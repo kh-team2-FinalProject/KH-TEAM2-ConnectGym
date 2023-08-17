@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>클래스리스트</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="content">
+
+    <!-- 사이드바 -->
+    <div id="container">
+        <div class="lcontent">
+            <nav>
+                <ul>
+                    <li class="has_sub"><a href="#" class="on"><span>LESSON</span></a>
+                        <ul>
+                            <li><a href="#" class="on">나의 정보 수정</a></li>
+                            <li><a href="/mypage/mylesson">나의 수강 현황</a></li>
+                            <li><a href="#">등등</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript: alert('준비 중입니다.');"><span>회원 관리</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <th:block layout:fragment="mypage">
+    </th:block>
+
+</th:block>
+
+<!-- 스크립트 부분 -->
+<th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+    </script>
+
+</th:block>
+
+</html>
