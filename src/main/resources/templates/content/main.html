@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+  <title>메인</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="content">
+
+  여기는 메인
+
+</th:block>
+
+<!-- 스크립트 부분 -->
+<th:block layout:fragment="script">
+
+  <script th:inline="javascript">
+  </script>
+
+</th:block>
+
+</html>

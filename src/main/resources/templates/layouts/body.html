@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="main-body">
+<div class="container">
+
+    <div id="adm_wrap">
+
+        <!--  실제 헤더 부분-->
+        <header>
+            <h1>여기는 헤더</h1><hr>
+        </header>
+
+
+    </div>
+    <!--/* 페이지별 컨텐츠 */-->
+    <th:block layout:fragment="content">
+
+    </th:block>
+
+
+    <!-- 타임리프 변수가 포함된 자바스크립트 소스 선언-->
+    <th:block layout:fragment="script"></th:block>
+
+<div>
+    <!-- 푸터 -->
+    <footer th:replace="layouts/footer :: main-footer">
+
+    </footer>
+</div>
+
+</div>
+</body>
+</html>
