@@ -26,13 +26,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// OpenVidu
+	implementation 'io.openvidu:openvidu-java-client:2.25.0'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-	// OpenVidu
-	implementation 'io.openvidu:openvidu-java-client:2.25.0'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 }
 
