@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ import io.openvidu.java.client.SessionProperties;
 @CrossOrigin(origins = "*")
 @RestController
 public class Controller {
+
+    private static final Logger logger = LoggerFactory.getLogger(Controller.class);
 
 	@Value("${OPENVIDU_URL}")
 	private String OPENVIDU_URL;
@@ -41,6 +45,7 @@ public class Controller {
 	@PostMapping("/api/sessions")
 	public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
 			throws OpenViduJavaClientException, OpenViduHttpException {
+        logger.info("init() 메소드 실행");
 		SessionProperties properties = SessionProperties.fromJson(params).build();
 		Session session = openvidu.createSession(properties);
 		return new ResponseEntity<>(session.getSessionId(), HttpStatus.OK);
@@ -55,6 +60,7 @@ public class Controller {
 	public ResponseEntity<String> createConnection(@PathVariable("sessionId") String sessionId,
 			@RequestBody(required = false) Map<String, Object> params)
 			throws OpenViduJavaClientException, OpenViduHttpException {
+        logger.info("connect() 메소드 실행");
 		Session session = openvidu.getActiveSession(sessionId);
 		if (session == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
