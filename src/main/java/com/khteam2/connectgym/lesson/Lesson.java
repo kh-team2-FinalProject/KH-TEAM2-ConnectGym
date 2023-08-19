@@ -15,8 +15,8 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "lesson")
-    private List<Room> roomList;
+   /* @OneToMany(mappedBy = "lesson")
+    private List<Room> roomList;*/
 
 
 
