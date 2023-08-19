@@ -29,16 +29,10 @@ public class Controller {
 
 	private OpenVidu openvidu;
 
-    @GetMapping("/")
-    public String main(){
-        return "testview";
-    }
-
 	@PostConstruct
 	public void init() {
 		this.openvidu = new OpenVidu(OPENVIDU_URL, OPENVIDU_SECRET);
 	}
-
 
 	/**
 	 * @param params The Session properties
