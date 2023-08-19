@@ -50,6 +50,8 @@ function joinSession() {
 
 	// Get a token from the OpenVidu deployment
 	getToken(mySessionId).then(token => {
+	    //sh - 토큰 발급 확인용
+	    console.log("Token received:", token);
 
 		// First param is the token got from the OpenVidu deployment. Second param can be retrieved by every user on event
 		// 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
