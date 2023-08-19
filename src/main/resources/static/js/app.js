@@ -192,7 +192,7 @@ function initMainVideo(videoElement, userData) {
  * more about the integration of OpenVidu in your application server.
  */
 
-var APPLICATION_SERVER_URL = "https://connectgym.store:4410/";
+//var APPLICATION_SERVER_URL = "https://connectgym.store:4410/";
 //var APPLICATION_SERVER_URL = "http://localhost:5000/";
 
 function getToken(mySessionId) {
@@ -203,7 +203,8 @@ function createSession(sessionId) {
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			type: "POST",
-			url: APPLICATION_SERVER_URL + "api/sessions",
+			url: "api/sessions",
+//			url: APPLICATION_SERVER_URL + "api/sessions",
 			data: JSON.stringify({ customSessionId: sessionId }),
 			headers: { "Content-Type": "application/json" },
 			success: response => resolve(response), // The sessionId
@@ -216,7 +217,8 @@ function createToken(sessionId) {
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			type: 'POST',
-			url: APPLICATION_SERVER_URL + 'api/sessions/' + sessionId + '/connections',
+			url: 'api/sessions/' + sessionId + '/connections',
+//			url: APPLICATION_SERVER_URL + 'api/sessions/' + sessionId + '/connections',
 			data: JSON.stringify({}),
 			headers: { "Content-Type": "application/json" },
 			success: (response) => resolve(response), // The token

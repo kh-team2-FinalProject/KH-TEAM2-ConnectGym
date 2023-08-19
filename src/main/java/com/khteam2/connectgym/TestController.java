@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TestController {
-
+/*
     //메인
     @GetMapping("/")
     public String index() {
@@ -43,4 +43,5 @@ public class TestController {
     public String myLesson() {
         return "mypage/mylesson";
     }
+    */
 }
