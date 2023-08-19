@@ -1,17 +1,12 @@
 package com.khteam2.connectgym;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TestController {
-    //메인
-    @GetMapping("/")
-    public String index() {
-        return "testview";
-    }
 
-/*
     //메인
     @GetMapping("/")
     public String index() {
@@ -44,9 +39,18 @@ public class TestController {
         return "content/mypages";
     }
 
-    @GetMapping("/mypage/mylesson")
+    @GetMapping("/mypage/mylessons")
     public String myLesson() {
-        return "mypage/mylesson";
+        return "mypage/mylessons";
     }
-    */
+
+    @GetMapping("/enterRoom")
+    public String enterRoom(Model model) {
+        // 현재 접속중인 회원의 수강중인 레슨의 방이름
+        String roomName="fixedname";
+
+        model.addAttribute(roomName);
+        return "room/enterroom";
+    }
+
 }
