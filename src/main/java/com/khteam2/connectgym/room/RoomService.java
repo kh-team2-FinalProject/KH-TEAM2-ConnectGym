@@ -31,13 +31,13 @@ public class RoomService {
     }
 
     // 룸 입장을 위한 세션 생성
-    public String initializeSession(RoomRequest roomRequest)
+    public String initializeSession(String lessonRoomName)
         throws OpenViduJavaClientException, OpenViduHttpException {
+
         SessionProperties properties = new SessionProperties.Builder()
-            .customSessionId(roomRequest.getRoomName())
+            .customSessionId(lessonRoomName)
             .build();
         Session session = openvidu.createSession(properties);
-        System.out.println("service session = " + session.toString());
         return session.getSessionId();
     }
 

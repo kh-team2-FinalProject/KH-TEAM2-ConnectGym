@@ -5,9 +5,11 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/openvidu-browser-2.28.0.js"></script>
-    <script th:inline="javascript" src="js/app.js">
-    var roomName = [[ ${roomName} ]];
+    <script th:inline="javascript">
+    var userName = /*[[ ${userName} ]]*/;
+    var myUserRole = /*[[ ${userRole} ]]*/;
     </script>
+    <script src="js/app.js"></script>
 </head>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
@@ -15,11 +17,8 @@
 
     <div id="main-container" class="container">
         <div id="join">
-<!--            <div id="img-div"><img src="resources/images/openvidu_grey_bg_transp_cropped.png" /></div>-->
             <div id="join-dialog" class="jumbotron vertical-center">
                 <h1>Join a video session</h1>
-<!--                <form class="form-group" onsubmit="joinSession(); return false">-->
-<!--                <form class="form-group" action="check();">-->
                     <p>
                         <label>LESSON ROOM NAME</label>
                         <input class="form-control" type="text" th:value="${roomName}"  id="roomName" required>
@@ -31,13 +30,13 @@
                     <p class="text-center">
                         <input class="btn btn-lg btn-success" type="button" onclick="check();" value="Connect Gym!">
                     </p>
-<!--                </form>-->
+
             </div>
         </div>
 
-        <div id="session" style="display: none;">
+        <div id="lessonRoom" style="display: none;">
             <div id="session-header">
-                <h1 id="session-title"></h1>
+                <h1 id="lesson-title"></h1>
                 <input class="btn btn-large btn-danger" type="button" id="buttonLeaveSession" onmouseup="leaveSession()" value="운동 종료">
             </div>
             <div id="main-video" class="col-md-6"><p></p><video autoplay playsinline="true"></video></div>

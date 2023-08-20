@@ -11,7 +11,8 @@ import lombok.ToString;
 public class RoomRequest {
     private String roomName;
     private String roomKey;
-//    private String roomToken;
+    private String userName;
+    //private String userRole;
 
 
 }

@@ -25,8 +25,8 @@ public class RoomApiController {
 
     @PostMapping("/checkEnroll")
     public boolean checkEnroll(@RequestBody(required = false) RoomRequest roomRequest){
+        // roomName과 roomKey 조건 확인하는 service 호출
 //     boolean check = roomSerivce.checkEnroll;
-        System.out.println("check 컨트롤러 동작");
         boolean check = false;
         if(roomRequest.getRoomKey().equals("1234")){
             check = true;
@@ -41,9 +41,8 @@ public class RoomApiController {
 	@PostMapping("/enter/id")
 	public ResponseEntity<String> initializeSession(@RequestBody(required = false) RoomRequest roomRequest)
 			throws OpenViduJavaClientException, OpenViduHttpException {
-        // 여기서 roomName과 roomKey 조건 확인하는 service 호출
-
-        String sessionId = roomSerivce.initializeSession(roomRequest);
+        String sessionId = roomSerivce.initializeSession(roomRequest.getRoomName());
+        System.out.println("sessionId 이니셜라이즈 = " + sessionId);
         return new ResponseEntity<>(sessionId, HttpStatus.OK);
 	}
 
@@ -52,7 +51,6 @@ public class RoomApiController {
     public ResponseEntity<String> createConnection(@PathVariable("sessionId") String sessionId,
                                                    @RequestBody RoomRequest roomRequest) {
         try {
-            System.out.println(sessionId);
             String connectionToken = roomSerivce.createConnection(sessionId, roomRequest);
 
             if (connectionToken != null) {

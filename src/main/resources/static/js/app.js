@@ -6,27 +6,37 @@ var session;
 
 function check() {
 
-    //내가 수강한 레슨의 네임으로 고정
+    //내가 수강한 레슨의 네임으로 고정(원본 소스의 mySessionId)
 	var myRoomName = document.getElementById("roomName").value;
-	//레슨 구매 후 발급받은 키
+	//레슨 구매 후 발급받은 키(입장 가능 여부만 판단)
 	var myRoomKey = document.getElementById("roomKey").value;
 
-	const roominfo ={
-	    roomName : myRoomName,
-	    roomKey : myRoomKey
-	}
+    //userName은 세션에 저장된 값으로 전달받음(원본 소스의 myUserName)
+    userName += Math.floor(Math.random() * 100);
+    console.log(userName);
 
+
+	const roomInfo ={
+	    roomName : myRoomName,
+	    roomKey : myRoomKey,
+	    userName : userName
+//	    userRole : myUserRole
+	}
+	console.log(roomInfo);
+
+
+	// 사용자가 입력한 값으로 입장여부 체크
     $.ajax({
         type: "POST",
     	url: "/room/checkEnroll",
     	contentType:'application/json; charset=utf-8',
         dataType : 'json',
-        data : JSON.stringify(roominfo),
+        data : JSON.stringify(roomInfo),
         async : false,
     	success: response => {
                          if (response) {
-                             // 방 이름과 키가 일치할 때
-                             joinSession(myRoomName,myRoomKey);
+                             // 키가 일치할 때
+                             joinSession(myRoomName,userName);
                          } else {
                              // 일치하지 않을 때
                              alert("키값이 잘못 입력되었거나 현재 수강시간이 아닙니다.");
@@ -37,7 +47,7 @@ function check() {
     });
 }
 
-function joinSession(myRoomName, myRoomKey){
+function joinSession(myRoomName, userName){
 
 	OV = new OpenVidu();
 
@@ -48,6 +58,7 @@ function joinSession(myRoomName, myRoomKey){
 	// --- 3) Specify the actions when events take place in the session ---
 
 	// On every new Stream received...
+	// 카메라 배치
 	session.on('streamCreated', event => {
 
 		// Subscribe to the Stream to receive it. HTML video will be appended to element with 'video-container' id
@@ -75,22 +86,20 @@ function joinSession(myRoomName, myRoomKey){
 
 
 	// --- 4) Connect to the session with a valid user token ---
-
 	// Get a token from the OpenVidu deployment
 	getToken(myRoomName).then(token => {
-	    //sh - 토큰 발급 확인용
+	    // 토큰 발급 확인용
 	    console.log("Token received:", token);
 
-		// First param is the token got from the OpenVidu deployment. Second param can be retrieved by every user on event
-		// 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
-		session.connect(token, { clientData: myRoomKey })
+		// 첫 번째 매개 변수는 OpenVidu 배포에서 가져온 토큰, 두 번째 매개 변수는 이벤트 시 모든 사용자가 검색할 수 있음
+        // 'streamCreated'(PropertyStream.connection.data)이며 사용자 닉네임으로 DOM에 추가
+		session.connect(token, { clientData: userName })
 			.then(() => {
 
 				// --- 5) Set page layout for active call ---
-
-				document.getElementById('session-title').innerText = myRoomName;
+				document.getElementById('lesson-title').innerText = myRoomName;
 				document.getElementById('join').style.display = 'none';
-				document.getElementById('session').style.display = 'block';
+				document.getElementById('lessonRoom').style.display = 'block';
 
 				// --- 6) Get your own camera stream with the desired properties ---
 
@@ -109,8 +118,8 @@ function joinSession(myRoomName, myRoomKey){
 
 				// When our HTML video has been added to DOM...
 				publisher.on('videoElementCreated', function (event) {
-					initMainVideo(event.element, myRoomKey);
-					appendUserData(event.element, myRoomKey);
+					initMainVideo(event.element, userName);
+					appendUserData(event.element, userName);
 					event.element['muted'] = true;
 				});
 
@@ -131,8 +140,8 @@ function leaveSession() {
 
 	session.disconnect();
 
-	// Removing all HTML elements with user's nicknames.
-	// HTML videos are automatically removed when leaving a Session
+    // 사용자의 닉네임으로 모든 HTML 요소를 제거
+    // 세션을 떠날 때 HTML 비디오가 자동으로 제거됨
 	removeAllUserData();
 
 	// Back to 'Join session' page
@@ -147,14 +156,14 @@ window.onbeforeunload = function () {
 
 /* APPLICATION SPECIFIC METHODS */
 
-window.addEventListener('load', function () {
-//	generateParticipantInfo();
+// ==방이름 html에서 고정으로 넣을지 js에서 시작할 때 값 넣어지게 만들지는 고민==
+/*window.addEventListener('load', function () {
+	generateParticipantInfo();
 });
 
-//function generateParticipantInfo() {
-//	document.getElementById("sessionId").value = "SessionA";
-//	document.getElementById("userName").value = "Participant" + Math.floor(Math.random() * 100);
-//}
+function generateParticipantInfo() {
+	document.getElementById("sessionId").value = myRoomName;
+}*/
 
 function appendUserData(videoElement, connection) {
 	var userData;
@@ -186,6 +195,25 @@ function removeAllUserData() {
 	}
 }
 
+//비디오를 클릭했을 때 메인 비디오 영역에 해당 비디오 스트림을 크게 보여주는 부분을 처리
+
+function addClickListener(videoElement, userData) {
+    videoElement.addEventListener('click', function () {
+        var mainVideo = $('#main-video video').get(0);
+        if (mainVideo.srcObject !== videoElement.srcObject) {
+            $('#video-container').fadeOut("fast"); // Hide the video in video-container
+            $('#main-video').fadeOut("fast", () => {
+                $('#main-video p').html(userData);
+                mainVideo.srcObject = videoElement.srcObject;
+                $('#main-video').fadeIn("fast", () => {
+                    // Show the video in main-video and update the source
+                    $('#video-container').fadeIn("fast"); // Show the video in video-container
+                });
+            });
+        }
+    });
+}
+/* 원본
 function addClickListener(videoElement, userData) {
 	videoElement.addEventListener('click', function () {
 		var mainVideo = $('#main-video video').get(0);
@@ -197,7 +225,7 @@ function addClickListener(videoElement, userData) {
 			});
 		}
 	});
-}
+}*/
 
 function initMainVideo(videoElement, userData) {
 	document.querySelector('#main-video video').srcObject = videoElement.srcObject;
@@ -210,11 +238,12 @@ function getToken(myRoomName) {
 }
 
 function createSession(roomName) {
+
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			type: "POST",
 			url: "/room/enter/id",
-			data: JSON.stringify({ lessonRoomName: roomName }),
+			data: JSON.stringify({ roomName : roomName }),
 			headers: { "Content-Type": "application/json" },
 			success: response => resolve(response),
 			error: (error) => reject(error)
