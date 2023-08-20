@@ -4,12 +4,40 @@ var session;
 
 /* OPENVIDU METHODS */
 
-function joinSession() {
+function check() {
 
-	var mySessionId = document.getElementById("sessionId").value;
-	var myUserName = document.getElementById("userName").value;
+    //내가 수강한 레슨의 네임으로 고정
+	var myRoomName = document.getElementById("roomName").value;
+	//레슨 구매 후 발급받은 키
+	var myRoomKey = document.getElementById("roomKey").value;
 
-	// --- 1) Get an OpenVidu object ---
+	const roominfo ={
+	    roomName : myRoomName,
+	    roomKey : myRoomKey
+	}
+
+    $.ajax({
+        type: "POST",
+    	url: "/room/checkEnroll",
+    	contentType:'application/json; charset=utf-8',
+        dataType : 'json',
+        data : JSON.stringify(roominfo),
+        async : false,
+    	success: response => {
+                         if (response) {
+                             // 방 이름과 키가 일치할 때
+                             joinSession(myRoomName,myRoomKey);
+                         } else {
+                             // 일치하지 않을 때
+                             alert("키값이 잘못 입력되었거나 현재 수강시간이 아닙니다.");
+                         }
+                     },
+    	error: (error) => reject(error)
+
+    });
+}
+
+function joinSession(myRoomName, myRoomKey){
 
 	OV = new OpenVidu();
 
@@ -49,18 +77,18 @@ function joinSession() {
 	// --- 4) Connect to the session with a valid user token ---
 
 	// Get a token from the OpenVidu deployment
-	getToken(mySessionId).then(token => {
+	getToken(myRoomName).then(token => {
 	    //sh - 토큰 발급 확인용
 	    console.log("Token received:", token);
 
 		// First param is the token got from the OpenVidu deployment. Second param can be retrieved by every user on event
 		// 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
-		session.connect(token, { clientData: myUserName })
+		session.connect(token, { clientData: myRoomKey })
 			.then(() => {
 
 				// --- 5) Set page layout for active call ---
 
-				document.getElementById('session-title').innerText = mySessionId;
+				document.getElementById('session-title').innerText = myRoomName;
 				document.getElementById('join').style.display = 'none';
 				document.getElementById('session').style.display = 'block';
 
@@ -81,8 +109,8 @@ function joinSession() {
 
 				// When our HTML video has been added to DOM...
 				publisher.on('videoElementCreated', function (event) {
-					initMainVideo(event.element, myUserName);
-					appendUserData(event.element, myUserName);
+					initMainVideo(event.element, myRoomKey);
+					appendUserData(event.element, myRoomKey);
 					event.element['muted'] = true;
 				});
 
@@ -120,13 +148,13 @@ window.onbeforeunload = function () {
 /* APPLICATION SPECIFIC METHODS */
 
 window.addEventListener('load', function () {
-	generateParticipantInfo();
+//	generateParticipantInfo();
 });
 
-function generateParticipantInfo() {
-	document.getElementById("sessionId").value = "SessionA";
-	document.getElementById("userName").value = "Participant" + Math.floor(Math.random() * 100);
-}
+//function generateParticipantInfo() {
+//	document.getElementById("sessionId").value = "SessionA";
+//	document.getElementById("userName").value = "Participant" + Math.floor(Math.random() * 100);
+//}
 
 function appendUserData(videoElement, connection) {
 	var userData;
@@ -177,39 +205,18 @@ function initMainVideo(videoElement, userData) {
 	document.querySelector('#main-video video')['muted'] = true;
 }
 
-
-/**
- * --------------------------------------------
- * GETTING A TOKEN FROM YOUR APPLICATION SERVER
- * --------------------------------------------
- * The methods below request the creation of a Session and a Token to
- * your application server. This keeps your OpenVidu deployment secure.
- *
- * In this sample code, there is no user control at all. Anybody could
- * access your application server endpoints! In a real production
- * environment, your application server must identify the user to allow
- * access to the endpoints.
- *
- * Visit https://docs.openvidu.io/en/stable/application-server to learn
- * more about the integration of OpenVidu in your application server.
- */
-
-//var APPLICATION_SERVER_URL = "https://connectgym.store:4410/";
-//var APPLICATION_SERVER_URL = "http://localhost:5000/";
-
-function getToken(mySessionId) {
-	return createSession(mySessionId).then(sessionId => createToken(sessionId));
+function getToken(myRoomName) {
+	return createSession(myRoomName).then(sessionId => createToken(sessionId));
 }
 
-function createSession(sessionId) {
+function createSession(roomName) {
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			type: "POST",
-			url: "/api/sessions",
-//			url: APPLICATION_SERVER_URL + "api/sessions",
-			data: JSON.stringify({ customSessionId: sessionId }),
+			url: "/room/enter/id",
+			data: JSON.stringify({ lessonRoomName: roomName }),
 			headers: { "Content-Type": "application/json" },
-			success: response => resolve(response), // The sessionId
+			success: response => resolve(response),
 			error: (error) => reject(error)
 		});
 	});
@@ -219,8 +226,7 @@ function createToken(sessionId) {
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			type: 'POST',
-			url: '/api/sessions/' + sessionId + '/connections',
-//			url: APPLICATION_SERVER_URL + 'api/sessions/' + sessionId + '/connections',
+			url: '/room/enter/' + sessionId + '/connection',
 			data: JSON.stringify({}),
 			headers: { "Content-Type": "application/json" },
 			success: (response) => resolve(response), // The token

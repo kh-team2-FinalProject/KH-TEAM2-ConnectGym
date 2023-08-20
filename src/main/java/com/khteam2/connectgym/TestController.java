@@ -46,10 +46,10 @@ public class TestController {
 
     @GetMapping("/enterRoom")
     public String enterRoom(Model model) {
-        // 현재 접속중인 회원의 수강중인 레슨의 방이름
+        // 현재 접속중인 회원(=>세션에서 가져오기)의 수강중인 레슨의 방이름
         String roomName="fixedname";
 
-        model.addAttribute(roomName);
+        model.addAttribute("roomName",roomName);
         return "room/enterroom";
     }
 
