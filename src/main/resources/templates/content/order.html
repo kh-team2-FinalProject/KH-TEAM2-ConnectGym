@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{layouts/body}"
+    xmlns:layout="http://www.w3.org/1999/xhtml"
+>
+<th:block layout:fragment="title">
+    <title>CONNECT GYM</title>
+</th:block>
+
+<th:block layout:fragment="content">
+    <th:block layout:fragment="order">
+        <h2>주문</h2>
+        <div>
+            <div class="order-lessons">
+                <div
+                    class="order-lesson"
+                    th:each="lesson : ${orderResponse.lessonList}"
+                >
+                    <th:block th:if="${false}">
+                        <div th:text="${lesson.name}"></div>
+                        <div th:text="${lesson.price}"></div>
+                        <div th:text="${lesson.trainer.name}"></div>
+                        <img
+                            th:src="@{${lesson.trainer.profileImg}}"
+                            alt="강사 프로필 사진"
+                        />
+                    </th:block>
+                </div>
+            </div>
+            <div class="order-name" th:text="|주문자명: ${orderResponse.name}|"></div>
+            <div class="order-telNo" th:text="|주문자 전화번호: ${orderResponse.telNo}|"></div>
+            <div class="order-price" th:text="|결제 금액: ${orderResponse.price}|"></div>
+            <div
+                class="order-orderNo"
+                th:text="|주문 번호: ${orderResponse.orderNo}|"
+            ></div>
+            <div>
+                <button type="button" onclick="pay()">결제</button>
+            </div>
+        </div>
+    </th:block>
+</th:block>
+
+<!-- 스크립트 부분 -->
+<th:block layout:fragment="script">
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script th:inline="javascript">
+        function pay() {
+            'use strict';
+
+            var pgShopId = [[${pgShopId}]]
+            var franchiseId = [[${franchiseId}]];
+            var orderId = [[${orderResponse.orderNo}]];
+            var name = [[${orderResponse.name}]];
+            var telNo = [[${orderResponse.telNo}]];
+            var price = [[${orderResponse.price}]];
+
+            console.log(name);
+
+            IMP.init(franchiseId);
+
+            IMP.request_pay({
+                pg: pgShopId,
+                pay_method: 'card',
+                merchant_uid: orderId,
+                name: "노르웨이 회전 의자",
+                amount: price,
+                buyer_name: name,
+                buyer_tel: telNo,
+                // 모바일에서 결제 시 다음 URL로 리다이렉트
+                m_redirect_url: location.origin + "/order/complete",
+            }, function (res) {
+                // PC에서 결제 시 콜백 실행
+                console.log("결과", res);
+            });
+        }
+    </script>
+</th:block>
+</html>
