@@ -2,6 +2,7 @@ package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.member.Member;
+import com.khteam2.connectgym.order.dto.OrderCompleteResponseDto;
 import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
 import com.khteam2.connectgym.order.dto.OrderResponseDto;
 import com.siot.IamportRestClient.IamportClient;
@@ -40,7 +41,8 @@ public class OrderService {
     /**
      * 결제 진행 전 실행되는 메소드
      *
-     * @param lessonNolist lesson 번호가 담겨있는 List
+     * @param loginMemberNo 로그인되어 있는 회원의 no
+     * @param lessonNolist  lesson 번호가 담겨있는 List
      */
     @Transactional(readOnly = true)
     public OrderResponseDto prepareOrder(Long loginMemberNo, List<Long> lessonNolist) throws IamportResponseException, IOException {
@@ -124,7 +126,7 @@ public class OrderService {
     /**
      * 주문 진행 중일 때 실행되는 메소드
      */
-    public OrderProcessResponseDto processOrder(boolean isPC, String impUid, String sMerchantUid, Long sTotalPrice, String errorMsg) {
+    public OrderProcessResponseDto processOrder(Long loginMemberNo, boolean isPC, String impUid, String sMerchantUid, Long sTotalPrice, String errorMsg) {
         OrderProcessResponseDto returnDto = OrderProcessResponseDto.builder()
             .success(false)
             .build();
@@ -146,7 +148,7 @@ public class OrderService {
             if (payment.getMerchantUid().equals(sMerchantUid)
                 && payment.getAmount().equals(BigDecimal.valueOf(sTotalPrice))) {
                 returnDto.setSuccess(true);
-                String tempUrl = "/order/complete";
+                String tempUrl = "/order/complete?orderId=" + sMerchantUid;
                 url = isPC ? tempUrl : "redirect:" + tempUrl;
 
                 // DB에 저장
@@ -185,5 +187,20 @@ public class OrderService {
         }
 
         return ResponseEntity.internalServerError().build();
+    }
+
+    public OrderCompleteResponseDto completeOrder(Long loginMemberId, String orderId) {
+        OrderCompleteResponseDto responseDto = OrderCompleteResponseDto.builder()
+            .success(false)
+            .url("/content/orderComplete")
+            .build();
+
+//        List<Order> orderList = this.orderRepository.find;
+
+        if (orderId == null) {
+
+        }
+
+        return responseDto;
     }
 }

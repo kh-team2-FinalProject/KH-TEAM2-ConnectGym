@@ -19,9 +19,24 @@ public class OrderApiController {
     @Value("${portone.pg_shop_id}")
     private Object pgShopId;
 
+    @GetMapping(value = "/temp_login")
+    public ResponseEntity<Object> tempLogin(HttpSession session) {
+        session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, 1);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value = "/temp_logout")
+    public ResponseEntity<Object> tempLogout(HttpSession session) {
+        session.removeAttribute(SessionConstant.LOGIN_MEMBER_NO);
+
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping(value = "/process")
     public ResponseEntity<OrderProcessResponseDto> processOrderPc(
         HttpSession session,
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @SessionAttribute(name = SessionConstant.PORTONE_ORDER_NO, required = false) String sMerchantUid,
         @SessionAttribute(name = SessionConstant.PORTONE_PRICE, required = false) Long sTotalPrice,
         String imp_uid,
@@ -33,7 +48,7 @@ public class OrderApiController {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
-        OrderProcessResponseDto responseDto = this.orderService.processOrder(true, imp_uid, sMerchantUid, sTotalPrice, error_msg);
+        OrderProcessResponseDto responseDto = this.orderService.processOrder(loginMemberNo, true, imp_uid, sMerchantUid, sTotalPrice, error_msg);
 
         if (!responseDto.isSuccess()) {
             return ResponseEntity.badRequest().body(responseDto);
