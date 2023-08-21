@@ -9,6 +9,8 @@ public class ConnectgymApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ConnectgymApplication.class, args);
         System.out.println("server start");
+
+
 	}
 
 }

@@ -1,4 +1,12 @@
 package com.khteam2.connectgym.lesson;
 
-public interface LessonRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface LessonRepository extends JpaRepository<Lesson, Long> {
+
+
+
 }

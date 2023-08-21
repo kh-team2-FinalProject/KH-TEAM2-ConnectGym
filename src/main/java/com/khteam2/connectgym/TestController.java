@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TestController {
 
     //메인
-    @GetMapping("/")
+ /*   @GetMapping("/")
     public String index() {
         return "content/main";
-    }
+    }*/
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")
     public String lesson() {
