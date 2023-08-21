@@ -146,7 +146,7 @@ function leaveSession() {
 
 	// Back to 'Join session' page
 	document.getElementById('join').style.display = 'block';
-	document.getElementById('session').style.display = 'none';
+	document.getElementById('lessonRoom').style.display = 'none';
 }
 
 window.onbeforeunload = function () {
