@@ -8,6 +8,24 @@
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="lesson">
-이거는 헬스
+    <div class="page-banner"> <!--카드 위 영역-->
+        <div class="page-banner-img"></div>
+        <div class="card-header"><h1> 카드 위 문구 영역</h1></div>
+        <div class="cards">
+            <div direction="row" width="calc(100% / 3 - 16px + 5px)" class="cards-row">
+                <div class="card-wrap">
+                    <div class="card-list">
+                        <img src="image.jpg" alt="cover_img">
+                        <div class="card-hover">
+                            <div class="card-hover-bg"></div>
+                            <div class="card-category"><span th:text="${category}"></span></div>
+                            <div class="card-title"><span th:text="${title}></span></div>
+                            <div class="card-trainer"><span th:text="${trainer_name}"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </th:block>
 </html>
