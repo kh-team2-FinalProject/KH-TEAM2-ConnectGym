@@ -1,6 +1,9 @@
 package com.khteam2.connectgym.order;
 
-import lombok.Getter;
+import com.khteam2.connectgym.member.Member;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
@@ -8,15 +11,17 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Getter
-@NoArgsConstructor
 @Table(name = "orders")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long no;
-    @Column(name = "user_no", nullable = false)
-    private Long userNo;
+    private String no;
+    @JoinColumn(name = "member_no", nullable = false)
+    @ManyToOne
+    private Member member;
     @Column(nullable = false, length = 50)
     private String type;
     @Column(name = "day_of_payment", nullable = false)

@@ -1,13 +1,17 @@
 package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
 import com.khteam2.connectgym.order.dto.OrderResponseDto;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -27,6 +31,7 @@ public class OrderController {
     @GetMapping(value = "/pay")
     public String order(
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+        HttpSession session,
         @RequestParam(required = false) List<Long> lessonList,
         Model model
     ) throws IamportResponseException, IOException {
@@ -37,20 +42,24 @@ public class OrderController {
             loginMemberNo = 1L;
         }
 
-        OrderResponseDto orderResponseDto = this.orderService.prepareOrder(loginMemberNo, lessonList);
-        model.addAttribute("orderResponse", orderResponseDto);
+        OrderResponseDto responseDto = this.orderService.prepareOrder(loginMemberNo, lessonList);
+
+        session.setAttribute(SessionConstant.PORTONE_ORDER_NO, responseDto.getOrderNo());
+        session.setAttribute(SessionConstant.PORTONE_PRICE, responseDto.getPrice());
+
+        model.addAttribute("orderResponse", responseDto);
         model.addAttribute("franchiseId", this.franchiseId);
         model.addAttribute("pgShopId", this.pgShopId);
 
         return "/content/order";
     }
 
-    @RequestMapping(value = "/process", method = {RequestMethod.GET, RequestMethod.POST})
+    @GetMapping(value = "/process")
     public String processOrder(
         Model model,
         HttpSession session,
         @SessionAttribute(name = SessionConstant.PORTONE_ORDER_NO, required = false) String sMerchantUid,
-        @SessionAttribute(name = "totalPrice", required = false) Long sTotalPrice,
+        @SessionAttribute(name = SessionConstant.PORTONE_PRICE, required = false) Long sTotalPrice,
         String imp_uid,
         String merchant_uid,
         String error_code,
@@ -60,17 +69,13 @@ public class OrderController {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
-        int result = this.orderService.processOrder(imp_uid, merchant_uid);
+        OrderProcessResponseDto responseDto = this.orderService.processOrder(false, imp_uid, sMerchantUid, sTotalPrice, error_msg);
 
-        session.removeAttribute("merchant_uid");
-        session.removeAttribute("totalPrice");
-
-        if (result != 0) {
-            model.addAttribute("message", "결제하지 못 했습니다.");
-            return "/order/fail";
+        if (!responseDto.isSuccess()) {
+            model.addAttribute("message", responseDto.getMessage());
         }
 
-        return "redirect:/order/complete";
+        return responseDto.getUrl();
     }
 
 //    @GetMapping(value = "/complete")
