@@ -99,9 +99,7 @@
                             .then(res => res.json())
                             .then(v => {
                                 if (v.success) {
-                                    location.href = v.url + '?' + new URLSearchParams({
-                                        orderId: res.merchant_uid,
-                                    });
+                                    location.href = v.url;
                                 }
                             });
                     } else {
