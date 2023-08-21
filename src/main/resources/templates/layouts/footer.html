@@ -1,8 +1,29 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <footer th:fragment="main-footer">
     <hr>
     여기는 푸터
+
+
+    <div class="footer_inner">
+        <div class="aside_area">
+            <div class="partner_box_wrap">
+                <div class="partner_box">
+                    <h3 class="footer_title">Creaters</h3></div>
+                <a th:href="creators.jpg">크리에이터</a>
+            </div>
+        </div>
+        <div class="corp_area">
+            <ul class="list_corp">
+                <li class="corp_item">회사소개</li>
+                <li class="corp_item">인재채용</li>
+                <li class="corp_item">제휴제안</li>
+                <li class="corp_item">이용약관</li>
+                <li class="corp_item">개인정보처리방침</li>
+            </ul>
+        </div>
+    </div>
     <hr>
 </footer>
 </html>
