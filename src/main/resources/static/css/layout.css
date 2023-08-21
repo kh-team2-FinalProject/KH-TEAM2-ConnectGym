@@ -1,0 +1,30 @@
+/*============푸터===========*/
+footer {
+    width: 1280px;
+    margin: 0 auto;
+    padding-bottom: 78px;
+    font-size: 1.3rem;
+}
+
+.footer_inner {
+    width: 1280px;
+    margin: 0 auto;
+    padding-top: 20px;
+    line-height: 20px;
+    text-align: center;
+
+}
+
+.corp_area {
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 23px;
+    vertical-align: top;
+}
+
+
+ul {
+    list-style: none;
+}
+
+/*============푸터 끝===========*/
