@@ -19,20 +19,6 @@ public class OrderApiController {
     @Value("${portone.pg_shop_id}")
     private Object pgShopId;
 
-    @GetMapping(value = "/temp_login")
-    public ResponseEntity<Object> tempLogin(HttpSession session) {
-        session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, 1);
-
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping(value = "/temp_logout")
-    public ResponseEntity<Object> tempLogout(HttpSession session) {
-        session.removeAttribute(SessionConstant.LOGIN_MEMBER_NO);
-
-        return ResponseEntity.ok().build();
-    }
-
     @PostMapping(value = "/process")
     public ResponseEntity<OrderProcessResponseDto> processOrderPc(
         HttpSession session,
