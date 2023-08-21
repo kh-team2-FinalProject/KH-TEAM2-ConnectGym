@@ -9,4 +9,5 @@ public class SessionConstant {
     // ============================== 포트원 ==============================
     public static final String PORTONE_IMP_NO = "session_portone_imp_no";
     public static final String PORTONE_ORDER_NO = "session_portone_order_no";
+    public static final String PORTONE_PRICE = "session_portone_price";
 }

@@ -2,6 +2,7 @@ package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.member.Member;
+import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
 import com.khteam2.connectgym.order.dto.OrderResponseDto;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -11,6 +12,7 @@ import com.siot.IamportRestClient.response.Payment;
 import com.siot.IamportRestClient.response.Prepare;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -122,19 +124,66 @@ public class OrderService {
     /**
      * 주문 진행 중일 때 실행되는 메소드
      */
-    public int processOrder(String imp_uid, String merchant_uid) {
-        IamportResponse<Payment> response = null;
+    public OrderProcessResponseDto processOrder(boolean isPC, String impUid, String sMerchantUid, Long sTotalPrice, String errorMsg) {
+        OrderProcessResponseDto returnDto = OrderProcessResponseDto.builder()
+            .success(false)
+            .build();
+        Payment payment = null;
+        String message = null;
+        String url = "/order/fail";
 
         try {
-            response = this.iamportClient.paymentByImpUid(imp_uid);
+            payment = this.iamportClient.paymentByImpUid(impUid).getResponse();
         } catch (IamportResponseException e) {
+            message = "결제에 실패했습니다. 서버 메시지: " + errorMsg;
             log.error("포트원 서버에서 오류가 발생했습니다.", e);
-            return 2011;
         } catch (IOException e) {
+            message = "결제 서버에 연결하지 못 했습니다. 서버 메시지: " + errorMsg;
             log.error("포트원 서버에 연결하는 중 문제가 발생했습니다.", e);
-            return 1000;
         }
 
-        return -1;
+        if (payment != null) {
+            if (payment.getMerchantUid().equals(sMerchantUid)
+                && payment.getAmount().equals(BigDecimal.valueOf(sTotalPrice))) {
+                returnDto.setSuccess(true);
+                String tempUrl = "/order/complete";
+                url = isPC ? tempUrl : "redirect:" + tempUrl;
+
+                // DB에 저장
+//                Order order = Order.builder()
+//                    .no(payment.getMerchantUid())
+//                    .type(payment.getPayMethod())
+//                    .build();
+//
+//                this.orderRepository.save(order);
+            } else {
+                message = "검증 실패";
+            }
+        }
+
+        returnDto.setMessage(message);
+        returnDto.setUrl(url);
+
+        return returnDto;
+    }
+
+    public ResponseEntity<Object> paymentCompleteWebhook(String impUid, String sMerchantUid, Long sPrice) {
+        Payment payment = null;
+
+        try {
+            payment = this.iamportClient.paymentByImpUid(impUid).getResponse();
+        } catch (IamportResponseException e) {
+            log.error("아임포트 webhook error: ", e);
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            log.error("아임포트 서버 접속 실패: ", e);
+            throw new RuntimeException(e);
+        }
+
+        if (payment.getMerchantUid().equals(sMerchantUid) && payment.getAmount().equals(BigDecimal.valueOf(sPrice))) {
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.internalServerError().build();
     }
 }
