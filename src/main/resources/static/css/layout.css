@@ -1,9 +1,21 @@
+/*============헤더===========*/
+header {
+
+    height: 2vh;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    align-items: center;
+}
+
+/*============헤더 끝===========*/
+
+
 /*============푸터===========*/
 footer {
     width: 1280px;
     margin: 0 auto;
     padding-bottom: 78px;
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 .footer_inner {
@@ -15,7 +27,7 @@ footer {
 
 }
 
-.corp_area {
+.list_corp {
     overflow: hidden;
     display: inline-block;
     margin-right: 23px;
