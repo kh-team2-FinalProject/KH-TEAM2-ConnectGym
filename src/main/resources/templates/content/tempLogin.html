@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>클래스리스트</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="content">
+    <div>
+        <form action="/temp_loginProcess" method="post">
+            <input type="text" name="userId" placeholder="id"/>
+            <br/>
+            <input type="password" name="userPassword" placeholder="password"/>
+            <br/>
+            <input type="submit" value="로그인"/>
+        </form>
+    </div>
+    <th:block layout:fragment="login"></th:block>
+</th:block>
+
+<!-- 스크립트 부분 -->
+<th:block layout:fragment="script">
+
+    <script th:if="${message != null}" th:inline="javascript">
+        alert([[${message}]]);
+    </script>
+
+</th:block>
+
+</html>
