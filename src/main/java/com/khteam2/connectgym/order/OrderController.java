@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.order.dto.OrderCompleteResponseDto;
 import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
 import com.khteam2.connectgym.order.dto.OrderResponseDto;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -57,7 +58,7 @@ public class OrderController {
     @GetMapping(value = "/process")
     public String processOrder(
         Model model,
-        HttpSession session,
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @SessionAttribute(name = SessionConstant.PORTONE_ORDER_NO, required = false) String sMerchantUid,
         @SessionAttribute(name = SessionConstant.PORTONE_PRICE, required = false) Long sTotalPrice,
         String imp_uid,
@@ -65,11 +66,15 @@ public class OrderController {
         String error_code,
         String error_msg
     ) {
+        // if (loginMemberNo == null) {
+        //     return "redirect:/login";
+        // }
+
         if (imp_uid == null || merchant_uid == null || sMerchantUid == null || sTotalPrice == null) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
-        OrderProcessResponseDto responseDto = this.orderService.processOrder(false, imp_uid, sMerchantUid, sTotalPrice, error_msg);
+        OrderProcessResponseDto responseDto = this.orderService.processOrder(loginMemberNo, false, imp_uid, sMerchantUid, sTotalPrice, error_msg);
 
         if (!responseDto.isSuccess()) {
             model.addAttribute("message", responseDto.getMessage());
@@ -78,8 +83,23 @@ public class OrderController {
         return responseDto.getUrl();
     }
 
-//    @GetMapping(value = "/complete")
-//    public String completeOrder() {}
+    @GetMapping(value = "/complete")
+    public String completeOrder(
+        Model model,
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+        String orderId,
+        HttpSession session) {
+        // if (loginMemberNo == null) {
+        //     return "redirect:/login";
+        // }
+
+        OrderCompleteResponseDto responseDto = this.orderService.completeOrder(loginMemberNo, orderId);
+
+        session.removeAttribute(SessionConstant.PORTONE_ORDER_NO);
+        session.removeAttribute(SessionConstant.PORTONE_PRICE);
+
+        return responseDto.getUrl();
+    }
 
 //    @ExceptionHandler({IamportResponseException.class})
 //    public String portOneExceptionHandler() {}
