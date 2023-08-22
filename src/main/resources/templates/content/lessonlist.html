@@ -3,35 +3,35 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
 <th:block layout:fragment="title">
-    <title>클래스리스트</title>
+    <title>Lesson > health</title>
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
 
-<!-- 사이드바 -->
-<div id="container">
-    <div class="side_logo"><img src="images/logo.png" width="300"></div>
+    <!-- 사이드바 -->
+    <nav class="sidebar">
+        <div class="side_logo" align="center"><img th:src="@{/images/logo-white.png}" width="200"></div>
 
-    <div class="side_menu">
-        <nav>
+        <div class="side_menu">
             <ul>
-                <li class="has_sub"><a href="#" class="on"><span>LESSON</span></a>
-                    <ul>
-                        <li><a href="/lesson/health" class="on">헬스</a></li>
-                        <li><a href="/lesson/yoga">요가</a></li>
-                        <li><a href="/lesson/pilates">필라테스</a></li>
-                    </ul>
-                </li>
+                    <li class="side-title"><a href="#" class="on"><span>LESSON</span></a>
+                        <ul>
+                            <li class="side-content"><a href="/lesson/health" class="on">헬스</a></li>
+                            <li class="side-content"><a href="/lesson/yoga">요가</a></li>
+                            <li class="side-content"><a href="/lesson/pilates">필라테스</a></li>
+                        </ul>
+                    </li>
             </ul>
-        </nav>
+        </div>
+    </nav>
+    <!-- 사이드바 -->
+
+    <div class="page">
+        <th:block layout:fragment="lesson">
+            여기는 리스트 메인? 아니면 바로 헬스?
+        </th:block>
     </div>
-</div>
-
-
-    <th:block layout:fragment="lesson">
-        여기는 리스트 메인? 아니면 바로 헬스?
-    </th:block>
 
 </th:block>
 
