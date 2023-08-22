@@ -46,4 +46,10 @@ public class MemberController {
 
         return "redirect:/";
     }
+
+    @GetMapping(value = "/temp_join")
+    public String tempJoin(HttpSession session) {
+        return "/content/tempJoin";
+    }
+
 }

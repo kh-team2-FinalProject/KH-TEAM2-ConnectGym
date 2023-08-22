@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class OrderResponseDto {
-    private boolean isSuccess;
+    private boolean success;
     private String message;
     private List<Lesson> lessonList;
     private String name;

@@ -1,10 +1,9 @@
 package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.SessionConstant;
-import com.khteam2.connectgym.order.dto.OrderCompleteResponseDto;
-import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
-import com.khteam2.connectgym.order.dto.OrderResponseDto;
+import com.khteam2.connectgym.order.dto.*;
 import com.siot.IamportRestClient.exception.IamportResponseException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,13 +19,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/order")
+@Slf4j
 public class OrderController {
     @Autowired
     private OrderService orderService;
     @Value("${portone.franchise_id}")
-    private Object franchiseId;
+    private String franchiseId;
     @Value("${portone.pg_shop_id}")
-    private Object pgShopId;
+    private String pgShopId;
 
 
     @GetMapping(value = "/pay")
@@ -36,17 +36,15 @@ public class OrderController {
         @RequestParam(required = false) List<Long> lessonList,
         Model model
     ) throws IamportResponseException, IOException {
-        // if (loginMemberNo == null) {
-        //     return "redirect:/login";
-        // }
         if (loginMemberNo == null) {
-            loginMemberNo = 1L;
+            return "redirect:/temp_login";
         }
 
         OrderResponseDto responseDto = this.orderService.prepareOrder(loginMemberNo, lessonList);
 
-        session.setAttribute(SessionConstant.PORTONE_ORDER_NO, responseDto.getOrderNo());
-        session.setAttribute(SessionConstant.PORTONE_PRICE, responseDto.getPrice());
+        session.setAttribute(SessionConstant.ORDER_ORDER_NO, responseDto.getOrderNo());
+        session.setAttribute(SessionConstant.ORDER_PRICE, responseDto.getPrice());
+        session.setAttribute(SessionConstant.ORDER_LESSON_LIST, lessonList);
 
         model.addAttribute("orderResponse", responseDto);
         model.addAttribute("franchiseId", this.franchiseId);
@@ -58,23 +56,38 @@ public class OrderController {
     @GetMapping(value = "/process")
     public String processOrder(
         Model model,
-        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
-        @SessionAttribute(name = SessionConstant.PORTONE_ORDER_NO, required = false) String sMerchantUid,
-        @SessionAttribute(name = SessionConstant.PORTONE_PRICE, required = false) Long sTotalPrice,
-        String imp_uid,
-        String merchant_uid,
-        String error_code,
-        String error_msg
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long sLoginMemberNo,
+        @SessionAttribute(name = SessionConstant.ORDER_ORDER_NO, required = false) String sMerchantUid,
+        @SessionAttribute(name = SessionConstant.ORDER_PRICE, required = false) Long sTotalPrice,
+        @SessionAttribute(name = SessionConstant.ORDER_LESSON_LIST, required = false) List<Long> sOrderLessonList,
+        OrderProcessDto processDto
     ) {
-        // if (loginMemberNo == null) {
-        //     return "redirect:/login";
-        // }
+        if (sLoginMemberNo == null) {
+            return "redirect:/temp_login";
+        }
 
-        if (imp_uid == null || merchant_uid == null || sMerchantUid == null || sTotalPrice == null) {
+        if (processDto.getImp_uid() == null
+            || processDto.getMerchant_uid() == null
+            || sMerchantUid == null
+            || sTotalPrice == null
+        ) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
-        OrderProcessResponseDto responseDto = this.orderService.processOrder(loginMemberNo, false, imp_uid, sMerchantUid, sTotalPrice, error_msg);
+        OrderProcessRequestDto requestDto = OrderProcessRequestDto.builder()
+            .sMerchantUid(sMerchantUid)
+            .sLoginMemberNo(sLoginMemberNo)
+            .sLessonNolist(sOrderLessonList)
+            .sTotalPrice(sTotalPrice)
+            .merchantUid(processDto.getMerchant_uid())
+            .impUid(processDto.getImp_uid())
+            .impSuccess(processDto.getImp_success())
+            .errorCode(processDto.getError_code())
+            .errorMsg(processDto.getError_msg())
+            .isPC(false)
+            .build();
+
+        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto);
 
         if (!responseDto.isSuccess()) {
             model.addAttribute("message", responseDto.getMessage());
@@ -88,15 +101,19 @@ public class OrderController {
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         String orderId,
-        HttpSession session) {
-        // if (loginMemberNo == null) {
-        //     return "redirect:/login";
-        // }
+        HttpSession session
+    ) {
+        if (loginMemberNo == null) {
+            return "redirect:/temp_login";
+        }
 
         OrderCompleteResponseDto responseDto = this.orderService.completeOrder(loginMemberNo, orderId);
 
-        session.removeAttribute(SessionConstant.PORTONE_ORDER_NO);
-        session.removeAttribute(SessionConstant.PORTONE_PRICE);
+        if (responseDto.isSuccess()) {
+            session.removeAttribute(SessionConstant.ORDER_ORDER_NO);
+            session.removeAttribute(SessionConstant.ORDER_LESSON_LIST);
+            session.removeAttribute(SessionConstant.ORDER_PRICE);
+        }
 
         return responseDto.getUrl();
     }
