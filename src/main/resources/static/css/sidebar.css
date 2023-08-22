@@ -1,0 +1,79 @@
+/*============사이드바 페이지===========*/
+.sidebar {
+    background-color: rgba(85, 87, 85, 0.8);
+    /*position: absolute;*/
+    margin-top: 5vh;
+    width: 300px;
+    height: 100%;
+}
+
+/*==사이드바 로고==*/
+.side_logo {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0px;
+
+}
+
+/*==사이드바 메뉴 div==*/
+.side_menu {
+    flex: 1;
+    margin-right: 60px;
+    text-align: left;
+    color: #a3dc10;
+    line-height: 50px;
+
+}
+
+/*사이드바 타이틀명*/
+.side_title {
+    width: 100%;
+    /*background-color: white;*/
+    border-radius: 5px;
+    font-size: 18pt;
+    padding: 5px 10px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    /*font-weight: bold;*/
+
+}
+
+.side_items {
+    display: flex;
+    flex-direction: column;
+
+}
+
+/*사이드바 소제목명*/
+.side-content {
+    font-size: 14pt;
+    font-weight: 20;
+    line-height: 40px;
+
+}
+
+
+.side_menu a {
+    text-decoration: none;
+    color: #cccccc;
+
+}
+
+/* 전체 div */
+.main_page {
+    display: flex;
+    align-items: baseline;
+    margin-top: 10px;
+}
+
+/*==========*/
+
+/*== 본문 ==*/
+.page {
+    flex: 3;
+    background: yellow;
+}
+
+/*============사이드바 끝===========*/
+

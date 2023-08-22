@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 /*============공통===========*/
 body {
+
   background-color: #0E181A;
   margin: 0;
+
 }
 a {
 text-decoration:none;
@@ -62,21 +64,23 @@ margin: 0px 20px;
 }
 
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  margin-left: auto;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
 }
+
 
 .header.scrolled {
   background-color: rgba(13, 20, 22, 0.1); /* Add opacity on scroll */
   color: #ffffff;
+
 }
 
 /*
 .nav-links li a:hover {
-  text-decoration: none;
-  color: rgba(163, 220, 16, 0.5);
+    text-decoration: none;
+    color: rgba(163, 220, 16, 0.5);
 }
 
 .nav-links li a:active {
@@ -85,14 +89,15 @@ margin: 0px 20px;
 }*/
 
 .header.scrolled .nav-links li a {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 .header.scrolled .nav-links li a:hover {
-  color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .login-btn {
+
   padding: 10px 10px;
   background-color: #a3dc10;
   border: none;
@@ -104,49 +109,50 @@ margin: 0px 20px;
   transition: background-color 0.3s; /* Add transition for background */
   /*opacity: 0.8;*/
   align-items: center;
+
 }
 
 .login-btn:hover {
-  background-color: rgba(163, 220, 16, 0.6);
+    background-color: rgba(163, 220, 16, 0.6);
 }
 
 .login-btn:active {
-  background-color: rgba(163, 220, 16, 0.8);
+    background-color: rgba(163, 220, 16, 0.8);
 }
 
 .header.scrolled .logout-btn {
-  background-color: rgba(13, 20, 22, 0.1);
-  border: 1px solid #ccc;
+    background-color: rgba(13, 20, 22, 0.1);
+    border: 1px solid #ccc;
 }
 
 .header.scrolled .login-btn {
-  background-color: rgba(
-    13,
-    20,
-    22,
-    0.1
-  ); /* Change background color and opacity on scroll */
-  border: 1px solid #ccc;
+    background-color: rgba(
+        13,
+        20,
+        22,
+        0.1
+    ); /* Change background color and opacity on scroll */
+    border: 1px solid #ccc;
 }
 
 .header.scrolled .login-btn:hover {
-  background-color: rgba(
-    13,
-    20,
-    22,
-    0.7
-  ); /* Change background color and opacity on scroll */
-  border: 1px solid #ccc;
+    background-color: rgba(
+        13,
+        20,
+        22,
+        0.7
+    ); /* Change background color and opacity on scroll */
+    border: 1px solid #ccc;
 }
 
 .header.scrolled .login-btn:active {
-  background-color: rgba(
-    13,
-    20,
-    22,
-    0.5
-  ); /* Change background color and opacity on scroll */
-  border: 1px solid #ccc;
+    background-color: rgba(
+        13,
+        20,
+        22,
+        0.5
+    ); /* Change background color and opacity on scroll */
+    border: 1px solid #ccc;
 }
 
 
@@ -182,45 +188,56 @@ position: relative;
 
 /*============바디===========*/
 .content-body {
-  margin-top: 5%;
+    margin-top: 5%;
 }
 
 /*============바디 끝===========*/
 
 /*============푸터===========*/
 footer {
-  /*background-color: #0E181A;*/
+
+/* 이서희 푸터 수정 주석처리
   color:#C9D3D4;
   position: absolute;
   width: 100%;
   margin: 0 auto;
   padding-bottom: 85px;
-  padding: 40px 20px;
+  padding: 40px 20px;*/
+
+    background-color: #0d1416;
+    color: #cccccc;
+    position: absolute;
+    width: 100%;
+    margin: 0 auto;
+    /*padding-bottom: 50px; */
+    border-top: 1px solid #e1e1e1;
+    padding: 10px;
+
 }
 
 .footer_inner {
-  width: 1280px;
-  margin: 0 auto;
-  padding-top: 20px;
-  line-height: 20px;
-  text-align: center;
+    display: block;
+    align-items: center;
+    width: 1280px;
+    margin: 0 auto;
+    padding-top: 10px;
+    line-height: 20px;
+    text-align: center;
 }
 
-.list_corp {
-  overflow: hidden;
-  display: inline-block;
-  margin-right: 23px;
-  vertical-align: top;
+.corp_area {
+    align-items: center;
 }
 
 footer ul {
   list-style: none;
 }
 
-footer ul li{
-  list-style: none;
-  margin: 0px 5px;
-  float: left;
+footer ul li {
+    list-style: none;
+    gap: 20px;
+    margin-left: 20px;
+    display: inline;
 }
 
 footer ul li:first-child:before {
@@ -293,3 +310,4 @@ footer ul li:after {
 }
 
 /*============사이드바 끝===========*/
+

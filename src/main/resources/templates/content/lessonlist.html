@@ -8,31 +8,30 @@
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
-<div class="main_page">
-    <!-- 사이드바 -->
-    <nav class="sidebar">
-        <div class="side_logo" align="center"><img th:src="@{/images/logo-white.png}" width="200"></div>
+    <div class="main_page">
+        <!-- 사이드바 -->
+        <nav class="sidebar">
+            <div class="side_logo" align="center"><img th:src="@{/images/logo-white.png}" width="200"></div>
 
-        <div class="side_menu">
-            <ul>
-                    <li><p class="side-title">LESSON</p>
-                        <ul>
-                            <li class="side-content"><a href="/lesson/health" class="on">헬스</a></li>
-                            <li class="side-content"><a href="/lesson/yoga">요가</a></li>
-                            <li class="side-content"><a href="/lesson/pilates">필라테스</a></li>
-                        </ul>
-                    </li>
-            </ul>
+            <div class="side_menu">
+                <ul class="side_items">
+                    <li class="side_title">LESSON</li>
+                    <li class="side-content"><a href="/lesson/health" class="on">헬스</a></li>
+                    <li class="side-content"><a href="/lesson/yoga">요가</a></li>
+                    <li class="side-content"><a href="/lesson/pilates">필라테스</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- 사이드바 -->
+
+        <div class="page">
+            <th:block layout:fragment="lesson">
+
+
+                여기는 리스트 메인? 아니면 바로 헬스?123
+            </th:block>
         </div>
-    </nav>
-    <!-- 사이드바 -->
-
-    <div class="page">
-        <th:block layout:fragment="lesson">
-            여기는 리스트 메인? 아니면 바로 헬스?123
-        </th:block>
     </div>
-</div>
 </th:block>
 
 <!-- 스크립트 부분 -->
