@@ -6,8 +6,12 @@
     <title>메인</title>
 </th:block>
 
+
+<!-- 스크립트 부분 -->
 <th:block layout:fragment="script">
-    <script th:src="@{/js/design/main.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gsap/1.19.1/TweenMax.min.js"></script>
+    <script src="js/design/main_section3.js"></script>
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
@@ -22,30 +26,36 @@
         </div>
         <!-- 메인 영상 끝 -->
 
-        <!-- 모집 중인 강좌 목록 -->
+        <!-- 카테고리 메뉴 바로가기 -->
         <div class="section-1">
-            <div class="l-stage">
-                <div class="l-container">
-                    <div class="l-ring">
-                        <!-- 강좌 목록 배너 불러오기 -->
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                        <div class="l-img"></div>
-                    </div>
+            <div class="sc-container">
+                <div class="sc-card">
+                    <a th:href="@{/lesson/health}">
+                        <img th:src="@{/images/main-health.png}">
+                        <div class="sc-card__head">Health</div>
+                    </a>
+                </div>
+                <div class="sc-card">
+                    <a th:href="@{/lesson/yoga}">
+                        <img th:src="@{/images/main-yoga.jpg}">
+                        <div class="sc-card__head">Yoga</div>
+                    </a>
+                </div>
+                <div class="sc-card">
+                    <a th:href="@{/lesson/pilates}">
+                        <img th:src="@{/images/main-pilates.jpg}">
+                        <div class="sc-card__head">Pilates</div>
+                    </a>
                 </div>
             </div>
-
-            <div class="stage-title">한달이면 가능합니다.</div>
-            <div class="stage-content">트레이너 신지니</div>
-
         </div>
+
+        <!-- 카테고리 메뉴 바로가기 끝 -->
+
+        <!-- 모집 중인 강좌 -->
+
+
+        <!-- 모집 중인 강좌 끝-->
 
         <!-- 인기 트레이너 -->
         <div class="section-2">
@@ -93,15 +103,63 @@
         </div>
         <!-- 인기 트레이너 끝 -->
 
+        <!-- 운동리뷰 또는 식단리뷰 -->
+        <div class="section-3">
+
+            <div class="review-slider-wrap">
+                <div id="r-card-slider" class="r-slider">
+
+                    <div class="r-slider-item">
+                        <div class="r-animation-card_image">
+                            <img th:src="@{/images/basic_profile.jpeg}" alt="">
+                        </div>
+                        <div class="r-animation-card_content">
+                            <h4 class="r-animation-card_content_title r-title-2">리뷰1</h4>
+                            <p class="r-animation-card_content_description r-p-2">With no contractual commitments
+                                comes
+                                the freedom of having top notch content created whenever.</p>
+                        </div>
+                    </div>
+                    <div class="r-slider-item">
+                        <div class="r-animation-card_image">
+                            <img th:src="@{/images/basic_profile.jpeg}" alt="">
+                        </div>
+                        <div class="r-animation-card_content">
+                            <h4 class="r-animation-card_content_title r-title-2">리뷰2</h4>
+                            <p class="r-animation-card_content_description r-p-2">With no contractual commitments
+                                comes
+                                the freedom of having top notch content created whenever.</p>
+                        </div>
+                    </div>
+                    <div class="r-slider-item">
+                        <div class="r-animation-card_image">
+                            <img th:src="@{/images/basic_profile.jpeg}" alt="">
+                        </div>
+                        <div class="r-animation-card_content">
+                            <h4 class="r-animation-card_content_title r-title-2">리뷰3</h4>
+                            <p class="r-animation-card_content_description r-p-2">With no contractual commitments
+                                comes
+                                the freedom of having top notch content created whenever.</p>
+                        </div>
+                    </div>
+                    <div class="r-slider-item">
+                        <div class="r-animation-card_image">
+                            <img th:src="@{/images/basic_profile.jpeg}" alt="">
+                        </div>
+                        <div class="r-animation-card_content">
+                            <h4 class="r-animation-card_content_title r-title-2">리뷰4</h4>
+                            <p class="r-animation-card_content_description r-p-2">With no contractual commitments
+                                comes
+                                the freedom of having top notch content created whenever.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 운동리뷰 또는 식단리뷰 끝 -->
+
     </div>
 </th:block>
 
-<!-- 스크립트 부분 -->
-<th:block layout:fragment="script">
-
-    <script th:inline="javascript">
-    </script>
-
-</th:block>
 
 </html>
