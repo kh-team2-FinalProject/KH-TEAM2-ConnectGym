@@ -1,21 +1,44 @@
+
+/*============공통===========*/
+
+
 /*============헤더===========*/
 header {
+    display:flex;
+    align-items:center;
+    background-color: #0D1416;
+    height: 10vh;
+}
 
-    height: 2vh;
-    margin-top: 1vh;
-    margin-bottom: 2vh;
-    align-items: center;
+header a {
+    text-decoration: none;
+    color:#C2D91A;
+    font-weight: bold;
+    font-size : 14pt;
+}
+
+header .header-item {
+    text-align : center;
+    width : 130px;
 }
 
 /*============헤더 끝===========*/
 
+/*============바디===========*/
+.content-body{
+
+}
+/*============바디 끝===========*/
 
 /*============푸터===========*/
 footer {
-    width: 1280px;
+    background-color:lemonchiffon;
+    position: absolute;
+    width: 100%;
     margin: 0 auto;
     padding-bottom: 78px;
-    font-size: 1rem;
+    border-top: 1px solid #e1e1e1;
+    padding: 40px 20px;
 }
 
 .footer_inner {
@@ -40,3 +63,52 @@ ul {
 }
 
 /*============푸터 끝===========*/
+
+/*============사이드바===========*/
+
+.sidebar{
+    background-color: #0D1416;
+    /*position: absolute;*/
+    width: 300px;
+    height: 100%;
+    margin-left: -20px;
+    margin-top:50px
+}
+
+/*==사이드바 로고==*/
+.side_logo{
+display: flex;
+justify-content: center;
+margin: 50px 0px;
+}
+
+/*==사이드바 메뉴명==*/
+.side_menu{
+margin : 100px 20px;
+text-align: left;
+line-height : 30px;
+}
+
+/*사이드바 타이틀명*/
+.side-title{
+font-size:15pt;
+}
+
+.side_menu a {
+text-decoration: none;
+color:#C2D91A;
+font-weight: bold;
+font-size : 12pt;
+}
+
+
+
+.page {
+     margin-top:50px;
+     margin-left: 250px;
+     background:yellow;
+}
+/*============사이드바 끝===========*/
+
+
+
