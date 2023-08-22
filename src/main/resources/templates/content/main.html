@@ -6,6 +6,10 @@
     <title>메인</title>
 </th:block>
 
+<th:block layout:fragment="script">
+    <script th:src="@{/js/design/main.js}"></script>
+</th:block>
+
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
     <div>
@@ -20,29 +24,26 @@
 
         <!-- 모집 중인 강좌 목록 -->
         <div class="section-1">
-            <div class="left-col">
-                <nav>
-                    <img src="https://i.postimg.cc/JzKwwG16/arrow.png" class="back-btn">
-
-                    <ul>
-                        <li><a href="#" class="active">HOT</a></li>
-                        <li><a href="#">HEALTH</a></li>
-                        <li><a href="#">YOGA</a></li>
-                        <li><a href="#">PILATES</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <section>
-                <div class="cv">
-                    <div class="content">
-                        <h1>Data Analytics</h1>
-                        <p>Making sense of your traffic.</p>
-
-                        <a href="#" class="cta">Go to my stats</a>
+            <div class="l-stage">
+                <div class="l-container">
+                    <div class="l-ring">
+                        <!-- 강좌 목록 배너 불러오기 -->
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
+                        <div class="l-img"></div>
                     </div>
                 </div>
-            </section>
+            </div>
+
+            <div class="stage-title">한달이면 가능합니다.</div>
+            <div class="stage-content">트레이너 신지니</div>
 
         </div>
 
@@ -56,8 +57,8 @@
                 <div class="person">
                     <div class="p-container">
                         <div class="p-container-inner">
-                            <img class="circle" th:src="@{/images/background.png}"/>
-                            <img class="img img1" th:src="@{/images/신지니.png}"/> <!--트레이너 프로필 변수-->
+                            <img class="p-circle" th:src="@{/images/background.png}"/>
+                            <img class="p-img p-img1" th:src="@{/images/신지니.png}"/> <!--트레이너 프로필 변수-->
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -68,8 +69,8 @@
                 <div class="person">
                     <div class="p-container">
                         <div class="p-container-inner">
-                            <img class="circle" th:src="@{/images/background.png}"/>
-                            <img class="img img2" th:src="@{/images/심으뜸.png}"/> <!--트레이너 프로필 변수-->
+                            <img class="p-circle" th:src="@{/images/background.png}"/>
+                            <img class="p-img p-img2" th:src="@{/images/심으뜸.png}"/> <!--트레이너 프로필 변수-->
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -80,8 +81,8 @@
                 <div class="person">
                     <div class="p-container">
                         <div class="p-container-inner">
-                            <img class="circle" th:src="@{/images/background.png}"/>
-                            <img class="img img3" th:src="@{/images/김계란.png}"/>
+                            <img class="p-circle" th:src="@{/images/background.png}"/>
+                            <img class="p-img p-img3" th:src="@{/images/김계란.png}"/>
                         </div>
                     </div>
                     <div class="divider"></div>
