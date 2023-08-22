@@ -22,7 +22,7 @@
         listHtml += `
         <div>
         <span>강좌1
-        ${val.lesson.title}
+        ${val.lesson.trainer.trainerName}
         </span>
         </div>
         `;

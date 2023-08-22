@@ -21,7 +21,11 @@ public class Lesson {
     private Long id;
 
     private String title;
-//    private Trainer trainer;
+
+    @OneToOne
+    @JoinColumn(name="trainer_no")
+    private Trainer trainer;
+
     private int price;
     private int category;
     private String lesson_info;

@@ -1,72 +1,58 @@
 <!DOCTYPE html>
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="css/layout.css">
+<head th:replace="layouts/head :: main-head"></head>
 
 <body th:fragment="main-body">
+<div>
+    <!--  실제 헤더 부분-->
+    <header class="top-nav">
+        <div class="top-nav-wrap">
+            <!--왼쪽에 로고 추가 필요-->
+            <ul class="nav justify-content-end">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <li class="header-item">
+                    <a aria-current="page" href="/lesson">CLASS</a>
+                </li>
+                <li class="header-item">
+                    <a  href="#">CHALLENGE</a>
+                </li>
+                <li class="header-item">
+                    <a  th:if="${session.id != null}" th:href="/mypage">MY PAGE</a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-success" th:if="${session.id == null}"
+                            th:onclick="|location.href='@{/user/login}'|">LOG IN
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" th:if="${session.id != null}"
+                            th:onclick="|location.href='@{/user/logout}'|">LOG OUT
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </header>
+</div>
 
-
-<div class="container">
-
-
-    <div id="adm_wrap">
-
-        <!--  실제 헤더 부분-->
-        <header class="top-nav">
-            <div class="top-nav-wrap">
-                <!--왼쪽에 로고 추가 필요-->
-                <ul class="nav justify-content-end">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/lesson">CLASS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">CHALLENGE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:if="${session.id != null}" th:href="/mypage">MY PAGE</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-outline-success" th:if="${session.id == null}"
-                                th:onclick="|location.href='@{/user/login}'|">LOG IN
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary" th:if="${session.id != null}"
-                                th:onclick="|location.href='@{/user/logout}'|">LOG OUT
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <hr>
-        </header>
-
-
-    </div>
+<div class="contet-body">
     <!--/* 페이지별 컨텐츠 */-->
     <th:block layout:fragment="content">
 
     </th:block>
-
-
-    <!-- 타임리프 변수가 포함된 자바스크립트 소스 선언-->
-    <th:block layout:fragment="script"></th:block>
-
-    <div>
-        <!-- 푸터 -->
-        <footer th:replace="layouts/footer :: main-footer">
-
-        </footer>
-    </div>
-
 </div>
 
+<!-- 타임리프 변수가 포함된 자바스크립트 소스 선언-->
+<th:block layout:fragment="script"></th:block>
+
+
+<!-- 푸터 -->
+<footer th:replace="layouts/footer :: main-footer">
+</footer>
+
+
+</div>
 
 
 </body>
