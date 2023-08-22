@@ -1,8 +1,11 @@
 package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.lesson.Lesson;
+import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
+import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.order.dto.OrderCompleteResponseDto;
+import com.khteam2.connectgym.order.dto.OrderProcessRequestDto;
 import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
 import com.khteam2.connectgym.order.dto.OrderResponseDto;
 import com.siot.IamportRestClient.IamportClient;
@@ -19,21 +22,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class OrderService {
-    //    @Autowired
-    //    private OrderRepository orderRepository;
-    //    @Autowired
-    //    private LessonRepository lessonRepository;
-    //    @Autowired
-    //    private MemberRepository memberRepository;
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
+    @Autowired
+    private LessonRepository lessonRepository;
+    @Autowired
+    private MemberRepository memberRepository;
     @Autowired
     private IamportClient iamportClient;
     private final Random random = new Random();
@@ -47,19 +53,11 @@ public class OrderService {
     @Transactional(readOnly = true)
     public OrderResponseDto prepareOrder(Long loginMemberNo, List<Long> lessonNolist) throws IamportResponseException, IOException {
         OrderResponseDto responseDto = OrderResponseDto.builder()
-            .isSuccess(false)
+            .success(false)
             .build();
 
         // DB에서 해당 강의 리스트를 가져온다.
-        List<Lesson> lessons = new ArrayList<>(); // this.lessonRepository.findAllById(lessonNolist);
-
-        if (lessonNolist == null) {
-            lessonNolist = List.of(1L, 2L);
-        }
-
-        for (Long no : lessonNolist) {
-            lessons.add(new Lesson());
-        }
+        List<Lesson> lessons = this.lessonRepository.findAllById(lessonNolist);
 
         if (lessons.isEmpty()) {
             responseDto.setMessage("잘못된 요청입니다.");
@@ -69,11 +67,10 @@ public class OrderService {
         long totalPrice = 0L;
         for (Lesson lesson : lessons) {
             // 가져온 강의의 금액을 모두 더한다.
-            totalPrice += 0; // lesson.getPrice();
+            totalPrice += lesson.getPrice();
         }
-        // DB 연계시 아래 코드 제거
-        totalPrice += this.random.nextInt(99900) + 100;
 
+        // 주문 번호를 생성한다.
         String merchantUid = this.generateOrderNo();
 
         // 결제 전 포트원 서버로 전송할 객체 선언. 주문 번호와 결제할 금액을 넘긴다.
@@ -84,14 +81,13 @@ public class OrderService {
         // if (postPrepareResponse.getCode() != 0) {}
 
         // 회원 정보를 조회한다.
-        Member member = new Member(); // this.memberRepository.findById(loginMemberNo).orElse(null);
+        Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
 
         // View로 넘겨줄 값들을 DTO에 넘겨준다.
-        String name = "홍길동";
         responseDto.setSuccess(true);
         responseDto.setLessonList(lessons);
-        responseDto.setName(name); //        responseDto.setName(member.getName());
-        responseDto.setTelNo("010-0000-0000"); //        responseDto.setTelNo(member.getTelNo());
+        responseDto.setName(member.getUserName());
+        responseDto.setTelNo(member.getUserTel());
         responseDto.setPrice(totalPrice);
         responseDto.setOrderNo(merchantUid);
 
@@ -104,18 +100,21 @@ public class OrderService {
      *
      * @return 사용되지 않은 새 주문 번호
      */
+    @Transactional
     private String generateOrderNo() {
         String orderNo = null;
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")); // 20230820
 
         for (int i = 0; i < 10; i++) {
-            // 1 ~ 999,999
+            // 1 ~ 999,999 값을 생성함
             int randomValue = random.nextInt(999_999) + 1;
-            // 20230820001024 / 20230820123456
+            // 주문 번호 형식: 20230820001024 / 20230820123456
             orderNo = String.format("%s%06d", date, randomValue);
 
-            Order order = null; // this.orderRepository.findById(orderNo).orElse(null);
+            // 해당 주문 번호가 있는지 확인
+            Order order = this.orderRepository.findById(orderNo).orElse(null);
             if (order == null) {
+                // 해당 주문 번호가 없으면 반복문에서 빠져 나옴
                 break;
             }
         }
@@ -126,10 +125,28 @@ public class OrderService {
     /**
      * 주문 진행 중일 때 실행되는 메소드
      */
-    public OrderProcessResponseDto processOrder(Long loginMemberNo, boolean isPC, String impUid, String sMerchantUid, Long sTotalPrice, String errorMsg) {
+    @Transactional
+    public OrderProcessResponseDto processOrder(
+        OrderProcessRequestDto requestDto
+    ) {
+        Long loginMemberNo = requestDto.getSLoginMemberNo();
+        String merchantUid = requestDto.getSMerchantUid();
+        Long totalPrice = requestDto.getSTotalPrice();
+        List<Long> lessonNolist = requestDto.getSLessonNolist();
+        boolean isPC = requestDto.isPC();
+        String impUid = requestDto.getImpUid();
+        String errorMsg = requestDto.getErrorMsg();
+
         OrderProcessResponseDto returnDto = OrderProcessResponseDto.builder()
             .success(false)
             .build();
+
+        if (!isPC && loginMemberNo == null) {
+            returnDto.setMessage("로그인되어 있지 않습니다.");
+            return returnDto;
+        }
+
+        Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
         Payment payment = null;
         String message = null;
         String url = "/order/fail";
@@ -145,19 +162,38 @@ public class OrderService {
         }
 
         if (payment != null) {
-            if (payment.getMerchantUid().equals(sMerchantUid)
-                && payment.getAmount().equals(BigDecimal.valueOf(sTotalPrice))) {
+            if (payment.getMerchantUid().equals(merchantUid)
+                && payment.getAmount().equals(BigDecimal.valueOf(totalPrice))
+            ) {
                 returnDto.setSuccess(true);
-                String tempUrl = "/order/complete?orderId=" + sMerchantUid;
+                String tempUrl = "/order/complete?orderId=" + merchantUid;
                 url = isPC ? tempUrl : "redirect:" + tempUrl;
 
-                // DB에 저장
-//                Order order = Order.builder()
-//                    .no(payment.getMerchantUid())
-//                    .type(payment.getPayMethod())
-//                    .build();
-//
-//                this.orderRepository.save(order);
+                List<Lesson> lessonList = this.lessonRepository.findAllById(lessonNolist);
+
+                if (lessonNolist.size() == lessonList.size()) {
+                    // DB에 저장
+                    Order order = Order.builder()
+                        .no(payment.getMerchantUid())
+                        .member(member)
+                        .orderPay(totalPrice)
+                        .dayOfPayment(Timestamp.valueOf(LocalDateTime.now()))
+                        .type(payment.getPayMethod())
+                        .build();
+
+                    // 주문을 DB에 넣는다.
+                    Order savedOrder = this.orderRepository.save(order);
+
+                    // order_detail 테이블에 저장할 리스트를 생성한다.
+                    List<OrderDetail> createdOrderDetailList = lessonList.stream()
+                        .map(lesson -> OrderDetail.builder().lesson(lesson).order(savedOrder).build())
+                        .collect(Collectors.toList());
+
+                    // order_detail 테이블에 주문한 강의를 모두 넣는다.
+                    List<OrderDetail> savedOrderDetailList = this.orderDetailRepository.saveAll(createdOrderDetailList);
+                } else {
+                    log.error("가져온 lesson과 lessonNo 리스트의 사이즈가 다릅니다");
+                }
             } else {
                 message = "검증 실패";
             }
@@ -189,17 +225,15 @@ public class OrderService {
         return ResponseEntity.internalServerError().build();
     }
 
+    @Transactional
     public OrderCompleteResponseDto completeOrder(Long loginMemberId, String orderId) {
         OrderCompleteResponseDto responseDto = OrderCompleteResponseDto.builder()
             .success(false)
             .url("/content/orderComplete")
             .build();
 
-//        List<Order> orderList = this.orderRepository.find;
-
-        if (orderId == null) {
-
-        }
+        Order order = this.orderRepository.findById(orderId).orElse(null);
+        List<OrderDetail> orderDetailList = this.orderDetailRepository.findByOrder(order);
 
         return responseDto;
     }
