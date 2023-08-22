@@ -3,53 +3,60 @@
 
 <head th:replace="layouts/head :: main-head"></head>
 
+
 <body th:fragment="main-body">
 <div>
     <!--  실제 헤더 부분-->
-    <header class="top-nav">
-        <div class="top-nav-wrap">
-            <!--왼쪽에 로고 추가 필요-->
-            <ul class="nav justify-content-end">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <li class="header-item">
-                    <a aria-current="page" href="/lesson">CLASS</a>
-                </li>
-                <li class="header-item">
-                    <a  href="#">CHALLENGE</a>
-                </li>
-                <li class="header-item">
-                    <a  th:if="${session.id != null}" th:href="/mypage">MY PAGE</a>
-                </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-outline-success" th:if="${session.id == null}"
-                            th:onclick="|location.href='@{/user/login}'|">LOG IN
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary" th:if="${session.id != null}"
-                            th:onclick="|location.href='@{/user/logout}'|">LOG OUT
-                    </button>
-                </li>
-            </ul>
+    <header>
+        <div class="header" id="navbar">
+            <img class="logo_img" src="/images/logo.png" href="#" th:alt="'CONNECT GYM'">
+            <div class="nav-wrap">
+                <ul class="nav-links">
+                    <li><a aria-current="page" href="/lesson">CLASS</a></li>
+                    <li><a href="#">CHALLENGE</a></li>
+                    <li>
+                        <a th:if="${session.id != null}" th:href="/mypage">MY PAGE</a>
+                    </li>
+                    <li>
+                        <button type="button" class="login-btn" th:if="${session.id == null}"
+                                th:onclick="|location.href='@{/user/login}'|">LOG IN
+                        </button>
+                        <button type="button" class="logout-btn" th:if="${session.id != null}"
+                                th:onclick="|location.href='@{/user/logout}'|">LOG OUT
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
-</div>
 
-<div class="contet-body">
-    <!--/* 페이지별 컨텐츠 */-->
-    <th:block layout:fragment="content">
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 0) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-    </th:block>
-</div>
-
-<!-- 타임리프 변수가 포함된 자바스크립트 소스 선언-->
-<th:block layout:fragment="script"></th:block>
+    </script>
 
 
-<!-- 푸터 -->
-<footer th:replace="layouts/footer :: main-footer">
-</footer>
+    <div class="contet-body">
+        <!--/* 페이지별 컨텐츠 */-->
+        <th:block layout:fragment="content">
+
+        </th:block>
+    </div>
+
+    <!-- 타임리프 변수가 포함된 자바스크립트 소스 선언-->
+    <th:block layout:fragment="script"></th:block>
+
+
+    <!-- 푸터 -->
+    <footer th:replace="layouts/footer :: main-footer">
+    </footer>
 
 
 </div>

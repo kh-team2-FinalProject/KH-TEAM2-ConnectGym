@@ -1,38 +1,122 @@
-
 /*============공통===========*/
 
 
 /*============헤더===========*/
-header {
-    display:flex;
-    align-items:center;
+.header {
     background-color: #0D1416;
-    height: 10vh;
+    color: #A3DC10;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: background-color 0.3s;
+    z-index: 1000;
 }
 
-header a {
+.logo_img {
+    height: 70px;
+    width: 90px;
+    margin-left: 10px;
+}
+
+.header.scrolled {
+    background-color: rgba(13, 20, 22, 0.1); /* Add opacity on scroll */
+    color: #ffffff;
+}
+
+.nav-wrap {
+    margin-right: 150px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
+}
+
+.nav-links li a {
     text-decoration: none;
-    color:#C2D91A;
-    font-weight: bold;
-    font-size : 14pt;
+    color: #A3DC10;
+    margin-top: 2px;
 }
 
-header .header-item {
-    text-align : center;
-    width : 130px;
+.nav-links li a:hover {
+    text-decoration: none;
+    color: rgba(163, 220, 16, 0.5);
+}
+
+.nav-links li a:active {
+    text-decoration: none;
+    color: rgba(163, 220, 16, 0.7);
+}
+
+
+.header.scrolled .nav-links li a {
+    color: #ffffff;
+}
+
+.header.scrolled .nav-links li a:hover {
+    color: rgba(255, 255, 255, 0.6);
+
+}
+
+.login-btn {
+    padding: 10px 20px;
+    background-color: #A3DC10;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add transition for background */
+    opacity: 0.8;
+    align-items: center;
+}
+
+.login-btn:hover {
+    background-color: rgba(163, 220, 16, 0.6);
+}
+
+.login-btn:active {
+    background-color: rgba(163, 220, 16, 0.8);
+}
+
+.header.scrolled .logout-btn {
+    background-color: rgba(13, 20, 22, 0.1);
+    border: 1px solid #ccc;
+}
+
+.header.scrolled .login-btn {
+    background-color: rgba(13, 20, 22, 0.1); /* Change background color and opacity on scroll */
+    border: 1px solid #ccc;
+}
+
+.header.scrolled .login-btn:hover {
+    background-color: rgba(13, 20, 22, 0.7); /* Change background color and opacity on scroll */
+    border: 1px solid #ccc;
+}
+
+.header.scrolled .login-btn:active {
+    background-color: rgba(13, 20, 22, 0.5); /* Change background color and opacity on scroll */
+    border: 1px solid #ccc;
 }
 
 /*============헤더 끝===========*/
 
+
 /*============바디===========*/
-.content-body{
+.content-body {
 
 }
+
 /*============바디 끝===========*/
 
 /*============푸터===========*/
 footer {
-    background-color:lemonchiffon;
+    background-color: lemonchiffon;
     position: absolute;
     width: 100%;
     margin: 0 auto;
@@ -66,48 +150,48 @@ ul {
 
 /*============사이드바===========*/
 
-.sidebar{
+.sidebar {
     background-color: #0D1416;
     /*position: absolute;*/
     width: 300px;
     height: 100%;
     margin-left: -20px;
-    margin-top:50px
+    margin-top: 50px
 }
 
 /*==사이드바 로고==*/
-.side_logo{
-display: flex;
-justify-content: center;
-margin: 50px 0px;
+.side_logo {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0px;
 }
 
 /*==사이드바 메뉴명==*/
-.side_menu{
-margin : 100px 20px;
-text-align: left;
-line-height : 30px;
+.side_menu {
+    margin: 100px 20px;
+    text-align: left;
+    line-height: 30px;
 }
 
 /*사이드바 타이틀명*/
-.side-title{
-font-size:15pt;
+.side-title {
+    font-size: 15pt;
 }
 
 .side_menu a {
-text-decoration: none;
-color:#C2D91A;
-font-weight: bold;
-font-size : 12pt;
+    text-decoration: none;
+    color: #C2D91A;
+    font-weight: bold;
+    font-size: 12pt;
 }
-
 
 
 .page {
-     margin-top:50px;
-     margin-left: 250px;
-     background:yellow;
+    margin-top: 50px;
+    margin-left: 250px;
+    background: yellow;
 }
+
 /*============사이드바 끝===========*/
 
 
