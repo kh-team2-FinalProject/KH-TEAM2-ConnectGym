@@ -1,12 +1,15 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 /*============공통===========*/
+body{
 
+}
 
 /*============헤더===========*/
 header {
     display:flex;
     align-items:center;
     background-color: #0D1416;
+    font-family: 'Do Hyeon', sans-serif;
     height: 10vh;
 }
 
@@ -64,15 +67,28 @@ ul {
 
 /*============푸터 끝===========*/
 
-/*============사이드바===========*/
+/*============사이드바 페이지===========*/
+
+.side_menu a {
+text-decoration: none;
+color:#A3DC10;
+
+}
+
+/* 전체 div */
+.main_page{
+    display: flex;
+    align-items: baseline;
+}
+/*==========*/
 
 .sidebar{
     background-color: #0D1416;
     /*position: absolute;*/
     width: 300px;
     height: 100%;
-    margin-left: -20px;
-    margin-top:50px
+   /* margin-left: -20px;
+    margin-top:50px;*/
 }
 
 /*==사이드바 로고==*/
@@ -82,31 +98,35 @@ justify-content: center;
 margin: 50px 0px;
 }
 
-/*==사이드바 메뉴명==*/
+/*==사이드바 메뉴 div==*/
 .side_menu{
-margin : 100px 20px;
+ flex: 1;
+ margin-right:60px;
 text-align: left;
-line-height : 30px;
+color:#A3DC10;
+line-height : 50px;
 }
 
 /*사이드바 타이틀명*/
 .side-title{
-font-size:15pt;
+width: 100%;
+background-color : white;
+border-radius: 0 16px 16px 0;
+font-size:18pt;
+
 }
 
-.side_menu a {
-text-decoration: none;
-color:#C2D91A;
-font-weight: bold;
-font-size : 12pt;
+/*사이드바 소제목명*/
+.side-content{
+font-size:14pt;
+font-weight:20;
+line-height : 40px;
 }
 
-
-
+/*== 본문 ==*/
 .page {
-     margin-top:50px;
-     margin-left: 250px;
-     background:yellow;
+    flex: 3;
+    background:yellow;
 }
 /*============사이드바 끝===========*/
 

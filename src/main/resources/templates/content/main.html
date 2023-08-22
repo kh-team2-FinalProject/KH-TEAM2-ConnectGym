@@ -9,8 +9,89 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
     <div>
-        <video src="video/main-video.mp4" style="width:100%;" autoplay loop muted playsinline></video>
-        여기는 메인이다.
+        <!-- 메인 영상 -->
+        <div class="video-container">
+            <video src="video/main-video.mp4" style="width:100%;" autoplay loop muted playsinline></video>
+            <div class="typing-content">
+                Your Gym, Any Space.
+            </div>
+        </div>
+        <!-- 메인 영상 끝 -->
+
+        <!-- 모집 중인 강좌 목록 -->
+        <div class="section-1">
+            <div class="left-col">
+                <nav>
+                    <img src="https://i.postimg.cc/JzKwwG16/arrow.png" class="back-btn">
+
+                    <ul>
+                        <li><a href="#" class="active">HOT</a></li>
+                        <li><a href="#">HEALTH</a></li>
+                        <li><a href="#">YOGA</a></li>
+                        <li><a href="#">PILATES</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <section>
+                <div class="cv">
+                    <div class="content">
+                        <h1>Data Analytics</h1>
+                        <p>Making sense of your traffic.</p>
+
+                        <a href="#" class="cta">Go to my stats</a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 인기 트레이너 -->
+        <div class="section-2">
+            <div class="person-title">
+                Popular Trainer
+            </div>
+            <div class="person-content">
+                <!--요가-->
+                <div class="person">
+                    <div class="p-container">
+                        <div class="p-container-inner">
+                            <img class="circle" th:src="@{/images/background.png}"/>
+                            <img class="img img1" th:src="@{/images/신지니.png}"/> <!--트레이너 프로필 변수-->
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="p-name">신지니</div> <!--트레이너 이름 변수-->
+                    <div class="p-cat">yoga</div> <!--레슨 카테고리 변수-->
+                </div>
+                <!--헬스-->
+                <div class="person">
+                    <div class="p-container">
+                        <div class="p-container-inner">
+                            <img class="circle" th:src="@{/images/background.png}"/>
+                            <img class="img img2" th:src="@{/images/심으뜸.png}"/> <!--트레이너 프로필 변수-->
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="p-name">심으뜸</div> <!--트레이너 이름 변수-->
+                    <div class="p-cat">health</div> <!--레슨 카테고리 변수-->
+                </div>
+                <!--필라테스-->
+                <div class="person">
+                    <div class="p-container">
+                        <div class="p-container-inner">
+                            <img class="circle" th:src="@{/images/background.png}"/>
+                            <img class="img img3" th:src="@{/images/김계란.png}"/>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="p-name">김계란</div>
+                    <div class="p-cat">pilates</div>
+                </div>
+            </div>
+        </div>
+        <!-- 인기 트레이너 끝 -->
+
     </div>
 </th:block>
 
