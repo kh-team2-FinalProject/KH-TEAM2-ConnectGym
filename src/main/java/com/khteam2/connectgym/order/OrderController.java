@@ -28,7 +28,6 @@ public class OrderController {
     @Value("${portone.pg_shop_id}")
     private String pgShopId;
 
-
     @GetMapping(value = "/pay")
     public String order(
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
@@ -113,17 +112,30 @@ public class OrderController {
             session.removeAttribute(SessionConstant.ORDER_ORDER_NO);
             session.removeAttribute(SessionConstant.ORDER_LESSON_LIST);
             session.removeAttribute(SessionConstant.ORDER_PRICE);
+
+            model.addAttribute("responseDto", responseDto);
         }
 
         return responseDto.getUrl();
     }
 
-//    @ExceptionHandler({IamportResponseException.class})
-//    public String portOneExceptionHandler() {}
+    @GetMapping(value = "/test_complete")
+    public String completeOrderTest(Model model) {
+        OrderCompleteResponseDto responseDto = OrderCompleteResponseDto.builder()
+            .success(true)
+            .build();
 
-//    @ExceptionHandler({IllegalArgumentException.class})
-//    public String illegalArgumentExceptionHandler() {}
+        model.addAttribute("responseDto", responseDto);
 
-//    @ExceptionHandler({IamportResponseException.class})
-//    public String IamportResponseExceptionHandler() {}
+        return "/content/orderComplete";
+    }
+
+    //    @ExceptionHandler({IamportResponseException.class})
+    //    public String portOneExceptionHandler() {}
+
+    //    @ExceptionHandler({IllegalArgumentException.class})
+    //    public String illegalArgumentExceptionHandler() {}
+
+    //    @ExceptionHandler({IamportResponseException.class})
+    //    public String IamportResponseExceptionHandler() {}
 }
