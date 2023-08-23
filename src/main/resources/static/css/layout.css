@@ -2,13 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 /*============공통===========*/
 body {
-
   background-color: #0E181A;
   margin: 0;
-
+  color:#ffffff;
 }
 a {
 text-decoration:none;
+    color:#ffffff;
 }
 /*============헤더===========*/
 .header {
@@ -45,14 +45,6 @@ margin-right:5px;
 
 .header-item svg:hover {
 cursor:pointer;
-width: 50px;
-margin-right:10px;
---fa-bounce-start-scale-x: 1;
---fa-bounce-start-scale-y: 1;
---fa-bounce-jump-scale-x: 1;
---fa-bounce-jump-scale-y: 1;
---fa-bounce-land-scale-x: 1;
---fa-bounce-land-scale-y: 1;
 }
 
 
@@ -104,30 +96,11 @@ gap : 20px;
 }
 /* =======마우스 오버 시 밑줄 끝====== */
 
-/*
-.nav-links {
-    display: flex;
-    gap: 20px;
-
-}*/
-
 
 .header.scrolled {
   background-color: rgba(13, 20, 22, 0.1); /* Add opacity on scroll */
   color: #ffffff;
-
 }
-
-/*
-.nav-links li a:hover {
-    text-decoration: none;
-    color: rgba(163, 220, 16, 0.5);
-}
-
-.nav-links li a:active {
-  text-decoration: none;
-  color: rgba(163, 220, 16, 0.7);
-}*/
 
 .header.scrolled .nav-links li a {
     color: #ffffff;
@@ -271,11 +244,11 @@ footer ul li:after {
 }
 
 /* 전체 div */
-.main_page {
+.side_main_page {
   display: flex;
   align-items: baseline;
+  height:100%;
 }
-/*==========*/
 
 .sidebar {
   background-color: #0E181A;
@@ -316,9 +289,9 @@ footer ul li:after {
 }
 
 /*== 본문 ==*/
-.page {
+.side_page {
   flex: 3;
-  background: yellow;
+  background: #DAD9FF;
 }
 
 /*============사이드바 끝===========*/

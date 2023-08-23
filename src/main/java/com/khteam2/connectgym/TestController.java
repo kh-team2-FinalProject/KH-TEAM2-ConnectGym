@@ -40,9 +40,9 @@ public class TestController {
         return "content/mypages";
     }
 
-    @GetMapping("/mypage/mylessons")
+    @GetMapping("/mypage/mylessonlist")
     public String myLesson() {
-        return "mypage/mylessons";
+        return "mypage/mylessonlist";
     }
 
     @GetMapping("/enterRoom")

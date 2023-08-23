@@ -12,7 +12,7 @@
   	success : function(response){
   	    if(!response.length){
                     document.querySelector('#lessonList').innerHTML=
-                    '<div class="lesson_none"><p>등록된 댓글이 없습니다.</p></div>';
+                    '<div class="lesson_none"><p>등록한 레슨이 없습니다.</p></div>';
                     return false;
         }
         // 댓글이 있는 경우

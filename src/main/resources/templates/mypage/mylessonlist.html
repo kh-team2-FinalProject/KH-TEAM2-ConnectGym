@@ -5,7 +5,7 @@
 
 <th:block layout:fragment="script">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../js/mylessons.js"></script>
+    <script th:src="@{/js/mylessonlist.js}"></script>
 </th:block>
 
 <th:block layout:fragment="title">
@@ -14,14 +14,13 @@
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
-
-    <a href="/enterRoom"> 수강하러 가기 </a>
-
-    // 내 수강 목록 출력하는 태그 (mylessons.js에서 출력)
+    <div class="mylessonlist-container">
+        <h1>MY LESSON LIST</h1>
+    // 내 수강 목록 출력하는 태그 (mylessonlist.js에서 출력)
     <div id="lessonList">
     </div>
 
-
+    </div>
 </th:block>
 
 
