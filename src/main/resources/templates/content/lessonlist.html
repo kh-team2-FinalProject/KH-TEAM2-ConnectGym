@@ -12,7 +12,6 @@
         <!-- 사이드바 -->
         <nav class="sidebar">
             <div class="side_logo" align="center"><img th:src="@{/images/logo-white.png}" width="200"></div>
-
             <div class="side_menu">
                 <ul class="side_items">
                     <li class="side_title">LESSON</li>
@@ -23,12 +22,23 @@
             </div>
         </nav>
         <!-- 사이드바 -->
-
         <div class="page">
             <th:block layout:fragment="lesson">
-
-
-                여기는 리스트 메인? 아니면 바로 헬스?123
+                <div id="wrap">
+                    <div class="card">
+                        <div class="card-front">   <!--${안의 값} 임의 작성-->
+                            <img th:src="${lesson.image}" alt="이미지가 지원되지 않습니다.">
+                        </div>
+                        <div class="card-back">
+                            <ul>
+                                <li class="card_title" th:text="${lesson.title}"></li>
+                                <li class="card_content" th:text="${trainer.name}"></li>
+                                <li class="card_content" th:text="${lesson.info}"></li>
+                                <li class="card_content" th:text="${lesson.start_date}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </th:block>
         </div>
     </div>
