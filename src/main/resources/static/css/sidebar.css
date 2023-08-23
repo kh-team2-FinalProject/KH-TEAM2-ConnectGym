@@ -86,6 +86,10 @@
 }
 
 #wrap {
+    display: flex;
+    flex-direction: row; /* 가로로 배치 */
+    justify-content: space-between; /* 카드 간 간격 조절 */
+    align-items: center; /* 세로 정렬 */
     position: relative;
     width: 200px;
     height: 400px;
@@ -93,13 +97,36 @@
     border-radius: 20px;
     perspective: 500px;
     cursor: pointer;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
+
 #wrap .card {
-    width: 100%;
-    height: 100%;
+    display: inline-flex;
+    width: 100px;
+    height: 200px;
     transition: all .5s;
     transform-style: preserve-3d;
+    flex: 0 1 calc(33.33% - 20px); /* 카드 너비를 3분의 1로 설정 */
+    max-width: 300px; /* 최대 너비 설정 */
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+    .card {
+        flex: 0 1 calc(50% - 20px); /* 카드 너비를 2분의 1로 설정 */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 0 100%; /* 카드 너비를 100%로 설정하여 아래로 내려감 */
+        max-width: none;
+    }
 }
 
 #wrap:hover .card {
@@ -129,6 +156,11 @@
     background-color: #ccc;
     z-index: 5;
     transform: rotateY(180deg);
+}
+
+.lesson_img {
+    width: 100px;
+    height: 100px;
 }
 
 /*============강좌 카드 섹션 끝========*/
