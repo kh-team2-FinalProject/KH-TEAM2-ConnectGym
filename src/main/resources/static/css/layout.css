@@ -2,25 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 /*============공통===========*/
 body {
-<<<<<<< HEAD
-  background-color: #0E181A;
-  margin: 0;
-  color:#ffffff;
-=======
 
     background-color: #0E181A;
     margin: 0;
+    color: #ffffff;
 
->>>>>>> 이채연
 }
 
 a {
-<<<<<<< HEAD
-text-decoration:none;
-    color:#ffffff;
-=======
+
     text-decoration: none;
->>>>>>> 이채연
+    color: #ffffff;
+
 }
 
 /*============헤더===========*/
@@ -57,9 +50,8 @@ text-decoration:none;
 }
 
 .header-item svg:hover {
-<<<<<<< HEAD
-cursor:pointer;
-=======
+
+
     cursor: pointer;
     width: 50px;
     margin-right: 10px;
@@ -69,7 +61,7 @@ cursor:pointer;
     --fa-bounce-jump-scale-y: 1;
     --fa-bounce-land-scale-x: 1;
     --fa-bounce-land-scale-y: 1;
->>>>>>> 이채연
+
 }
 
 
@@ -95,7 +87,6 @@ cursor:pointer;
 .h-title {
     position: relative;
     letter-spacing: 4px;
-    letter-spacing: 3px;
     padding: 0;
     text-align: center;
 }
@@ -124,14 +115,8 @@ cursor:pointer;
 
 
 .header.scrolled {
-<<<<<<< HEAD
-  background-color: rgba(13, 20, 22, 0.1); /* Add opacity on scroll */
-  color: #ffffff;
-=======
     background-color: rgba(13, 20, 22, 0.1); /* Add opacity on scroll */
     color: #ffffff;
-
->>>>>>> 이채연
 }
 
 .header.scrolled .nav-links li a {
@@ -276,21 +261,14 @@ footer ul li:after {
 /*  color: #a3dc10;*/
 /*}*/
 
-<<<<<<< HEAD
+
 /* 전체 div */
 .side_main_page {
-  display: flex;
-  align-items: baseline;
-  height:100%;
+    display: flex;
+    align-items: baseline;
+    height: 100%;
 }
-=======
-/*!* 전체 div *!*/
-/*.main_page {*/
-/*  display: flex;*/
-/*  !*align-items: baseline;*!*/
-/*}*/
-/*!*==========*!*/
->>>>>>> 이채연
+
 
 /*.sidebar {*/
 /*  background-color: #0E181A;*/
@@ -330,19 +308,13 @@ footer ul li:after {
 /*  line-height: 40px;*/
 /*}*/
 
-<<<<<<< HEAD
+
 /*== 본문 ==*/
-.side_page {
-  flex: 3;
-  background: #DAD9FF;
-}
-=======
-/*!*== 본문 ==*!*/
-/*.page {*/
-/*  flex: 3;*/
-/*  background: yellow;*/
+/*.side_page {*/
+/*    flex: 3;*/
+/*    background: #DAD9FF;*/
 /*}*/
->>>>>>> 이채연
+
 
 /*!*============사이드바 끝===========*!*/
 
