@@ -26,15 +26,41 @@
             <th:block layout:fragment="lesson">
                 <div id="wrap">
                     <div class="card">
-                        <div class="card-front">   <!--${안의 값} 임의 작성-->
-                            <img th:src="${lesson.image}" alt="이미지가 지원되지 않습니다.">
+                        <div class="card-front">
+                            <img class="lesson_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
                         </div>
                         <div class="card-back">
                             <ul>
-                                <li class="card_title" th:text="${lesson.title}"></li>
-                                <li class="card_content" th:text="${trainer.name}"></li>
-                                <li class="card_content" th:text="${lesson.info}"></li>
-                                <li class="card_content" th:text="${lesson.start_date}"></li>
+                                <li class="card_title" th:text="'레슨타이틀'"></li>
+                                <li class="card_content" th:text="'트레이너 이름'"></li>
+                                <li class="card_content" th:text="'레슨정보'"></li>
+                                <li class="card_content" th:text="'시작일'"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-front">
+                            <img class="lesson_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
+                        </div>
+                        <div class="card-back">
+                            <ul>
+                                <li class="card_title" th:text="'레슨타이틀'"></li>
+                                <li class="card_content" th:text="'트레이너 이름'"></li>
+                                <li class="card_content" th:text="'레슨정보'"></li>
+                                <li class="card_content" th:text="'시작일'"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-front">
+                            <img class="lesson_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
+                        </div>
+                        <div class="card-back">
+                            <ul>
+                                <li class="card_title" th:text="'레슨타이틀'"></li>
+                                <li class="card_content" th:text="'트레이너 이름'"></li>
+                                <li class="card_content" th:text="'레슨정보'"></li>
+                                <li class="card_content" th:text="'시작일'"></li>
                             </ul>
                         </div>
                     </div>
