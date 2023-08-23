@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.member;
 
 import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.member.dto.MemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,8 +49,18 @@ public class MemberController {
     }
 
     @GetMapping(value = "/temp_join")
-    public String tempJoin(HttpSession session) {
+    public String tempJoin() {
         return "/content/tempJoin";
+    }
+
+    // 회원가입 버튼 클릭 시 실행
+    @PostMapping("/temp_joinProcess")
+    public String saveUser(MemberDTO memberDTO) {
+
+        memberService.createMember(memberDTO);
+
+        return "content/main";
+
     }
 
 }

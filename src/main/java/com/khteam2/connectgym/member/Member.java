@@ -2,10 +2,7 @@ package com.khteam2.connectgym.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.khteam2.connectgym.enroll.EnrollDetail;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,6 +27,8 @@ public class Member {
     private String userTel;
     @Column(name = "user_address")
     private String userAddress;
+    @Column(name = "user_email")
+    private String userEmail;
 
     @OneToMany(mappedBy = "member")
     @JsonIgnore

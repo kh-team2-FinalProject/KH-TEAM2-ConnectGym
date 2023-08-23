@@ -12,6 +12,7 @@ public class TestController {
     public String index() {
         return "content/main";
     }
+
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")
     public String lesson() {
@@ -47,12 +48,12 @@ public class TestController {
     @GetMapping("/enterRoom")
     public String enterRoom(Model model) {
         // 현재 접속중인 회원(=>세션에서 가져오기)의 수강중인 레슨의 방이름 / 회원이름
-        String roomName="fixedname";
-        String userName="이서희";
+        String roomName = "fixedname";
+        String userName = "이서희";
 
-        model.addAttribute("roomName",roomName);
-        model.addAttribute("userRole","member");
-        model.addAttribute("userName",userName);
+        model.addAttribute("roomName", roomName);
+        model.addAttribute("userRole", "member");
+        model.addAttribute("userName", userName);
         return "room/enterroom";
     }
 
