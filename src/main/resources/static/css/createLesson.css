@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+}
+
+.createLesson_container {
+    background: #0D1416;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: -20px 0 50px;
+}
+
+.input_lesson {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input_lesson li {
+    margin-bottom: 20px;
+    list-style: none;
+}
+
+.createLessonTitle {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+
+
+}
+
+.createLesson_container span {
+    font-size: 14px;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+.createLesson_container button {
+    border-radius: 5px;
+    background: #A3DC10;
+    color: #0D1416;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+.createLesson_container form {
+    border: 1px solid #A3DC10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 100px;
+
+}
+
+.createLesson_container input, textarea {
+    background: #ffffff;
+    border: none;
+    padding: 12px 15px;
+    margin-top: 10px;
+    width: 80%;
+    border-radius: 5px;
+
+
+}
+

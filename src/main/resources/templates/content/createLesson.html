@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="script">
+    <script type="text/javascript" rel="script"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+</th:block>
+
+<th:block layout:fragment="content">
+
+    <div>
+        <div class="createLesson_container">
+            <form action="/createLesson" method="post">
+                <div class="createLessonTitle">
+                    <h2>Create Lesson</h2>
+                </div>
+                <!-- 레슨명 -->
+                <div class="input_lesson">
+                    <ul>
+                        <li><span>레슨명</span></li>
+                        <li><input id="lesson_Title" type="text" name="lesson_Title"></input></li>
+                        <li><span>이름</span></li>
+                        <li><input id="trainer_name" type="text" name="trainer_name"></input></li>
+                        <li><span>강좌 내용 </span></li>
+                        <li><textarea id="lesson_info" placeholder="강좌 내용을 작성해주세요." name="lesson_info"></textarea></li>
+                        <li>
+                            <button type="button">수정하기</button>
+                            <button type="submit">CONNECT</button>
+                        </li>
+                    </ul>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</th:block>
+
+</html>
