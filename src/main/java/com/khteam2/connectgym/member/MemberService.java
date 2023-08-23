@@ -35,12 +35,6 @@ public class MemberService {
         member.setUserEmail(memberDTO.getUserEmail());
         member.setUserAddress("1234"); // input 추가예정
 
-        System.out.println(member.getUserId());
-        System.out.println(member.getUserPw());
-        System.out.println(member.getUserName());
-        System.out.println(member.getUserTel());
-        System.out.println(member.getUserEmail());
-        System.out.println(member.getUserAddress());
         memberRepository.save(member);
 
     }
