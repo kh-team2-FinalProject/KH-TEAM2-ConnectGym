@@ -6,11 +6,12 @@ create table users(
   user_name varchar(20) not null,
   user_tel varchar(20) not null,
   user_address varchar(100) not null,
-  reg_date datetime default now()
+  reg_date datetime default now(),
+  user_email varchar(40) not null
 );
-insert into users(user_id, user_pw, user_name, user_tel,user_address) values('aaaa', '1234', '추성훈', '010-1234-1234','경기도 의정부시 전좌로');
-insert into users(user_id, user_pw, user_name, user_tel,user_address)  values('bbbb', '2345', '김연아', '010-2345-2345','서울시 강서구 화곡로');
-insert into users(user_id, user_pw, user_name, user_tel,user_address)  values('cccc', '3456', '손흥민', '010-3456-3456','서울시 송파구 오금로');
+insert into users(user_id, user_pw, user_name, user_tel,user_address, user_email) values('aaaa', '1234', '추성훈', '010-1234-1234','경기도 의정부시 전좌로', '111@naver.com');
+insert into users(user_id, user_pw, user_name, user_tel,user_address, user_email)  values('bbbb', '2345', '김연아', '010-2345-2345','서울시 강서구 화곡로', '222@naver.com');
+insert into users(user_id, user_pw, user_name, user_tel,user_address, user_email)  values('cccc', '3456', '손흥민', '010-3456-3456','서울시 송파구 오금로', '333@naver.com');
 
 insert into trainers(trainer_id,trainer_pw,trainer_name,trainer_tel,license,profile_img,trainer_info) values
 ('qwer','1234','심으뜸','010-1234-1234',1,'me.jpg','성실하게 가르치겠습니다');
