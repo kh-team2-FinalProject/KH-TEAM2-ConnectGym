@@ -28,6 +28,7 @@ public class Lesson {
 
     private int price;
     private int category;
+    private String img_src;
     private String lesson_info;
     private LocalDate start_date;
     private LocalDate end_date;
