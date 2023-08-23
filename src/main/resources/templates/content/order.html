@@ -9,12 +9,19 @@
     </th:block>
 
     <th:block layout:fragment="content">
+        <link
+            rel="stylesheet"
+            as="style"
+            crossorigin
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css"
+        />
+        <link rel="stylesheet" th:href="@{/css/order_common.css}" />
         <link rel="stylesheet" th:href="@{/css/order.css}" />
         <div id="order">
             <div class="order_inner">
                 <div class="order_inner2">
                     <h2 class="order_title">주문</h2>
-                    <div class="order_inner3">
+                    <form name="paymentForm" class="order_inner3">
                         <div class="order_left">
                             <div class="order_want_lesson">
                                 <h3 class="order_want_lesson_title">
@@ -67,21 +74,42 @@
                                 class="order_orderNo"
                                 th:text="|주문 번호: ${orderResponse.orderNo}|"
                             ></div>
-                            <div>
-                                <button
-                                    type="button"
-                                    class="btn btn-success"
-                                    onclick="pay()"
-                                >
-                                    결제
-                                </button>
-                            </div>
+                            <input
+                                type="hidden"
+                                name="pgShopId"
+                                th:value="${pgShopId}"
+                            />
+                            <input
+                                type="hidden"
+                                name="franchiseId"
+                                th:value="${franchiseId}"
+                            />
+                            <input
+                                type="hidden"
+                                name="orderNo"
+                                th:value="${orderResponse.orderNo}"
+                            />
+                            <input
+                                type="hidden"
+                                name="userName"
+                                th:value="${orderResponse.name}"
+                            />
+                            <input
+                                type="hidden"
+                                name="userTelNo"
+                                th:value="${orderResponse.telNo}"
+                            />
+                            <input
+                                type="hidden"
+                                name="price"
+                                th:value="${orderResponse.price}"
+                            />
                         </div>
 
                         <div class="order_right">
                             <div class="order_payment_price_box">
                                 <h4>결제 예정 금액</h4>
-                                <div>
+                                <div class="order_payment_total_price_box">
                                     <span>합계:</span>
                                     <span
                                         class="order_payment_price"
@@ -105,9 +133,9 @@
                                         <input
                                             type="radio"
                                             name="orderMethod"
-                                            value="bank"
+                                            value="phone"
                                         />
-                                        계좌이체
+                                        휴대폰 소액결제
                                     </label>
                                 </div>
                             </div>
@@ -117,79 +145,148 @@
                                     모두 동의
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="agreeBuy" />
+                                    <input type="checkbox" name="agree1" />
                                     구매 조건을 확인했습니다.
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="agree3" />
+                                    <input type="checkbox" name="agree2" />
                                     정보 수집 및 이용 동의
                                 </label>
                             </div>
                             <div class="order_payment_button_container">
-                                <button type="button">결제하기</button>
+                                <button type="submit" class="order_button_2">
+                                    결제하기
+                                </button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+        <script th:inline="javascript">
+            void (function (D) {
+                "use strict";
+
+                /**
+                 * @type {HTMLCollectionOf<HTMLFormElement> & {
+                 *   paymentForm: HTMLFormElement
+                 * }}
+                 */
+                const { paymentForm } = D.forms;
+                /**
+                 * @type {HTMLFormControlsCollection & {
+                 *   orderMethod: HTMLInputElement
+                 *   agreeAll: HTMLInputElement
+                 *   agree1: HTMLInputElement
+                 *   agree2: HTMLInputElement
+                 *   pgShopId: HTMLInputElement
+                 *   franchiseId: HTMLInputElement
+                 *   orderNo: HTMLInputElement
+                 *   userName: HTMLInputElement
+                 *   userTelNo: HTMLInputElement
+                 *   price: HTMLInputElement
+                 * }}
+                 */
+                const {
+                    agree1,
+                    agree2,
+                    agreeAll,
+                    orderMethod,
+                    pgShopId,
+                    franchiseId,
+                    orderNo,
+                    userName,
+                    userTelNo,
+                    price,
+                } = paymentForm.elements;
+
+                /**
+                 * @this {HTMLInputElement}
+                 * @param {Event} e
+                 */
+                const agreementButtonClickEvent = (e) => {
+                    if (e.target === agreeAll) {
+                        agree1.checked = agree2.checked = agreeAll.checked;
+                    } else if (e.target === agree1 || e.target === agree2) {
+                        agreeAll.checked = agree1.checked && agree2.checked;
+                    }
+                };
+
+                paymentForm.addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    if (
+                        !agree1.checked ||
+                        !agree2.checked ||
+                        !agreeAll.checked
+                    ) {
+                        alert("모든 항목에 동의해 주시기 바랍니다.");
+                        return;
+                    }
+
+                    switch (orderMethod.value) {
+                        case "card":
+                            break;
+                        case "phone":
+                            break;
+                        default:
+                            console.log("결제 수단을 선택해 주시기 바랍니다.");
+                            break;
+                    }
+
+                    IMP.init(franchiseId.value);
+
+                    IMP.request_pay(
+                        {
+                            pg: pgShopId.value,
+                            pay_method: orderMethod.value,
+                            merchant_uid: orderNo.value,
+                            name: "강의",
+                            amount: +price.value,
+                            buyer_name: userName.value,
+                            buyer_tel: userTelNo.value,
+                            // 모바일에서 결제 시 다음 URL로 리다이렉트
+                            m_redirect_url: location.origin + "/order/process",
+                        },
+                        function (res) {
+                            // PC에서 결제 시 콜백 실행
+                            console.log("결과", res);
+
+                            if (res.success) {
+                                const body = new URLSearchParams({
+                                    imp_uid: res.imp_uid,
+                                    merchant_uid: res.merchant_uid,
+                                });
+
+                                res.error_msg &&
+                                    body.set("error_msg", res.error_msg);
+                                res.error_code &&
+                                    body.set("error_code", res.error_code);
+
+                                fetch("/api/order/process", {
+                                    method: "POST",
+                                    body,
+                                })
+                                    .then((res) => res.json())
+                                    .then((v) => {
+                                        if (v.success) {
+                                            location.href = v.url;
+                                        }
+                                    });
+                            } else {
+                                alert(res.error_msg);
+                            }
+                        }
+                    );
+                });
+
+                agree1.addEventListener("change", agreementButtonClickEvent);
+                agree2.addEventListener("change", agreementButtonClickEvent);
+                agreeAll.addEventListener("change", agreementButtonClickEvent);
+            })(document);
+        </script>
     </th:block>
 
     <th:block layout:fragment="script"></th:block>
-
-    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-    <script th:inline="javascript">
-        function pay() {
-            'use strict';
-
-            var pgShopId = [[${pgShopId}]]
-            var franchiseId = [[${franchiseId}]];
-            var orderId = [[${orderResponse.orderNo}]];
-            var name = [[${orderResponse.name}]];
-            var telNo = [[${orderResponse.telNo}]];
-            var price = [[${orderResponse.price}]];
-
-            console.log(name);
-
-            IMP.init(franchiseId);
-
-            IMP.request_pay({
-                pg: pgShopId,
-                pay_method: 'card',
-                merchant_uid: orderId,
-                name: "노르웨이 회전 의자",
-                amount: price,
-                buyer_name: name,
-                buyer_tel: telNo,
-                // 모바일에서 결제 시 다음 URL로 리다이렉트
-                m_redirect_url: location.origin + '/order/process',
-            }, function (res) {
-                // PC에서 결제 시 콜백 실행
-                console.log("결과", res);
-
-                if (res.success) {
-                    const body = new URLSearchParams({
-                        imp_uid: res.imp_uid,
-                        merchant_uid: res.merchant_uid,
-                    });
-
-                    res.error_msg && body.set('error_msg', res.error_msg);
-                    res.error_code && body.set('error_code', res.error_code);
-
-                    fetch('/api/order/process', {
-                        method: 'POST',
-                        body,
-                    })
-                        .then(res => res.json())
-                        .then(v => {
-                            if (v.success) {
-                                location.href = v.url;
-                            }
-                        });
-                } else {
-                    alert(res.error_msg);
-                }
-            })
-        }
-    </script>
 </html>
