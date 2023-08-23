@@ -20,8 +20,7 @@ public class EnrollDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "no")
-    private Long id;
+    private Long no;
 
     @ManyToOne
     @JoinColumn(name="user_no")
@@ -33,8 +32,8 @@ public class EnrollDetail {
 
     private String enroll_key;
 
-    public EnrollDetail(Long id, Member member, Lesson lesson) {
-        this.id = id;
+    public EnrollDetail(Long no, Member member, Lesson lesson) {
+        this.no = no;
         this.member = member;
         this.lesson = lesson;
         this.enroll_key = generateRandomString();

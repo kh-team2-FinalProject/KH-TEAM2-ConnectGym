@@ -113,7 +113,7 @@ gap : 20px;
 .login-btn {
 
   padding: 10px 10px;
-  background-color: #a3dc10;
+  background-color: #A3DC10;
   border: none;
   border-radius: 5px;
   color: white;
@@ -247,6 +247,7 @@ footer ul li:after {
 .side_main_page {
   display: flex;
   align-items: baseline;
+
   height:100%;
 }
 
@@ -291,7 +292,10 @@ footer ul li:after {
 /*== 본문 ==*/
 .side_page {
   flex: 3;
-  background: #123478;
+  /*background: #123478;*/
+  /*임시높이*/
+  min-height: 500px;
+  padding: 30px 30px;
 }
 
 /*============사이드바 끝===========*/

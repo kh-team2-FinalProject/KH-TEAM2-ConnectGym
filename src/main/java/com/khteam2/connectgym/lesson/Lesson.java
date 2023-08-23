@@ -17,8 +17,7 @@ import java.util.List;
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "no")
-    private Long id;
+    private Long no;
 
     private String title;
 
@@ -28,7 +27,7 @@ public class Lesson {
 
     private int price;
     private int category;
-    private String img_src;
+    /*private String img_src;*/
     private String lesson_info;
     private LocalDate start_date;
     private LocalDate end_date;
