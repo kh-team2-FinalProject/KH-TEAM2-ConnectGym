@@ -1,0 +1,26 @@
+#order .order_inner2 {
+    text-align: center;
+}
+
+#order .orderComplete_image {
+    filter: invert(100%);
+}
+
+#order .order_title {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+#order .orderComplete_description {
+    margin-bottom: 2rem;
+}
+
+#order .order_button_list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+#order .order_button_1 {
+}

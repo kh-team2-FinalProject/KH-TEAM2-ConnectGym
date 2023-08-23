@@ -13,12 +13,11 @@ public class EnrollController {
 
     private final EnrollService enrollService;
 
-
     //url 사이에 멤버id를 넣어야하나?
     @GetMapping("/api/lessonlist")
-    public List<EnrollDetail> lessonlist() {
+    public List<EnrollDetail> lessonlist(Long memberId) {
         //원래는 로그인한 세션의 멤버 id를 넣어줘야 함
-        return enrollService.memLessonList(3L);
+        return enrollService.memLessonList(memberId);
     }
 
 }

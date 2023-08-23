@@ -3,6 +3,7 @@ package com.khteam2.connectgym;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class TestController {
@@ -40,13 +41,13 @@ public class TestController {
         return "content/mypages";
     }
 
-    @GetMapping("/mypage/mylessons")
+    @GetMapping("/mypage/mylessonlist")
     public String myLesson() {
-        return "mypage/mylessons";
+        return "mypage/mylessonlist";
     }
 
-    @GetMapping("/enterRoom")
-    public String enterRoom(Model model) {
+    @GetMapping("/enterroom/{lessonNo}")
+    public String enterRoom(@PathVariable Long lessonNo, Model model) {
         // 현재 접속중인 회원(=>세션에서 가져오기)의 수강중인 레슨의 방이름 / 회원이름
         String roomName = "fixedname";
         String userName = "이서희";

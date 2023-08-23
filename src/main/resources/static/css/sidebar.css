@@ -1,23 +1,31 @@
 /*============사이드바 페이지===========*/
+/* 전체 div */
+.side_main_page {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+}
+
 .sidebar {
     background-color: rgba(85, 87, 85, 0.8);
     /*position: absolute;*/
-    margin-top: 5vh;
     width: 300px;
-    height: 100%;
+    height: 100vh;
+    flex: 1;
+
 }
 
 /*==사이드바 로고==*/
 .side_logo {
     display: flex;
     justify-content: center;
-    margin: 50px 0px;
+    margin: 100px 10px;
 
 }
 
 /*==사이드바 메뉴 div==*/
 .side_menu {
-    flex: 1;
+    margin-left: 50px;
     margin-right: 60px;
     text-align: left;
     color: #a3dc10;
@@ -63,17 +71,92 @@
 /* 전체 div */
 .main_page {
     display: flex;
-    align-items: baseline;
+    /*align-items: baseline;*/
     margin-top: 10px;
 }
 
 /*==========*/
 
 /*== 본문 ==*/
-.page {
+.side_page {
     flex: 3;
-    background: yellow;
 }
 
 /*============사이드바 끝===========*/
 
+/*============배너 이미지===========*/
+/*============배너 이미지 끝===========*/
+
+/*============강좌 카드 섹션========*/
+
+.lessonList_title {
+    margin: 20px;
+}
+
+* {
+
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    width: calc(33.33% - 20px); /* 카드 너비를 3분의 1로 설정하고 간격을 제외함 */
+    height: 300px; /* 카드 높이 설정 */
+    perspective: 1000px;
+    margin: 20px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    transform-origin: center center;
+}
+
+.card-front {
+    background: #AAADAD;
+
+
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 20px;
+    box-sizing: border-box;
+
+
+}
+
+.lesson_img {
+    width: 100px;
+    height: 100px;
+}
+
+/*============강좌 카드 섹션 끝========*/

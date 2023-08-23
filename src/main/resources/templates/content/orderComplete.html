@@ -4,19 +4,48 @@
     layout:decorate="~{layouts/body}"
     xmlns:layout="http://www.w3.org/1999/xhtml"
 >
-<th:block layout:fragment="title">
-    <title>CONNECT GYM</title>
-</th:block>
+    <th:block layout:fragment="title">
+        <title>CONNECT GYM</title>
+    </th:block>
 
-<th:block layout:fragment="content">
-    <th:block layout:fragment="order">
-        <h2>주문 완료</h2>
-        <div>
-            <div></div>
+    <th:block layout:fragment="content">
+        <link
+            rel="stylesheet"
+            as="style"
+            crossorigin
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css"
+        />
+        <link rel="stylesheet" th:href="@{/css/order_common.css}" />
+        <link rel="stylesheet" th:href="@{/css/orderComplete.css}" />
+        <div id="order">
+            <div class="order_inner">
+                <div class="order_inner2">
+                    <div>
+                        <img
+                            th:src="@{/images/icons/mdi/store-check-outline.svg}"
+                            alt="결제 완료 이미지"
+                            class="orderComplete_image"
+                            width="150"
+                            height="150"
+                        />
+                    </div>
+                    <h2 class="order_title">결제 완료</h2>
+                    <div class="orderComplete_description">
+                        신청한 강의가 정상적으로 결제되었습니다.
+                    </div>
+                    <div class="order_button_list">
+                        <a href="/user/mypage" class="order_button_1">
+                            결제내역 보러 가기
+                        </a>
+                        <a href="/" class="order_button_1">
+                            메인 화면으로 이동
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </th:block>
-</th:block>
 
-<!-- 스크립트 부분 -->
-<th:block layout:fragment="script"></th:block>
+    <!-- 스크립트 부분 -->
+    <th:block layout:fragment="script"></th:block>
 </html>

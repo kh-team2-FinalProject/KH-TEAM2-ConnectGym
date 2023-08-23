@@ -9,27 +9,31 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
 
-    <!-- 사이드바 -->
-    <div id="container">
-        <div class="lcontent">
-            <nav>
-                <ul>
-                    <li class="has_sub"><a href="#" class="on"><span>LESSON</span></a>
-                        <ul>
-                            <li><a href="#" class="on">나의 정보 수정</a></li>
-                            <li><a href="/mypage/mylessons">나의 수강 현황</a></li>
-                            <li><a href="#">등등</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="javascript: alert('준비 중입니다.');"><span>회원 관리</span></a></li>
+    <div class="side_main_page">
+        <!-- 사이드바 -->
+        <nav class="sidebar">
+            <div class="side_logo" align="center">
+                <a href="/">
+                    <img th:src="@{/images/logo-white.png}" width="200"/>
+                </a>
+            </div>
+            <div class="side_menu">
+                <ul class="side_items">
+                    <li class="side_title">LESSON</li>
+                    <li class="side-content"><a href="#" class="on">나의 정보</a></li>
+                    <li class="side-content"><a href="/mypage/mylessonlist">나의 레슨</a></li>
+                    <li class="side-content"><a href="/#">기타등등</a></li>
                 </ul>
-            </nav>
+            </div>
+        </nav>
+        <!-- 사이드바 -->
+
+        <div class="side_page">
+            <th:block layout:fragment="mypage">
+            </th:block>
         </div>
+
     </div>
-
-
-    <th:block layout:fragment="mypage">
-    </th:block>
 
 </th:block>
 
