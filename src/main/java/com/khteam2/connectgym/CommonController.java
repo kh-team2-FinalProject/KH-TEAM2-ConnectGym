@@ -31,21 +31,21 @@ public class CommonController {
 
     @GetMapping("/lesson/health")
     public String lessonHealth(Model model) {
-        String lessonCategory = "헬스";
+        String lessonCategory = "health";
         model.addAttribute("lessonCategory",lessonCategory);
         return "lesson/health";
     }
 
     @GetMapping("/lesson/yoga")
     public String lessonYoga(Model model) {
-        String lessonCategory = "요가";
+        String lessonCategory = "yoga";
         model.addAttribute("lessonCategory",lessonCategory);
         return "lesson/yoga";
     }
 
     @GetMapping("/lesson/pilates")
     public String lessonPilates(Model model) {
-        String lessonCategory = "필라테스";
+        String lessonCategory = "pilates";
         model.addAttribute("lessonCategory",lessonCategory);
         return "lesson/pilates";
     }

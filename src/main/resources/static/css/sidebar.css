@@ -1,90 +1,123 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 /*============사이드바 페이지===========*/
-/* 전체 div */
-.side_main_page {
-    background-color:white;
-    color:#0E181A;
+/* 사이드바 페이지에서 다른 헤더 적용 */
+.header {
+    background-color: rgba(0, 0, 0, 0.00);
+    /*background-color: #161616;*/
+    color: #0E181A;
     display: flex;
-    align-items: flex-start;
-    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: background-color 0.3s;
+    z-index: 1000;
+    font-family: 'Black Ops One', cursive;
+    height: 10vh;
+    font-size: 18px;
+}
+
+.header-item li a {
+    text-decoration: none;
+    color: #0E181A;
 }
 
 
+/* 전체 div */
+.side_main_page {
+  background-color: white;
+  color: #0e181a;
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  padding: 0px 80px;
+}
+
+.site_banner{
+  height: 300px;
+  background-color: white;
+  display: flex;
+  justify-content : center;
+  align-items : center;
+}
+
+.site_banner_title{
+ font-family: 'Staatliches', cursive;
+ text-transform: uppercase;
+ font-size: 100pt;
+ color : black;
+ letter-spacing: 10px;
+}
+
 /*== 사이드바 ==*/
 .sidebar {
-    width: 300px;
-    height: 100vh;
-    flex: 1;
+  /*background-color: white;*/
+  width: 300px;
+  min-height: 100vh;
+  flex: 1;
 }
 
 /*== 본문 ==*/
 .side_page {
-    min-height: 100vh;
-    flex: 4;
+  background-color: white;
+  min-height: 100vh;
+  flex: 4;
 }
-
 
 /*==사이드바 로고==*/
 .side_logo {
-    display: flex;
-    justify-content: center;
-    margin: 80px 10px 100px 10px;
-
+  display: flex;
+  justify-content: center;
+  margin: 80px 10px 100px 10px;
 }
 
 /*==사이드바 메뉴 div==*/
 .side_menu {
-    width:100%;
-    padding : 0px 30px;
-    text-align: right;
-    line-height: 50px;
-    box-sizing: border-box;
-    font-family: Arial;
-
+  width: 100%;
+  padding: 0px 30px;
+  text-align: right;
+  line-height: 50px;
+  box-sizing: border-box;
+  margin-top : 10px;
 }
 
 /*사이드바 타이틀명*/
 .side_title {
-    /*background-color: white;*/
-    border-radius: 5px;
-    font-size: 18pt;
-    padding: 10px 0px;
-    font-weight: bold;
+  /*background-color: white;*/
+  border-radius: 5px;
+  font-size: 18pt;
+  padding: 10px 0px;
+  font-weight: 900;
+  letter-spacing: 3px;
 }
 
 .side_items {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /*사이드바 소제목명*/
-.side-content{
+.side-content {
   position: relative;
   margin: 2px 0;
 }
 
-.side_menu ul li a{
-    font-size: 16px;
-    line-height: 5em;
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      color: #0E181A;
-      opacity: 0.35;
-      display: block;
-      transition: all ease-out 300ms;
+.side_menu ul li a {
+  font-size: 16px;
+  line-height: 5em;
+  text-decoration: none;
+  letter-spacing: 5px;
+  color: #0e181a;
+  display: block;
+  transition: all ease-out 300ms;
+  font-family: "NanumSquareNeoExtraBold";
 }
 
-.side_menu ul li.active a{
-  opacity: 1;
-}
-
-.side_menu ul li:not(.active)::after {
+.side_menu ul li:hover a {
+  color: #0e181a;
   opacity: 0.5;
-}
-
-.side_menu ul li:not(.active):hover a {
-    color: #0E181A;
-    opacity: 0.75;
 }
 
 .side_menu ul li:not(:first-child)::after {
@@ -95,13 +128,7 @@
   background: black;
   left: 0;
   bottom: 0;
-  background-image: linear-gradient(to right, #A3DC10, #FFCB98);
-}
-
-
-/* a 태그 데코 제거*/
-.side_menu a {
-    text-decoration: none;
+  background-image: linear-gradient(to right, #000000, #000000);
 }
 
 /*============사이드바 끝===========*/
