@@ -33,8 +33,7 @@ public class OrderController {
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         HttpSession session,
         @RequestParam(required = false) List<Long> lessonList,
-        Model model
-    ) throws IamportResponseException, IOException {
+        Model model) throws IamportResponseException, IOException {
         if (loginMemberNo == null) {
             return "redirect:/temp_login";
         }
@@ -59,17 +58,12 @@ public class OrderController {
         @SessionAttribute(name = SessionConstant.ORDER_ORDER_NO, required = false) String sMerchantUid,
         @SessionAttribute(name = SessionConstant.ORDER_PRICE, required = false) Long sTotalPrice,
         @SessionAttribute(name = SessionConstant.ORDER_LESSON_LIST, required = false) List<Long> sOrderLessonList,
-        OrderProcessDto processDto
-    ) {
-        if (sLoginMemberNo == null) {
-            return "redirect:/temp_login";
-        }
+        OrderProcessDto processDto) {
 
         if (processDto.getImp_uid() == null
             || processDto.getMerchant_uid() == null
             || sMerchantUid == null
-            || sTotalPrice == null
-        ) {
+            || sTotalPrice == null) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
@@ -100,12 +94,7 @@ public class OrderController {
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         String orderId,
-        HttpSession session
-    ) {
-        if (loginMemberNo == null) {
-            return "redirect:/temp_login";
-        }
-
+        HttpSession session) {
         OrderCompleteResponseDto responseDto = this.orderService.completeOrder(loginMemberNo, orderId);
 
         if (responseDto.isSuccess()) {
