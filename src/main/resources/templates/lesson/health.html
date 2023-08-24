@@ -3,11 +3,72 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
 <th:block layout:fragment="title">
-    <title>클래스리스트 > 헬스</title>
+    <title>클래스리스트 > ${lessonCategory}</title>
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="lesson">
+    <div class="lessonlist">
+        <img class="lessonlist_banner" th:src="@{/images/health_banner.png}" alt="이미지가 지원되지 않습니다.">
+        <div class="lessonlist_title"><h3 th:text="${lessonCategory}"> > 진행 중인 레슨</h3></div>
+        <div id="lessonlist_wrap">
+            <div class="l_card">
+                <div class="l_card-inner">
+                    <div class="l_card-front">
+                        <img class="lessonlist_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
+                    </div>
+                    <div class="l_card-back">
+                        <ul>
+                            <li class="l_card_title" th:text="'레슨타이틀'"></li>
+                            <li class="l_card_content" th:text="'트레이너 이름'"></li>
+                            <li class="l_card_content" th:text="'레슨정보'"></li>
+                            <li class="l_card_content" th:text="'시작일'"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="l_card">
+                <div class="l_card-inner">
+                    <div class="l_card-front">
+                        <img class="lessonlist_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
+                    </div>
+                    <div class="l_card-back">
+                        <ul>
+                            <li class="l_card_title" th:text="'레슨타이틀'"></li>
+                            <li class="l_card_content" th:text="'트레이너 이름'"></li>
+                            <li class="l_card_content" th:text="'레슨정보'"></li>
+                            <li class="l_card_content" th:text="'시작일'"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="l_card">
+                <div class="l_card-inner">
+                    <div class="l_card-front">
+                        <img class="lessonlist_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
+                    </div>
+                    <div class="l_card-back">
+                        <ul>
+                            <li class="l_card_title" th:text="'레슨타이틀'"></li>
+                            <li class="l_card_content" th:text="'트레이너 이름'"></li>
+                            <li class="l_card_content" th:text="'레슨정보'"></li>
+                            <li class="l_card_content" th:text="'시작일'"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+                    document.querySelectorAll('.l_card').forEach(card => {
+                        card.addEventListener('mouseenter', () => {
+                            card.querySelector('.l_card-inner').style.transform = 'rotateY(180deg)';
+                        });
 
+                        card.addEventListener('mouseleave', () => {
+                            card.querySelector('.l_card-inner').style.transform = 'rotateY(0deg)';
+                        });
+                    });
+    </script>
 </th:block>
 </html>

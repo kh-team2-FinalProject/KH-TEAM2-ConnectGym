@@ -1,5 +1,6 @@
 /*@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");*/
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
 /*============공통===========*/
 body {
     background-color: #0E181A;
@@ -13,6 +14,10 @@ a {
 }
 
 /* 목록 스타일 제거 및 왼쪽 들여쓰기 제거*/
+ul{
+padding-left:0;
+}
+
 li {
 list-style:none;
 padding-left:0;
@@ -21,6 +26,7 @@ padding-left:0;
 /*============헤더===========*/
 .header {
     background-color: #0E181A;
+    /*background-color: #161616;*/
     color: #C9D3D4;
     display: flex;
     justify-content: space-between;

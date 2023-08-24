@@ -11,17 +11,17 @@
     <div class="side_main_page">
         <!-- 사이드바 -->
         <nav class="sidebar">
-            <div class="side_logo" align="center">
+            <div class="side_logo">
                 <a href="/">
-                    <img th:src="@{/images/logo-white.png}" width="200"/>
+                    <img th:src="@{/images/logo.png}" width="200"/>
                 </a>
             </div>
             <div class="side_menu">
                 <ul class="side_items">
                     <li class="side_title">LESSON</li>
-                    <li class="side-content"><a href="/lesson/health" class="on">헬스</a></li>
-                    <li class="side-content"><a href="/lesson/yoga">요가</a></li>
-                    <li class="side-content"><a href="/lesson/pilates">필라테스</a></li>
+                    <li class="side-content"><a href="/lesson/health" class="on">Health</a></li>
+                    <li class="side-content"><a href="/lesson/yoga">Yoga</a></li>
+                    <li class="side-content"><a href="/lesson/pilates">Pilates</a></li>
                 </ul>
             </div>
         </nav>
@@ -29,72 +29,7 @@
 
         <!--페이지-->
         <div class="side_page">
-
             <th:block layout:fragment="lesson">
-                <img class="health_banner" th:src="@{/images/health_banner.png}" alt="이미지가 지원되지 않습니다.">
-                <div class="lessonList_title"><h3> 진행 중인 레슨</h3></div>
-                <div id="wrap">
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <img class="lesson_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
-                            </div>
-                            <div class="card-back">
-                                <ul>
-                                    <li class="card_title" th:text="'레슨타이틀'"></li>
-                                    <li class="card_content" th:text="'트레이너 이름'"></li>
-                                    <li class="card_content" th:text="'레슨정보'"></li>
-                                    <li class="card_content" th:text="'시작일'"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <img class="lesson_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
-                            </div>
-                            <div class="card-back">
-                                <ul>
-                                    <li class="card_title" th:text="'레슨타이틀'"></li>
-                                    <li class="card_content" th:text="'트레이너 이름'"></li>
-                                    <li class="card_content" th:text="'레슨정보'"></li>
-                                    <li class="card_content" th:text="'시작일'"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <img class="lesson_img" th:src="@{/images/logo.png}" alt="이미지가 지원되지 않습니다.">
-                            </div>
-                            <div class="card-back">
-                                <ul>
-                                    <li class="card_title" th:text="'레슨타이틀'"></li>
-                                    <li class="card_content" th:text="'트레이너 이름'"></li>
-                                    <li class="card_content" th:text="'레슨정보'"></li>
-                                    <li class="card_content" th:text="'시작일'"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <script>
-                    document.querySelectorAll('.card').forEach(card => {
-                        card.addEventListener('mouseenter', () => {
-                            card.querySelector('.card-inner').style.transform = 'rotateY(180deg)';
-                        });
-
-                        card.addEventListener('mouseleave', () => {
-                            card.querySelector('.card-inner').style.transform = 'rotateY(0deg)';
-                        });
-                    });
-
-
-
-                </script>
             </th:block>
         </div>
     </div>

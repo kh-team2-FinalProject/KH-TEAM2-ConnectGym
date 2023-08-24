@@ -1,167 +1,107 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 /*============사이드바 페이지===========*/
 /* 전체 div */
 .side_main_page {
+    background-color:white;
+    color:#0E181A;
     display: flex;
     align-items: flex-start;
     height: 100%;
 }
 
-.health_banner {
-    width: 100%;
-    height: 300px;
-}
 
+/*== 사이드바 ==*/
 .sidebar {
-    background-color: rgba(85, 87, 85, 0.8);
-    /*position: absolute;*/
     width: 300px;
     height: 100vh;
     flex: 1;
-
 }
+
+/*== 본문 ==*/
+.side_page {
+    min-height: 100vh;
+    flex: 4;
+}
+
 
 /*==사이드바 로고==*/
 .side_logo {
     display: flex;
     justify-content: center;
-    margin: 100px 10px;
+    margin: 80px 10px 100px 10px;
 
 }
 
 /*==사이드바 메뉴 div==*/
 .side_menu {
-    margin-left: 50px;
-    margin-right: 60px;
-    text-align: left;
-    color: #a3dc10;
+    width:100%;
+    padding : 0px 30px;
+    text-align: right;
     line-height: 50px;
+    box-sizing: border-box;
+    font-family: Arial;
 
 }
 
 /*사이드바 타이틀명*/
 .side_title {
-    width: 100%;
     /*background-color: white;*/
     border-radius: 5px;
     font-size: 18pt;
-    padding: 5px 10px;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    /*font-weight: bold;*/
-
+    padding: 10px 0px;
+    font-weight: bold;
 }
 
 .side_items {
     display: flex;
     flex-direction: column;
-
 }
 
 /*사이드바 소제목명*/
-.side-content {
-    font-size: 14pt;
-    font-weight: 20;
-    line-height: 40px;
+.side-content{
+  position: relative;
+  margin: 2px 0;
+}
 
+.side_menu ul li a{
+    font-size: 16px;
+    line-height: 5em;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: #0E181A;
+      opacity: 0.35;
+      display: block;
+      transition: all ease-out 300ms;
+}
+
+.side_menu ul li.active a{
+  opacity: 1;
+}
+
+.side_menu ul li:not(.active)::after {
+  opacity: 0.5;
+}
+
+.side_menu ul li:not(.active):hover a {
+    color: #0E181A;
+    opacity: 0.75;
+}
+
+.side_menu ul li:not(:first-child)::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0.2em;
+  background: black;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, #A3DC10, #FFCB98);
 }
 
 
+/* a 태그 데코 제거*/
 .side_menu a {
     text-decoration: none;
-    color: #cccccc;
-
-}
-
-/* 전체 div */
-.side_main_page {
-    display: flex;
-    /*align-items: baseline;*/
-    margin-top: 10px;
-}
-
-/*==========*/
-
-/*== 본문 ==*/
-.side_page {
-    flex: 3;
 }
 
 /*============사이드바 끝===========*/
-
-/*============배너 이미지===========*/
-/*============배너 이미지 끝===========*/
-
-/*============강좌 카드 섹션========*/
-
-.lessonList_title {
-    margin: 20px;
-}
-
-* {
-
-    margin: 0;
-    box-sizing: border-box;
-}
-
-#wrap {
-    display: flex;
-    justify-content: space-between;
-}
-
-.card {
-    width: calc(33.33% - 20px); /* 카드 너비를 3분의 1로 설정하고 간격을 제외함 */
-    height: 300px; /* 카드 높이 설정 */
-    perspective: 1000px;
-    margin: 20px;
-}
-
-.card-inner {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-}
-
-.card:hover .card-inner {
-    transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    transform-origin: center center;
-}
-
-.card-front {
-    background: #AAADAD;
-
-
-}
-
-.card-back {
-    transform: rotateY(180deg);
-    background-color: #f5f5f5;
-    color: #333;
-    padding: 20px;
-    box-sizing: border-box;
-
-
-}
-
-.lesson_img {
-    width: 100px;
-    height: 100px;
-}
-
-/*============강좌 카드 섹션 끝========*/

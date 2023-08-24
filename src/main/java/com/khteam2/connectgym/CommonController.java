@@ -26,23 +26,30 @@ public class CommonController {
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")
     public String lesson() {
-        return "content/lessonlist";
+        return "redirect:/lesson/health";
     }
 
     @GetMapping("/lesson/health")
-    public String lessonHealth() {
+    public String lessonHealth(Model model) {
+        String lessonCategory = "헬스";
+        model.addAttribute("lessonCategory",lessonCategory);
         return "lesson/health";
     }
 
+    @GetMapping("/lesson/yoga")
+    public String lessonYoga(Model model) {
+        String lessonCategory = "요가";
+        model.addAttribute("lessonCategory",lessonCategory);
+        return "lesson/yoga";
+    }
+
     @GetMapping("/lesson/pilates")
-    public String lessonPilates() {
+    public String lessonPilates(Model model) {
+        String lessonCategory = "필라테스";
+        model.addAttribute("lessonCategory",lessonCategory);
         return "lesson/pilates";
     }
 
-    @GetMapping("/lesson/yoga")
-    public String lessonYoga() {
-        return "lesson/yoga";
-    }
 
     //마이페이지 내 메뉴 이동
     @GetMapping("/mypage")
