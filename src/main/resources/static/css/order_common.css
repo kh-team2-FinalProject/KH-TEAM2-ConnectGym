@@ -1,14 +1,10 @@
-:root {
+:root #order {
     --order-max-width: 64rem;
-    --order-margin-top: 0px;
-    --font-sans: Pretendard, sans-serif;
 }
 
 #order {
-    margin: var(--order-margin-top) auto 0;
     color: rgb(228, 228, 228);
     font-size: 0.875rem;
-    font-family: var(--font-sans);
 }
 
 #order *,
@@ -32,16 +28,19 @@
 #order h2 {
     font-size: 2.5rem;
     margin-top: 0px;
+    margin-bottom: 1rem;
 }
 
 #order h3 {
     font-size: 1.75rem;
     margin-top: 0px;
+    margin-bottom: 1rem;
 }
 
 #order h4 {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     margin-top: 0px;
+    margin-bottom: 1rem;
 }
 
 #order > .order_inner {
@@ -57,6 +56,9 @@
     display: flex;
 }
 
+/*
+버튼 1
+ */
 #order .order_button_1 {
     background-color: #4f7ff8;
     color: rgb(255 255 255);
@@ -74,6 +76,9 @@
     background-color: #3a66d6;
 }
 
+/*
+버튼 2
+ */
 #order .order_button_2 {
     background-color: #ffe261;
     color: rgb(0 0 0);
@@ -90,4 +95,35 @@
 
 #order .order_button_2:active {
     background-color: #d3b73b;
+}
+
+/*
+라디오 버튼
+ */
+#order input.order_radiobox_1[type="radio"] {
+    appearance: none;
+    background-image: url("/images/icons/mdi/radiobox-blank.svg");
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+#order input.order_radiobox_1[type="radio"]:checked {
+    background-image: url("/images/icons/mdi/radiobox-marked.svg");
+}
+
+/*
+체크박스
+ */
+#order input.order_checkbox_1[type="checkbox"] {
+    appearance: none;
+    background-image: url("/images/icons/mdi/checkbox-blank-outline.svg");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 20px;
+    height: 20px;
+}
+
+#order input.order_checkbox_1[type="checkbox"]:checked {
+    background-image: url("/images/icons/mdi/checkbox-outline.svg");
 }

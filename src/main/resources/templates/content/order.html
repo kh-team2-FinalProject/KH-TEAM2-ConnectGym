@@ -9,12 +9,6 @@
     </th:block>
 
     <th:block layout:fragment="content">
-        <link
-            rel="stylesheet"
-            as="style"
-            crossorigin
-            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css"
-        />
         <link rel="stylesheet" th:href="@{/css/order_common.css}" />
         <link rel="stylesheet" th:href="@{/css/order.css}" />
         <div id="order">
@@ -47,21 +41,30 @@
                                                 height="100"
                                             />
                                         </div>
-                                        <div class="order_lesson_description">
+                                        <div class="order_lesson_descriptions">
                                             <div
+                                                class="order_lesson_title"
                                                 th:text="${lesson.title}"
                                             ></div>
                                             <div
-                                                th:text="${lesson.price}"
-                                            ></div>
-                                            <div
-                                                th:text="${lesson.trainer.trainerName}"
-                                            ></div>
+                                                class="order_lesson_descriptions_2"
+                                            >
+                                                <div
+                                                    class="order_lesson_trainerName"
+                                                    th:text="${lesson.trainer.trainerName}"
+                                                ></div>
+                                                <div
+                                                    class="order_lesson_price"
+                                                    th:text="${#numbers.formatInteger(lesson.price, 1, 'COMMA') + '원'}"
+                                                ></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="order_order_info"></div>
+                            <div class="order_order_info">
+                                <h3>주문자 정보</h3>
+                            </div>
                             <div
                                 class="order_name"
                                 th:text="|주문자명: ${orderResponse.name}|"
@@ -110,7 +113,9 @@
                             <div class="order_payment_price_box">
                                 <h4>결제 예정 금액</h4>
                                 <div class="order_payment_total_price_box">
-                                    <span>합계:</span>
+                                    <span class="order_payment_total_price_desc"
+                                        >합계:</span
+                                    >
                                     <span
                                         class="order_payment_price"
                                         th:text="${#numbers.formatInteger(orderResponse.price, 1, 'COMMA') + '원'}"
@@ -120,37 +125,53 @@
                             <div class="order_payment_method_container">
                                 <h4>결제 수단</h4>
                                 <div class="order_payment_method_select">
-                                    <label>
+                                    <label class="order_label_in_input">
                                         <input
                                             type="radio"
                                             name="orderMethod"
                                             value="card"
                                             checked
+                                            class="order_radiobox_1"
                                         />
-                                        신용카드
+                                        <span>신용카드</span>
                                     </label>
-                                    <label>
+                                    <label class="order_label_in_input">
                                         <input
                                             type="radio"
                                             name="orderMethod"
                                             value="phone"
+                                            class="order_radiobox_1"
                                         />
-                                        휴대폰 소액결제
+                                        <span>휴대폰 소액결제</span>
                                     </label>
                                 </div>
                             </div>
-                            <div class="order_payment_agreement_container">
-                                <label>
-                                    <input type="checkbox" name="agreeAll" />
-                                    모두 동의
+                            <div
+                                class="order_payment_agreement_container order_label_in_input_container"
+                            >
+                                <label class="order_label_in_input">
+                                    <input
+                                        type="checkbox"
+                                        name="agreeAll"
+                                        class="order_checkbox_1"
+                                    />
+                                    <span>모두 동의</span>
                                 </label>
-                                <label>
-                                    <input type="checkbox" name="agree1" />
-                                    구매 조건을 확인했습니다.
+                                <label class="order_label_in_input">
+                                    <input
+                                        type="checkbox"
+                                        name="agree1"
+                                        class="order_checkbox_1 order_payment_agreement_other_agree"
+                                    />
+                                    <span>구매 조건을 확인했습니다.</span>
                                 </label>
-                                <label>
-                                    <input type="checkbox" name="agree2" />
-                                    정보 수집 및 이용 동의
+                                <label class="order_label_in_input">
+                                    <input
+                                        type="checkbox"
+                                        name="agree2"
+                                        class="order_checkbox_1 order_payment_agreement_other_agree"
+                                    />
+                                    <span>정보 수집 및 이용 동의</span>
                                 </label>
                             </div>
                             <div class="order_payment_button_container">
@@ -164,128 +185,7 @@
             </div>
         </div>
         <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-        <script th:inline="javascript">
-            void (function (D) {
-                "use strict";
-
-                /**
-                 * @type {HTMLCollectionOf<HTMLFormElement> & {
-                 *   paymentForm: HTMLFormElement
-                 * }}
-                 */
-                const { paymentForm } = D.forms;
-                /**
-                 * @type {HTMLFormControlsCollection & {
-                 *   orderMethod: HTMLInputElement
-                 *   agreeAll: HTMLInputElement
-                 *   agree1: HTMLInputElement
-                 *   agree2: HTMLInputElement
-                 *   pgShopId: HTMLInputElement
-                 *   franchiseId: HTMLInputElement
-                 *   orderNo: HTMLInputElement
-                 *   userName: HTMLInputElement
-                 *   userTelNo: HTMLInputElement
-                 *   price: HTMLInputElement
-                 * }}
-                 */
-                const {
-                    agree1,
-                    agree2,
-                    agreeAll,
-                    orderMethod,
-                    pgShopId,
-                    franchiseId,
-                    orderNo,
-                    userName,
-                    userTelNo,
-                    price,
-                } = paymentForm.elements;
-
-                /**
-                 * @this {HTMLInputElement}
-                 * @param {Event} e
-                 */
-                const agreementButtonClickEvent = (e) => {
-                    if (e.target === agreeAll) {
-                        agree1.checked = agree2.checked = agreeAll.checked;
-                    } else if (e.target === agree1 || e.target === agree2) {
-                        agreeAll.checked = agree1.checked && agree2.checked;
-                    }
-                };
-
-                paymentForm.addEventListener("submit", function (e) {
-                    e.preventDefault();
-
-                    if (
-                        !agree1.checked ||
-                        !agree2.checked ||
-                        !agreeAll.checked
-                    ) {
-                        alert("모든 항목에 동의해 주시기 바랍니다.");
-                        return;
-                    }
-
-                    switch (orderMethod.value) {
-                        case "card":
-                            break;
-                        case "phone":
-                            break;
-                        default:
-                            console.log("결제 수단을 선택해 주시기 바랍니다.");
-                            break;
-                    }
-
-                    IMP.init(franchiseId.value);
-
-                    IMP.request_pay(
-                        {
-                            pg: pgShopId.value,
-                            pay_method: orderMethod.value,
-                            merchant_uid: orderNo.value,
-                            name: "강의",
-                            amount: +price.value,
-                            buyer_name: userName.value,
-                            buyer_tel: userTelNo.value,
-                            // 모바일에서 결제 시 다음 URL로 리다이렉트
-                            m_redirect_url: location.origin + "/order/process",
-                        },
-                        function (res) {
-                            // PC에서 결제 시 콜백 실행
-                            console.log("결과", res);
-
-                            if (res.success) {
-                                const body = new URLSearchParams({
-                                    imp_uid: res.imp_uid,
-                                    merchant_uid: res.merchant_uid,
-                                });
-
-                                res.error_msg &&
-                                    body.set("error_msg", res.error_msg);
-                                res.error_code &&
-                                    body.set("error_code", res.error_code);
-
-                                fetch("/api/order/process", {
-                                    method: "POST",
-                                    body,
-                                })
-                                    .then((res) => res.json())
-                                    .then((v) => {
-                                        if (v.success) {
-                                            location.href = v.url;
-                                        }
-                                    });
-                            } else {
-                                alert(res.error_msg);
-                            }
-                        }
-                    );
-                });
-
-                agree1.addEventListener("change", agreementButtonClickEvent);
-                agree2.addEventListener("change", agreementButtonClickEvent);
-                agreeAll.addEventListener("change", agreementButtonClickEvent);
-            })(document);
-        </script>
+        <script th:src="@{/js/order.js}"></script>
     </th:block>
 
     <th:block layout:fragment="script"></th:block>

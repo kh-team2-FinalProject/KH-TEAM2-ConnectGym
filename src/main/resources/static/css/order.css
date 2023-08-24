@@ -1,3 +1,7 @@
+#order .order_inner3 {
+    gap: 1.5rem;
+}
+
 /*
     ============================== 왼쪽 ==============================
 */
@@ -6,12 +10,34 @@
     flex-grow: 1;
 }
 
+#order .order_title {
+    margin-bottom: 1rem;
+}
+
 #order .order_left .order_want_lesson_title {
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+#order .order_left .order_lessons {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    margin-bottom: 1rem;
 }
 
 #order .order_left .order_lessons > .order_lesson {
     display: flex;
+    position: relative;
+}
+
+#order .order_left .order_lessons > .order_lesson:not(:last-child)::after {
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    right: 0;
+    content: "";
+    background-color: #4b4b4b;
+    height: 1px;
 }
 
 #order .order_left .order_lessons > .order_lesson > .order_lesson_photo {
@@ -27,8 +53,31 @@
     border-radius: 100%;
 }
 
-#order .order_left .order_lessons > .order_lesson > .order_lesson_description {
+#order .order_left .order_lessons > .order_lesson .order_lesson_title {
+    font-size: 1.625rem;
+}
+
+#order .order_left .order_lessons > .order_lesson > .order_lesson_descriptions {
     flex: 1;
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+#order .order_left .order_lessons .order_lesson_descriptions_2 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+#order .order_left .order_lessons > .order_lesson .order_lesson_trainerName {
+    align-self: flex-end;
+}
+
+#order .order_left .order_lessons > .order_lesson .order_lesson_price {
+    font-size: 1.375rem;
+    /* font-weight: 700; */
 }
 
 /*
@@ -41,6 +90,7 @@
     border-radius: 16px;
     padding: 1.5rem;
     color: rgb(32, 32, 32);
+    height: fit-content;
 }
 
 #order .order_right > .order_right_window {
@@ -60,6 +110,11 @@
     justify-content: space-between;
 }
 
+#order .order_payment_total_price_box .order_payment_total_price_desc {
+    display: flex;
+    align-items: end;
+}
+
 #order .order_right .order_payment_price_box .order_payment_price {
     font-weight: 700;
     font-size: 1.25rem;
@@ -74,7 +129,28 @@
     flex-direction: column;
 }
 
+#order
+    .order_right
+    .order_payment_method_container
+    .order_payment_method_select {
+    gap: 0.25rem;
+}
+
+#order .order_label_in_input_container {
+    display: flex;
+    gap: 0.25rem;
+}
+
+#order .order_label_in_input {
+    display: flex;
+    gap: 0.25rem;
+}
+
 #order .order_payment_button_container > button {
     width: 100%;
     font-weight: 700;
+}
+
+#order .order_right .order_payment_agreement_other_agree {
+    margin-left: 1rem;
 }
