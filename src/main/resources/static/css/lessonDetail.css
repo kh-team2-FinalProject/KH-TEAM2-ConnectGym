@@ -1,6 +1,6 @@
 
 .lessonDetail_container {
-    background: #0E181A;
+    background: #ffffff;
     display: flex;
     justify-content: center;
     /*align-items: center;*/
@@ -10,11 +10,12 @@
 }
 
 .lessonDetail_content {
-    background: #0E181A;
+    background: #ffffff;
     border: 2px solid #A3DC10;
     border-radius: 5px;
     padding: 30px;
     width: 50vw;
+    margin-left: 3vw;
 
 }
 
@@ -60,7 +61,7 @@
 .user_id {
     font-weight: bold;
     font-size: 20px;
-    color: white;
+    color: #0E181A;
     margin-left: 10vw;
 }
 
@@ -72,7 +73,7 @@
     padding: 10px;
     border-bottom: 1px groove #A3DC10;
     /*border-radius: 5px;*/
-    background: #0E181A;
+    background: #ffffff;
 
 }
 
@@ -81,10 +82,11 @@
     font-weight: bold;
     font-size: 14px;
     margin-bottom: 20px;
+    color: #0E181A;
 }
 
 .lessonDetail_content span {
-    color: white;
+    color: #0E181A;
 
 
 }
