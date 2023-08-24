@@ -14,173 +14,187 @@
         <div id="order">
             <div class="order_inner">
                 <div class="order_inner2">
-                    <h2 class="order_title">주문</h2>
-                    <form name="paymentForm" class="order_inner3">
-                        <div class="order_left">
-                            <div class="order_want_lesson">
-                                <h3 class="order_want_lesson_title">
-                                    신청하려는 강의
-                                </h3>
-                                <div class="order_lessons">
-                                    <div
-                                        class="order_lesson"
-                                        th:each="lesson : ${orderResponse.lessonList}"
-                                    >
-                                        <div class="order_lesson_photo">
-                                            <th:block th:if="${false}">
+                    <th:block th:if="${orderResponse.success}">
+                        <h2 class="order_title">주문</h2>
+                        <form name="paymentForm" class="order_inner3">
+                            <div class="order_left">
+                                <div class="order_want_lesson">
+                                    <h3 class="order_want_lesson_title">
+                                        신청하려는 강의
+                                    </h3>
+                                    <div class="order_lessons">
+                                        <div
+                                            class="order_lesson"
+                                            th:each="lesson : ${orderResponse.lessonList}"
+                                        >
+                                            <div class="order_lesson_photo">
+                                                <th:block th:if="${false}">
+                                                    <img
+                                                        th:src="@{${lesson.trainer.profileImg}}"
+                                                        alt="강사 프로필 사진"
+                                                    />
+                                                </th:block>
                                                 <img
-                                                    th:src="@{${lesson.trainer.profileImg}}"
+                                                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80"
                                                     alt="강사 프로필 사진"
+                                                    class="order-trainer-profile-photo"
+                                                    width="100"
+                                                    height="100"
                                                 />
-                                            </th:block>
-                                            <img
-                                                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80"
-                                                alt="강사 프로필 사진"
-                                                class="order-trainer-profile-photo"
-                                                width="100"
-                                                height="100"
-                                            />
-                                        </div>
-                                        <div class="order_lesson_descriptions">
+                                            </div>
                                             <div
-                                                class="order_lesson_title"
-                                                th:text="${lesson.title}"
-                                            ></div>
-                                            <div
-                                                class="order_lesson_descriptions_2"
+                                                class="order_lesson_descriptions"
                                             >
                                                 <div
-                                                    class="order_lesson_trainerName"
-                                                    th:text="${lesson.trainer.trainerName}"
+                                                    class="order_lesson_title"
+                                                    th:text="${lesson.title}"
                                                 ></div>
                                                 <div
-                                                    class="order_lesson_price"
-                                                    th:text="${#numbers.formatInteger(lesson.price, 1, 'COMMA') + '원'}"
-                                                ></div>
+                                                    class="order_lesson_descriptions_2"
+                                                >
+                                                    <div
+                                                        class="order_lesson_trainerName"
+                                                        th:text="${lesson.trainer.trainerName}"
+                                                    ></div>
+                                                    <div
+                                                        class="order_lesson_price"
+                                                        th:text="${#numbers.formatInteger(lesson.price, 1, 'COMMA') + '원'}"
+                                                    ></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="order_order_info">
+                                    <h3>주문자 정보</h3>
+                                </div>
+                                <div
+                                    class="order_name"
+                                    th:text="|주문자명: ${orderResponse.name}|"
+                                ></div>
+                                <div
+                                    class="order_telNo"
+                                    th:text="|주문자 전화번호: ${orderResponse.telNo}|"
+                                ></div>
+                                <div
+                                    class="order_orderNo"
+                                    th:text="|주문 번호: ${orderResponse.orderNo}|"
+                                ></div>
+                                <input
+                                    type="hidden"
+                                    name="pgShopId"
+                                    th:value="${pgShopId}"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="franchiseId"
+                                    th:value="${franchiseId}"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="orderNo"
+                                    th:value="${orderResponse.orderNo}"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="userName"
+                                    th:value="${orderResponse.name}"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="userTelNo"
+                                    th:value="${orderResponse.telNo}"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="price"
+                                    th:value="${orderResponse.price}"
+                                />
                             </div>
-                            <div class="order_order_info">
-                                <h3>주문자 정보</h3>
-                            </div>
-                            <div
-                                class="order_name"
-                                th:text="|주문자명: ${orderResponse.name}|"
-                            ></div>
-                            <div
-                                class="order_telNo"
-                                th:text="|주문자 전화번호: ${orderResponse.telNo}|"
-                            ></div>
-                            <div
-                                class="order_orderNo"
-                                th:text="|주문 번호: ${orderResponse.orderNo}|"
-                            ></div>
-                            <input
-                                type="hidden"
-                                name="pgShopId"
-                                th:value="${pgShopId}"
-                            />
-                            <input
-                                type="hidden"
-                                name="franchiseId"
-                                th:value="${franchiseId}"
-                            />
-                            <input
-                                type="hidden"
-                                name="orderNo"
-                                th:value="${orderResponse.orderNo}"
-                            />
-                            <input
-                                type="hidden"
-                                name="userName"
-                                th:value="${orderResponse.name}"
-                            />
-                            <input
-                                type="hidden"
-                                name="userTelNo"
-                                th:value="${orderResponse.telNo}"
-                            />
-                            <input
-                                type="hidden"
-                                name="price"
-                                th:value="${orderResponse.price}"
-                            />
-                        </div>
 
-                        <div class="order_right">
-                            <div class="order_payment_price_box">
-                                <h4>결제 예정 금액</h4>
-                                <div class="order_payment_total_price_box">
-                                    <span class="order_payment_total_price_desc"
-                                        >합계:</span
+                            <div class="order_right">
+                                <div class="order_payment_price_box">
+                                    <h4>결제 예정 금액</h4>
+                                    <div class="order_payment_total_price_box">
+                                        <span
+                                            class="order_payment_total_price_desc"
+                                            >합계:</span
+                                        >
+                                        <span
+                                            class="order_payment_price"
+                                            th:text="${#numbers.formatInteger(orderResponse.price, 1, 'COMMA') + '원'}"
+                                        ></span>
+                                    </div>
+                                </div>
+                                <div class="order_payment_method_container">
+                                    <h4>결제 수단</h4>
+                                    <div class="order_payment_method_select">
+                                        <label class="order_label_in_input">
+                                            <input
+                                                type="radio"
+                                                name="orderMethod"
+                                                value="card"
+                                                checked
+                                                class="order_radiobox_1"
+                                            />
+                                            <span>신용카드</span>
+                                        </label>
+                                        <label class="order_label_in_input">
+                                            <input
+                                                type="radio"
+                                                name="orderMethod"
+                                                value="phone"
+                                                class="order_radiobox_1"
+                                            />
+                                            <span>휴대폰 소액결제</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div
+                                    class="order_payment_agreement_container order_label_in_input_container"
+                                >
+                                    <label class="order_label_in_input">
+                                        <input
+                                            type="checkbox"
+                                            name="agreeAll"
+                                            class="order_checkbox_1"
+                                        />
+                                        <span>모두 동의</span>
+                                    </label>
+                                    <label class="order_label_in_input">
+                                        <input
+                                            type="checkbox"
+                                            name="agree1"
+                                            class="order_checkbox_1 order_payment_agreement_other_agree"
+                                        />
+                                        <span>구매 조건을 확인했습니다.</span>
+                                    </label>
+                                    <label class="order_label_in_input">
+                                        <input
+                                            type="checkbox"
+                                            name="agree2"
+                                            class="order_checkbox_1 order_payment_agreement_other_agree"
+                                        />
+                                        <span>정보 수집 및 이용 동의</span>
+                                    </label>
+                                </div>
+                                <div class="order_payment_button_container">
+                                    <button
+                                        type="submit"
+                                        class="order_button_2"
                                     >
-                                    <span
-                                        class="order_payment_price"
-                                        th:text="${#numbers.formatInteger(orderResponse.price, 1, 'COMMA') + '원'}"
-                                    ></span>
+                                        결제하기
+                                    </button>
                                 </div>
                             </div>
-                            <div class="order_payment_method_container">
-                                <h4>결제 수단</h4>
-                                <div class="order_payment_method_select">
-                                    <label class="order_label_in_input">
-                                        <input
-                                            type="radio"
-                                            name="orderMethod"
-                                            value="card"
-                                            checked
-                                            class="order_radiobox_1"
-                                        />
-                                        <span>신용카드</span>
-                                    </label>
-                                    <label class="order_label_in_input">
-                                        <input
-                                            type="radio"
-                                            name="orderMethod"
-                                            value="phone"
-                                            class="order_radiobox_1"
-                                        />
-                                        <span>휴대폰 소액결제</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div
-                                class="order_payment_agreement_container order_label_in_input_container"
-                            >
-                                <label class="order_label_in_input">
-                                    <input
-                                        type="checkbox"
-                                        name="agreeAll"
-                                        class="order_checkbox_1"
-                                    />
-                                    <span>모두 동의</span>
-                                </label>
-                                <label class="order_label_in_input">
-                                    <input
-                                        type="checkbox"
-                                        name="agree1"
-                                        class="order_checkbox_1 order_payment_agreement_other_agree"
-                                    />
-                                    <span>구매 조건을 확인했습니다.</span>
-                                </label>
-                                <label class="order_label_in_input">
-                                    <input
-                                        type="checkbox"
-                                        name="agree2"
-                                        class="order_checkbox_1 order_payment_agreement_other_agree"
-                                    />
-                                    <span>정보 수집 및 이용 동의</span>
-                                </label>
-                            </div>
-                            <div class="order_payment_button_container">
-                                <button type="submit" class="order_button_2">
-                                    결제하기
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </th:block>
+                    <th:block th:unless="${orderResponse.success}">
+                        <script th:inline="javascript">
+                            alert([[${orderResponse.message}]]);
+                            history.back();
+                        </script>
+                    </th:block>
                 </div>
             </div>
         </div>
