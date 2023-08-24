@@ -14,4 +14,10 @@ public class LessonController {
     public String createLesson(Lesson lesson) {
         return "content/createLesson";
     }
+
+    @GetMapping(value = "/lessonDetail")
+    public String lessonDetail(Lesson lesson) {
+        return "content/lessonDetail";
+    }
 }
+

@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.member.interceptor;
 
 import com.khteam2.connectgym.common.SessionConstant;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 /**
  * 로그인이 되어있는지 확인하기 위한 인터셉터
  */
+@Component
 public class LoginCheckInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
