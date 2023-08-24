@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/fooddiary}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>클래스리스트 > ${lessonCategory}</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="foodD">
+    <div class="calendar">
+        <div class="calendar_header">
+            <button th:id="prevBtn">&lt;</button>
+            <h1 th:id="monthYear" th:text="${today.getMonth}"></h1>
+            <button th:id="nextBtn">&gt;</button>
+        </div>
+        <table class="foodD_calendar_table">
+            <thead>
+            <tr>
+                <th class="foodD_calendar_padding">Sun</th>
+                <th class="foodD_calendar_padding">Mon</th>
+                <th class="foodD_calendar_padding">Tue</th>
+                <th class="foodD_calendar_padding">Wed</th>
+                <th class="foodD_calendar_padding">Thu</th>
+                <th class="foodD_calendar_padding">Fri</th>
+                <th class="foodD_calendar_padding">Sat</th>
+            </tr>
+            </thead>
+
+
+            <tbody>
+            <tr th:each="week : ${weeks}">
+                <td  class="foodD_calendar_padding" th:each="day : ${week}" th:class="${day != null} ? 'active' : ''">
+                    <div class="foodD_clanedar_day_layout" >
+                        <div class="foodD_clanedar_datebox" th:if="${day != null}" th:text="${day}">Day</div>
+                        <div class= "foodD_clanedar_foodbox" th:if="${day != null}">
+                            <div th:each="todo : ${todosMap[__${day}__]}"
+                                 th:if="${todosMap[__${day}__]} != null">
+                                <span th:text="${todo.task}"></span>
+                            </div>
+
+
+                            <div  th:unless="${todosMap[__${day}__]} != null">
+                                <!-- Handle case where todosMap[__${day}__] is null -->
+                            </div>
+
+
+                        </div>
+
+                        <!-- <button type="button">추가</button> -->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+
+
+
+        </table>
+    </div>
+
+</th:block>
+</html>

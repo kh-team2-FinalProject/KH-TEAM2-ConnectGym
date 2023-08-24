@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>Food Diary > Calendar</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="content">
+    <div class="side_main_page">
+        <!-- 사이드바 -->
+        <nav class="sidebar">
+            <div class="side_logo">
+                <a href="/">
+                    <img th:src="@{/images/logo.png}" width="200"/>
+                </a>
+            </div>
+            <div class="side_menu">
+                <ul class="side_items">
+                    <li class="side_title">Food Diary</li>
+                    <li class="side-content"><a href="/fooddiary/calendar" class="on">Calendar</a></li>
+                    <li class="side-content"><a href="/fooddiary/diary">Diary</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- 사이드바 -->
+
+        <!--페이지-->
+        <div class="side_page">
+            <th:block layout:fragment="foodD">
+            </th:block>
+        </div>
+    </div>
+</th:block>
+
+<!-- 스크립트 부분 -->
+<script th:inline="javascript">
+
+
+</script>
+
+<th:block layout:fragment="script">
+
+</th:block>
+
+
+</html>
