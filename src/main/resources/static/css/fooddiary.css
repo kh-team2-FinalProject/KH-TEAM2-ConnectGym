@@ -1,0 +1,40 @@
+.foodD_calendar_table {
+    text-align: center;
+    margin: auto;
+    width: 90%;
+    font-family: Arial, sans-serif;
+    height: 90vh;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    height: 90%;
+}
+
+.foodD_calendar_padding {
+
+    padding: 2px;
+}
+
+.active {
+
+}
+
+
+
+ul>li{ list-style-type: none;}
+.foodD_clanedar_datebox{
+    height: 20%;
+}
+.foodD_clanedar_foodbox{
+    height: 80%;
+}
+
+.foodD_clanedar_day_layout{
+    display: block;
+    height: 100%;
+    border-radius :15%;
+    background-color: #d0dda1;
+}
