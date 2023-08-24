@@ -51,14 +51,27 @@ public class OrderService {
      * @param lessonNolist  lesson 번호가 담겨있는 List
      */
     @Transactional(readOnly = true)
-    public OrderResponseDto prepareOrder(Long loginMemberNo, List<Long> lessonNolist) throws IamportResponseException, IOException {
+    public OrderResponseDto prepareOrder(Long loginMemberNo, List<Long> lessonNolist) {
         OrderResponseDto responseDto = OrderResponseDto.builder()
             .success(false)
             .build();
 
+        // 회원 정보를 조회한다.
+        Member member = this.memberRepository.findById(loginMemberNo).orElseThrow(NullPointerException::new);
+
+        // 해당 강의를 결제했는지 확인한다.
+        boolean lessonResult = this.hasLesson(member.getNo(), lessonNolist);
+
+        // 결제한 내역이 존재하면 거부 메시지를 설정한 후 객체를 반환한다.
+        if (lessonResult) {
+            responseDto.setMessage("이미 결제한 강의가 포함되어 있어 결제할 수 없습니다.");
+            return responseDto;
+        }
+
         // DB에서 해당 강의 리스트를 가져온다.
         List<Lesson> lessons = this.lessonRepository.findAllById(lessonNolist);
 
+        // 해당 강의 리스트가 존재하지 않으면 객체를 반환한다.
         if (lessons.isEmpty()) {
             responseDto.setMessage("잘못된 요청입니다.");
             return responseDto;
@@ -76,12 +89,19 @@ public class OrderService {
         // 결제 전 포트원 서버로 전송할 객체 선언. 주문 번호와 결제할 금액을 넘긴다.
         PrepareData prepareData = new PrepareData(merchantUid, BigDecimal.valueOf(totalPrice));
         // 포트원 서버로 사전 검증 요청을 전송하고 받아온다.
-        IamportResponse<Prepare> postPrepareResponse = this.iamportClient.postPrepare(prepareData);
+        IamportResponse<Prepare> postPrepareResponse = null;
+        try {
+            postPrepareResponse = this.iamportClient.postPrepare(prepareData);
+        } catch (IOException | IamportResponseException e) {
+            log.error(e.getMessage(), e);
+            responseDto.setMessage(e.getMessage());
+            return responseDto;
+        }
 
-        // if (postPrepareResponse.getCode() != 0) {}
-
-        // 회원 정보를 조회한다.
-        Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+        if (postPrepareResponse.getCode() != 0) {
+            responseDto.setMessage(postPrepareResponse.getMessage());
+            return responseDto;
+        }
 
         // View로 넘겨줄 값들을 DTO에 넘겨준다.
         responseDto.setSuccess(true);
@@ -95,12 +115,36 @@ public class OrderService {
     }
 
     /**
+     * 해당 회원이 신청한 레슨이 있는지 확인하는 메소드
+     *
+     * @param memberNo     회원 번호
+     * @param lessonNoList 레슨 번호가 들어있는 리스트
+     * @return 회원이 신청한 레슨이 존재하면 {@code true}, 아니면 {@code false} 반환
+     */
+    @Transactional(readOnly = true)
+    private boolean hasLesson(Long memberNo, List<Long> lessonNoList) {
+        boolean result = false;
+        // 해당 회원이 신청한 레슨을 모두 가져온다.
+        List<Lesson> alreadyLessonList = this.lessonRepository.findByMemberNo(memberNo);
+
+        // 레슨 리스트를 순환해서 해당 번호가 존재하면 true로 설정한 뒤 반복문에서 빠져나온다.
+        for (Lesson lesson : alreadyLessonList) {
+            if (lessonNoList.contains(lesson.getNo())) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * 주문 번호 생성 메소드.
      * 생성한 주문 번호를 DB에서 조회해서 만약 존재하면 새로운 주문 번호를 생성한다.
      *
      * @return 사용되지 않은 새 주문 번호
      */
-    @Transactional
+    @Transactional(readOnly = true)
     private String generateOrderNo() {
         String orderNo = null;
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")); // 20230820
@@ -119,7 +163,7 @@ public class OrderService {
             }
         }
 
-        return orderNo; // this.orderRepository.getMaxNo() + 1;
+        return orderNo;
     }
 
     /**
@@ -127,8 +171,12 @@ public class OrderService {
      */
     @Transactional
     public OrderProcessResponseDto processOrder(
-        OrderProcessRequestDto requestDto
-    ) {
+        OrderProcessRequestDto requestDto) {
+        OrderProcessResponseDto returnDto = OrderProcessResponseDto.builder()
+            .success(false)
+            .url("/order/fail")
+            .build();
+
         Long loginMemberNo = requestDto.getSLoginMemberNo();
         String merchantUid = requestDto.getSMerchantUid();
         Long totalPrice = requestDto.getSTotalPrice();
@@ -137,70 +185,64 @@ public class OrderService {
         String impUid = requestDto.getImpUid();
         String errorMsg = requestDto.getErrorMsg();
 
-        OrderProcessResponseDto returnDto = OrderProcessResponseDto.builder()
-            .success(false)
-            .build();
-
         if (!isPC && loginMemberNo == null) {
             returnDto.setMessage("로그인되어 있지 않습니다.");
             return returnDto;
         }
 
+        List<Lesson> lessonList = this.lessonRepository.findAllById(lessonNolist);
+
+        if (lessonNolist.size() != lessonList.size()) {
+            log.error("가져온 lesson과 lessonNo 리스트의 사이즈가 다릅니다");
+            returnDto.setMessage("내부 서버 문제로 인해 결제에 실패했습니다.");
+            return returnDto;
+        }
+
         Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
         Payment payment = null;
-        String message = null;
-        String url = "/order/fail";
 
         try {
             payment = this.iamportClient.paymentByImpUid(impUid).getResponse();
         } catch (IamportResponseException e) {
-            message = "결제에 실패했습니다. 서버 메시지: " + errorMsg;
+            returnDto.setMessage("결제에 실패했습니다. 서버 메시지: " + errorMsg);
             log.error("포트원 서버에서 오류가 발생했습니다.", e);
+            return returnDto;
         } catch (IOException e) {
-            message = "결제 서버에 연결하지 못 했습니다. 서버 메시지: " + errorMsg;
+            returnDto.setMessage("결제 서버에 연결하지 못 했습니다. " + errorMsg);
             log.error("포트원 서버에 연결하는 중 문제가 발생했습니다.", e);
+            return returnDto;
         }
 
-        if (payment != null) {
-            if (payment.getMerchantUid().equals(merchantUid)
-                && payment.getAmount().equals(BigDecimal.valueOf(totalPrice))
-            ) {
-                returnDto.setSuccess(true);
-                String tempUrl = "/order/complete?orderId=" + merchantUid;
-                url = isPC ? tempUrl : "redirect:" + tempUrl;
-
-                List<Lesson> lessonList = this.lessonRepository.findAllById(lessonNolist);
-
-                if (lessonNolist.size() == lessonList.size()) {
-                    // DB에 저장
-                    Order order = Order.builder()
-                        .no(payment.getMerchantUid())
-                        .member(member)
-                        .orderPay(totalPrice)
-                        .dayOfPayment(Timestamp.valueOf(LocalDateTime.now()))
-                        .type(payment.getPayMethod())
-                        .build();
-
-                    // 주문을 DB에 넣는다.
-                    Order savedOrder = this.orderRepository.save(order);
-
-                    // order_detail 테이블에 저장할 리스트를 생성한다.
-                    List<OrderDetail> createdOrderDetailList = lessonList.stream()
-                        .map(lesson -> OrderDetail.builder().lesson(lesson).order(savedOrder).build())
-                        .collect(Collectors.toList());
-
-                    // order_detail 테이블에 주문한 강의를 모두 넣는다.
-                    List<OrderDetail> savedOrderDetailList = this.orderDetailRepository.saveAll(createdOrderDetailList);
-                } else {
-                    log.error("가져온 lesson과 lessonNo 리스트의 사이즈가 다릅니다");
-                }
-            } else {
-                message = "검증 실패";
-            }
+        if (!payment.getMerchantUid().equals(merchantUid)
+            || !payment.getAmount().equals(BigDecimal.valueOf(totalPrice))) {
+            returnDto.setMessage("검증 실패");
+            return returnDto;
         }
 
-        returnDto.setMessage(message);
-        returnDto.setUrl(url);
+        String tempUrl = "/order/complete?orderId=" + merchantUid;
+        returnDto.setUrl(isPC ? tempUrl : "redirect:" + tempUrl);
+
+        // DB에 저장
+        Order newOrder = Order.builder()
+            .no(payment.getMerchantUid())
+            .member(member)
+            .orderPay(totalPrice)
+            .dayOfPayment(Timestamp.valueOf(LocalDateTime.now()))
+            .type(payment.getPayMethod())
+            .build();
+
+        // 주문을 DB에 넣는다.
+        Order savedOrder = this.orderRepository.save(newOrder);
+
+        // order_detail 테이블에 저장할 리스트를 생성한다.
+        List<OrderDetail> newOrderDetailList = lessonList.stream()
+            .map(lesson -> OrderDetail.builder().lesson(lesson).order(savedOrder).build())
+            .collect(Collectors.toList());
+
+        // order_detail 테이블에 주문한 강의를 모두 넣는다.
+        List<OrderDetail> savedOrderDetailList = this.orderDetailRepository.saveAll(newOrderDetailList);
+
+        returnDto.setSuccess(true);
 
         return returnDto;
     }
