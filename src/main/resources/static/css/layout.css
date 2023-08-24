@@ -180,7 +180,7 @@ padding-left:0;
 
 /*============바디===========*/
 .content-body {
-    margin-top: 5%;
+    margin-top: 10vh;
 }
 
 /*============바디 끝===========*/
@@ -227,17 +227,18 @@ footer ul {
 
 footer ul li {
     list-style: none;
-    gap: 20px;
-    margin-left: 20px;
     display: inline;
 }
 
+/*
 footer ul li:first-child:before {
-    content: " | ";
+    content: "  |  ";
 }
+*/
 
-footer ul li:after {
-    content: " | ";
+footer ul li:not(:last-child):after {
+    margin:0px 10px;
+    content: "  |  ";
 }
 
 /*============푸터 끝===========*/

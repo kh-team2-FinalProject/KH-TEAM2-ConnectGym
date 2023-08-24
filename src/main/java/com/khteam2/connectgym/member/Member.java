@@ -5,6 +5,7 @@ import com.khteam2.connectgym.enroll.EnrollDetail;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,8 @@ public class Member {
     private String userAddress;
     @Column(name = "user_email")
     private String userEmail;
+    @Column(name = "reg_date")
+    private LocalDateTime regDate;
 
     @OneToMany(mappedBy = "member")
     @JsonIgnore

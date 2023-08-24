@@ -1,5 +1,4 @@
-   window.onload = () => {
-   console.log("js 실행 됐나요 - 별도파일");
+   window.onload=() => {
      		findMyLesson();
   	}
 
@@ -7,9 +6,9 @@
   	$.ajax({
     type:"GET",
     /*${session.no}*/
-  	url : `/api/lessonlist?memberId=1`,
+  	url : `/api/lessonlist?memberId=${userNo}`,
   	dataType:"json",
-  	async:"false",
+  	//async:"false",
   	success : function(response){
 
   	    if(!response.length){
@@ -17,7 +16,7 @@
                     '<div class="mylesson_none"><p>등록한 레슨이 없습니다.</p></div>';
                     return false;
         }
-        // 댓글이 있는 경우
+        // 강좌가 있는 경우
         let listHtml = "";
         response.forEach(val =>{
 
@@ -28,7 +27,7 @@
                 <div class="myl-trainer">트레이너 ${val.lesson.trainer.trainerName} / PT 진행 횟수 1/30 (넣으면 좋겠다)</div>
             </div>
             <div class="enter-button">
-                <button onclick="location.href='/enterroom/${val.lesson.no}'">Connect GYM!</button>
+                <button onclick="checkRoom(${val.lesson.no},'${val.lesson.title}',${val.no});">Connect GYM!</button>
             </div>
         </div>
         `;

@@ -2,9 +2,12 @@ package com.khteam2.connectgym.member;
 
 
 import com.khteam2.connectgym.member.dto.MemberDTO;
+import com.khteam2.connectgym.member.dto.MemberResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -43,6 +46,11 @@ public class MemberService {
         System.out.println(member.getUserAddress());
         memberRepository.save(member);
 
+    }
+
+    public MemberResponse findOneMember(Long no){
+        Member entity = memberRepository.findById(no).orElse(null);
+        return new MemberResponse(entity);
     }
 
 }

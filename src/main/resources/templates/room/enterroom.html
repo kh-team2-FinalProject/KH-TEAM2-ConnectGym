@@ -3,44 +3,30 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
 <th:block layout:fragment="script">
-    <script src="js/openvidu-browser-2.28.0.js"></script>
+    <script th:src="@{/js/openvidu-browser-2.28.0.js}"></script>
     <script th:inline="javascript">
-    var userName = /*[[ ${userName} ]]*/;
-    var myUserRole = /*[[ ${userRole} ]]*/;
+    var myRoomName = [[${lessonTitle}]];
+    var userName = [[${member.userName}]];
+
     </script>
-    <script src="js/app.js"></script>
+    <script th:src="@{/js/app.js}"></script>
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
 
-    <div id="main-container" class="container">
-        <div id="join">
-            <div id="join-dialog" class="jumbotron vertical-center">
-                <h1>Join a video session</h1>
-                    <p>
-                        <label>LESSON ROOM NAME</label>
-                        <input class="form-control" type="text" th:value="${roomName}"  id="roomName" required>
-                    </p>
-                    <p>
-                        <label>key</label>
-                        <input class="form-control" type="text" id="roomKey" required>
-                    </p>
-                    <p class="text-center">
-                        <input class="btn btn-lg btn-success" type="button" onclick="check();" value="Connect Gym!">
-                    </p>
-
-            </div>
+    <div id="lessonRoom" style="display: none;">
+        <div id="session-header">
+            <h1 id="lesson-title"></h1>
+            <input class="room-button" type="button" id="buttonLeaveSession" onmouseup="leaveSession()" value="운동 종료">
         </div>
-
-        <div id="lessonRoom" style="display: none;">
-            <div id="session-header">
-                <h1 id="lesson-title"></h1>
-                <input class="btn btn-large btn-danger" type="button" id="buttonLeaveSession" onmouseup="leaveSession()" value="운동 종료">
-            </div>
-            <div id="main-video" class="col-md-6"><p></p><video autoplay playsinline="true"></video></div>
-            <div id="video-container" class="col-md-6"></div>
+        <div id="main-video" class="main-video">
+            <p></p>
+            <video autoplay playsinline="true"></video>
         </div>
+        <div class="room-divider"></div>
+        <div id="video-container" class="video-container"></div>
+    </div>
     </div>
 
 </th:block>

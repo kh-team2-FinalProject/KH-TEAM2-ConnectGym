@@ -1,7 +1,10 @@
 package com.khteam2.connectgym.room;
 
+import com.khteam2.connectgym.enroll.EnrollDetail;
+import com.khteam2.connectgym.enroll.EnrollRepository;
 import com.khteam2.connectgym.room.dto.RoomRequest;
 import io.openvidu.java.client.*;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,9 +15,14 @@ import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class RoomService {
 
     private static final Logger logger = LoggerFactory.getLogger(RoomApiController.class);
+
+
+    private final EnrollRepository enrollRepository;
+    private final RoomRepository roomRepository;
 
     @Value("${OPENVIDU_URL}")
     private String OPENVIDU_URL;
@@ -29,6 +37,26 @@ public class RoomService {
     public void init() {
         this.openvidu = new OpenVidu(OPENVIDU_URL, OPENVIDU_SECRET);
     }
+
+    // 룸 입장을 위한 key check
+    public boolean enterKeyCheck(Long enrollNo) {
+        boolean check = false;
+
+        EnrollDetail ed = enrollRepository.findById(enrollNo).orElse(null);
+        Room room = roomRepository.findRoomKey(enrollNo);
+        try {
+            if (ed.getEnrollKey().equals(room.getRoomKey())) {
+                check = true;
+            } else if(room.getRoomKey() == null){
+                check = false;
+            }
+
+        } catch (Exception e) {
+
+        }
+        return check;
+    }
+
 
     // 룸 입장을 위한 세션 생성
     public String initializeSession(String lessonRoomName)
