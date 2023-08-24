@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.room;
 
 
+import com.khteam2.connectgym.enroll.EnrollDetail;
 import com.khteam2.connectgym.room.dto.RoomRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,19 +24,11 @@ public class RoomApiController {
 
     private final RoomService roomSerivce;
 
-    @PostMapping("/checkEnroll")
-    public boolean checkEnroll(@RequestBody(required = false) RoomRequest roomRequest){
-        // roomName과 roomKey 조건 확인하는 service 호출
-//     boolean check = roomSerivce.checkEnroll;
-        boolean check = false;
-        if(roomRequest.getRoomKey().equals("1234")){
-            check = true;
-            return check;
-        }
-
-        return check;
+    @GetMapping("/checkEnroll/{enrollNo}")
+    public boolean checkEnroll(@PathVariable Long enrollNo){
+        System.out.println("체크인롤 컨트롤러 호출 : " + enrollNo);
+        return roomSerivce.enterKeyCheck(enrollNo);
     }
-
 
     // 룸 입장을 위한 세션 생성
 	@PostMapping("/enter/id")

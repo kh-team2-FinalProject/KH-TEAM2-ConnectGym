@@ -2,6 +2,7 @@ package com.khteam2.connectgym.enroll;
 
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.member.Member;
+import com.khteam2.connectgym.room.Room;
 import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,13 +31,14 @@ public class EnrollDetail {
     @JoinColumn(name="lesson_no")
     private Lesson lesson;
 
-    private String enroll_key;
+    @Column(name="enroll_key")
+    private String enrollKey;
 
     public EnrollDetail(Long no, Member member, Lesson lesson) {
         this.no = no;
         this.member = member;
         this.lesson = lesson;
-        this.enroll_key = generateRandomString();
+        this.enrollKey = generateRandomString();
     }
 
     //룸키 난수 생성기

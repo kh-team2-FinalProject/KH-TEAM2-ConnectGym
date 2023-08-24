@@ -1,51 +1,12 @@
 var OV;
 var session;
-
+var myRoomName =
 
 /* OPENVIDU METHODS */
+   window.onload = () => {
 
-function check() {
-
-    //내가 수강한 레슨의 네임으로 고정(원본 소스의 mySessionId)
-	var myRoomName = document.getElementById("roomName").value;
-	//레슨 구매 후 발급받은 키(입장 가능 여부만 판단)
-	var myRoomKey = document.getElementById("roomKey").value;
-
-    //userName은 세션에 저장된 값으로 전달받음(원본 소스의 myUserName)
-    userName += Math.floor(Math.random() * 100);
-    console.log(userName);
-
-
-	const roomInfo ={
-	    roomName : myRoomName,
-	    roomKey : myRoomKey,
-	    userName : userName
-//	    userRole : myUserRole
-	}
-	console.log(roomInfo);
-
-
-	// 사용자가 입력한 값으로 입장여부 체크
-    $.ajax({
-        type: "POST",
-    	url: "/room/checkEnroll",
-    	contentType:'application/json; charset=utf-8',
-        dataType : 'json',
-        data : JSON.stringify(roomInfo),
-        async : false,
-    	success: response => {
-                         if (response) {
-                             // 키가 일치할 때
-                             joinSession(myRoomName,userName);
-                         } else {
-                             // 일치하지 않을 때
-                             alert("키값이 잘못 입력되었거나 현재 수강시간이 아닙니다.");
-                         }
-                     },
-    	error: (error) => reject(error)
-
-    });
-}
+   joinSession(myRoomName,userName);
+   }
 
 function joinSession(myRoomName, userName){
 
@@ -98,7 +59,7 @@ function joinSession(myRoomName, userName){
 
 				// --- 5) Set page layout for active call ---
 				document.getElementById('lesson-title').innerText = myRoomName;
-				document.getElementById('join').style.display = 'none';
+//				document.getElementById('join').style.display = 'none';
 				document.getElementById('lessonRoom').style.display = 'block';
 
 				// --- 6) Get your own camera stream with the desired properties ---
@@ -145,7 +106,7 @@ function leaveSession() {
 	removeAllUserData();
 
 	// Back to 'Join session' page
-	document.getElementById('join').style.display = 'block';
+//	document.getElementById('join').style.display = 'block';
 	document.getElementById('lessonRoom').style.display = 'none';
 }
 
