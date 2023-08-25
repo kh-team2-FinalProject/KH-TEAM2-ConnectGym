@@ -1,16 +1,16 @@
-.foodD_calendar_table {
+.foodD_calendar {
+        padding-top: 100px;
     text-align: center;
     margin: auto;
     width: 90%;
     font-family: Arial, sans-serif;
     height: 90vh;
 }
-
-table {
+.foodD_calendar_table{
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    height: 90%;
+    height: 80%;
 }
 
 .foodD_calendar_padding {

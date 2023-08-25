@@ -8,11 +8,11 @@
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="foodD">
-    <div class="calendar">
+    <div class="foodD_calendar">
         <div class="calendar_header">
-            <button th:id="prevBtn">&lt;</button>
-            <h1 th:id="monthYear" th:text="${today.getMonth}"></h1>
-            <button th:id="nextBtn">&gt;</button>
+            <button class="nav-button" onclick="goToPreviousMonth()">&lt; Prev</button>
+            <h3 th:id="monthYear" th:text="${yearMonth.getMonth()}"></h3>
+            <button class="nav-button" onclick="goToNextMonth()">Next &gt;</button>
         </div>
         <table class="foodD_calendar_table">
             <thead>
@@ -30,7 +30,7 @@
 
             <tbody>
             <tr th:each="week : ${weeks}">
-                <td  class="foodD_calendar_padding" th:each="day : ${week}" th:class="${day != null} ? 'active' : ''">
+                <td  class="foodD_calendar_padding" th:each="day : ${week}" th:class="${day != null} ? 'calendar_active' : ''">
                     <div class="foodD_clanedar_day_layout" >
                         <div class="foodD_clanedar_datebox" th:if="${day != null}" th:text="${day}">Day</div>
                         <div class= "foodD_clanedar_foodbox" th:if="${day != null}">
@@ -57,6 +57,26 @@
 
         </table>
     </div>
+
+
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+        var prevYear = [[${yearMonth.minusMonths(1).getYear()}]];
+     var prevMonth = [[${yearMonth.minusMonths(1).getMonthValue()}]];
+     var nextYear = [[${yearMonth.plusMonths(1).getYear()}]];
+     var nextMonth = [[${yearMonth.plusMonths(1).getMonthValue()}]];
+
+        function goToPreviousMonth() {
+            window.location.href = "/fooddiary/calendar/?year=" +prevYear + "&month=" + prevMonth;
+
+        }
+
+        function goToNextMonth() {
+            window.location.href = "/fooddiary/calendar/?year=" + nextYear + "&month=" + nextMonth;
+        }
+        /*]]>*/
+    </script>
 
 </th:block>
 </html>
