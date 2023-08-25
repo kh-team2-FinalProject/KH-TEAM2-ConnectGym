@@ -6,7 +6,8 @@
     height: 90vh;
 }
 
-table {
+/*이채연 - 충돌로 css 테이블 명 변경*/
+.foodD_calendar_table table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
@@ -23,18 +24,21 @@ table {
 }
 
 
+ul > li {
+    list-style-type: none;
+}
 
-ul>li{ list-style-type: none;}
-.foodD_clanedar_datebox{
+.foodD_clanedar_datebox {
     height: 20%;
 }
-.foodD_clanedar_foodbox{
+
+.foodD_clanedar_foodbox {
     height: 80%;
 }
 
-.foodD_clanedar_day_layout{
+.foodD_clanedar_day_layout {
     display: block;
     height: 100%;
-    border-radius :15%;
+    border-radius: 15%;
     background-color: #d0dda1;
 }
