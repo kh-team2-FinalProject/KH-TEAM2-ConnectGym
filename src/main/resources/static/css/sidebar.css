@@ -2,33 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 /*============사이드바 페이지===========*/
 /* 사이드바 페이지에서 다른 헤더 적용 */
-.header {
-    background-color: rgba(0, 0, 0, 0.00);
-    /*background-color: #161616;*/
-    color: #0E181A;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    transition: background-color 0.3s;
-    z-index: 1000;
-    font-family: 'Black Ops One', cursive;
-    height: 10vh;
-    font-size: 18px;
-}
-
-.header-item li a {
-    text-decoration: none;
-    color: #0E181A;
-}
-
 
 /* 전체 div */
 .side_main_page {
-  background-color: white;
-  color: #0e181a;
+  background-color:#0e1414;
+  color: #C9D3D4;
   display: flex;
   align-items: flex-start;
   height: 100%;
@@ -36,8 +14,7 @@
 }
 
 .site_banner{
-  height: 300px;
-  background-color: white;
+  height: 350px;
   display: flex;
   justify-content : center;
   align-items : center;
@@ -46,14 +23,39 @@
 .site_banner_title{
  font-family: 'Staatliches', cursive;
  text-transform: uppercase;
- font-size: 100pt;
- color : black;
- letter-spacing: 10px;
+ font-size: 90pt;
+ color : #0e181a;
+ letter-spacing: 15px;
+ height:40%;
+
 }
+.site_banner_title p{
+ margin: 0;
+ border : 5px solid;
+ padding: 0px 80px;
+ box-shadow: 10px 10px 30px 1px #535151;
+ background-color: rgba(223, 223, 223, 0.3);
+}
+
+.site_banner.health-banner{
+  background: url("/images/banner-health.jpg") center center / cover no-repeat;
+  filter: grayscale(100%);
+}
+
+.site_banner.yoga-banner{
+  background: url("/images/banner-yoga.jpg") center center / cover no-repeat;
+filter: grayscale(100%);
+}
+
+.site_banner.pilates-banner{
+  background: url("/images/banner-pilates.jpg") center center / cover no-repeat;
+}
+
 
 /*== 사이드바 ==*/
 .sidebar {
-  /*background-color: white;*/
+/*side_main_page 색으로 조정
+  background-color: #0e181a;*/
   width: 300px;
   min-height: 100vh;
   flex: 1;
@@ -61,7 +63,8 @@
 
 /*== 본문 ==*/
 .side_page {
-  background-color: white;
+/*side_main_page 색으로 조정
+  background-color: #0e181a;*/
   min-height: 100vh;
   flex: 4;
 }
@@ -78,7 +81,7 @@
   width: 100%;
   padding: 0px 30px;
   text-align: right;
-  line-height: 50px;
+  line-height: 20px;
   box-sizing: border-box;
   margin-top : 10px;
 }
@@ -87,8 +90,9 @@
 .side_title {
   /*background-color: white;*/
   border-radius: 5px;
+  text-align : center;
   font-size: 18pt;
-  padding: 10px 0px;
+  padding: 30px 0px;
   font-weight: 900;
   letter-spacing: 3px;
 }
@@ -106,29 +110,31 @@
 
 .side_menu ul li a {
   font-size: 16px;
-  line-height: 5em;
+  line-height: 4em;
   text-decoration: none;
   letter-spacing: 5px;
-  color: #0e181a;
+  width:80%;
+  color: #C9D3D4;
   display: block;
   transition: all ease-out 300ms;
-  font-family: "NanumSquareNeoExtraBold";
+  /*font-family: "NanumSquareNeoExtraBold";*/
 }
 
 .side_menu ul li:hover a {
-  color: #0e181a;
-  opacity: 0.5;
+  color:#a3dc10;
+  /*opacity: 0.5;*/
 }
 
 .side_menu ul li:not(:first-child)::after {
   content: "";
   position: absolute;
   width: 100%;
-  height: 0.2em;
+  height: 1px;
   background: black;
+  width:80%;
   left: 0;
   bottom: 0;
-  background-image: linear-gradient(to right, #000000, #000000);
+  background-image: linear-gradient(to right, #dfdfdf, #FFE400);
 }
 
 /*============사이드바 끝===========*/
