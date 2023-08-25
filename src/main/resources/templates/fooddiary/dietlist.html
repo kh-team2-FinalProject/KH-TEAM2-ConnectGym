@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/fooddiary}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>Diet input 페이지</title>
+</th:block>
+
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="foodD">
+    <link rel="stylesheet" th:href="@{/css/dietlist.css}">
+    <link rel="stylesheet" th:href="@{/css/diettitle.css}">
+    <!-- 날짜 제목  -->
+    <div class="diettitle">
+        <div class="calendar-controls">
+            <div id="calendarButton" class="calendar-button">
+                <span id="selectedDate"></span>
+                <div id="calendarDropdown" class="dropdown-content">
+                    <div class="calendar-header">
+                        <select id="yearSelect"></select>
+                        <select id="monthSelect"></select>
+                    </div>
+                    <div id="calendar"></div>
+                </div>
+            </div>
+            <div class="search">
+                <button id="search_btn">search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- input box -->
+
+    <div class="Diet">
+        <!-- 아침 메뉴 -->
+        <div class="Diet1">
+            <h3>아침</h3>
+            <div class="meal_box" id="breakfast">
+                <div class="table">
+                    <!-- 데이터 추가하는 테이블 -->
+                    <!-- 영양성분 테이블 -->
+                    <table class="foodinfo_Tbl" cellpadding="0" cellsacing="0" style="position:relative;left:-2px;float:right;line-height:14px">
+                        <tbody>
+                        <tr style="height:36px">
+
+                            <td class="sub" title="총 아침 식사지방 : g">지방</td>
+
+                            <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
+
+                            <td class="sub" title="총 아침 식사단백질 : g">단백질</td>
+
+                            <td class="sub" style="color:#000;font-weight:bold" title="총 아침 식사칼로리 : kcal">칼로리</td>
+
+                            <td width="10">&nbsp;</td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="btn">
+                    <button class="btn1" onclick="add_textbox()">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 점심 메뉴 -->
+        <div class="Diet1">
+            <h3>점심</h3>
+            <div class="meal_box" id="lunch">
+
+                <div class="table">
+                    <!-- 데이터 추가하는 테이블 -->
+                    <!-- 영양성분 테이블 -->
+                    <table class="foodinfo_Tbl" cellpadding="0" cellsacing="0" style="position:relative;left:-2px;float:right;line-height:14px">
+                        <tbody>
+                        <tr style="height:36px">
+
+                            <td class="sub" title="총 아침 식사지방 : g">지방</td>
+
+                            <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
+
+                            <td class="sub" title="총 아침 식사단백질 : g">단백질</td>
+
+                            <td class="sub" style="color:#000;font-weight:bold" title="총 아침 식사칼로리 : kcal">칼로리</td>
+
+                            <td width="10">&nbsp;</td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="btn">
+                    <button class="btn1" onclick="add_textbox()">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 저녁 메뉴 -->
+        <div class="Diet1">
+            <h3>저녁</h3>
+            <div class="meal_box" id="dinner">
+
+                <div class="table">
+                    <!-- 데이터 추가하는 테이블 -->
+                    <!-- 영양성분 테이블 -->
+                    <table class="foodinfo_Tbl" cellpadding="0" cellsacing="0" style="position:relative;left:-2px;float:right;line-height:14px">
+                        <tbody>
+                        <tr style="height:36px">
+
+                            <td class="sub" title="총 아침 식사지방 : g">지방</td>
+
+                            <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
+
+                            <td class="sub" title="총 아침 식사단백질 : g">단백질</td>
+
+                            <td class="sub" style="color:#000;font-weight:bold" title="총 아침 식사칼로리 : kcal">칼로리</td>
+
+                            <td width="10">&nbsp;</td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="btn">
+                    <button class="btn1" onclick="add_textbox()">+</button>
+                    <button class="btn1" onclick="">Photo</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 간식 메뉴 -->
+        <div class="Diet1">
+            <h3>간식</h3>
+            <div class="meal_box" id="snack">
+
+                <div class="table">
+                    <!-- 데이터 추가하는 테이블 -->
+                    <!-- 영양성분 테이블 -->
+                    <table class="foodinfo_Tbl" cellpadding="0" cellsacing="0" style="position:relative;left:-2px;float:right;line-height:14px">
+                        <tbody>
+                        <tr style="height:36px">
+
+                            <td class="sub" title="총 아침 식사지방 : g">지방</td>
+
+                            <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
+
+                            <td class="sub" title="총 아침 식사단백질 : g">단백질</td>
+
+                            <td class="sub" style="color:#000;font-weight:bold" title="총 아침 식사칼로리 : kcal">칼로리</td>
+
+                            <td width="10">&nbsp;</td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="btn">
+                    <button class="btn1" onclick="add_textbox()">+</button>
+                    <button class="btn1" onclick="">Photo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/diettitle.js}"></script>
+</th:block>
+</html>
