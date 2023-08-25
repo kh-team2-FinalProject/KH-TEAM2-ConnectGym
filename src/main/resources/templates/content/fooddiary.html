@@ -3,24 +3,31 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
 <th:block layout:fragment="title">
-    <title>Food Diary > Calendar</title>
+    <title>FoodDiary > ${lessonCategory}</title>
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
+    <div th:class="${lessonCategory + '-banner site_banner'}">
+        <div class="site_banner_title">
+            <p th:text="${lessonCategory}"></p>
+        </div>
+    </div>
+
     <div class="side_main_page">
         <!-- 사이드바 -->
         <nav class="sidebar">
-            <div class="side_logo">
+            <!--<div class="side_logo">
                 <a href="/">
                     <img th:src="@{/images/logo.png}" width="200"/>
                 </a>
-            </div>
+            </div>-->
             <div class="side_menu">
                 <ul class="side_items">
                     <li class="side_title">Food Diary</li>
                     <li class="side-content"><a href="/fooddiary/calendar" class="on">Calendar</a></li>
                     <li class="side-content"><a href="/fooddiary/diary">Diary</a></li>
+
                 </ul>
             </div>
         </nav>
@@ -37,12 +44,8 @@
 <!-- 스크립트 부분 -->
 <script th:inline="javascript">
 
-           /*<![CDATA[*/
 
-           /*]]>*/
 </script>
-
-
 
 <th:block layout:fragment="script">
 

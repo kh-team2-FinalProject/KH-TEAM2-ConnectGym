@@ -22,6 +22,9 @@ public class CalendarController {
         public String getCalendar(@RequestParam(value = "year", required = false) Integer year,
                                   @RequestParam(value = "month", required = false) Integer month,
                                   Model model) {
+        String foodDCategory = "Calendar";
+        model.addAttribute("lessonCategory",foodDCategory);
+
             LocalDate today = LocalDate.now();
         if (year == null || month == null) {
             year = today.getYear();

@@ -47,3 +47,8 @@ ul>li{ list-style-type: none;}
 
         border: none;
     }
+
+.site_banner.Calendar-banner {
+    background: url("/images/banner-calendar.jpg") center center / cover no-repeat;
+    filter: grayscale(100%);
+}
