@@ -3,26 +3,26 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
 <th:block layout:fragment="title">
-    <title>클래스리스트</title>
+    <title>MY PAGE</title>
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
+    <div class="site_banner">
+        <div class="site_banner_title">
+            <p>MY PAGE</p>
+        </div>
+    </div>
 
     <div class="side_main_page">
         <!-- 사이드바 -->
         <nav class="sidebar">
-            <div class="side_logo" align="center">
-                <a href="/">
-                    <img th:src="@{/images/logo.png}" width="200"/>
-                </a>
-            </div>
             <div class="side_menu">
                 <ul class="side_items">
                     <li class="side_title">MY PAGE</li>
-                    <li class="side-content"><a href="#" class="on">나의 정보</a></li>
-                    <li class="side-content"><a href="/mypage/mylessonlist">나의 레슨</a></li>
-                    <li class="side-content"><a href="/#">기타등등</a></li>
+                    <li class="side-content"><a href="#" class="on">My Info</a></li>
+                    <li class="side-content"><a href="/mypage/mylessonlist">My Lesson</a></li>
+                    <li class="side-content"><a href="#">etc</a></li>
                 </ul>
             </div>
         </nav>

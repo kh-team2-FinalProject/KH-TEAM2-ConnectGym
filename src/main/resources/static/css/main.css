@@ -262,7 +262,7 @@ color : #B2B5B5;
 
 .review-slider-wrap {
   height: 100%;
-  width: 100%;
+  /*width: 100%;*/
   position: relative; /* Added */
 }
 
