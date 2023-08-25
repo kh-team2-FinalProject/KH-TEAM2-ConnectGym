@@ -26,5 +26,4 @@ public class MemberApiController {
 
         return ResponseEntity.ok(map);
     }
-
 }
