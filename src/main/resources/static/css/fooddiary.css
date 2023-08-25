@@ -1,27 +1,24 @@
-.foodD_calendar_table {
+.foodD_calendar {
+    padding-top: 100px;
     text-align: center;
     margin: auto;
     width: 90%;
     font-family: Arial, sans-serif;
     height: 90vh;
+    background-color :#0E1414;
 }
-
-table {
+.foodD_calendar_table{
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    height: 90%;
+    height: 80%;
+    color : white;
 }
 
 .foodD_calendar_padding {
 
     padding: 2px;
 }
-
-.active {
-
-}
-
 
 
 ul>li{ list-style-type: none;}
@@ -35,6 +32,23 @@ ul>li{ list-style-type: none;}
 .foodD_clanedar_day_layout{
     display: block;
     height: 100%;
-    border-radius :15%;
-    background-color: #d0dda1;
+    border-radius :5%;
+    background-color: #55ebc09a;
+}
+.calendar_header{
+    display: flex;
+    justify-content: space-around;
+
+}
+.calendar_header h1{color:white;}
+ .foodD_calendar-button{
+        background-color: transparent;
+        color: #A3DC10;
+
+        border: none;
+    }
+
+.site_banner.Calendar-banner {
+    background: url("/images/banner-calendar.jpg") center center / cover no-repeat;
+    filter: grayscale(100%);
 }

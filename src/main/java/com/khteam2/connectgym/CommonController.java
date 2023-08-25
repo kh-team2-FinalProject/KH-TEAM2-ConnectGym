@@ -77,4 +77,9 @@ public class CommonController {
         return "room/enterroom";
     }
 
+    @GetMapping("/fooddiary")
+    public String fooddiary() {
+        return "redirect:/fooddiary/calendar";
+    }
+
 }
