@@ -33,19 +33,20 @@ public class CalendarController {
 
             int daysInMonth = yearMonth.lengthOfMonth();
         int dayCounter = 1;
-
+        System.out.println(firstDayOfMonth.getDayOfWeek().getValue());
         while (dayCounter <= daysInMonth) {
             List<String> week = new ArrayList<>();
             for (int i = 0; i < 7; i++) {
-                if ((dayCounter == 1 && i < firstDayOfMonth.getDayOfWeek().getValue()) || dayCounter > daysInMonth) {
+                if ((dayCounter == 1 && i < firstDayOfMonth.getDayOfWeek().getValue() %7 ) || dayCounter > daysInMonth) {
                     week.add(null);
                 } else {
                     week.add(String.valueOf(dayCounter));
                     dayCounter++;
-                }
+                }System.out.println(firstDayOfMonth.getDayOfWeek().getValue()  +"i : "+ i);
             }
             weeks.add(week);
         }
+
 
         model.addAttribute("yearMonth",yearMonth);
         model.addAttribute("today",today);
