@@ -57,7 +57,12 @@ public class OrderService {
             .build();
 
         // 회원 정보를 조회한다.
-        Member member = this.memberRepository.findById(loginMemberNo).orElseThrow(NullPointerException::new);
+        Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+
+        if (member == null) {
+            responseDto.setMessage("해당 회원을 찾을 수 없습니다.");
+            return responseDto;
+        }
 
         // 해당 강의를 결제했는지 확인한다.
         boolean lessonResult = this.hasLesson(member.getNo(), lessonNolist);
@@ -181,11 +186,11 @@ public class OrderService {
         String merchantUid = requestDto.getSMerchantUid();
         Long totalPrice = requestDto.getSTotalPrice();
         List<Long> lessonNolist = requestDto.getSLessonNolist();
-        boolean isPC = requestDto.isPC();
+        boolean isApi = requestDto.isPC();
         String impUid = requestDto.getImpUid();
         String errorMsg = requestDto.getErrorMsg();
 
-        if (!isPC && loginMemberNo == null) {
+        if (loginMemberNo == null) {
             returnDto.setMessage("로그인되어 있지 않습니다.");
             return returnDto;
         }
@@ -220,7 +225,7 @@ public class OrderService {
         }
 
         String tempUrl = "/order/complete?orderId=" + merchantUid;
-        returnDto.setUrl(isPC ? tempUrl : "redirect:" + tempUrl);
+        returnDto.setUrl(isApi ? tempUrl : "redirect:" + tempUrl);
 
         // DB에 저장
         Order newOrder = Order.builder()

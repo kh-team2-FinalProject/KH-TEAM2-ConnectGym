@@ -2,7 +2,6 @@ package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.order.dto.*;
-import com.siot.IamportRestClient.exception.IamportResponseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -33,20 +31,19 @@ public class OrderController {
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         HttpSession session,
         @RequestParam(required = false) List<Long> lessonList,
-        Model model) throws IamportResponseException, IOException {
-        if (loginMemberNo == null) {
-            return "redirect:/temp_login";
-        }
-
+        Model model) {
         OrderResponseDto responseDto = this.orderService.prepareOrder(loginMemberNo, lessonList);
 
-        session.setAttribute(SessionConstant.ORDER_ORDER_NO, responseDto.getOrderNo());
-        session.setAttribute(SessionConstant.ORDER_PRICE, responseDto.getPrice());
-        session.setAttribute(SessionConstant.ORDER_LESSON_LIST, lessonList);
+        if (responseDto.isSuccess()) {
+            session.setAttribute(SessionConstant.ORDER_ORDER_NO, responseDto.getOrderNo());
+            session.setAttribute(SessionConstant.ORDER_PRICE, responseDto.getPrice());
+            session.setAttribute(SessionConstant.ORDER_LESSON_LIST, lessonList);
+
+            model.addAttribute("franchiseId", this.franchiseId);
+            model.addAttribute("pgShopId", this.pgShopId);
+        }
 
         model.addAttribute("orderResponse", responseDto);
-        model.addAttribute("franchiseId", this.franchiseId);
-        model.addAttribute("pgShopId", this.pgShopId);
 
         return "/content/order";
     }
@@ -59,7 +56,6 @@ public class OrderController {
         @SessionAttribute(name = SessionConstant.ORDER_PRICE, required = false) Long sTotalPrice,
         @SessionAttribute(name = SessionConstant.ORDER_LESSON_LIST, required = false) List<Long> sOrderLessonList,
         OrderProcessDto processDto) {
-
         if (processDto.getImp_uid() == null
             || processDto.getMerchant_uid() == null
             || sMerchantUid == null
@@ -101,9 +97,9 @@ public class OrderController {
             session.removeAttribute(SessionConstant.ORDER_ORDER_NO);
             session.removeAttribute(SessionConstant.ORDER_LESSON_LIST);
             session.removeAttribute(SessionConstant.ORDER_PRICE);
-
-            model.addAttribute("responseDto", responseDto);
         }
+
+        model.addAttribute("responseDto", responseDto);
 
         return responseDto.getUrl();
     }
