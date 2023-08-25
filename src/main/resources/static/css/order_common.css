@@ -43,6 +43,19 @@
     margin-bottom: 1rem;
 }
 
+#order input[type="text"].order_input_reset,
+#order input[type="tel"].order_input_reset,
+#order input[type="number"].order_input_reset {
+    background-color: initial;
+    border: none;
+}
+
+#order input[type="text"].order_input_reset:focus,
+#order input[type="tel"].order_input_reset:focus,
+#order input[type="number"].order_input_reset:focus {
+    outline: initial;
+}
+
 #order > .order_inner {
     padding: 3rem 0;
 }
@@ -126,4 +139,39 @@
 
 #order input.order_checkbox_1[type="checkbox"]:checked {
     background-image: url("/images/icons/mdi/checkbox-outline.svg");
+}
+
+#order .order_input_container {
+    background-color: #d3d3d3;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+}
+
+#order .order_input_container > .order_input_icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 1rem;
+    width: 3rem;
+    height: 2.5rem;
+}
+
+#order .order_input_container > .order_input_icon_account {
+    background-image: url("/images/icons/mdi/account-outline.svg");
+}
+
+#order .order_input_container > .order_input_icon_phone {
+    background-image: url("/images/icons/mdi/phone-outline.svg");
+}
+
+#order .order_input_container > input.order_input_input {
+    flex: 1;
+    height: 100%;
+}
+
+#order .order_input_container > input.order_input_input:disabled {
+    color: #575757;
+    cursor: not-allowed;
 }
