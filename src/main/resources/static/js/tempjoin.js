@@ -1,3 +1,4 @@
+// 주소 api(다음)
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -44,7 +45,7 @@ function sample6_execDaumPostcode() {
         document.getElementById("sample6_detailAddress").focus();
         }
     }).open();
-}
+};
 
 // 이메일 도메인 선택
 $('#select').change(function(){
@@ -80,6 +81,168 @@ function email(){
         $("#userEmail").val(email + middle + address);
     }
 };
+
+// 주소 DB에 저장하기
+// 주소 가져오기
+$("#sample6_address").blur(function(){
+    address();
+});
+
+// 상세주소 가져오기
+$("#sample6_detailAddress").blur(function(){
+    address();
+});
+
+// 참고사항 가져오기
+$("#sample6_extraAddress").blur(function(){
+    address();
+});
+
+// 가져온 주소 합치기
+function address(){
+    const sample6_address = $("#sample6_address").val();
+    const sample6_detailAddress = $("#sample6_detailAddress").val();
+    const sample6_extraAddress = $("#sample6_extraAddress").val();
+
+    if(sample6_address != "" && sample6_detailAddress != "" && sample6_extraAddress != ""){
+        $("#userAddress").val(sample6_address + " " + sample6_detailAddress + " " + sample6_extraAddress);
+    }
+};
+
+function joinform_check(){
+    var InputID = document.getElementById("InputID");
+    var InputPW = document.getElementById("InputPW");
+    var CheckPW = document.getElementById("CheckPW");
+    var InputName = document.getElementById("InputName");
+    var InputTel = document.getElementById("InputTel");
+    var userAddress = document.getElementById("userAddress");
+    var userEmail = document.getElementById("userEmail");
+    var check = document.getElementById("check");
+
+    var returnEmail = document.getElementById("email01");
+
+    if(InputID.value == ""){
+        alert("아이디를 입력하세요.");
+        InputID.focus();
+        return false;
+    };
+
+    if(InputPW.value == ""){
+        alert("비밀번호를 입력하세요.");
+        InputPW.focus();
+        return false;
+    };
+
+    // 비밀번호 영문자 + 숫자 조합 (6~25자리 입력) 정규식
+    var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,25}$/;
+
+    if(!pwdCheck.test(CheckPW.value)){
+        alert("비밀번호는 영문자 + 숫자 조합으로 6~25자리 사용해야합니다.");
+        CheckPW.focus();
+        return false;
+    };
+
+    if(InputPW.value != CheckPW.value){
+        alert("비밀번호가 일치하지 않습니다.");
+        CheckPW.focus();
+        return false;
+    };
+
+    if(InputName.value == ""){
+        alert("이름을 입력하세요.");
+        InputName.focus();
+        return false;
+    };
+
+    // 숫자만 입력하는 정규식
+    var reg = /^[0-9]+/g;
+
+    if(!reg.test(InputTel.value) && InputTel.value != ""){
+        alert("전화번호는 숫자만 입력할 수 있습니다.");
+        InputTel.focus();
+        return false;
+    };
+
+    if(InputTel.value == ""){
+        alert("전화번호를 입력해주세요.");
+        InputTel.focus();
+        return false;
+    }
+
+    if(InputTel.value.length != 11){
+        alert("전화번호를 확인해주세요.");
+        InputTel.focus();
+        return false;
+    }
+
+    if(userAddress.value==""){
+        alert("주소를 입력해주세요.");
+        userAddress.focus();
+        return false;
+    };
+
+    if(userEmail.value==""){
+        alert("이메일 주소를 입력하세요.");
+        returnEmail.focus();
+        return false;
+    };
+
+    if(!check.checked){
+        alert("약관 동의를 체크하세요.");
+        check.focus();
+        return false;
+    };
+
+    document.join_form.submit();
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,5 +1,9 @@
 #order .order_inner3 {
-    gap: 1.5rem;
+    gap: 2rem;
+}
+
+#order .order_title {
+    margin-bottom: 1rem;
 }
 
 /*
@@ -10,11 +14,10 @@
     flex-grow: 1;
 }
 
-#order .order_title {
-    margin-bottom: 1rem;
-}
-
-#order .order_left .order_want_lesson_title {
+/*
+    신청하려는 강의
+*/
+#order .order_left .order_want_lesson .order_want_lesson_title {
     margin-bottom: 1rem;
 }
 
@@ -72,12 +75,21 @@
 }
 
 #order .order_left .order_lessons > .order_lesson .order_lesson_trainerName {
-    align-self: flex-end;
+    align-self: center;
 }
 
 #order .order_left .order_lessons > .order_lesson .order_lesson_price {
     font-size: 1.375rem;
     /* font-weight: 700; */
+}
+
+#order .order_left .order_order_info_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+#order .order_left .order_order_info_container > .order_input_container {
 }
 
 /*
@@ -144,6 +156,10 @@
 #order .order_label_in_input {
     display: flex;
     gap: 0.25rem;
+}
+
+#order .order_label_in_input > span {
+    align-self: center;
 }
 
 #order .order_payment_button_container > button {
