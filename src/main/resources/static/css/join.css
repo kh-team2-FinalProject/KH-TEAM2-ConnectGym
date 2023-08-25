@@ -173,7 +173,7 @@
     width: 100px;
 }
 
-#id_check_message{
+#id_check_message, #pw_check_message, #checkpw_check_message{
     font-size:12px;
     padding-left: 20px;
 }
