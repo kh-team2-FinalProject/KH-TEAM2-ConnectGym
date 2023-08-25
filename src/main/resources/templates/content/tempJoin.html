@@ -25,8 +25,8 @@
             <!-- 아이디 -->
             <div class="input_wrap">
                 <span>아이디</span><br>
-                <input id="InputID" type="text" name="userId"></input>
-                <span id="id_error"></span>
+                <input id="InputID" type="text" name="userId" placeholder="영문 + 숫자 조합으로 6~16자리 입력해주세요."></input><br>
+                <span id="id_check_message"></span>
             </div>
 
             <!-- 비밀번호 -->
@@ -88,11 +88,12 @@
                     <option value="hanmir.com">hanmir.com</option>
                     <option value="paran.com">paran.com</option>
                 </select>
-                <button onclick="" class="join_request_btn">인증코드 발송</button>
+                <button type="button" class="join_request_btn" id="join_request_btn">인증코드 발송</button>
                 <br>
-                <input id="checkEmail" type="text" name="checkEmail"></input>
-                <button onclick="" class="join_auth_btn">본인인증</button>
-                <input type="hidden" id="userEmail" name="userEmail" value="">
+                <input id="checkEmail" type="text" name="checkEmail" disabled="disabled" maxlength="6"></input>
+                <button type="button" class="join_auth_btn" id="join_auth_btn">본인인증</button><br>
+                <span id="mail-check-warn"></span>
+                <input type="hidden" id="userEmail" name="userEmail">
             </div>
 
             <div class="join_agree_wrap">

@@ -109,6 +109,82 @@ function address(){
     }
 };
 
+// 실시간 ID 유효성검사(중복 ID 체크)
+$('#InputID').on("propertychange change keyup paste input", function(){
+    // 실시간 input에 입력받은 내용
+    var liveValue = $(this).val();
+    var idCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,16}$/;
+
+    // ajax 실행하여 실시간 id 중복검사
+    $.ajax({
+        url: "/api/check_overlap_id",
+        type: "POST",
+        data: {
+            user_id: liveValue
+        },
+        success: function(check_overlap_id){
+            if (check_overlap_id.boolean) {
+                $('#id_check_message').empty();
+                $('#id_check_message').css('color', 'red');
+                $('#id_check_message').text("중복된 아이디입니다.");
+            } else {
+                if(!idCheck.test(liveValue)){
+                    $('#id_check_message').empty();
+                    $('#id_check_message').css('color', 'red');
+                    $('#id_check_message').text("영문 + 숫자 조합으로 6~16자리 입력해주세요.");
+                }else{
+                    $('#id_check_message').empty();
+                    $('#id_check_message').css('color', 'green');
+                    $('#id_check_message').text("사용 가능한 아이디입니다.");
+                }
+            }
+        },
+        error: function(error){
+            alert('에러가 발생하였습니다.');
+            return false;
+        }
+    });
+});
+
+//// email 인증코드 구현
+//$('#join_request_btn').click(function(){
+//    var email = $('#userEmail').val();
+//    console.log("------------email : " + email); // email 오는지 확인용
+//    var checkInput = $('#checkEmail');
+//
+//    $.ajax({
+//        type: 'get',
+//        url: "/mailCheck",
+//        data: {
+//            email: email
+//        },
+//        success: function(data){
+//            checkInput.attr('disabled', false);
+//            code=data;
+//            alert('인증번호가 전송되었습니다.');
+//        }
+//    }); // ajax 끝
+//
+//    // 인증번호 비교
+//	$('#join_auth_btn').click(function () {
+//		const inputCode = $('#checkEmail').val();
+//		const $resultMsg = $('#mail-check-warn');
+//
+//		if(inputCode === code){
+//			$resultMsg.html('인증번호가 일치합니다.');
+//			$resultMsg.css('color','green');
+//			$('#mail-Check-Btn').attr('disabled',true);
+//			$('#email01').attr('readonly',true);
+//			$('#email02').attr('readonly',true);
+//			$('#email02').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+//	         $('#email02').attr('onChange', 'this.selectedIndex = this.initialSelect');
+//		}else{
+//			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+//			$resultMsg.css('color','red');
+//		}
+//});
+
+// 회원가입 버튼 클릭 시 유효성검사
 function joinform_check(){
     var InputID = document.getElementById("InputID");
     var InputPW = document.getElementById("InputPW");
@@ -123,6 +199,12 @@ function joinform_check(){
 
     if(InputID.value == ""){
         alert("아이디를 입력하세요.");
+        InputID.focus();
+        return false;
+    };
+
+    if(InputID.value.length < 6 || InputID.value.length > 16){
+        alert("영문 + 숫자 조합으로 6~16자리 입력해주세요.");
         InputID.focus();
         return false;
     };
@@ -175,11 +257,11 @@ function joinform_check(){
         return false;
     }
 
-    if(userAddress.value==""){
-        alert("주소를 입력해주세요.");
-        userAddress.focus();
-        return false;
-    };
+//    if(userAddress.value==""){
+//        alert("주소를 입력해주세요.");
+//        userAddress.focus();
+//        return false;
+//    };
 
     if(userEmail.value==""){
         alert("이메일 주소를 입력하세요.");

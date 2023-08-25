@@ -2,6 +2,7 @@ package com.khteam2.connectgym.member;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.dto.MemberDTO;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 public class MemberController {
+
     @Autowired
     private MemberService memberService;
+
+//    @Autowired
+//    private MailSendService mailService;
 
     @GetMapping(value = "/temp_login")
     public String tempLogin(
@@ -56,11 +59,18 @@ public class MemberController {
     // 회원가입 버튼 클릭 시 실행
     @PostMapping("/temp_joinProcess")
     public String saveUser(MemberDTO memberDTO) {
-
         memberService.createMember(memberDTO);
-
         return "content/main";
-
     }
+
+//    // email 인증시 사용
+//    @GetMapping("/mailCheck")
+//    @ResponseBody
+//    public String mailCheck(String email) {
+//        System.out.println("email 들어오는지 체크중" + email);
+////        return mailService.joinEmail(email);
+//        return "";
+//    }
+
 
 }

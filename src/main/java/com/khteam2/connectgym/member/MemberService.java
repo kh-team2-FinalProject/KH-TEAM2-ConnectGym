@@ -3,15 +3,15 @@ package com.khteam2.connectgym.member;
 
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberResponse;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @Slf4j
 public class MemberService {
+
     @Autowired
     private MemberRepository memberRepository;
 
@@ -28,7 +28,7 @@ public class MemberService {
         return returnValue;
     }
 
-    public void createMember(MemberDTO memberDTO){
+    public void createMember(MemberDTO memberDTO) {
         Member member = new Member();
 
         member.setUserId(memberDTO.getUserId());
@@ -36,15 +36,27 @@ public class MemberService {
         member.setUserName(memberDTO.getUserName());
         member.setUserTel(memberDTO.getUserTel());
         member.setUserEmail(memberDTO.getUserEmail());
-        member.setUserAddress(memberDTO.getUserAddress()); // input 추가예정
-
+        if (memberDTO.getUserAddress() != null) {
+            member.setUserAddress(memberDTO.getUserAddress());
+        }
         memberRepository.save(member);
 
     }
 
-    public MemberResponse findOneMember(Long no){
+    public MemberResponse findOneMember(Long no) {
         Member entity = memberRepository.findById(no).orElse(null);
         return new MemberResponse(entity);
     }
 
+    public boolean overlap_userID(String user_id) {
+        List<Member> memberList = memberRepository.findAll();
+        boolean res = false;
+
+        for (int i = 0; i < memberList.size(); i++) {
+            if (user_id.equals(memberList.get(i).getUserId())) {
+                res = true;
+            }
+        }
+        return res;
+    }
 }
