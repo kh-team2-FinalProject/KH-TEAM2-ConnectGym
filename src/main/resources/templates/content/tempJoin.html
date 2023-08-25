@@ -21,7 +21,7 @@
             </a>
         </div>
 
-        <form action="/temp_joinProcess" method="post" class="form_wrap">
+        <form action="/temp_joinProcess" method="post" class="form_wrap" name="join_form">
             <!-- 아이디 -->
             <div class="input_wrap">
                 <span>아이디</span><br>
@@ -32,7 +32,7 @@
             <!-- 비밀번호 -->
             <div class="input_wrap">
                 <span>비밀번호</span><br>
-                <input id="InputPW" type="password" name="userPw"></input>
+                <input id="InputPW" type="password" name="userPw" placeholder="영문 + 숫자 조합으로 6~25자리 입력해주세요."></input>
                 <span id="pw_error"></span>
             </div>
 
@@ -109,7 +109,7 @@
 
             <div class="join_btn_wrap">
                 <button type="button" onclick="history.back();" class="join_btn1">이전 페이지로</button>
-                <button type="submit" class="join_btn2">회원가입</button>
+                <button type="button" class="join_btn2" onclick="joinform_check();">회원가입</button>
                 <!-- submit -> button 수정 후 onclick으로 유효성검사 실행 -->
             </div>
         </form>

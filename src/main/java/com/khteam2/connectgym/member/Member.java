@@ -3,6 +3,8 @@ package com.khteam2.connectgym.member;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.khteam2.connectgym.enroll.EnrollDetail;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,6 +33,7 @@ public class Member {
     @Column(name = "user_email")
     private String userEmail;
     @Column(name = "reg_date")
+    @CreationTimestamp
     private LocalDateTime regDate;
 
     @OneToMany(mappedBy = "member")
