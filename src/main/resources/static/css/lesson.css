@@ -9,13 +9,15 @@
 #lessonlist_wrap{
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .l_card {
-    width: calc(33.33% - 20px); /* 카드 너비를 3분의 1로 설정하고 간격을 제외함 */
+    width: calc(33.33% - 50px); /* 카드 너비를 3분의 1로 설정하고 간격을 제외함 */
     height: 300px; /* 카드 높이 설정 */
     perspective: 1000px;
     margin: 20px;
+    min-width: 300px;
 }
 
 .l_card-inner {

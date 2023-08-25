@@ -8,8 +8,10 @@
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
-    <div class="site_banner">
-        <div class="site_banner_title"><p th:text="${lessonCategory}"></p></div>
+    <div th:class="${lessonCategory + '-banner site_banner'}">
+        <div class="site_banner_title">
+            <p th:text="${lessonCategory}"></p>
+        </div>
     </div>
 
     <div class="side_main_page">
@@ -23,9 +25,9 @@
             <div class="side_menu">
                 <ul class="side_items">
                     <li class="side_title">LESSON</li>
-                    <li class="side-content"><a href="/lesson/health" class="on">헬스</a></li>
-                    <li class="side-content"><a href="/lesson/yoga">요가</a></li>
-                    <li class="side-content"><a href="/lesson/pilates">필라테스</a></li>
+                    <li class="side-content"><a href="/lesson/health" class="on">Health</a></li>
+                    <li class="side-content"><a href="/lesson/yoga">Yoga</a></li>
+                    <li class="side-content"><a href="/lesson/pilates">Pilates</a></li>
                 </ul>
             </div>
         </nav>
