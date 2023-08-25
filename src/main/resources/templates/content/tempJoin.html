@@ -14,106 +14,105 @@
 
 <th:block layout:fragment="content">
     <div class="join_container">
-            <div class="join_logo">
-                <!-- 메인 헤드에있는 이미지로 변경 예정 -->
-                <a href="/">
-                    <img class="join_logo_img" src="/images/logo-white.png" th:alt="'CONNECT GYM'">
-                </a>
+        <div class="join_logo">
+            <!-- 메인 헤드에있는 이미지로 변경 예정 -->
+            <a href="/">
+                <img class="join_logo_img" src="/images/logo-white.png" th:alt="'CONNECT GYM'">
+            </a>
+        </div>
+
+        <form action="/temp_joinProcess" method="post" class="form_wrap">
+            <!-- 아이디 -->
+            <div class="input_wrap">
+                <span>아이디</span><br>
+                <input id="InputID" type="text" name="userId"></input>
+                <span id="id_error"></span>
             </div>
 
-            <form action="/temp_joinProcess" method="post" class="form_wrap">
-                <!-- 아이디 -->
-                <div class="input_wrap">
-                    <span>아이디</span><br>
-                    <input id="InputID" type="text" name="userId"></input>
-                    <span id="id_error"></span>
-                </div>
+            <!-- 비밀번호 -->
+            <div class="input_wrap">
+                <span>비밀번호</span><br>
+                <input id="InputPW" type="password" name="userPw"></input>
+                <span id="pw_error"></span>
+            </div>
 
-                <!-- 비밀번호 -->
-                <div class="input_wrap">
-                    <span>비밀번호</span><br>
-                    <input id="InputPW" type="password" name="userPw"></input>
-                    <span id="pw_error"></span>
-                </div>
+            <!-- 비밀번호 확인 -->
+            <div class="input_wrap">
+                <span>비밀번호 재확인</span><br>
+                <span id="pwCheck_error"></span>
+                <input id="CheckPW" type="password" name="CheckPW"></input>
+            </div>
 
-                <!-- 비밀번호 확인 -->
-                <div class="input_wrap">
-                    <span>비밀번호 재확인</span><br>
-                    <span id="pwCheck_error"></span>
-                    <input id="CheckPW" type="password" name="CheckPW"></input>
-                </div>
+            <!-- 이름 -->
+            <div class="input_wrap">
+                <span>이름</span><br>
+                <input id="InputName" type="text" name="userName"></input>
+            </div>
 
-                <!-- 이름 -->
-                <div class="input_wrap">
-                    <span>이름</span><br>
-                    <input id="InputName" type="text" name="userName"></input>
-                </div>
+            <!-- 전화번호 -->
+            <div class="input_wrap">
+                <span>전화번호</span><br>
+                <input id="InputTel" type="text" placeholder="'-'를 제외하고 작성하여주세요." name="userTel"></input>
+            </div>
 
-                <!-- 전화번호 -->
-                <div class="input_wrap">
-                    <span>전화번호</span><br>
-                    <input id="InputTel" type="text" placeholder="'-'를 제외하고 작성하여주세요." name="userTel"></input>
-                </div>
+            <!-- 주소 -->
+            <div class="input_address_wrap">
+                <span>주소</span><br>
+                <input type="text" id="sample6_postcode" placeholder="우편번호" style="width: 70%;">
+                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                <input type="text" id="sample6_address" placeholder="주소"><br>
+                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+                <input type="text" id="sample6_extraAddress" placeholder="(동)">
+                <input type="text" name="userAddress" id="userAddress">
+            </div>
 
-                <!-- 주소 -->
-                <div class="input_address_wrap">
-                    <span>주소</span><br>
-                    <input type="text" id="sample6_postcode" placeholder="우편번호" style="width: 70%;">
-                    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                    <input type="text" id="sample6_address" placeholder="주소"><br>
-                    <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-                    <input type="text" id="sample6_extraAddress" placeholder="(동)">
-                    <input type="hidden" name="userAddress">
-                </div>
+            <!-- email -->
+            <div class="input_email_wrap">
+                <span>이메일</span><br>
+                <input id="email01" type="text" name="email01" required></input>
+                <span id="email_middle">@</span>
+                <input id="email02" name="email02">
+                <select id="select" name="select">
+                    <option value="1" selected>직접입력</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="hanmail.net">hanmail.net</option>
+                    <option value="hotmail.com">hotmail.com</option>
+                    <option value="nate.com">nate.com</option>
+                    <option value="yahoo.co.kr">yahoo.co.kr</option>
+                    <option value="empas.com">empas.com</option>
+                    <option value="dreamwiz.com">dreamwiz.com</option>
+                    <option value="freechal.com">freechal.com</option>
+                    <option value="lycos.co.kr">lycos.co.kr</option>
+                    <option value="korea.com">korea.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="hanmir.com">hanmir.com</option>
+                    <option value="paran.com">paran.com</option>
+                </select>
+                <button onclick="" class="join_request_btn">인증코드 발송</button>
+                <br>
+                <input id="checkEmail" type="text" name="checkEmail"></input>
+                <button onclick="" class="join_auth_btn">본인인증</button>
+                <input type="hidden" id="userEmail" name="userEmail" value="">
+            </div>
 
-                <!-- email -->
-                <div class="input_email_wrap">
-                    <span>이메일</span><br>
-                    <input id="email01" type="text" name="email01" required></input>
-                    <span id="email_middle">@</span>
-                    <input id="email02" name="email02">
-                    <select id="select" name="select">
-                        <option value="1" selected>직접입력</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="hanmail.net">hanmail.net</option>
-                        <option value="hotmail.com">hotmail.com</option>
-                        <option value="nate.com">nate.com</option>
-                        <option value="yahoo.co.kr">yahoo.co.kr</option>
-                        <option value="empas.com">empas.com</option>
-                        <option value="dreamwiz.com">dreamwiz.com</option>
-                        <option value="freechal.com">freechal.com</option>
-                        <option value="lycos.co.kr">lycos.co.kr</option>
-                        <option value="korea.com">korea.com</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="hanmir.com">hanmir.com</option>
-                        <option value="paran.com">paran.com</option>
-                    </select>
-                    <button onclick="" class="join_request_btn">인증코드 발송</button>
-                    <br>
-                    <input id="checkEmail" type="text" name="checkEmail"></input>
-                    <button onclick="" class="join_auth_btn">본인인증</button>
-                    <input type="hidden" id="userEmail" name="userEmail" value="">
-                </div>
-
-                <div class="join_agree_wrap">
-                    <label>개인정보 수집/이용동의<span id="consentError"></span></label>
-                    <div id="informationConsent">
+            <div class="join_agree_wrap">
+                <label>개인정보 수집/이용동의<span id="consentError"></span></label>
+                <div id="informationConsent">
                   <span id="consentBox">
                       <label>개인정보 처리방침<span id="consentError"></span></label>
                       <!-- 세부내용 중략 -->
                   </span>
-                    </div>
-                    <label class="select"><input type="radio" id="check" name="check" value="동의">동의</label>
-                    <label class="select"><input type="radio" id="noneCheck" name="check" value="비동의" checked="checked">비동의</label>
                 </div>
+                <label class="select"><input type="radio" id="check" name="check" value="동의">동의</label>
+                <label class="select"><input type="radio" id="noneCheck" name="check" value="비동의" checked="checked">비동의</label>
+            </div>
 
-                <div class="join_btn_wrap">
-                    <button type="button" onclick="history.back();" class="join_btn1">이전 페이지로</button>
-                    <button onclick="" type="button" class="join_btn2">회원가입</button>
-                    <!-- js 기능 아직 미구현 -->
-
-                </div>
-            </form>
+            <div class="join_btn_wrap">
+                <button type="button" onclick="history.back();" class="join_btn1">이전 페이지로</button>
+                <button type="submit" class="join_btn2">회원가입</button>
+                <!-- submit -> button 수정 후 onclick으로 유효성검사 실행 -->
+            </div>
+        </form>
     </div>
 </th:block>
 

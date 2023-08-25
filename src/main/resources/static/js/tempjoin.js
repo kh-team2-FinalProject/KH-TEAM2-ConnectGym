@@ -81,8 +81,32 @@ function email(){
     }
 };
 
+// 주소 DB에 저장하기
+// 주소 가져오기
+$("#sample6_address").blur(function(){
+    address();
+});
 
+// 상세주소 가져오기
+$("#sample6_detailAddress").blur(function(){
+    address();
+});
 
+// 참고사항 가져오기
+$("#sample6_extraAddress").blur(function(){
+    address();
+});
+
+// 가져온 주소 합치기
+function address(){
+    const sample6_address = $("#sample6_address").val();
+    const sample6_detailAddress = $("#sample6_detailAddress").val();
+    const sample6_extraAddress = $("#sample6_extraAddress").val();
+
+    if(sample6_address != "" && sample6_detailAddress != "" && sample6_extraAddress != ""){
+        $("#userAddress").val(sample6_address + " " + sample6_detailAddress + " " + sample6_extraAddress);
+    }
+};
 
 
 

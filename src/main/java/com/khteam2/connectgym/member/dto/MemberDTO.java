@@ -2,6 +2,8 @@ package com.khteam2.connectgym.member.dto;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class MemberDTO {
 
@@ -12,6 +14,7 @@ public class MemberDTO {
     private String userTel;
     private String userEmail;
     private String userAddress;
+    private LocalDateTime regDate;
 
 
 }
