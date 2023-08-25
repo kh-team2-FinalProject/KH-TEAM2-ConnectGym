@@ -147,42 +147,43 @@ $('#InputID').on("propertychange change keyup paste input", function(){
 });
 
 //// email 인증코드 구현
-//$('#join_request_btn').click(function(){
-//    var email = $('#userEmail').val();
-//    console.log("------------email : " + email); // email 오는지 확인용
-//    var checkInput = $('#checkEmail');
-//
-//    $.ajax({
-//        type: 'get',
-//        url: "/mailCheck",
-//        data: {
-//            email: email
-//        },
-//        success: function(data){
-//            checkInput.attr('disabled', false);
-//            code=data;
-//            alert('인증번호가 전송되었습니다.');
-//        }
-//    }); // ajax 끝
-//
-//    // 인증번호 비교
-//	$('#join_auth_btn').click(function () {
-//		const inputCode = $('#checkEmail').val();
-//		const $resultMsg = $('#mail-check-warn');
-//
-//		if(inputCode === code){
-//			$resultMsg.html('인증번호가 일치합니다.');
-//			$resultMsg.css('color','green');
-//			$('#mail-Check-Btn').attr('disabled',true);
-//			$('#email01').attr('readonly',true);
-//			$('#email02').attr('readonly',true);
-//			$('#email02').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-//	         $('#email02').attr('onChange', 'this.selectedIndex = this.initialSelect');
-//		}else{
-//			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
-//			$resultMsg.css('color','red');
-//		}
-//});
+$('#join_request_btn').click(function(){
+    var email = $('#userEmail').val();
+    console.log("------------email : " + email); // email 오는지 확인용
+    var checkInput = $('#checkEmail');
+
+    $.ajax({
+        type: 'get',
+        url: "/mailCheck",
+        data: {
+            email: email
+        },
+        success: function(data){
+            checkInput.attr('disabled', false);
+            code=data;
+            alert('인증번호가 전송되었습니다.');
+        }
+    }); // ajax 끝
+
+    // 인증번호 비교
+	$('#join_auth_btn').click(function () {
+		const inputCode = $('#checkEmail').val();
+		const $resultMsg = $('#mail-check-warn');
+
+		if(inputCode === code){
+			$resultMsg.html('인증번호가 일치합니다.');
+			$resultMsg.css('color','green');
+			$('#mail-Check-Btn').attr('disabled',true);
+			$('#email01').attr('readonly',true);
+			$('#email02').attr('readonly',true);
+			$('#email02').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+	        $('#email02').attr('onChange', 'this.selectedIndex = this.initialSelect');
+		}else{
+			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+			$resultMsg.css('color','red');
+		}
+    });
+});
 
 // 회원가입 버튼 클릭 시 유효성검사
 function joinform_check(){
@@ -277,59 +278,3 @@ function joinform_check(){
 
     document.join_form.submit();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

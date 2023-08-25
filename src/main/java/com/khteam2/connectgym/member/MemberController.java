@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
@@ -16,8 +17,8 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-//    @Autowired
-//    private MailSendService mailService;
+    @Autowired
+    private MailSendService mailService;
 
     @GetMapping(value = "/temp_login")
     public String tempLogin(
@@ -64,13 +65,12 @@ public class MemberController {
     }
 
 //    // email 인증시 사용
-//    @GetMapping("/mailCheck")
-//    @ResponseBody
-//    public String mailCheck(String email) {
-//        System.out.println("email 들어오는지 체크중" + email);
-////        return mailService.joinEmail(email);
-//        return "";
-//    }
+    @GetMapping("/mailCheck")
+    @ResponseBody
+    public String mailCheck(String email) {
+        System.out.println("email 들어오는지 체크중" + email);
+        return mailService.joinEmail(email);
+    }
 
 
 }
