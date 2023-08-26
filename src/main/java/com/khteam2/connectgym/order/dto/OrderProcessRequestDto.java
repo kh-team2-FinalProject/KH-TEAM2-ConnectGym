@@ -17,7 +17,7 @@ public class OrderProcessRequestDto {
     private Long sTotalPrice;
     private Long sLoginMemberNo;
     private List<Long> sLessonNolist;
-    private boolean isPC;
+    private boolean isApi;
     private String impUid;
     private String merchantUid;
     private Boolean impSuccess;
