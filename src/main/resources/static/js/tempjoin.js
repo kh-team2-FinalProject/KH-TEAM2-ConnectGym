@@ -1,3 +1,4 @@
+////////////////////////////////////////////////////////
 // 주소 api(다음)
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -47,6 +48,7 @@ function sample6_execDaumPostcode() {
     }).open();
 };
 
+////////////////////////////////////////////////////////
 // 이메일 도메인 선택
 $('#select').change(function(){
     $('#select option:selected').each(function(){
@@ -82,6 +84,7 @@ function email(){
     }
 };
 
+////////////////////////////////////////////////////////
 // 주소 DB에 저장하기
 // 주소 가져오기
 $("#sample6_address").blur(function(){
@@ -109,6 +112,7 @@ function address(){
     }
 };
 
+////////////////////////////////////////////////////////
 // 실시간 ID 유효성검사(중복 ID 체크)
 $('#InputID').on("propertychange change keyup paste input", function(){
     // 실시간 input에 입력받은 내용
@@ -124,15 +128,18 @@ $('#InputID').on("propertychange change keyup paste input", function(){
         },
         success: function(check_overlap_id){
             if (check_overlap_id.boolean) {
+                $('#InputID').css('border', '2px solid red');
                 $('#id_check_message').empty();
                 $('#id_check_message').css('color', 'red');
                 $('#id_check_message').text("중복된 아이디입니다.");
             } else {
                 if(!idCheck.test(liveValue)){
+                    $('#InputID').css('border', '2px solid red');
                     $('#id_check_message').empty();
                     $('#id_check_message').css('color', 'red');
                     $('#id_check_message').text("영문 + 숫자 조합으로 6~16자리 입력해주세요.");
                 }else{
+                    $('#InputID').css('border', '2px solid green');
                     $('#id_check_message').empty();
                     $('#id_check_message').css('color', 'green');
                     $('#id_check_message').text("사용 가능한 아이디입니다.");
@@ -146,44 +153,51 @@ $('#InputID').on("propertychange change keyup paste input", function(){
     });
 });
 
+////////////////////////////////////////////////////////
 //// email 인증코드 구현
-//$('#join_request_btn').click(function(){
-//    var email = $('#userEmail').val();
-//    console.log("------------email : " + email); // email 오는지 확인용
-//    var checkInput = $('#checkEmail');
-//
-//    $.ajax({
-//        type: 'get',
-//        url: "/mailCheck",
-//        data: {
-//            email: email
-//        },
-//        success: function(data){
-//            checkInput.attr('disabled', false);
-//            code=data;
-//            alert('인증번호가 전송되었습니다.');
-//        }
-//    }); // ajax 끝
-//
-//    // 인증번호 비교
-//	$('#join_auth_btn').click(function () {
-//		const inputCode = $('#checkEmail').val();
-//		const $resultMsg = $('#mail-check-warn');
-//
-//		if(inputCode === code){
-//			$resultMsg.html('인증번호가 일치합니다.');
-//			$resultMsg.css('color','green');
-//			$('#mail-Check-Btn').attr('disabled',true);
-//			$('#email01').attr('readonly',true);
-//			$('#email02').attr('readonly',true);
-//			$('#email02').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-//	         $('#email02').attr('onChange', 'this.selectedIndex = this.initialSelect');
-//		}else{
-//			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
-//			$resultMsg.css('color','red');
-//		}
-//});
+$('#join_request_btn').click(function(){
+    var email = $('#userEmail').val();
+    console.log("------------email : " + email); // email 오는지 확인용
+    var checkInput = $('#checkEmail');
 
+    $.ajax({
+        type: 'get',
+        url: "/mailCheck",
+        data: {
+            email: email
+        },
+        success: function(data){
+            checkInput.attr('disabled', false);
+            code=data;
+            alert('인증번호가 전송되었습니다.');
+        }
+    }); // ajax 끝
+
+    // 인증번호 비교
+	$('#join_auth_btn').click(function () {
+		const inputCode = $('#checkEmail').val();
+		const $resultMsg = $('#mail-check-warn');
+
+		if(inputCode === code){
+			$resultMsg.html('인증번호가 일치합니다.');
+			$resultMsg.css('color','green');
+			$('#email01').attr('readonly',true);
+			$('#email02').attr('readonly',true);
+			$('#email02').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+	        $('#email02').attr('onChange', 'this.selectedIndex = this.initialSelect');
+            $('#checkEmail').attr('disabled', 'disabled');
+
+	        $('#join_auth_btn').attr('value', true);
+		}else{
+			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+			$resultMsg.css('color','red');
+
+			$('#join_auth_btn').attr('value', false);
+		}
+    });
+});
+
+////////////////////////////////////////////////////////
 // 회원가입 버튼 클릭 시 유효성검사
 function joinform_check(){
     var InputID = document.getElementById("InputID");
@@ -237,10 +251,10 @@ function joinform_check(){
     };
 
     // 숫자만 입력하는 정규식
-    var reg = /^[0-9]+/g;
+    var phoneRule = /^(010)[0-9]{4}[0-9]{4}$/;
 
-    if(!reg.test(InputTel.value) && InputTel.value != ""){
-        alert("전화번호는 숫자만 입력할 수 있습니다.");
+    if(!phoneRule.test(InputTel.value)){
+        alert("전화번호를 확인해주세요.");
         InputTel.focus();
         return false;
     };
@@ -251,20 +265,15 @@ function joinform_check(){
         return false;
     }
 
-    if(InputTel.value.length != 11){
-        alert("전화번호를 확인해주세요.");
-        InputTel.focus();
-        return false;
-    }
-
 //    if(userAddress.value==""){
 //        alert("주소를 입력해주세요.");
 //        userAddress.focus();
 //        return false;
 //    };
 
-    if(userEmail.value==""){
-        alert("이메일 주소를 입력하세요.");
+    // 이메일 인증 후 안되어있으면 진행하라 메시지로 수정할 것
+    if(!$('#join_auth_btn')){
+        alert("이메일 인증을 완료해주세요.");
         returnEmail.focus();
         return false;
     };
@@ -278,49 +287,67 @@ function joinform_check(){
     document.join_form.submit();
 };
 
+////////////////////////////////////////////////////////
+// 비밀번호 실시간 유효성검사
+$('#InputPW').on("propertychange change keyup paste input", function(){
+    // 실시간 input에 입력받은 내용
+    var liveValue = $(this).val();
+    var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,25}$/;
 
+    if(!pwdCheck.test(liveValue)){
+        $('#InputPW').css('border', '2px solid red');
+        $('#pw_check_message').empty();
+        $('#pw_check_message').css('color', 'red');
+        $('#pw_check_message').text("영문 + 숫자 조합으로 6~25자리 입력해주세요.");
+    } else {
+        $('#InputPW').css('border', '2px solid green');
+        $('#pw_check_message').empty();
+        $('#pw_check_message').css('color', 'green');
+        $('#pw_check_message').text("사용 가능한 비밀번호입니다.");
+    }
+});
 
+////////////////////////////////////////////////////////
+// 비밀번호 확인 실시간 유효성검사
+$('#CheckPW').on("propertychange change keyup paste input", function(){
+    // 실시간 input에 입력받은 내용
+    var liveValue = $(this).val();
+    var pwdCheck = $('#InputPW').val();
 
+    if(liveValue!=pwdCheck){
+        $('#CheckPW').css('border', '2px solid red');
+        $('#checkpw_check_message').empty();
+        $('#checkpw_check_message').css('color', 'red');
+        $('#checkpw_check_message').text("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+    } else {
+        $('#CheckPW').css('border', '2px solid green');
+        $('#checkpw_check_message').empty();
+        $('#checkpw_check_message').css('color', 'green');
+        $('#checkpw_check_message').text("비밀번호가 일치합니다.");
+    }
+});
 
+///////////////////////////
+// blur 효과
+$('#InputName').on("propertychange change keyup paste input", function(){
+    if(!$(this).val()==""){
+        $('#InputName').css('border', '2px solid green');
+    }else{
+        $('#InputName').css('border', 'none');
+    }
+});
 
+$('#InputTel').blur(function(){
+    var phoneRule = /^(010)[0-9]{4}[0-9]{4}$/;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if(phoneRule.test($(this).val())){
+        $('#InputTel').css('border', '2px solid green');
+    }else if($(this).val()==""){
+        $('#InputTel').css('border', 'none');
+    }else{
+        $('#InputTel').css('border', '2px solid red');
+    }
+});
 
 
 

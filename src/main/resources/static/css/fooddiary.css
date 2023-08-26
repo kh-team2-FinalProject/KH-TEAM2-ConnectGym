@@ -5,14 +5,18 @@
     width: 90%;
     font-family: Arial, sans-serif;
     height: 90vh;
-    background-color :#0E1414;
+    background-color: #0E1414;
 }
-.foodD_calendar_table{
+
+
+/*이채연 - 충돌로 css 테이블 명 변경*/
+.foodD_calendar_table table {
+
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     height: 80%;
-    color : white;
+    color: white;
 }
 
 .foodD_calendar_padding {
@@ -21,34 +25,53 @@
 }
 
 
-ul>li{ list-style-type: none;}
-.foodD_clanedar_datebox{
+.active {
+
+}
+
+
+ul > li {
+    list-style-type: none;
+}
+
+.foodD_clanedar_datebox {
     height: 20%;
 }
-.foodD_clanedar_foodbox{
+
+.foodD_clanedar_foodbox {
     height: 80%;
 }
 
-.foodD_clanedar_day_layout{
+.foodD_clanedar_day_layout {
     display: block;
     height: 100%;
-    border-radius :5%;
+
+    border-radius: 5%;
     background-color: #55ebc09a;
 }
-.calendar_header{
+
+.calendar_header {
     display: flex;
     justify-content: space-around;
 
 }
-.calendar_header h1{color:white;}
- .foodD_calendar-button{
-        background-color: transparent;
-        color: #A3DC10;
 
-        border: none;
-    }
+.calendar_header h1 {
+    color: white;
+}
+
+.foodD_calendar-button {
+    background-color: transparent;
+    color: #A3DC10;
+
+    border: none;
+}
 
 .site_banner.Calendar-banner {
     background: url("/images/banner-calendar.jpg") center center / cover no-repeat;
     filter: grayscale(100%);
+
+    border-radius: 15%;
+    background-color: #d0dda1;
+
 }

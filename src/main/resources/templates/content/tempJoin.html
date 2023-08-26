@@ -33,14 +33,14 @@
             <div class="input_wrap">
                 <span>비밀번호</span><br>
                 <input id="InputPW" type="password" name="userPw" placeholder="영문 + 숫자 조합으로 6~25자리 입력해주세요."></input>
-                <span id="pw_error"></span>
+                <span id="pw_check_message"></span>
             </div>
 
             <!-- 비밀번호 확인 -->
             <div class="input_wrap">
                 <span>비밀번호 재확인</span><br>
-                <span id="pwCheck_error"></span>
-                <input id="CheckPW" type="password" name="CheckPW"></input>
+                <input id="CheckPW" type="password" name="CheckPW">
+                <span id="checkpw_check_message"></span>
             </div>
 
             <!-- 이름 -->
@@ -63,7 +63,7 @@
                 <input type="text" id="sample6_address" placeholder="주소"><br>
                 <input type="text" id="sample6_detailAddress" placeholder="상세주소">
                 <input type="text" id="sample6_extraAddress" placeholder="(동)">
-                <input type="text" name="userAddress" id="userAddress">
+                <input type="hidden" name="userAddress" id="userAddress">
             </div>
 
             <!-- email -->
@@ -91,7 +91,7 @@
                 <button type="button" class="join_request_btn" id="join_request_btn">인증코드 발송</button>
                 <br>
                 <input id="checkEmail" type="text" name="checkEmail" disabled="disabled" maxlength="6"></input>
-                <button type="button" class="join_auth_btn" id="join_auth_btn">본인인증</button><br>
+                <button type="button" class="join_auth_btn" id="join_auth_btn" value="false">본인인증</button><br>
                 <span id="mail-check-warn"></span>
                 <input type="hidden" id="userEmail" name="userEmail">
             </div>

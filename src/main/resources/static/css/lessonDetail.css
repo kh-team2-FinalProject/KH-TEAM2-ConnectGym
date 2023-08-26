@@ -1,3 +1,7 @@
+.lessonDetail_container {
+    display: flex;
+    background: white;
+}
 
 .lessonDetail_banner {
     height: 300px;
@@ -15,13 +19,14 @@
     letter-spacing: 10px;
 }
 
-.lessonDetail_container {
+.lessonDetail_leftContainer {
     background: #ffffff;
     display: flex;
     /*justify-content: center;*/
     /*align-items: center;*/
     flex-direction: column;
     height: 100vh;
+    width: 70vw;
 
 }
 
@@ -104,6 +109,35 @@
 
 .lessonDetail_content span {
     color: #0E181A;
+}
 
+.lessonDetail_rightContainer {
+    background: white;
+    display: flex;
+    width: 20vw;
+    height: 60vh;
+    position: relative;
+}
 
+.lessonDetail_orderBox {
+    background: white;
+    border: 2px solid black;
+    /*width: 20vw;*/
+    /*height: 50vh;*/
+    border-radius: 5px;
+    position: fixed;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.lessonDetail_orderBox thead {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.lessonDetail_orderBox table {
+    padding: 2vw;
 }
