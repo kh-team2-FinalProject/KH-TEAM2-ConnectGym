@@ -1,4 +1,29 @@
 
+.createLesson_banner {
+    height: 300px;
+    background-color: #0E181A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createLesson_banner_title {
+    font-family: 'Staatliches', cursive;
+    text-transform: uppercase;
+    font-size: 90pt;
+    color: #0e181a;
+    letter-spacing: 15px;
+    height: 40%;
+}
+
+.createLesson_banner_title p {
+    margin: 0;
+    border: 5px solid;
+    padding: 0px 80px;
+    box-shadow: 10px 10px 30px 1px #535151;
+    background-color: rgba(223, 223, 223, 0.3);
+}
+
 .createLesson_container {
     background: #0E181A;
     display: flex;
@@ -6,25 +31,20 @@
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    margin: -20px 0 50px;
+    /*margin: -20px 0 50px;*/
 }
+
 
 .createLesson_form {
     background: #0E181A;
     border: 1px solid #A3DC10;
     border-radius: 5px;
-    padding: 20px;
+    padding: 10px;
     width: 40vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
 }
 
-.createLessonTitle {
-    font-weight: bold;
-    font-size: 24px;
-    color: white;
-    margin-bottom: 40px;
-    text-align: center;
-    margin-top: 20px;
-}
 
 .profile_picture {
     display: flex;
@@ -48,7 +68,7 @@
     margin-left: 10px;
 }
 
-.user_id {
+.profile_info .user_id {
     font-weight: bold;
     font-size: 20px;
     color: white;
@@ -107,7 +127,6 @@
     display: none;
 }
 
-
 .input_createLesson {
     list-style: none;
     padding: 0;
@@ -117,7 +136,7 @@
 }
 
 .input_createLesson li {
-    margin-bottom: 40px;
+    margin-bottom: 3vh;
     text-align: center;
     width: 30vw;
 
@@ -128,6 +147,7 @@
     font-weight: bold;
     margin-bottom: 8px;
     text-align: left;
+    color: white;
 }
 
 .input_createLesson input {
