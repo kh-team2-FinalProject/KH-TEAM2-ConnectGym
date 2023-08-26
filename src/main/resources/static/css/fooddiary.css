@@ -9,8 +9,8 @@
 }
 
 
-/*이채연 - 충돌로 css 테이블 명 변경*/
-.foodD_calendar_table table {
+
+.foodD_calendar_table{
 
     width: 100%;
     border-collapse: collapse;
@@ -25,9 +25,6 @@
 }
 
 
-.active {
-
-}
 
 
 ul > li {
