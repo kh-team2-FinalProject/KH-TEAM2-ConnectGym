@@ -6,29 +6,62 @@
     <title>MY PAGE</title>
 </th:block>
 
+
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
-    <div class="site_banner">
-        <div class="site_banner_title">
-            <p>MY PAGE</p>
+    <div class="myp_site_banner">
+        <div class="myp_site_banner_title">
+            <p th:text="${mypage}"></p>
         </div>
     </div>
 
-    <div class="side_main_page">
+    <div class="myp_side_main_page">
         <!-- 사이드바 -->
-        <nav class="sidebar">
-            <div class="side_menu">
-                <ul class="side_items">
-                    <li class="side_title">MY PAGE</li>
-                    <li class="side-content"><a href="#" class="on">My Info</a></li>
-                    <li class="side-content"><a href="/mypage/mylessonlist">My Lesson</a></li>
-                    <li class="side-content"><a href="#">etc</a></li>
+        <div class="myp_sidebar">
+            <div class="myp_sidebar_child">
+            <nav class="myp_navbar">
+                <ul class="myp_navbar__menu">
+
+                    <!--메인 페이지-->
+                    <li class="myp_navbar__item">
+                        <a href="/" class="myp_navbar__link"><i class="fa-solid fa-house fa-xl"
+                                                                style="color: #a3dc10;"></i><span>Home</span></a>
+                    </li>
+                    <!--나의강좌-->
+                    <li class="myp_navbar__item">
+                        <a href="/mypage/mylessonlist" class="myp_navbar__link"><i
+                            class="fa-solid fa-dumbbell fa-xl"></i><span>MyLesson</span></a>
+                    </li>
+
+                    <!--선생님과 채팅 기능 있으면 좋을것 같음-->
+                    <li class="myp_navbar__item">
+                        <a href="#" class="myp_navbar__link"><i
+                            class="fa-regular fa-comment fa-xl"></i><span>Messages</span></a>
+                    </li>
+                    <!--마이 페이지 또는 결제내역-->
+                    <li class="myp_navbar__item">
+                        <a href="#" class="myp_navbar__link"><i class="fa-solid fa-money-check-dollar fa-xl"></i><span>Payment</span></a>
+                    </li>
+
+
+                    <!--고객센터?-->
+                    <li class="myp_navbar__item">
+                        <a href="#" class="myp_navbar__link"><i class="fa-regular fa-circle-question fa-xl"></i><span>Help</span></a>
+                    </li>
+
+                    <!--내 정보 수정-->
+                    <li class="myp_navbar__item">
+                        <a href="#" class="myp_navbar__link"><i
+                            class="fa-solid fa-user-gear fa-xl"></i><span>MyInfo</span></a>
+                    </li>
                 </ul>
+            </nav>
             </div>
-        </nav>
+        </div>
         <!-- 사이드바 -->
 
-        <div class="side_page">
+
+        <div class="myp_side_page">
             <th:block layout:fragment="mypage">
             </th:block>
         </div>

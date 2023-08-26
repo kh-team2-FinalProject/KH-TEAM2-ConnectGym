@@ -53,12 +53,14 @@ public class CommonController {
 
     //마이페이지 내 메뉴 이동
     @GetMapping("/mypage")
-    public String myPage() {
+    public String myPage(Model model) {
+        model.addAttribute("mypage","MY PAGE");
         return "content/mypages";
     }
 
     @GetMapping("/mypage/mylessonlist")
     public String myLesson(Model model) {
+        model.addAttribute("mypage","MY LESSON");
         // (삭제예정)세션에서 꺼내오기 못해서 고정으로 테스트 중
         MemberResponse member =memberService.findOneMember(1L);
         model.addAttribute("member",member);
