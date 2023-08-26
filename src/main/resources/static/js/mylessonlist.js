@@ -27,7 +27,7 @@
                 <div class="myl-trainer">트레이너 ${val.lesson.trainer.trainerName} / PT 진행 횟수 1/30 (넣으면 좋겠다)</div>
             </div>
             <div class="enter-button">
-                <button onclick="checkRoom(${val.lesson.no},'${val.lesson.title}',${val.no});">Connect GYM!</button>
+                <button onclick="checkRoom(${val.lesson.no},${val.no});">Connect GYM!</button>
             </div>
         </div>
         `;

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import io.openvidu.java.client.OpenViduHttpException;
 import io.openvidu.java.client.OpenViduJavaClientException;
 
+import java.util.Map;
+
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @RestController
@@ -31,11 +33,10 @@ public class RoomApiController {
     }
 
     // 룸 입장을 위한 세션 생성
-	@PostMapping("/enter/id")
-	public ResponseEntity<String> initializeSession(@RequestBody(required = false) RoomRequest roomRequest)
+	@PostMapping("/enter/init")
+	public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
 			throws OpenViduJavaClientException, OpenViduHttpException {
-        String sessionId = roomSerivce.initializeSession(roomRequest.getRoomName());
-        System.out.println("sessionId 이니셜라이즈 = " + sessionId);
+        String sessionId = roomSerivce.initializeSession(params);
         return new ResponseEntity<>(sessionId, HttpStatus.OK);
 	}
 

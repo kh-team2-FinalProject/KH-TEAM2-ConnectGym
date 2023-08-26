@@ -1,11 +1,10 @@
 var OV;
 var session;
-var myRoomName =
 
 /* OPENVIDU METHODS */
    window.onload = () => {
+    joinSession(myRoomName,userName);
 
-   joinSession(myRoomName,userName);
    }
 
 function joinSession(myRoomName, userName){
@@ -58,9 +57,9 @@ function joinSession(myRoomName, userName){
 			.then(() => {
 
 				// --- 5) Set page layout for active call ---
-				document.getElementById('lesson-title').innerText = myRoomName;
+				/*document.getElementById('lesson-title').innerText = myRoomName;*/
 //				document.getElementById('join').style.display = 'none';
-				document.getElementById('lessonRoom').style.display = 'block';
+				/*document.getElementById('lessonRoom').style.display = 'block';*/
 
 				// --- 6) Get your own camera stream with the desired properties ---
 
@@ -105,13 +104,17 @@ function leaveSession() {
     // 세션을 떠날 때 HTML 비디오가 자동으로 제거됨
 	removeAllUserData();
 
+	history.go(-1);
+
 	// Back to 'Join session' page
 //	document.getElementById('join').style.display = 'block';
-	document.getElementById('lessonRoom').style.display = 'none';
+//	document.getElementById('lessonRoom').style.display = 'none';
 }
 
 window.onbeforeunload = function () {
-	if (session) session.disconnect();
+	if (session){
+	session.disconnect();
+	}
 };
 
 
@@ -162,18 +165,19 @@ function addClickListener(videoElement, userData) {
     videoElement.addEventListener('click', function () {
         var mainVideo = $('#main-video video').get(0);
         if (mainVideo.srcObject !== videoElement.srcObject) {
-            $('#video-container').fadeOut("fast"); // Hide the video in video-container
+            $('#video-container').fadeOut("fast"); // video-container의 비디오 숨김
             $('#main-video').fadeOut("fast", () => {
                 $('#main-video p').html(userData);
                 mainVideo.srcObject = videoElement.srcObject;
                 $('#main-video').fadeIn("fast", () => {
-                    // Show the video in main-video and update the source
-                    $('#video-container').fadeIn("fast"); // Show the video in video-container
+                    // main-video에 비디오를 보여주고 소스 업데이트
+                    $('#video-container').fadeIn("fast"); // video-container의 비디오 보여줌
                 });
             });
         }
     });
 }
+
 /* 원본
 function addClickListener(videoElement, userData) {
 	videoElement.addEventListener('click', function () {
@@ -203,7 +207,7 @@ function createSession(roomName) {
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			type: "POST",
-			url: "/room/enter/id",
+			url: "/room/enter/init",
 			data: JSON.stringify({ roomName : roomName }),
 			headers: { "Content-Type": "application/json" },
 			success: response => resolve(response),

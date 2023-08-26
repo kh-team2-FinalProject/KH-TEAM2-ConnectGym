@@ -59,12 +59,10 @@ public class RoomService {
 
 
     // 룸 입장을 위한 세션 생성
-    public String initializeSession(String lessonRoomName)
+    public String initializeSession(Map<String, Object> params)
         throws OpenViduJavaClientException, OpenViduHttpException {
 
-        SessionProperties properties = new SessionProperties.Builder()
-            .customSessionId(lessonRoomName)
-            .build();
+        SessionProperties properties = SessionProperties.fromJson(params).build();
         Session session = openvidu.createSession(properties);
         return session.getSessionId();
     }

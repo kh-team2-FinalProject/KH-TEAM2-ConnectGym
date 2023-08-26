@@ -2,32 +2,47 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{/css/enterroom.css}">
+</th:block>
+
 <th:block layout:fragment="script">
     <script th:src="@{/js/openvidu-browser-2.28.0.js}"></script>
     <script th:inline="javascript">
-    var myRoomName = [[${lessonTitle}]];
+    var myRoomName = [[${roomName}]];
+    console.log("myroomname",myRoomName);
     var userName = [[${member.userName}]];
-
     </script>
     <script th:src="@{/js/app.js}"></script>
+
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
 
-    <div id="lessonRoom" style="display: none;">
-        <div id="session-header">
-            <h1 id="lesson-title"></h1>
-            <button type="button" class="room-button" id="buttonLeaveSession" onmouseup="leaveSession()">운동 종료</button>
+
+    <div class="lessonroom_container">
+        <div class="lessonroom_top">
+            <div class="lroom-title" th:text="${roomName}"></div>
+            <button type="button" class="lroom-button" id="buttonLeaveSession" onmouseup="leaveSession()">Finish!
+            </button>
         </div>
-        <div id="main-video" class="main-video">
-            <p></p>
-            <video autoplay playsinline="true"></video>
+
+
+        <div class="lessonroom_content">
+        <div class="loader">
         </div>
-        <div class="room-divider"></div>
-        <div id="video-container" class="video-container"></div>
+            <div id="main-video" class="main-video">
+
+                <video autoplay playsinline="true"></video>
+                <p></p>
+            </div>
+
+            <div id="video-container" class="video-container"></div>
+        </div>
     </div>
-    </div>
+
+
 
 </th:block>
 

@@ -39,6 +39,8 @@ no int primary key auto_increment,
 trainer_no int references trainers(no),
 content varchar(50)
 );
+
+# 수업 요일, 수업 시간, 수업 횟수 컬럼 필요
 create table lessons (
 	no int primary key auto_increment,
   title varchar(50) not null,
@@ -51,6 +53,8 @@ create table lessons (
 );
 
 drop table enroll_detail;
+
+
 create table enroll_detail(
 	no int primary key auto_increment,
     user_no int references users(no),
