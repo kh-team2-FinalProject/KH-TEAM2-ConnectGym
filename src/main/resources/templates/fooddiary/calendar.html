@@ -10,11 +10,9 @@
 <th:block layout:fragment="foodD">
     <div class="foodD_calendar">
         <div class="calendar_header">
-            <button class="foodD_calendar-button" onclick="goToPreviousMonth()"
-                    th:text="|${yearMonth.getYear()} ${yearMonth.getMonth().getValue()-1}|"> Prev</button>
-            <h1 th:id="monthYear" th:text="|${yearMonth.getYear()} ${yearMonth.getMonth().getValue()}|"></h1>
-            <button class="foodD_calendar-button" onclick="goToNextMonth()"
-                    th:text="|${yearMonth.getYear()} ${yearMonth.getMonth().getValue()+1}|">Next &gt;</button>
+            <button class="foodD_calendar-button" onclick="goToPreviousMonth()"> << Prev </button>
+            <h1 th:id="monthYear" th:text="|${yearMonth.getYear()} . ${yearMonth.getMonth().getValue()} |"></h1>
+            <button class="foodD_calendar-button" onclick="goToNextMonth()" > Next >> </button>
         </div>
         <table class="foodD_calendar_table">
             <thead>
