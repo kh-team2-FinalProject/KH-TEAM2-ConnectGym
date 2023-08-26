@@ -167,7 +167,7 @@ $('#join_request_btn').click(function(){
             email: email
         },
         success: function(data){
-            checkInput.attr('disabled', false);
+            checkInput.attr('readonly', false);
             code=data;
             alert('인증번호가 전송되었습니다.');
         }
@@ -185,7 +185,7 @@ $('#join_request_btn').click(function(){
 			$('#email02').attr('readonly',true);
 			$('#email02').attr('onFocus', 'this.initialSelect = this.selectedIndex');
 	        $('#email02').attr('onChange', 'this.selectedIndex = this.initialSelect');
-            $('#checkEmail').attr('disabled', 'disabled');
+            $('#checkEmail').attr('readonly', true);
 
 	        $('#join_auth_btn').attr('value', true);
 		}else{
@@ -207,7 +207,8 @@ function joinform_check(){
     var InputTel = document.getElementById("InputTel");
     var userAddress = document.getElementById("userAddress");
     var userEmail = document.getElementById("userEmail");
-    var check = document.getElementById("check");
+    var check1 = document.getElementById("check1");
+    var check2 = document.getElementById("check2");
 
     var returnEmail = document.getElementById("email01");
 
@@ -278,8 +279,14 @@ function joinform_check(){
         return false;
     };
 
-    if(!check.checked){
-        alert("약관 동의를 체크하세요.");
+    if(!check1.checked){
+        alert("약관 동의를 체크해주세요.");
+        check.focus();
+        return false;
+    };
+
+    if(!check2.checked){
+        alert("약관 동의를 체크해주세요.");
         check.focus();
         return false;
     };
