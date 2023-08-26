@@ -56,11 +56,26 @@ public class OrderService {
             .success(false)
             .build();
 
+        // 레슨 번호 리스트가 없는 상황을 위해 예외를 처리한다.
+        if (lessonNolist == null) {
+            responseDto.setMessage("잘못된 요청입니다.");
+            return responseDto;
+        }
+
         // 회원 정보를 조회한다.
         Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
 
         if (member == null) {
             responseDto.setMessage("해당 회원을 찾을 수 없습니다.");
+            return responseDto;
+        }
+
+        // DB에서 해당 강의 리스트를 가져온다.
+        List<Lesson> lessons = this.lessonRepository.findAllById(lessonNolist);
+
+        // 해당 강의 리스트가 존재하지 않거나 크기가 일치하지 않으면 객체를 반환한다.
+        if (lessons.isEmpty() || lessonNolist.size() != lessons.size()) {
+            responseDto.setMessage("존재하지 않는 레슨이 포함되어 있어 진행할 수 없습니다.");
             return responseDto;
         }
 
@@ -70,15 +85,6 @@ public class OrderService {
         // 결제한 내역이 존재하면 거부 메시지를 설정한 후 객체를 반환한다.
         if (lessonResult) {
             responseDto.setMessage("이미 결제한 강의가 포함되어 있어 결제할 수 없습니다.");
-            return responseDto;
-        }
-
-        // DB에서 해당 강의 리스트를 가져온다.
-        List<Lesson> lessons = this.lessonRepository.findAllById(lessonNolist);
-
-        // 해당 강의 리스트가 존재하지 않으면 객체를 반환한다.
-        if (lessons.isEmpty()) {
-            responseDto.setMessage("잘못된 요청입니다.");
             return responseDto;
         }
 
@@ -175,8 +181,7 @@ public class OrderService {
      * 주문 진행 중일 때 실행되는 메소드
      */
     @Transactional
-    public OrderProcessResponseDto processOrder(
-        OrderProcessRequestDto requestDto) {
+    public OrderProcessResponseDto processOrder(OrderProcessRequestDto requestDto) {
         OrderProcessResponseDto returnDto = OrderProcessResponseDto.builder()
             .success(false)
             .url("/order/fail")
@@ -186,7 +191,7 @@ public class OrderService {
         String merchantUid = requestDto.getSMerchantUid();
         Long totalPrice = requestDto.getSTotalPrice();
         List<Long> lessonNolist = requestDto.getSLessonNolist();
-        boolean isApi = requestDto.isPC();
+        boolean isApi = requestDto.isApi();
         String impUid = requestDto.getImpUid();
         String errorMsg = requestDto.getErrorMsg();
 
@@ -195,18 +200,29 @@ public class OrderService {
             return returnDto;
         }
 
+        // 레슨 번호가 들어있는 리스트를 통해서 DB에서 레슨 목록을 받아온다.
         List<Lesson> lessonList = this.lessonRepository.findAllById(lessonNolist);
 
+        // 레슨 번호 리스트와 DB에서 가져온 레슨의 개수를 비교해서 다르면 실패 메시지를 반환한다.
         if (lessonNolist.size() != lessonList.size()) {
             log.error("가져온 lesson과 lessonNo 리스트의 사이즈가 다릅니다");
             returnDto.setMessage("내부 서버 문제로 인해 결제에 실패했습니다.");
             return returnDto;
         }
 
+        // 로그인되어 있는 사용자 ID를 이용해서 사용자 정보를 DB에서 꺼내온다.
         Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+
+        if (member == null) {
+            log.error("DB에서 사용자 정보를 찾을 수 없습니다.");
+            returnDto.setMessage("사용자 정보를 찾을 수 없습니다.");
+            return returnDto;
+        }
+
         Payment payment = null;
 
         try {
+            // 포트원 서버로 주문 번호를 전송해 해당 결제건을 받아온다.
             payment = this.iamportClient.paymentByImpUid(impUid).getResponse();
         } catch (IamportResponseException e) {
             returnDto.setMessage("결제에 실패했습니다. 서버 메시지: " + errorMsg);
@@ -218,16 +234,18 @@ public class OrderService {
             return returnDto;
         }
 
+        // 포트원 서버에서 가져온 결제건과 요청한 결제건이 일치하지 않거나 금액이 일치하지 않으면 실패 메시지를 반환한다.
         if (!payment.getMerchantUid().equals(merchantUid)
             || !payment.getAmount().equals(BigDecimal.valueOf(totalPrice))) {
             returnDto.setMessage("검증 실패");
             return returnDto;
         }
 
+        // DTO에 URL을 설정해 준다.
         String tempUrl = "/order/complete?orderId=" + merchantUid;
         returnDto.setUrl(isApi ? tempUrl : "redirect:" + tempUrl);
 
-        // DB에 저장
+        // DB에 주문을 저장하기 위해 객체를 생성한다.
         Order newOrder = Order.builder()
             .no(payment.getMerchantUid())
             .member(member)
@@ -272,7 +290,7 @@ public class OrderService {
         return ResponseEntity.internalServerError().build();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public OrderCompleteResponseDto completeOrder(Long loginMemberId, String orderId) {
         OrderCompleteResponseDto responseDto = OrderCompleteResponseDto.builder()
             .success(false)
