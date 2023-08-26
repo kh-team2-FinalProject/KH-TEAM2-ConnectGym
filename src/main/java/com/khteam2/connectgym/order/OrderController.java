@@ -73,7 +73,7 @@ public class OrderController {
             .impSuccess(processDto.getImp_success())
             .errorCode(processDto.getError_code())
             .errorMsg(processDto.getError_msg())
-            .isPC(false)
+            .isApi(false)
             .build();
 
         OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto);
