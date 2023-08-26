@@ -1,4 +1,8 @@
 
+.lessonlist{
+    margin-top:80px;
+}
+
 /*============강좌 카드 섹션========*/
 
 .lessonlist_title {
@@ -10,6 +14,7 @@
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+
 }
 
 .l_card {

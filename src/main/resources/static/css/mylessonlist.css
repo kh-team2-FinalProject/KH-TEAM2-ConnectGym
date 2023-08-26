@@ -2,7 +2,8 @@
 
 
 .mylessonlist-container{
-
+display:flex;
+justify-content:cneter;
 }
 
 .mylessonlist-menu-title{
@@ -10,16 +11,15 @@ width:100%;
 /*background-color:#C9D3D4;*/
 font-size:28pt;
 font-weight:900;
-text-align:center;
+/*text-align:center;*/
 padding : 20px 0px;
-
 
 }
 
 #mylesson-list{
 display:flex;
 flex-direction: column;
-align-items:center;
+/*align-items:center;*/
 color : black;
 margin: 0px 10px;
 }
@@ -31,14 +31,16 @@ margin: 0px 10px;
 
 /* 강좌별 div (정보랑 버튼) */
 .mylesson-item{
-background-color:#ffffff;
+/*background-color:silver;*/
 border-radius: 20px;
+border:1px solid gray;
 display:flex;
-width:80%;
+width:100%;
 justify-content: space-between;
 align-items:center;
 padding: 30px 30px;
 margin:30px 0px 0px 0px;
+box-sizing: border-box;
 }
 
 /* 강좌별 div 안 강좌명,선생님 박스 */

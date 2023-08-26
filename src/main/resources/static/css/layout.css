@@ -1,13 +1,15 @@
 /*@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");*/
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@300&display=swap');
 /*============공통===========*/
 
 
 body {
-    background-color: #0E181A;
+    background-color: #0E1414;
     margin: 0px;
     color: #0e181a;
+    font-family: 'Changa', sans-serif;
 }
 
 a {
