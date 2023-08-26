@@ -26,7 +26,8 @@
  font-family: 'Staatliches', cursive;
  text-transform: uppercase;
  font-size: 40pt;
- color: white;
+ color:#A3DC10;
+  text-shadow: 2px 2px 2px #f8fff8;
  letter-spacing: 15px;
  height:40%;
 
@@ -40,7 +41,7 @@
 /*마이페이지 본문 HEAD*/
 .myp_side_page{
     background-color:white;
-    padding: 0px 50px;
+    padding: 50px 50px;
     flex:8;
     min-height:80vh;
     border-radius:10px;
@@ -61,8 +62,9 @@
   position: fixed;
 }
 
-.myp_sidebar .myp_navbar {
+.myp_navbar {
   font-family: "Open Sans", sans-serif;
+  position: static;
   top: 2rem;
   left: 1rem;
   background: white;
@@ -90,7 +92,7 @@
   opacity: 0;
   pointer-events: none;
   color: #A3DC10;
-  background: #fff;
+  background: #ffffff;
   padding: 0.75rem;
   transition: 250ms ease all;
   border:1px solid #A3DC10;
@@ -99,13 +101,11 @@
   font-weight:bold;
   letter-spacing:2px;
 }
-.myp_navbar__link.active{
-  color: #a3dc10;
-}
 
 .myp_navbar__link:hover {
   color: #A3DC10;
 }
+
 .myp_navbar:not(:hover) .myp_navbar__link:focus span, .myp_navbar__link:hover span {
   opacity: 1;
   transform: translate(0);
@@ -113,19 +113,21 @@
 .myp_navbar__menu {
   position: relative;
 }
+
 .myp_navbar__item:last-child:before {
   content: "";
   position: absolute;
   opacity: 0;
   z-index: -1;
   top: 0;
-  left: 1rem;
+  left: 3rem;
   width: 3.5rem;
   height: 3.5rem;
-  background: #406ff3;
+  background: #A3DC10;
   border-radius: 17.5px;
   transition: 250ms cubic-bezier(1, 0.2, 0.1, 1.2) all;
 }
+
 .myp_navbar__item:first-child:nth-last-child(1):hover ~ li:last-child:before, .myp_navbar__item:first-child:nth-last-child(1) ~ li:hover ~ li:last-child:before {
   opacity: 1;
 }
@@ -477,4 +479,8 @@
     transform: scale(1, 1);
   }
 }
+
+/*아이콘 움직이기(1~6)*/
+
+
 /*마이페이지 사이드바 END*/
