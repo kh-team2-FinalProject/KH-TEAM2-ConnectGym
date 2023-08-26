@@ -5,7 +5,7 @@
 
 .lessonDetail_banner {
     height: 300px;
-    background-color: white;
+    background-color: #0E181A;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,9 +14,18 @@
 .lessonDetail_banner_title {
     font-family: 'Staatliches', cursive;
     text-transform: uppercase;
-    font-size: 100pt;
-    color: black;
-    letter-spacing: 10px;
+    font-size: 90pt;
+    color: #0e181a;
+    letter-spacing: 15px;
+    height: 40%;
+}
+
+.lessonDetail_banner_title p {
+    margin: 0;
+    border: 5px solid;
+    padding: 0px 80px;
+    box-shadow: 10px 10px 30px 1px #535151;
+    background-color: rgba(223, 223, 223, 0.3);
 }
 
 .lessonDetail_leftContainer {
@@ -37,6 +46,8 @@
     padding: 2vw;
     margin-left: 10vw;
     width: 50vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 
 
 }
@@ -114,30 +125,127 @@
 .lessonDetail_rightContainer {
     background: white;
     display: flex;
-    width: 20vw;
+    width: 30vw;
     height: 60vh;
-    position: relative;
+    /*position: relative;*/
+    /*align-items: center;*/
+    flex-direction: column;
 }
 
-.lessonDetail_orderBox {
-    background: white;
+.lessonDetail_trainerBox {
+    width: 20vw;
+    margin-top: 5vh;
     border: 2px solid black;
-    /*width: 20vw;*/
-    /*height: 50vh;*/
     border-radius: 5px;
-    position: fixed;
     text-align: center;
     justify-content: center;
-    align-items: center;
-    color: black;
+    display: flex;
+    border-collapse: collapse;
 }
 
-.lessonDetail_orderBox thead {
-    font-size: 14px;
+.ld_trainerBox_table {
+    width: 100vw;
+    box-sizing: content-box;
+    padding: 2vh;
+}
+
+.ld_trainerBox_table tr {
+    width: 100vw;
+    height: 6vh;
+    margin-top: 1vh;
+}
+
+.ld_trainerBox_table img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+.ld_trainer_like_btn {
+    padding: 8px 8px;
+    background-color: #A3DC10;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    width: 90px;
     font-weight: bold;
-    letter-spacing: 2px;
+    transition: background-color 0.3s; /* Add transition for background */
+    /*opacity: 0.8;*/
+    align-items: center;
+    letter-spacing: 1px;
 }
 
-.lessonDetail_orderBox table {
-    padding: 2vw;
+.ld_trainer_like_btn:hover {
+    background-color: rgba(163, 220, 16, 0.6);
 }
+
+.ld_trainer_like_btn:active {
+    background-color: rgba(163, 220, 16, 0.8);
+}
+
+
+.lessonDetail_orderBox {
+    width: 20vw;
+    margin-top: 3vh;
+    border-radius: 5px;
+    border: 2px solid black;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    border-collapse: collapse;
+}
+
+.ld_orderBox_table {
+    width: 100vw;
+    box-sizing: content-box;
+    padding: 2vh;
+}
+
+.ld_orderBox_table tr {
+    width: 100vw;
+    height: 6vh;
+    margin-top: 1vh;
+}
+
+.lessonDetail_btn {
+    background-color: #A3DC10;
+    position: relative;
+    display: inline-block;
+    /*크기 지정*/
+    width: 10vw;
+    font-size: 16px;
+    font-family: 'Black Ops One', cursive;
+    padding: 7px 7px;
+    color: white;
+    border: 0px;
+    border-radius: 6px;
+    text-align: center;
+    transition: top .01s linear;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+
+    box-shadow: 0 0 0 1px #A3DC10 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 8px 0 0 #81BC12,
+    0 8px 0 1px rgba(0, 0, 0, .4),
+    0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+.lessonDetail_btn:active {
+    top: 9px;
+    border: 0px;
+    box-shadow: 0 0 0 1px #A3DC10 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.lessonDetail_btn:hover {
+    background-color: #A7D145;
+}
+
+.ld_btn_tr {
+    margin-top: 2vh;
+}
+
