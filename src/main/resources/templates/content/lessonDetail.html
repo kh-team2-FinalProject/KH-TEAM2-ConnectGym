@@ -19,7 +19,7 @@
                     <li class="lessonDetail_profile">
                         <div class="lessonDetail_profile_info">
                             <img th:src="@{/images/김계란.png}" alt="Profile Picture">
-                            <span class="user_id">사용자 아이디</span>
+                            <span class="user_id">트레이너 아이디</span>
                         </div>
                     </li>
 
@@ -43,35 +43,59 @@
         </div>
 
         <div class="lessonDetail_rightContainer">
+
+            <div class="lessonDetail_trainerBox">
+                <table class="ld_trainerBox_table">
+                    <tr>
+                        <td><img th:src="@{/images/김계란.png}" alt="Profile Picture"></td>
+                        <td>트레이너 아이디</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <button class="ld_trainer_like_btn">like</button>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
             <div class="lessonDetail_orderBox">
-                <table>
+                <table class="ld_orderBox_table">
                     <thead>
                     <tr>
-                        <th colspan="2">order</th>
+                        <th colspan="2">order<br></th>
                     </tr>
 
                     </thead>
                     <tr>
-                        <td>결제금액</td>
-                        <td>100000원</td>
+                        <td><br>결제금액</td>
+                        <td><br>100000원</td>
                     </tr>
                     <tr>
                         <td>할인금액</td>
                         <td>0원</td>
                     </tr>
                     <tr>
+                        <td colspan="2">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>총금액</td>
                         <td>100000원</td>
                     </tr>
-                    <tr>
+
+                    <tr class="ld_btn_tr">
                         <td colspan="2">
+                            <br>
                             <button class="lessonDetail_btn" th:href="@{/order}">CONNECT</button>
+                            <br>
+                            <br>
                         </td>
 
                     </tr>
                 </table>
             </div>
-
         </div>
     </div>
 
