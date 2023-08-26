@@ -2,7 +2,6 @@ package com.khteam2.connectgym.room;
 
 import com.khteam2.connectgym.enroll.EnrollDetail;
 import com.khteam2.connectgym.enroll.EnrollRepository;
-import com.khteam2.connectgym.room.dto.RoomRequest;
 import io.openvidu.java.client.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -61,23 +60,20 @@ public class RoomService {
     // 룸 입장을 위한 세션 생성
     public String initializeSession(Map<String, Object> params)
         throws OpenViduJavaClientException, OpenViduHttpException {
-
         SessionProperties properties = SessionProperties.fromJson(params).build();
         Session session = openvidu.createSession(properties);
         return session.getSessionId();
     }
 
     // 룸 입장
-    public String createConnection(String sessionId, RoomRequest roomRequest)
-        throws OpenViduJavaClientException, OpenViduHttpException {
+    public String createConnection(String sessionId, Map<String, Object> params) throws Exception {
+
         Session session = openvidu.getActiveSession(sessionId);
         if (session == null) {
             return null;
         }
 
-        ConnectionProperties properties = new ConnectionProperties.Builder()
-            .data(roomRequest.getRoomKey()) // Assuming roomKey corresponds to data
-            .build();
+        ConnectionProperties properties = ConnectionProperties.fromJson(params).build();
         Connection connection = session.createConnection(properties);
         return connection.getToken();
     }

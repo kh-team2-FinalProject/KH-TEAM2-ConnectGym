@@ -3,6 +3,7 @@ package com.khteam2.connectgym.room;
 
 import com.khteam2.connectgym.enroll.EnrollDetail;
 import com.khteam2.connectgym.room.dto.RoomRequest;
+import io.openvidu.java.client.OpenViduException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,20 +43,19 @@ public class RoomApiController {
 
     // 룸 입장
     @PostMapping("/enter/{sessionId}/connection")
-    public ResponseEntity<String> createConnection(@PathVariable("sessionId") String sessionId,
-                                                   @RequestBody RoomRequest roomRequest) {
+    public ResponseEntity<String> createConnection(@PathVariable String sessionId,
+                                                   @RequestBody Map<String, Object> params) {
         try {
-            String connectionToken = roomSerivce.createConnection(sessionId, roomRequest);
-
-            if (connectionToken != null) {
-                return new ResponseEntity<>(connectionToken, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (OpenViduJavaClientException | OpenViduHttpException e) {
+            System.out.println("sessionId = " + sessionId);
+            System.out.println("params = " + params);
+            String token = roomSerivce.createConnection(sessionId, params);
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 
 
 }

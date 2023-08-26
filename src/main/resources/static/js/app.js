@@ -3,11 +3,11 @@ var session;
 
 /* OPENVIDU METHODS */
    window.onload = () => {
-    joinSession(myRoomName,userName);
+    joinSession();
 
    }
 
-function joinSession(myRoomName, userName){
+function joinSession(){
 
 	OV = new OpenVidu();
 
@@ -78,7 +78,7 @@ function joinSession(myRoomName, userName){
 
 				// When our HTML video has been added to DOM...
 				publisher.on('videoElementCreated', function (event) {
-					initMainVideo(event.element, userName);
+					/*initMainVideo(event.element, userName);*/
 					appendUserData(event.element, userName);
 					event.element['muted'] = true;
 				});
