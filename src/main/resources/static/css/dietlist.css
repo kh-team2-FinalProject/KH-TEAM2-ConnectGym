@@ -1,10 +1,14 @@
+.Diet{
+    margin-top: 20px;
+}
+
 /* 식단 박스 */
 .Diet{
     display: grid;
     width: 100%;
     height: 650px;
     font-family: Arial, sans-serif;
-    grid-template-columns:45% 45%;
+    grid-template-columns:43% 43%;
     grid-column-gap: 100px;
     justify-content: center;
     align-items: center;
@@ -24,28 +28,27 @@
     border-radius: 20px;
     padding: 10px;
     box-sizing:inherit;
-
-
 }
 
-/* 식단 개별 테이블구조 */
-.table{
+/* 식단 개별 테이블구조 , 팝업 데이터테이블 구조 */
+.table, .pop_content2{
     display: grid;
     /* Flexbox 대신 Grid 레이아웃 사용 <자식 태그> food_name, sub text-align 적용
      */
-    grid-template-columns: 1fr auto auto auto auto; /* 각 열의 너비 설정 */
+    padding: 5px;
+    grid-template-columns: repeat(auto-fill, 2.5fr 1fr 1fr 1fr 1fr); /* 각 열의 너비 설정 */
     align-items: center;
 }
 
 /* 영양성분명 */
-
- .food_name{
-    text-align: left;
-}
- .sub{
+ .sub, .sub1{
     text-align: right;
  }
-td{
+ .food_name{
+    text-align: left;
+ }
+
+.meal_box td, .foodselect_Tbl td{
     padding: 10px;
     color: black;
     font-weight:bold;
@@ -109,10 +112,17 @@ td{
 .pop-content {
     width: 500px;
     height: 700px;
-    background-color: white;
+    background-color: #e6ebe1;
+    color: #5f797c;
     padding: 20px;
     border-radius: 10px;
 }
+
+/* 팝업 내 음식 데이터 테이블 */
+.pop_content2{
+    width:83%;
+}
+
 
 /* 닫기 버튼 */
 #closeBtn{
@@ -126,9 +136,28 @@ justify-items: end
 
 #popInput{
 
- width: 100%;
+ width: 70%;
  height: 30px;
+ padding: 10px;
  border-radius: 10px;
+}
 
+.pop-content input, button{
+    display: inline-block;
+    vertical-align: middle;
+}
 
+/* 팝업 data 들어가는 table 정리
+   .foodselect_Tbl
+
+.foodselect_Tbl td{
+ td 기본적으로 자동 정렬 margin 안 먹음 display : block
+    padding:10px;
+    text-align: center;
+}
+*/
+
+.food_name1{
+    display: block;
+    margin-right: 20px;
 }

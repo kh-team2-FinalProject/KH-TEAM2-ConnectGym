@@ -33,6 +33,7 @@
     <!-- input box -->
 
     <div class="Diet">
+
         <!-- 아침 메뉴 -->
         <div class="Diet1">
             <h3>아침</h3>
@@ -228,6 +229,22 @@
             <h1 th:text="${mealTime}">time 식사</h1>
             <input id="popInput" type="text" placeholder="음식 찾기" />
             <button id="closeBtn">닫기</button>
+            <div class="pop_content2">
+                <table class="foodselect_Tbl" cellpadding="0" cellsacing="0">
+                    <tbody>
+                    <tr style="height:36px">
+                        <td class="food_name1" title="식품명 :">식품명 </td>
+                        <td class="sub1" title="총 아침 식사지방 : g1">지방</td>
+                        <td class="sub1" title="총 아침 식사탄수화물 : g1">탄수화물</td>
+                        <td class="sub1" title="총 아침 식사단백질 : g1">단백질</td>
+                        <td class="sub1" title="총 아침 식사칼로리 : kcal1">칼로리</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
         </div>
     </div>
 
