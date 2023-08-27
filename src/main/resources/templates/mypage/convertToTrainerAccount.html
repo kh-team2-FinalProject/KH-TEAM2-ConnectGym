@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{content/mypages}"
+    xmlns:layout="http://www.w3.org/1999/xhtml"
+>
+    <th:block layout:fragment="script"></th:block>
+
+    <th:block layout:fragment="title">
+        <title>마이페이지 > 트레이너 계정 전환</title>
+    </th:block>
+
+    <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+    <th:block layout:fragment="mypage">
+        <link rel="stylesheet" th:href="@{/css/convertToTrainerAccount.css}" />
+        <form id="convertToTrainerAccount_wrap" name="convertForm">
+            <label
+                for="convertToTrainerAccount_photo_container_input"
+                class="convertToTrainerAccount_photo_container"
+            >
+                <input
+                    id="convertToTrainerAccount_photo_container_input"
+                    name="profilePhoto"
+                    type="file"
+                    accept="image/*"
+                />
+                <img
+                    class="convertToTrainerAccount_photo"
+                    th:src="@{/images/icons/mdi/account-outline.svg}"
+                    width="150"
+                    height="150"
+                />
+            </label>
+            <div class="convertToTrainerAccount_description_container">
+                <textarea
+                    name="description"
+                    rows="5"
+                    placeholder="자기소개 입력..."
+                    class="_js_textarea_design_1 convertToTrainerAccount_description_textarea"
+                ></textarea>
+            </div>
+            <div class="convertToTrainerAccount_certificate_container">
+                <div class="convertToTrainerAccount_certificate_top">
+                    <h2>자격증</h2>
+                    <div
+                        class="convertToTrainerAccount_certificate_add_button_box"
+                    >
+                        <button
+                            type="button"
+                            class="_js_button_reset convertToTrainerAccount_certificate_add_button"
+                        >
+                            <img
+                                th:src="@{/images/icons/mdi/plus-box.svg}"
+                                width="30"
+                                height="30"
+                            />
+                        </button>
+                    </div>
+                </div>
+                <div class="convertToTrainerAccount_certificate_list"></div>
+            </div>
+            <div class="convertToTrainerAccount_readme_container">
+                <div class="convertToTrainerAccount_readme_title_box">
+                    <img
+                        th:src="@{/images/icons/mdi/alert-outline.svg}"
+                        width="30"
+                        height="30"
+                    />
+                    <div class="convertToTrainerAccount_readme_title">
+                        주의!
+                    </div>
+                </div>
+                <div class="convertToTrainerAccount_readme_content_box">
+                    <div>
+                        트레이너 회원으로 전환한 이후 일반 회원으로 재전환할 수
+                        없습니다.
+                    </div>
+                </div>
+            </div>
+            <div class="convertToTrainerAccount_agreement_container">
+                <div>
+                    <label>
+                        <input type="checkbox">
+                        <span>위 안내 사항을 확인했으며 동의합니다.</span>
+                    </label>
+                </div>
+            </div>
+            <div class="convertToTrainerAccount_convert_button_container">
+                <button type="submit" class="_js_button_reset _js_button_1 convertToTrainerAccount_convert_button">
+                    회원 전환
+                </button>
+            </div>
+        </form>
+        <script th:src="@{/js/convertToTrainerAccount.js}"></script>
+    </th:block>
+</html>
