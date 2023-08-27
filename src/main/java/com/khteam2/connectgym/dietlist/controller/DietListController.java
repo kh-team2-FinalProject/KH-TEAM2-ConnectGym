@@ -1,4 +1,4 @@
-package com.khteam2.connectgym.fooddiary;
+package com.khteam2.connectgym.dietlist.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

@@ -44,6 +44,8 @@
                         <tbody>
                         <tr style="height:36px">
 
+                            <td class="food_name" title="식품">식품명 </td>
+
                             <td class="sub" title="총 아침 식사지방 : g">지방</td>
 
                             <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
@@ -52,15 +54,25 @@
 
                             <td class="sub" title="총 아침 식사칼로리 : kcal">칼로리</td>
 
-                            <td width="10">&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
+
+                        <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
+                        <tr th:each="food : ${foods}">
+                            <td th:text="${food.fat}">지방값</td>
+                            <td th:text="${food.carbohydrates}">탄수화물값</td>
+                            <td th:text="${food.protein}">단백질값</td>
+                            <td th:text="${food.calories}">칼로리값</td>
+                            <td>&nbsp;</td>
+                        </tr>
+
 
                         </tbody>
 
                     </table>
                 </div>
                 <div class="btn">
-                    <button class="btn1" onclick="add_textbox()">+</button>
+                    <button class="btn1" onclick="openPop(meal)">+</button>
                 </div>
             </div>
         </div>
@@ -76,6 +88,8 @@
                     <table class="foodinfo_Tbl" cellpadding="0" cellsacing="0" style="position:relative;left:-2px;float:right;line-height:14px">
                         <tbody>
                         <tr style="height:36px">
+                            <td class="food_name" title="식품">식품명 </td>
+
                             <td class="sub" title="총 아침 식사지방 : g">지방</td>
 
                             <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
@@ -84,7 +98,7 @@
 
                             <td class="sub" title="총 아침 식사칼로리 : kcal">칼로리</td>
 
-                            <td width="10">&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
 
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
@@ -102,7 +116,7 @@
                 </div>
 
                 <div class="btn">
-                    <button class="btn1" onclick="add_textbox()">+</button>
+                    <button class="btn1" onclick="openPop(meal)">+</button>
                 </div>
             </div>
         </div>
@@ -119,6 +133,8 @@
                         <tbody>
                         <tr style="height:36px">
 
+                            <td class="food_name" title="식품">식품명 </td>
+
                             <td class="sub" title="총 아침 식사지방 : g">지방</td>
 
                             <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
@@ -127,8 +143,19 @@
 
                             <td class="sub" title="총 아침 식사칼로리 : kcal">칼로리</td>
 
-                            <td width="10">&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
+
+                        <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
+                        <tr th:each="food : ${foods}">
+                            <td th:text="${food.fat}">지방값</td>
+                            <td th:text="${food.carbohydrates}">탄수화물값</td>
+                            <td th:text="${food.protein}">단백질값</td>
+                            <td th:text="${food.calories}">칼로리값</td>
+                            <td>&nbsp;</td>
+                        </tr>
+
+
 
                         </tbody>
 
@@ -136,7 +163,7 @@
                 </div>
 
                 <div class="btn">
-                    <button class="btn1" onclick="add_textbox()">+</button>
+                    <button class="btn1" onclick="openPop(meal)">+</button>
                 </div>
             </div>
         </div>
@@ -154,6 +181,8 @@
                         <tbody>
                         <tr style="height:36px">
 
+                            <td class="food_name" title="식품">식품명 </td>
+
                             <td class="sub" title="총 아침 식사지방 : g">지방</td>
 
                             <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
@@ -162,8 +191,19 @@
 
                             <td class="sub" title="총 아침 식사칼로리 : kcal">칼로리</td>
 
-                            <td width="10">&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
+
+
+                        <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
+                        <tr th:each="food : ${foods}">
+                            <td th:text="${food.fat}">지방값</td>
+                            <td th:text="${food.carbohydrates}">탄수화물값</td>
+                            <td th:text="${food.protein}">단백질값</td>
+                            <td th:text="${food.calories}">칼로리값</td>
+                            <td>&nbsp;</td>
+                        </tr>
+
 
                         </tbody>
 
@@ -171,13 +211,31 @@
                 </div>
 
                 <div class="btn">
-                    <button class="btn1" onclick="add_textbox()">+</button>
+                    <button class="btn1" onclick="openPop(meal)">+</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+    <!-- 모달 팝업 -->
+    <div id="dietPopup" class="dietPop">
+        <div class="pop-content">
+            <h1 th:text="${mealTime}">time 식사</h1>
+            <input id="popInput" type="text" placeholder="음식 찾기" />
+            <button id="closeBtn">닫기</button>
+        </div>
+    </div>
+
+
+
     <script th:src="@{/js/diettitle.js}"></script>
+    <script th:src="@{/js/dietlist.js}"></script>
 </th:block>
-<script src="../js/dietlist.js"></script>
+
 </body>
 </html>
