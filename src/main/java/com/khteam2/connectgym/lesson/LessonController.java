@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-<<<<<<< HEAD
-=======
 import org.springframework.web.bind.annotation.ModelAttribute;
->>>>>>> 이채연
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -18,24 +15,23 @@ public class LessonController {
 
     @GetMapping(value = "/createLesson")
     public String createLesson(Model model) {
-<<<<<<< HEAD
+
         //배너타이틀
-        model.addAttribute("bannerTitle","create lesson");
+        model.addAttribute("bannerTitle", "create lesson");
+        //폼 호출
+        model.addAttribute("lessonForm", new Lesson());
         return "detailOrCrud/createLesson";
     }
 
     @PostMapping(value = "/createLesson")
-    public String createLesson(Model model,Lesson lesson) {
+    public String createLesson(Model model, Lesson lesson) {
         //배너타이틀
-        model.addAttribute("bannerTitle","create lesson");
+        model.addAttribute("bannerTitle", "create lesson");
 
         //service save() 호출
 
         return "detailOrCrud/createComplete";
-=======
-        model.addAttribute("lessonForm", new Lesson());
-        return "content/createLesson";
->>>>>>> 이채연
+
     }
 
     @PostMapping("/createLesson")
@@ -46,9 +42,9 @@ public class LessonController {
     }
 
     @GetMapping(value = "/lessonDetail")
-    public String lessonDetail(Model model,Lesson lesson) {
+    public String lessonDetail(Model model, Lesson lesson) {
         //배너타이틀
-        model.addAttribute("bannerTitle","lesson detail");
+        model.addAttribute("bannerTitle", "lesson detail");
         return "detailOrCrud/lessonDetail";
     }
 
