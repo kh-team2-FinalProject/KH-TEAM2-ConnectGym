@@ -1,12 +1,9 @@
 package com.khteam2.connectgym.lesson;
 
 
-import com.khteam2.connectgym.room.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,9 +14,12 @@ public class LessonService {
 
     public Lesson getLesson(Long lessonNo) {
         System.out.println("겟레슨 서비스 호출");
-       return lessonRepository.findById(lessonNo).orElse(null);
+        return lessonRepository.findById(lessonNo).orElse(null);
     }
 
-
-
+    @Transactional
+    public Long createLesson(Lesson lesson) {
+        lessonRepository.save(lesson);
+        return lesson.getNo();
+    }
 }
