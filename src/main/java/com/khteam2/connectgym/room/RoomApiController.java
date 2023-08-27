@@ -34,23 +34,37 @@ public class RoomApiController {
     }
 
     // 룸 입장을 위한 세션 생성
-	@PostMapping("/enter/init")
+/*	@PostMapping("/enter/init")
 	public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
 			throws OpenViduJavaClientException, OpenViduHttpException {
         String sessionId = roomSerivce.initializeSession(params);
+        System.out.println("params = " + params.get("roomName"));
+        System.out.println("sessionId = " + sessionId);
         return new ResponseEntity<>(sessionId, HttpStatus.OK);
-	}
+	}*/
+
+    @PostMapping("/enter/init")
+    public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
+        throws OpenViduJavaClientException, OpenViduHttpException {
+        System.out.println("룸이름: "+ params.get("customSessionId"));
+        String sessionId = roomSerivce.initializeSession(params);
+        System.out.println("sessionId 이니셜라이즈 = " + sessionId);
+        return new ResponseEntity<>(sessionId, HttpStatus.OK);
+    }
 
     // 룸 입장
     @PostMapping("/enter/{sessionId}/connection")
-    public ResponseEntity<String> createConnection(@PathVariable String sessionId,
-                                                   @RequestBody Map<String, Object> params) {
+    public ResponseEntity<String> createConnection(@PathVariable("sessionId") String sessionId,
+                                                   @RequestBody RoomRequest roomRequest) {
         try {
-            System.out.println("sessionId = " + sessionId);
-            System.out.println("params = " + params);
-            String token = roomSerivce.createConnection(sessionId, params);
-            return new ResponseEntity<>(token, HttpStatus.OK);
-        } catch (Exception e) {
+            String connectionToken = roomSerivce.createConnection(sessionId, roomRequest);
+
+            if (connectionToken != null) {
+                return new ResponseEntity<>(connectionToken, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (OpenViduJavaClientException | OpenViduHttpException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

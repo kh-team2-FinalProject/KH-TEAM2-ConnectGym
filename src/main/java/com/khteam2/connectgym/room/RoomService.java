@@ -2,6 +2,7 @@ package com.khteam2.connectgym.room;
 
 import com.khteam2.connectgym.enroll.EnrollDetail;
 import com.khteam2.connectgym.enroll.EnrollRepository;
+import com.khteam2.connectgym.room.dto.RoomRequest;
 import io.openvidu.java.client.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -18,7 +19,6 @@ import java.util.Map;
 public class RoomService {
 
     private static final Logger logger = LoggerFactory.getLogger(RoomApiController.class);
-
 
     private final EnrollRepository enrollRepository;
     private final RoomRepository roomRepository;
@@ -49,13 +49,11 @@ public class RoomService {
             } else if(room.getRoomKey() == null){
                 check = false;
             }
-
         } catch (Exception e) {
 
         }
         return check;
     }
-
 
     // 룸 입장을 위한 세션 생성
     public String initializeSession(Map<String, Object> params)
@@ -65,8 +63,19 @@ public class RoomService {
         return session.getSessionId();
     }
 
+    /*public String initializeSession(String lessonRoomName)
+        throws OpenViduJavaClientException, OpenViduHttpException {
+
+        SessionProperties properties = new SessionProperties.Builder()
+            .customSessionId(lessonRoomName)
+            .build();
+
+        Session session = openvidu.createSession(properties);
+        return session.getSessionId();
+    }*/
+
     // 룸 입장
-    public String createConnection(String sessionId, Map<String, Object> params) throws Exception {
+  /*  public String createConnection(String sessionId, Map<String, Object> params) throws Exception {
 
         Session session = openvidu.getActiveSession(sessionId);
         if (session == null) {
@@ -74,6 +83,20 @@ public class RoomService {
         }
 
         ConnectionProperties properties = ConnectionProperties.fromJson(params).build();
+        Connection connection = session.createConnection(properties);
+        return connection.getToken();
+    }*/
+
+    public String createConnection(String sessionId, RoomRequest roomRequest)
+        throws OpenViduJavaClientException, OpenViduHttpException {
+        Session session = openvidu.getActiveSession(sessionId);
+        if (session == null) {
+            return null;
+        }
+        System.out.println("roomKey = " + roomRequest.getRoomKey());
+        ConnectionProperties properties = new ConnectionProperties.Builder()
+            .data(roomRequest.getRoomKey()) // Assuming roomKey corresponds to data
+            .build();
         Connection connection = session.createConnection(properties);
         return connection.getToken();
     }

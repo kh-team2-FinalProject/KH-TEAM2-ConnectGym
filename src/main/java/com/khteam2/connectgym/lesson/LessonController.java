@@ -24,7 +24,9 @@ public class LessonController {
         //배너타이틀
         model.addAttribute("bannerTitle","create lesson");
 
-        return "detailOrCrud/createLesson";//등록완료페이지로 변경
+        //service save() 호출
+
+        return "detailOrCrud/createComplete";
     }
 
     @GetMapping(value = "/lessonDetail")

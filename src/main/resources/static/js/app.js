@@ -47,7 +47,7 @@ function joinSession(){
 
 	// --- 4) Connect to the session with a valid user token ---
 	// Get a token from the OpenVidu deployment
-	getToken(myRoomName).then(token => {
+	getToken(myRoomCode).then(token => {
 	    // 토큰 발급 확인용
 	    console.log("Token received:", token);
 
@@ -161,24 +161,8 @@ function removeAllUserData() {
 
 //비디오를 클릭했을 때 메인 비디오 영역에 해당 비디오 스트림을 크게 보여주는 부분을 처리
 
-function addClickListener(videoElement, userData) {
-    videoElement.addEventListener('click', function () {
-        var mainVideo = $('#main-video video').get(0);
-        if (mainVideo.srcObject !== videoElement.srcObject) {
-            $('#video-container').fadeOut("fast"); // video-container의 비디오 숨김
-            $('#main-video').fadeOut("fast", () => {
-                $('#main-video p').html(userData);
-                mainVideo.srcObject = videoElement.srcObject;
-                $('#main-video').fadeIn("fast", () => {
-                    // main-video에 비디오를 보여주고 소스 업데이트
-                    $('#video-container').fadeIn("fast"); // video-container의 비디오 보여줌
-                });
-            });
-        }
-    });
-}
 
-/* 원본
+/*원본*/
 function addClickListener(videoElement, userData) {
 	videoElement.addEventListener('click', function () {
 		var mainVideo = $('#main-video video').get(0);
@@ -190,7 +174,7 @@ function addClickListener(videoElement, userData) {
 			});
 		}
 	});
-}*/
+}
 
 function initMainVideo(videoElement, userData) {
 	document.querySelector('#main-video video').srcObject = videoElement.srcObject;
@@ -198,17 +182,16 @@ function initMainVideo(videoElement, userData) {
 	document.querySelector('#main-video video')['muted'] = true;
 }
 
-function getToken(myRoomName) {
-	return createSession(myRoomName).then(sessionId => createToken(sessionId));
+function getToken(myRoomCode) {
+	return createSession(myRoomCode).then(sessionId => createToken(sessionId));
 }
 
-function createSession(roomName) {
-
+function createSession(sessionId) {
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			type: "POST",
 			url: "/room/enter/init",
-			data: JSON.stringify({ roomName : roomName }),
+			data: JSON.stringify({ customSessionId: sessionId }),
 			headers: { "Content-Type": "application/json" },
 			success: response => resolve(response),
 			error: (error) => reject(error)

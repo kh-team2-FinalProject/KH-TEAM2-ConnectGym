@@ -1,4 +1,4 @@
-package com.khteam2.connectgym.room;
+package com.khteam2.connectgym.room.dto;
 
 public enum RoomStatus {
 

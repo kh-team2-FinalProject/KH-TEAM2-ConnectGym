@@ -21,6 +21,9 @@ public class Lesson {
 
     private String title;
 
+    @Column(name="title_code")
+    private String titleCode;
+
     @OneToOne
     @JoinColumn(name="trainer_no")
     private Trainer trainer;

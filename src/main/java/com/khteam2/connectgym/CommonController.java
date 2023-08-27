@@ -73,7 +73,7 @@ public class CommonController {
     @GetMapping("/enterroom/{lessonNo}")
     public String enterRoom(@PathVariable Long lessonNo, Model model) {
         Lesson lesson = lessonService.getLesson(lessonNo);
-        model.addAttribute("roomName", lesson.getTitle());
+        model.addAttribute("lesson", lesson);
         MemberResponse member =memberService.findOneMember(1L);
         model.addAttribute("member",member);
         System.out.println("엔터룸 컨트롤러 호출");

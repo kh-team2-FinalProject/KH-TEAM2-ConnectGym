@@ -1,8 +1,7 @@
 package com.khteam2.connectgym.room;
 
 import com.khteam2.connectgym.enroll.EnrollDetail;
-import com.khteam2.connectgym.lesson.Lesson;
-import com.khteam2.connectgym.order.Order;
+import com.khteam2.connectgym.room.dto.RoomStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
