@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/smallbanner}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>강사 상세</title>
+</th:block>
+
+
+<th:block layout:fragment="detailOrCrud">
+
+    <div class="trainerDetail_container">
+        <div class="trainerDetail_content">
+            <ul class="td_list">
+                <li class="td_profile">
+                    <div class="td_profile_info">
+                        <img th:src="@{/images/김계란.png}" alt="Profile Picture">
+                        <span class="user_id">사용자 아이디</span>
+                    </div>
+                </li>
+
+                <p>강좌명</p>
+
+                <li>
+                    <span id="lesson_name">강좌명 강좌명 강좌명 강좌명 강좌명 강좌명</span>
+                </li>
+
+                <p>강좌 소개</p>
+                <li>
+                    <span id="lesson_info">강좌 소개 강좌 소개 강좌 소개 강좌 소개 강좌 소개 강좌 소개</span>
+                </li>
+                <p>강사 소개</p>
+                <li>
+                    <span id="trainer_info">강사 소개 강사 소개 강사 소개 강사 소개 강사 소개 </span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+</th:block>
+
+</html>

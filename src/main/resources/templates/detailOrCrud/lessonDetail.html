@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/smallbanner}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
-<th:block layout:fragment="script">
-    <script type="text/javascript" rel="script"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<th:block layout:fragment="title">
+    <title>강좌 상세</title>
 </th:block>
 
-<th:block layout:fragment="content">
+<th:block layout:fragment="detailOrCrud">
 
-    <div class="lessonDetail_banner">
-        <div class="lessonDetail_banner_title"><p>Lesson Detail</p></div>
-    </div>
     <div class="lessonDetail_container">
         <div class="lessonDetail_leftContainer">
             <div class="lessonDetail_content">
@@ -98,7 +94,6 @@
             </div>
         </div>
     </div>
-
 </th:block>
 
 </html>
