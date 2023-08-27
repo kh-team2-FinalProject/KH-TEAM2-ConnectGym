@@ -10,7 +10,7 @@
 <th:block layout:fragment="detailOrCrud">
 
     <div class="createLesson_container">
-        <form class="createLesson_form" action="/createLesson" method="post">
+        <form role="form" class="createLesson_form" action="/createLesson" th:object="${lessonForm}" method="POST">
             <ul class="input_createLesson">
                 <li class="profile_picture">
                     <div class="profile_info">
@@ -24,9 +24,20 @@
                     </div>
                 </li>
                 <li>
-                    <label for="lesson_name">강좌명</label>
-                    <input type="text" id="lesson_name" name="lesson_name">
+                    <label th:for="title">강좌명</label>
+                    <input type="text" th:field="*{title}">
                 </li>
+                <!--
+                <li>
+                    <label th:for="price">가격</label>
+                    <input type="text" th:field="*{price}">
+                </li>
+                 <li>
+                    <label th:for="category">카테고리</label>
+                    <input type="text" th:field="*{category}">
+                </li>
+
+                -->
                 <li>
                     <label for="lesson_info">강좌 소개</label>
                     <textarea id="lesson_info" name="lesson_info"></textarea>
@@ -35,6 +46,17 @@
                     <label for="trainer_info">강사 소개</label>
                     <textarea id="trainer_info" name="trainer_info"></textarea>
                 </li>
+                <!--
+                <li>
+                    <label th:for="start_date">시작일</label>
+                    <input type="text" th:field="*{start_date}">
+                </li>
+                   <li>
+                    <label th:for="end_date">종료일</label>
+                    <input type="text" th:field="*{end_date}">
+                </li>
+                -->
+
                 <li>
                     <button class="sign_up_btn" type="submit">Sign Up</button>
                 </li>
