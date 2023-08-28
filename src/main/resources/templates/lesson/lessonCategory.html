@@ -1,0 +1,41 @@
+<!-- 레슨 카테고리로 헬스, 요가, 필라테스 강좌 화면 가져오기 (lesson/health, yoga, pilates로 나누지 않기 위함)-->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/lessonlist}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="lesson">
+    <div class="lessonlist">
+        <div id="lessonlist_wrap">
+            <div th:each="lesson : ${lessonList}" class="lesson-card">
+                <div class="l_card">
+                    <div class="l_card-inner">
+                        <div class="l_card-front">
+                            <img class="lessonlist_img" th:src="@{/lesson.lesson_img}" alt="lesson image">
+                            <h3 th:text="${lesson.title}"></h3>
+                            <h4 th:text="${lesson.trainer.username}"></h4>
+                        </div>
+                        <div class="l_card-back">
+                            <ul>
+                                <li class="l_card_title" th:text="${lesson.lesson_info}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.l_card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('.l_card-inner').style.transform = 'rotateY(180deg)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('.l_card-inner').style.transform = 'rotateY(0deg)';
+            });
+        });
+    </script>
+</th:block>
+</html>
