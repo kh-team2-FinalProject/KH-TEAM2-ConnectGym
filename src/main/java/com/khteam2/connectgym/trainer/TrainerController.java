@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class TrainerController {
 
+    @GetMapping("/convertTrainer")
+    public String convertTrainer(Model model){
+        model.addAttribute("bannerTitle", "convert");
+        return "mypage/convertToTrainerAccount";
+    }
+
     @GetMapping(value = "/trainerDetail")
     public String lessonDetail(Model model) {
         //배너타이틀

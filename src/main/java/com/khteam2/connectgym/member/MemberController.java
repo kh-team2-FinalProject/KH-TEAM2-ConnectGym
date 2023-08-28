@@ -72,5 +72,12 @@ public class MemberController {
         return mailService.joinEmail(email);
     }
 
+    @GetMapping("/myInfo")
+    public String myInfo(Model model) {
+        //배너타이틀
+        model.addAttribute("bannerTitle", "my info");
+        return "mypage/myInfo";
+    }
+
 
 }

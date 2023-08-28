@@ -13,8 +13,4 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
         + " WHERE u.`no` = :memberId", nativeQuery = true)
     List<Lesson> findByMemberNo(@Param("memberId") Long memberNo);
 
-    Long save(Lesson lesson);
-
-    Lesson find(long id);
-
 }
