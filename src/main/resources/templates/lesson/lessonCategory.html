@@ -14,7 +14,7 @@
                         <div class="l_card-front">
                             <img class="lessonlist_img" th:src="@{/lesson.lesson_img}" alt="lesson image">
                             <h3 th:text="${lesson.title}"></h3>
-                            <h4 th:text="${lesson.trainer.username}"></h4>
+                            <h4 th:text="${lesson.trainer != null ? lesson.trainer.trainerName : 'Unknown Trainer'}"></h4>
                         </div>
                         <div class="l_card-back">
                             <ul>
