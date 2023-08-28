@@ -10,7 +10,8 @@
             <div class="l_card">
                 <div class="l_card-inner">
                     <div class="l_card-front">
-                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}" alt="이미지가 지원되지 않습니다.">
+                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}"
+                             alt="이미지가 지원되지 않습니다.">
                     </div>
                     <div class="l_card-back">
                         <ul>
@@ -25,7 +26,8 @@
             <div class="l_card">
                 <div class="l_card-inner">
                     <div class="l_card-front">
-                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}" alt="이미지가 지원되지 않습니다.">
+                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}"
+                             alt="이미지가 지원되지 않습니다.">
                     </div>
                     <div class="l_card-back">
                         <ul>
@@ -40,7 +42,8 @@
             <div class="l_card">
                 <div class="l_card-inner">
                     <div class="l_card-front">
-                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}" alt="이미지가 지원되지 않습니다.">
+                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}"
+                             alt="이미지가 지원되지 않습니다.">
                     </div>
                     <div class="l_card-back">
                         <ul>
@@ -52,18 +55,35 @@
                     </div>
                 </div>
             </div>
+            <!--
+            <div th:each="lesson : ${lessonList}" class="lesson-card">
+                         <div class="l_card">
+                            <div class="l_card-inner">
+                                <div class="l_card-front">
+                                    <img class="lessonlist_img" th:src="@{/lesson.lesson_img}" alt="lesson image">
+                                    <h3 th:text="${lesson.title}"></h3>
+                                    <h4 th:text="${lesson.trainer.username}"></h4>
+                                </div>
+                                <div class="l_card-back">
+                                    <ul>
+                                        <li class="l_card_title" th:text="${lesson.lesson_info}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                                -->
         </div>
     </div>
     <script>
-                    document.querySelectorAll('.l_card').forEach(card => {
-                        card.addEventListener('mouseenter', () => {
-                            card.querySelector('.l_card-inner').style.transform = 'rotateY(180deg)';
-                        });
+        document.querySelectorAll('.l_card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('.l_card-inner').style.transform = 'rotateY(180deg)';
+            });
 
-                        card.addEventListener('mouseleave', () => {
-                            card.querySelector('.l_card-inner').style.transform = 'rotateY(0deg)';
-                        });
-                    });
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('.l_card-inner').style.transform = 'rotateY(0deg)';
+            });
+        });
     </script>
 </th:block>
 </html>
