@@ -36,7 +36,7 @@
     /* Flexbox 대신 Grid 레이아웃 사용 <자식 태그> food_name, sub text-align 적용
      */
     padding: 5px;
-    grid-template-columns: repeat(auto-fill, 2.5fr 1fr 1fr 1fr 1fr); /* 각 열의 너비 설정 */
+    grid-template-columns: repeat(auto-fill, 3fr 1fr 1fr 1fr 1fr 1fr); /* 각 열의 너비 설정 */
     align-items: center;
 }
 
@@ -44,12 +44,16 @@
  .sub, .sub1{
     text-align: right;
  }
- .food_name{
+
+ .food_name, .food_name1{
     text-align: left;
+
  }
 
-.meal_box td, .foodselect_Tbl td{
+.meal_box td{
     padding: 10px;
+}
+.meal_box td, .foodselect_Tbl td{
     color: black;
     font-weight:bold;
 }
@@ -66,7 +70,7 @@
 
 /* 아 점 저 글씨*/
 .Diet1 h3{
-    padding 5px;
+    padding: 5px;
     font-size: 25px;
     color: white;
     font-weight:bold
@@ -118,9 +122,14 @@
     border-radius: 10px;
 }
 
+.pop-content h1{
+    margin-left: 5px;
+}
+
 /* 팝업 내 음식 데이터 테이블 */
 .pop_content2{
-    width:83%;
+    width:80%;
+    font-size:15px;
 }
 
 
@@ -129,14 +138,15 @@
 padding: 10px;
 background-color: #e9f8c4;
 border-radius:20px;
-justify-items: end
+justify-items: end;
+margin: 5px;
 }
 
 /* input box */
 
 #popInput{
 
- width: 70%;
+ width: 75%;
  height: 30px;
  padding: 10px;
  border-radius: 10px;
@@ -156,8 +166,3 @@ justify-items: end
     text-align: center;
 }
 */
-
-.food_name1{
-    display: block;
-    margin-right: 20px;
-}
