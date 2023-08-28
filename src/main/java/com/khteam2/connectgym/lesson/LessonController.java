@@ -29,16 +29,9 @@ public class LessonController {
         model.addAttribute("bannerTitle", "create lesson");
 
         //service save() 호출
+        lessonService.createLesson(lesson);
 
         return "detailOrCrud/createComplete";
-
-    }
-
-    @PostMapping("/createLesson")
-    public String create(@ModelAttribute("lessonForm") Lesson lesson) {
-        lessonService.createLesson(lesson);
-        return "redirect:/content/createLesson";
-
     }
 
     @GetMapping(value = "/lessonDetail")
