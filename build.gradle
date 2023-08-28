@@ -36,6 +36,7 @@ dependencies {
     // Jasypt
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     compileOnly 'org.projectlombok:lombok'
@@ -51,7 +52,6 @@ dependencies {
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
     implementation 'org.springframework:spring-context-support:5.3.29'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-
 
 
 }
