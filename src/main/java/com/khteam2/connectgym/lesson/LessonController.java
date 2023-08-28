@@ -1,11 +1,11 @@
 package com.khteam2.connectgym.lesson;
 
 
+import com.khteam2.connectgym.lesson.dto.LessonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -24,7 +24,7 @@ public class LessonController {
     }
 
     @PostMapping(value = "/createLesson")
-    public String createLesson(Model model, Lesson lesson) {
+    public String createLesson(Model model, LessonDTO lessonDTO) {
         //배너타이틀
         model.addAttribute("bannerTitle", "create lesson");
 
