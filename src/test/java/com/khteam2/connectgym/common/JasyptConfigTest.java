@@ -1,22 +1,16 @@
-package com.khteam2.connectgym;
+package com.khteam2.connectgym.common;
 
 import org.assertj.core.api.Assertions;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 
-@SpringBootTest
-class ConnectgymApplicationTests {
+import static org.junit.jupiter.api.Assertions.*;
 
-	@Test
-	void contextLoads() {
+@TestConfiguration()
+class JasyptConfigTest {
 
-
-	}
-
-
-
-
+    
 
 }
