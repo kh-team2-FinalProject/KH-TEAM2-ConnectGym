@@ -2,12 +2,15 @@ package com.khteam2.connectgym.trainer.dto;
 
 import com.khteam2.connectgym.trainer.Licenses;
 import com.khteam2.connectgym.trainer.Trainer;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class TrainerRequestDTO {
 
     private String trainerId;
