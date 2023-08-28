@@ -1,5 +1,6 @@
 package com.khteam2.connectgym.order;
 
+import com.khteam2.connectgym.common.CommonUtil;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
@@ -24,7 +25,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -158,11 +158,11 @@ public class OrderService {
     @Transactional(readOnly = true)
     private String generateOrderNo() {
         String orderNo = null;
-        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")); // 20230820
+        String date = CommonUtil.getTodayLocalDate8(); // 20230820
 
         for (int i = 0; i < 10; i++) {
             // 1 ~ 999,999 값을 생성함
-            int randomValue = random.nextInt(999_999) + 1;
+            int randomValue = CommonUtil.generateRandomNumberInt(6);
             // 주문 번호 형식: 20230820001024 / 20230820123456
             orderNo = String.format("%s%06d", date, randomValue);
 
@@ -259,7 +259,12 @@ public class OrderService {
 
         // order_detail 테이블에 저장할 리스트를 생성한다.
         List<OrderDetail> newOrderDetailList = lessonList.stream()
-            .map(lesson -> OrderDetail.builder().lesson(lesson).order(savedOrder).build())
+            .map(lesson -> OrderDetail.builder()
+                .lesson(lesson)
+                .enrollKey(this.generateEnrollKey())
+                .order(savedOrder)
+                .build()
+            )
             .collect(Collectors.toList());
 
         // order_detail 테이블에 주문한 강의를 모두 넣는다.
@@ -268,6 +273,26 @@ public class OrderService {
         returnDto.setSuccess(true);
 
         return returnDto;
+    }
+
+    /**
+     * 새로운 enroll_key를 생성하는 메소드
+     *
+     * @return 중복되지 않는 고유한 값
+     */
+    private long generateEnrollKey() {
+        long enrollKey = -1;
+
+        for (int i = 0; i < 10_000; i++) {
+            enrollKey = CommonUtil.generateRandomNumberLong(12);
+            OrderDetail orderDetail = this.orderDetailRepository.findByEnrollKey(enrollKey);
+
+            if (orderDetail == null) {
+                break;
+            }
+        }
+
+        return enrollKey;
     }
 
     public ResponseEntity<Object> paymentCompleteWebhook(String impUid, String sMerchantUid, Long sPrice) {
