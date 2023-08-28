@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.lesson;
 
 
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,19 @@ public class LessonService {
     }
 
     @Transactional
-    public Long createLesson(Lesson lesson) {
+    public Long createLesson(LessonResponseDTO lessonResponseDTO) {
+        Lesson lesson = new Lesson();
+        lesson.setNo(lessonResponseDTO.getNo());
+        lesson.setTitle(lessonResponseDTO.getTitle());
+        lesson.setTitleCode(lessonResponseDTO.getTitleCode());
+        lesson.setTrainer(lessonResponseDTO.getTrainer());
+        lesson.setPrice(lessonResponseDTO.getPrice());
+        lesson.setCategory(lessonResponseDTO.getCategory());
+        lesson.setLesson_info(lessonResponseDTO.getLesson_info());
+        lesson.setStart_date(lessonResponseDTO.getStart_date());
+        lesson.setEnd_date(lessonResponseDTO.getEnd_date());
+        lesson.setLesson_img(lessonResponseDTO.getLesson_img());
+
         lessonRepository.save(lesson);
         return lesson.getNo();
     }

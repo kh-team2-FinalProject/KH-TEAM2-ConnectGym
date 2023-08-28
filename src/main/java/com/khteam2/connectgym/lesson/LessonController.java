@@ -1,7 +1,7 @@
 package com.khteam2.connectgym.lesson;
 
 
-import com.khteam2.connectgym.lesson.dto.LessonDTO;
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +24,12 @@ public class LessonController {
     }
 
     @PostMapping(value = "/createLesson")
-    public String createLesson(Model model, LessonDTO lessonDTO) {
+    public String createLesson(Model model, LessonResponseDTO LessonResponseDTO) {
         //배너타이틀
         model.addAttribute("bannerTitle", "create lesson");
 
         //service save() 호출
-        lessonService.createLesson(lesson);
+        lessonService.createLesson(LessonResponseDTO);
 
         return "detailOrCrud/createComplete";
     }

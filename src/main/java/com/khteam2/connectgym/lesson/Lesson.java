@@ -21,7 +21,7 @@ public class Lesson {
 
     private String title;
 
-    @Column(name="title_code")
+    @Column(name = "title_code")
     private String titleCode;
 
     @OneToOne
@@ -34,6 +34,7 @@ public class Lesson {
     private String lesson_info;
     private LocalDate start_date;
     private LocalDate end_date;
+    private String lesson_img;
 
 
 }
