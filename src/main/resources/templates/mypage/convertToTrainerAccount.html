@@ -50,15 +50,24 @@
                             type="button"
                             class="_js_button_reset convertToTrainerAccount_certificate_add_button"
                         >
+                            <label
+                                for="certificate_container_input"
+                                class="certificate_container_label"
+                            >
+                            <input type="file" name="licenseImgFiles" id="certificate_container_input" multiple/>
                             <img
+                                class="plus_box_img"
                                 th:src="@{/images/icons/mdi/plus-box.svg}"
                                 width="30"
                                 height="30"
                             />
+                            </label>
                         </button>
                     </div>
                 </div>
-                <div class="convertToTrainerAccount_certificate_list"></div>
+                <div class="convertToTrainerAccount_certificate_list" id="licensePhotoDiv">
+
+                </div>
             </div>
             <div class="convertToTrainerAccount_readme_container">
                 <div class="convertToTrainerAccount_readme_title_box">

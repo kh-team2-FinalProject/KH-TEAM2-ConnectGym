@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,15 +28,32 @@ public class TrainerService {
 
     @Transactional
     public Long registerTrainer(TrainerRequestDTO trainerRequestDTO, Member member,
-                                  MultipartFile profileImgFile) {
+                                  MultipartFile profileImgFile,MultipartFile[] licenseImgFiles) {
         String fileUrl = "";
+        //프로필사진
         if (!profileImgFile.isEmpty()) {
             try {
-                fileUrl = s3Uploader.uploadFile(profileImgFile);
+                fileUrl = s3Uploader.uploadProfileFile(profileImgFile,member.getUserId());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+
+        //자격증사진
+        if (licenseImgFiles.length != 0) {
+            Licenses licenses = new Licenses();
+
+            try {
+                for(MultipartFile file: licenseImgFiles){
+                    licenses.setLicenseImg(s3Uploader.uploadProfileFile(file, member.getUserId()));
+                    trainerRequestDTO.addLicense(licenses);
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
 
         TrainerRequestDTO dto = TrainerRequestDTO.builder()
                                 .trainerId(member.getUserId())
@@ -45,10 +65,6 @@ public class TrainerService {
                                 .build();
 
         Long trainerNo = trainerRepository.save(dto.toEntity()).getNo();
-
-  /*      if(trainerNo != null){
-            memberRepository.deleteById(member.getNo());
-        }*/
 
         return trainerNo;
     }
