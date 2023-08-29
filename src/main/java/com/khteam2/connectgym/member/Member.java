@@ -35,6 +35,8 @@ public class Member {
     @Column(name = "reg_date")
     @CreationTimestamp
     private LocalDateTime regDate;
+    private String provider; //어디 api에서 왔는가 ex)구글 네이버등등
+    private String providerId;//api 생성고유번호
 
     @OneToMany(mappedBy = "member")
     @JsonIgnore
