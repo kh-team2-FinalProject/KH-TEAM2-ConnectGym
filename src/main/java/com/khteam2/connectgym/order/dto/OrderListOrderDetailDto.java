@@ -4,15 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Builder
 @AllArgsConstructor
-public class OrderListDetailDto {
+public class OrderListOrderDetailDto {
     private String title;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Long price;
     private String status;
+    private String trainerName;
+    private String imageUrl;
 }
