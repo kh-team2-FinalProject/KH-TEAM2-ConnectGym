@@ -27,4 +27,6 @@ public class CS {
     private LocalDateTime faq_datetime;
     @Column(name = "user_id", nullable = false)
     private String user_id;
+    @Column(name = "category_id", nullable = false)
+    private Long category_id;
 }
