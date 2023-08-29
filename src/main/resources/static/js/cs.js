@@ -9,7 +9,6 @@ $(document).ready(function () {
 
   // 자주묻는질문 클릭시 div display 설정
   $(".accodion-item").click(function () {
-    // $(this).children("div").slideToggle(200);
     if ($(this).hasClass("active")) {
       $(this).removeClass("active");
       $(this).children("div").slideUp(200);

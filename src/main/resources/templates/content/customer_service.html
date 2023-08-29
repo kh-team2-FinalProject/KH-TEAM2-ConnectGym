@@ -2,20 +2,13 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
-<th:block layout:fragment="title">
-    <title>메인</title>
-</th:block>
-
 <th:block layout:fragment="add-css">
     <link th:href="@{/css/cs.css}" rel="stylesheet">
 </th:block>
 
 <!-- 스크립트 부분 -->
 <th:block layout:fragment="script">
-    <script type="text/javascript" rel="script"
-            src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" rel="script" th:src="@{/js/cs.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content">
@@ -36,67 +29,26 @@
                     <div class="ctgyAll ctgyitem active" id="ctgyitem">
                         <button class="ctgy-btn" type="button">전체</button>
                     </div>
-                    <div class="ctgyitem">
-                        <button class="ctgy-btn" type="button">가입/탈퇴</button>
-                    </div>
-                    <div class="ctgyitem">
-                        <button class="ctgy-btn" type="button">결제</button>
-                    </div>
-                    <div class="ctgyitem">
-                        <button class="ctgy-btn" type="button">test1</button>
-                    </div>
-                    <div class="ctgyitem">
-                        <button class="ctgy-btn" type="button">test2</button>
-                    </div>
-                    <div class="ctgyitem">
-                        <button class="ctgy-btn" type="button">test3</button>
-                    </div>
-                    <div class="ctgyitem">
-                        <button class="ctgy-btn" type="button">test4</button>
-                    </div>
-                    <div class="ctgyitem">
-                        <button class="ctgy-btn" type="button">test5</button>
+                    <div class="ctgyitem" th:each="ctgyList: ${ctgyList}">
+                        <button class="ctgy-btn" type="button" th:text="${ctgyList.ctgy}"></button>
                     </div>
                 </div>
             </div>
 
-            <!-- db에서 가져와 출력할 부분 -->
+            <!-- db에서 가져와 출력할 부분 / 전체 -->
             <div class="faq-accodion-wrap">
                 <div class="ui-accodion">
                     <!-- 아마 실제로는 db 연동하여 for-each사용할듯? -->
-                    <div class="accodion-item">
+                    <div class="accodion-item" th:each="csList : ${csList}">
                         <button type="button" class="accodion-btn">
                             <span class="mark">Q</span>
-                            <span class="faq-title" id="faq-titele">
-                  자주찾는 질문 제목1
-                </span>
+                            <span class="faq-title" th:text="${csList.title}">
+                            </span>
                             <i class="ico arrow md"></i>
                         </button>
                         <div class="layer">
                             <div class="accodion-content">
-                                <p class="desc">
-                                    <strong>test1</strong>
-                                    <br/><br/>
-                                    test1
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accodion-item">
-                        <button type="button" class="accodion-btn">
-                            <span class="mark">Q</span>
-                            <span class="faq-title" id="faq-titele">
-                  자주찾는 질문 제목2
-                </span>
-                            <i class="ico arrow md"></i>
-                        </button>
-                        <div class="layer">
-                            <div class="accodion-content">
-                                <p class="desc">
-                                    <strong>test2</strong>
-                                    <br/><br/>
-                                    test2
+                                <p class="desc" th:text="${csList.content}">
                                 </p>
                             </div>
                         </div>
@@ -107,11 +59,9 @@
             <!-- 페이지 넘기는 부분 -->
             <div></div>
         </div>
+
     </div>
-    </body>
-
+    <script type="text/javascript" rel="script" th:src="@{/js/cs.js}"></script>
 </th:block>
 
-
-</th:block>
 </html>
