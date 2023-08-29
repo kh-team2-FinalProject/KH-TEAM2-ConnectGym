@@ -47,7 +47,7 @@
 
                             <td class="food_name" title="식품">식품명 </td>
 
-                            <td class="sub" title="총 제공량: g">1회 제공량(g) </td>
+                            <td class="sub" title="총 제공량: g">1회 제공량(g/ml) </td>
 
                             <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
 
@@ -62,10 +62,12 @@
 
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                         <tr th:each="food : ${foods}">
-                            <td th:text="${food.carbohydrates}">탄수화물값</td>
-                            <td th:text="${food.protein}">단백질값</td>
-                            <td th:text="${food.fat}">지방값</td>
-                            <td th:text="${food.calories}">칼로리값</td>
+                            <td th:text="${food.foodNm}">식품명</td>
+                            <td th:text="${food.nutConSrtrQua}">1회 제공량</td>
+                            <td th:text="${food.chocdf}">탄수화물</td>
+                            <td th:text="${food.prot}">단백질</td>
+                            <td th:text="${food.fatce}">지방</td>
+                            <td th:text="${food.enerc}">칼로리</td>
                             <td>&nbsp;</td>
                         </tr>
 
@@ -93,7 +95,7 @@
                         <tr style="height:36px">
                             <td class="food_name" title="식품">식품명 </td>
 
-                            <td class="sub" title="총 제공량: g">1회 제공량(g) </td>
+                            <td class="sub" title="총 제공량: g">1회 제공량(g/ml) </td>
 
                             <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
 
@@ -107,10 +109,12 @@
 
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                         <tr th:each="food : ${foods}">
-                            <td th:text="${food.carbohydrates}">탄수화물값</td>
-                            <td th:text="${food.protein}">단백질값</td>
-                            <td th:text="${food.fat}">지방값</td>
-                            <td th:text="${food.calories}">칼로리값</td>
+                            <td th:text="${food.foodNm}">식품명</td>
+                            <td th:text="${food.nutConSrtrQua}">1회 제공량</td>
+                            <td th:text="${food.chocdf}">탄수화물</td>
+                            <td th:text="${food.prot}">단백질</td>
+                            <td th:text="${food.fatce}">지방</td>
+                            <td th:text="${food.enerc}">칼로리</td>
                             <td>&nbsp;</td>
                         </tr>
 
@@ -139,7 +143,7 @@
 
                             <td class="food_name" title="식품">식품명 </td>
 
-                            <td class="sub" title="총 제공량: g">1회 제공량(g) </td>
+                            <td class="sub" title="총 제공량: g">1회 제공량(g/ml) </td>
 
                             <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
 
@@ -154,10 +158,12 @@
 
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                         <tr th:each="food : ${foods}">
-                            <td th:text="${food.carbohydrates}">탄수화물값</td>
-                            <td th:text="${food.protein}">단백질값</td>
-                            <td th:text="${food.fat}">지방값</td>
-                            <td th:text="${food.calories}">칼로리값</td>
+                            <td th:text="${food.foodNm}">식품명</td>
+                            <td th:text="${food.nutConSrtrQua}">1회 제공량</td>
+                            <td th:text="${food.chocdf}">탄수화물</td>
+                            <td th:text="${food.prot}">단백질</td>
+                            <td th:text="${food.fatce}">지방</td>
+                            <td th:text="${food.enerc}">칼로리</td>
                             <td>&nbsp;</td>
                         </tr>
 
@@ -189,7 +195,7 @@
 
                             <td class="food_name" title="식품">식품명 </td>
 
-                            <td class="sub" title="총 제공량: g">1회 제공량(g) </td>
+                            <td class="sub" title="총 제공량: g">1회 제공량(g/ml) </td>
 
                             <td class="sub" title="총 아침 식사탄수화물 : g">탄수화물</td>
 
@@ -205,10 +211,12 @@
 
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                         <tr th:each="food : ${foods}">
-                            <td th:text="${food.carbohydrates}">탄수화물값</td>
-                            <td th:text="${food.protein}">단백질값</td>
-                            <td th:text="${food.fat}">지방값</td>
-                            <td th:text="${food.calories}">칼로리값</td>
+                            <td th:text="${food.foodNm}">식품명</td>
+                            <td th:text="${food.nutConSrtrQua}">1회 제공량</td>
+                            <td th:text="${food.chocdf}">탄수화물</td>
+                            <td th:text="${food.prot}">단백질</td>
+                            <td th:text="${food.fatce}">지방</td>
+                            <td th:text="${food.enerc}">칼로리</td>
                             <td>&nbsp;</td>
                         </tr>
 
@@ -241,7 +249,7 @@
                     <tbody>
                     <tr style="height:36px">
                         <td class="food_name1" title="식품명 :">식품명 </td>
-                        <td class="sub1" title="식품명 :"> 1회제공량(g) </td>
+                        <td class="sub1" title="식품명 :"> 1회제공량(g/ml) </td>
                         <td class="sub1" title="총 아침 식사탄수화물 : g1">탄수화물</td>
                         <td class="sub1" title="총 아침 식사단백질 : g1">단백질</td>
                         <td class="sub1" title="총 아침 식사지방 : g1">지방</td>

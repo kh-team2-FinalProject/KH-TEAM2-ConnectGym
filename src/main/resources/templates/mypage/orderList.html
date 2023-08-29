@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{content/mypages}"
+    xmlns:layout="http://www.w3.org/1999/xhtml"
+>
+    <th:block layout:fragment="script"></th:block>
+
+    <th:block layout:fragment="title">
+        <title>마이페이지 > 주문내역</title>
+    </th:block>
+
+    <th:block layout:fragment="mypage">
+        <link rel="stylesheet" th:href="@{/css/orderList.css}" />
+        <div id="orderList_wrap">
+            <form class="orderList_top_bar">
+                <select name="status">
+                    <option value="none">선택</option>
+                    <option value="paymentFinish">결제완료</option>
+                    <option value="inSuGang">수강 중</option>
+                </select>
+                <input type="date" name="startDate" placeholder="시작일자" />
+                <input type="date" name="endDate" />
+                <input type="search" name="q" />
+                <button type="button">찾기</button>
+            </form>
+            <th:block th:if="${responseDto.success}">
+                <div
+                    class="orderList_list_container"
+                    th:each="order : ${responseDto.orderListOrderDtoList}"
+                >
+                    <div class="orderList_list_item">
+                        <div class="orderList_list_item_top_bar">
+                            <div class="orderList_list_item_top_bar_left">
+                                <span
+                                    th:text="${#temporals.format(order.orderDate, 'YYYY-MM-dd')}"
+                                    class="orderList_list_item_payment_date"
+                                    >2023. 08. 28</span
+                                >
+                                <span
+                                    th:text="|주문번호: ${order.orderNo}|"
+                                    class="orderList_list_item_order_no"
+                                >
+                                    주문번호: 20230828123456
+                                </span>
+                            </div>
+                            <div class="orderList_list_item_top_bar_right">
+                                <span
+                                    class="orderList_list_item_total_price_box"
+                                >
+                                    <span class="">총 금액: </span>
+                                    <span
+                                        th:text="${#numbers.formatInteger(order.totalPrice, 1, 'COMMA') + '원'}"
+                                        class="orderList_list_item_total_price"
+                                        >100,000원</span
+                                    >
+                                </span>
+                            </div>
+                        </div>
+                        <div
+                            th:each="detail : ${order.detailDtoList}"
+                            class="orderList_order_detail_items"
+                        >
+                            <div class="orderList_order_detail_item">
+                                <div
+                                    class="orderList_order_detail_trainer_image_box"
+                                >
+                                    <img
+                                        thsrc="@{detail.imgSrc}"
+                                        src="https://images.unsplash.com/photo-1552848031-326ec03fe2ec?auto=format&fit=crop&w=1470&q=80"
+                                        class="orderList_order_detail_trainer_image"
+                                        width="100"
+                                        height="100"
+                                    />
+                                </div>
+                                <div class="orderList_order_detail_center_box">
+                                    <div
+                                        th:text="${detail.title}"
+                                        class="orderList_order_detail_title"
+                                    >
+                                        헬창클럽 트레이너의 특별 강의
+                                    </div>
+                                    <div
+                                        class="orderList_order_detail_center_bottom"
+                                    >
+                                        <div
+                                            th:text="|${detail.startDate} ~ ${detail.endDate}|"
+                                            class="orderList_order_detail_date"
+                                        >
+                                            2023. 08. 29 ~ 2023. 09. 13 (매 주
+                                            월요일, 수요일)
+                                        </div>
+                                        <div
+                                            th:text="${#numbers.formatInteger(detail.price, 1, 'COMMA') + '원'}"
+                                            class="orderList_order_detail_price"
+                                        >
+                                            100,000원
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    th:text="${detail.status}"
+                                    class="orderList_order_detail_right"
+                                >
+                                    결제완료
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </th:block>
+</html>

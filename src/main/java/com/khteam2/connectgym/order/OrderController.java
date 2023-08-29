@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/order")
 @Slf4j
 public class OrderController {
     @Autowired
@@ -26,7 +24,7 @@ public class OrderController {
     @Value("${portone.pg_shop_id}")
     private String pgShopId;
 
-    @GetMapping(value = "/pay")
+    @GetMapping(value = "/order/pay")
     public String order(
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         HttpSession session,
@@ -48,7 +46,7 @@ public class OrderController {
         return "/content/order";
     }
 
-    @GetMapping(value = "/process")
+    @GetMapping(value = "/order/process")
     public String processOrder(
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long sLoginMemberNo,
@@ -85,7 +83,7 @@ public class OrderController {
         return responseDto.getUrl();
     }
 
-    @GetMapping(value = "/complete")
+    @GetMapping(value = "/order/complete")
     public String completeOrder(
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
@@ -104,7 +102,20 @@ public class OrderController {
         return responseDto.getUrl();
     }
 
-    @GetMapping(value = "/test_complete")
+    @GetMapping(value = "/mypage/orderList")
+    public String myOrderList(
+        Model model,
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+        OrderListDto orderListDto) {
+        OrderListResponseDto responseDto = this.orderService.orderList(loginMemberNo, orderListDto);
+
+        model.addAttribute("responseDto", responseDto);
+        model.addAttribute("bannerTitle", "MY ORDER LIST");
+
+        return "/mypage/orderList";
+    }
+
+    @GetMapping(value = "/order/test_complete")
     public String completeOrderTest(Model model) {
         OrderCompleteResponseDto responseDto = OrderCompleteResponseDto.builder()
             .success(true)
