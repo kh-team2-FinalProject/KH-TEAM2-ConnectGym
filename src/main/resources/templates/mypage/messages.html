@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</th:block>
+<th:block layout:fragment="title">
+    <title>마이페이지 > 내 레슨 현황</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="mypage">
+
+    <div class="person-content">
+        <a th:onclick="|window.open('@{/chat_test}', 'chatting-window', 'width=430, height=500, location=no, status=no, scrollbars=yes')|">
+            <div class="mychat person">
+                <div class="p-container">
+                    <div class="p-container-inner">
+                        <img class="mychat p-circle" th:src="@{/images/background.png}"/>
+                        <img class="mychat p-img p-img3" th:src="@{/images/김계란.png}"/>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="mychat p-name">김계란</div>
+                <div class="mychat p-cat">pilates</div>
+            </div>
+        </a>
+
+        <div class="person">
+            <div class="p-container">
+                <div class="p-container-inner">
+                    <img class="p-circle" th:src="@{/images/background.png}"/>
+                    <img class="p-img p-img2" th:src="@{/images/심으뜸.png}"/> <!--트레이너 프로필 변수-->
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="mychat p-name">심으뜸</div> <!--트레이너 이름 변수-->
+            <div class="mychat p-cat">health</div> <!--레슨 카테고리 변수-->
+        </div>
+    </div>
+
+
+</th:block>
+
+
+</html>

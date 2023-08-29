@@ -69,7 +69,7 @@ public class CommonController {
         System.out.println("마이레슨리스트 컨트롤러 호출");
         return "mypage/mylessonlist";
     }
-    
+
     @GetMapping(value = "/mypage/convertToTrainerAccount")
     public String convertAccount(Model model) {
         model.addAttribute("bannerTitle", "CONVERT TO TRAINER ACCOUNT");
@@ -85,6 +85,19 @@ public class CommonController {
         System.out.println("엔터룸 컨트롤러 호출");
         return "room/enterroom";
     }
+
+    @GetMapping("/mypage/messages")
+    public String chattingRoomList(Model model) {
+        //배너타이틀
+        model.addAttribute("bannerTitle", "MY CHATTIING");
+        MemberResponse member = memberService.findOneMember(1L);
+        model.addAttribute("member", member);
+        System.out.println("member = " + member.getUserName());
+        System.out.println("마이레슨리스트 컨트롤러 호출");
+
+        return "mypage/messages";
+    }
+
 
     @GetMapping("/fooddiary")
     public String fooddiary() {
