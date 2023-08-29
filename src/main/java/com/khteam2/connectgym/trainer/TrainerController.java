@@ -28,13 +28,14 @@ public class TrainerController {
 
     @PostMapping("/convertTrainer")
     public String convertTrainer(Model model, TrainerRequestDTO trainerRequestDTO,
-                                 @RequestParam("profileImgFile") MultipartFile profileImgFile ){
+                                 @RequestParam("profileImgFile") MultipartFile profileImgFile,
+                                 @RequestParam("licenseImgFiles") MultipartFile[] licenseImgFiles){
         model.addAttribute("bannerTitle", "convert");
 
         Member member = memberRepository.findById(1L).orElse(null);
 
         //트레이너로 등록 후 해당 멤버는 삭제되는 서비스
-        trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile);
+        trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile, licenseImgFiles);
         //추후 기존 멤버 세션 삭제하는 메소드 추가
 
         return "redirect:/mypage";

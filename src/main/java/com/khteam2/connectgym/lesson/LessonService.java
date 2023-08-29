@@ -39,7 +39,7 @@ public class LessonService {
         String fileUrl = "";
         if (!file.isEmpty()) {
             try {
-                fileUrl = s3Uploader.uploadFile(file);
+                fileUrl = s3Uploader.uploadLessonFile(file, lessonRequestDTO.getTitleCode());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
