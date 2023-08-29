@@ -7,7 +7,6 @@
 </th:block>
 
 <th:block layout:fragment="detailOrCrud">
-
     <div class="lessonDetail_container">
         <div class="lessonDetail_leftContainer">
             <div class="lessonDetail_content">
@@ -15,7 +14,7 @@
                     <li class="lessonDetail_profile">
                         <div class="lessonDetail_profile_info">
                             <img th:src="@{/images/김계란.png}" alt="Profile Picture">
-                            <span class="user_id">트레이너 아이디</span>
+                            <span th:text="${trainerId}" class="user_id">트레이너 아이디</span>
                         </div>
                     </li>
 
