@@ -54,8 +54,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     //oauth2.0 api
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.7'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '2.5.7'
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.7'
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '2.5.7'
 }
 
 tasks.named('test') {
