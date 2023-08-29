@@ -91,7 +91,7 @@ public class CommonController {
         return "redirect:/fooddiary/calendar";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/user/login")
     public String login() {
         return "login";
     }
