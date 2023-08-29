@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,12 +66,23 @@ public class LessonController {
 
 
     //레슨 한 개만 불러오기
-//    @GetMapping("/lesson/{lessonNo}")
-//    public String viewLesson(@PathVariable Long lessonNo, Model model){
-//        Lesson lesson = lessonService.getLesson(lessonNo);
-//        model.addAttribute("lesson", lesson);
-//        return "lesson/view";
-//    }
+    @GetMapping("/lesson/{lessonNo}")
+    public String viewLesson(@PathVariable Long lessonNo, Model model) {
+        Lesson lesson = lessonService.getLesson(lessonNo);
+        String trainerId = lessonService.getTrainerIdFromLesson(lesson);
+
+        System.out.println("lesson = " + lesson);
+        System.out.println("trainerId = " + trainerId);
+
+
+        if (lesson != null) {
+
+            model.addAttribute("trainerId", trainerId);
+            model.addAttribute("lesson", lesson);
+        }
+        return "detailOrCrud/lessonDetail";
+    }
+
 
 }
 
