@@ -1,13 +1,12 @@
 package com.khteam2.connectgym.order;
 
+import com.khteam2.connectgym.common.CommonUtil;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
-import com.khteam2.connectgym.order.dto.OrderCompleteResponseDto;
-import com.khteam2.connectgym.order.dto.OrderProcessRequestDto;
-import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
-import com.khteam2.connectgym.order.dto.OrderResponseDto;
+import com.khteam2.connectgym.order.dto.*;
+import com.khteam2.connectgym.trainer.Trainer;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.PrepareData;
@@ -23,8 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -158,11 +158,11 @@ public class OrderService {
     @Transactional(readOnly = true)
     private String generateOrderNo() {
         String orderNo = null;
-        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")); // 20230820
+        String date = CommonUtil.getTodayLocalDate8(); // 20230820
 
         for (int i = 0; i < 10; i++) {
             // 1 ~ 999,999 값을 생성함
-            int randomValue = random.nextInt(999_999) + 1;
+            int randomValue = CommonUtil.generateRandomNumberInt(6);
             // 주문 번호 형식: 20230820001024 / 20230820123456
             orderNo = String.format("%s%06d", date, randomValue);
 
@@ -259,7 +259,11 @@ public class OrderService {
 
         // order_detail 테이블에 저장할 리스트를 생성한다.
         List<OrderDetail> newOrderDetailList = lessonList.stream()
-            .map(lesson -> OrderDetail.builder().lesson(lesson).order(savedOrder).build())
+            .map(lesson -> OrderDetail.builder()
+                .lesson(lesson)
+                .enrollKey(this.generateEnrollKey())
+                .order(savedOrder)
+                .build())
             .collect(Collectors.toList());
 
         // order_detail 테이블에 주문한 강의를 모두 넣는다.
@@ -268,6 +272,26 @@ public class OrderService {
         returnDto.setSuccess(true);
 
         return returnDto;
+    }
+
+    /**
+     * 새로운 enroll_key를 생성하는 메소드
+     *
+     * @return 중복되지 않는 고유한 값
+     */
+    private long generateEnrollKey() {
+        long enrollKey = -1;
+
+        for (int i = 0; i < 10_000; i++) {
+            enrollKey = CommonUtil.generateRandomNumberLong(12);
+            OrderDetail orderDetail = this.orderDetailRepository.findByEnrollKey(enrollKey);
+
+            if (orderDetail == null) {
+                break;
+            }
+        }
+
+        return enrollKey;
     }
 
     public ResponseEntity<Object> paymentCompleteWebhook(String impUid, String sMerchantUid, Long sPrice) {
@@ -299,6 +323,84 @@ public class OrderService {
 
         Order order = this.orderRepository.findById(orderId).orElse(null);
         List<OrderDetail> orderDetailList = this.orderDetailRepository.findByOrder(order);
+
+        return responseDto;
+    }
+
+    @Transactional(readOnly = true)
+    public OrderListResponseDto orderList(Long loginMemberNo, OrderListDto orderListDto) {
+        OrderListResponseDto responseDto = OrderListResponseDto.builder()
+            .success(false)
+            .build();
+
+        if (loginMemberNo == null) {
+            responseDto.setMessage("로그인한 상태가 아닙니다.");
+            return responseDto;
+        }
+
+        Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+
+        if (member == null) {
+            responseDto.setMessage("사용자 정보가 없습니다.");
+            return responseDto;
+        }
+
+        List<Order> orderList = this.orderRepository.findByMember(member);
+        responseDto.setOrderListOrderDtoList(new ArrayList<>());
+
+        List<OrderListOrderDto> orderListOrderDtoList = new ArrayList<>();
+//        List<OrderDetail> orderDetailListAll = this.orderDetailRepository.findByMemberNo(member.getNo());
+
+        for (Order order : orderList) {
+            long totalPrice = 0;
+
+            List<OrderDetail> orderDetailList = this.orderDetailRepository.findByOrder(order);
+            List<OrderListOrderDetailDto> detailDtoList = new ArrayList<>();
+
+            for (OrderDetail orderDetail : orderDetailList) {
+                Lesson lesson = orderDetail.getLesson();
+                Trainer trainer = lesson.getTrainer();
+
+                totalPrice += lesson.getPrice();
+
+                LocalDate startDate = lesson.getStart_date();
+                LocalDate endDate = lesson.getEnd_date();
+                LocalDate localDateToday = LocalDate.now();
+                String status = null;
+
+                if (localDateToday.isBefore(startDate)) {
+                    status = "결제 완료";
+                } else if (localDateToday.isAfter(startDate) && localDateToday.isBefore(endDate)) {
+                    status = "수강 중";
+                } else if (localDateToday.isAfter(endDate)) {
+                    status = "수강 완료";
+                }
+
+                OrderListOrderDetailDto detailDto = OrderListOrderDetailDto.builder()
+                    .title(lesson.getTitle())
+                    .startDate(lesson.getStart_date())
+                    .endDate(lesson.getEnd_date())
+                    .price((long) lesson.getPrice())
+                    .trainerName(trainer.getTrainerName())
+//                    .imageUrl(trainer.getImgUrl)
+                    .status(status)
+                    .build();
+                detailDtoList.add(detailDto);
+            }
+
+            OrderListOrderDto orderDto = OrderListOrderDto.builder()
+                .orderNo(order.getNo())
+                .orderDate(order.getDayOfPayment().toLocalDateTime())
+                .detailDtoList(detailDtoList)
+                .totalPrice(totalPrice)
+                .build();
+            orderListOrderDtoList.add(orderDto);
+        }
+
+        System.out.println(orderListOrderDtoList);
+
+        responseDto.setOrderListOrderDtoList(orderListOrderDtoList);
+        responseDto.setSuccess(true);
 
         return responseDto;
     }
