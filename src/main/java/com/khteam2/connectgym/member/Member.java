@@ -2,21 +2,29 @@ package com.khteam2.connectgym.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.khteam2.connectgym.enroll.EnrollDetail;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="users")
+@Table(name = "users")
 @Builder
 public class Member {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
@@ -26,17 +34,16 @@ public class Member {
     private String userPw;
     @Column(name = "user_name", nullable = false)
     private String userName;
-    @Column(name = "user_tel", nullable = false)
+    @Column(name = "user_tel")
     private String userTel;
     @Column(name = "user_address")
     private String userAddress;
-    @Column(name = "user_email")
+    @Column(name = "user_email", unique = true, nullable = false)
     private String userEmail;
     @Column(name = "reg_date")
     @CreationTimestamp
     private LocalDateTime regDate;
-    private String provider; //어디 api에서 왔는가 ex)구글 네이버등등
-    private String providerId;//api 생성고유번호
+
 
     @OneToMany(mappedBy = "member")
     @JsonIgnore
