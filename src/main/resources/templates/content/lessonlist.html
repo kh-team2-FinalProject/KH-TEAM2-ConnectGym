@@ -26,9 +26,9 @@
             <div class="side_menu">
                 <ul class="side_items">
                     <li class="side_title">LESSON</li>
-                    <li class="side-content"><a href="/lesson/health" class="on">Health</a></li>
-                    <li class="side-content"><a href="/lesson/yoga">Yoga</a></li>
-                    <li class="side-content"><a href="/lesson/pilates">Pilates</a></li>
+                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
+                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
+                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
                 </ul>
             </div>
         </nav>
