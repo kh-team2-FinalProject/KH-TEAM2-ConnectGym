@@ -43,10 +43,14 @@
 /* 영양성분명 */
  .sub, .sub1{
     text-align: right;
+    white-space: nowrap; /* 텍스트를 한 줄로만 표시하도록 설정 */
  }
+
+
 
  .food_name, .food_name1{
     text-align: left;
+    white-space: nowrap; /* 텍스트를 한 줄로만 표시하도록 설정 */
 
  }
 
