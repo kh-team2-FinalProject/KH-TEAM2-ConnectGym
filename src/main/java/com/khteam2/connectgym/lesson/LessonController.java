@@ -24,7 +24,7 @@ public class LessonController {
     }
 
     @PostMapping(value = "/createLesson")
-    public String createLesson(Model model, LessonDTO lessonDTO) {
+    public String createLesson(Model model, LessonDTO lessonDTO, Lesson lesson) {
         //배너타이틀
         model.addAttribute("bannerTitle", "create lesson");
 

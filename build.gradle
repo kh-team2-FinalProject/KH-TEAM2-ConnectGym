@@ -33,7 +33,15 @@ dependencies {
     // AWS S3
     implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.3.1'
 
+    //채팅관련  stomp,websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.webjars:sockjs-client:1.5.1'
+    implementation 'org.webjars:stomp-websocket:2.3.3'
+
+
+    //devtools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -48,7 +56,6 @@ dependencies {
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
     implementation 'org.springframework:spring-context-support:5.3.29'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-
 
 
 }
