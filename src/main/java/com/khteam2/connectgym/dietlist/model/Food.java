@@ -9,16 +9,13 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(
-    name = "foods"
-)
+@Table(name = "foods")
 
-@XmlRootElement(name = "food")
+@XmlRootElement(name = "foods")
 public class Food {
+
     @Id
-    @GeneratedValue(
-        strategy = GenerationType.IDENTITY
-    )
+    @Column(name = "food_cd")
     private String foodCd; //식품 코드
 
     private String foodNm; //식품명
