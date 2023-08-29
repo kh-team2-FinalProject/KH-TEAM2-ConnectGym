@@ -31,7 +31,11 @@ dependencies {
     implementation 'io.openvidu:openvidu-java-client:2.25.0'
 
     // AWS S3
-//    implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.3.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+    // Jasypt
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
@@ -49,7 +53,9 @@ dependencies {
     implementation 'org.springframework:spring-context-support:5.3.29'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-
+    //oauth2.0 api
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.7'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '2.5.7'
 }
 
 tasks.named('test') {

@@ -12,13 +12,13 @@ void (function (D) {
      *   profilePhoto: HTMLInputElement
      * }}
      */
-    const { profilePhoto } = convertForm.elements;
+    const { profileImgFile } = convertForm.elements;
     /** @type {HTMLImageElement} */
     const profilePhotoImgEl = convertForm.querySelector(
         "img.convertToTrainerAccount_photo"
     );
 
-    profilePhoto.addEventListener("change", function (e) {
+    profileImgFile.addEventListener("change", function (e) {
         const file = this.files[0];
         const profilePhotoUrl = URL.createObjectURL(file);
         profilePhotoImgEl.src = profilePhotoUrl;

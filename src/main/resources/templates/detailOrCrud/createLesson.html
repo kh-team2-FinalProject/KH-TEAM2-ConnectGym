@@ -10,7 +10,10 @@
 <th:block layout:fragment="detailOrCrud">
 
     <div class="createLesson_container">
-        <form role="form" class="createLesson_form" action="/createLesson" th:object="${lessonForm}" method="POST">
+        <form role="form" class="createLesson_form" action="/createLesson"
+              th:object="${lessonForm}" method="POST"
+              name="createLessonForm"
+              enctype="multipart/form-data" >>
             <ul class="input_createLesson">
                 <li class="profile_picture">
                     <div class="profile_info">
@@ -19,7 +22,7 @@
                               th:text="${lesson.trainer.trainer_name}"></span>
                         <div class="attachment">
                             <button type="button" class="add_attachment">+
-                                <input type="file" id="attachment" name="uploadedFile" class="attachment_input">
+                                <!--<input type="file" id="attachment" name="uploadedFile" class="attachment_input">-->
                             </button>
                         </div>
                     </div>
@@ -35,7 +38,13 @@
                 </li>
                 <li>
                     <label th:for="category">카테고리</label>
-                    <input type="text" th:field="*{category}">
+                    <select id="category" name="category">
+                        <option value="1">헬스</option>
+                        <option value="2">요가</option>
+                        <option value="3">필라테스</option>
+                    </select>
+
+
                 </li>
 
 
@@ -49,12 +58,30 @@
                 <!--                </li>-->
 
                 <li>
+                    <label th:for="lesson_img">강좌 이미지</label>
+                    <label for="createLessonImgInput"
+                           class="createLessonImg_container">
+                        <input type="file" name="lessonImgFile"
+                               class="createLessonImgInput"
+                               id="createLessonImgInput"
+                               accept="image/*"/>
+                        <img
+                            class="createLessonPhoto"
+                            th:src="@{/images/icons/img_upload.png}"
+                            width="300"
+                            height="300"
+                        />
+                    </label>
+                    <label>[미리 보기]</label>
+                </li>
+
+                <li>
                     <label th:for="start_date">시작일</label>
-                    <input type="text" th:field="*{start_date}">
+                    <input type="date" th:field="*{start_date}">
                 </li>
                 <li>
                     <label th:for="end_date">종료일</label>
-                    <input type="text" th:field="*{end_date}">
+                    <input type="date" th:field="*{end_date}">
                 </li>
 
 
@@ -65,8 +92,10 @@
             </ul>
         </form>
 
+        <script th:src="@{/js/createLesson.js}"></script>
     </div>
 
 </th:block>
+
 
 </html>

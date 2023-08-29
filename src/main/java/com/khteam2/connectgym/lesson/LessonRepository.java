@@ -13,4 +13,7 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
         + " WHERE u.`no` = :memberId", nativeQuery = true)
     List<Lesson> findByMemberNo(@Param("memberId") Long memberNo);
 
+    //테스트해보고 필요하면 적용
+    @Query("SELECT l.titleCode FROM Lesson l ORDER BY l.titleCode DESC")
+    List<String> findLatestTitleCode();
 }

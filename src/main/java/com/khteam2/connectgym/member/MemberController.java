@@ -3,6 +3,10 @@ package com.khteam2.connectgym.member;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import javax.servlet.http.HttpSession;
+
+import com.khteam2.connectgym.trainer.Trainer;
+import com.khteam2.connectgym.trainer.TrainerRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+@RequiredArgsConstructor
 @Controller
 public class MemberController {
 
@@ -72,10 +77,15 @@ public class MemberController {
         return mailService.joinEmail(email);
     }
 
+    //임시
+    private  final TrainerRepository trainerRepository;
     @GetMapping("/myInfo")
     public String myInfo(Model model) {
         //배너타이틀
         model.addAttribute("bannerTitle", "my info");
+        Trainer trainer = trainerRepository.findById(6L).orElse(null);
+
+        model.addAttribute("trainer",trainer);
         return "mypage/myInfo";
     }
 

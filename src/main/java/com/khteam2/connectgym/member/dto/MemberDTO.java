@@ -16,5 +16,8 @@ public class MemberDTO {
     private String userAddress;
     private LocalDateTime regDate;
 
+    private String provider; //어디 api에서 왔는가 ex)구글 네이버등등
+    private String providerId;//api 생성고유번호
+
 
 }

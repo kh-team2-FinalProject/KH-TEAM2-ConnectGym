@@ -2,17 +2,18 @@ package com.khteam2.connectgym.lesson;
 
 
 import com.khteam2.connectgym.trainer.Trainer;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "lessons")
 public class Lesson {
     @Id
@@ -30,11 +31,15 @@ public class Lesson {
 
     private int price;
     private int category;
-    /*private String img_src;*/
     private String lesson_info;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate start_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate end_date;
+
     private String lesson_img;
+
 
 
 }

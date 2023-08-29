@@ -1,25 +1,30 @@
 package com.khteam2.connectgym.lesson;
 
 
+import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class LessonController {
-    @Autowired
-    private LessonService lessonService;
+
+    private final LessonService lessonService;
 
     @GetMapping(value = "/createLesson")
     public String createLesson(Model model) {
 
         //배너타이틀
-        model.addAttribute("bannerTitle", "create lesson");
+        model.addAttribute("bannerTitle", "create");
 
         //폼 호출
         model.addAttribute("lessonForm", new Lesson());
@@ -29,13 +34,14 @@ public class LessonController {
     }
 
     @PostMapping(value = "/createLesson")
-    public String createLesson(Model model, LessonResponseDTO LessonResponseDTO) {
+    public String createLesson(Model model, LessonRequestDTO lessonRequestDTO,
+                               @RequestParam("lessonImgFile") MultipartFile file) {
         //배너타이틀
         model.addAttribute("bannerTitle", "create lesson");
 
-
+        System.out.println("lessonRequestDTO = " + lessonRequestDTO.getStart_date());
         //service save() 호출
-        lessonService.createLesson(LessonResponseDTO);
+        lessonService.createLesson(lessonRequestDTO, file);
 
         return "detailOrCrud/createComplete";
     }

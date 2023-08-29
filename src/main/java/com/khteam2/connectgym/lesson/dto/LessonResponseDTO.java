@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.lesson.dto;
 
 import com.khteam2.connectgym.trainer.Trainer;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +21,6 @@ public class LessonResponseDTO {
     private LocalDate start_date;
     private LocalDate end_date;
     private String lesson_img;
+
+
 }

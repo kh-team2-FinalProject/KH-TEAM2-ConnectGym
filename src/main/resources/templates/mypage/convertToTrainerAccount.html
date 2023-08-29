@@ -13,17 +13,18 @@
     <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
     <th:block layout:fragment="mypage">
         <link rel="stylesheet" th:href="@{/css/convertToTrainerAccount.css}" />
-        <form id="convertToTrainerAccount_wrap" name="convertForm">
+        <form id="convertToTrainerAccount_wrap" name="convertForm"
+              action="/convertTrainer" method="post"
+              enctype="multipart/form-data" >
+
             <label
                 for="convertToTrainerAccount_photo_container_input"
                 class="convertToTrainerAccount_photo_container"
             >
-                <input
-                    id="convertToTrainerAccount_photo_container_input"
-                    name="profilePhoto"
-                    type="file"
-                    accept="image/*"
-                />
+                <input type="file"
+                   id="convertToTrainerAccount_photo_container_input"
+                    name="profileImgFile"
+                    accept="image/*" />
                 <img
                     class="convertToTrainerAccount_photo"
                     th:src="@{/images/icons/mdi/account-outline.svg}"
@@ -33,7 +34,7 @@
             </label>
             <div class="convertToTrainerAccount_description_container">
                 <textarea
-                    name="description"
+                    name="trainerInfo"
                     rows="5"
                     placeholder="자기소개 입력..."
                     class="_js_textarea_design_1 convertToTrainerAccount_description_textarea"
@@ -95,6 +96,6 @@
                 </button>
             </div>
         </form>
-        <script th:src="@{/js/convertToTrainerAccount.js}"></script>
+       <script th:src="@{/js/convertToTrainerAccount.js}"></script>
     </th:block>
 </html>
