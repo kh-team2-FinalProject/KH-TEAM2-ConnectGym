@@ -1,6 +1,6 @@
 
-.lessonlist{
-    margin-top:80px;
+.lessonlist {
+    margin-top: 80px;
 }
 
 /*============강좌 카드 섹션========*/
@@ -10,19 +10,23 @@
     margin: 20px;
 }
 
-#lessonlist_wrap{
+#lessonlist_wrap {
     display: flex;
     justify-content: flex-start;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
 
 }
 
 .l_card {
-    width: calc(33.33% - 50px); /* 카드 너비를 3분의 1로 설정하고 간격을 제외함 */
-    height: 300px; /* 카드 높이 설정 */
+    width: 20vw;
+    height: 25vh;
     perspective: 1000px;
-    margin: 20px;
-    min-width: 300px;
+    margin: 1vw;
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 100px;
+    min-height: 100px;
+
 }
 
 .l_card-inner {
@@ -57,6 +61,36 @@
     /*border:1px solid black;*/
 }
 
+.l_card-front-bottom {
+    background: rgba(136, 134, 134, 0.34);
+    position: absolute;
+    bottom: 0; /* 아래쪽에 위치 */
+    width: 100%; /* 너비를 100%로 설정 */
+    height: 40%;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.l_card-front-title {
+    color: #0d1416;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0.5vh;
+    margin-top: 2vh;
+}
+
+.l_card-front-trainer {
+    color: #0d1416;
+    font-weight: bold;
+    font-size: 1rem;
+}
 
 .l_card-back {
     transform: rotateY(180deg);
@@ -64,12 +98,14 @@
     color: #333;
     padding: 20px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .lessonlist_img {
     width: 100%;
     height: 100%;
-    border-radius:10px;
+    border-radius: 10px;
 }
 
 /*============강좌 카드 섹션 끝========*/
+

@@ -18,10 +18,12 @@ public class FoodServiceImpl implements FoodService {
 
     @Autowired
     public FoodServiceImpl(FoodRepository foodRepository) {
+
         this.foodRepository = foodRepository;
     }
 
+    @Override
     public List<Food> getAllFoods() {
-        return this.foodRepository.findAll();
+        return foodRepository.findAll();
     }
 }

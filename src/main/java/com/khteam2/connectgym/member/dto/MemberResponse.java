@@ -18,6 +18,7 @@ public class MemberResponse {
     private String userAddress;
     private LocalDateTime regDate;
 
+
     public MemberResponse(Member entity) {
         this.no = entity.getNo();
         this.userId = entity.getUserId();
@@ -27,5 +28,7 @@ public class MemberResponse {
         this.userEmail = entity.getUserEmail();
         this.userAddress = entity.getUserAddress();
         this.regDate = entity.getRegDate();
+
+
     }
 }

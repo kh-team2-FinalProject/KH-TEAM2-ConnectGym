@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class DietController {
+public class TestDietController {
     @Autowired
     private FoodService foodService;
 
-    public DietController() {
+    public TestDietController() {
     }
 
     @GetMapping({"/fooddiary/dietlisttest"})

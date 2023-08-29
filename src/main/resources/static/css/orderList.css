@@ -1,0 +1,129 @@
+#orderList_wrap {
+    color: initial;
+}
+
+#orderList_wrap *,
+#orderList_wrap *::before,
+#orderList_wrap *::after {
+    box-sizing: border-box;
+}
+
+#orderList_wrap .orderList_top_bar {
+    margin-bottom: 1rem;
+}
+
+#orderList_wrap
+    .orderList_list_container
+    .orderList_list_item
+    .orderList_list_item_top_bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+#orderList_wrap
+    .orderList_list_container
+    .orderList_list_item
+    .orderList_list_item_top_bar
+    .orderList_list_item_payment_date {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+#orderList_wrap
+    .orderList_list_container
+    .orderList_list_item
+    .orderList_list_item_top_bar
+    .orderList_list_item_order_no {
+    color: rgb(100, 100, 100);
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+}
+
+#orderList_wrap
+    .orderList_list_container
+    .orderList_list_item
+    .orderList_list_item_top_bar_right {
+    display: flex;
+}
+
+#orderList_wrap
+    .orderList_list_container
+    .orderList_list_item
+    .orderList_list_item_total_price_box {
+    align-self: center;
+}
+
+#orderList_wrap
+    .orderList_list_container
+    .orderList_list_item
+    .orderList_list_item_total_price_box
+    .orderList_list_item_total_price {
+    font-size: 1.5rem;
+}
+
+#orderList_wrap .orderList_order_detail_items .orderList_order_detail_item {
+    display: flex;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_trainer_image_box {
+    margin-right: 1.75rem;
+    line-height: 0;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_trainer_image_box
+    .orderList_order_detail_trainer_image {
+    border-radius: 20px;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_center_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_center_box
+    .orderList_order_detail_title {
+    font-size: 1.5rem;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_center_box
+    .orderList_order_detail_center_bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_price {
+    font-size: 1.25rem;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_right {
+    align-self: center;
+    justify-self: center;
+    flex-basis: 8rem;
+    text-align: center;
+    font-size: 1.25rem;
+}
