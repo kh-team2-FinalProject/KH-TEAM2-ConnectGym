@@ -5,6 +5,19 @@ $(document).ready(function () {
       $(".active").removeClass("active");
       $(this).addClass("active");
     }
+    if($(this).text().includes('전체')){
+        $('#faq-accodion-wrap1').removeClass('none');
+        $('#faq-accodion-wrap2').addClass('none');
+        $('#faq-accodion-wrap3').addClass('none');
+    }else if($(this).text().includes('가입/탈퇴')){
+        $('#faq-accodion-wrap1').addClass('none');
+        $('#faq-accodion-wrap2').removeClass('none');
+        $('#faq-accodion-wrap3').addClass('none');
+    }else if($(this).text().includes('결제')){
+        $('#faq-accodion-wrap1').addClass('none');
+        $('#faq-accodion-wrap2').addClass('none');
+        $('#faq-accodion-wrap3').removeClass('none');
+    }
   });
 
   // 자주묻는질문 클릭시 div display 설정

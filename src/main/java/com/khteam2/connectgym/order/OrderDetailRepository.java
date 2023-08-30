@@ -9,6 +9,8 @@ import java.util.List;
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
     List<OrderDetail> findByOrder(Order order);
 
+    List<OrderDetail> findByOrderOrderByNoDesc(Order order);
+
     OrderDetail findByEnrollKey(Long enrollKey);
 
     @Query(nativeQuery = true, value = "SELECT * FROM order_detail od"

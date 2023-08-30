@@ -36,7 +36,7 @@
             </div>
 
             <!-- db에서 가져와 출력할 부분 / 전체 -->
-            <div class="faq-accodion-wrap">
+            <div class="faq-accodion-wrap" id="faq-accodion-wrap1">
                 <div class="ui-accodion">
                     <!-- 아마 실제로는 db 연동하여 for-each사용할듯? -->
                     <div class="accodion-item" th:each="csList : ${csList}">
@@ -56,8 +56,61 @@
                 </div>
             </div>
 
+            <div class="faq-accodion-wrap none" id="faq-accodion-wrap2">
+                <div class="ui-accodion">
+                    <!-- 아마 실제로는 db 연동하여 for-each사용할듯? -->
+                    <div class="accodion-item" th:each="category1 : ${category1}">
+                        <button type="button" class="accodion-btn">
+                            <span class="mark">Q</span>
+                            <span class="faq-title" th:text="${category1.title}">
+                            </span>
+                            <i class="ico arrow md"></i>
+                        </button>
+                        <div class="layer">
+                            <div class="accodion-content">
+                                <p class="desc" th:text="${category1.content}">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-accodion-wrap none" id="faq-accodion-wrap3">
+                <div class="ui-accodion">
+                    <!-- 아마 실제로는 db 연동하여 for-each사용할듯? -->
+                    <div class="accodion-item" th:each="category2 : ${category2}">
+                        <button type="button" class="accodion-btn">
+                            <span class="mark">Q</span>
+                            <span class="faq-title" th:text="${category2.title}">
+                            </span>
+                            <i class="ico arrow md"></i>
+                        </button>
+                        <div class="layer">
+                            <div class="accodion-content">
+                                <p class="desc" th:text="${category2.content}">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- 페이지 넘기는 부분 -->
-            <div></div>
+            <div class="pagination">
+                <ul>
+                    <li th:if="${currentPage > 1}">
+                        <a th:href="@{'/cs/page/' + ${currentPage - 1}}">이전</a>
+                    </li>
+                    <li th:each="page : ${#numbers.sequence(1, totalPages)}"
+                        th:classappend="${currentPage == page} ? 'active'">
+                        <a th:href="@{'/cs/page/' + ${page}}" th:text="${page}"></a>
+                    </li>
+                    <li th:if="${currentPage < totalPages}">
+                        <a th:href="@{'/cs/page/' + ${currentPage + 1}}">다음</a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
     </div>

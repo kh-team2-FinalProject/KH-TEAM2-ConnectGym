@@ -151,4 +151,12 @@ button {
   white-space: normal;
 }
 
+.none{
+    display: none;
+}
+
+.pagination a{
+    color: black;
+}
+
 

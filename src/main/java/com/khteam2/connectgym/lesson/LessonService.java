@@ -70,13 +70,9 @@ public class LessonService {
         return lessonRepository.findAll();
     }
 
-    public String getTrainerIdFromLesson(Lesson lesson) {
-        if (lesson != null) {
-            Trainer trainer = lesson.getTrainer();
-            if (trainer != null) {
-                return trainer.getTrainerId();
-            }
-        }
-        return null;
+
+    public Lesson getLessonById(Long lessonNo) {
+        return lessonRepository.findById(lessonNo).orElseThrow(() -> new RuntimeException("LessonNo: " + lessonNo + "에 해당하는 레슨을 찾을 수 없습니다."));
+
     }
 }
