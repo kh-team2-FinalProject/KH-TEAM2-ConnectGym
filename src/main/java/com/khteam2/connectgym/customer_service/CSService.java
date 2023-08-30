@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CSService {
 
+
     @Autowired
     CS_CategoryRepository cs_categoryRepository;
     @Autowired
@@ -18,6 +19,7 @@ public class CSService {
 
         return csList;
     }
+
 
     public List<CS_Category> viewToAllCategory() {
         List<CS_Category> ctgyList = cs_categoryRepository.findAll();
@@ -34,6 +36,26 @@ public class CSService {
             }
         }
         return select_categoryList;
+    }
+
+    public List<CS> getDataForPage(int pageNumber, int itemsPerPage) {
+        List<CS> dataForPage = new ArrayList<>();
+        List<CS> allData = csRepository.findAll();
+
+        int startIndex = (pageNumber - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, allData.size());
+
+        for (int i = startIndex; i < endIndex; i++) {
+            dataForPage.add(allData.get(i));
+        }
+
+        return dataForPage;
+    }
+
+    public int getTotalPages(int itemsPerPage) {
+        List<CS> allData = csRepository.findAll();
+        int totalItems = allData.size();
+        return (int) Math.ceil((double) totalItems / itemsPerPage);
     }
 
 }

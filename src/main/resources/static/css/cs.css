@@ -155,4 +155,8 @@ button {
     display: none;
 }
 
+.pagination a{
+    color: black;
+}
+
 

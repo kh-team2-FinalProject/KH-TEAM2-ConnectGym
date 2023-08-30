@@ -97,7 +97,20 @@
             </div>
 
             <!-- 페이지 넘기는 부분 -->
-            <div></div>
+            <div class="pagination">
+                <ul>
+                    <li th:if="${currentPage > 1}">
+                        <a th:href="@{'/cs/page/' + ${currentPage - 1}}">이전</a>
+                    </li>
+                    <li th:each="page : ${#numbers.sequence(1, totalPages)}"
+                        th:classappend="${currentPage == page} ? 'active'">
+                        <a th:href="@{'/cs/page/' + ${page}}" th:text="${page}"></a>
+                    </li>
+                    <li th:if="${currentPage < totalPages}">
+                        <a th:href="@{'/cs/page/' + ${currentPage + 1}}">다음</a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
     </div>

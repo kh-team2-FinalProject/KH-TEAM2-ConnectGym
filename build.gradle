@@ -61,6 +61,8 @@ dependencies {
     implementation 'org.springframework:spring-context-support:5.3.29'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+    // 페이징
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 
     //oauth2.0 api
 //    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.7'
