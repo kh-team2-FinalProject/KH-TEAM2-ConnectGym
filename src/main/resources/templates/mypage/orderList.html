@@ -13,16 +13,24 @@
     <th:block layout:fragment="mypage">
         <link rel="stylesheet" th:href="@{/css/orderList.css}" />
         <div id="orderList_wrap">
-            <form class="orderList_top_bar">
+            <form name="orderFilterForm" class="orderList_top_bar">
                 <select name="status">
                     <option value="none">선택</option>
                     <option value="paymentFinish">결제완료</option>
                     <option value="inSuGang">수강 중</option>
                 </select>
-                <input type="date" name="startDate" placeholder="시작일자" />
-                <input type="date" name="endDate" />
+                <input
+                    type="date"
+                    name="startDate"
+                    th:value="${#temporals.format(responseDto.startDate, 'YYYY-MM-dd')}"
+                />
+                <input
+                    type="date"
+                    name="endDate"
+                    th:value="${#temporals.format(responseDto.endDate, 'YYYY-MM-dd')}"
+                />
                 <input type="search" name="q" />
-                <button type="button">찾기</button>
+                <button>찾기</button>
             </form>
             <th:block th:if="${responseDto.success}">
                 <div
@@ -109,6 +117,14 @@
                     </div>
                 </div>
             </th:block>
+            <th:block th:unless="${responseDto.success}">
+                <div class="orderList_list_container">
+                    <script th:inline="javascript">
+                        alert([[${responseDto.message}]])
+                    </script>
+                </div>
+            </th:block>
         </div>
+        <script th:src="@{/js/orderList.js}"></script>
     </th:block>
 </html>

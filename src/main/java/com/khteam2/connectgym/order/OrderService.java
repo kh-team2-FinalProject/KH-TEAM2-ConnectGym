@@ -327,55 +327,79 @@ public class OrderService {
         return responseDto;
     }
 
+    /**
+     * 주문 내역을 가져오는 메소드
+     *
+     * @param loginMemberNo 로그인된 멤버 번호
+     * @param orderListDto  사용자가 요청한 정보
+     * @return 성공/실패, 주문건에 대한 정보 등을 담은 객체 반환
+     */
     @Transactional(readOnly = true)
     public OrderListResponseDto orderList(Long loginMemberNo, OrderListDto orderListDto) {
         OrderListResponseDto responseDto = OrderListResponseDto.builder()
             .success(false)
             .build();
 
+        // 로그인된 사용자가 없으면 객체를 반환한다.
         if (loginMemberNo == null) {
             responseDto.setMessage("로그인한 상태가 아닙니다.");
             return responseDto;
         }
 
+        // 멤버 번호를 이용해서 멤버를 찾는다.
         Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
 
+        // 해당 멤버가 없으면 객체를 반환한다.
         if (member == null) {
             responseDto.setMessage("사용자 정보가 없습니다.");
             return responseDto;
         }
 
-        List<Order> orderList = this.orderRepository.findByMember(member);
-        responseDto.setOrderListOrderDtoList(new ArrayList<>());
+        // 주문건을 역순으로 가져온다.
+        List<Order> orderList = this.orderRepository.findByMemberOrderByDayOfPaymentDesc(member);
 
+        // 가져온 주문건을 화면에 출력하기 위해서 List 타입의 객체를 만들어준다.
         List<OrderListOrderDto> orderListOrderDtoList = new ArrayList<>();
-//        List<OrderDetail> orderDetailListAll = this.orderDetailRepository.findByMemberNo(member.getNo());
+        //        List<OrderDetail> orderDetailListAll = this.orderDetailRepository.findByMemberNo(member.getNo());
 
         for (Order order : orderList) {
+            // 전체 금액을 넣는다.
             long totalPrice = 0;
 
+            // 주문건을 이용해서 주문 상세 정보를 가져온다.
             List<OrderDetail> orderDetailList = this.orderDetailRepository.findByOrder(order);
+            // 화면에 출력할 상세 정보들을 담아주기 위해서 새 List 객체를 만든다.
             List<OrderListOrderDetailDto> detailDtoList = new ArrayList<>();
 
             for (OrderDetail orderDetail : orderDetailList) {
+                // 가져온 주문 상세 정보에서 레슨을 가져온다.
                 Lesson lesson = orderDetail.getLesson();
+                // 레슨에서 트레이너 정보를 가져온다.
                 Trainer trainer = lesson.getTrainer();
 
+                // 전체 금액에 레슨 가격을 더 한다.
                 totalPrice += lesson.getPrice();
 
+                // 레슨의 시작일과 종료일을 가져온다.
                 LocalDate startDate = lesson.getStart_date();
                 LocalDate endDate = lesson.getEnd_date();
+                // 현재 날짜를 가져온다.
                 LocalDate localDateToday = LocalDate.now();
                 String status = null;
 
+                // 오늘 날짜와 강의 날짜를 비교해서 그에 맞는 조건문을 실행한다.
                 if (localDateToday.isBefore(startDate)) {
+                    // 강의를 수강하기 전이면 실행되는 조건문
                     status = "결제 완료";
                 } else if (localDateToday.isAfter(startDate) && localDateToday.isBefore(endDate)) {
+                    // 강의를 수강하는 중일 때 실행되는 조건문
                     status = "수강 중";
                 } else if (localDateToday.isAfter(endDate)) {
+                    // 수강할 수 있는 날짜가 지났을 때 실행되는 조건문
                     status = "수강 완료";
                 }
 
+                // 상세 정보 DTO를 생성해서 가져온 정보들을 담아준다.
                 OrderListOrderDetailDto detailDto = OrderListOrderDetailDto.builder()
                     .title(lesson.getTitle())
                     .startDate(lesson.getStart_date())
@@ -385,20 +409,26 @@ public class OrderService {
 //                    .imageUrl(trainer.getImgUrl)
                     .status(status)
                     .build();
+                // 상세 정보 리스트에 담는다.
                 detailDtoList.add(detailDto);
             }
 
+            // 주문 DTO를 생성해서 가져온 정보들을 담아준다.
             OrderListOrderDto orderDto = OrderListOrderDto.builder()
                 .orderNo(order.getNo())
                 .orderDate(order.getDayOfPayment().toLocalDateTime())
                 .detailDtoList(detailDtoList)
                 .totalPrice(totalPrice)
                 .build();
+            // 주문 DTO 리스트에 담는다.
             orderListOrderDtoList.add(orderDto);
         }
 
-        System.out.println(orderListOrderDtoList);
-
+        // 가져온 정보들을 담아준다.
+        responseDto.setSearch(orderListDto.getQ());
+        responseDto.setStartDate(orderListDto.getStartDate());
+        responseDto.setEndDate(orderListDto.getEndDate());
+        responseDto.setStatus(orderListDto.getStatus());
         responseDto.setOrderListOrderDtoList(orderListOrderDtoList);
         responseDto.setSuccess(true);
 
