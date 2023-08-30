@@ -28,6 +28,7 @@ public class CSService {
     }
 
     public List<CS> viewToCategory(int a) {
+
         List<CS> csList = csRepository.findAll();
         List<CS> select_categoryList = new ArrayList<>();
         for (int i = 0; i < csList.size(); i++) {
@@ -48,13 +49,25 @@ public class CSService {
         for (int i = startIndex; i < endIndex; i++) {
             dataForPage.add(allData.get(i));
         }
-
         return dataForPage;
     }
 
-    public int getTotalPages(int itemsPerPage) {
-        List<CS> allData = csRepository.findAll();
-        int totalItems = allData.size();
+    public List<CS> getDataForCategoryPage(int pageNumber, int itemsPerPage,
+        List<CS> categoryList) {
+        List<CS> dataForPage = new ArrayList<>();
+
+        int startIndex = (pageNumber - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, categoryList.size());
+
+        for (int i = startIndex; i < endIndex; i++) {
+            dataForPage.add(categoryList.get(i));
+        }
+        return dataForPage;
+    }
+
+    public int getTotalPages(int itemsPerPage, List<CS> list) {
+//        List<CS> allData = csRepository.findAll();
+        int totalItems = list.size();
         return (int) Math.ceil((double) totalItems / itemsPerPage);
     }
 
