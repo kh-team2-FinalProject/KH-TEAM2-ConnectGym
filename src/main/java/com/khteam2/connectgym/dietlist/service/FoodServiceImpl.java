@@ -10,11 +10,10 @@ import com.khteam2.connectgym.dietlist.model.FoodApiResponse;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,17 +30,20 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public List<Food> saveFoodsFromOpenAPI() {
-        String openApiUrl = "http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1?serviceKey=zYPK1Bj9cpL%2FZ1nD8%2Fr56or2XJaCFvizZqM9ZQ4oxjDhjtfMHceoEtq4%2BrwcNJoynkMj5DWZk9EIxH8bwPzs8Q%3D%3D&type=xml";  // 실제 OpenAPI URL로 변경
+        String openApiUrl = "https://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1?serviceKey=zYPK1Bj9cpL%2FZ1nD8%2Fr56or2XJaCFvizZqM9ZQ4oxjDhjtfMHceoEtq4%2BrwcNJoynkMj5DWZk9EIxH8bwPzs8Q%3D%3D&type=json";  // 실제 OpenAPI URL로 변경
 
         RestTemplate restTemplate = new RestTemplate();
-        FoodApiResponse[] foodApiResponses = restTemplate.getForObject(openApiUrl, FoodApiResponse[].class);
+//        FoodApiResponse[] foodApiResponses = restTemplate.getForObject(openApiUrl, FoodApiResponse[].class);
+        FoodApiResponse foodApiResponse = restTemplate.getForObject(openApiUrl, FoodApiResponse.class);
 
         // ModelMapper를 사용하여 API 응답과 엔티티 간의 필드 매핑 자동화
-        List<Food> foods = Arrays.stream(foodApiResponses)
-            .map(this::convertToFoodEntity)
-            .collect(Collectors.toList());
+        // List<Food> foods = Arrays.stream(foodApiResponses)
+        //    .map(this::convertToFoodEntity)
+        //    .collect(Collectors.toList());
 
-        return foodRepository.saveAll(foods);
+        Food food = convertToFoodEntity(foodApiResponse);
+        foodRepository.save(food);
+        return Collections.singletonList(food);
     }
 
     private Food convertToFoodEntity(FoodApiResponse apiResponse) {
