@@ -85,15 +85,15 @@ public class TrainerService {
             return responseDto;
         }
 
-        Member member = this.memberRepository.findByUserId(id);
+        Trainer trainer = this.trainerRepository.findByTrainerId(id);
 
-        if (member == null || !member.getUserPw().equals(password)) {
+        if (trainer == null || !trainer.getTrainerPw().equals(password)) {
             responseDto.setMessage("ID 또는 비밀번호를 확인해 주시기 바랍니다.");
             return responseDto;
         }
 
         responseDto.setSuccess(true);
-        responseDto.setMemberNo(member.getNo());
+        responseDto.setMemberNo(trainer.getNo());
         responseDto.setMemberClass(MemberClass.TRAINER);
 
         return responseDto;
