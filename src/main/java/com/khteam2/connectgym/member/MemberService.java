@@ -1,16 +1,18 @@
 package com.khteam2.connectgym.member;
 
 import com.khteam2.connectgym.member.dto.MemberDTO;
+import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
+import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.member.dto.MemberResponse;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class MemberService {
-
     @Autowired
     private MemberRepository memberRepository;
 
@@ -57,5 +59,37 @@ public class MemberService {
             }
         }
         return res;
+    }
+
+    public MemberLoginResponseDto memberLogin(MemberLoginRequestDto requestDto) {
+        MemberLoginResponseDto responseDto = MemberLoginResponseDto.builder()
+            .success(false)
+            .build();
+
+        if (requestDto == null) {
+            responseDto.setMessage("잘못된 요청입니다.");
+            return responseDto;
+        }
+
+        String id = requestDto.getId();
+        String password = requestDto.getPassword();
+
+        if (id == null || id.isBlank() || password == null || password.isBlank()) {
+            responseDto.setMessage("ID 또는 비밀번호가 비어있습니다.");
+            return responseDto;
+        }
+
+        Member member = this.memberRepository.findByUserId(id);
+
+        if (member == null || !member.getUserPw().equals(password)) {
+            responseDto.setMessage("ID 또는 비밀번호를 확인해 주시기 바랍니다.");
+            return responseDto;
+        }
+
+        responseDto.setSuccess(true);
+        responseDto.setMemberNo(member.getNo());
+        responseDto.setMemberClass(MemberClass.MEMBER);
+
+        return responseDto;
     }
 }
