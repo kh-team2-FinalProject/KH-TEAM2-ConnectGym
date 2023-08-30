@@ -7,46 +7,51 @@ import com.khteam2.connectgym.member.MemberClass;
  * <br />
  * <br />
  * <h2>사용 예시</h2>
- * 어노테이션을 통해서 꺼내올 때<br />
+ * SessionAttribute 어노테이션을 통해서 값을 꺼내올 때<br />
  * <pre>
  * &#64;GetMapping("/mypage")
  * public String myController(
- *   &#64;SessionAttribute(name = {@link SessionConstant#LOGIN_MEMBER_NO}, required = false) Long memberNo,
- *   &#64;SessionAttribute(name = {@link SessionConstant#LOGIN_MEMBER_CLASS}, required = false) {@link MemberClass} memberClass
+ *   &#64;SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+ *   &#64;SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass
  * ) {
- *     if (memberClass == null || memberNo == null) {
- *         log.info("로그인되어 있지 않습니다.");
- *     } else if (memberClass == {@link MemberClass#MEMBER}) {
- *         log.info("로그인되어 있는 회원은 일반 회원입니다.");
- *         Member member = this.memberRepository.findById(memberNo).orElse(null);
- *     } else if (memberClass == {@link MemberClass#TRAINER}) {
- *         log.info("로그인되어 있는 회원은 트레이너 회원입니다.");
- *         Trainer trainer = this.trainerRepository.findById(memberNo).orElse(null);
+ *     if (loginMemberClass == null || loginMemberNo == null) {
+ *         log.info("로그인되어 있지 않음");
+ *     } else if (loginMemberClass == MemberClass.MEMBER) {
+ *         log.info("일반 회원 로그인됨");
+ *         Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+ *     } else if (loginMemberClass == MemberClass.TRAINER) {
+ *         log.info("트레이너 회원 로그인됨");
+ *         Trainer trainer = this.trainerRepository.findById(loginMemberNo).orElse(null);
  *     }
  *
  *     return "/content/mypages";
  * }
  * </pre>
  * <br />
- * 세션에 저장할 때<br />
+ * HttpSession을 이용해서 세션에 값을 저장할 때<br />
  * <pre>
  * &#64;GetMapping("/login")
  * public String myController(HttpSession session) {
- *     session.setAttribute({@link SessionConstant#LOGIN_MEMBER_NO}, 1L);
- *     session.setAttribute({@link SessionConstant#LOGIN_MEMBER_CLASS}, {@link MemberClass#MEMBER});
+ *     session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, 1L);
+ *     session.setAttribute(SessionConstant.LOGIN_MEMBER_CLASS, MemberClass.MEMBER);
  *
  *     return "redirect:/";
  * }
  * </pre>
+ *
+ * @see SessionConstant#LOGIN_MEMBER_NO
+ * @see SessionConstant#LOGIN_MEMBER_CLASS
+ * @see MemberClass
  */
 public class SessionConstant {
     /**
-     * 로그인되어 있는 회원 no
+     * 로그인되어 있는 회원 번호 (멤버 구분과 상관없이 저장)
      */
     public static final String LOGIN_MEMBER_NO = "session_login_member_no";
 
     /**
-     * 로그인되어 있는 회원 구분. 열거형 {@link MemberClass}의 값을 저장한다.
+     * 로그인되어 있는 회원 구분. 일반 회원인지, 아니면 트레이너 회원인지 구분하는 세션 변수이며
+     * 열거형 클래스 {@link MemberClass}의 값을 저장한다.
      */
     public static final String LOGIN_MEMBER_CLASS = "session_login_member_class";
 
