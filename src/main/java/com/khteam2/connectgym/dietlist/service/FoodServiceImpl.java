@@ -6,6 +6,7 @@
 package com.khteam2.connectgym.dietlist.service;
 
 import com.khteam2.connectgym.dietlist.model.Food;
+import com.khteam2.connectgym.dietlist.model.FoodEntity;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> getAllFoods() {
+    public List<FoodEntity> getAllFoods() {
         return foodRepository.findAll();
     }
 }
