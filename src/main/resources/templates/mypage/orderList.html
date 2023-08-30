@@ -13,7 +13,11 @@
     <th:block layout:fragment="mypage">
         <link rel="stylesheet" th:href="@{/css/orderList.css}" />
         <div id="orderList_wrap">
-            <form name="orderFilterForm" class="orderList_top_bar">
+            <form
+                name="orderFilterForm"
+                class="orderList_top_bar"
+                style="display: none"
+            >
                 <select name="status">
                     <option value="none">선택</option>
                     <option value="paymentFinish">결제완료</option>
@@ -33,6 +37,21 @@
                 <button>찾기</button>
             </form>
             <th:block th:if="${responseDto.success}">
+                <div
+                    class="orderList_empty_container"
+                    th:if="${#lists.isEmpty(responseDto.orderListOrderDtoList)}"
+                >
+                    <div class="orderList_empty_icon_box">
+                        <img
+                            th:src="@{/images/icons/mdi/store-alert-outline.svg}"
+                            width="150"
+                            height="150"
+                        />
+                    </div>
+                    <div class="orderList_empty_description">
+                        주문하신 내역이 없습니다.
+                    </div>
+                </div>
                 <div
                     class="orderList_list_container"
                     th:each="order : ${responseDto.orderListOrderDtoList}"
