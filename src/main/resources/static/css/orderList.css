@@ -12,6 +12,10 @@
     margin-bottom: 1rem;
 }
 
+#orderList_wrap .orderList_list_container {
+    margin-bottom: 1rem;
+}
+
 #orderList_wrap
     .orderList_list_container
     .orderList_list_item
