@@ -22,7 +22,12 @@ public class CSController {
         model.addAttribute("csList", csList);
         model.addAttribute("ctgyList", ctgyList);
 
+//      카테고리 id별로 가져오기
         List<CS> category1 = csService.viewToCategory(1);
+        List<CS> category2 = csService.viewToCategory(2);
+
+        model.addAttribute("category1", category1);
+        model.addAttribute("category2", category2);
 
         return "content/customer_service";
     }
