@@ -1,10 +1,10 @@
 package com.khteam2.connectgym.chat_test;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Data
