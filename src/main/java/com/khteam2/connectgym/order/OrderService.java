@@ -88,8 +88,16 @@ public class OrderService {
             return responseDto;
         }
 
+        LocalDate localDateToday = LocalDate.now();
+
         long totalPrice = 0L;
         for (Lesson lesson : lessons) {
+            // 강의를 시작한 이후인지 확인하고 객체를 반환한다.
+            if (localDateToday.isAfter(lesson.getStart_date())) {
+                responseDto.setMessage("이미 시작했거나 종료된 강의가 포함되어 있어 결제할 수 없습니다.");
+                return responseDto;
+            }
+
             // 가져온 강의의 금액을 모두 더한다.
             totalPrice += lesson.getPrice();
         }
