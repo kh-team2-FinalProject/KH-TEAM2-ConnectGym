@@ -66,20 +66,16 @@ public class LessonController {
 
 
     //레슨 한 개만 불러오기
-    @GetMapping("/lesson/{lessonNo}")
+    @GetMapping("/lessonDetail/{lessonNo}")
     public String viewLesson(@PathVariable Long lessonNo, Model model) {
-        Lesson lesson = lessonService.getLesson(lessonNo);
-        String trainerId = lessonService.getTrainerIdFromLesson(lesson);
+        Lesson lesson = lessonService.getLessonById(lessonNo);
+        String trainerName = lesson.getTrainer().getTrainerName();
+        String trainerImg = lesson.getTrainer().getProfileImg();
 
-        System.out.println("lesson = " + lesson);
-        System.out.println("trainerId = " + trainerId);
+        model.addAttribute("trainerName", trainerName);
+        model.addAttribute("lesson", lesson);
+        model.addAttribute("trainerImg", trainerImg);
 
-
-        if (lesson != null) {
-
-            model.addAttribute("trainerId", trainerId);
-            model.addAttribute("lesson", lesson);
-        }
         return "detailOrCrud/lessonDetail";
     }
 

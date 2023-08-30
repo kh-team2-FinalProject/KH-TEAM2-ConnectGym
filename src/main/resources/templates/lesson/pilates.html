@@ -1,3 +1,6 @@
+<!-- 사용 안 함 -->
+
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/lessonlist}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
@@ -12,7 +15,8 @@
             <div class="l_card">
                 <div class="l_card-inner">
                     <div class="l_card-front">
-                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}" alt="이미지가 지원되지 않습니다.">
+                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}"
+                             alt="이미지가 지원되지 않습니다.">
                     </div>
                     <div class="l_card-back">
                         <ul>
@@ -27,7 +31,8 @@
             <div class="l_card">
                 <div class="l_card-inner">
                     <div class="l_card-front">
-                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}" alt="이미지가 지원되지 않습니다.">
+                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}"
+                             alt="이미지가 지원되지 않습니다.">
                     </div>
                     <div class="l_card-back">
                         <ul>
@@ -42,7 +47,8 @@
             <div class="l_card">
                 <div class="l_card-inner">
                     <div class="l_card-front">
-                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}" alt="이미지가 지원되지 않습니다.">
+                        <img class="lessonlist_img" th:src="@{/images/lesson-demo/recruit_lesson.jpg}"
+                             alt="이미지가 지원되지 않습니다.">
                     </div>
                     <div class="l_card-back">
                         <ul>
@@ -57,15 +63,15 @@
         </div>
     </div>
     <script>
-                    document.querySelectorAll('.l_card').forEach(card => {
-                        card.addEventListener('mouseenter', () => {
-                            card.querySelector('.l_card-inner').style.transform = 'rotateY(180deg)';
-                        });
+        document.querySelectorAll('.l_card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('.l_card-inner').style.transform = 'rotateY(180deg)';
+            });
 
-                        card.addEventListener('mouseleave', () => {
-                            card.querySelector('.l_card-inner').style.transform = 'rotateY(0deg)';
-                        });
-                    });
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('.l_card-inner').style.transform = 'rotateY(0deg)';
+            });
+        });
     </script>
 </th:block>
 </html>
