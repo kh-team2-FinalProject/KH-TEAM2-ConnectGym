@@ -104,6 +104,8 @@
 /* 팝업 창 */
 
 .dietPop {
+    z-index: 1000; /* header 위로 올리는 작업 */
+    background-color: rgba(0, 0, 0, 0.5); /* 뒷 배경 */
     display: none;
     position: fixed;
     top: 50%;
@@ -119,7 +121,7 @@
 /* 팝업 내용 */
 .pop-content {
     width: 500px;
-    height: 700px;
+    height: 650px;
     background-color: #e6ebe1;
     color: #5f797c;
     padding: 20px;
@@ -138,19 +140,30 @@
 
 
 /* 닫기 버튼 */
+
 #closeBtn{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #e9f8c4;
+    border-radius:50%;
+    margin-left: 85%;
+}
+
+/* 검색 버튼 */
+
+#searchBtn{
+font-weight: bold;
 padding: 10px;
 background-color: #e9f8c4;
 border-radius:20px;
 justify-items: end;
-margin: 5px;
 }
 
 /* input box */
 
 #popInput{
 
- width: 75%;
+ width: 77%;
  height: 30px;
  padding: 10px;
  border-radius: 10px;

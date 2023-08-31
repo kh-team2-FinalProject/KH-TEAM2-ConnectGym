@@ -4,15 +4,13 @@ package com.khteam2.connectgym.dietlist.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 // Data 전달 용도
 
 @Data
 @Entity
+@Table(name = "foods")
 public class Food {
 
     @Id

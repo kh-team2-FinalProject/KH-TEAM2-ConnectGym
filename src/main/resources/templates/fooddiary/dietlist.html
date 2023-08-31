@@ -241,9 +241,10 @@
     <!-- 모달 팝업 -->
     <div id="dietPopup" class="dietPop">
         <div class="pop-content">
+            <button id="closeBtn">X</button>
             <h1 th:text="${mealTime}">time 식사</h1>
             <input id="popInput" type="text" placeholder="음식 찾기" />
-            <button id="closeBtn">닫기</button>
+            <button id="searchBtn">검색</button>
             <div class="pop_content2">
                 <table class="foodselect_Tbl" cellpadding="0" cellsacing="0">
                     <tbody>

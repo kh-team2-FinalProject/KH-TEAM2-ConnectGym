@@ -7,6 +7,7 @@ import lombok.Data;
 // 필드명 달라서 매핑
 @Data
 public class FoodApiResponse {
+
     @JsonProperty("DESC_KOR")
     private String foodNm;
     @JsonProperty("SERVING_WT")
