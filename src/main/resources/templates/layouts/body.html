@@ -27,21 +27,46 @@
                 <!--            avg 아이콘 마우스 올렸을때-->
                 <!--            로그인 안했으면 '로그인 하세요'-->
                 <!--            했으면 토글 내려와서 마이페이지/내수강현황/... 보이게 하기-->
-                    <a href="/mypage">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512">
-                        <style>svg {
-                            fill: #a3dc10
-                        }</style>
-                        <path
-                            d="M406.5 399.6C387.4 352.9 341.5 320 288 320H224c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3h64c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-88-40a88 88 0 1 0 176 0 88 88 0 1 0 -176 0z"/>
-                    </svg>
-                </a>
-                <button type="button" class="login-btn" th:if="${session.id == null}"
-                        th:onclick="|location.href='@{/user/login}'|">LOG IN
+                <div class="mypage_hover_menu">
+                    <ul>
+                        <li>
+                            <a href="/mypage">
+                            <svg class="mypage_header_icon" xmlns="http://www.w3.org/2000/svg" height="1.5em"
+                                 viewBox="0 0 512 512">
+                                <style>svg {fill: #a3dc10 }
+
+                                </style>
+                                <path
+                                    d="M406.5 399.6C387.4 352.9 341.5 320 288 320H224c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3h64c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-272a40 40 0 1 1 0-80 40 40 0 1 1 0 80zm-88-40a88 88 0 1 0 176 0 88 88 0 1 0 -176 0z"/>
+                            </svg>
+                             </a>
+
+                            <ul class="header_mypage_popup_menu" th:if="${session.session_login_member_no == null}">
+                                <li>
+                                    로그인 후 이용 가능합니다.
+                                </li>
+                            </ul>
+
+                            <ul th:if="${session.session_login_member_no != null}">
+                                <li><a href="/mypage/myDashboard">대시보드</a></li>
+                                <li><a href="/mypage/myLessonList">수강현황</a></li>
+                                <li><a href="/mypage/myInfo">내 정보</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <!--마이페이지 버튼 마우스 오버 시-->
+
+
+                <button type="button" class="login-btn" th:if="${session.session_login_member_no == null}"
+                        th:onclick="|location.href='@{/user/login}'|">LOGIN
                 </button>
-                <button type="button" class="login-btn" th:if="${session.id != null}"
-                        th:onclick="|location.href='@{/user/logout}'|">LOG OUT
+                <button type="button" class="login-btn" th:if="${session.session_login_member_no != null}"
+                        th:onclick="|location.href='@{/user/logout}'|">LOGOUT
                 </button>
+
             </div>
 
         </div>
@@ -57,6 +82,14 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+
+
+
+
+
+
+
 
     </script>
 

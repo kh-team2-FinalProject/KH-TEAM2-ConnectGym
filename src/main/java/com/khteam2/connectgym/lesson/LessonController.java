@@ -60,6 +60,8 @@ public class LessonController {
     //레슨 다 가져오기
     @GetMapping("/lesson-list")
     public String lessonList(Model model) {
+        model.addAttribute("bannerTitle", "lessons");
+
         List<Lesson> lessonList = lessonService.getAllLessons();
         model.addAttribute("lessonList", lessonList);
         return "lesson/lessonCategory";
@@ -69,6 +71,8 @@ public class LessonController {
     //레슨 한 개만 불러오기
     @GetMapping("/lessonDetail/{lessonNo}")
     public String viewLesson(@PathVariable Long lessonNo, Model model) {
+        model.addAttribute("bannerTitle", "lesson details");
+
         Lesson lesson = lessonService.getLessonById(lessonNo);
         TrainerResponseDTO trainerLessonResponseDTO = TrainerResponseDTO.builder()
             .trainerNo(lesson.getTrainer().getNo())

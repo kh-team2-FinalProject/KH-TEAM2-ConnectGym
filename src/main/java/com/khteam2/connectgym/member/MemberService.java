@@ -16,7 +16,7 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public long tempLoginProcess(String id, String password) {
+    public long loginProcess(String id, String password) {
         long returnValue = -1;
         Member member = this.memberRepository.findByUserId(id);
 
