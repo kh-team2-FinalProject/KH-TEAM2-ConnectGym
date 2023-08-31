@@ -63,4 +63,8 @@ public class CommonUtil {
 
         return sb.toString();
     }
+
+    public static Double opendataParseDouble(String str) {
+        return (str == null || str.isEmpty() || str.equals("N/A")) ? null : Double.parseDouble(str);
+    }
 }
