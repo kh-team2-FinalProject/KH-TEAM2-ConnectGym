@@ -28,11 +28,12 @@
                 <div class="module">
                     <div class="ctgyAll ctgyitem active" id="ctgyitem">
                         <button class="ctgy-btn" type="button">전체</button>
+<!--                        <a th:href="@{'/change/customer_service?category=All'}">전체</a>-->
                     </div>
-
 
                     <div class="ctgyitem" th:each="ctgyList: ${ctgyList}">
                         <button class="ctgy-btn" type="button" th:text="${ctgyList.ctgy}"></button>
+<!--                        <a th:href="@{'/change/customer_service?category=' + ${ctgyList.id}}" th:text="${ctgyList.ctgy}"></a>-->
                     </div>
 
                 </div>
@@ -63,15 +64,14 @@
                 <div class="pagination">
                     <ul>
                         <li th:if="${currentPage > 1}">
-                            <a th:href="@{'/customer_service/categoryAll/page/' + ${currentPage - 1}}">이전</a>
+                            <a th:href="@{'/customer_service?category=All&page=' + ${currentPage - 1}}">이전</a>
                         </li>
                         <li th:each="page : ${#numbers.sequence(1, totalPages_All)}"
                             th:classappend="${currentPage == page} ? 'active'">
-                            <a th:href="@{'/customer_service/categoryAll/page/' + ${page}}"
-                               th:text="${page}"></a>
+                            <a th:href="@{'/customer_service?category=All&page=' + ${page}}" th:text="${page}"></a>
                         </li>
                         <li th:if="${currentPage < totalPages_All}">
-                            <a th:href="@{'/customer_service/categoryAll/page/' + ${currentPage + 1}}">다음</a>
+                            <a th:href="@{'/customer_service?category=All&page=' + ${currentPage + 1}}">다음</a>
                         </li>
                     </ul>
                 </div>
@@ -101,15 +101,14 @@
                 <div class="pagination">
                     <ul>
                         <li th:if="${currentPage > 1}">
-                            <a th:href="@{'/customer_service/category1/' + ${currentPage - 1}}">이전</a>
+                            <a th:href="@{'/customer_service?category=1&page=' + ${currentPage - 1}}">이전</a>
                         </li>
                         <li th:each="page : ${#numbers.sequence(1, totalPages_ctgy1)}"
                             th:classappend="${currentPage == page} ? 'active'">
-                            <a th:href="@{'/customer_service/category1/' + ${page}}"
-                               th:text="${page}"></a>
+                            <a th:href="@{'/customer_service?category=1&page=' + ${page}}" th:text="${page}"></a>
                         </li>
                         <li th:if="${currentPage < totalPages_ctgy1}">
-                            <a th:href="@{'/customer_service/category1/' + ${currentPage + 1}}">다음</a>
+                            <a th:href="@{'/customer_service?category=1&page=' + ${currentPage + 1}}">다음</a>
                         </li>
                     </ul>
                 </div>
@@ -138,22 +137,21 @@
                 <div class="pagination">
                     <ul>
                         <li th:if="${currentPage > 1}">
-                            <a th:href="@{'/customer_service/category2/' + ${currentPage - 1}}">이전</a>
+                            <a th:href="@{'/customer_service?category=2page=' + ${currentPage - 1}}">이전</a>
                         </li>
                         <li th:each="page : ${#numbers.sequence(1, totalPages_ctgy2)}"
                             th:classappend="${currentPage == page} ? 'active'">
-                            <a th:href="@{'/customer_service/category2/' + ${page}}"
-                               th:text="${page}"></a>
+                            <a th:href="@{'/customer_service?category=2&page=' + ${page}}" th:text="${page}"></a>
                         </li>
                         <li th:if="${currentPage < totalPages_ctgy2}">
-                            <a th:href="@{'/customer_service/category2/' + ${currentPage + 1}}">다음</a>
+                            <a th:href="@{'/customer_service?category=2&page=' + ${currentPage + 1}}">다음</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
         </div>
-
+<input type="hidden" th:value="${category}" class="hidden-category">
     </div>
     <script type="text/javascript" rel="script" th:src="@{/js/cs.js}"></script>
 </th:block>
