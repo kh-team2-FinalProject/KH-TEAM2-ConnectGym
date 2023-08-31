@@ -6,6 +6,7 @@
 package com.khteam2.connectgym.dietlist.service;
 
 import com.khteam2.connectgym.dietlist.model.Food;
+import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientDto;
 
 import java.util.List;
 
@@ -13,4 +14,8 @@ import java.util.List;
 public interface FoodService {
     List<Food> saveFoodsFromOpenAPI();
     // 필요한 추가 메서드를 선언
+
+    OpenDataFoodNutrientDto getFoods(int pageNo, int limit);
+
+    int moveDataToDatabase();
 }

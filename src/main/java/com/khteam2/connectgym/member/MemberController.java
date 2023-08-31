@@ -9,19 +9,22 @@ import com.khteam2.connectgym.member.dto.MemberResponse;
 
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
+import com.khteam2.connectgym.trainer.TrainerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 @RequiredArgsConstructor
 @Controller
 @Slf4j
 public class MemberController {
 
+    private final TrainerRepository trainerRepository;
+    private final TrainerService trainerService;
     private final MemberService memberService;
     private final MailSendService mailService;
 
@@ -84,7 +87,19 @@ public class MemberController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/mypage")
-    public String myPage(){
+    public String myPage(
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass) {
+        if (SessionConstant.LOGIN_MEMBER_CLASS == null || loginMemberNo == null) {
+            log.info("로그인되어 있지 않음");
+        } else if (loginMemberClass == MemberClass.MEMBER) {
+            log.info("일반 회원 로그인됨");
+            Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+        } else if (loginMemberClass == MemberClass.TRAINER) {
+            log.info("트레이너 회원 로그인됨");
+            Trainer trainer = this.trainerRepository.findById(loginMemberNo).orElse(null);
+        }
+
         return "redirect:/mypage/myDashboard";
     }
 
@@ -130,10 +145,50 @@ public class MemberController {
         return "mypage/myInfo";
     }
 
-
     @GetMapping("/mypage/update")
     public String update() {
         return "/mypage/update";
     }
+
+    //  로컬호스트일 때의 urlmapping
+    @RequestMapping(value = "/connectgym", method = RequestMethod.GET)
+    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) {
+
+        // 인가코드 받는 부분 // 출력 테스트
+        System.out.println("###########" + code);
+
+        // 토큰 받는 부분
+        String access_Token = memberService.getAccessToken(code);
+        System.out.println(access_Token);
+
+        // 실제 정보를 출력하는 메서드 호출하기
+        HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+
+        // 카카오 정보를 이용하여 users 테이블의 email과 비교하여 회원정보가 있는지 확인하기
+        String kakaoemail = (String) userInfo.get("email");
+        HashMap<String, Object> m = memberService.findMemberByEmail(kakaoemail);
+        HashMap<String, Object> t = trainerService.findTrainerByEmail(kakaoemail);
+
+        // 출력 테스트용
+//      System.out.println("############" + kakaoemail);
+
+
+        // 응답받아오면 카카오 정보 비교하여 있으면 main으로 없으면 회원가입으로 return
+        if (m == null && t == null) {
+            // api 에서 가져온 정보 회원가입페이지에서 자동 입력되게 하기
+            // 추후 추가해야함
+            return "content/temp_join";
+        } else {
+            if (m != null) {
+                // users table에 있을 경우 session 저장
+            }
+            if (t != null) {
+                // trainer table에 있을 경우 session 저장
+            }
+
+            return "redirect:/";
+        }
+    }
+
 
 }
