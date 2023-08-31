@@ -14,72 +14,31 @@
                           #request.getParameter('category') == '2' and lesson.category == 2 or
                           #request.getParameter('category') == '3' and lesson.category == 3}"
                  class="lesson-card">
-                <div class="l_card">
-                    <div class="l_card-inner">
-                        <div class="l_card-front">
-                            <img class="lessonlist_img" th:src="${lesson.lesson_img}" alt="lesson image">
-                            <div class="l_card-front-bottom">
-                                <div class="l_card-front-title"><span th:text="${lesson.title}"></span></div>
-                                <div class="l_card-front-trainer">
+                <a th:href="@{/lessonDetail/{lessonNo}(lessonNo=${lesson.getNo()})}" class="card-link">
+                    <div class="l_card">
+                        <div class="l_card-inner">
+                            <div class="l_card-front">
+
+                                <img class="lessonlist_img" th:src="${lesson.lesson_img}" alt="lesson image">
+
+                                <div class="l_card-front-bottom">
+                                    <div class="l_card-front-title"><span th:text="${lesson.title}"></span></div>
+                                    <div class="l_card-front-trainer">
                                 <span
                                     th:text="${lesson.trainer != null ? lesson.trainer.trainerName : 'Unknown Trainer'}"></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="l_card-back">
-                            <ul>
-                                <li class="l_card_title" th:text="${lesson.lesson_info}"></li>
-                            </ul>
+                            <div class="l_card-back">
+                                <ul>
+                                    <li class="l_card_title" th:text="${lesson.lesson_info}"></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
-            <!--            <div th:each="lesson : ${lessonList}"-->
-            <!--                 th:if="${#request.getParameter('category') == '2' and lesson.category == 2}"-->
-            <!--                 class="lesson-card">-->
-            <!--                <div class="l_card">-->
-            <!--                    <div class="l_card-inner">-->
-            <!--                        <div class="l_card-front">-->
-            <!--                            <img class="lessonlist_img" th:src="${lesson.lesson_img}" alt="lesson image">-->
-            <!--                            <div class="l_card-front-bottom">-->
-            <!--                                <div class="l_card-front-title"><span th:text="${lesson.title}"></span></div>-->
-            <!--                                <div class="l_card-front-trainer">-->
-            <!--                                <span-->
-            <!--                                    th:text="${lesson.trainer != null ? lesson.trainer.trainerName : 'Unknown Trainer'}"></span>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                        <div class="l_card-back">-->
-            <!--                            <ul>-->
-            <!--                                <li class="l_card_title" th:text="${lesson.lesson_info}"></li>-->
-            <!--                            </ul>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--            <div th:each="lesson : ${lessonList}"-->
-            <!--                 th:if="${#request.getParameter('category') == '3' and lesson.category == 3}"-->
-            <!--                 class="lesson-card">-->
-            <!--                <div class="l_card">-->
-            <!--                    <div class="l_card-inner">-->
-            <!--                        <div class="l_card-front">-->
-            <!--                            <img class="lessonlist_img" th:src="${lesson.lesson_img}" alt="lesson image">-->
-            <!--                            <div class="l_card-front-bottom">-->
-            <!--                                <div class="l_card-front-title"><span th:text="${lesson.title}"></span></div>-->
-            <!--                                <div class="l_card-front-trainer">-->
-            <!--                                <span-->
-            <!--                                    th:text="${lesson.trainer != null ? lesson.trainer.trainerName : 'Unknown Trainer'}"></span>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                        <div class="l_card-back">-->
-            <!--                            <ul>-->
-            <!--                                <li class="l_card_title" th:text="${lesson.lesson_info}"></li>-->
-            <!--                            </ul>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
+
         </div>
     </div>
     <script th:src="@{/js/lessonCategory.js}"></script>
