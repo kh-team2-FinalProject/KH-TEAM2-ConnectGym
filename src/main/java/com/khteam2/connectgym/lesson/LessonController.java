@@ -2,6 +2,7 @@ package com.khteam2.connectgym.lesson;
 
 
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,12 +70,17 @@ public class LessonController {
     @GetMapping("/lessonDetail/{lessonNo}")
     public String viewLesson(@PathVariable Long lessonNo, Model model) {
         Lesson lesson = lessonService.getLessonById(lessonNo);
+        TrainerResponseDTO trainerLessonResponseDTO = TrainerResponseDTO.builder()
+            .trainerNo(lesson.getTrainer().getNo())
+            .trainerId(lesson.getTrainer().getTrainerId())
+            .trainerName(lesson.getTrainer().getTrainerName())
+            .profileImg(lesson.getTrainer().getProfileImg())
+            .build();
         String trainerName = lesson.getTrainer().getTrainerName();
         String trainerImg = lesson.getTrainer().getProfileImg();
 
-        model.addAttribute("trainerName", trainerName);
+        model.addAttribute("trainerInfo", trainerLessonResponseDTO);
         model.addAttribute("lesson", lesson);
-        model.addAttribute("trainerImg", trainerImg);
 
         return "detailOrCrud/lessonDetail";
     }

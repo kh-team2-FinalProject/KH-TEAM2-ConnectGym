@@ -3,10 +3,12 @@ package com.khteam2.connectgym.trainer;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,22 +41,17 @@ public class TrainerController {
         return "redirect:/mypage";
     }
 
-
-    @GetMapping(value = "/trainerDetail")
-    public String lessonDetail(Model model) {
+    @GetMapping(value = "/trainerDetail/{trainerNo}")
+    public String trainerDetail(@PathVariable Long trainerNo, Model model) {
         //배너타이틀
-        model.addAttribute("bannerTitle", "trainer");
+        model.addAttribute("bannerTitle", "trainer detail");
+
+        TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+
+        model.addAttribute("trainer", trainerResponseDTO);
+
         return "detailOrCrud/trainerdetail";
     }
 
-
-    @PostMapping(value = "/trainerDetail")
-    public String lessonDetail(Model model, TrainerRequestDTO trainerRequest) {
-        //배너타이틀
-        model.addAttribute("bannerTitle", "trainer");
-
-        //service save() 호출
-        return "detailOrCrud/createComplete";
-    }
 
 }

@@ -6,6 +6,7 @@ import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,9 @@ public class TrainerService {
     //중복 검사 메소드
     public boolean validateDuplicate(String id){
         boolean check= false;
-         List<Trainer> findTrainers = trainerRepository.findTrainerId(id);
+        Trainer findTrainer = trainerRepository.findByTrainerId(id);
 
-        if(findTrainers.isEmpty()){
+        if(findTrainer == null){
             check=true;
         }
         return check;
@@ -120,5 +121,20 @@ public class TrainerService {
         responseDto.setMemberClass(MemberClass.TRAINER);
 
         return responseDto;
+    }
+
+    public TrainerResponseDTO findOneTrainer(Long trainerNo) {
+        Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
+
+        TrainerResponseDTO trainerResponseDTO = TrainerResponseDTO.builder()
+            .trainerNo(trainer.getNo())
+            .trainerId(trainer.getTrainerId())
+            .trainerName(trainer.getTrainerName())
+            .trainerTel(trainer.getTrainerTel())
+            .profileImg(trainer.getProfileImg())
+            .trainerInfo(trainer.getTrainerInfo())
+            .build();
+
+       return trainerResponseDTO;
     }
 }

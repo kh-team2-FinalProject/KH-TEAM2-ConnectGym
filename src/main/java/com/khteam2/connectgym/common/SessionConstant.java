@@ -9,10 +9,10 @@ import com.khteam2.connectgym.member.MemberClass;
  * <h2>사용 예시</h2>
  * SessionAttribute 어노테이션을 통해서 값을 꺼내올 때<br />
  * <pre>
- * &#64;GetMapping("/mypage")
+ GetMapping("/mypage")
  * public String myController(
- *   &#64;SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
- *   &#64;SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass
+ *   SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+ *   SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass
  * ) {
  *     if (loginMemberClass == null || loginMemberNo == null) {
  *         log.info("로그인되어 있지 않음");
@@ -30,7 +30,7 @@ import com.khteam2.connectgym.member.MemberClass;
  * <br />
  * HttpSession을 이용해서 세션에 값을 저장할 때<br />
  * <pre>
- * &#64;GetMapping("/login")
+ GetMapping("/login")
  * public String myController(HttpSession session) {
  *     session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, 1L);
  *     session.setAttribute(SessionConstant.LOGIN_MEMBER_CLASS, MemberClass.MEMBER);

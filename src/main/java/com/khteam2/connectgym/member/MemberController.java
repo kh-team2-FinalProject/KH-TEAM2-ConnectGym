@@ -10,7 +10,7 @@ import com.khteam2.connectgym.member.dto.MemberResponse;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +22,11 @@ import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class MemberController {
 
-    @Autowired
-    private MemberService memberService;
-
-    @Autowired
-    private MailSendService mailService;
+    private final MemberService memberService;
+    private final MailSendService mailService;
 
     @GetMapping(value = "/temp_login")
     public String tempLogin(
@@ -85,16 +83,35 @@ public class MemberController {
 
 
     //=====마이페이지=====
-    private  final TrainerRepository trainerRepository;
+    private final MemberRepository memberRepository;
+    private final TrainerRepository trainerRepository;
+
+    @GetMapping("/mypage")
+    public String myPage(
+        @SessionAttribute(name=SessionConstant.LOGIN_MEMBER_NO, required =false) Long loginMemberNo,
+        @SessionAttribute(name =SessionConstant.LOGIN_MEMBER_CLASS, required =false) MemberClass loginMemberClass)
+    {
+        if (SessionConstant.LOGIN_MEMBER_CLASS == null || loginMemberNo == null) {
+            log.info("로그인되어 있지 않음");
+        } else if (loginMemberClass == MemberClass.MEMBER) {
+            log.info("일반 회원 로그인됨");
+            Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+        } else if (loginMemberClass == MemberClass.TRAINER) {
+            log.info("트레이너 회원 로그인됨");
+            Trainer trainer = this.trainerRepository.findById(loginMemberNo).orElse(null);
+        }
+
+        return "redirect:/mypage/myDashboard";
+    }
 
     // 1) 대시보드
     @GetMapping("/mypage/myDashboard")
     public String myDashboard(Model model) {
         //배너타이틀
         model.addAttribute("bannerTitle", "my dashboard");
-        Trainer trainer = trainerRepository.findById(1L).orElse(null);
+        Member member = memberRepository.findById(1L).orElse(null);
 
-        model.addAttribute("trainer",trainer);
+        model.addAttribute("member", member);
         return "mypage/dashboard";
     }
 
@@ -123,13 +140,11 @@ public class MemberController {
     public String myInfo(Model model) {
         //배너타이틀
         model.addAttribute("bannerTitle", "my info");
-        Trainer trainer = trainerRepository.findById(6L).orElse(null);
+        /*Trainer trainer = trainerRepository.findById(6L).orElse(null);*/
 
-        model.addAttribute("trainer", trainer);
+        /*model.addAttribute("trainer", trainer);*/
         return "mypage/myInfo";
     }
-
-
 
 
 }

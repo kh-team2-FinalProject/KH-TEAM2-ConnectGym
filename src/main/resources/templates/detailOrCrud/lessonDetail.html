@@ -13,8 +13,8 @@
                 <ul class="lessonDetailList">
                     <li class="lessonDetail_profile">
                         <div class="lessonDetail_profile_info">
-                            <img th:href="@{trainerdetail.html}" th:src="${trainerImg}" alt="Profile Picture">
-                            <span th:text="${trainerName}" class="user_id">트레이너 아이디</span>
+                            <img th:src="${trainerInfo.profileImg}" alt="Profile Picture">
+                            <span th:text="${trainerInfo.trainerName}" class="user_id">트레이너 아이디</span>
                         </div>
                     </li>
 
@@ -39,13 +39,17 @@
             <div class="lessonDetail_trainerBox">
                 <table class="ld_trainerBox_table">
                     <tr>
-                        <td><img th:href="@{trainerdetail.html}" th:src="${trainerImg}" alt="Profile Picture"></td>
-                        <td>[[${trainerName}]]</td>
+                        <td><img th:src="${trainerInfo.profileImg}" alt="Profile Picture"></td>
+                        <td><span th:text="${trainerInfo.trainerName}"></span>
+                            <br> <span th:text="${trainerInfo.trainerId}"></span>
+                        </td>
                     </tr>
 
                     <tr>
                         <td colspan="2">
-                            <button class="ld_trainer_like_btn">like</button>
+                            <button class="ld_trainer_like_btn"
+                                    onclick="location.href='/trainerDetail/${trainerInfo.trainerNo}'">
+                                상세보기</button>
                         </td>
 
                     </tr>

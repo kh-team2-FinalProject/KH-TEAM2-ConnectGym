@@ -14,24 +14,23 @@
             <ul class="td_list">
                 <li class="td_profile">
                     <div class="td_profile_info">
-                        <img th:src="@{/images/김계란.png}" alt="Profile Picture">
-                        <span class="user_id">사용자 아이디</span>
+                        <img th:src="${trainer.profileImg}" alt="Profile Picture">
+                        <span class="user_id" th:text="${trainer.trainerId}"></span>
                     </div>
                 </li>
 
-                <p>강좌명</p>
-
                 <li>
-                    <span id="lesson_name">강좌명 강좌명 강좌명 강좌명 강좌명 강좌명</span>
+                    <!-- trainer.no 가져가시면 됩니다.-->
+                    <button class="trainer_follow trainer_button">
+
+                        팔로우하기</button>
+                    <button class="trainer_chatting trainer_button">채팅하기</button>
                 </li>
 
-                <p>강좌 소개</p>
+                <p>트레이너 소개</p>
+
                 <li>
-                    <span id="lesson_info">강좌 소개 강좌 소개 강좌 소개 강좌 소개 강좌 소개 강좌 소개</span>
-                </li>
-                <p>강사 소개</p>
-                <li>
-                    <span id="trainer_info">강사 소개 강사 소개 강사 소개 강사 소개 강사 소개 </span>
+                    <span id="lesson_info" th:text="${trainer.trainerInfo}"></span>
                 </li>
 
             </ul>
