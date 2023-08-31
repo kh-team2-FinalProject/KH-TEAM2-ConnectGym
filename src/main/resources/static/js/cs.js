@@ -1,6 +1,7 @@
 $(document).ready(function () {
   // 카테고리 버튼 클릭시 class 추가/삭제
   $(".ctgyitem").click(function () {
+
     if (!$(this).hasClass("active")) {
       $(".active").removeClass("active");
       $(this).addClass("active");
@@ -30,4 +31,29 @@ $(document).ready(function () {
       $(this).children("div").slideDown(200);
     }
   });
+  pageCategory();
 });
+
+function pageCategory(){
+    var category =$('.hidden-category').val();
+
+    if(category == 1){
+        $('#faq-accodion-wrap1').addClass('none');
+        $('#faq-accodion-wrap2').removeClass('none');
+        $('#faq-accodion-wrap3').addClass('none');
+
+        $('.module').children('div:eq(1)').addClass('active');
+        $('.module').children('div:eq(0)').removeClass('active');
+        $('.module').children('div:eq(2)').removeClass('active');
+
+    }else if(category==2){
+        $('#faq-accodion-wrap1').addClass('none');
+        $('#faq-accodion-wrap2').addClass('none');
+        $('#faq-accodion-wrap3').removeClass('none');
+
+        $('.module').children('div:eq(2)').addClass('active');
+        $('.module').children('div:eq(1)').removeClass('active');
+        $('.module').children('div:eq(0)').removeClass('active');
+    }
+}
+
