@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -27,22 +28,22 @@ public class TrainerService {
     private final S3Uploader s3Uploader;
 
     //중복 검사 메소드
-    public boolean validateDuplicate(String id){
-        boolean check= false;
+    public boolean validateDuplicate(String id) {
+        boolean check = false;
         Trainer findTrainer = trainerRepository.findByTrainerId(id);
 
-        if(findTrainer == null){
-            check=true;
+        if (findTrainer == null) {
+            check = true;
         }
         return check;
     }
 
     @Transactional
     public Long registerTrainer(TrainerRequestDTO trainerRequestDTO, Member member,
-                                  MultipartFile profileImgFile,MultipartFile[] licenseImgFiles) {
-       //중복검사
+                                MultipartFile profileImgFile, MultipartFile[] licenseImgFiles) {
+        //중복검사
         boolean check = validateDuplicate(member.getUserId());
-        if(!check){
+        if (!check) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
 
@@ -60,7 +61,7 @@ public class TrainerService {
         //자격증사진
         if (licenseImgFiles.length != 0) {
             try {
-                for(MultipartFile file: licenseImgFiles){
+                for (MultipartFile file : licenseImgFiles) {
                     String licenseImgUrl = s3Uploader.uploadProfileFile(file, member.getUserId());
                     License license = new License();
                     license.setLicenseImg(licenseImgUrl);
@@ -135,6 +136,23 @@ public class TrainerService {
             .trainerInfo(trainer.getTrainerInfo())
             .build();
 
-       return trainerResponseDTO;
+        return trainerResponseDTO;
+    }
+
+    public HashMap<String, Object> findTrainerByEmail(String email) {
+        List<Trainer> TrainerList = trainerRepository.findAll();
+        HashMap<String, Object> findTrainer = new HashMap<>();
+
+        for (int i = 0; i < TrainerList.size(); i++) {
+            if (email.equals(TrainerList.get(i).getTrainerEmail())) {
+                findTrainer.put("user_id", TrainerList.get(i).getTrainerId());
+                findTrainer.put("user_pw", TrainerList.get(i).getTrainerPw());
+                findTrainer.put("user_name", TrainerList.get(i).getTrainerName());
+                findTrainer.put("user_tel", TrainerList.get(i).getTrainerTel());
+                findTrainer.put("user_email", TrainerList.get(i).getTrainerEmail());
+                return findTrainer;
+            }
+        }
+        return findTrainer;
     }
 }
