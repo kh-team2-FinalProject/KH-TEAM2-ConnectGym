@@ -145,11 +145,11 @@ public class TrainerService {
 
         for (int i = 0; i < TrainerList.size(); i++) {
             if (email.equals(TrainerList.get(i).getTrainerEmail())) {
-                findTrainer.put("user_id", TrainerList.get(i).getTrainerId());
-                findTrainer.put("user_pw", TrainerList.get(i).getTrainerPw());
-                findTrainer.put("user_name", TrainerList.get(i).getTrainerName());
-                findTrainer.put("user_tel", TrainerList.get(i).getTrainerTel());
-                findTrainer.put("user_email", TrainerList.get(i).getTrainerEmail());
+                findTrainer.put("trainer_id", TrainerList.get(i).getTrainerId());
+                findTrainer.put("trainer_pw", TrainerList.get(i).getTrainerPw());
+                findTrainer.put("trainer_name", TrainerList.get(i).getTrainerName());
+                findTrainer.put("trainer_tel", TrainerList.get(i).getTrainerTel());
+                findTrainer.put("trainer_email", TrainerList.get(i).getTrainerEmail());
                 return findTrainer;
             }
         }

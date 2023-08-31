@@ -16,15 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
 @Slf4j
 public class MemberController {
 
+    private final TrainerRepository trainerRepository;
     private final TrainerService trainerService;
     private final MemberService memberService;
     private final MailSendService mailService;
@@ -88,9 +87,6 @@ public class MemberController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/mypage")
-<<<<<<< HEAD
-    public String myPage(){
-=======
     public String myPage(
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass) {
@@ -104,7 +100,6 @@ public class MemberController {
             Trainer trainer = this.trainerRepository.findById(loginMemberNo).orElse(null);
         }
 
->>>>>>> 89c8a5b (박진석-카카오 로그인 api // 사용자 정보 가져와서 DB와 비교하여 main or join 페이지 이동 처리 완료 // session 추후 설정예정 // return값 session 설정 후 재확인예정 // trainer db trainer_email 추가 완료)
         return "redirect:/mypage/myDashboard";
     }
 
@@ -150,12 +145,7 @@ public class MemberController {
         return "mypage/myInfo";
     }
 
-<<<<<<< HEAD
-
     @GetMapping("/mypage/update")
-=======
-    @GetMapping("/update")
->>>>>>> 89c8a5b (박진석-카카오 로그인 api // 사용자 정보 가져와서 DB와 비교하여 main or join 페이지 이동 처리 완료 // session 추후 설정예정 // return값 session 설정 후 재확인예정 // trainer db trainer_email 추가 완료)
     public String update() {
         return "/mypage/update";
     }
