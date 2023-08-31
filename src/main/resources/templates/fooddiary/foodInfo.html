@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/fooddiary}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>식단 등록, 기입 페이지</title>
+</th:block>
+
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="foodD">
+    <link rel="stylesheet" th:href="@{/css/foodInfo.css}">
+    <div class="foodD_search">
+        <!-- 헤더 -->
+        <div class="search_header">
+            <h1 id="food_search">FOOD INFO</h1>
+        </div>
+        <div class="info_btn">
+            <input  class="searchInput" type="text" placeholder="식품명을 입력하시오" />
+            <button class="search_btn">search</button>
+            <button class="write_btn">write</button>
+        </div>
+        <table class="FoodInfo_table">
+            <tr>
+                <th class="Info_name">식품명</th>
+                <th class="Info_name">1회제공량</th>
+                <th class="Info_name">탄수화물</th>
+                <th class="Info_name">단백질</th>
+                <th class="Info_name">지방</th>
+                <th class="Info_name">나트륨</th>
+                <th class="Info_name">당류</th>
+                <th class="Info_name">칼로리</th>
+            </tr>
+        </table>
+    </div>
+
+</th:block>
+
+</body>
+</html>

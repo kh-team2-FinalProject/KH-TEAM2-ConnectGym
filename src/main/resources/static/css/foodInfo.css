@@ -1,0 +1,81 @@
+.foodD_search{
+    text-align: center;
+    margin: auto;
+    width: 95%;
+
+    font-family: Arial, sans-serif;
+/*
+    background-color: #0E1414;
+*/
+    font-size : 1.5vw;
+    padding-top : 40px;
+}
+
+.search_header{
+    justify-content: space-around;
+    align-items:center;
+}
+
+.info_btn{
+    display: flex;
+}
+.write_btn{
+    margin-left: 68%;
+}
+
+
+.foodD_search button {
+    background-color: transparent;
+    color: #A3DC10;
+    border: none;
+}
+
+.info_btn button{
+  background-color: #A3DC10;
+   position: relative;
+    display: inline-block;
+
+    height:20%;
+    font-family: 'Black Ops One', cursive;
+    padding: 5px 5px;
+    color: white;
+    border:0px;
+    border-radius: 6px;
+    text-align: center;
+    transition: top .01s linear;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+
+  box-shadow: 0 0 0 1px #A3DC10 inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 4px 0 0 #81BC12,
+        0 4px 0 1px rgba(0,0,0,.4),
+        0 4px 4px 1px rgba(0,0,0,0.5);
+}
+
+.search_header button:active {
+  top: 6px;
+  border:0px;
+  box-shadow: 0 0 0 1px #A3DC10 inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 0 0 1px rgba(0,0,0,0.4);
+}
+
+.search_header button:hover{
+background-color: #A7D145;
+}
+
+.FoodInfo_table{
+
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    color: white;
+}
+
+/* 식품 정보 이름 */
+th{
+padding: 12px;
+font-size: 15px;
+}
+
