@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 대시보드</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="mypage">
+    <div id="myDashboard">
+        <div class="myDashboard_inner">
+            <h2>마이페이지</h2>
+            <div class="myDashboard_cards">
+                <div class="myDashboard_myCard myDashboard_profile_card">
+                    <div class="myDashboard_profile">
+                        <div class="myDashboard_profile_image">
+                            <img
+                                src="img/ciaran-o-brien-qegMLAiTBA4-unsplash.jpg"
+                                alt="프로필 사진"
+                                id="profile_image"
+                                width="100"
+                            />
+                        </div>
+                        <div class="myDashboard_message">님 환영합니다!</div>
+                    </div>
+                    <div class="myDashboard_buttons">
+                        <a href="modify_user_info.html" class="myDashboard_button2">개인정보수정</a>
+                    </div>
+                </div>
+                <div class="myDashboard_myCard recent_review_card">
+                    <div class="title card_title">최근 작성한 후기</div>
+                    <ul class="reviews">
+                        <div class="review_empty">작성한 후기가 없습니다.</div>
+                    </ul>
+                    <div class="link_and_buttons">
+                        <a href="my_review.html" class="small_link">모두 보기</a>
+                    </div>
+                </div>
+                <div class="myDashboard_myCard order_card" style="display: none">
+                    <div class="card_title">최근 결제내역</div>
+                </div>
+                <div id="cart" class="myDashboard_myCard cart_card">
+                    <div class="myDashboard_inner">
+                        <div class="card_title title">나의 찜</div>
+                        <div class="myDashboard_cards">
+                            <div class="empty_cart">찜 목록이 비어있습니다.</div>
+                        </div>
+                        <div class="controllers" style="display: none">
+                            <div class="order_select_all_cb_con">
+                                <input
+                                    type="checkbox"
+                                    id="order_select_all_cb"
+                                    class="checkbox_default checkbox_default_large_1"
+                                />
+                                <label for="order_select_all_cb">모두 선택</label>
+                            </div>
+                            <div>
+                                <button
+                                    type="button"
+                                    class="myDashboard_button2 button_2_large_2 remove_selected_item_button"
+                                >
+                                    삭제
+                                </button>
+                                <button
+                                    type="button"
+                                    class="myDashboard_button2 button_2_large_2 payment_selected_item_button"
+                                >
+                                    결제
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</th:block>
+
+
+</html>

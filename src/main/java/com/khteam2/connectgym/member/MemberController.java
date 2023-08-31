@@ -4,6 +4,7 @@ import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import javax.servlet.http.HttpSession;
 
+import com.khteam2.connectgym.member.dto.MemberResponse;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import lombok.RequiredArgsConstructor;
@@ -77,9 +78,42 @@ public class MemberController {
         return mailService.joinEmail(email);
     }
 
-    //임시
+    //=====마이페이지=====
     private  final TrainerRepository trainerRepository;
-    @GetMapping("/myInfo")
+
+    // 1) 대시보드
+    @GetMapping("/mypage/myDashboard")
+    public String myDashboard(Model model) {
+        //배너타이틀
+        model.addAttribute("bannerTitle", "my dashboard");
+        Trainer trainer = trainerRepository.findById(1L).orElse(null);
+
+        model.addAttribute("trainer",trainer);
+        return "mypage/dashboard";
+    }
+
+    // 2) 내 수강목록
+    @GetMapping("/mypage/mylessonlist")
+    public String myLesson(Model model) {
+        //배너타이틀
+        model.addAttribute("bannerTitle", "MY LESSON");
+        // (삭제예정)세션에서 꺼내오기 못해서 고정으로 테스트 중
+        MemberResponse member = memberService.findOneMember(1L);
+        model.addAttribute("member", member);
+        System.out.println("member = " + member.getUserName());
+        System.out.println("마이레슨리스트 컨트롤러 호출");
+        return "mypage/mylessonlist";
+    }
+
+
+    @GetMapping(value = "/mypage/convertToTrainerAccount")
+    public String convertAccount(Model model) {
+        model.addAttribute("bannerTitle", "CONVERT TO TRAINER ACCOUNT");
+        return "mypage/convertToTrainerAccount";
+    }
+
+
+    @GetMapping("/mypage/myInfo")
     public String myInfo(Model model) {
         //배너타이틀
         model.addAttribute("bannerTitle", "my info");
@@ -88,6 +122,8 @@ public class MemberController {
         model.addAttribute("trainer",trainer);
         return "mypage/myInfo";
     }
+
+
 
 
 }

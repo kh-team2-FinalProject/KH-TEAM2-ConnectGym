@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class TrainerController {
 
     private final MemberRepository memberRepository;
-
     private final TrainerService trainerService;
 
 
@@ -32,11 +31,10 @@ public class TrainerController {
                                  @RequestParam("licenseImgFiles") MultipartFile[] licenseImgFiles){
         model.addAttribute("bannerTitle", "convert");
 
-        Member member = memberRepository.findById(1L).orElse(null);
+        Member member = memberRepository.findById(3L).orElse(null);
 
         //트레이너로 등록 후 해당 멤버는 삭제되는 서비스
         trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile, licenseImgFiles);
-        //추후 기존 멤버 세션 삭제하는 메소드 추가
 
         return "redirect:/mypage";
     }

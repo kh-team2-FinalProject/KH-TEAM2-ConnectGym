@@ -2,8 +2,6 @@ package com.khteam2.connectgym.trainer;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.khteam2.connectgym.enroll.EnrollDetail;
-import com.khteam2.connectgym.lesson.Lesson;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +33,7 @@ public class Trainer {
 
     @OneToMany(mappedBy = "trainer")
     @JsonIgnore
-    private List<Licenses> licenseList = new ArrayList<>();
+    private List<License> licenseList;
 
     private String profileImg;
 

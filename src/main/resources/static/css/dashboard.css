@@ -1,0 +1,353 @@
+.card_title {
+  font-size: 26px;
+  text-align: center;
+}
+
+#my_page {
+  margin: var(--page-container-marin-top) 0 var(--page-container-marin-bottom);
+}
+
+#my_page > .inner {
+  margin: 0 auto;
+  max-width: 48rem;
+}
+
+#my_page > .inner h2 {
+  font-size: 32px;
+}
+
+#my_page > .inner > .cards {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 32px;
+}
+
+#my_page > .inner > .cards > .card {
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgb(0 0 0 / 0.3);
+  /* height: fit-content; */
+}
+
+#my_page > .inner > .cards > .card.profile_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#my_page > .inner > .cards > .card.profile_card .profile {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#my_page > .inner > .cards > .card.profile_card .profile_image_con {
+  margin-bottom: 8px;
+}
+
+#my_page > .inner > .cards > .card.profile_card .profile_image_con > img {
+  border-radius: 100%;
+}
+
+#my_page > .inner > .cards > .card.profile_card .buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+#my_page > .inner > .cards > .card.recent_review_card {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#my_page > .inner > .cards > .card.recent_review_card > .title {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+#my_page > .inner > .cards > .card.recent_review_card > .reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+#my_page > .inner > .cards > .card.recent_review_card > .reviews > .review_empty {
+  text-align: center;
+}
+
+#my_page > .inner > .cards > .card.recent_review_card > .reviews > .review {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+#my_page .cards > .card.recent_review_card > .reviews > .review .review_top > .review_star {
+  color: var(--star-color);
+}
+
+#my_page .cards > .card.recent_review_card > .reviews > .review .review_top > *:not(:last-child) {
+  margin-right: 8px;
+}
+
+#my_page .cards > .card.recent_review_card > .reviews > .review .review_title {
+  font-weight: 700;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#my_page .cards > .card.recent_review_card > .reviews > .review .review_content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+#my_page .cards > .card.recent_review_card > .reviews > .review > .review_photo {
+  display: none;
+}
+
+#my_page > .inner > .cards > .card.recent_review_card > .link_and_buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#my_page
+  > .inner
+  > .cards
+  > .card_list
+  > .card.recent_review_card
+  > .link_and_buttons
+  > .small_link {
+  font-size: 14px;
+}
+
+#my_page .cards .cart_card {
+  grid-column-end: span 2;
+}
+
+#my_page .cards .cart_card > .inner {
+}
+
+#my_page .cards .cart_card > .inner .title {
+  font-size: 26px;
+  text-align: center;
+}
+
+#my_page .cards .cart_card .cards {
+  margin-top: 24px;
+}
+
+#my_page .cards .cart_card .cards > .empty_cart {
+  margin: 4rem 0;
+  text-align: center;
+}
+
+#my_page .cards .cart_card .cards > .card {
+  padding: 20px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: row;
+  border: none;
+  border-radius: 0;
+}
+
+#my_page .cards .cart_card .cards > .card:not(:last-child) {
+  border-bottom: 1px solid gray;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_img {
+  line-height: 0;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_img > img {
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 0;
+  height: 104px;
+  flex: 1 0;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_info > .order_title {
+  font-size: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_info .order_info_2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_info .order_info_2 > .order_travel_date {
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_info .order_info_2 > .order_price {
+  position: relative;
+  display: flex;
+  gap: 16px;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_info .order_info_2 > .order_price > .order_count,
+#my_page
+  .cards
+  .cart_card
+  .cards
+  > .card
+  > .order_info
+  .order_info_2
+  > .order_price
+  > .order_discount_price {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#my_page
+  .cards
+  .cart_card
+  .cards
+  > .card
+  > .order_info
+  .order_info_2
+  > .order_price
+  > .order_normal_price {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  right: 2px;
+  text-decoration: line-through;
+  font-size: 14px;
+  color: gray;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_buttons > * {
+  width: 100%;
+}
+
+#my_page .cards .cart_card .cards > .card > .order_buttons > *:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+#my_page .cards .cart_card .controllers {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+#my_page .cards .cart_card .controllers .order_select_all_cb_con {
+  align-self: center;
+}
+
+#my_page .cards .cart_card .controllers .order_select_all_cb_con > label {
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+#my_page .cards .cart_card > #cart_modify {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgb(0 0 0 / 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#my_page .cards .cart_card > #cart_modify > .inner {
+  padding: 24px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+#my_page .cards .cart_card > #cart_modify form[name='modify_goods'] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 20rem;
+}
+
+#my_page .cards .cart_card > #cart_modify form[name='modify_goods'] > :first-child {
+  margin-bottom: 8px;
+}
+
+#my_page .cards .cart_card > #cart_modify form[name='modify_goods'] > :last-child {
+  margin-top: 8px;
+}
+
+#my_page .cards .cart_card > #cart_modify form[name='modify_goods'] > .goods_modify_title {
+  font-size: 1.5rem;
+}
+
+#my_page .cards .cart_card > #cart_modify form[name='modify_goods'] > .goods_modify_input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#my_page
+  .cards
+  .cart_card
+  > #cart_modify
+  form[name='modify_goods']
+  > .goods_modify_input
+  > .goods_modify_input_item {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+#my_page
+  .cards
+  .cart_card
+  > #cart_modify
+  form[name='modify_goods']
+  > .goods_modify_input
+  > .goods_modify_input_item
+  > label {
+  position: absolute;
+  left: 60px;
+  line-height: 2;
+}
+
+#my_page
+  .cards
+  .cart_card
+  > #cart_modify
+  form[name='modify_goods']
+  > .goods_modify_input
+  > .goods_modify_input_item
+  > .goods_modify_price {
+  position: absolute;
+  right: 0;
+  line-height: 2;
+}
+
+#my_page .cards .cart_card > #cart_modify form[name='modify_goods'] > .goods_modify_info {
+  margin-top: 8px;
+  text-align: end;
+}
+
+#my_page .cards > .order_card {
+  grid-column-end: span 2;
+}
+
+#my_page .cards > .order_card > :not(:last-child) {
+  margin-bottom: 8px;
+}

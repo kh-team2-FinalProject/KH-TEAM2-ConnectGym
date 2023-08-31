@@ -3,15 +3,14 @@ package com.khteam2.connectgym.trainer;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Entity
 @Builder
 @Getter @Setter
 @AllArgsConstructor
-public class Licenses {
+@Table(name="licenses")
+public class License {
 
     @Id @GeneratedValue
     private Long no;

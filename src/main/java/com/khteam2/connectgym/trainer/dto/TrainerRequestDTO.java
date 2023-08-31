@@ -1,12 +1,13 @@
 package com.khteam2.connectgym.trainer.dto;
 
-import com.khteam2.connectgym.trainer.Licenses;
+import com.khteam2.connectgym.trainer.License;
 import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,17 +21,16 @@ public class TrainerRequestDTO {
     private String trainerPw;
     private String trainerName;
     private String trainerTel;
-    private List<Licenses> licenseList = new ArrayList<>();
+    private List<License> licenseList = new ArrayList<>();
     private String profileImg;
     private String trainerInfo;
 
 
     //라이선스 추가
-    public void addLicense(Licenses licenses) {
+    public void addLicense(License licenses) {
         licenseList.add(licenses);
         licenses.setTrainer(this.toEntity());
     }
-
 
     public Trainer toEntity() {
         return Trainer.builder()
