@@ -128,7 +128,10 @@ public class MemberController {
         model.addAttribute("trainer", trainer);
         return "mypage/myInfo";
     }
-
+    @GetMapping("/update")
+    public String update() {
+        return "/mypage/update";
+    }
 
 
 
