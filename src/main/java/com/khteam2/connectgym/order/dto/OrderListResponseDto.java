@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -12,5 +13,9 @@ import java.util.List;
 public class OrderListResponseDto {
     private boolean success;
     private String message;
+    private String status;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String search;
     List<OrderListOrderDto> orderListOrderDtoList;
 }

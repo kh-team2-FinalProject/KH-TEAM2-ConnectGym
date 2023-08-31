@@ -2,12 +2,11 @@ package com.khteam2.connectgym.lesson;
 
 
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
-import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,8 +33,10 @@ public class LessonController {
     }
 
     @PostMapping(value = "/createLesson")
+
     public String createLesson(Model model, LessonRequestDTO lessonRequestDTO,
                                @RequestParam("lessonImgFile") MultipartFile file) {
+
         //배너타이틀
         model.addAttribute("bannerTitle", "create lesson");
 
@@ -65,12 +66,19 @@ public class LessonController {
 
 
     //레슨 한 개만 불러오기
-//    @GetMapping("/lesson/{lessonNo}")
-//    public String viewLesson(@PathVariable Long lessonNo, Model model){
-//        Lesson lesson = lessonService.getLesson(lessonNo);
-//        model.addAttribute("lesson", lesson);
-//        return "lesson/view";
-//    }
+    @GetMapping("/lessonDetail/{lessonNo}")
+    public String viewLesson(@PathVariable Long lessonNo, Model model) {
+        Lesson lesson = lessonService.getLessonById(lessonNo);
+        String trainerName = lesson.getTrainer().getTrainerName();
+        String trainerImg = lesson.getTrainer().getProfileImg();
+
+        model.addAttribute("trainerName", trainerName);
+        model.addAttribute("lesson", lesson);
+        model.addAttribute("trainerImg", trainerImg);
+
+        return "detailOrCrud/lessonDetail";
+    }
+
 
 }
 

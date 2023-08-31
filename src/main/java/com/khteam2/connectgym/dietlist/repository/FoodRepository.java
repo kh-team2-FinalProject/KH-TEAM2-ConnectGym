@@ -1,7 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 
 package com.khteam2.connectgym.dietlist.repository;
 
@@ -10,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FoodRepository extends JpaRepository<Food, String> {
+public interface FoodRepository extends JpaRepository<Food, Long> {
+
 }
+// JpaRepository를 통해 기본적인 CRUD(Create, Read, Update, Delete) 메소드가 제공됨

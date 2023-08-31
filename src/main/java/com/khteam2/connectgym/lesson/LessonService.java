@@ -2,7 +2,6 @@ package com.khteam2.connectgym.lesson;
 
 
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
-import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import com.khteam2.connectgym.upload.S3Uploader;
@@ -55,9 +54,9 @@ public class LessonService {
     synchronized String generateTitleCode() {
         String latestTitleCode = lessonRepository.findLatestTitleCode().get(0);
         System.out.println("latestTitleCode = " + latestTitleCode);
-        String titleCode="";
+        String titleCode = "";
         if (latestTitleCode == null) {
-            titleCode="A00001";
+            titleCode = "A00001";
         } else {
             int numericPart = Integer.parseInt(latestTitleCode.substring(1)) + 1;
             titleCode = String.format("A%05d", numericPart);
@@ -72,4 +71,8 @@ public class LessonService {
     }
 
 
+    public Lesson getLessonById(Long lessonNo) {
+        return lessonRepository.findById(lessonNo).orElseThrow(() -> new RuntimeException("LessonNo: " + lessonNo + "에 해당하는 레슨을 찾을 수 없습니다."));
+
+    }
 }

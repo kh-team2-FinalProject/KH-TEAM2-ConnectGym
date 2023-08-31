@@ -8,6 +8,8 @@ import com.khteam2.connectgym.member.Member;
 
 public interface OrderRepository extends JpaRepository<Order, String> {
     List<Order> findByMember(Member member);
+
+    List<Order> findByMemberOrderByDayOfPaymentDesc(Member member);
     // @Query(value = "SELECT * FROM orders o" +
     //     " JOIN order_details od ON od.order_no = o.no" +
     //     " JOIN lesson l ON l.id = od.lesson_no"

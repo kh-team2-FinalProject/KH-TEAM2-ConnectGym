@@ -7,13 +7,6 @@ function openPop11(){
 */
 
 
-/* 팝업 열리는 함수
-function openPop() {
-    var modal = document.getElementById("dietPopup");
-    modal.style.display = "block";
-}
-*/
-
 /* 열림 */
 function openPop(meal) {
     var mealName = meal + " MENU";
@@ -45,23 +38,28 @@ document.getElementById("closeBtn").addEventListener("click", function() {
 });
 
 
+
+/* 검색 기능 */
+$(document).ready(function(){
+
+    // Enter
+    $("#popInput").keypress(function (e){
+        if(e.which === 13){
+            const searchValue = $("#popInput").val();
+            if(searchValue.trim() !== ""){
+                searchFoods(searchValue);
+            }
+        }
+    })
+})
+
+
+
+
+
+
+
 /*
-
-document.getElementById("closeBtn").addEventListener("click", function() {
-     window.close();
-
-
-
-
-var openButton = document.querySelectorAll(".btn1");
-openButton.forEach(function(button, index) {
-    button.addEventListener("click", function() {
-        var dietPops = document.querySelectorAll(".dietPops");
-        var dietPop = dietPops[index];
-        dietPop.style.display = "block";
-    });
-});
-
 var closeButton = document.querySelectorAll(".closeBtn");
 closeButton.forEach(function(button) {
     button.addEventListener("click", function() {

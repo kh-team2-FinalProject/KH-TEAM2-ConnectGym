@@ -1,251 +1,303 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
 * {
+    margin: 0;
+    padding: 0;
+}
+
+/* 전체 랩 */
+.join_container {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 외곽 테두리 */
+.join_border{
+    background: #0E181A;
+    border: 4px solid white;
+    border-radius: 10px;
+    width: 800px;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    box-sizing: border-box;
+    padding: 5vh 0 5vh 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* form 크기 설정 */
+.form_wrap{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+
+/* logo */
+.join_logo{
+    display: flex;
+    justify-content: center;
+}
+.join_logo_img{
+    height: 100px;
+    width: 180px;
+    text-align: left;
+}
+
+/* 각 입력 폼 div */
+.input_wrap{
+    width: 100%;
+    height: 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* 입력폼 안의 input */
+.input_wrap input {
+    height: 40px;
+    border-radius: 6px;
+    width: 365px;
+    font-size: 16px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    border: none;
+}
+
+.input_wrap input::placeholder,
+.input_address_wrap input::placeholder{
+    font-size: 14px;
+}
+
+/* 입력폼 안의 span */
+.input_wrap span, .join_agree_wrap span{
+    color: white;
+    font-size: 18px;
+}
+
+.input_email_wrap span, .input_address_wrap span{
+    color: white;
+    font-size: 18px;
+}
+
+
+
+/* 주소 입력폼 */
+.input_address_wrap{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* 주소 입력폼 안의 input */
+.input_address_wrap input{
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    border: none;
+}
+.input_address_wrap input[type=button]{
+    width: 150px;
+    text-align: center;
+    padding: 0;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+/* 주소 api 사용 input */
+#sample6_postcode{
+    width: 200px;
+}
+#sample6_address{
+    width: 365px;
+}
+#sample6_detailAddress{
+    width: 600px;
+}
+#sample6_extraAddress{
+    width: 220px;
+    padding:0;
+    text-align: center;
+    margin-left: 10px;
+}
+
+/* email wrap */
+.input_email_wrap{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 160px;
+}
+
+.input_email_wrap input{
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    border: none;
+    color: black;
+}
+
+#email01{
+    width: 180px;
+    margin-right: 8px;
+}
+#email02{
+    width: 180px;
+    text-align: center;
+    padding: 0;
+    margin-right: 10px;
+    margin-left: 8px;
+}
+#select{
+    width: 180px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+    border: none;
+    text-align: center;
+}
+#checkEmail{
+    width: 130px;
+    margin-right: 10px;
+}
+.join_request_btn, .join_auth_btn{
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    font-size: 16px;
+}
+.join_request_btn{
+    margin-right: 10px;
+}
+
+.join_agree_wrap{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.join_btn_wrap{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.join_btn_wrap button{
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+}
+
+.join_btn1{
+    width: 150px;
+}
+.join_btn2{
+    width: 100px;
+}
+
+#id_check_message, #pw_check_message, #checkpw_check_message, #mail-check-warn{
+    font-size:14px;
+    padding-left: 10px;
+}
+
+/* 개인정보수집이용동의 */
+.join_agree_wrap{
+    display:flex;
+    flex-direction: column;
+}
+.join_agree_wrap textarea{
+    padding-left: 20px;
+    border-radius: 5px;
     box-sizing: border-box;
 }
+.agreement label{
+    color: white;
+}
+.agreement_radio_wrap{
+    float: right;
+}
 
-body {
-    background: #f6f5f7;
+.agreement_contents{
+    width: 600px;
+}
+
+.agreement_radio_wrap input[type=radio]{
+    margin-right: 4px;
+}
+
+.agreement_radio_wrap .select1{
+    margin-right: 10px;
+}
+
+/* Style for the entire container */
+.join_container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
     height: 100vh;
-    margin: -20px 0 50px;
+    background-color: #00000;
 }
 
-h1 {
-    font-weight: bold;
-    margin: 0;
-}
-
-h2 {
-    text-align: center;
-}
-
-p {
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    margin: 20px 0 30px;
-}
-
-span {
-    font-size: 12px;
-}
-
-a {
-    color: #333;
-    font-size: 14px;
-    text-decoration: none;
-    margin: 15px 0;
-}
-
-button {
-    border-radius: 20px;
-    border: 1px solid #FF4B2B;
-    background-color: #FF4B2B;
-    color: #FFFFFF;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-button:focus {
-    outline: none;
-}
-
-button.ghost {
-    background-color: transparent;
-    border-color: #FFFFFF;
-}
-
-form {
-    background-color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 50px;
-    height: 100%;
-    text-align: center;
-}
-
-input {
-    background-color: #eee;
-    border: none;
-    padding: 12px 15px;
-    margin: 8px 0;
-    width: 100%;
-}
-
-.container {
-    background-color: #fff;
+/* Style for the form border */
+.join_border {
+    background-color: #000000;
     border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
-    0 10px 10px rgba(0,0,0,0.22);
-    position: relative;
-    overflow: hidden;
-    width: 768px;
-    max-width: 100%;
-    min-height: 480px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 400px; /* Adjust the width as needed */
+    text-align: center; /* Center the form elements */
+    margin: 0 auto; /* Horizontally center the form */
+}
+.form-group {
+    margin-bottom: 15px;
+    text-align: center; /* Center the form elements */
 }
 
-.form-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    transition: all 0.6s ease-in-out;
-}
-
-.sign-in-container {
-    left: 0;
-    width: 50%;
-    z-index: 2;
-}
-
-.container.right-panel-active .sign-in-container {
-    transform: translateX(100%);
-}
-
-.sign-up-container {
-    left: 0;
-    width: 50%;
-    opacity: 0;
-    z-index: 1;
-}
-
-.container.right-panel-active .sign-up-container {
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
-    animation: show 0.6s;
-}
-
-@keyframes show {
-    0%, 49.99% {
-        opacity: 0;
-        z-index: 1;
-    }
-
-    50%, 100% {
-        opacity: 1;
-        z-index: 5;
-    }
-}
-
-.overlay-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    transition: transform 0.6s ease-in-out;
-    z-index: 100;
-}
-
-.container.right-panel-active .overlay-container{
-    transform: translateX(-100%);
-}
-
-.overlay {
-    background: #FF416C;
-    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-    background: linear-gradient(to right, #FF4B2B, #FF416C);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 0 0;
-    color: #FFFFFF;
-    position: relative;
-    left: -100%;
-    height: 100%;
-    width: 200%;
-    transform: translateX(0);
-    transition: transform 0.6s ease-in-out;
-}
-
-.container.right-panel-active .overlay {
-    transform: translateX(50%);
-}
-
-.overlay-panel {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 40px;
-    text-align: center;
-    top: 0;
-    height: 100%;
-    width: 50%;
-    transform: translateX(0);
-    transition: transform 0.6s ease-in-out;
-}
-
-.overlay-left {
-    transform: translateX(-20%);
-}
-
-.container.right-panel-active .overlay-left {
-    transform: translateX(0);
-}
-
-.overlay-right {
-    right: 0;
-    transform: translateX(0);
-}
-
-.container.right-panel-active .overlay-right {
-    transform: translateX(20%);
-}
-
-.social-container {
-    margin: 20px 0;
-}
-
-.social-container a {
-    border: 1px solid #DDDDDD;
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
-    height: 40px;
-    width: 40px;
-}
-
-footer {
-    background-color: #222;
-    color: #fff;
+.form-group label {
     font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left; /* Align label text to the left */
 }
 
-footer p {
-    margin: 10px 0;
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: left; /* Align input text to the left */
+}
+.btn-primary {
+    background-color: #0E181A;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 12px 24px; /* 조절 가능한 패딩값 */
+    cursor: pointer;
+    font-size: 16px; /* 조절 가능한 폰트 크기 */
 }
 
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
+/* 소셜 로그인 버튼 스타일 */
+.social-container .social {
+    font-size: 30px; /* 조절 가능한 아이콘 크기 */
+    color: #333;
+    margin: 0 15px; /* 조절 가능한 마진 값 */
     text-decoration: none;
+    transition: color 0.3s;
 }

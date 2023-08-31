@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.trainer;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,6 +9,10 @@ import java.util.Optional;
 
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
 
+
     @Query("select t from Trainer t where t.trainerId = ?1")
     List<Trainer> findTrainerId(String id);
+
+    Trainer findByTrainerId(String trainerId);
+
 }

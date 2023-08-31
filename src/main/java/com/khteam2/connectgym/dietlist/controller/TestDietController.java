@@ -1,7 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 
 package com.khteam2.connectgym.dietlist.controller;
 
@@ -16,16 +12,18 @@ import java.util.List;
 
 @Controller
 public class TestDietController {
-    @Autowired
-    private FoodService foodService;
+    private final FoodService foodService;
 
-    public TestDietController() {
+    @Autowired
+    public TestDietController(FoodService foodService) {
+        this.foodService = foodService;
     }
 
-    @GetMapping({"/fooddiary/dietlisttest"})
+    @GetMapping("/fooddiary/dietlisttest")
     public String showDietList(Model model) {
-        List<Food> foods = this.foodService.getAllFoods();
+        List<Food> foods = foodService.saveFoodsFromOpenAPI();
         model.addAttribute("foods", foods);
         return "fooddiary/dietlisttest";
     }
 }
+

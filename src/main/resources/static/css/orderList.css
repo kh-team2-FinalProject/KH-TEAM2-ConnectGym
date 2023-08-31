@@ -12,6 +12,23 @@
     margin-bottom: 1rem;
 }
 
+#orderList_wrap .orderList_empty_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 3rem 0;
+}
+
+#orderList_wrap .orderList_empty_container .orderList_empty_description {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+#orderList_wrap .orderList_list_container {
+    margin-bottom: 1rem;
+}
+
 #orderList_wrap
     .orderList_list_container
     .orderList_list_item

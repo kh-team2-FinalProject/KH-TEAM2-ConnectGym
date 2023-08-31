@@ -328,3 +328,16 @@ color : #B2B5B5;
   line-height: 24px;
 
 }
+
+
+
+
+
+/*========== mychat 트레이너 카드 ========*/
+.mychat.p-name {
+            color: #041717;
+            font-size: 28px;
+            font-weight: 600;
+            margin-top: 16px;
+            text-align: center;
+        }

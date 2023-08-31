@@ -2,6 +2,9 @@ package com.khteam2.connectgym.trainer;
 
 
 import com.khteam2.connectgym.member.Member;
+import com.khteam2.connectgym.member.MemberClass;
+import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
+import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +49,7 @@ public class TrainerService {
         //프로필사진
         if (!profileImgFile.isEmpty()) {
             try {
-                fileUrl = s3Uploader.uploadProfileFile(profileImgFile,member.getUserId());
+                fileUrl = s3Uploader.uploadProfileFile(profileImgFile, member.getUserId());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -86,5 +88,37 @@ public class TrainerService {
         }*/
 
         return trainer.getNo();
+    }
+
+    public MemberLoginResponseDto trainerLogin(MemberLoginRequestDto requestDto) {
+        MemberLoginResponseDto responseDto = MemberLoginResponseDto.builder()
+            .success(false)
+            .build();
+
+        if (requestDto == null) {
+            responseDto.setMessage("잘못된 요청입니다.");
+            return responseDto;
+        }
+
+        String id = requestDto.getId();
+        String password = requestDto.getPassword();
+
+        if (id == null || id.isBlank() || password == null || password.isBlank()) {
+            responseDto.setMessage("ID 또는 비밀번호가 비어있습니다.");
+            return responseDto;
+        }
+
+        Trainer trainer = this.trainerRepository.findByTrainerId(id);
+
+        if (trainer == null || !trainer.getTrainerPw().equals(password)) {
+            responseDto.setMessage("ID 또는 비밀번호를 확인해 주시기 바랍니다.");
+            return responseDto;
+        }
+
+        responseDto.setSuccess(true);
+        responseDto.setMemberNo(trainer.getNo());
+        responseDto.setMemberClass(MemberClass.TRAINER);
+
+        return responseDto;
     }
 }

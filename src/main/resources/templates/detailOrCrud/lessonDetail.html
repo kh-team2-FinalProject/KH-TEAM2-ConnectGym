@@ -7,32 +7,28 @@
 </th:block>
 
 <th:block layout:fragment="detailOrCrud">
-
     <div class="lessonDetail_container">
         <div class="lessonDetail_leftContainer">
             <div class="lessonDetail_content">
                 <ul class="lessonDetailList">
                     <li class="lessonDetail_profile">
                         <div class="lessonDetail_profile_info">
-                            <img th:src="@{/images/김계란.png}" alt="Profile Picture">
-                            <span class="user_id">트레이너 아이디</span>
+                            <img th:href="@{trainerdetail.html}" th:src="${trainerImg}" alt="Profile Picture">
+                            <span th:text="${trainerName}" class="user_id">트레이너 아이디</span>
                         </div>
                     </li>
 
                     <p>강좌명</p>
 
                     <li>
-                        <span id="lesson_name">강좌명 강좌명 강좌명 강좌명 강좌명 강좌명</span>
+                        <span th:text="${lesson.title}" id="lesson_name"></span>
                     </li>
 
                     <p>강좌 소개</p>
                     <li>
-                        <span id="lesson_info">강좌 소개 강좌 소개 강좌 소개 강좌 소개 강좌 소개 강좌 소개</span>
+                        <span th:text="${lesson.lesson_info}" id="lesson_info"></span>
                     </li>
-                    <p>강사 소개</p>
-                    <li>
-                        <span id="trainer_info">강사 소개 강사 소개 강사 소개 강사 소개 강사 소개 </span>
-                    </li>
+
 
                 </ul>
             </div>
@@ -43,8 +39,8 @@
             <div class="lessonDetail_trainerBox">
                 <table class="ld_trainerBox_table">
                     <tr>
-                        <td><img th:src="@{/images/김계란.png}" alt="Profile Picture"></td>
-                        <td>트레이너 아이디</td>
+                        <td><img th:href="@{trainerdetail.html}" th:src="${trainerImg}" alt="Profile Picture"></td>
+                        <td>[[${trainerName}]]</td>
                     </tr>
 
                     <tr>
@@ -64,8 +60,8 @@
 
                     </thead>
                     <tr>
-                        <td><br>결제금액</td>
-                        <td><br>100000원</td>
+                        <td><br>결제금액</td> <!--(n회당 얼마 -> 10, 30, 60회 등 선택할 수 있게?-->
+                        <td><br>[[${lesson.price}]]</td>
                     </tr>
                     <tr>
                         <td>할인금액</td>

@@ -6,12 +6,11 @@
 package com.khteam2.connectgym.dietlist.service;
 
 import com.khteam2.connectgym.dietlist.model.Food;
-import com.khteam2.connectgym.dietlist.repository.FoodRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+// OpenAPI에서 음식 데이터를 가져와 저장하는 메소드 선언
 public interface FoodService {
-    List<Food> getAllFoods();
+    List<Food> saveFoodsFromOpenAPI();
     // 필요한 추가 메서드를 선언
 }

@@ -50,7 +50,6 @@ public class CommonController {
         return "lesson/pilates";
     }*/
 
-
     @GetMapping("/enterroom/{lessonNo}")
     public String enterRoom(@PathVariable Long lessonNo, Model model) {
         Lesson lesson = lessonService.getLesson(lessonNo);
@@ -60,6 +59,19 @@ public class CommonController {
         System.out.println("엔터룸 컨트롤러 호출");
         return "room/enterroom";
     }
+
+    @GetMapping("/mypage/messages")
+    public String chattingRoomList(Model model) {
+        //배너타이틀
+        model.addAttribute("bannerTitle", "MY CHATTIING");
+        MemberResponse member = memberService.findOneMember(1L);
+        model.addAttribute("member", member);
+        System.out.println("member = " + member.getUserName());
+        System.out.println("마이레슨리스트 컨트롤러 호출");
+
+        return "mypage/messages";
+    }
+
 
     @GetMapping("/fooddiary")
     public String fooddiary() {
