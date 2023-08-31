@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<th:block layout:fragment="script">
+    <script type="text/javascript" rel="script"
+            src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript" rel="script" th:src="@{/js/tempjoin.js}"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+</th:block>
+
+<th:block layout:fragment="add-css">
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="join_container">
+        <div class="join_border">
+            <div class="join_logo">
+                <!-- 메인 헤드에있는 이미지로 변경 예정 -->
+                <a href="/">
+                    <img class="join_logo_img" src="/images/logo-white.png" th:alt="'CONNECT GYM'">
+                </a>
+            </div>
+
+            <div class="join_form">
+                <!-- 회원가입/로그인 폼 -->
+                <form class="join_signInUpForm" action="/user/loginProcess" name="loginForm">
+                    <div class="login_select_class">
+                        <label>
+                            <input
+                                type="radio"
+                                name="accountClass"
+                                value="normal"
+                                checked
+                            />
+                            <span>일반 회원</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="accountClass" value="trainer"/>
+                            <span>트레이너 회원</span>
+                        </label>
+                    </div>
+                    <!-- 아이디 입력란 -->
+                    <div class="form-group">
+                        <label for="username">아이디</label>
+                        <input type="text" id="username" name="id" class="form-control" required>
+                    </div>
+
+                    <!-- 비밀번호 입력란 -->
+                    <div class="form-group">
+                        <label for="password">비밀번호</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <br>
+                    <!-- 로그인 버튼 -->
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                </form>
+
+                <!-- 소셜 로그인 버튼들 -->
+                <div class="social-container">
+                    <a href="/oauth2/authorization/naver" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a></a>
+                    <a href="/oauth2/authorization/google" class="social"><i class="fab fa-google"></i></a>
+                    <a href="" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+
+                <!-- 회원가입 링크 -->
+                <div class="signup-link">
+                    <br>
+                    <p>계정이 없으신가요? <a href="/temp_join">회원가입</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+            void (function (D) {
+                "use strict";
+
+                /**
+                 * @type {{
+                 *   loginForm: HTMLFormElement
+                 * }}
+                 */
+                const { loginForm } = D.forms;
+
+                /**
+                 * @type {{
+                 *   accountClass: HTMLInputElement
+                 *   id: HTMLInputElement
+                 *   password: HTMLInputElement
+                 * }}
+                 */
+                const { accountClass, id, password } = loginForm.elements;
+
+                loginForm.addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    let urlPrefix;
+                    let memberClass;
+
+                    switch (accountClass.value) {
+                        case "normal":
+                            urlPrefix = "member";
+                            memberClass = "MEMBER";
+                            break;
+                        case "trainer":
+                            urlPrefix = "trainer";
+                            memberClass = "TRAINER";
+                            break;
+                        default:
+                            alert("알 수 없는 회원입니다.");
+                            return;
+                    }
+
+                    if (id.value.length <= 0 || password.value.length <= 0) {
+                        alert("ID 또는 비밀번호를 입력해 주세요.");
+                        return;
+                    }
+
+                    const body = {
+                        id: id.value,
+                        password: password.value,
+                        memberClass,
+                    };
+
+                    const url = `/api/login`;
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(body),
+                    })
+                        .then((v) => v.json())
+                        .then((v) => {
+                            if (v.success) {
+                                location.href = "/";
+                            } else {
+                                alert(v.message);
+                            }
+                        });
+                });
+            })(document);
+        </script>
+    <script th:if="${message != null}" th:inline="javascript">
+            alert([[${message}]]);
+        </script>
+</th:block>
+
+<!-- 기존 스크립트 하단 부분 -->
+</body>
+</html>

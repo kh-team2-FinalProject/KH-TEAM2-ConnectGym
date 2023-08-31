@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,7 +25,7 @@ public class MemberController {
     private final MemberService memberService;
     private final MailSendService mailService;
 
-    @GetMapping(value = "/temp_login")
+    @GetMapping(value = "/user/login")
     public String tempLogin(
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo
@@ -38,22 +35,23 @@ public class MemberController {
                 + " 로그아웃 하려면 /temp_logout 으로 이동하면 됩니다.");
         }
 
-        return "/content/tempLogin";
+        return "/content/login";
     }
 
-    @PostMapping(value = "/temp_loginProcess")
+    @PostMapping(value = "/user/loginProcess")
     public String tempLoginProcess(HttpSession session, String userId, String userPassword) {
-        long result = this.memberService.tempLoginProcess(userId, userPassword);
+        long result = this.memberService.loginProcess(userId, userPassword);
 
         if (result > 0) {
             session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, result);
+
             return "redirect:/";
         }
 
-        return "redirect:/temp_login";
+        return "redirect:/user/login";
     }
 
-    @GetMapping(value = "/temp_logout")
+    @GetMapping(value = "/user/logout")
     public String tempLogout(HttpSession session) {
         session.removeAttribute(SessionConstant.LOGIN_MEMBER_NO);
         session.removeAttribute(SessionConstant.LOGIN_MEMBER_CLASS);
@@ -84,23 +82,9 @@ public class MemberController {
 
     //=====마이페이지=====
     private final MemberRepository memberRepository;
-    private final TrainerRepository trainerRepository;
 
     @GetMapping("/mypage")
-    public String myPage(
-        @SessionAttribute(name=SessionConstant.LOGIN_MEMBER_NO, required =false) Long loginMemberNo,
-        @SessionAttribute(name =SessionConstant.LOGIN_MEMBER_CLASS, required =false) MemberClass loginMemberClass)
-    {
-        if (SessionConstant.LOGIN_MEMBER_CLASS == null || loginMemberNo == null) {
-            log.info("로그인되어 있지 않음");
-        } else if (loginMemberClass == MemberClass.MEMBER) {
-            log.info("일반 회원 로그인됨");
-            Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
-        } else if (loginMemberClass == MemberClass.TRAINER) {
-            log.info("트레이너 회원 로그인됨");
-            Trainer trainer = this.trainerRepository.findById(loginMemberNo).orElse(null);
-        }
-
+    public String myPage(){
         return "redirect:/mypage/myDashboard";
     }
 
@@ -116,7 +100,7 @@ public class MemberController {
     }
 
     // 2) 내 수강목록
-    @GetMapping("/mypage/mylessonlist")
+    @GetMapping("/mypage/myLessonList")
     public String myLesson(Model model) {
         //배너타이틀
         model.addAttribute("bannerTitle", "MY LESSON");
@@ -145,7 +129,9 @@ public class MemberController {
         /*model.addAttribute("trainer", trainer);*/
         return "mypage/myInfo";
     }
-    @GetMapping("/update")
+
+
+    @GetMapping("/mypage/update")
     public String update() {
         return "/mypage/update";
     }

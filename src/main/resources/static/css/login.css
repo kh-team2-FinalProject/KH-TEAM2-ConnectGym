@@ -81,6 +81,18 @@
     font-size: 18px;
 }
 
+/*회원유형 선택*/
+.login_select_class {
+    margin:10px 0px;
+    text-align:center;
+}
+
+/*항목 이름*/
+.login_select_class label{
+ color : white;
+ font-size: 14px;
+ margin: 0px 5px;
+}
 
 
 /* 주소 입력폼 */
@@ -269,7 +281,7 @@
 
 .form-group label {
     font-size: 14px;
-    color: #333;
+    color: white;
     display: block;
     margin-bottom: 5px;
     text-align: left; /* Align label text to the left */
