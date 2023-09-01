@@ -2,22 +2,18 @@ package com.khteam2.connectgym.member;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.dto.MemberDTO;
-
-
-import javax.servlet.http.HttpSession;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
-
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import com.khteam2.connectgym.trainer.TrainerService;
 import java.util.HashMap;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -157,11 +153,12 @@ public class MemberController {
         return "/mypage/update";
     }
 
-    @PutMapping(value = "/mypage/updateProcess")
-    public String updateProcess() {
+    @PostMapping(value = "/mypage/updateProcess")
+    public String updateProcess(MemberDTO memberDTO) {
 
         // 회원정보 수정 버튼 누르면 실행되는 컨트롤러
         // 버튼 클릭 시 회원정보 수정해주는 서비스 함수 실행
+        memberService.updateMember(memberDTO);
 
         return "redirect:/mypage/myInfo";
     }
