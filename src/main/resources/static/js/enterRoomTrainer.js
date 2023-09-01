@@ -22,7 +22,7 @@ function joinSession(){
 	session.on('streamCreated', event => {
 
 		// Subscribe to the Stream to receive it. HTML video will be appended to element with 'video-container' id
-		var subscriber = session.subscribe(event.stream, 'video-container');
+		var subscriber = session.subscribe(event.stream, 'main-video');
 
 		// When the HTML video has been appended to DOM...
 		subscriber.on('videoElementCreated', event => {
@@ -63,7 +63,7 @@ function joinSession(){
 
 				// --- 6) Get your own camera stream with the desired properties ---
 
-				var publisher = OV.initPublisher('video-container', {
+				var publisher = OV.initPublisher('main-video', {
 					audioSource: undefined, // The source of audio. If undefined default microphone
 					videoSource: undefined, // The source of video. If undefined default webcam
 					publishAudio: true,  	// Whether you want to start publishing with your audio unmuted or not

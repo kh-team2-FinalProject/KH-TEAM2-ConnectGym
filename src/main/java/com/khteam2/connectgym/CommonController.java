@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class CommonController {
 
     private final MemberService memberService;
-    private final LessonService lessonService;
 
     //메인
     @GetMapping("/")
@@ -50,15 +49,6 @@ public class CommonController {
         return "lesson/pilates";
     }*/
 
-    @GetMapping("/enterroom/{lessonNo}")
-    public String enterRoom(@PathVariable Long lessonNo, Model model) {
-        Lesson lesson = lessonService.getLesson(lessonNo);
-        model.addAttribute("lesson", lesson);
-        MemberResponseDTO member = memberService.findOneMember(1L);
-        model.addAttribute("member", member);
-        System.out.println("엔터룸 컨트롤러 호출");
-        return "room/enterroom";
-    }
 
     @GetMapping("/mypage/messages")
     public String chattingRoomList(Model model) {

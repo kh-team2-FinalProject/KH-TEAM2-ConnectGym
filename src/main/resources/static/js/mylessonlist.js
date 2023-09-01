@@ -1,6 +1,16 @@
-   window.onload=() => {
-     		findMyLesson();
-  	}
+window.onload = function() {
+    // findMyLesson 함수를 비동기적으로 호출
+    setTimeout(findMyLesson, 0);
+
+    setTimeout(function() {
+        const element = document.getElementById("mylesson-list");
+        const loadingElement = document.getElementById("mylessonlistloading_wrap");
+
+        loadingElement.style.display = "none";
+        element.style.display = "flex";
+        element.style.flexDirection = "column";
+    }, 2000); // 2초 후에 실행
+}
 
   	function findMyLesson(){
   	$.ajax({
