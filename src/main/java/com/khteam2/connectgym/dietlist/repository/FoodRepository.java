@@ -2,6 +2,8 @@ package com.khteam2.connectgym.dietlist.repository;
 
 import java.util.List;
 
+import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientFoodDto;
+import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientItemDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

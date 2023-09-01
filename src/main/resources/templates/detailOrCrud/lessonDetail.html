@@ -9,136 +9,34 @@
 
 <th:block layout:fragment="detailOrCrud">
     <div class="lessonDetail_container">
+
         <div class="lessonDetail_leftContainer">
             <div class="lessonDetail_content">
-
-                <!--                <ul class="lessonDetailList">-->
-                <!--                    <li class="lessonDetail_profile">-->
-                <!--                        <div class="lessonDetail_profile_info">-->
-                <!--                            <img th:src="${trainerInfo.profileImg}" alt="Profile Picture">-->
-                <!--                            <span th:text="${trainerInfo.trainerName}" class="user_id"></span>-->
-                <!--                        </div>-->
-                <!--                    </li>-->
-
-                <!--                    <p>강좌명</p>-->
-
-                <!--                    <li>-->
-                <!--                        <span th:text="${lesson.title}" id="lesson_name"></span>-->
-                <!--                    </li>-->
-
-                <!--                    <p>강좌 소개</p>-->
-                <!--                    <li>-->
-                <!--                        <span th:text="${lesson.lesson_info}" id="lesson_info"></span>-->
-                <!--                    </li>-->
-
-
-                <!--                </ul>-->
-
                 <img class="lessonDetail_img" th:src="${lesson.lesson_img}" alt="Lesson Picture">
-
             </div>
         </div>
 
-        <!--                <ul class="lessonDetailList">-->
-        <!--                    <li class="lessonDetail_profile">-->
-        <!--                        <div class="lessonDetail_profile_info">-->
-        <!--                            <img th:src="${trainerInfo.profileImg}" alt="Profile Picture">-->
-        <!--                            <span th:text="${trainerInfo.trainerName}" class="user_id">트레이너 아이디</span>-->
-        <!--                        </div>-->
-        <!--                    </li>-->
-
-        <!--                    <p>강좌명</p>-->
-
-        <!--                    <li>-->
-        <!--                        <span th:text="${lesson.title}" id="lesson_name"></span>-->
-        <!--                    </li>-->
-
-        <!--                    <p>강좌 소개</p>-->
-        <!--                    <li>-->
-        <!--                        <span th:text="${lesson.lesson_info}" id="lesson_info"></span>-->
-        <!--                    </li>-->
-
-
-        <!--                </ul>-->
-
 
         <div class="lessonDetail_rightContainer">
-
             <div class="lessonDetail_trainerBox">
                 <div class="ld_trainerImg">
                     <img th:src="${trainerInfo.profileImg}" alt="Profile Picture">
                 </div>
+
                 <div class="ld_trainerInfo">
                     <span th:text="${trainerInfo.trainerName}" id="ld_trainerName"></span>
                     <span th:text="${trainerInfo.infoTitle}" id="ld_trainerInfo"></span>
                     <button class="ld_trainer_detail_btn"
                             th:onclick="|location.href='/trainerDetail/${trainerInfo.trainerNo}'|">
-                        상세보기
+                        PROFILE
                     </button>
                 </div>
-                <!--                <table class="ld_trainerBox_table">-->
-                <!--                    <tr>-->
-                <!--                        <td><img th:src="${trainerInfo.profileImg}" alt="Profile Picture"></td>-->
-                <!--                        <td><span th:text="${trainerInfo.trainerName}"></span>-->
-                <!--                            <br> <span th:text="${trainerInfo.trainerId}"></span>-->
-                <!--                        </td>-->
-                <!--                    </tr>-->
-
-
-                <!--                    <tr>-->
-                <!--                        <td colspan="2">-->
-                <!--                            <button class="ld_trainer_like_btn"-->
-                <!--                                    th:onclick="|location.href='/trainerDetail/${trainerInfo.trainerNo}'|">-->
-                <!--                                상세보기</button>-->
-                <!--                        </td>-->
-
-                <!--                    <tr>-->
-                <!--                        <td colspan="2">-->
-                <!--                            <button class="ld_trainer_like_btn"-->
-                <!--                                    onclick="location.href='/trainerDetail/${trainerInfo.trainerNo}'">-->
-                <!--                                상세보기-->
-                <!--                            </button>-->
-                <!--                        </td>-->
-
-                <!--                    </tr>-->
-                <!--                </table>-->
             </div>
+
             <div class="lessonDetail_infoBox">
-                <!--                <table class="ld_orderBox_table">-->
-                <!--                    <thead>-->
-                <!--                    <tr>-->
-                <!--                        <th colspan="2">order<br></th>-->
-                <!--                    </tr>-->
-
-                <!--                    </thead>-->
-                <!--                    <tr>-->
-                <!--                        <td><br>결제금액</td>-->
-                <!--                        <td><br>[[${lesson.price}]]</td>-->
-                <!--                    </tr>-->
-                <!--                    <tr>-->
-                <!--                        <td>할인금액</td>-->
-                <!--                        <td>0원</td>-->
-                <!--                    </tr>-->
-                <!--                    <tr>-->
-                <!--                        <td colspan="2">-->
-                <!--                            <hr>-->
-                <!--                        </td>-->
-                <!--                    </tr>-->
-                <!--                    <tr>-->
-                <!--                        <td>총금액</td>-->
-                <!--                        <td>100000원</td>-->
-                <!--                    </tr>-->
-
-                <!--                    <tr class="ld_btn_tr">-->
-                <!--                        <td colspan="2">-->
-                <!--                            <br>-->
-                <!--                            <button class="lessonDetail_btn" th:href="@{/order}">CONNECT</button>-->
-                <!--                            <br>-->
-                <!--                            <br>-->
-                <!--                        </td>-->
-
-                <!--                    </tr>-->
-                <!--                </table>-->
+                <span th:text="${lesson.title}" id="lesson_name"></span>
+                <a href id="review_count"> 123개 리뷰 보기</a>
+                <span th:text="${lesson.price}+원" id="lesson_price"></span>
             </div>
             <div class="lessonDetail_btn_box">
                 <button class="ld-jim-btn" th:href="@{/order}">찜</button>
@@ -147,11 +45,10 @@
             </div>
         </div>
 
+
         <div class="lessonDetail_bottomContainer">
             <p>강좌 소개</p>
-
             <span th:text="${lesson.lesson_info}" id="lesson_info"></span>
-
         </div>
     </div>
 </th:block>

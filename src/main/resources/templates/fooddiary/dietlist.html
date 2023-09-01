@@ -69,6 +69,9 @@
                     </tr>
                     </tfoot>
                     -->
+                    <!--<tfoot>
+                        <a th:href="@{/post}">정보 기입</a>
+                    </tfoot>-->
 
                 </table>
             </div>
@@ -188,8 +191,10 @@
         <div class="pop-content">
             <button id="closeBtn">X</button>
             <h1 th:text="${mealTime}">time 식사</h1>
+            <form action="/fooddairy/search" method="GET">
             <input id="popInput" type="text" placeholder="음식 찾기" />
             <button id="searchBtn">검색</button>
+            </form>
             <div class="pop_content2">
                 <table class="foodselect_Tbl">
                     <thead>
