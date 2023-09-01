@@ -26,7 +26,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,7 +41,6 @@ public class OrderService {
     private MemberRepository memberRepository;
     @Autowired
     private IamportClient iamportClient;
-    private final Random random = new Random();
 
     /**
      * 결제 진행 전 실행되는 메소드
@@ -189,23 +187,28 @@ public class OrderService {
      * 주문 진행 중일 때 실행되는 메소드
      */
     @Transactional
-    public OrderProcessResponseDto processOrder(OrderProcessRequestDto requestDto) {
-        OrderProcessResponseDto returnDto = OrderProcessResponseDto.builder()
+    public OrderProcessResponseDto processOrder(
+        OrderProcessRequestDto requestDto,
+        Long sLoginMemberNo,
+        String sMerchantUid,
+        Long sTotalPrice,
+        List<Long> sOrderLessonList,
+        boolean isApi) {
+        OrderProcessResponseDto responseDto = OrderProcessResponseDto.builder()
             .success(false)
             .url("/order/fail")
             .build();
 
-        Long loginMemberNo = requestDto.getSLoginMemberNo();
-        String merchantUid = requestDto.getSMerchantUid();
-        Long totalPrice = requestDto.getSTotalPrice();
-        List<Long> lessonNolist = requestDto.getSLessonNolist();
-        boolean isApi = requestDto.isApi();
-        String impUid = requestDto.getImpUid();
-        String errorMsg = requestDto.getErrorMsg();
+        Long loginMemberNo = sLoginMemberNo;
+        String merchantUid = sMerchantUid;
+        Long totalPrice = sTotalPrice;
+        List<Long> lessonNolist = sOrderLessonList;
+        String impUid = requestDto.getImp_uid();
+        String errorMsg = requestDto.getError_msg();
 
         if (loginMemberNo == null) {
-            returnDto.setMessage("로그인되어 있지 않습니다.");
-            return returnDto;
+            responseDto.setMessage("로그인되어 있지 않습니다.");
+            return responseDto;
         }
 
         // 레슨 번호가 들어있는 리스트를 통해서 DB에서 레슨 목록을 받아온다.
@@ -214,8 +217,8 @@ public class OrderService {
         // 레슨 번호 리스트와 DB에서 가져온 레슨의 개수를 비교해서 다르면 실패 메시지를 반환한다.
         if (lessonNolist.size() != lessonList.size()) {
             log.error("가져온 lesson과 lessonNo 리스트의 사이즈가 다릅니다");
-            returnDto.setMessage("내부 서버 문제로 인해 결제에 실패했습니다.");
-            return returnDto;
+            responseDto.setMessage("내부 서버 문제로 인해 결제에 실패했습니다.");
+            return responseDto;
         }
 
         // 로그인되어 있는 사용자 ID를 이용해서 사용자 정보를 DB에서 꺼내온다.
@@ -223,8 +226,8 @@ public class OrderService {
 
         if (member == null) {
             log.error("DB에서 사용자 정보를 찾을 수 없습니다.");
-            returnDto.setMessage("사용자 정보를 찾을 수 없습니다.");
-            return returnDto;
+            responseDto.setMessage("사용자 정보를 찾을 수 없습니다.");
+            return responseDto;
         }
 
         Payment payment = null;
@@ -233,25 +236,25 @@ public class OrderService {
             // 포트원 서버로 주문 번호를 전송해 해당 결제건을 받아온다.
             payment = this.iamportClient.paymentByImpUid(impUid).getResponse();
         } catch (IamportResponseException e) {
-            returnDto.setMessage("결제에 실패했습니다. 서버 메시지: " + errorMsg);
+            responseDto.setMessage("결제에 실패했습니다. 서버 메시지: " + errorMsg);
             log.error("포트원 서버에서 오류가 발생했습니다.", e);
-            return returnDto;
+            return responseDto;
         } catch (IOException e) {
-            returnDto.setMessage("결제 서버에 연결하지 못 했습니다. " + errorMsg);
+            responseDto.setMessage("결제 서버에 연결하지 못 했습니다. " + errorMsg);
             log.error("포트원 서버에 연결하는 중 문제가 발생했습니다.", e);
-            return returnDto;
+            return responseDto;
         }
 
         // 포트원 서버에서 가져온 결제건과 요청한 결제건이 일치하지 않거나 금액이 일치하지 않으면 실패 메시지를 반환한다.
         if (!payment.getMerchantUid().equals(merchantUid)
             || !payment.getAmount().equals(BigDecimal.valueOf(totalPrice))) {
-            returnDto.setMessage("검증 실패");
-            return returnDto;
+            responseDto.setMessage("검증 실패");
+            return responseDto;
         }
 
         // DTO에 URL을 설정해 준다.
         String tempUrl = "/order/complete?orderId=" + merchantUid;
-        returnDto.setUrl(isApi ? tempUrl : "redirect:" + tempUrl);
+        responseDto.setUrl(isApi ? tempUrl : "redirect:" + tempUrl);
 
         // DB에 주문을 저장하기 위해 객체를 생성한다.
         Order newOrder = Order.builder()
@@ -277,9 +280,9 @@ public class OrderService {
         // order_detail 테이블에 주문한 강의를 모두 넣는다.
         List<OrderDetail> savedOrderDetailList = this.orderDetailRepository.saveAll(newOrderDetailList);
 
-        returnDto.setSuccess(true);
+        responseDto.setSuccess(true);
 
-        return returnDto;
+        return responseDto;
     }
 
     /**
@@ -338,12 +341,12 @@ public class OrderService {
     /**
      * 주문 내역을 가져오는 메소드
      *
-     * @param loginMemberNo 로그인된 멤버 번호
-     * @param orderListDto  사용자가 요청한 정보
+     * @param loginMemberNo       로그인된 멤버 번호
+     * @param orderListRequestDto 사용자가 요청한 정보
      * @return 성공/실패, 주문건에 대한 정보 등을 담은 객체 반환
      */
     @Transactional(readOnly = true)
-    public OrderListResponseDto orderList(Long loginMemberNo, OrderListDto orderListDto) {
+    public OrderListResponseDto orderList(Long loginMemberNo, OrderListRequestDto orderListRequestDto) {
         OrderListResponseDto responseDto = OrderListResponseDto.builder()
             .success(false)
             .build();
@@ -433,10 +436,10 @@ public class OrderService {
         }
 
         // 가져온 정보들을 담아준다.
-        responseDto.setSearch(orderListDto.getQ());
-        responseDto.setStartDate(orderListDto.getStartDate());
-        responseDto.setEndDate(orderListDto.getEndDate());
-        responseDto.setStatus(orderListDto.getStatus());
+        responseDto.setSearch(orderListRequestDto.getQ());
+        responseDto.setStartDate(orderListRequestDto.getStartDate());
+        responseDto.setEndDate(orderListRequestDto.getEndDate());
+        responseDto.setStatus(orderListRequestDto.getStatus());
         responseDto.setOrderListOrderDtoList(orderListOrderDtoList);
         responseDto.setSuccess(true);
 

@@ -3,7 +3,7 @@ package com.khteam2.connectgym;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonService;
 import com.khteam2.connectgym.member.MemberService;
-import com.khteam2.connectgym.member.dto.MemberResponse;
+import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +54,7 @@ public class CommonController {
     public String enterRoom(@PathVariable Long lessonNo, Model model) {
         Lesson lesson = lessonService.getLesson(lessonNo);
         model.addAttribute("lesson", lesson);
-        MemberResponse member = memberService.findOneMember(1L);
+        MemberResponseDTO member = memberService.findOneMember(1L);
         model.addAttribute("member", member);
         System.out.println("엔터룸 컨트롤러 호출");
         return "room/enterroom";
@@ -64,7 +64,7 @@ public class CommonController {
     public String chattingRoomList(Model model) {
         //배너타이틀
         model.addAttribute("bannerTitle", "MY CHATTIING");
-        MemberResponse member = memberService.findOneMember(1L);
+        MemberResponseDTO member = memberService.findOneMember(1L);
         model.addAttribute("member", member);
         System.out.println("member = " + member.getUserName());
         System.out.println("마이레슨리스트 컨트롤러 호출");

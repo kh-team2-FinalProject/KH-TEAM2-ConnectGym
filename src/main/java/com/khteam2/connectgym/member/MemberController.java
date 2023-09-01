@@ -2,7 +2,7 @@ package com.khteam2.connectgym.member;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.dto.MemberDTO;
-import com.khteam2.connectgym.member.dto.MemberResponse;
+import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import com.khteam2.connectgym.trainer.TrainerService;
@@ -120,7 +120,7 @@ public class MemberController {
         //배너타이틀
         model.addAttribute("bannerTitle", "MY LESSON");
         // (삭제예정)세션에서 꺼내오기 못해서 고정으로 테스트 중
-        MemberResponse member = memberService.findOneMember(1L);
+        MemberResponseDTO member = memberService.findOneMember(1L);
         model.addAttribute("member", member);
         System.out.println("member = " + member.getUserName());
         System.out.println("마이레슨리스트 컨트롤러 호출");
@@ -136,12 +136,15 @@ public class MemberController {
 
 
     @GetMapping("/mypage/myInfo")
-    public String myInfo(Model model) {
+    public String myInfo(Model model, HttpSession session) {
         //배너타이틀
         model.addAttribute("bannerTitle", "my info");
-        /*Trainer trainer = trainerRepository.findById(6L).orElse(null);*/
 
-        /*model.addAttribute("trainer", trainer);*/
+        Long sessionUserNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        MemberResponseDTO member = memberService.findOneMember(sessionUserNo);
+
+        model.addAttribute("member", member);
+
         return "mypage/myInfo";
     }
 
@@ -149,6 +152,17 @@ public class MemberController {
     public String update() {
         return "/mypage/update";
     }
+
+    @PostMapping(value = "/mypage/updateProcess")
+    public String updateProcess(MemberDTO memberDTO) {
+
+        // 회원정보 수정 버튼 누르면 실행되는 컨트롤러
+        // 버튼 클릭 시 회원정보 수정해주는 서비스 함수 실행
+        memberService.updateMember(memberDTO);
+
+        return "redirect:/mypage/myInfo";
+    }
+
 
     //  로컬호스트일 때의 urlmapping
     @RequestMapping(value = "/connectgym", method = RequestMethod.GET)
@@ -175,10 +189,10 @@ public class MemberController {
 
         // 응답받아오면 카카오 정보 비교하여 있으면 main으로 없으면 회원가입으로 return
         if (m == null && t == null) {
-            // api 에서 가져온 정보 회원가입페이지에서 자동 입력되게 하기
-            // 추후 추가해야함
-            System.out.println("==============member: " + m);
-            System.out.println("==============trainer: " + t);
+            session.setAttribute("kakaoEmail", kakaoemail);
+
+            // 휴대폰 번호 받아올 수 있을 때 그 정보도 추가해야함.
+
             return "redirect:/temp_join";
         } else {
             System.out.println("==============member: " + m);

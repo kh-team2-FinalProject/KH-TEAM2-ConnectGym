@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
-import com.khteam2.connectgym.member.dto.MemberResponse;
+import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -54,9 +54,9 @@ public class MemberService {
 
     }
 
-    public MemberResponse findOneMember(Long no) {
+    public MemberResponseDTO findOneMember(Long no) {
         Member entity = memberRepository.findById(no).orElse(null);
-        return new MemberResponse(entity);
+        return new MemberResponseDTO(entity);
     }
 
     public boolean overlap_userID(String user_id) {
@@ -216,8 +216,10 @@ public class MemberService {
                 findMember.put("user_id", memberList.get(i).getUserId());
                 findMember.put("user_pw", memberList.get(i).getUserPw());
                 findMember.put("user_name", memberList.get(i).getUserName());
-                findMember.put("user_tel", memberList.get(i).getUserTel());
                 findMember.put("user_email", memberList.get(i).getUserEmail());
+                if (memberList.get(i).getUserTel() != null) {
+                    findMember.put("user_tel", memberList.get(i).getUserTel());
+                }
                 if (memberList.get(i).getUserAddress() != null) {
                     findMember.put("user_address", memberList.get(i).getUserAddress());
                 }
@@ -225,5 +227,40 @@ public class MemberService {
             }
         }
         return null;
+    }
+
+    public HashMap<String, Object> findMemberByNo(Long no) {
+        List<Member> memberList = memberRepository.findAll();
+        HashMap<String, Object> findMember = new HashMap<>();
+
+        for (int i = 0; i < memberList.size(); i++) {
+            if (memberList.get(i).getNo() == no) {
+                findMember.put("user_no", memberList.get(i).getNo());
+                findMember.put("user_id", memberList.get(i).getUserId());
+                findMember.put("user_name", memberList.get(i).getUserName());
+                findMember.put("user_email", memberList.get(i).getUserEmail());
+                if (memberList.get(i).getUserTel() != null) {
+                    findMember.put("user_tel", memberList.get(i).getUserTel());
+                }
+            }
+        }
+        return findMember;
+    }
+
+    public void updateMember(MemberDTO memberDTO) {
+        Member member = memberRepository.findByUserId(memberDTO.getUserId());
+
+        member.setUserPw(memberDTO.getUserPw());
+        member.setUserName(memberDTO.getUserName());
+        member.setUserTel(memberDTO.getUserTel());
+        if (memberDTO.getUserAddress() == null || memberDTO.getUserAddress() == "") {
+            member.setUserAddress(member.getUserAddress());
+        } else {
+            member.setUserAddress(memberDTO.getUserAddress());
+        }
+
+        // null 일 경우 기존 데이터 그대로 저장
+
+        memberRepository.save(member);
     }
 }

@@ -7,12 +7,17 @@
     <title>마이페이지 > 내 정보</title>
 </th:block>
 
+<th:block layout:fragment="add-css">
+
+    <link rel="stylesheet" th:href="@{/css/update.css}">
+</th:block>
+
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
 
     <button onclick="location.href='/convertTrainer'">트레이너 전환</button>
     <!--<img th:src="${trainer.profileImg}" width="200"/>-->
-    <button onclick="location.href='/update'">내정보 수정</button>
+    <button onclick="location.href='/mypage/update'">내정보 수정</button>
 
 </th:block>
 

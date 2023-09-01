@@ -2,7 +2,6 @@ package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.MemberRepository;
-import com.khteam2.connectgym.order.dto.OrderProcessDto;
 import com.khteam2.connectgym.order.dto.OrderProcessRequestDto;
 import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,28 +34,15 @@ public class OrderApiController {
         @SessionAttribute(name = SessionConstant.ORDER_ORDER_NO, required = false) String sMerchantUid,
         @SessionAttribute(name = SessionConstant.ORDER_PRICE, required = false) Long sTotalPrice,
         @SessionAttribute(name = SessionConstant.ORDER_LESSON_LIST, required = false) List<Long> sOrderLessonList,
-        OrderProcessDto processDto) {
-        if (processDto.getImp_uid() == null
-            || processDto.getMerchant_uid() == null
+        OrderProcessRequestDto requestDto) {
+        if (requestDto.getImp_uid() == null
+            || requestDto.getMerchant_uid() == null
             || sMerchantUid == null
             || sTotalPrice == null) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
-        OrderProcessRequestDto requestDto = OrderProcessRequestDto.builder()
-            .sMerchantUid(sMerchantUid)
-            .sLoginMemberNo(sLoginMemberNo)
-            .sLessonNolist(sOrderLessonList)
-            .sTotalPrice(sTotalPrice)
-            .merchantUid(processDto.getMerchant_uid())
-            .impUid(processDto.getImp_uid())
-            .impSuccess(processDto.getImp_success())
-            .errorCode(processDto.getError_code())
-            .errorMsg(processDto.getError_msg())
-            .isApi(true)
-            .build();
-
-        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto);
+        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto, sLoginMemberNo, sMerchantUid, sTotalPrice, sOrderLessonList, true);
 
         if (!responseDto.isSuccess()) {
             return ResponseEntity.badRequest().body(responseDto);

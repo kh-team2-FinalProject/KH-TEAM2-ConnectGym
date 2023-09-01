@@ -8,21 +8,22 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "follow")
+@Table(name = "follows", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_follow_from_to",columnNames = {"from_user_no", "to_trainer_no"})
+})
 public class Follow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
 
     @ManyToOne
-    @JoinColumn(name = "from_user")
+    @JoinColumn(name = "from_user_no")
     private Member fromUser;
 
     @ManyToOne
-    @JoinColumn(name = "to_trainer")
+    @JoinColumn(name = "to_trainer_no")
     private Trainer toTrainer;
 }
