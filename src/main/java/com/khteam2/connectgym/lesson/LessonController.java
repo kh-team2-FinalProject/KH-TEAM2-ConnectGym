@@ -29,12 +29,10 @@ public class LessonController {
         //폼 호출
         model.addAttribute("lessonForm", new Lesson());
 
-
         return "detailOrCrud/createLesson";
     }
 
     @PostMapping(value = "/createLesson")
-
     public String createLesson(Model model, LessonRequestDTO lessonRequestDTO,
                                @RequestParam("lessonImgFile") MultipartFile file) {
 
