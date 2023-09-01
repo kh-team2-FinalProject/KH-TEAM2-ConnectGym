@@ -5,6 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+<<<<<<< HEAD
+=======
+
+>>>>>>> ab302324d58c1f7b6f12e6dd1837016a8e239f99
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,12 +33,11 @@ public class Food {
     private Double choc; //탄수화물
     private Double prot; // 단백질
     private Double fat; //지방
-    private Double sat_fat; // 포화 지방
-    private Double trans_fat; // 트랜스 지방
+    private Double satFat; // 포화 지방
+    private Double transFat; // 트랜스 지방
     private Double kcal; // 칼로리
     private Double nat; // 나트륨
-    private Double sugar;  // 당류
-    private String animal_plant; // 가공업체
-
+    private Double sugar; // 당류
+    private String animalPlant; // 가공업체
 
 }
