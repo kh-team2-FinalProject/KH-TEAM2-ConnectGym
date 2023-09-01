@@ -1,5 +1,10 @@
 package com.khteam2.connectgym.dietlist.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +16,18 @@ import javax.persistence.*;
 
 @Data
 @Entity
+<<<<<<< HEAD
 /*<<<<<<< HEAD
 =======*/
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 //>>>>>>> 309cc76f85971ff732e82cbc6b328b150e10c96d
+=======
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+>>>>>>> 062824244cf13ad3cf9772ba5ce2d247728c7eed
 @Table(name = "foods")
 public class Food {
 
@@ -29,12 +40,11 @@ public class Food {
     private Double choc; //탄수화물
     private Double prot; // 단백질
     private Double fat; //지방
-    private Double sat_fat; // 포화 지방
-    private Double trans_fat; // 트랜스 지방
+    private Double satFat; // 포화 지방
+    private Double transFat; // 트랜스 지방
     private Double kcal; // 칼로리
     private Double nat; // 나트륨
-    private Double sugar;  // 당류
-    private String animal_plant; // 가공업체
-
+    private Double sugar; // 당류
+    private String animalPlant; // 가공업체
 
 }

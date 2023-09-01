@@ -8,15 +8,13 @@ import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +38,7 @@ public class TrainerService {
 
     @Transactional
     public Long registerTrainer(TrainerRequestDTO trainerRequestDTO, Member member,
-                                MultipartFile profileImgFile, MultipartFile[] licenseImgFiles) {
+        MultipartFile profileImgFile, MultipartFile[] licenseImgFiles) {
         //중복검사
         boolean check = validateDuplicate(member.getUserId());
         if (!check) {
@@ -56,7 +54,6 @@ public class TrainerService {
                 throw new RuntimeException(e);
             }
         }
-
 
         //자격증사진
         if (licenseImgFiles.length != 0) {
@@ -147,6 +144,7 @@ for(License val :trainer.getLicenseList() ){
 
         for (int i = 0; i < TrainerList.size(); i++) {
             if (email.equals(TrainerList.get(i).getTrainerEmail())) {
+                findTrainer.put("trainer_no", TrainerList.get(i).getNo());
                 findTrainer.put("trainer_id", TrainerList.get(i).getTrainerId());
                 findTrainer.put("trainer_pw", TrainerList.get(i).getTrainerPw());
                 findTrainer.put("trainer_name", TrainerList.get(i).getTrainerName());
@@ -155,7 +153,7 @@ for(License val :trainer.getLicenseList() ){
                 return findTrainer;
             }
         }
-        return findTrainer;
+        return null;
     }
 }
 

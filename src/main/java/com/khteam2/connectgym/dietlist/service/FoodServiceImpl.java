@@ -121,12 +121,12 @@ public class FoodServiceImpl implements FoodService {
         food.setChoc(apiResponse.getChoc());
         food.setProt(apiResponse.getProt());
         food.setFat(apiResponse.getFat());
-        food.setSat_fat(apiResponse.getSat_fat());
-        food.setTrans_fat(apiResponse.getTrans_fat());
+        food.setSatFat(apiResponse.getSatFat());
+        food.setTransFat(apiResponse.getTransFat());
         food.setKcal(apiResponse.getKcal());
         food.setNat(apiResponse.getNat());
         food.setSugar(apiResponse.getSugar());
-        food.setAnimal_plant(apiResponse.getAnimal_plant());
+        food.setAnimalPlant(apiResponse.getAnimalPlant());
         return food;
     }
 

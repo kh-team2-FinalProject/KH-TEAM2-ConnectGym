@@ -1,26 +1,28 @@
 package com.khteam2.connectgym.member;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.member.dto.MemberResponse;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
 public class MemberService {
+
     @Autowired
     private MemberRepository memberRepository;
 
@@ -204,18 +206,19 @@ public class MemberService {
         return userInfo;
     }
 
-    public HashMap<String, Object> findMemberByEmail(String email){
+    public HashMap<String, Object> findMemberByEmail(String email) {
         List<Member> memberList = memberRepository.findAll();
         HashMap<String, Object> findMember = new HashMap<>();
 
         for (int i = 0; i < memberList.size(); i++) {
             if (email.equals(memberList.get(i).getUserEmail())) {
+                findMember.put("user_no", memberList.get(i).getNo());
                 findMember.put("user_id", memberList.get(i).getUserId());
                 findMember.put("user_pw", memberList.get(i).getUserPw());
                 findMember.put("user_name", memberList.get(i).getUserName());
                 findMember.put("user_tel", memberList.get(i).getUserTel());
                 findMember.put("user_email", memberList.get(i).getUserEmail());
-                if(memberList.get(i).getUserAddress()!=null){
+                if (memberList.get(i).getUserAddress() != null) {
                     findMember.put("user_address", memberList.get(i).getUserAddress());
                 }
                 return findMember;

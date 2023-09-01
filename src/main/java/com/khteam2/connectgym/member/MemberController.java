@@ -2,21 +2,23 @@ package com.khteam2.connectgym.member;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.dto.MemberDTO;
-
-import javax.servlet.http.HttpSession;
-
 import com.khteam2.connectgym.member.dto.MemberResponse;
-
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import com.khteam2.connectgym.trainer.TrainerService;
+import java.util.HashMap;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RequiredArgsConstructor
 @Controller
@@ -27,6 +29,8 @@ public class MemberController {
     private final TrainerService trainerService;
     private final MemberService memberService;
     private final MailSendService mailService;
+    //=====마이페이지=====
+    private final MemberRepository memberRepository;
 
     @GetMapping(value = "/user/login")
     public String tempLogin(
@@ -81,10 +85,6 @@ public class MemberController {
         System.out.println("email 들어오는지 체크중" + email);
         return mailService.joinEmail(email);
     }
-
-
-    //=====마이페이지=====
-    private final MemberRepository memberRepository;
 
     @GetMapping("/mypage")
     public String myPage(
@@ -152,7 +152,8 @@ public class MemberController {
 
     //  로컬호스트일 때의 urlmapping
     @RequestMapping(value = "/connectgym", method = RequestMethod.GET)
-    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) {
+    public String kakaoLogin(@RequestParam(value = "code", required = false) String code,
+        HttpSession session) {
 
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
@@ -170,20 +171,27 @@ public class MemberController {
         HashMap<String, Object> t = trainerService.findTrainerByEmail(kakaoemail);
 
         // 출력 테스트용
-//      System.out.println("############" + kakaoemail);
-
+        System.out.println("############" + kakaoemail);
 
         // 응답받아오면 카카오 정보 비교하여 있으면 main으로 없으면 회원가입으로 return
         if (m == null && t == null) {
             // api 에서 가져온 정보 회원가입페이지에서 자동 입력되게 하기
             // 추후 추가해야함
-            return "content/temp_join";
+            System.out.println("==============member: " + m);
+            System.out.println("==============trainer: " + t);
+            return "redirect:/temp_join";
         } else {
+            System.out.println("==============member: " + m);
+            System.out.println("==============trainer: " + t);
             if (m != null) {
                 // users table에 있을 경우 session 저장
+                session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, m.get("user_no"));
+                session.setAttribute(SessionConstant.LOGIN_MEMBER_CLASS, MemberClass.MEMBER);
             }
             if (t != null) {
                 // trainer table에 있을 경우 session 저장
+                session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, t.get("trainer_no"));
+                session.setAttribute(SessionConstant.LOGIN_MEMBER_CLASS, MemberClass.TRAINER);
             }
 
             return "redirect:/";
