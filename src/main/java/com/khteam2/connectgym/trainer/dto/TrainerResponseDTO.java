@@ -1,4 +1,3 @@
-
 package com.khteam2.connectgym.trainer.dto;
 
 import lombok.AllArgsConstructor;
@@ -16,11 +15,10 @@ public class TrainerResponseDTO {
     private String trainerId;
     private String trainerName;
     private String trainerTel;
-//    private List<License> licenseList;
+    //    private List<License> licenseList;
     private String profileImg;
     private String trainerInfo;
     private String trainerEmail;
 
 
 }
-

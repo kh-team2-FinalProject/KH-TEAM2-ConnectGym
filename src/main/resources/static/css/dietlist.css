@@ -1,16 +1,13 @@
-/*.Diet{
-    margin-top: 20px;
-}*/
 
 /* 식단 박스 */
 .Diet{
+    margin-top: 30px;
     font-family: Arial, sans-serif;
     display: grid;
     width: 100%;
     height: 650px;
     font-family: Arial, sans-serif;
-/*    grid-template-columns:43% 43%;*/
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2fr 2fr;
     grid-column-gap: 50px;
     justify-content: center;
     align-items: center;
@@ -21,7 +18,6 @@
 .meal_box {
     background-color: #e9f8c4;
     display: inline-block;
-    /*    flex-direction: column;  가로 방향으로 아이템 배치 */
     align-items: center;
     width: 100%;
     height: 35%;
@@ -29,52 +25,33 @@
     border-radius: 20px;
     padding: 10px;
     box-sizing:inherit;
+    justify-items:center;
 }
 
 /* 식단 개별 테이블구조 , 팝업 데이터테이블 구조 */
-.table, .pop_content2{
-    display: grid;
-    /* Flexbox 대신 Grid 레이아웃 사용 <자식 태그> food_name, sub text-align 적용 */
+.meal_box, .pop_content2{
+   justify-content: space-between;
     padding: 5px;
-    grid-template-columns: repeat(auto-fill, 2fr 1fr 1fr 1fr 1fr 1fr 1fr); /* 각 열의 너비 설정 */
     align-items: center;
 }
 
 /* 영양성분명 */
  .sub, .sub1{
-    text-align: right;
-  /*   white-space: nowrap; 텍스트를 한 줄로만 표시하도록 설정 */
+    text-align: center;
+ /*   white-space: nowrap; 텍스트를 한 줄로만 표시하도록 설정 */
  }
 
 
-
-
-
-
-
-
-
- .food_name, .food_name1{
-    text-align: left;
-    white-space: nowrap; /* 텍스트를 한 줄로만 표시하도록 설정 */
-
- }
-
-
-.meal_box td, .foodselect_Tbl td{
+.meal_box th, .foodselect_Tbl th{
     color: black;
     font-weight:bold;
 }
 
-
-
-
-
-/* + 버튼 */
-
+/* + 버튼
 .meal_box button{
     float: right;
-}
+} */
+
 
 /* 아 점 저 글씨*/
 .Diet1 h3{
@@ -87,7 +64,7 @@
 
 
 /* + 버튼 */
-.btn1 {
+.sub> button{
     background-color: #7a9d6e;
     color: rgb(227, 238, 242);
     padding: 8px 13px;
@@ -96,6 +73,7 @@
     cursor: pointer;
     font-weight: bold;
     font-size: 13px;
+    visibility: visible;
 }
 
 

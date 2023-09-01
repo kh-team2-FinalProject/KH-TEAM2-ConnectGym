@@ -242,6 +242,9 @@ public class MemberService {
                 if (memberList.get(i).getUserTel() != null) {
                     findMember.put("user_tel", memberList.get(i).getUserTel());
                 }
+                if (memberList.get(i).getUserAddress() != null) {
+                    findMember.put("user_address", memberList.get(i).getUserAddress());
+                }
             }
         }
         return findMember;

@@ -101,6 +101,10 @@ function email(){
 ////////////////////////////////////////////////////////
 // 주소 DB에 저장하기
 // 주소 가져오기
+$('#sample6_postcode').blur(function(){
+    address();
+});
+
 $("#sample6_address").blur(function(){
     address();
 });
@@ -117,12 +121,13 @@ $("#sample6_extraAddress").blur(function(){
 
 // 가져온 주소 합치기
 function address(){
+    const sample6_postcode = $('#sample6_postcode').val();
     const sample6_address = $("#sample6_address").val();
     const sample6_detailAddress = $("#sample6_detailAddress").val();
     const sample6_extraAddress = $("#sample6_extraAddress").val();
 
-    if(sample6_address != "" && sample6_detailAddress != "" && sample6_extraAddress != ""){
-        $("#userAddress").val(sample6_address + " " + sample6_detailAddress + " " + sample6_extraAddress);
+    if(sample6_postcode != "" && sample6_address != "" && sample6_detailAddress != "" && sample6_extraAddress != ""){
+        $("#userAddress").val(sample6_postcode + "." + sample6_address + "." + sample6_extraAddress + "." + sample6_detailAddress);
     }
 };
 

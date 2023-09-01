@@ -212,5 +212,52 @@ public class MemberController {
         }
     }
 
+    @RequestMapping(value = "/connectgym.store", method = RequestMethod.GET)
+    public String kakaoLogindomain(@RequestParam(value = "code", required = false) String code,
+        HttpSession session) {
+
+        // 인가코드 받는 부분 // 출력 테스트
+        System.out.println("###########" + code);
+
+        // 토큰 받는 부분
+        String access_Token = memberService.getAccessToken(code);
+        System.out.println(access_Token);
+
+        // 실제 정보를 출력하는 메서드 호출하기
+        HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+
+        // 카카오 정보를 이용하여 users 테이블의 email과 비교하여 회원정보가 있는지 확인하기
+        String kakaoemail = (String) userInfo.get("email");
+        HashMap<String, Object> m = memberService.findMemberByEmail(kakaoemail);
+        HashMap<String, Object> t = trainerService.findTrainerByEmail(kakaoemail);
+
+        // 출력 테스트용
+        System.out.println("############" + kakaoemail);
+
+        // 응답받아오면 카카오 정보 비교하여 있으면 main으로 없으면 회원가입으로 return
+        if (m == null && t == null) {
+            session.setAttribute("kakaoEmail", kakaoemail);
+
+            // 휴대폰 번호 받아올 수 있을 때 그 정보도 추가해야함.
+
+            return "redirect:/temp_join";
+        } else {
+            System.out.println("==============member: " + m);
+            System.out.println("==============trainer: " + t);
+            if (m != null) {
+                // users table에 있을 경우 session 저장
+                session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, m.get("user_no"));
+                session.setAttribute(SessionConstant.LOGIN_MEMBER_CLASS, MemberClass.MEMBER);
+            }
+            if (t != null) {
+                // trainer table에 있을 경우 session 저장
+                session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, t.get("trainer_no"));
+                session.setAttribute(SessionConstant.LOGIN_MEMBER_CLASS, MemberClass.TRAINER);
+            }
+
+            return "redirect:/";
+        }
+    }
+
 
 }

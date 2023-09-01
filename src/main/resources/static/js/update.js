@@ -24,6 +24,8 @@ $(document).ready(function(){
             }
             if(getSession_Info.user_address != null){
                 $('#userAddress').val(getSession_Info.user_address);
+                var userAddress = getSession_Info.user_address;
+                address_split(userAddress);
             }
             $('#userEmail').val(getSession_Info.user_email);
             var userEmail = getSession_Info.user_email;
@@ -44,7 +46,19 @@ $(document).ready(function(){
 
         $('#email01').attr('readonly', true);
         $('#email02').attr('readonly', true);
+    }
+    function address_split(userAddress){
+        var address = userAddress.split(".");
 
+        var postcode = address[0];
+        var address01 = address[1];
+        var address02 = address[2];
+        var address03 = address[3];
+
+        $('#sample6_postcode').val(postcode);
+        $('#sample6_address').val(address01);
+        $('#sample6_extraAddress').val(address02);
+        $('#sample6_detailAddress').val(address03);
     }
 });
 
@@ -98,6 +112,10 @@ function sample6_execDaumPostcode() {
     }).open();
 };
 
+$('#sample6_postcode').blur(function(){
+    address();
+});
+
 $("#sample6_address").blur(function(){
     address();
 });
@@ -114,12 +132,13 @@ $("#sample6_extraAddress").blur(function(){
 
 // 가져온 주소 합치기
 function address(){
+    const sample6_postcode = $('#sample6_postcode').val();
     const sample6_address = $("#sample6_address").val();
     const sample6_detailAddress = $("#sample6_detailAddress").val();
     const sample6_extraAddress = $("#sample6_extraAddress").val();
 
-    if(sample6_address != "" && sample6_detailAddress != "" && sample6_extraAddress != ""){
-        $("#userAddress").val(sample6_address + " " + sample6_detailAddress + " " + sample6_extraAddress);
+    if(sample6_postcode != "" && sample6_address != "" && sample6_detailAddress != "" && sample6_extraAddress != ""){
+        $("#userAddress").val(sample6_postcode + "." + sample6_address + "." + sample6_extraAddress + "." + sample6_detailAddress);
     }
 };
 
