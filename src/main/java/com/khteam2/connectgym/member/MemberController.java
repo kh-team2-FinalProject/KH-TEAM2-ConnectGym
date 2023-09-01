@@ -45,11 +45,6 @@ public class MemberController {
         return "/content/login";
     }
 
-    @GetMapping(value = "/login_old")
-    public String viewOld() {
-        return "content/login_old";
-    }
-
     @PostMapping(value = "/user/loginProcess")
     public String tempLoginProcess(HttpSession session, String userId, String userPassword) {
         long result = this.memberService.loginProcess(userId, userPassword);

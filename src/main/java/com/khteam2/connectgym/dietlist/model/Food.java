@@ -5,10 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-<<<<<<< HEAD
-=======
-
->>>>>>> ab302324d58c1f7b6f12e6dd1837016a8e239f99
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
