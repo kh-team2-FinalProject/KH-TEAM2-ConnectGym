@@ -70,9 +70,9 @@
                 </div>
                 <div class="ld_trainerInfo">
                     <span th:text="${trainerInfo.trainerName}" id="ld_trainerName"></span>
-                    <span th:text="${trainerInfo.trainerInfo}" id="ld_trainerInfo"></span>
+                    <span th:text="${trainerInfo.infoTitle}" id="ld_trainerInfo"></span>
                     <button class="ld_trainer_detail_btn"
-                            onclick="location.href='/trainerDetail/${trainerInfo.trainerNo}'">
+                            th:onclick="|location.href='/trainerDetail/${trainerInfo.trainerNo}'|">
                         상세보기
                     </button>
                 </div>

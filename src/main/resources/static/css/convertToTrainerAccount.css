@@ -1,9 +1,10 @@
+input._js_textarea_design_1,
 textarea._js_textarea_design_1 {
     border: 1px solid rgb(90, 90, 90);
     border-radius: 10px;
     resize: none;
     padding: 1.25rem;
-    font-family: unset;
+    margin-bottom:15px;
     font-size: 1rem;
 }
 
@@ -70,7 +71,10 @@ textarea._js_textarea_design_1 {
 
 #convertToTrainerAccount_wrap
     .convertToTrainerAccount_description_container
-    .convertToTrainerAccount_description_textarea {
+    .convertToTrainerAccount_description_textarea,
+#convertToTrainerAccount_wrap
+    .convertToTrainerAccount_description_container
+    .convertToTrainerAccount_description_inputtext{
     width: 100%;
 }
 

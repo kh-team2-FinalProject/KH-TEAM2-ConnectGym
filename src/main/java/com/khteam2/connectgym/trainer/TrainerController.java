@@ -26,7 +26,6 @@ public class TrainerController {
 
     private final MemberRepository memberRepository;
     private final TrainerService trainerService;
-    private final LessonService lessonService;
     private final FollowService followService;
 
 
@@ -51,6 +50,33 @@ public class TrainerController {
         return "redirect:/mypage";
     }
 
+    /*@GetMapping(value = "/trainerDetail/{trainerNo}")
+    public String trainerDetail(@PathVariable Long trainerNo, HttpSession session,Model model) {
+        //배너타이틀
+        model.addAttribute("bannerTitle", "trainer detail");
+
+        TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+        *//*LessonResponseDTO lessonResponseDTO = lessonService.*//*
+
+        //트레이너의 팔로우 수 확인
+        int followCount = followService.followCount(trainerNo);
+
+        //사용자가 해당 사용자를 팔로우 했는지 확인
+        Long userNo = (Long)session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        Boolean isFollow = followService.followCheck(userNo,trainerNo);
+
+        FollowTrainerResponseDTO followTrainerResponseDTO = FollowTrainerResponseDTO.builder()
+            .trainerFollowCnt(followCount)
+            .followStatus(isFollow)
+            .build();
+
+        model.addAttribute("trainer", trainerResponseDTO);
+        model.addAttribute("followInfo", followTrainerResponseDTO);
+
+        return "detailOrCrud/trainerdetail";
+    }*/
+
+    //트레이너 상세 페이지 수정 중
     @GetMapping(value = "/trainerDetail/{trainerNo}")
     public String trainerDetail(@PathVariable Long trainerNo, HttpSession session,Model model) {
         //배너타이틀
@@ -74,7 +100,7 @@ public class TrainerController {
         model.addAttribute("trainer", trainerResponseDTO);
         model.addAttribute("followInfo", followTrainerResponseDTO);
 
-        return "detailOrCrud/trainerdetail";
+        return "detailOrCrud/trainerDetail";
     }
 
 

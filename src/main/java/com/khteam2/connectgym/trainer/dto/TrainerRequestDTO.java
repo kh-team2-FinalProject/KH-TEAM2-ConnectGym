@@ -23,7 +23,8 @@ public class TrainerRequestDTO {
     private String trainerTel;
     private List<License> licenseList = new ArrayList<>();
     private String profileImg;
-    private String trainerInfo;
+    private String infoTitle;
+    private String infoContent;
     private String trainerEmail;
 
 
@@ -41,7 +42,8 @@ public class TrainerRequestDTO {
             .trainerTel(trainerTel)
             .licenseList(licenseList)
             .profileImg(profileImg)
-            .trainerInfo(trainerInfo)
+            .infoTitle(infoTitle)
+            .infoContent(infoContent)
             .trainerEmail(trainerEmail)
             .build();
     }

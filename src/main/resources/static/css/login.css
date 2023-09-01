@@ -5,12 +5,14 @@
 
 /* 전체 랩 */
 .join_container {
-    margin-top: 10vh;
-    margin-bottom: 10vh;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+/*    justify-content: center;*/
     align-items: center;
+    min-height: 50vh;
+    background-color: #0e1414;
 }
 
 /* 외곽 테두리 */
@@ -256,13 +258,6 @@
 }
 
 /* Style for the entire container */
-.join_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #00000;
-}
 
 /* Style for the form border */
 .join_border {

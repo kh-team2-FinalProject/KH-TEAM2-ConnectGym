@@ -36,7 +36,8 @@ public class Trainer {
 
     private String profileImg;
 
-    private String trainerInfo;
+    private String infoTitle;
+    private String infoContent;
 
     private LocalDate regDate;
     @Column(name = "trainer_email")

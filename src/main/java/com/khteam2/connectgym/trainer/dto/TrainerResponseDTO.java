@@ -17,7 +17,8 @@ public class TrainerResponseDTO {
     private String trainerTel;
     //    private List<License> licenseList;
     private String profileImg;
-    private String trainerInfo;
+    private String infoTitle;
+    private String infoContent;
     private String trainerEmail;
 
 

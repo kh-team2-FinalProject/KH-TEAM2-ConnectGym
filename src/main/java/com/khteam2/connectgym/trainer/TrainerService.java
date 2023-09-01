@@ -77,7 +77,8 @@ public class TrainerService {
             .trainerTel(member.getUserTel())
             .licenseList(trainerRequestDTO.getLicenseList())
             .profileImg(fileUrl)
-            .trainerInfo(trainerRequestDTO.getTrainerInfo())
+            .infoTitle(trainerRequestDTO.getInfoTitle())
+            .infoContent(trainerRequestDTO.getInfoContent())
             .build();
 
         Trainer trainer = trainerRepository.save(dto.toEntity());
@@ -132,7 +133,8 @@ for(License val :trainer.getLicenseList() ){
             .trainerName(trainer.getTrainerName())
             .trainerTel(trainer.getTrainerTel())
             .profileImg(trainer.getProfileImg())
-            .trainerInfo(trainer.getTrainerInfo())
+            .infoTitle(trainer.getInfoTitle())
+            .infoContent(trainer.getInfoContent())
             .build();
 
         return trainerResponseDTO;

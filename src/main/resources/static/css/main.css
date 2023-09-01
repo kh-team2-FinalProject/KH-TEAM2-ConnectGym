@@ -197,7 +197,7 @@ color : #B2B5B5;
     left: 15px;
     pointer-events: none;
     position: absolute;
-    top: 210px;
+    top: 240px;
 }
 
 .p-img {
@@ -215,20 +215,20 @@ color : #B2B5B5;
 
 .p-img1 {
     /*left: -30px;*/
-    top: 135px;
-    width: 500px;
+    top: 110px;
+    width: 550px;
 }
 
 .p-img2 {
     /*left: -32px;*/
-    top: 160px;
+    top: 190px;
     width: 500px;
 }
 
 .p-img3 {
-    /*left: -32px;*/
-    top: 160px;
-    width: 500px;
+    left: -30px;
+    top: 180px;
+    width: 550px;
 }
 
 .divider {
@@ -342,6 +342,7 @@ margin-right:30px;
   line-height: 24px;
   margin: 0;
 }
+
 .r-animation-card_content_description {
   color: #696d74;
   font-size: 15px;
@@ -351,41 +352,26 @@ margin-right:30px;
 
 }
 
-
 .review-right-content p{
     margin: 0px;
+    max-width:490px;
+    word-wrap: break-word;
 }
-
 
 .review-right-content > p:nth-child(1){
-    color:white;
-    font-size:22px;
-    font-weight:900;
-    line-height:35px;
-}
-
-.review-right-content > p:nth-child(2),
-.review-right-content > p:nth-child(3){
     color:white;
     font-size:28px;
     font-weight:900;
     line-height:35px;
 }
 
-.review-right-content > p:nth-child(4){
+.review-right-content > p:nth-child(2){
     color:white;
     font-size:24px;
     font-weight:900;
     line-height:60px;
 }
 
-.review-right-content > p:nth-child(5){
-    color:white;
-    font-size:22px;
-    font-weight:900;
-    line-height:35px;
-    float:right;
-}
 
 
 

@@ -72,15 +72,16 @@ public class LessonController {
         model.addAttribute("bannerTitle", "lesson details");
 
         Lesson lesson = lessonService.getLessonById(lessonNo);
+
         TrainerResponseDTO trainerLessonResponseDTO = TrainerResponseDTO.builder()
             .trainerNo(lesson.getTrainer().getNo())
             .trainerId(lesson.getTrainer().getTrainerId())
             .trainerName(lesson.getTrainer().getTrainerName())
             .profileImg(lesson.getTrainer().getProfileImg())
-            .trainerInfo(lesson.getTrainer().getTrainerInfo())
+            .infoTitle(lesson.getTrainer().getInfoTitle())
+            .infoContent(lesson.getTrainer().getInfoContent())
             .build();
-        String trainerName = lesson.getTrainer().getTrainerName();
-        String trainerImg = lesson.getTrainer().getProfileImg();
+
 
         model.addAttribute("trainerInfo", trainerLessonResponseDTO);
         model.addAttribute("lesson", lesson);
