@@ -56,7 +56,7 @@
 
         stompClient.connect({}, function() {
             console.log('Connected: ' );
-            stompClient.subscribe('/topic/qqq', function(message) {
+            stompClient.subscribe('/queue/qqq', function(message) {
                 showMessage(JSON.parse(message.body));
             });
         });
