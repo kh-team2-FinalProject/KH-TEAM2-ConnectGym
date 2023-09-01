@@ -84,11 +84,11 @@
                                 </span>
                             </div>
                         </div>
-                        <div
-                            th:each="detail : ${order.detailDtoList}"
-                            class="orderList_order_detail_items"
-                        >
-                            <div class="orderList_order_detail_item">
+                        <div class="orderList_order_detail_items">
+                            <div
+                                th:each="detail : ${order.detailDtoList}"
+                                class="orderList_order_detail_item"
+                            >
                                 <div
                                     class="orderList_order_detail_trainer_image_box"
                                 >
