@@ -6,19 +6,14 @@ import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import com.khteam2.connectgym.trainer.TrainerService;
-import java.util.HashMap;
-import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 @RequiredArgsConstructor
 @Controller
@@ -43,19 +38,6 @@ public class MemberController {
         }
 
         return "/content/login";
-    }
-
-    @PostMapping(value = "/user/loginProcess")
-    public String tempLoginProcess(HttpSession session, String userId, String userPassword) {
-        long result = this.memberService.loginProcess(userId, userPassword);
-
-        if (result > 0) {
-            session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, result);
-
-            return "redirect:/";
-        }
-
-        return "redirect:/user/login";
     }
 
     @GetMapping(value = "/user/logout")
@@ -90,7 +72,7 @@ public class MemberController {
     public String myPage(
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass) {
-        if (SessionConstant.LOGIN_MEMBER_CLASS == null || loginMemberNo == null) {
+        if (loginMemberClass == null || loginMemberNo == null) {
             log.info("로그인되어 있지 않음");
         } else if (loginMemberClass == MemberClass.MEMBER) {
             log.info("일반 회원 로그인됨");
@@ -167,7 +149,7 @@ public class MemberController {
     //  로컬호스트일 때의 urlmapping
     @RequestMapping(value = "/connectgym", method = RequestMethod.GET)
     public String kakaoLogin(@RequestParam(value = "code", required = false) String code,
-        HttpSession session) {
+                             HttpSession session) {
 
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
@@ -214,7 +196,7 @@ public class MemberController {
 
     @RequestMapping(value = "/connectgym.store", method = RequestMethod.GET)
     public String kakaoLogindomain(@RequestParam(value = "code", required = false) String code,
-        HttpSession session) {
+                                   HttpSession session) {
 
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
