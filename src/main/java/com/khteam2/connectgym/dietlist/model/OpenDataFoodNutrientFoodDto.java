@@ -50,15 +50,15 @@ public class OpenDataFoodNutrientFoodDto {
     /**
      * 포화지방산 (g)
      */
-    private Double sat_fat;
+    private Double satFat;
     /**
      * 트랜스지방산 (g)
      */
-    private Double trans_fat;
+    private Double transFat;
     /**
      * 가공업체
      */
-    private String animal_plant;
+    private String animalPlant;
 
     public static OpenDataFoodNutrientFoodDto ofOpenDataFoodNutrientItemDto(OpenDataFoodNutrientItemDto dto) {
         String animalPlant = dto.getAnimalPlant();
@@ -72,9 +72,9 @@ public class OpenDataFoodNutrientFoodDto {
             .fat(CommonUtil.opendataParseDouble(dto.getNutrCont4()))
             .sugar(CommonUtil.opendataParseDouble(dto.getNutrCont5()))
             .nat(CommonUtil.opendataParseDouble(dto.getNutrCont6()))
-            .sat_fat(CommonUtil.opendataParseDouble(dto.getNutrCont8()))
-            .trans_fat(CommonUtil.opendataParseDouble(dto.getNutrCont9()))
-            .animal_plant((animalPlant != null && !animalPlant.isEmpty()) ? animalPlant : null)
+            .satFat(CommonUtil.opendataParseDouble(dto.getNutrCont8()))
+            .transFat(CommonUtil.opendataParseDouble(dto.getNutrCont9()))
+            .animalPlant((animalPlant != null && !animalPlant.isEmpty()) ? animalPlant : null)
             .build();
     }
 
@@ -89,9 +89,9 @@ public class OpenDataFoodNutrientFoodDto {
             .fat(this.fat)
             .sugar(this.sugar)
             .nat(this.nat)
-            .sat_fat(this.sat_fat)
-            .trans_fat(this.trans_fat)
-            .animal_plant(this.animal_plant)
+            .satFat(this.satFat)
+            .transFat(this.transFat)
+            .animalPlant(this.animalPlant)
             .build();
     }
 }

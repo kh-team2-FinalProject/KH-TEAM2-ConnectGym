@@ -19,9 +19,9 @@ public class FoodApiResponse {
     @JsonProperty("NUTR_CONT4")
     private double fat;
     @JsonProperty("NUTR_CONT8")
-    private double sat_fat;
+    private double satFat;
     @JsonProperty("NUTR_CONT9")
-    private double trans_fat;
+    private double transFat;
     @JsonProperty("NUTR_CONT1")
     private double kcal;
     @JsonProperty("NUTR_CONT6")
@@ -29,5 +29,5 @@ public class FoodApiResponse {
     @JsonProperty("NUTR_CONT5")
     private double sugar;
     @JsonProperty("ANIMAL_PLANT")
-    private String animal_plant;
+    private String animalPlant;
 }
