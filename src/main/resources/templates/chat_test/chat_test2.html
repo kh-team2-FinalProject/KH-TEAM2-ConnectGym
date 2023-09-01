@@ -26,13 +26,13 @@
 
     document.querySelector("#messageForm").addEventListener("submit", function (event) {
         event.preventDefault();
-        var roomSelect = document.querySelector("#roomSelect");
-        var roomId = roomSelect.value;
+        document.querySelector("");
+
         var messageInput = document.querySelector("#message");
         var messageContent = messageInput.value;
         stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify({
             'content': messageContent,
-
+            'sender': '우영'
         }));
         messageInput.value = '';
     });
@@ -43,7 +43,7 @@
         document.querySelector("#messages").appendChild(messageDiv);
     }
 
-    stompClient.subscribe('/queue/qqq/{roomId}', function (message) {
+    stompClient.subscribe('/queue/qqq/${roomId}', function (message) {
         showMessage(JSON.parse(message.body));
     });
 </script>

@@ -26,4 +26,12 @@ public class ChatroomDTO {
             .trainer(trainer)
             .build();
     }
+
+    public ChatroomDTO fromEntity(Chatroom chatroom) {
+        return ChatroomDTO.builder()
+            .no(chatroom.getNo())
+            .trainer(chatroom.getTrainer())
+            .member(chatroom.getMember())
+            .build();
+    }
 }
