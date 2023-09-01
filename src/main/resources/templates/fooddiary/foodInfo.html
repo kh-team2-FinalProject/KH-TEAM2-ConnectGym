@@ -57,28 +57,61 @@
 
     <!-- 상품 등록 팝업 -->
     <div id="dietPopup" class="dietPop">
-        <div class="pop-content">
+        <form class="pop-content" method="POST">
             <button id="closeBtn">X</button>
-            <h1 th:text="${mealTime}">time 식사</h1>
-            <input id="popInput" type="text" placeholder="음식 찾기" />
-            <button id="searchBtn">검색</button>
-            <div class="pop_content2">
-                <table class="foodselect_Tbl" cellpadding="0" cellsacing="0">
-                    <tbody>
-                    <tr style="height:36px">
-                        <td class="food_name1" title="식품명 :">식품명 </td>
-                        <td class="sub1" title="식품명 :"> 1회제공량(g/ml) </td>
-                        <td class="sub1" title="총 아침 식사탄수화물 : g1">탄수화물</td>
-                        <td class="sub1" title="총 아침 식사단백질 : g1">단백질</td>
-                        <td class="sub1" title="총 아침 식사지방 : g1">지방</td>
-                        <td class="sub1" title="총 아침 식사칼로리 : kcal1">칼로리</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <h2> 영양성분 기입 </h2>
+
+            <div class="foodInput">
+                <label class="nutriNm">식품명</label>
+                <input class="nutriInput" type="text"/>
             </div>
-        </div>
+            <div class="foodInput">
+                <label class="nutriNm">1회 제공량</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">칼로리</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">탄수화물</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">단백질</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">지방</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">당류</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">나트륨</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">포화지방산</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">불포화지방산</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+            <div class="foodInput">
+                <label class="nutriNm">가공업체</label>
+                <input class="nutriInput" type="text"/>
+            </div>
+
+            <!-- 저장 버튼 -->
+            <input id="submit" type="submit" value="저장" />
+
+        </form>
     </div>
-    <script th:src="@{/js/dietlist.js}"></script>
+    <script th:src="@{/js/foodInfo.js}"></script>
 </th:block>
 
 </body>

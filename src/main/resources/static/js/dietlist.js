@@ -1,12 +1,5 @@
 
 
-/* html 따로 만들었는데 복잡해서 이건 일단 보류
-function openPop11(){
-    var popup = window.open("popup.html", "_blank", "width=500,height=300");
-}
-*/
-
-
 /* 열림 */
 function openPop(meal) {
     var mealName = meal + " MENU";
@@ -57,14 +50,3 @@ $(document).ready(function(){
 
 
 
-
-
-/*
-var closeButton = document.querySelectorAll(".closeBtn");
-closeButton.forEach(function(button) {
-    button.addEventListener("click", function() {
-        var dietPop = this.closest(".dietPops");
-        dietPop.style.display = "none";
-    });
-});
-*/
