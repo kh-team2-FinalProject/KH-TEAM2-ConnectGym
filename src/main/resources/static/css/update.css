@@ -8,9 +8,9 @@
     margin-top: 10vh;
     margin-bottom: 10vh;
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
 }
 
 /* 외곽 테두리 */
@@ -206,7 +206,7 @@
     width: 150px;
 }
 .join_btn2{
-    width: 100px;
+    width: 150px;
 }
 
 #id_check_message, #pw_check_message, #checkpw_check_message, #mail-check-warn{
@@ -271,4 +271,15 @@
     font-size: 16px; /* 폰트 크기 설정 */
     padding: 12px 24px; /* 안쪽 여백 설정 */
     border-radius: 12px; /* 모서리 둥글게 */
+}
+
+/* 사이드바 css */
+
+.myp_side_main_page{
+    display:flex;
+    align-items: flex-start;
+    margin-top: 10vh;
+}
+.myp_sidebar_child{
+    position: static;
 }
