@@ -1,4 +1,18 @@
 ////////////////////////////////////////////////////////
+// 카카오 로그인을 통하여 db에 정보가 없어 넘어올 경우
+$(document).ready(function(){
+    if(kakaoEmail != null){
+        var kakaoEmail_split = kakaoEmail.split("@");
+        var kakaoEmail01 = kakaoEmail_split[0];
+        var kakaoEmail02 = kakaoEmail_split[1];
+
+        $('#email01').val(kakaoEmail01);
+        $('#email02').val(kakaoEmail02);
+        $('#email01').attr('readonly', true);
+        $('#email02').attr('readonly', true);
+    }
+});
+
 // 주소 api(다음)
 function sample6_execDaumPostcode() {
     new daum.Postcode({

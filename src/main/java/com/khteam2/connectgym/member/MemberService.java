@@ -216,8 +216,10 @@ public class MemberService {
                 findMember.put("user_id", memberList.get(i).getUserId());
                 findMember.put("user_pw", memberList.get(i).getUserPw());
                 findMember.put("user_name", memberList.get(i).getUserName());
-                findMember.put("user_tel", memberList.get(i).getUserTel());
                 findMember.put("user_email", memberList.get(i).getUserEmail());
+                if (memberList.get(i).getUserTel() != null) {
+                    findMember.put("user_tel", memberList.get(i).getUserTel());
+                }
                 if (memberList.get(i).getUserAddress() != null) {
                     findMember.put("user_address", memberList.get(i).getUserAddress());
                 }
@@ -225,5 +227,23 @@ public class MemberService {
             }
         }
         return null;
+    }
+
+    public HashMap<String, Object> findMemberByNo(Long no) {
+        List<Member> memberList = memberRepository.findAll();
+        HashMap<String, Object> findMember = new HashMap<>();
+
+        for (int i = 0; i < memberList.size(); i++) {
+            if (memberList.get(i).getNo() == no) {
+                findMember.put("user_no", memberList.get(i).getNo());
+                findMember.put("user_id", memberList.get(i).getUserId());
+                findMember.put("user_name", memberList.get(i).getUserName());
+                findMember.put("user_email", memberList.get(i).getUserEmail());
+                if (memberList.get(i).getUserTel() != null) {
+                    findMember.put("user_tel", memberList.get(i).getUserTel());
+                }
+            }
+        }
+        return findMember;
     }
 }
