@@ -263,6 +263,11 @@ font-weight: bold;
     stroke-linecap: round;
 }
 
+.td_follow_button_group svg{
+     /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
+    animation: beat 1s linear forwards;
+}
+
 .td_follow_button_group span{
     display: block;
     width: 24px;
@@ -346,12 +351,17 @@ font-weight: bold;
     0%{
         transform: scale(1);
     }
-    70%{
+    50%{
         transform: scale(1);
     }
-    80%{
+    60%{
         transform: scale(1.2);
     }
+
+    80%{
+            transform: scale(1.5);
+        }
+
     100%{
         transform: scale(1);
     }

@@ -246,4 +246,21 @@ public class MemberService {
         }
         return findMember;
     }
+
+    public void updateMember(MemberDTO memberDTO) {
+        Member member = memberRepository.findByUserId(memberDTO.getUserId());
+
+        member.setUserPw(memberDTO.getUserPw());
+        member.setUserName(memberDTO.getUserName());
+        member.setUserTel(memberDTO.getUserTel());
+        if (memberDTO.getUserAddress() == null || memberDTO.getUserAddress() == "") {
+            member.setUserAddress(member.getUserAddress());
+        } else {
+            member.setUserAddress(memberDTO.getUserAddress());
+        }
+
+        // null 일 경우 기존 데이터 그대로 저장
+
+        memberRepository.save(member);
+    }
 }

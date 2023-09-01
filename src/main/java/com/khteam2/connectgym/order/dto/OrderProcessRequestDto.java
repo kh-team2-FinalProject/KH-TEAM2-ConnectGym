@@ -1,26 +1,18 @@
 package com.khteam2.connectgym.order.dto;
 
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
-
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Builder
 public class OrderProcessRequestDto {
-    private String sMerchantUid;
-    private Long sTotalPrice;
-    private Long sLoginMemberNo;
-    private List<Long> sLessonNolist;
-    private boolean isApi;
-    private String impUid;
-    private String merchantUid;
-    private Boolean impSuccess;
-    private String errorCode;
-    private String errorMsg;
+    private String imp_uid;
+    private String merchant_uid;
+    private Boolean imp_success;
+    private String error_code;
+    private String error_msg;
 }
