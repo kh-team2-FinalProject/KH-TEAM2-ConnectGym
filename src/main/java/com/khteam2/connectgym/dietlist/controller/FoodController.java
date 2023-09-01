@@ -4,6 +4,7 @@ import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientDto;
 import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientFoodDto;
 import com.khteam2.connectgym.dietlist.service.FoodService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 public class FoodController {
     private final FoodService foodService;
 

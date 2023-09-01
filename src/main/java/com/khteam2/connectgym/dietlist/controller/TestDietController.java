@@ -19,11 +19,11 @@ public class TestDietController {
         this.foodService = foodService;
     }
 
-    @GetMapping("/fooddiary/dietlisttest")
+/*    @GetMapping("/fooddiary/dietlisttest")
     public String showDietList(Model model) {
         List<Food> foods = foodService.saveFoodsFromOpenAPI();
         model.addAttribute("foods", foods);
         return "fooddiary/dietlisttest";
-    }
+    }*/
 }
 
