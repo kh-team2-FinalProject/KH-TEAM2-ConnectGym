@@ -85,9 +85,11 @@ public class TrainerService {
 
         Trainer trainer = trainerRepository.save(dto.toEntity());
 
-        /*for(License val :trainer.getLicenseList() ){
+
+for(License val :trainer.getLicenseList() ){
             licenseRepository.save(val);
-        }*/
+        }
+
 
         return trainer.getNo();
     }
@@ -156,3 +158,4 @@ public class TrainerService {
         return findTrainer;
     }
 }
+

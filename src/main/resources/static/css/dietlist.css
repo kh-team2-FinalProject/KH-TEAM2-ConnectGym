@@ -36,14 +36,14 @@
     display: grid;
     /* Flexbox 대신 Grid 레이아웃 사용 <자식 태그> food_name, sub text-align 적용 */
     padding: 5px;
-    grid-template-columns: repeat(auto-fill, 2fr 1fr 1fr 1fr 1fr 1fr); /* 각 열의 너비 설정 */
+    grid-template-columns: repeat(auto-fill, 2fr 1fr 1fr 1fr 1fr 1fr 1fr); /* 각 열의 너비 설정 */
     align-items: center;
 }
 
 /* 영양성분명 */
  .sub, .sub1{
     text-align: right;
- /*    white-space: nowrap; 텍스트를 한 줄로만 표시하도록 설정 */
+  /*   white-space: nowrap; 텍스트를 한 줄로만 표시하도록 설정 */
  }
 
 
@@ -60,9 +60,7 @@
 
  }
 
-.meal_box td{
-    padding: 10px;
-}
+
 .meal_box td, .foodselect_Tbl td{
     color: black;
     font-weight:bold;

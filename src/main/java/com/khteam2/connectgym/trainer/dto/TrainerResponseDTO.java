@@ -1,3 +1,4 @@
+/*
 package com.khteam2.connectgym.trainer.dto;
 
 import lombok.AllArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder.Default
 public class TrainerResponseDTO {
 
     private Long trainerNo;
@@ -22,3 +23,4 @@ public class TrainerResponseDTO {
 
 
 }
+*/

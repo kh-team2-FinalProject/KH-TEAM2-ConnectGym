@@ -11,12 +11,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-<<<<<<< HEAD
-=======
+/*<<<<<<< HEAD
+=======*/
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
->>>>>>> 309cc76f85971ff732e82cbc6b328b150e10c96d
+//>>>>>>> 309cc76f85971ff732e82cbc6b328b150e10c96d
 @Table(name = "foods")
 public class Food {
 

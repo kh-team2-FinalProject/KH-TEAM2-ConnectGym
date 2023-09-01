@@ -40,19 +40,16 @@ public class FoodServiceImpl implements FoodService {
         String openApiUrl = "https://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1?serviceKey=zYPK1Bj9cpL%2FZ1nD8%2Fr56or2XJaCFvizZqM9ZQ4oxjDhjtfMHceoEtq4%2BrwcNJoynkMj5DWZk9EIxH8bwPzs8Q%3D%3D&type=json";  // 실제 OpenAPI URL로 변경
 
         RestTemplate restTemplate = new RestTemplate();
-//        FoodApiResponse[] foodApiResponses = restTemplate.getForObject(openApiUrl, FoodApiResponse[].class);
         FoodApiResponse foodApiResponse = restTemplate.getForObject(openApiUrl, FoodApiResponse.class);
 
-        // ModelMapper를 사용하여 API 응답과 엔티티 간의 필드 매핑 자동화
-        // List<Food> foods = Arrays.stream(foodApiResponses)
-        //    .map(this::convertToFoodEntity)
-        //    .collect(Collectors.toList());
+
 
         Food food = convertToFoodEntity(foodApiResponse);
         foodRepository.save(food);
         return Collections.singletonList(food);
     }
 
+    /* food api로 get */
     public OpenDataFoodNutrientDto getFoods(int pageNo, int limit) {
         OpenDataFoodNutrientDto dto = null;
 
@@ -90,6 +87,8 @@ public class FoodServiceImpl implements FoodService {
         return dto;
     }
 
+
+    /* db 저장 */
     @Transactional
     public int moveDataToDatabase() {
         int page = 1;

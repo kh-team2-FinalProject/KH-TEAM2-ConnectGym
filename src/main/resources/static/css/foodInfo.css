@@ -79,3 +79,83 @@ padding: 12px;
 font-size: 15px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 팝업 */
+
+
+.dietPop {
+    z-index: 1000; /* header 위로 올리는 작업 */
+    background-color: rgba(0, 0, 0, 0.5); /* 뒷 배경 */
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 700px;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* 스크롤 */
+}
+
+/* 팝업 내용 */
+.pop-content {
+    width: 500px;
+    height: 650px;
+    background-color: #e6ebe1;
+    color: #5f797c;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.pop-content h1{
+    margin-left: 5px;
+}
+
+/* 팝업 내 음식 데이터 테이블 */
+.pop_content2{
+    width:80%;
+    font-size:15px;
+}
+
+
+/* 닫기 버튼 */
+
+#closeBtn{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #e9f8c4;
+    border-radius:50%;
+    margin-left: 85%;
+}
+
+
+/* input box */
+
+#popInput{
+
+ width: 77%;
+ height: 30px;
+ padding: 10px;
+ border-radius: 10px;
+}
+
+.pop-content input, button{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+

@@ -10,7 +10,7 @@ import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientDto;
 
 import java.util.List;
 
-// OpenAPI에서 음식 데이터를 가져와 저장하는 메소드 선언
+// OpenAPI에서 음식 데이터를 가져와 저장하는 메소드
 public interface FoodService {
     List<Food> saveFoodsFromOpenAPI();
     // 필요한 추가 메서드를 선언
