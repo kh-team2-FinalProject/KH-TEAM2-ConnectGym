@@ -104,32 +104,28 @@ font-size: 15px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 700px;
-    justify-content: center;
-    align-items: center;
-    overflow: auto; /* 스크롤 */
+    width: 35%;
+    border-radius: 10px;
+    margin-bottom: 30px;
 }
 
 /* 팝업 내용 */
 .pop-content {
-    width: 500px;
-    height: 650px;
-    background-color: #e6ebe1;
+    width: 100%;
+    max-height: 100%;
+/*    background-color: #e6ebe1;*/
+    background-color: #A3DC10;
     color: #5f797c;
     padding: 20px;
     border-radius: 10px;
+    text-align:center;
+    overflow: auto;
 }
 
-.pop-content h1{
-    margin-left: 5px;
+.pop-content h2 {
+    margin: 0 0 20px; /* 위 아래 여백 추가 */
 }
 
-/* 팝업 내 음식 데이터 테이블 */
-.pop_content2{
-    width:80%;
-    font-size:15px;
-}
 
 
 /* 닫기 버튼 */
@@ -139,23 +135,35 @@ font-size: 15px;
     font-weight: bold;
     background-color: #e9f8c4;
     border-radius:50%;
-    margin-left: 85%;
+    margin-left: 90%;
+    padding: 5px 10px;
+}
+
+/* input 박스 정리 */
+.foodInput{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.nutriNm, .nutriInput {
+    flex: 0 0 130px; /* 고정 너비 */
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+/* 입력 필드 스타일 지정 */
+.nutriInput {
+    flex: 1; /* 남은 공간을 채우도록 설정 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 
-/* input box */
-
-#popInput{
-
- width: 77%;
- height: 30px;
- padding: 10px;
- border-radius: 10px;
+#submit{
+    background-color: #878787;
+    color: white;
+    padding:10px;
+    border-radius:10px;
 }
-
-.pop-content input, button{
-    display: inline-block;
-    vertical-align: middle;
-}
-
 

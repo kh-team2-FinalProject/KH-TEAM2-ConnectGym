@@ -3,6 +3,7 @@ package com.khteam2.connectgym.chat_test;
 import com.khteam2.connectgym.chat_test.dto.ChatMessageDTO;
 import com.khteam2.connectgym.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -29,20 +30,20 @@ public class ChatController {
 
     @PostMapping("/checkedChatroom")
     @ResponseBody
-    public Long checkedChatroom(@RequestParam Long memberNo, @RequestParam Long trainerNo) {
+    public Chatroom checkedChatroom(@RequestParam Long memberNo, @RequestParam Long trainerNo) {
 
         System.out.println(memberNo + "왔다 트레이너" + trainerNo);
 
-        Long chatroomNo = chatroomService.enterChatRoom(memberNo, trainerNo).getNo();
-
-        return chatroomNo;
+        return chatroomService.enterChatRoom(memberNo, trainerNo);
 
 
     }
 
-    @MessageMapping("/chat") // 클라이언트가 메시지 보낼 때의 엔드포인트 설정
-    @SendTo("/topic/qqq") // 브로커 주소 설정
-    public ChatMessage sendMessage(ChatMessageDTO message) {
+    @MessageMapping("/chat/{roomId}") // 클라이언트가 메시지 보낼 때의 엔드포인트 설정
+    @SendTo("/topic/qqq/{roomId}") // 브로커 주소 설정
+    public ChatMessage sendMessage(@DestinationVariable Long roomId, ChatMessageDTO message) {
+
+
         System.out.println(message);
 
         // 메시지 처리 로직 구현

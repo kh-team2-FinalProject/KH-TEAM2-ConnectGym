@@ -2,6 +2,7 @@
 
 /* 열림 */
 function openPop() {
+    var modal = document.getElementById("dietPopup");
     modal.style.display= "block";
 }
 

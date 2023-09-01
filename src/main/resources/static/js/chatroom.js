@@ -6,8 +6,8 @@ function checkedChatroom() {
             memberNo: memberNo,
             trainerNo: trainerNo
         },
-        success: function (roomId) {
-            window.open("/chat_test/" + roomId, 'chatting-window', 'width=430, height=500, location=no, status=no, scrollbars=yes');
+        success: function (chatroom) {
+            window.open("/chat_test/" + chatroom.no, 'chatting-window', 'width=430, height=500, location=no, status=no, scrollbars=yes');
 
         },
         error: function (error) {
