@@ -16,18 +16,9 @@ import javax.persistence.*;
 
 @Data
 @Entity
-<<<<<<< HEAD
-/*<<<<<<< HEAD
-=======*/
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-//>>>>>>> 309cc76f85971ff732e82cbc6b328b150e10c96d
-=======
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
->>>>>>> 062824244cf13ad3cf9772ba5ce2d247728c7eed
 @Table(name = "foods")
 public class Food {
 
