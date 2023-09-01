@@ -3,6 +3,7 @@ package com.khteam2.connectgym.chat_test;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class ChatMessage {
 
     @Id

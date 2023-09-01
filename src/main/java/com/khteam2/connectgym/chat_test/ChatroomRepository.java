@@ -18,5 +18,5 @@ public interface ChatroomRepository extends JpaRepository<Chatroom, Long> {
 
     //    @Query("select cr from Chatroom cr where cr.member.no=?1 and cr.trainer.no=?2")
     Chatroom findByMemberNoAndTrainerNo(Long memberNo, Long trainerNo);
-
+    
 }

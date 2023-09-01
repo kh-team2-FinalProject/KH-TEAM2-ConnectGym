@@ -1,118 +1,30 @@
+function checkedChatroom() {
+    $.ajax({
+        type: "POST",
+        url: "/checkedChatroom",
+        data: {
+            memberNo: memberNo,
+            trainerNo: trainerNo
+        },
+        success: function (roomId) {
+            window.open("/chat_test/" + roomId, 'chatting-window', 'width=430, height=500, location=no, status=no, scrollbars=yes');
 
-function findChatRoom(){
-    const trainerNo = ${trainer.trainerNo};
-    const memberNo = ${session.session_login_member_no};
-
-
-
-
-    const data = {
-            type: 'openChat',
-            trainerNo: trainerNo,
-            memberNo: memberNo
-    };
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function setConnected(connected) {
-    var connectButton = $('#connect');
-    var disconnectButton = $('#disconnect');
-    var messageInput = $('#message');
-    var sendButton = $('#send');
-
-    if (connected) {
-        connectButton.prop('disabled', true);
-        disconnectButton.prop('disabled', false);
-        messageInput.prop('disabled', false);
-        sendButton.prop('disabled', false);
-    } else {
-        connectButton.prop('disabled', false);
-        disconnectButton.prop('disabled', true);
-        messageInput.prop('disabled', true);
-        sendButton.prop('disabled', true);
-    }
+        },
+        error: function (error) {
+            alert("채팅방 연결에 실패하였습니다.")
+        }
+    });
 }
 
 function connect() {
     var socket = new SockJS('/chat');
     stompClient = Stomp.over(socket);
 
-    stompClient.connect({}, function (frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-
-        stompClient.send("/app/register", {}, JSON.stringify({ 'username': username }));
-
-        stompClient.subscribe('/topic/chat', function (message) {
+    stompClient.connect({}, function () {
+        console.log('Connected: ');
+        stompClient.subscribe('/queue/qqq', function (message) {
             showMessage(JSON.parse(message.body));
         });
+
     });
 }
-
-function disconnect() {
-    if (stompClient !== null) {
-        stompClient.disconnect();
-    }
-    setConnected(false);
-    console.log("Disconnected");
-}
-
-function sendMessage() {
-    var messageInput = $('#message');
-    var message = messageInput.val().trim();
-
-    if (message && stompClient) {
-        var chatMessage = {
-            'from': username,
-            'text': message
-        };
-        stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
-        messageInput.val('');
-    }
-}
-
-function showMessage(message) {
-    var chatDiv = $('#chat');
-    var messageElem = $('<div>').addClass('message').html('<strong>' + message.from + ':</strong> ' + message.text);
-    chatDiv.append(messageElem);
-}
-
-$(function () {
-    username = prompt('Please enter your username:');
-    connect();
-
-    $('#disconnect').click(function () {
-        disconnect();
-    });
-
-    $('#send').click(function () {
-        sendMessage();
-    });
-});

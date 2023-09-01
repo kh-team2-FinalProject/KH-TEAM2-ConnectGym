@@ -9,9 +9,7 @@
 <body>
 <div id="chat">
     <form id="messageForm">
-        <!--        <select id="roomSelect">-->
-        <!--            <option th:each="room : ${chatRooms}" th:value="${room.id}" th:text="${room.id}"></option>-->
-        <!--        </select>-->
+
         <input type="text" id="message" placeholder="Type your message..."/>
         <button type="submit">Send</button>
     </form>
@@ -21,7 +19,7 @@
 <script th:inline="javascript">
     var socket = new SockJS('/chat');
     var stompClient = Stomp.over(socket);
-    var memberNo =
+
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
     });
@@ -34,7 +32,7 @@
         var messageContent = messageInput.value;
         stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify({
             'content': messageContent,
-            'sender':
+
         }));
         messageInput.value = '';
     });
@@ -45,7 +43,7 @@
         document.querySelector("#messages").appendChild(messageDiv);
     }
 
-    stompClient.subscribe('/queue/messages/{roomId}', function (message) {
+    stompClient.subscribe('/queue/qqq/{roomId}', function (message) {
         showMessage(JSON.parse(message.body));
     });
 </script>
