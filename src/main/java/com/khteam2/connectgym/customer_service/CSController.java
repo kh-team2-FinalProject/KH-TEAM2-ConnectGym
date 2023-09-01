@@ -1,7 +1,6 @@
 package com.khteam2.connectgym.customer_service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,18 +53,18 @@ public class CSController {
         return "content/customer_service";
     }
 
-//    @GetMapping(value = "/change/customer_service")
-//    public String changeCategorytoDefaultPage(
-//        @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
-//        @RequestParam(name = "category", required = false, defaultValue = "All") String category,
-//        Model model
-//    ) {
-//        pageNumber = 1;
-//        model.addAttribute("category", category);
-//        model.addAttribute("currentPage", pageNumber);
-//
-//        return "redirect:/customer_service";
-//    }
+    @GetMapping(value = "/change/customer_service")
+    public String changeCategorytoDefaultPage(
+        @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
+        @RequestParam(name = "category", required = false, defaultValue = "All") String category,
+        Model model
+    ) {
+        pageNumber = 1;
+        model.addAttribute("category", category);
+        model.addAttribute("currentPage", pageNumber);
+
+        return "redirect:/customer_service";
+    }
 
 //    @GetMapping(value = "/customer_service/categoryAll")
 //    public String viewCategoryAll(

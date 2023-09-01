@@ -1,4 +1,10 @@
 $(document).ready(function () {
+
+    $.ajax({
+        success: function(data){
+
+        }
+    });
   // 카테고리 버튼 클릭시 class 추가/삭제
   $(".ctgyitem").click(function () {
 
@@ -21,7 +27,7 @@ $(document).ready(function () {
     }
   });
 
-  // 자주묻는질문 클릭시 div display 설정
+  // div 토글
   $(".accodion-item").click(function () {
     if ($(this).hasClass("active")) {
       $(this).removeClass("active");
