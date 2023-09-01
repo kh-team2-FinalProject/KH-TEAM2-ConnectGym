@@ -1,15 +1,20 @@
 package com.khteam2.connectgym.dietlist.controller;
 import com.khteam2.connectgym.dietlist.model.Food;
+import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientFoodDto;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
+import com.khteam2.connectgym.dietlist.service.FoodService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class DietListController {
     @Autowired
     private FoodRepository foodRepository;
@@ -28,6 +33,20 @@ public class DietListController {
     public String diet_SearchForm(){
         return "/fooddiary/foodInfo";
     }
+
+    @GetMapping("fooddairy/post")
+    public String foodInfowrite(){
+        return "fooddairy/post";
+    }
+
+/*
+    @PostMapping("/fooddairy/post")
+    public String foodInfowrite(OpenDataFoodNutrientFoodDto openDataFoodNutrientFoodDto){
+        FoodService.savePost(OpenDataFoodNutrientFoodDto.toEntity()).getId();
+
+        return "redirect:/";
+    }
+*/
 
 
 

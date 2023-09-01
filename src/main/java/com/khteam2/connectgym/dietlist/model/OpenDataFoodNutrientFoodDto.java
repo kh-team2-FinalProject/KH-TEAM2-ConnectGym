@@ -1,14 +1,12 @@
 package com.khteam2.connectgym.dietlist.model;
 
 import com.khteam2.connectgym.common.CommonUtil;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+/*AllArgsConstructor*/
+@ToString
 @Builder
 public class OpenDataFoodNutrientFoodDto {
     /**
@@ -94,4 +92,23 @@ public class OpenDataFoodNutrientFoodDto {
             .animalPlant(this.animalPlant)
             .build();
     }
+
+    @Builder
+    public OpenDataFoodNutrientFoodDto(Long foodCd, String foodNm, Double foodSize, Double kcal,
+                   Double choc, Double prot, Double fat, Double sugar, Double nat, Double satFat,
+                   Double transFat, String animalPlant){
+        this.foodCd = foodCd;
+        this.foodNm = foodNm;
+        this.foodSize = foodSize;
+        this.kcal = kcal;
+        this.choc = choc;
+        this.prot = prot;
+        this.fat = fat;
+        this.sugar = sugar;
+        this.nat = nat;
+        this.satFat = satFat;
+        this.transFat = transFat;
+        this.animalPlant = animalPlant;
+    }
+
 }

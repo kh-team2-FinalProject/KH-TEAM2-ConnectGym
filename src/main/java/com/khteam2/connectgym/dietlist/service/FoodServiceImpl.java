@@ -6,16 +6,13 @@
 package com.khteam2.connectgym.dietlist.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.khteam2.connectgym.dietlist.model.Food;
-import com.khteam2.connectgym.dietlist.model.FoodApiResponse;
-import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientDto;
-import com.khteam2.connectgym.dietlist.model.OpenDataFoodNutrientFoodDto;
+import com.khteam2.connectgym.dietlist.model.*;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,18 +20,19 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 // 서비스 구현
+@AllArgsConstructor
 @Service
 public class FoodServiceImpl implements FoodService {
     @Autowired
     private FoodRepository foodRepository;
     @Value("${dietApi.key}")
     private String opendataEncodedApiKey;
-
+/*
     @Override
     public List<Food> saveFoodsFromOpenAPI() {
         String openApiUrl = "https://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1?serviceKey=zYPK1Bj9cpL%2FZ1nD8%2Fr56or2XJaCFvizZqM9ZQ4oxjDhjtfMHceoEtq4%2BrwcNJoynkMj5DWZk9EIxH8bwPzs8Q%3D%3D&type=json";  // 실제 OpenAPI URL로 변경
@@ -47,7 +45,7 @@ public class FoodServiceImpl implements FoodService {
         Food food = convertToFoodEntity(foodApiResponse);
         foodRepository.save(food);
         return Collections.singletonList(food);
-    }
+    }*/
 
     /* food api로 get */
     public OpenDataFoodNutrientDto getFoods(int pageNo, int limit) {
@@ -89,6 +87,7 @@ public class FoodServiceImpl implements FoodService {
 
 
     /* db 저장 */
+
     @Transactional
     public int moveDataToDatabase() {
         int page = 1;
@@ -114,21 +113,37 @@ public class FoodServiceImpl implements FoodService {
         return 1;
     }
 
-    private Food convertToFoodEntity(FoodApiResponse apiResponse) {
-        Food food = new Food();
-        food.setFoodNm(apiResponse.getFoodNm());
-        food.setFoodSize(apiResponse.getFoodSize());
-        food.setChoc(apiResponse.getChoc());
-        food.setProt(apiResponse.getProt());
-        food.setFat(apiResponse.getFat());
-        food.setSatFat(apiResponse.getSatFat());
-        food.setTransFat(apiResponse.getTransFat());
-        food.setKcal(apiResponse.getKcal());
-        food.setNat(apiResponse.getNat());
-        food.setSugar(apiResponse.getSugar());
-        food.setAnimalPlant(apiResponse.getAnimalPlant());
-        return food;
+    @Override
+    @Transactional
+    public Long savePost(OpenDataFoodNutrientFoodDto openDataFoodNutrientFoodDto){
+        return foodRepository.save(openDataFoodNutrientFoodDto.toEntity()).getFoodCd();
     }
+
+    @Override
+    @Transactional
+    public List<OpenDataFoodNutrientFoodDto> getFoodlist(){
+        List<Food> foodentity = foodRepository.findAll();
+        List<OpenDataFoodNutrientFoodDto> foodDtoList = new ArrayList<>();
+
+        for (Food food : foodentity) {
+            OpenDataFoodNutrientFoodDto foodinfoDTO = OpenDataFoodNutrientFoodDto.builder()
+                .foodCd(food.getFoodCd())
+                .foodNm(food.getFoodNm())
+                .foodSize(food.getFoodSize())
+                .choc(food.getChoc())
+                .prot(food.getProt())
+                .fat(food.getFat())
+                .nat(food.getNat())
+                .sugar(food.getSugar())
+                .kcal(food.getKcal())
+                .build();
+
+            foodDtoList.add(foodinfoDTO);
+        }
+        return foodDtoList;
+    }
+
+
 
 
 }
