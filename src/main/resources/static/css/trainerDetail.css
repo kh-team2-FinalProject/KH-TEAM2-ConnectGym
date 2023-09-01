@@ -5,10 +5,16 @@ body{
     -webkit-linear-gradient(350deg, rgba(250, 214, 195, 0.8) 30%, #b0eae8 120%);
   background: linear-gradient(transparent, rgba(110, 110, 110, 0.3)),
     linear-gradient(100deg, rgba(250, 214, 195, 0.8) 30%, #b0eae8 120%);
+
+    /*원본 색
+     background: linear-gradient(transparent, rgba(110, 110, 110, 0.3)),
+        linear-gradient(100deg, rgba(250, 214, 195, 0.8) 30%, #b0eae8 120%);
+    */
 }
 
 .trainerDetail_container{
   margin-top: 15vh;
+  margin-bottom: 15vh;
   min-height: 80vh;
   height:100%;
   --c: #FF0000;
@@ -46,16 +52,19 @@ body{
 .trainerDetail_profile_header {
   background: #272727;
   border-left: 0.625rem solid #97ece1;
-  padding: 1.5em 1.5em 1em;
+  padding: 1.5em 4em 2em;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* profile picture */
 
 .trainerDetail_profile_header_imgbox {
   display: block;
-  width: 9.5rem;
-  height: 9.5rem;
+  width: 10rem;
+  height: 10rem;
   overflow: hidden;
   border-radius: 50%;
   margin: auto;
@@ -74,14 +83,13 @@ body{
   color: #f3f3f3;
   font-size: 1.5rem;
   margin-top: 0.8em;
-  font-family: "Oswald", sans-serif;
   font-weight: normal;
   position: relative;
 }
 
 /* header text span */
 
-.trainerDetail_profile_header h1 span {
+.trainerDetail_profile_container h1 span:first-child {
   font-size: 1.2rem;
   font-weight: 300;
   display: block;
@@ -91,23 +99,72 @@ body{
   border-top: 0.075em solid rgba(250, 214, 195, 1);
 }
 
+.trainerDetail_profile_header_items{
+  display:flex;
+  width:80%;
+  justify-content: space-around;
+  background: #ecebeb;
+  border-radius:10px;
+  padding: 5px;
+}
+
+.trainerDetail_profile_header_item{
+   display:flex;
+   flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+
+}
+
+.trainerDetail_profile_header_item:not(:first-child):hover{
+  cursor:pointer;
+}
+
+/* 문의하기만 애니메이션 효과 넣어보기 */
+
+
+
+.trainerDetail_profile_header_item
+.trainerDetail_profile_header_item_sub1{
+  display:flex;
+  align-items: center;
+  font-size:15px;
+  height:4vh;
+}
+
+.trainerDetail_profile_header_item
+.trainerDetail_profile_header_item_sub2{
+  display:flex;
+  align-items: center;
+  font-size:20px;
+  font-weight: bold;
+  height:5vh;
+}
+
+
+/*여기까지 헤더 끝*/
+
+
 
 /*팔로우*/
 .trainerDetail_profile_follow{
   display:flex;
   justify-content: space-between;
-  padding : 0px 3vw;
+  padding : 1vh 1vw;
+  color: white;
 
 }
 
 .td_trainer_follow_count_group{
   display:flex;
+  align-items: center;
 }
 
 .td_trainer_follow_count{
     font-weight: bold;
-    font-size: 20px;
-    color: #0E181A;
+    font-size: 17px;
+    color: #A3DC10;
     /* margin-left: 10vw;*/
 }
 
@@ -132,6 +189,7 @@ body{
   position: relative;
   z-index: 2;
   vertical-align: middle;
+  vertical-align: middle;
 }
 
 .trainerDetail_profile_about h2::before {
@@ -151,14 +209,38 @@ body{
   font-weight: 300;
 }
 
-. trainerDetail_profile_license{
+
+
+.trainerDetail_profile_license_subTitle{
+  width: 8vw;
+  text-align: center;
+  padding: 10px 10px;
+  border-radius:30px;
+  background:#e1e1e1;
+  font-weight:bold;
+}
+
+.trainerDetail_profile_license_img{
   display:flex;
 }
 
+/*태그 내 생성되는 img 태그 > 위랑 같은거 아님*/
+.trainerDetail_profile_license img{
+  object-fit: cover;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.trainerDetail_profile_license_img p{
+  font-size: 15px;
+  margin:0;
+  padding: 10px;
+}
 
 .trainerDetail_profile_bottom {
   margin-top: 1.5em;
   text-align: right;
+   font-size: 15px;
 }
 
 /* back to profile link */
@@ -189,6 +271,8 @@ body{
   border-bottom-color: #fdc1a0;
 }
 
+
+/*밑에서 위로 애니메이션*/
 @media screen and (max-width: 26em) {
   .side_wrapper {
     min-height: 100vh;
@@ -251,7 +335,7 @@ body{
 
 .td_follow_button_group svg{
      /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
-    animation: beat 1s linear forwards;
+    animation: beat 1s linear forwards 3;
 }
 
 .td_follow_button_group span{
@@ -280,7 +364,7 @@ body{
 /*checkbox를 클릭할 경우 애니메이션 실행*/
 #td_followCheckbox:checked + svg #td_heart{
     /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
-    animation: drawHeart 1s linear forwards;
+     animation: drawHeart 1s linear forwards;
 }
 
 #td_followCheckbox:checked ~ .td_follow_button_group span{

@@ -26,7 +26,7 @@ public class S3Uploader {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String formattedDateTime = now.format(dateTimeFormatter);
 
-        String s3FileName = file.getOriginalFilename()+"-"+formattedDateTime;
+        String s3FileName = formattedDateTime+"-"+file.getOriginalFilename();
 
         //메타데이터 설정
         ObjectMetadata metadata = new ObjectMetadata();
@@ -46,7 +46,7 @@ public class S3Uploader {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String formattedDateTime = now.format(dateTimeFormatter);
 
-        String s3FileName = file.getOriginalFilename()+"-"+formattedDateTime;
+        String s3FileName = formattedDateTime+"-"+file.getOriginalFilename();
 
         //메타데이터 설정
         ObjectMetadata metadata = new ObjectMetadata();

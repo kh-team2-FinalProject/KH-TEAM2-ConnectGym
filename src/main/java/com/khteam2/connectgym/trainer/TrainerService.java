@@ -1,6 +1,8 @@
 package com.khteam2.connectgym.trainer;
 
 
+import com.khteam2.connectgym.lesson.Lesson;
+import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
@@ -8,10 +10,14 @@ import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class TrainerService {
 
     private final TrainerRepository trainerRepository;
+    private final LessonRepository lessonRepository;
     private final LicenseRepository licenseRepository;
     private final S3Uploader s3Uploader;
 
@@ -38,7 +45,7 @@ public class TrainerService {
 
     @Transactional
     public Long registerTrainer(TrainerRequestDTO trainerRequestDTO, Member member,
-        MultipartFile profileImgFile, MultipartFile[] licenseImgFiles) {
+                                MultipartFile profileImgFile, MultipartFile[] licenseImgFiles) {
         //중복검사
         boolean check = validateDuplicate(member.getUserId());
         if (!check) {
@@ -60,7 +67,8 @@ public class TrainerService {
             .trainerPw(member.getUserPw())
             .trainerName(member.getUserName())
             .trainerTel(member.getUserTel())
-          /*  .licenseList(trainerRequestDTO.getLicenseList())*/
+            .trainerEmail(member.getUserEmail())
+            /*  .licenseList(trainerRequestDTO.getLicenseList())*/
             .profileImg(fileUrl)
             .infoTitle(trainerRequestDTO.getInfoTitle())
             .infoContent(trainerRequestDTO.getInfoContent())
@@ -77,7 +85,7 @@ public class TrainerService {
                         .licenseImg(licenseImgUrl)
                         .trainer(trainer)
                         .build();
-                   /* licenseRepository.save(license);*/
+                    licenseRepository.save(license);
                 }
 
             } catch (IOException e) {
@@ -123,6 +131,13 @@ public class TrainerService {
     public TrainerResponseDTO findOneTrainer(Long trainerNo) {
         Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
 
+        //레슨 번호
+        Lesson lesson = lessonRepository.findByTrainerNo(trainerNo).orElse(null);
+
+
+        //라이선스 목록
+        List<License> licenses = licenseRepository.findAllTrainerNo(trainerNo);
+
         TrainerResponseDTO trainerResponseDTO = TrainerResponseDTO.builder()
             .trainerNo(trainerNo)
             .trainerId(trainer.getTrainerId())
@@ -131,7 +146,14 @@ public class TrainerService {
             .profileImg(trainer.getProfileImg())
             .infoTitle(trainer.getInfoTitle())
             .infoContent(trainer.getInfoContent())
+            .licenses(licenses)
             .build();
+
+        if (lesson == null) {
+            trainerResponseDTO.setLessonNo(-1L);
+        } else {
+            trainerResponseDTO.setLessonNo(lesson.getNo());
+        }
 
         return trainerResponseDTO;
     }

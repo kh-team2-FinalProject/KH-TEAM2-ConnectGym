@@ -40,6 +40,4 @@ public class Lesson {
 
     private String lesson_img;
 
-
-
 }

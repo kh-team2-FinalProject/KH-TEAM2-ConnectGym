@@ -14,7 +14,7 @@
     <th:block layout:fragment="mypage">
         <link rel="stylesheet" th:href="@{/css/convertToTrainerAccount.css}" />
         <form id="convertToTrainerAccount_wrap" name="convertForm"
-              action="/convertTrainer" method="post"
+              action="/mypage/convertTrainer" method="post"
               enctype="multipart/form-data" >
 
             <label
@@ -39,6 +39,7 @@
                 <textarea
                     name="infoContent"
                     rows="5"
+                    wrap="hard"
                     placeholder="자기소개 입력..."
                     class="_js_textarea_design_1 convertToTrainerAccount_description_textarea"
                 ></textarea>

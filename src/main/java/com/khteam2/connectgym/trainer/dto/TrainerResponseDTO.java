@@ -1,9 +1,13 @@
 package com.khteam2.connectgym.trainer.dto;
 
+import com.khteam2.connectgym.lesson.Lesson;
+import com.khteam2.connectgym.trainer.License;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,11 +19,15 @@ public class TrainerResponseDTO {
     private String trainerId;
     private String trainerName;
     private String trainerTel;
-    //    private List<License> licenseList;
     private String profileImg;
     private String infoTitle;
     private String infoContent;
     private String trainerEmail;
+
+    //DTO에서만 받음
+    private List<License> licenses;
+    private Long lessonNo;
+
 
 
 }

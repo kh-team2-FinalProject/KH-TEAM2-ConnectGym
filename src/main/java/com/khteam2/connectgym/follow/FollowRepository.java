@@ -22,7 +22,7 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
     List<Follow> findAllByToTrainer(Long toTrainerNo);
 
     //유저가 팔로우한 트레이너 목록 출력
-    List<Follow> findAllByFromUser(Long fromUserNoo);
+    List<Follow> findAllByFromUser(Long fromUserNo);
 
     //사용자를 위한 트레이너 팔로우된 수 출력
     @Query("select count(f) from Follow f where f.toTrainer.no=?1")

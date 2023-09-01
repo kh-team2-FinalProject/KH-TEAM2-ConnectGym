@@ -1,33 +1,3 @@
-/*
-function toggleFollow(toTrainerNo,obj) {
-
-	if ($(obj).text() === "unfollow") {
-		$.ajax({
-			type: "delete",
-			url: `/follow/${toTrainerNo}`,
-			dataType: "text"
-		}).done(res => {
-			$(obj).text("follow");
-			$(obj).toggleClass("follow_fill");
-			$('.td_trainer_follow_count').text(parseInt($('.td_trainer_follow_count').text()) - 1);
-		}).fail(error => {
-			alert(error.responseText);
-		});
-	} else {
-		$.ajax({
-			type: "post",
-			url: `/follow/${toTrainerNo}`,
-			dataType: "text"
-		}).done(res => {
-			$(obj).text("unfollow");
-			$(obj).toggleClass("follow_fill");
-			$('.td_trainer_follow_count').text(parseInt($('.td_trainer_follow_count').text()) + 1);
-		}).fail(error => {
-			alert(error.responseText);
-		});
-	}
-}
-*/
 
 window.onload = () => {
     const checkbox = document.getElementById("td_followCheckbox");
