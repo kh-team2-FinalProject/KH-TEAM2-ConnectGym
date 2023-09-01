@@ -30,13 +30,13 @@ public class TrainerController {
     private final FollowService followService;
 
 
-    @GetMapping("/convertTrainer")
+    @GetMapping("/mypage/convertTrainer")
     public String convertTrainer(Model model){
         model.addAttribute("bannerTitle", "convert");
         return "mypage/convertToTrainerAccount";
     }
 
-    @PostMapping("/convertTrainer")
+    @PostMapping("/mypage/convertTrainer")
     public String convertTrainer(Model model, TrainerRequestDTO trainerRequestDTO, HttpSession session,
                                  @RequestParam("profileImgFile") MultipartFile profileImgFile,
                                  @RequestParam("licenseImgFiles") MultipartFile[] licenseImgFiles){

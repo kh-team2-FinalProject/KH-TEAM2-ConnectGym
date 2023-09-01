@@ -81,6 +81,13 @@
 
 #orderList_wrap .orderList_order_detail_items .orderList_order_detail_item {
     display: flex;
+    margin-bottom: 0.75rem;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item:last-child {
+    margin-bottom: 0;
 }
 
 #orderList_wrap
