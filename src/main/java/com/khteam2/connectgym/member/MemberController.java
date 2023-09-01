@@ -5,17 +5,13 @@ import com.khteam2.connectgym.member.dto.MemberDTO;
 
 import javax.servlet.http.HttpSession;
 
-import com.khteam2.connectgym.member.dto.MemberResponse;
+import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 
-import com.khteam2.connectgym.trainer.Trainer;
-import com.khteam2.connectgym.trainer.TrainerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
@@ -105,7 +101,7 @@ public class MemberController {
         //배너타이틀
         model.addAttribute("bannerTitle", "MY LESSON");
         // (삭제예정)세션에서 꺼내오기 못해서 고정으로 테스트 중
-        MemberResponse member = memberService.findOneMember(1L);
+        MemberResponseDTO member = memberService.findOneMember(1L);
         model.addAttribute("member", member);
         System.out.println("member = " + member.getUserName());
         System.out.println("마이레슨리스트 컨트롤러 호출");
@@ -121,12 +117,15 @@ public class MemberController {
 
 
     @GetMapping("/mypage/myInfo")
-    public String myInfo(Model model) {
+    public String myInfo(Model model, HttpSession session) {
         //배너타이틀
         model.addAttribute("bannerTitle", "my info");
-        /*Trainer trainer = trainerRepository.findById(6L).orElse(null);*/
 
-        /*model.addAttribute("trainer", trainer);*/
+        Long sessionUserNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        MemberResponseDTO member = memberService.findOneMember(sessionUserNo);
+
+        model.addAttribute("member", member);
+
         return "mypage/myInfo";
     }
 

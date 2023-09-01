@@ -1,0 +1,358 @@
+.trainerDetail_container {
+    display: flex;
+    background: white;
+    justify-content:center;
+    /*사용자정의: var 함수로 핸들링*/
+    --c: #FF0000;
+}
+
+
+.trainerDetail_content {
+    background: #ffffff;
+    border: 2px solid #0e181a;
+    border-radius: 5px;
+    padding: 2vw;
+    width: 50vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.td_list {
+    list-style: none;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column; /*align-items: center;*/
+
+}
+
+.td_profile {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    position: relative;
+}
+
+.td_list li {
+    margin-bottom: 2vh;
+    text-align: center;
+    padding: 1vw;
+    border-bottom: 2px groove black;
+    /*border-radius: 5px;*/
+    background: #ffffff;
+}
+
+.td_profile_detail > li{
+    display:flex;
+    min-width:15vw;
+    justify-content: space-between;
+}
+
+.td_profile_info {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.td_profile img {
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 30px;
+    margin-left: 10px;
+}
+
+.td_trainer_span{
+font-weight: bold;
+    font-size: 20px;
+    color: #0E181A;
+}
+
+.td_trainer_name {
+    font-weight: bold;
+    font-size: 20px;
+    color: #0E181A;
+    /*margin-left: 10vw;*/
+}
+.td_trainer_id {
+    font-weight: bold;
+    font-size: 20px;
+    color: #0E181A;
+    /*margin-left: 10vw;*/
+}
+
+.td_trainer_follow_count{
+    font-weight: bold;
+    font-size: 20px;
+    color: #0E181A;
+    /* margin-left: 10vw;*/
+}
+
+
+
+
+.td_trainer_follow_count_group{
+  display:flex
+}
+
+.td_follow_button_group {
+
+}
+
+.lessonDetailList p {
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 2vh;
+    color: #0E181A;
+}
+
+.lessonDetail_content span {
+    color: #0E181A;
+}
+
+.lessonDetail_rightContainer {
+    background: white;
+    display: flex;
+    width: 30vw;
+    height: 60vh;
+    /*position: relative;*/
+    /*align-items: center;*/
+    flex-direction: column;
+}
+
+.lessonDetail_trainerBox {
+    width: 20vw;
+    margin-top: 5vh;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    border-collapse: collapse;
+}
+
+.ld_trainerBox_table {
+    width: 100vw;
+    box-sizing: content-box;
+    padding: 2vh;
+}
+
+.ld_trainerBox_table tr {
+    width: 100vw;
+    height: 6vh;
+    margin-top: 1vh;
+}
+
+.ld_trainerBox_table img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+.ld_trainer_like_btn {
+    padding: 8px 8px;
+    background-color: #A3DC10;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    width: 90px;
+    font-weight: bold;
+    transition: background-color 0.3s; /* Add transition for background */
+    /*opacity: 0.8;*/
+    align-items: center;
+    letter-spacing: 1px;
+}
+
+.ld_trainer_like_btn:hover {
+    background-color: rgba(163, 220, 16, 0.6);
+}
+
+.ld_trainer_like_btn:active {
+    background-color: rgba(163, 220, 16, 0.8);
+}
+
+
+.lessonDetail_orderBox {
+    width: 20vw;
+    margin-top: 3vh;
+    border-radius: 5px;
+    border: 2px solid black;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    border-collapse: collapse;
+}
+
+.ld_orderBox_table {
+    width: 100vw;
+    box-sizing: content-box;
+    padding: 2vh;
+}
+
+.ld_orderBox_table tr {
+    width: 100vw;
+    height: 6vh;
+    margin-top: 1vh;
+}
+
+.lessonDetail_btn {
+    background-color: #A3DC10;
+    position: relative;
+    display: inline-block;
+    /*크기 지정*/
+    width: 10vw;
+    font-size: 16px;
+    font-family: 'Black Ops One', cursive;
+    padding: 7px 7px;
+    color: white;
+    border: 0px;
+    border-radius: 6px;
+    text-align: center;
+    transition: top .01s linear;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+
+    box-shadow: 0 0 0 1px #A3DC10 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 8px 0 0 #81BC12,
+    0 8px 0 1px rgba(0, 0, 0, .4),
+    0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+.lessonDetail_btn:active {
+    top: 9px;
+    border: 0px;
+    box-shadow: 0 0 0 1px #A3DC10 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.lessonDetail_btn:hover {
+    background-color: #A7D145;
+}
+
+.ld_btn_tr {
+    margin-top: 2vh;
+}
+
+/*=============팔로우버튼===============*/
+
+.td_follow_button_group svg{
+    width: 30px;
+    /*상대포지션*/
+   position: relative;
+    /*z-index: 10;*/
+}
+
+#td_heart{
+    /*색 보충*/
+    fill: #a6a5a5;
+
+    /*stroke속성은 선, 문자, 원소등의 테두리에대해서 디자인 가능*/
+    stroke: var(--c);
+    /*선의 넓이*/
+    stroke-width: 40px;
+    /*선을 점선으로 설정, 점선의 길이 설정*/
+    stroke-dasharray: 3000;
+    /*displacement of line*/
+    stroke-dashoffset: 3000;
+    /*끝점은 둥글게*/
+    stroke-linecap: round;
+}
+
+.td_follow_button_group span{
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border-radius: 50%;
+    /*절대적 포지션: center*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    /*각 방향의 쉐도우 설정*/
+    /*var함수로 쉐도우 컬러 설정*/
+    box-shadow: 0 -160px 0 var(--c),
+    0 160px 0 var(--c),
+    -160px 0 0 var(--c),
+    160px 0 0 var(--c),
+    -120px -120px 0 var(--c),
+    120px -120px 0 var(--c),
+    120px 120px 0 var(--c),
+    -120px 120px 0 var(--c);
+}
+
+/*checkbox를 클릭할 경우 애니메이션 실행*/
+#td_followCheckbox:checked + svg #td_heart{
+    /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
+    animation: drawHeart 1s linear forwards;
+}
+
+#td_followCheckbox:checked ~ .td_follow_button_group span{
+    /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
+    animation: blink 0.5s ease-in-out forwards;
+    /*애니메이션 딜레이*/
+    animation-delay: 0.8s ;
+}
+
+#td_followCheckbox:checked + .td_follow_button_group svg{
+     /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
+    animation: beat 1s linear forwards;
+}
+
+.td_follow_button_group label{
+    /*마우스 heart로 이동시 마우스 커서변동*/
+    cursor: pointer;
+}
+
+/*애니메이션 효과 설정*/
+/*heart 애니메이션*/
+@keyframes drawHeart{
+    0%{
+        stroke-dashoffset: 2000;
+    }
+    80%{
+        fill: #eee;
+        stroke-dashoffset: 0;
+    }
+    100%{
+        fill: var(--c);
+        stroke-dashoffset: 0;
+    }
+
+}
+/*점 애니메이션*/
+@keyframes blink{
+    0%{
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0.8;
+    }
+    80%{
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/*두근두근 애니메이션*/
+@keyframes beat {
+    0%{
+        transform: scale(1);
+    }
+    70%{
+        transform: scale(1);
+    }
+    80%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}

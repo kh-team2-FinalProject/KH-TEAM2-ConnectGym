@@ -2,6 +2,7 @@ package com.khteam2.connectgym.trainer;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.khteam2.connectgym.lesson.Lesson;
 import lombok.*;
 
 import javax.persistence.*;

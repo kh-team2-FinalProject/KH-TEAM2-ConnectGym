@@ -127,7 +127,7 @@ public class TrainerService {
         Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
 
         TrainerResponseDTO trainerResponseDTO = TrainerResponseDTO.builder()
-            .trainerNo(trainer.getNo())
+            .trainerNo(trainerNo)
             .trainerId(trainer.getTrainerId())
             .trainerName(trainer.getTrainerName())
             .trainerTel(trainer.getTrainerTel())

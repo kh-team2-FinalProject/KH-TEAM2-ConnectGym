@@ -75,4 +75,6 @@ public class LessonService {
         return lessonRepository.findById(lessonNo).orElseThrow(() -> new RuntimeException("LessonNo: " + lessonNo + "에 해당하는 레슨을 찾을 수 없습니다."));
 
     }
+
+    //트레이너 넘버로 레슨 가져오기
 }

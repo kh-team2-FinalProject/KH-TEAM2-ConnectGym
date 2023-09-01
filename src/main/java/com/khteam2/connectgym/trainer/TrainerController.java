@@ -1,5 +1,10 @@
 package com.khteam2.connectgym.trainer;
 
+import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.follow.FollowService;
+import com.khteam2.connectgym.follow.dto.FollowTrainerResponseDTO;
+import com.khteam2.connectgym.lesson.LessonService;
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
@@ -13,12 +18,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class TrainerController {
 
     private final MemberRepository memberRepository;
     private final TrainerService trainerService;
+    private final LessonService lessonService;
+    private final FollowService followService;
 
 
     @GetMapping("/convertTrainer")
@@ -28,27 +37,42 @@ public class TrainerController {
     }
 
     @PostMapping("/convertTrainer")
-    public String convertTrainer(Model model, TrainerRequestDTO trainerRequestDTO,
+    public String convertTrainer(Model model, TrainerRequestDTO trainerRequestDTO, HttpSession session,
                                  @RequestParam("profileImgFile") MultipartFile profileImgFile,
                                  @RequestParam("licenseImgFiles") MultipartFile[] licenseImgFiles){
         model.addAttribute("bannerTitle", "convert");
 
-        Member member = memberRepository.findById(3L).orElse(null);
+        Long userNo = (Long)session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        Member member = memberRepository.findById(userNo).orElse(null);
 
-        //트레이너로 등록 후 해당 멤버는 삭제되는 서비스
+        //트레이너로 등록
         trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile, licenseImgFiles);
 
         return "redirect:/mypage";
     }
 
     @GetMapping(value = "/trainerDetail/{trainerNo}")
-    public String trainerDetail(@PathVariable Long trainerNo, Model model) {
+    public String trainerDetail(@PathVariable Long trainerNo, HttpSession session,Model model) {
         //배너타이틀
         model.addAttribute("bannerTitle", "trainer detail");
 
         TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+        /*LessonResponseDTO lessonResponseDTO = lessonService.*/
+
+        //트레이너의 팔로우 수 확인
+        int followCount = followService.followCount(trainerNo);
+
+        //사용자가 해당 사용자를 팔로우 했는지 확인
+        Long userNo = (Long)session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        Boolean isFollow = followService.followCheck(userNo,trainerNo);
+
+        FollowTrainerResponseDTO followTrainerResponseDTO = FollowTrainerResponseDTO.builder()
+            .trainerFollowCnt(followCount)
+            .followStatus(isFollow)
+            .build();
 
         model.addAttribute("trainer", trainerResponseDTO);
+        model.addAttribute("followInfo", followTrainerResponseDTO);
 
         return "detailOrCrud/trainerdetail";
     }

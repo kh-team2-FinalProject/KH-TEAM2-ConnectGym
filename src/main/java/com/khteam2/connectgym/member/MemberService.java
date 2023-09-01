@@ -3,7 +3,7 @@ package com.khteam2.connectgym.member;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
-import com.khteam2.connectgym.member.dto.MemberResponse;
+import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,9 +44,9 @@ public class MemberService {
 
     }
 
-    public MemberResponse findOneMember(Long no) {
+    public MemberResponseDTO findOneMember(Long no) {
         Member entity = memberRepository.findById(no).orElse(null);
-        return new MemberResponse(entity);
+        return new MemberResponseDTO(entity);
     }
 
     public boolean overlap_userID(String user_id) {

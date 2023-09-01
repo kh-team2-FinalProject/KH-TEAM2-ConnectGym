@@ -7,12 +7,84 @@
     <title>마이페이지 > 내 정보</title>
 </th:block>
 
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{/css/update.css}">
+</th:block>
+
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
 
-    <button onclick="location.href='/convertTrainer'">트레이너 전환</button>
-    <!--<img th:src="${trainer.profileImg}" width="200"/>-->
-    <button onclick="location.href='/update'">내정보 수정</button>
+
+    <div class="myInfo_lookup_container">
+        <div class="myInfo_lookup_border">
+            <div class="myInfo_lookup_top">
+                <button class="myInfo_lookup_button myInfo_lookup_button_large" onclick="location.href='/convertTrainer'">트레이너 전환</button>
+            </div>
+            <form action="" method="post" class="myInfo_lookup_form">
+                <div name="myInfo_lookup">
+                    <!-- 아이디는 수정 불가 -->
+                    <div class="myInfo_lookup_input_wrap">
+                        <span>ID</span>
+                        <input id="InputID" type="text" name="userId" th:value="${member.userId}" readonly>
+                    </div>
+                    <div class="myInfo_lookup_input_wrap">
+                        <span>비밀번호</span>
+                        <input id="InputPW" type="password" name="userPw" placeholder="영문 + 숫자 조합으로 6~25자리 입력해주세요.">
+                        <span id="pw_check_message"></span>
+                    </div>
+                    <!-- 전화번호 -->
+                    <div class="myInfo_lookup_input_wrap">
+                        <span>전화번호</span>
+                        <input id="InputTel" type="text" th:value="${member.userTel}" name="userTel"></input>
+                    </div>
+
+                    <!-- 주소 -->
+                    <div class="myInfo_lookup_input_address_wrap">
+                        <span>주소</span><br>
+                        <input type="text" id="sample6_postcode" placeholder="우편번호">
+                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                        <input type="text" id="sample6_address" placeholder="주소">
+                        <input type="text" id="sample6_extraAddress">
+                        <br>
+                        <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+                        <input type="hidden" name="userAddress" id="userAddress">
+                    </div>
+
+                    <!-- email -->
+                    <div class="myInfo_lookup_input_email_wrap">
+                        <span>이메일</span><br>
+                        <input id="email01" type="text" name="email01" required></input>
+                        <span id="email_middle">@</span>
+                        <input id="email02" name="email02">
+                        <select id="select" name="select">
+                            <option value="1" selected>직접입력</option>
+                            <option value="naver.com">naver.com</option>
+                            <option value="hanmail.net">hanmail.net</option>
+                            <option value="hotmail.com">hotmail.com</option>
+                            <option value="nate.com">nate.com</option>
+                            <option value="yahoo.co.kr">yahoo.co.kr</option>
+                            <option value="empas.com">empas.com</option>
+                            <option value="dreamwiz.com">dreamwiz.com</option>
+                            <option value="freechal.com">freechal.com</option>
+                            <option value="lycos.co.kr">lycos.co.kr</option>
+                            <option value="korea.com">korea.com</option>
+                            <option value="gmail.com">gmail.com</option>
+                            <option value="hanmir.com">hanmir.com</option>
+                            <option value="paran.com">paran.com</option>
+                        </select>
+                        <span id="mail-check-warn"></span>
+                        <input type="hidden" id="userEmail" name="userEmail">
+                    </div>
+                    <div class="edit_submit_wrap">
+                        <button type="submit" class="myInfo_lookup_button myInfo_lookup_button_small"  onsubmit="return showCompletionAlert()">정보 수정
+                        </button>
+                        <button type="reset" class="myInfo_lookup_button myInfo_lookup_button_small"  onsubmit="return showCompletionAlert()">RESET
+                        </button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
 
 </th:block>
 

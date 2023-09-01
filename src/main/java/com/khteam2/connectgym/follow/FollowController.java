@@ -1,21 +1,29 @@
 package com.khteam2.connectgym.follow;
 
-import com.khteam2.connectgym.member.Member;
-import com.khteam2.connectgym.trainer.Trainer;
+import com.khteam2.connectgym.common.SessionConstant;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import javax.servlet.http.HttpSession;
+
+@RestController
 @RequiredArgsConstructor
 public class FollowController {
+
     private final FollowService followService;
 
-    @PostMapping("/add")
-    public void addFollow(@RequestParam Member fromUser, @RequestParam Trainer toTrainer) {
-        followService.addFollow(fromUser, toTrainer);
-
+    @PostMapping("/follow/{toTrainerNo}")
+    public ResponseEntity<String> follow(@PathVariable Long toTrainerNo, HttpSession session) {
+        Long fromUserNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        followService.addFollow(fromUserNo, toTrainerNo);
+        return ResponseEntity.ok().body("Follow");
     }
 
+    @DeleteMapping("/follow/{toTrainerNo}")
+    public ResponseEntity<String> unFollow(@PathVariable Long toTrainerNo,HttpSession session){
+        Long fromUserNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        followService.delFollow(fromUserNo, toTrainerNo);
+        return ResponseEntity.ok().body("unFollow");
+    }
 }
