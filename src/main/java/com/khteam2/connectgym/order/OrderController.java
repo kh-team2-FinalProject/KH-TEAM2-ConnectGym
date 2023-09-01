@@ -53,28 +53,16 @@ public class OrderController {
         @SessionAttribute(name = SessionConstant.ORDER_ORDER_NO, required = false) String sMerchantUid,
         @SessionAttribute(name = SessionConstant.ORDER_PRICE, required = false) Long sTotalPrice,
         @SessionAttribute(name = SessionConstant.ORDER_LESSON_LIST, required = false) List<Long> sOrderLessonList,
-        OrderProcessDto processDto) {
-        if (processDto.getImp_uid() == null
-            || processDto.getMerchant_uid() == null
+        OrderProcessRequestDto requestDto) {
+        if (requestDto.getImp_uid() == null
+            || requestDto.getMerchant_uid() == null
             || sMerchantUid == null
             || sTotalPrice == null) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
-        OrderProcessRequestDto requestDto = OrderProcessRequestDto.builder()
-            .sMerchantUid(sMerchantUid)
-            .sLoginMemberNo(sLoginMemberNo)
-            .sLessonNolist(sOrderLessonList)
-            .sTotalPrice(sTotalPrice)
-            .merchantUid(processDto.getMerchant_uid())
-            .impUid(processDto.getImp_uid())
-            .impSuccess(processDto.getImp_success())
-            .errorCode(processDto.getError_code())
-            .errorMsg(processDto.getError_msg())
-            .isApi(false)
-            .build();
-
-        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto);
+        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto, sLoginMemberNo, sMerchantUid,
+            sTotalPrice, sOrderLessonList, false);
 
         if (!responseDto.isSuccess()) {
             model.addAttribute("message", responseDto.getMessage());
@@ -106,8 +94,8 @@ public class OrderController {
     public String myOrderList(
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
-        OrderListDto orderListDto) {
-        OrderListResponseDto responseDto = this.orderService.orderList(loginMemberNo, orderListDto);
+        OrderListRequestDto orderListRequestDto) {
+        OrderListResponseDto responseDto = this.orderService.orderList(loginMemberNo, orderListRequestDto);
 
         model.addAttribute("responseDto", responseDto);
         model.addAttribute("bannerTitle", "MY ORDER LIST");
