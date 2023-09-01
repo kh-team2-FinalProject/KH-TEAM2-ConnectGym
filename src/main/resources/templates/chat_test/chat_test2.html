@@ -21,7 +21,7 @@
 <script th:inline="javascript">
     var socket = new SockJS('/chat');
     var stompClient = Stomp.over(socket);
-
+    var memberNo =
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
     });

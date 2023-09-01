@@ -1,5 +1,6 @@
 package com.khteam2.connectgym.chat_test;
 
+import com.khteam2.connectgym.chat_test.dto.ChatMessageDTO;
 import com.khteam2.connectgym.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -13,6 +14,7 @@ public class ChatController {
 
 
     private final MemberService memberService;
+    private final ChatMessageService chatMessageService;
 
 
     @GetMapping("/chat_test")
@@ -22,10 +24,10 @@ public class ChatController {
 
     @MessageMapping("/chat") // 클라이언트가 메시지 보낼 때의 엔드포인트 설정
     @SendTo("/topic/qqq") // 브로커 주소 설정
-    public ChatMessage sendMessage(ChatMessage message) {
+    public ChatMessage sendMessage(ChatMessageDTO message) {
         System.out.println(message);
 
         // 메시지 처리 로직 구현
-        return message;
+        return chatMessageService.saveMessage(message);
     }
 }
