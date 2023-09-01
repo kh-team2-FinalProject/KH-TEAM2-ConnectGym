@@ -21,6 +21,7 @@
             <button class="write_btn" onclick="openPop()">write</button>
         </div>
         <table class="FoodInfo_table">
+            <thead>
             <tr>
                 <th class="Info_name">식품명</th>
                 <th class="Info_name">1회제공량</th>
@@ -31,6 +32,8 @@
                 <th class="Info_name">당</th>
                 <th class="Info_name">칼로리</th>
             </tr>
+            </thead>
+            <tbody>
             <tr th:each="food: ${foods}">
                 <td th:text="${food.foodNm}">식품명</td>
                 <td th:text="${food.foodSize}">1회 제공량</td>
@@ -41,9 +44,7 @@
                 <td th:text="${food.sugar}">당</td>
                 <td th:text="${food.kcal}">칼로리</td>
             </tr>
-
-
-
+            </tbody>
         </table>
     </div>
 
@@ -72,19 +73,11 @@
                         <td class="sub1" title="총 아침 식사지방 : g1">지방</td>
                         <td class="sub1" title="총 아침 식사칼로리 : kcal1">칼로리</td>
                     </tr>
-
                     </tbody>
                 </table>
-
             </div>
-
         </div>
     </div>
-
-
-
-
-
     <script th:src="@{/js/dietlist.js}"></script>
 </th:block>
 
