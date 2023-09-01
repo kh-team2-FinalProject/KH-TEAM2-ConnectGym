@@ -5,6 +5,7 @@ import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -12,10 +13,11 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @Builder
+@NoArgsConstructor
 public class Chatroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chatroom_no")
+    
     private Long no;
 
     @ManyToOne(fetch = FetchType.LAZY)

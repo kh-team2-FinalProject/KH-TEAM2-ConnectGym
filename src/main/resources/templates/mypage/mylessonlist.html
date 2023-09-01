@@ -2,6 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/mypages}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{/css/common/loading.css}">
+</th:block>
+
+
 <th:block layout:fragment="script">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:inline="javascript">
@@ -9,7 +14,6 @@
         var userName = [[ ${member.userName} ]];
     </script>
     <script th:src="@{/js/mylessonlist.js}"></script>
-
     <script th:src="@{/js/enterroomcheck.js}"></script>
 </th:block>
 
@@ -17,13 +21,21 @@
     <title>마이페이지 > 내 레슨 현황</title>
 </th:block>
 
+
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
+
     <div class="mylessonlist-container">
-       <!-- <div class="mylessonlist-menu-title">나의 레슨</div>-->
+
+        <div class="mylessonlistloading_wrap" id="mylessonlistloading_wrap">
+            <div class="mylessonlist_loading">
+                <div class="bounceball"></div>
+                <div class="text">NOW LOADING</div>
+            </div>
+        </div>
 
         <!--내 수강 목록 출력하는 태그 (mylessonlist.js에서 출력)-->
-        <div id="mylesson-list">
+        <div id="mylesson-list" style="display:none;">
 
         </div>
 

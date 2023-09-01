@@ -9,9 +9,7 @@
 <body>
 <div id="chat">
     <form id="messageForm">
-        <!--        <select id="roomSelect">-->
-        <!--            <option th:each="room : ${chatRooms}" th:value="${room.id}" th:text="${room.id}"></option>-->
-        <!--        </select>-->
+
         <input type="text" id="message" placeholder="Type your message..."/>
         <button type="submit">Send</button>
     </form>
@@ -28,13 +26,13 @@
 
     document.querySelector("#messageForm").addEventListener("submit", function (event) {
         event.preventDefault();
-        var roomSelect = document.querySelector("#roomSelect");
-        var roomId = roomSelect.value;
+        document.querySelector("");
+
         var messageInput = document.querySelector("#message");
         var messageContent = messageInput.value;
         stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify({
             'content': messageContent,
-            'sender':
+            'sender': '우영'
         }));
         messageInput.value = '';
     });
@@ -45,7 +43,7 @@
         document.querySelector("#messages").appendChild(messageDiv);
     }
 
-    stompClient.subscribe('/queue/messages/{roomId}', function (message) {
+    stompClient.subscribe('/queue/qqq/${roomId}', function (message) {
         showMessage(JSON.parse(message.body));
     });
 </script>

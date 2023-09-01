@@ -70,23 +70,20 @@ background-color: #e74c3c;
 
 /*비디오 레이아웃 HEAD*/
 .lessonroom_content{
-display:flex;
+  display:flex;
+  width:100%;
 }
 
 
 .lessonroom_content .main-video{
-flex:2;
 min-height:80vh;
-width:100%;
+width:50%;
 
 }
 
 .lessonroom_content .video-container {
-flex:1;
 min-height:80vh;
-display : flex;
-flex-direction : column;
-width:100%;
+width:50%;
 }
 /*비디오 레이아웃 END*/
 

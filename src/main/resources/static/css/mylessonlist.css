@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400')
 
 
+
 .mylessonlist-container{
 display:flex;
 justify-content:cneter;
@@ -17,8 +18,8 @@ padding : 20px 0px;
 }
 
 #mylesson-list{
-display:flex;
-flex-direction: column;
+/*display:flex;
+flex-direction: column;*/
 /*align-items:center;*/
 color : black;
 margin: 0px 10px;
