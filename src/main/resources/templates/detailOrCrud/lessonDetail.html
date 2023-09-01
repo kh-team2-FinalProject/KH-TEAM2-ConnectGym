@@ -6,10 +6,12 @@
     <title>강좌 상세</title>
 </th:block>
 
+
 <th:block layout:fragment="detailOrCrud">
     <div class="lessonDetail_container">
         <div class="lessonDetail_leftContainer">
             <div class="lessonDetail_content">
+<<<<<<< HEAD
                 <ul class="lessonDetailList">
                     <li class="lessonDetail_profile">
                         <div class="lessonDetail_profile_info">
@@ -31,67 +33,126 @@
 
 
                 </ul>
+=======
+                <img class="lessonDetail_img" th:src="${lesson.lesson_img}" alt="Lesson Picture">
+>>>>>>> 이채연
             </div>
         </div>
+
+        <!--                <ul class="lessonDetailList">-->
+        <!--                    <li class="lessonDetail_profile">-->
+        <!--                        <div class="lessonDetail_profile_info">-->
+        <!--                            <img th:src="${trainerInfo.profileImg}" alt="Profile Picture">-->
+        <!--                            <span th:text="${trainerInfo.trainerName}" class="user_id">트레이너 아이디</span>-->
+        <!--                        </div>-->
+        <!--                    </li>-->
+
+        <!--                    <p>강좌명</p>-->
+
+        <!--                    <li>-->
+        <!--                        <span th:text="${lesson.title}" id="lesson_name"></span>-->
+        <!--                    </li>-->
+
+        <!--                    <p>강좌 소개</p>-->
+        <!--                    <li>-->
+        <!--                        <span th:text="${lesson.lesson_info}" id="lesson_info"></span>-->
+        <!--                    </li>-->
+
+
+        <!--                </ul>-->
+
 
         <div class="lessonDetail_rightContainer">
 
             <div class="lessonDetail_trainerBox">
-                <table class="ld_trainerBox_table">
-                    <tr>
-                        <td><img th:src="${trainerInfo.profileImg}" alt="Profile Picture"></td>
-                        <td><span th:text="${trainerInfo.trainerName}"></span>
-                            <br> <span th:text="${trainerInfo.trainerId}"></span>
-                        </td>
-                    </tr>
+                <div class="ld_trainerImg">
+                    <img th:src="${trainerInfo.profileImg}" alt="Profile Picture">
+                </div>
+                <div class="ld_trainerInfo">
+                    <span th:text="${trainerInfo.trainerName}" id="ld_trainerName"></span>
+                    <span th:text="${trainerInfo.trainerInfo}" id="ld_trainerInfo"></span>
+                    <button class="ld_trainer_detail_btn"
+                            onclick="location.href='/trainerDetail/${trainerInfo.trainerNo}'">
+                        상세보기
+                    </button>
+                </div>
+                <!--                <table class="ld_trainerBox_table">-->
+                <!--                    <tr>-->
+                <!--                        <td><img th:src="${trainerInfo.profileImg}" alt="Profile Picture"></td>-->
+                <!--                        <td><span th:text="${trainerInfo.trainerName}"></span>-->
+                <!--                            <br> <span th:text="${trainerInfo.trainerId}"></span>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
 
+<<<<<<< HEAD
                     <tr>
                         <td colspan="2">
                             <button class="ld_trainer_like_btn"
                                     th:onclick="|location.href='/trainerDetail/${trainerInfo.trainerNo}'|">
                                 상세보기</button>
                         </td>
+=======
+                <!--                    <tr>-->
+                <!--                        <td colspan="2">-->
+                <!--                            <button class="ld_trainer_like_btn"-->
+                <!--                                    onclick="location.href='/trainerDetail/${trainerInfo.trainerNo}'">-->
+                <!--                                상세보기-->
+                <!--                            </button>-->
+                <!--                        </td>-->
+>>>>>>> 이채연
 
-                    </tr>
-                </table>
+                <!--                    </tr>-->
+                <!--                </table>-->
             </div>
-            <div class="lessonDetail_orderBox">
-                <table class="ld_orderBox_table">
-                    <thead>
-                    <tr>
-                        <th colspan="2">order<br></th>
-                    </tr>
+            <div class="lessonDetail_infoBox">
+                <!--                <table class="ld_orderBox_table">-->
+                <!--                    <thead>-->
+                <!--                    <tr>-->
+                <!--                        <th colspan="2">order<br></th>-->
+                <!--                    </tr>-->
 
-                    </thead>
-                    <tr>
-                        <td><br>결제금액</td> <!--(n회당 얼마 -> 10, 30, 60회 등 선택할 수 있게?-->
-                        <td><br>[[${lesson.price}]]</td>
-                    </tr>
-                    <tr>
-                        <td>할인금액</td>
-                        <td>0원</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <hr>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>총금액</td>
-                        <td>100000원</td>
-                    </tr>
+                <!--                    </thead>-->
+                <!--                    <tr>-->
+                <!--                        <td><br>결제금액</td>-->
+                <!--                        <td><br>[[${lesson.price}]]</td>-->
+                <!--                    </tr>-->
+                <!--                    <tr>-->
+                <!--                        <td>할인금액</td>-->
+                <!--                        <td>0원</td>-->
+                <!--                    </tr>-->
+                <!--                    <tr>-->
+                <!--                        <td colspan="2">-->
+                <!--                            <hr>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                    <tr>-->
+                <!--                        <td>총금액</td>-->
+                <!--                        <td>100000원</td>-->
+                <!--                    </tr>-->
 
-                    <tr class="ld_btn_tr">
-                        <td colspan="2">
-                            <br>
-                            <button class="lessonDetail_btn" th:href="@{/order}">CONNECT</button>
-                            <br>
-                            <br>
-                        </td>
+                <!--                    <tr class="ld_btn_tr">-->
+                <!--                        <td colspan="2">-->
+                <!--                            <br>-->
+                <!--                            <button class="lessonDetail_btn" th:href="@{/order}">CONNECT</button>-->
+                <!--                            <br>-->
+                <!--                            <br>-->
+                <!--                        </td>-->
 
-                    </tr>
-                </table>
+                <!--                    </tr>-->
+                <!--                </table>-->
             </div>
+            <div class="lessonDetail_btn_box">
+                <button class="ld-jim-btn" th:href="@{/order}">찜</button>
+                <button class="ld-chat-btn" th:href="@{/order}">1:1 문의하기</button>
+                <button class="ld-order-btn" th:href="@{/order}">바로 구매하기</button>
+            </div>
+        </div>
+
+        <div class="lessonDetail_bottomContainer">
+            <p>강좌 소개</p>
+
+            <span th:text="${lesson.lesson_info}" id="lesson_info"></span>
+
         </div>
     </div>
 </th:block>
