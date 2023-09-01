@@ -221,6 +221,7 @@
 }
 .join_agree_wrap textarea{
     padding-left: 20px;
+    padding-top: 20px;
     border-radius: 5px;
     box-sizing: border-box;
 }
