@@ -1,37 +1,35 @@
 package com.khteam2.connectgym.chat_test;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+
 public class ChatMessage {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long no;
 
-
-    private Long chattingRoomNo;
+    @ManyToOne
+    @JoinColumn(name = "chatroom_no")
+    private Chatroom chatroom;
 
     private String content;
+
     private String sender;
-    private LocalDateTime timestamp;
 
-    public ChatMessage(Long no, Long chattingRoomNo, String content, String sender, LocalDateTime timestamp) {
-        this.no = no;
-        this.chattingRoomNo = chattingRoomNo;
-        this.content = content;
-        this.sender = sender;
-        this.timestamp = timestamp;
-    }
+    @CreationTimestamp
+    private LocalDateTime sendAt;
 
-    public ChatMessage() {
-    }
 
     //메시지 테스트용 생성자
     public ChatMessage(String content, String sender) {
