@@ -18,7 +18,7 @@ min-height:70px;
     font-size: 20px;
 }
 .myinfo_converTrainer_button a span {
-    padding: 15px;
+    padding: 10px 20px;
     transition: .5s;
     position: relative;
 }
@@ -28,15 +28,15 @@ min-height:70px;
 }
 .myinfo_converTrainer_button a span:nth-child(2) {
     color: #fff;
-    background: #e9a9a5;
+    background: #f09e98;
 }
 .myinfo_converTrainer_button a span:nth-child(1):before {
     content: attr(data-attr);
     position: absolute;
     top: 0;
     left: 0;
-    background: #e9a9a5;
-    padding: 15px;
+    background: #f09e98;
+    padding: 10px 20px;
     transition: 0.5S;
     transform-origin: top;
     transform: rotateX(90deg) translateY(-50%);
@@ -50,7 +50,7 @@ min-height:70px;
     top: 0;
     left: 0;
     background: #262626;
-    padding: 15px;
+    padding: 10px 20px;
     transition: 0.5S;
     transform-origin: bottom;
     transform: rotateX(90deg) translateY(50%);
@@ -60,7 +60,7 @@ min-height:70px;
 }
 .myinfo_converTrainer_button a  span:nth-child(1):after {
   content: attr(data-attr);
-  padding: 15px;
+  padding: 10px 20px;
   position: absolute;
   top: 0;
   left: 0;
@@ -77,8 +77,8 @@ min-height:70px;
     position: absolute;
     top: 0;
     left: 0;
-    background: #e9a9a5;
-    padding: 15px;
+    background: #f09e98;
+    padding: 10px 20px;
     transition: 0.5S;
     transform-origin: top;
     transform: rotateX(0deg) translateY(0%);

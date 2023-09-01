@@ -16,6 +16,7 @@
         const memberNo = /*[[${session.session_login_member_no}]]*/;
 
 
+
     </script>
     <script th:src="@{/js/follow.js}"></script>
     <script th:src="@{/js/chatroom.js}"></script>
@@ -77,16 +78,19 @@
                                                     checkbox.checked = false;
                                                 }
 
-
-
                                 </script>
                             </label>
                         </th:block>
                     </div>
                 </div>
-
-                <h2>[[${trainer.infoTitle}]]</h2>
-                <p>[[${trainer.infoContent}]]</p>
+                <div class="trainerDetail_profile_about_textGrp">
+                    <h2>[[${trainer.infoTitle}]]</h2>
+                    <p>[[${trainer.infoContent}]]</p>
+                </div>
+                <div class="trainerDetail_profile_license" th:each="license : ${licenseList}">
+                    <img width="100" th:src="${license.licenseImg}">
+                    </th:each>
+                </div>
                 <div class="trainerDetail_profile_bottom">
                     <p><a class="trainerDetail_profile_lesson" href="#">현재 모집중인 강좌로 이동</a></p>
                 </div>

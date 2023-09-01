@@ -30,9 +30,9 @@ public class Trainer {
 
     private String trainerTel;
 
-    @OneToMany(mappedBy = "trainer")
+/*    @OneToMany(mappedBy = "trainer")
     @JsonIgnore
-    private List<License> licenseList;
+    private List<License> licenseList;*/
 
     private String profileImg;
 

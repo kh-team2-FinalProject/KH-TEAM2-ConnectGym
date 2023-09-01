@@ -55,27 +55,12 @@ public class TrainerService {
             }
         }
 
-        //자격증사진
-        if (licenseImgFiles.length != 0) {
-            try {
-                for (MultipartFile file : licenseImgFiles) {
-                    String licenseImgUrl = s3Uploader.uploadProfileFile(file, member.getUserId());
-                    License license = new License();
-                    license.setLicenseImg(licenseImgUrl);
-                    trainerRequestDTO.addLicense(license);
-                }
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
         TrainerRequestDTO dto = TrainerRequestDTO.builder()
             .trainerId(member.getUserId())
             .trainerPw(member.getUserPw())
             .trainerName(member.getUserName())
             .trainerTel(member.getUserTel())
-            .licenseList(trainerRequestDTO.getLicenseList())
+          /*  .licenseList(trainerRequestDTO.getLicenseList())*/
             .profileImg(fileUrl)
             .infoTitle(trainerRequestDTO.getInfoTitle())
             .infoContent(trainerRequestDTO.getInfoContent())
@@ -83,11 +68,22 @@ public class TrainerService {
 
         Trainer trainer = trainerRepository.save(dto.toEntity());
 
+        //자격증사진
+        if (licenseImgFiles.length != 0) {
+            try {
+                for (MultipartFile file : licenseImgFiles) {
+                    String licenseImgUrl = s3Uploader.uploadProfileFile(file, member.getUserId());
+                    License license = License.builder()
+                        .licenseImg(licenseImgUrl)
+                        .trainer(trainer)
+                        .build();
+                   /* licenseRepository.save(license);*/
+                }
 
-for(License val :trainer.getLicenseList() ){
-            licenseRepository.save(val);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-
 
         return trainer.getNo();
     }

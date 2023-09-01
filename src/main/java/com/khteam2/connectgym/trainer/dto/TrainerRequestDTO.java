@@ -21,7 +21,7 @@ public class TrainerRequestDTO {
     private String trainerPw;
     private String trainerName;
     private String trainerTel;
-    private List<License> licenseList = new ArrayList<>();
+/*    private List<License> licenseList = new ArrayList<>();*/
     private String profileImg;
     private String infoTitle;
     private String infoContent;
@@ -29,10 +29,10 @@ public class TrainerRequestDTO {
 
 
     //라이선스 추가
-    public void addLicense(License licenses) {
+/*    public void addLicense(License licenses) {
         licenseList.add(licenses);
         licenses.setTrainer(this.toEntity());
-    }
+    }*/
 
     public Trainer toEntity() {
         return Trainer.builder()
@@ -40,7 +40,7 @@ public class TrainerRequestDTO {
             .trainerPw(trainerPw)
             .trainerName(trainerName)
             .trainerTel(trainerTel)
-            .licenseList(licenseList)
+            /*.licenseList(licenseList)*/
             .profileImg(profileImg)
             .infoTitle(infoTitle)
             .infoContent(infoContent)

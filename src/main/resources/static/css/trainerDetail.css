@@ -18,7 +18,7 @@ body{
 /*본문*/
 .trainerDetail_about-dev {
   width: 100%;
-  max-width: 55rem;
+  min-width: 60vw;
   margin: auto;
   box-shadow: 2px 4px 2px -2px rgba(0, 0, 0, 0.3),
     -2px -4px 15px -2px rgba(0, 0, 0, 0.2);
@@ -150,6 +150,11 @@ body{
 .trainer_Detailprofile_about p {
   font-weight: 300;
 }
+
+. trainerDetail_profile_license{
+  display:flex;
+}
+
 
 .trainerDetail_profile_bottom {
   margin-top: 1.5em;
