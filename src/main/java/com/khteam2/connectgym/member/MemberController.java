@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -156,6 +157,16 @@ public class MemberController {
         return "/mypage/update";
     }
 
+    @PutMapping(value = "/mypage/updateProcess")
+    public String updateProcess() {
+
+        // 회원정보 수정 버튼 누르면 실행되는 컨트롤러
+        // 버튼 클릭 시 회원정보 수정해주는 서비스 함수 실행
+
+        return "redirect:/mypage/myInfo";
+    }
+
+
     //  로컬호스트일 때의 urlmapping
     @RequestMapping(value = "/connectgym", method = RequestMethod.GET)
     public String kakaoLogin(@RequestParam(value = "code", required = false) String code,
@@ -181,10 +192,10 @@ public class MemberController {
 
         // 응답받아오면 카카오 정보 비교하여 있으면 main으로 없으면 회원가입으로 return
         if (m == null && t == null) {
-            // api 에서 가져온 정보 회원가입페이지에서 자동 입력되게 하기
-            // 추후 추가해야함
-            System.out.println("==============member: " + m);
-            System.out.println("==============trainer: " + t);
+            session.setAttribute("kakaoEmail", kakaoemail);
+
+            // 휴대폰 번호 받아올 수 있을 때 그 정보도 추가해야함.
+
             return "redirect:/temp_join";
         } else {
             System.out.println("==============member: " + m);
