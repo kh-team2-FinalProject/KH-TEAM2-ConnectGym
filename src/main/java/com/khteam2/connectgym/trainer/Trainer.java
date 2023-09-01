@@ -39,6 +39,8 @@ public class Trainer {
     private String trainerInfo;
 
     private LocalDate regDate;
+    @Column(name = "trainer_email")
+    private String trainerEmail;
 
 }
 

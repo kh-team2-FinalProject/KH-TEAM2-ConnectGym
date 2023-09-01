@@ -12,6 +12,11 @@ public class DietListController {
         return "/fooddiary/dietlist";
     }
 
+    @GetMapping("/fooddiary/foodInfo")
+    public String diet_SearchForm(){
+        return "/fooddiary/foodInfo";
+    }
+
 
 
 }

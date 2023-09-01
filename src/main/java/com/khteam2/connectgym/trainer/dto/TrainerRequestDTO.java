@@ -24,6 +24,7 @@ public class TrainerRequestDTO {
     private List<License> licenseList = new ArrayList<>();
     private String profileImg;
     private String trainerInfo;
+    private String trainerEmail;
 
 
     //라이선스 추가
@@ -41,6 +42,7 @@ public class TrainerRequestDTO {
             .licenseList(licenseList)
             .profileImg(profileImg)
             .trainerInfo(trainerInfo)
+            .trainerEmail(trainerEmail)
             .build();
     }
 }

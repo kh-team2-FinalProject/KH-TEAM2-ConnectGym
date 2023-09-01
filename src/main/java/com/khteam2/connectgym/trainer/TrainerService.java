@@ -8,14 +8,13 @@ import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,22 +26,22 @@ public class TrainerService {
     private final S3Uploader s3Uploader;
 
     //중복 검사 메소드
-    public boolean validateDuplicate(String id){
-        boolean check= false;
+    public boolean validateDuplicate(String id) {
+        boolean check = false;
         Trainer findTrainer = trainerRepository.findByTrainerId(id);
 
-        if(findTrainer == null){
-            check=true;
+        if (findTrainer == null) {
+            check = true;
         }
         return check;
     }
 
     @Transactional
     public Long registerTrainer(TrainerRequestDTO trainerRequestDTO, Member member,
-                                  MultipartFile profileImgFile,MultipartFile[] licenseImgFiles) {
-       //중복검사
+        MultipartFile profileImgFile, MultipartFile[] licenseImgFiles) {
+        //중복검사
         boolean check = validateDuplicate(member.getUserId());
-        if(!check){
+        if (!check) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
 
@@ -56,11 +55,10 @@ public class TrainerService {
             }
         }
 
-
         //자격증사진
         if (licenseImgFiles.length != 0) {
             try {
-                for(MultipartFile file: licenseImgFiles){
+                for (MultipartFile file : licenseImgFiles) {
                     String licenseImgUrl = s3Uploader.uploadProfileFile(file, member.getUserId());
                     License license = new License();
                     license.setLicenseImg(licenseImgUrl);
@@ -84,9 +82,11 @@ public class TrainerService {
 
         Trainer trainer = trainerRepository.save(dto.toEntity());
 
-        /*for(License val :trainer.getLicenseList() ){
+
+for(License val :trainer.getLicenseList() ){
             licenseRepository.save(val);
-        }*/
+        }
+
 
         return trainer.getNo();
     }
@@ -135,6 +135,25 @@ public class TrainerService {
             .trainerInfo(trainer.getTrainerInfo())
             .build();
 
-       return trainerResponseDTO;
+        return trainerResponseDTO;
+    }
+
+    public HashMap<String, Object> findTrainerByEmail(String email) {
+        List<Trainer> TrainerList = trainerRepository.findAll();
+        HashMap<String, Object> findTrainer = new HashMap<>();
+
+        for (int i = 0; i < TrainerList.size(); i++) {
+            if (email.equals(TrainerList.get(i).getTrainerEmail())) {
+                findTrainer.put("trainer_no", TrainerList.get(i).getNo());
+                findTrainer.put("trainer_id", TrainerList.get(i).getTrainerId());
+                findTrainer.put("trainer_pw", TrainerList.get(i).getTrainerPw());
+                findTrainer.put("trainer_name", TrainerList.get(i).getTrainerName());
+                findTrainer.put("trainer_tel", TrainerList.get(i).getTrainerTel());
+                findTrainer.put("trainer_email", TrainerList.get(i).getTrainerEmail());
+                return findTrainer;
+            }
+        }
+        return null;
     }
 }
+
