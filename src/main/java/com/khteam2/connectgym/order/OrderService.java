@@ -417,7 +417,7 @@ public class OrderService {
                     .endDate(lesson.getEnd_date())
                     .price((long) lesson.getPrice())
                     .trainerName(trainer.getTrainerName())
-//                    .imageUrl(trainer.getImgUrl)
+                    .imageUrl(lesson.getLesson_img())
                     .status(status)
                     .build();
                 // 상세 정보 리스트에 담는다.
