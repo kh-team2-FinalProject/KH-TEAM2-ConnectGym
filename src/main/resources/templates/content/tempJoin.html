@@ -6,6 +6,9 @@
             src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" rel="script" th:src="@{/js/tempjoin.js}"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script th:inline="javascript">
+        var kakaoEmail = [[${session.kakaoEmail}]];
+    </script>
 </th:block>
 
 <th:block layout:fragment="add-css">
@@ -96,7 +99,9 @@
                     <button type="button" class="join_auth_btn" id="join_auth_btn" value="false">본인인증</button>
                     <br>
                     <span id="mail-check-warn"></span>
-                    <input type="hidden" id="userEmail" name="userEmail">
+                    <input type="hidden" id="userEmail" name="userEmail" th:if="${session.kakaoEmail == null}">
+                    <input type="hidden" id="userEmail" name="userEmail" th:if="${session.kakaoEmail != null}" th:value="${session.kakaoEmail}">
+
                 </div>
 
                 <div class="join_agree_wrap">
