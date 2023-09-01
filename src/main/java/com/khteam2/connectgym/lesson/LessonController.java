@@ -77,6 +77,7 @@ public class LessonController {
             .trainerId(lesson.getTrainer().getTrainerId())
             .trainerName(lesson.getTrainer().getTrainerName())
             .profileImg(lesson.getTrainer().getProfileImg())
+            .trainerInfo(lesson.getTrainer().getTrainerInfo())
             .build();
         String trainerName = lesson.getTrainer().getTrainerName();
         String trainerImg = lesson.getTrainer().getProfileImg();

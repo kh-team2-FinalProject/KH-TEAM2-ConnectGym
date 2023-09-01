@@ -1,224 +1,334 @@
 .lessonDetail_container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    /*height: 100vh;*/
+    gap: 4vh;
+    margin: 5vh 10vw 5vw 10vw;
+    /*display: flex;*/
     background: white;
+    /*flex-direction: row;*/
 }
 
 .lessonDetail_leftContainer {
-    background: #ffffff;
+    /*background: blue;*/
     display: flex;
-    /*justify-content: center;*/
-    /*align-items: center;*/
+    /* justify-content: center; */
+    /* align-items: center; */
     flex-direction: column;
-    height: 100vh;
-    width: 70vw;
+    height: 43vh;
+    /* width: 70vw; */
+    /* margin-right: 5vw; */
+    /* flex: 1; */
+    align-items: center;
+    /*justify-content: center;*/
 
 }
+
 
 .lessonDetail_content {
     background: #ffffff;
-    border: 2px solid #0e181a;
-    border-radius: 5px;
-    padding: 2vw;
-    margin-left: 10vw;
-    width: 50vw;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-}
-
-.lessonDetail_title {
-    font-weight: bold;
-    font-size: 24px;
-    color: #A3DC10;
-    margin-bottom: 40px;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.lessonDetailList {
-    list-style: none;
-    padding: 2vw;
-    display: flex;
-    flex-direction: column; /*align-items: center;*/
 
 }
 
-.lessonDetail_profile {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.lessonDetail_profile_info {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-
-.lessonDetail_profile img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
-    margin-left: 10px;
-}
-
-.user_id {
-    font-weight: bold;
-    font-size: 20px;
-    color: #0E181A;
-    margin-left: 10vw;
-}
-
-
-.lessonDetailList li {
-    margin-bottom: 2vh;
-    text-align: center;
-    /*width: 100%;*/
-    padding: 1vw;
-    border-bottom: 2px groove black;
-    /*border-radius: 5px;*/
-    background: #ffffff;
+.lessonDetail_img {
+    width: 34vw;
+    height: 42vh;
 
 }
 
-.lessonDetailList p {
-    text-align: left;
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 2vh;
-    color: #0E181A;
-}
+/*.lessonDetail_title {*/
+/*    font-weight: bold;*/
+/*    font-size: 24px;*/
+/*    color: #A3DC10;*/
+/*    margin-bottom: 40px;*/
+/*    text-align: center;*/
+/*    margin-top: 20px;*/
+/*}*/
 
-.lessonDetail_content span {
-    color: #0E181A;
-}
+/*.lessonDetailList {*/
+/*    list-style: none;*/
+/*    padding: 2vw;*/
+/*    display: flex;*/
+/*    flex-direction: column; !*align-items: center;*!*/
+
+/*}*/
+
+/*.lessonDetail_profile {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    position: relative;*/
+/*}*/
+
+/*.lessonDetail_profile_info {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    position: relative;*/
+/*}*/
+
+
+/*.lessonDetail_profile img {*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    border-radius: 50%;*/
+/*    object-fit: cover;*/
+/*    margin-right: 20px;*/
+/*    margin-left: 10px;*/
+/*}*/
+
+/*.user_id {*/
+/*    font-weight: bold;*/
+/*    font-size: 20px;*/
+/*    color: #0E181A;*/
+/*    margin-left: 10vw;*/
+/*}*/
+
+
+/*.lessonDetailList li {*/
+/*    margin-bottom: 2vh;*/
+/*    text-align: center;*/
+/*    !*width: 100%;*!*/
+/*    padding: 1vw;*/
+/*    border-bottom: 2px groove black;*/
+/*    !*border-radius: 5px;*!*/
+/*    background: #ffffff;*/
+
+/*}*/
+
+/*.lessonDetailList p {*/
+/*    text-align: left;*/
+/*    font-weight: bold;*/
+/*    font-size: 14px;*/
+/*    margin-bottom: 2vh;*/
+/*    color: #0E181A;*/
+/*}*/
+
+/*.lessonDetail_content span {*/
+/*    color: #0E181A;*/
+/*}*/
 
 .lessonDetail_rightContainer {
-    background: white;
+    /*background: yellow;*/
     display: flex;
-    width: 30vw;
-    height: 60vh;
-    /*position: relative;*/
-    /*align-items: center;*/
+    /* width: 30vw; */
+    height: 43vh;
+    /* position: relative; */
+    border-top: 2px solid black;
+    /* align-items: center; */
     flex-direction: column;
+    /* flex: 1; */
+    align-items: center;
+
 }
 
 .lessonDetail_trainerBox {
-    width: 20vw;
-    margin-top: 5vh;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    border-collapse: collapse;
-}
-
-.ld_trainerBox_table {
-    width: 100vw;
-    box-sizing: content-box;
-    padding: 2vh;
-}
-
-.ld_trainerBox_table tr {
-    width: 100vw;
-    height: 6vh;
+    width: 35vw;
     margin-top: 1vh;
+    border: 2px solid black;
+    /* border-radius: 5px; */
+    /* text-align: center; */
+    /*justify-content: center;*/
+    display: flex;
+    height: 10vh;
+    /* border-collapse: collapse; */
+    /* align-items: center;*/
+    padding: 1vh;
 }
 
-.ld_trainerBox_table img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-
+.ld_trainerImg {
+    border: black 1px solid;
+    margin-right: 1vw;
 }
 
-.ld_trainer_like_btn {
-    padding: 8px 8px;
-    background-color: #A3DC10;
-    border: none;
-    border-radius: 5px;
-    color: white;
+.ld_trainerImg img {
+    height: 10vh;
+    width: 10vh;
+}
+
+.ld_trainerInfo {
+    border: black 1px solid;
+    width: 25vw;
+    flex-direction: column;
+    display: flex;
+    margin: 0.5vh;
+}
+
+.ld_trainer_detail_btn {
+    width: 5vw;
+    height: 2vh;
+    /* margin-left: 1vh; */
+    padding: 1px;
+    margin-top: 1vh;
+    background: white;
+    border: 0.5px solid gray;
+    border-radius: 2px;
     cursor: pointer;
-    width: 90px;
+    transition: box-shadow 0.3s;
+}
+
+.ld_trainer_detail_btn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 버튼에 호버 시 섀도우 추가 */
+}
+
+
+.ld_trainerInfo #ld_trainerName {
     font-weight: bold;
-    transition: background-color 0.3s; /* Add transition for background */
-    /*opacity: 0.8;*/
-    align-items: center;
-    letter-spacing: 1px;
+    margin: 0 0 1vh 0;
 }
 
-.ld_trainer_like_btn:hover {
-    background-color: rgba(163, 220, 16, 0.6);
+.ld_trainerInfo #ld_trainerInfo {
+
 }
 
-.ld_trainer_like_btn:active {
-    background-color: rgba(163, 220, 16, 0.8);
-}
+/*.ld_trainerBox_table {*/
+/*    width: 100vw;*/
+/*    box-sizing: content-box;*/
+/*    padding: 1vh;*/
+/*}*/
+
+/*.ld_trainerBox_table tr {*/
+/*    !*width: 100vw;*!*/
+/*    height: 3vh;*/
+/*    !* margin-top: 1vh;*!*/
+/*}*/
+
+/*.ld_trainerBox_table img {*/
+/*    width: 50px;*/
+/*    height: 50px;*/
+/*    border-radius: 50%;*/
+/*    object-fit: cover;*/
+
+/*}*/
+
+/*.ld_trainer_like_btn {*/
+/*    padding: 8px 8px;*/
+/*    background-color: #A3DC10;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    color: white;*/
+/*    cursor: pointer;*/
+/*    width: 90px;*/
+/*    font-weight: bold;*/
+/*    transition: background-color 0.3s; !* Add transition for background *!*/
+/*    !*opacity: 0.8;*!*/
+/*    align-items: center;*/
+/*    letter-spacing: 1px;*/
+/*}*/
+
+/*.ld_trainer_like_btn:hover {*/
+/*    background-color: rgba(163, 220, 16, 0.6);*/
+/*}*/
+
+/*.ld_trainer_like_btn:active {*/
+/*    background-color: rgba(163, 220, 16, 0.8);*/
+/*}*/
 
 
-.lessonDetail_orderBox {
-    width: 20vw;
-    margin-top: 3vh;
-    border-radius: 5px;
+.lessonDetail_infoBox {
+    width: 35vw;
+    margin: 2vh 0 2vh 0;
     border: 2px solid black;
-    text-align: center;
-    justify-content: center;
+    /* border-radius: 5px; */
+    /* text-align: center; */
+    /* justify-content: center; */
     display: flex;
-    border-collapse: collapse;
+    height: 33vh;
+    /* border-collapse: collapse; */
+    /* align-items: center; */
+    padding: 1vh;
 }
 
-.ld_orderBox_table {
-    width: 100vw;
-    box-sizing: content-box;
-    padding: 2vh;
+.lessonDetail_btn_box {
+    width: 35vw;
+    /* margin-top: 1vh; */
+    border: 2px solid black;
+    /* border-radius: 5px; */
+    /* text-align: center; */
+    /* justify-content: center; */
+    display: flex;
+    height: 10vh;
+    /* border-collapse: collapse; */
+    align-items: center;
+    /* padding: 1vh; */
+    /* margin-bottom: 1vh;*/
+    justify-content: space-between;
 }
 
-.ld_orderBox_table tr {
-    width: 100vw;
-    height: 6vh;
-    margin-top: 1vh;
+.lessonDetail_btn_box button {
+
 }
 
-.lessonDetail_btn {
-    background-color: #A3DC10;
-    position: relative;
-    display: inline-block;
-    /*크기 지정*/
-    width: 10vw;
-    font-size: 16px;
-    font-family: 'Black Ops One', cursive;
-    padding: 7px 7px;
-    color: white;
-    border: 0px;
-    border-radius: 6px;
-    text-align: center;
-    transition: top .01s linear;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+.ld-jim-btn {
 
-    box-shadow: 0 0 0 1px #A3DC10 inset,
-    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
-    0 8px 0 0 #81BC12,
-    0 8px 0 1px rgba(0, 0, 0, .4),
-    0 8px 8px 1px rgba(0, 0, 0, 0.5);
 }
 
-.lessonDetail_btn:active {
-    top: 9px;
-    border: 0px;
-    box-shadow: 0 0 0 1px #A3DC10 inset,
-    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
-    0 0 0 1px rgba(0, 0, 0, 0.4);
+.ld-chat-btn {
+
 }
 
-.lessonDetail_btn:hover {
-    background-color: #A7D145;
+.ld-order-btn {
+
 }
 
-.ld_btn_tr {
+/*.ld_orderBox_table {*/
+/*    width: 100vw;*/
+/*    box-sizing: content-box;*/
+/*    padding: 2vh;*/
+/*}*/
+
+/*.ld_orderBox_table tr {*/
+/*    width: 100vw;*/
+/*    height: 6vh;*/
+/*    margin-top: 1vh;*/
+/*}*/
+
+/*.lessonDetail_btn {*/
+/*    background-color: #A3DC10;*/
+/*    position: relative;*/
+/*    display: inline-block;*/
+/*    !*크기 지정*!*/
+/*    width: 10vw;*/
+/*    font-size: 16px;*/
+/*    font-family: 'Black Ops One', cursive;*/
+/*    padding: 7px 7px;*/
+/*    color: white;*/
+/*    border: 0px;*/
+/*    border-radius: 6px;*/
+/*    text-align: center;*/
+/*    transition: top .01s linear;*/
+/*    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);*/
+
+/*    box-shadow: 0 0 0 1px #A3DC10 inset,*/
+/*    0 0 0 2px rgba(255, 255, 255, 0.15) inset,*/
+/*    0 8px 0 0 #81BC12,*/
+/*    0 8px 0 1px rgba(0, 0, 0, .4),*/
+/*    0 8px 8px 1px rgba(0, 0, 0, 0.5);*/
+/*}*/
+
+/*.lessonDetail_btn:active {*/
+/*    top: 9px;*/
+/*    border: 0px;*/
+/*    box-shadow: 0 0 0 1px #A3DC10 inset,*/
+/*    0 0 0 2px rgba(255, 255, 255, 0.15) inset,*/
+/*    0 0 0 1px rgba(0, 0, 0, 0.4);*/
+/*}*/
+
+/*.lessonDetail_btn:hover {*/
+/*    background-color: #A7D145;*/
+/*}*/
+
+/*.ld_btn_tr {*/
+/*    margin-top: 2vh;*/
+/*}*/
+
+
+.lessonDetail_bottomContainer {
+    /*background: aqua;*/
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    grid-column: span 2;
+    /* width: 100vw; */
     margin-top: 2vh;
-}
 
+}
