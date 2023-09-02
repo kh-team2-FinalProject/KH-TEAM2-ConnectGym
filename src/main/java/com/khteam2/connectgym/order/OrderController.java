@@ -56,8 +56,11 @@ public class OrderController {
         OrderProcessRequestDto requestDto) {
         if (requestDto.getImp_uid() == null
             || requestDto.getMerchant_uid() == null
+            || sLoginMemberNo == null
             || sMerchantUid == null
-            || sTotalPrice == null) {
+            || sTotalPrice == null
+            || sOrderLessonList == null
+            || sOrderLessonList.isEmpty()) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 

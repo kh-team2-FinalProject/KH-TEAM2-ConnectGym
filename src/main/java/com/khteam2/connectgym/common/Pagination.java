@@ -18,70 +18,55 @@ public class Pagination {
     /**
      * 보여지는 항목 수
      */
-    private int postPerPage;
+    private int recordPerPage;
     /**
      * 보여지는 페이지 수
      */
-    private int rangeSize;
+    private int pageSize;
     /**
      * 전체 페이지 수
      */
     private int totalPage;
     /**
-     * 이전 페이지
+     * 페이지 리스트 첫 페이지
      */
-    private int prevPage;
+    private int firstPage;
     /**
-     * 다음 페이지
+     * 페이지 리스트 마지막 페이지
      */
-    private int nextPage;
+    private int endPage;
     /**
-     * 이전 페이지 존재 여부
+     * 페이지 리스트 첫 페이지 존재 여부
      */
     private boolean prev;
     /**
-     * 다음 페이지 존재 여부
+     * 페이지 리스트 마지막 페이지 존재 여부
      */
     private boolean next;
-    /**
-     * 첫 페이지
-     */
-    private int startPage;
-    /**
-     * 마지막 페이지
-     */
-    private int endPage;
 
-    public Pagination(int totalCount, int currentPage, int postPerPage, int rangeSize) {
+    public Pagination(int totalCount, int currentPage, int recordPerPage, int pageSize) {
         this.totalCount = totalCount;
         this.currentPage = currentPage;
-        this.postPerPage = postPerPage;
-        this.rangeSize = rangeSize;
+        this.recordPerPage = recordPerPage;
+        this.pageSize = pageSize;
         this.calculate();
     }
 
     private void calculate() {
-        this.totalPage = ((this.totalCount - 1) / this.postPerPage) + 1;
-        this.startPage = ((this.currentPage - 1) / this.rangeSize) * this.rangeSize + 1;
-        if (this.startPage < 1) {
-            this.startPage = 1;
+        this.totalPage = ((this.totalCount - 1) / this.recordPerPage) + 1;
+
+        this.firstPage = ((this.currentPage - 1) / this.pageSize) * this.pageSize + 1;
+        if (this.firstPage < 1) {
+            this.firstPage = 1;
         }
-        this.endPage = this.startPage + this.rangeSize - 1;
+        this.prev = this.firstPage > 1;
+
+        this.endPage = this.firstPage + this.pageSize - 1;
+
         if (this.endPage > this.totalPage) {
             this.endPage = this.totalPage;
         }
-
-        this.prevPage = this.currentPage - 1;
-        this.prev = this.prevPage >= 1;
-        if (!this.prev) {
-            this.prevPage = 1;
-        }
-
-        this.nextPage = this.currentPage + 1;
-        this.next = this.totalPage >= this.nextPage;
-        if (!this.next) {
-            this.nextPage = this.totalPage;
-        }
+        this.next = this.endPage < this.totalPage;
     }
 
     public void setTotalCount(int totalCount) {
@@ -94,13 +79,13 @@ public class Pagination {
         this.calculate();
     }
 
-    public void setPostPerPage(int postPerPage) {
-        this.postPerPage = postPerPage;
+    public void setRecordPerPage(int recordPerPage) {
+        this.recordPerPage = recordPerPage;
         this.calculate();
     }
 
-    public void setRangeSize(int rangeSize) {
-        this.rangeSize = rangeSize;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
         this.calculate();
     }
 }
