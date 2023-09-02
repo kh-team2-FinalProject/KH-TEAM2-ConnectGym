@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class OpenDataFoodNutrientDto {
+public class FoodNutrientDto {
     private OpenDataHeaderDto header;
-    private OpenDataFoodNutrientBodyDto body;
+    private OpenDataBodyDto body;
 }

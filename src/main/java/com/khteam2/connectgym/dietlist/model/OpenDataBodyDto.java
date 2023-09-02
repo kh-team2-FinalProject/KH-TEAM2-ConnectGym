@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class OpenDataFoodNutrientBodyDto {
+public class OpenDataBodyDto {
     private Integer pageNo;
     private Integer totalCount;
     private Integer numOfRows;
     @JsonProperty(value = "items")
-    @JsonDeserialize(as = ArrayList.class, contentAs = OpenDataFoodNutrientItemDto.class)
-    private List<OpenDataFoodNutrientItemDto> items;
+    @JsonDeserialize(as = ArrayList.class, contentAs = FoodNutrientItemDto.class)
+    private List<FoodNutrientItemDto> items;
 }
