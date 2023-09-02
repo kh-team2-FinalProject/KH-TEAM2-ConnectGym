@@ -8,47 +8,53 @@
 
 
 <th:block layout:fragment="detailOrCrud">
-    <div class="lessonDetail_container">
+    <div class="ld_container">
+        <div class="lessonDetail_container">
 
-        <div class="lessonDetail_leftContainer">
-            <div class="lessonDetail_content">
-                <img class="lessonDetail_img" th:src="${lesson.lesson_img}" alt="Lesson Picture">
-            </div>
-        </div>
-
-
-        <div class="lessonDetail_rightContainer">
-            <div class="lessonDetail_trainerBox">
-                <div class="ld_trainerImg">
-                    <img th:src="${trainerInfo.profileImg}" alt="Profile Picture">
-                </div>
-
-                <div class="ld_trainerInfo">
-                    <span th:text="${trainerInfo.trainerName}" id="ld_trainerName"></span>
-                    <span th:text="${trainerInfo.infoTitle}" id="ld_trainerInfo"></span>
-                    <button class="ld_trainer_detail_btn"
-                            th:onclick="|location.href='/trainerDetail/${trainerInfo.trainerNo}'|">
-                        PROFILE
-                    </button>
+            <div class="lessonDetail_leftContainer">
+                <div class="lessonDetail_content">
+                    <img class="lessonDetail_img" th:src="${lesson.lesson_img}" alt="Lesson Picture">
                 </div>
             </div>
 
-            <div class="lessonDetail_infoBox">
-                <span th:text="${lesson.title}" id="lesson_name"></span>
-                <a href id="review_count"> 123개 리뷰 보기</a>
-                <span th:text="${lesson.price}+원" id="lesson_price"></span>
+
+            <div class="lessonDetail_rightContainer">
+                <div class="lessonDetail_trainerBox">
+                    <div class="ld_trainerImg">
+                        <img th:src="${trainerInfo.profileImg}" alt="Profile Picture">
+                    </div>
+
+                    <div class="ld_trainerInfo">
+                        <span th:text="${trainerInfo.trainerName}" id="ld_trainerName"></span>
+                        <span th:text="${trainerInfo.infoTitle}" id="ld_trainerInfo"></span>
+                        <button class="ld_trainer_detail_btn"
+                                th:onclick="|location.href='/trainerDetail/${trainerInfo.trainerNo}'|">
+                            PROFILE
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lessonDetail_infoBox">
+                    <span th:text="${lesson.title}" id="lesson_name"></span>
+                    <span th:text="${lesson.price}+원" id="lesson_price"></span>
+                    <div class="ld_reviewBox">
+                        <span id="ld-review-content">여기에는 리뷰가 들어갈 예정 </span>
+                        <a href id="review_count"> 123개 리뷰 보기</a>
+
+                    </div>
+                </div>
+                <div class="lessonDetail_btn_box">
+                    <button class="ld-jim-btn" th:href="@{/order}">찜</button>
+                    <button class="ld-chat-btn" th:href="@{/order}">1:1 문의하기</button>
+                    <button class="ld-order-btn" th:href="@{/order}">바로 구매하기</button>
+                </div>
             </div>
-            <div class="lessonDetail_btn_box">
-                <button class="ld-jim-btn" th:href="@{/order}">찜</button>
-                <button class="ld-chat-btn" th:href="@{/order}">1:1 문의하기</button>
-                <button class="ld-order-btn" th:href="@{/order}">바로 구매하기</button>
-            </div>
-        </div>
 
 
-        <div class="lessonDetail_bottomContainer">
-            <p>강좌 소개</p>
-            <span th:text="${lesson.lesson_info}" id="lesson_info"></span>
+            <div class="lessonDetail_bottomContainer">
+                <p>강좌 소개</p>
+                <span th:text="${lesson.lesson_info}" id="lesson_info"></span>
+            </div>
         </div>
     </div>
 </th:block>
