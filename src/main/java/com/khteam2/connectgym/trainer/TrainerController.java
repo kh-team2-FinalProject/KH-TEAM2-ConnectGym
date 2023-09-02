@@ -3,6 +3,7 @@ package com.khteam2.connectgym.trainer;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.follow.dto.FollowForTrainerResponseDTO;
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
@@ -72,6 +73,26 @@ public class TrainerController {
 
         return "detailOrCrud/trainerDetail";
     }
+
+
+    //트레이너 페이지
+    @GetMapping("/trainer/enrollMemberList")
+    public String enrollMemberList(HttpSession session,Model model){
+
+        // 등록강좌 불러오기
+        LessonResponseDTO registered = trainerService.registered(session);
+
+
+        if(registered.getErrorMsg().equals("NotFound")){
+
+            model.addAttribute("lesson","NotFound");
+        }else {
+            model.addAttribute("lesson",registered);
+        }
+
+        return "trainerView";
+    }
+
 
 
 }

@@ -1,15 +1,11 @@
 package com.khteam2.connectgym.member;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.khteam2.connectgym.enroll.EnrollDetail;
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,10 +39,5 @@ public class Member {
     @Column(name = "reg_date")
     @CreationTimestamp
     private LocalDateTime regDate;
-
-
-    @OneToMany(mappedBy = "member")
-    @JsonIgnore
-    private List<EnrollDetail> lessonList;
 
 }

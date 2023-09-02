@@ -1,9 +1,7 @@
 package com.khteam2.connectgym.room;
 
 
-import com.khteam2.connectgym.enroll.EnrollDetail;
 import com.khteam2.connectgym.room.dto.RoomRequest;
-import io.openvidu.java.client.OpenViduException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,21 +25,12 @@ public class RoomApiController {
 
     private final RoomService roomSerivce;
 
-    @GetMapping("/checkEnroll/{enrollNo}")
-    public boolean checkEnroll(@PathVariable Long enrollNo){
-        System.out.println("체크인롤 컨트롤러 호출 : " + enrollNo);
-        return roomSerivce.enterKeyCheck(enrollNo);
+    @GetMapping("/checkEnroll")
+    public Long checkEnroll(String titleCode, Long enrollKey){
+        System.out.println("체크인롤 컨트롤러 호출 : " + titleCode+enrollKey);
+        return roomSerivce.roomStatusCheck(titleCode,enrollKey);
     }
 
-    // 룸 입장을 위한 세션 생성
-/*	@PostMapping("/enter/init")
-	public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
-			throws OpenViduJavaClientException, OpenViduHttpException {
-        String sessionId = roomSerivce.initializeSession(params);
-        System.out.println("params = " + params.get("roomName"));
-        System.out.println("sessionId = " + sessionId);
-        return new ResponseEntity<>(sessionId, HttpStatus.OK);
-	}*/
 
     @PostMapping("/enter/init")
     public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)

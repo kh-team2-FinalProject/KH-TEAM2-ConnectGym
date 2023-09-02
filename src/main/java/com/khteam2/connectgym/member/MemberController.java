@@ -212,7 +212,7 @@ public class MemberController {
         MemberResponseDTO member = memberService.sessionMem(session);
         model.addAttribute("member", member);
 
-        return "mypage/mylessonlist";
+        return "mypage/myLessonList";
     }
 
     // 3) 팔로잉

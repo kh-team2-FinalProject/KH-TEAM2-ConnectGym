@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>내가 등록한 강좌</h1>
+
+<th:block th:if="${lesson == 'NotFound'}">
+    <div> 현재 등록된 강좌가 없습니다.</div>
+    <div><a href="/createLesson">등록하기</a></div>
+</th:block>
+
+<th:block th:if="${lesson != 'NotFound'}">
+    <div>내가 등록한 강좌</div>
+  <!--  <div>[[${lesson}]]</div>-->
+</th:block>
+
+</body>
+</html>

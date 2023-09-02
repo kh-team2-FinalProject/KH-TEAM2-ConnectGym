@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.khteam2.connectgym.member.Member;
 
 public interface OrderRepository extends JpaRepository<Order, String> {
+
     List<Order> findByMember(Member member);
 
     List<Order> findByMemberOrderByDayOfPaymentDesc(Member member);

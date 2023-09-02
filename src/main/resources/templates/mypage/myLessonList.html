@@ -9,12 +9,8 @@
 
 <th:block layout:fragment="script">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script th:inline="javascript">
-        var userNo = [[ ${member.no} ]];
-        var userName = [[ ${member.userName} ]];
-    </script>
-    <script th:src="@{/js/mylessonlist.js}"></script>
-    <script th:src="@{/js/enterroomcheck.js}"></script>
+    <script th:src="@{/js/myLessonList.js}"></script>
+    <script th:src="@{/js/enterRoomCheck.js}"></script>
 </th:block>
 
 <th:block layout:fragment="title">

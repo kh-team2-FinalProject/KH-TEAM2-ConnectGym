@@ -102,3 +102,20 @@ text-align:right;
 background-color: #A7D145;
 }
 
+.mylesson_none{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+}
+.mylesson_none p{
+margin:0;
+font-size:30px;
+font-weight:bold;
+}
+
+.mylesson_none a{
+font-size:20px;
+color:#0e1414;
+}

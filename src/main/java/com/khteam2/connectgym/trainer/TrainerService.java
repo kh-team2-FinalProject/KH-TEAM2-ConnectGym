@@ -1,12 +1,15 @@
 package com.khteam2.connectgym.trainer;
 
 
+import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
+import com.khteam2.connectgym.order.OrderDetailRepository;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
@@ -21,6 +24,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +48,7 @@ public class TrainerService {
         return check;
     }
 
+    //트레이너 가입
     @Transactional
     public Long registerTrainer(TrainerRequestDTO trainerRequestDTO, Member member,
                                 MultipartFile profileImgFile, MultipartFile[] licenseImgFiles) {
@@ -128,6 +134,7 @@ public class TrainerService {
         return responseDto;
     }
 
+    //트레이너 불러오기(레슨까지)
     public TrainerResponseDTO findOneTrainer(Long trainerNo) {
         Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
 
@@ -175,5 +182,29 @@ public class TrainerService {
         }
         return null;
     }
+
+    private final OrderDetailRepository orderDetailRepository;
+
+    //트레이너의 등록 레슨 불러오기
+    public LessonResponseDTO registered(HttpSession session) {
+
+        Long no = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+
+        Lesson lesson = lessonRepository.findByTrainerNo(no).orElse(null);
+
+
+        if (lesson == null) {
+            LessonResponseDTO lessonResponseDTO = LessonResponseDTO.builder()
+                .errorMsg("NotFound")
+                .build();
+            return lessonResponseDTO;
+        }
+        LessonResponseDTO lessonResponseDTO = new LessonResponseDTO(lesson);
+
+        return lessonResponseDTO;
+
+    }
+
+
 }
 

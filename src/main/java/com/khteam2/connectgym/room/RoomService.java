@@ -1,8 +1,8 @@
 package com.khteam2.connectgym.room;
 
-import com.khteam2.connectgym.enroll.EnrollDetail;
-import com.khteam2.connectgym.enroll.EnrollRepository;
 import com.khteam2.connectgym.room.dto.RoomRequest;
+import com.khteam2.connectgym.room.dto.RoomResponseDto;
+import com.khteam2.connectgym.room.dto.RoomStatus;
 import io.openvidu.java.client.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -20,7 +20,6 @@ public class RoomService {
 
     private static final Logger logger = LoggerFactory.getLogger(RoomApiController.class);
 
-    private final EnrollRepository enrollRepository;
     private final RoomRepository roomRepository;
 
     @Value("${OPENVIDU_URL}")
@@ -38,7 +37,7 @@ public class RoomService {
     }
 
     // 룸 입장을 위한 key check
-    public boolean enterKeyCheck(Long enrollNo) {
+    /*public boolean enterKeyCheck(Long enrollNo) {
         boolean check = false;
 
         EnrollDetail ed = enrollRepository.findById(enrollNo).orElse(null);
@@ -53,7 +52,54 @@ public class RoomService {
 
         }
         return check;
+    }*/
+
+    //룸 상태 확인
+    public Long roomStatusCheck(String titleCode, Long enrollKey) {
+
+        // -1 : 룸 생성 전
+        // 0 : 트레이너 입장 전
+        // 1 : 입장 가능
+
+        String reqRoomName = titleCode + "" + enrollKey;
+        System.out.println("roomRepository reqRoomName = " + reqRoomName);
+
+        Room room = roomRepository.findByRoomName(reqRoomName).orElse(null);
+
+        if (room == null) {
+            return -1L;
+        }
+
+        if (room.getRoomStatus().equals(RoomStatus.ACTIVE)) {
+            return room.getNo();
+        } else {
+            return 0L;
+        }
+
     }
+
+    //룸 정보 불러오기
+    public RoomResponseDto enterRoomInfo(Long roomNo) {
+        Room room = roomRepository.findById(roomNo).orElse(null);
+
+        RoomResponseDto roomResponseDto = RoomResponseDto.builder()
+            .no(room.getNo())
+            .roomName(room.getRoomName())
+            .lessonTitle(room.getOrderDetail().getLesson().getTitle())
+            .build();
+
+        return roomResponseDto;
+    }
+
+
+
+
+
+
+
+
+
+
 
     // 룸 입장을 위한 세션 생성
     public String initializeSession(Map<String, Object> params)
@@ -62,30 +108,6 @@ public class RoomService {
         Session session = openvidu.createSession(properties);
         return session.getSessionId();
     }
-
-    /*public String initializeSession(String lessonRoomName)
-        throws OpenViduJavaClientException, OpenViduHttpException {
-
-        SessionProperties properties = new SessionProperties.Builder()
-            .customSessionId(lessonRoomName)
-            .build();
-
-        Session session = openvidu.createSession(properties);
-        return session.getSessionId();
-    }*/
-
-    // 룸 입장
-  /*  public String createConnection(String sessionId, Map<String, Object> params) throws Exception {
-
-        Session session = openvidu.getActiveSession(sessionId);
-        if (session == null) {
-            return null;
-        }
-
-        ConnectionProperties properties = ConnectionProperties.fromJson(params).build();
-        Connection connection = session.createConnection(properties);
-        return connection.getToken();
-    }*/
 
     public String createConnection(String sessionId, RoomRequest roomRequest)
         throws OpenViduJavaClientException, OpenViduHttpException {
@@ -100,5 +122,6 @@ public class RoomService {
         Connection connection = session.createConnection(properties);
         return connection.getToken();
     }
+
 
 }

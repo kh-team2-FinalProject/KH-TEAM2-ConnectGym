@@ -9,6 +9,9 @@ import java.util.List;
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
     List<OrderDetail> findByOrder(Order order);
 
+    @Query("select o from OrderDetail o where o.order=?1")
+    OrderDetail findByEnroll(Order order);
+
     List<OrderDetail> findByOrderOrderByNoDesc(Order order);
 
     OrderDetail findByEnrollKey(Long enrollKey);

@@ -6,6 +6,7 @@ import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.MemberService;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.room.dto.RoomResponseDto;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerService;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
@@ -21,14 +22,17 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class RoomController {
 
-    private final LessonService lessonService;
     private final MemberService memberService;
     private final TrainerService trainerService;
+    private final RoomService roomService;
 
-    @GetMapping("/enterroom/{lessonNo}")
-    public String enterRoom(@PathVariable Long lessonNo, Model model, HttpSession session) {
-        Lesson lesson = lessonService.getLesson(lessonNo);
-        model.addAttribute("lesson", lesson);
+
+    @GetMapping("/enterRoom/{roomNo}")
+    public String enterRoom(@PathVariable Long roomNo, Model model, HttpSession session) {
+
+        RoomResponseDto roomResponseDto = roomService.enterRoomInfo(roomNo);
+
+        model.addAttribute("roomInfo", roomResponseDto);
 
         Long no  = (Long) session.getAttribute("session_login_member_no");
         MemberClass value = (MemberClass) session.getAttribute("session_login_member_class");
@@ -44,6 +48,7 @@ public class RoomController {
         }
 
         System.out.println("엔터룸 컨트롤러 호출");
+
         return "room/enterroom";
     }
 }
