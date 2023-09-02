@@ -10,7 +10,31 @@
 
 #orderList_wrap .orderList_top_bar {
     margin-bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
 }
+
+#orderList_wrap .orderList_top_bar .orderList_top_bar_item {
+    display: flex;
+    flex-direction: column;
+}
+
+#orderList_wrap .orderList_top_bar .orderList_top_bar_item .orderList_top_bar_label_text {
+    font-size: 0.75rem;
+}
+
+#orderList_wrap .orderList_top_bar .orderList_top_bar_item input[type="date"] {
+    width: 7rem;
+}
+
+#orderList_wrap .orderList_top_bar .orderList_top_bar_item input[name] {
+    height: 100%;
+}
+
+/* #orderList_wrap .orderList_top_bar input[name="startDate"]::before {
+    width: 100%;
+    content: attr(placeholder);
+} */
 
 #orderList_wrap .orderList_empty_container {
     display: flex;

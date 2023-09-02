@@ -13,27 +13,40 @@
     <th:block layout:fragment="mypage">
         <link rel="stylesheet" th:href="@{/css/orderList.css}" />
         <div id="orderList_wrap">
-            <form
-                name="orderFilterForm"
-                class="orderList_top_bar"
-                style="display: none"
-            >
-                <select name="status">
-                    <option value="none">선택</option>
+            <form name="orderFilterForm" class="orderList_top_bar">
+                <!--/*
+                <select name="status" style="display: none">
+                    <option value="all">선택</option>
                     <option value="paymentFinish">결제완료</option>
                     <option value="inSuGang">수강 중</option>
                 </select>
-                <input
-                    type="date"
-                    name="startDate"
-                    th:value="${#temporals.format(responseDto.startDate, 'YYYY-MM-dd')}"
-                />
-                <input
-                    type="date"
-                    name="endDate"
-                    th:value="${#temporals.format(responseDto.endDate, 'YYYY-MM-dd')}"
-                />
-                <input type="search" name="q" />
+                */-->
+                <label class="orderList_top_bar_item">
+                    <span class="orderList_top_bar_label_text">시작 날짜</span>
+                    <input
+                        type="date"
+                        name="startDate"
+                        placeholder="시작 날짜"
+                        th:max="${#temporals.format(#temporals.createNow(), 'YYYY-MM-dd')}"
+                        th:value="${#temporals.format(responseDto.startDate, 'YYYY-MM-dd')}"
+                    />
+                </label>
+                <label class="orderList_top_bar_item">
+                    <span class="orderList_top_bar_label_text"
+                        >마지막 날짜</span
+                    >
+                    <input
+                        type="date"
+                        name="endDate"
+                        placeholder="마지막 날짜"
+                        th:max="${#temporals.format(#temporals.createNow(), 'YYYY-MM-dd')}"
+                        th:value="${#temporals.format(responseDto.endDate ?: #temporals.createNow(), 'YYYY-MM-dd')}"
+                    />
+                </label>
+                <label class="orderList_top_bar_item">
+                    <span class="orderList_top_bar_label_text">검색어</span>
+                    <input type="search" name="q" />
+                </label>
                 <button>찾기</button>
             </form>
             <th:block th:if="${responseDto.success}">
