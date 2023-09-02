@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -418,8 +419,20 @@ public class OrderService {
             return responseDto;
         }
 
+        List<Order> orderList = null;
+
         // 주문건을 역순으로 가져온다.
-        List<Order> orderList = this.orderRepository.findByMemberOrderByDayOfPaymentDesc(member);
+        if (orderListRequestDto.getStartDate() != null && orderListRequestDto.getEndDate() != null) {
+            // 사용자 정보와 시작일, 종료일을 이용해서 그에 해당하는 주문건을 주문일 역순으로 가져온다.
+            orderList = this.orderRepository.findByMemberAndDayOfPaymentBetweenOrderByDayOfPaymentDesc(
+                member,
+                Date.valueOf(orderListRequestDto.getStartDate()),
+                Date.valueOf(orderListRequestDto.getEndDate())
+            );
+        } else {
+            // 시작일 또는 종료일이 존재하지 않을 경우 모든 내용을 가져온다.
+            orderList = this.orderRepository.findByMemberOrderByDayOfPaymentDesc(member);
+        }
 
         // 가져온 주문건을 화면에 출력하기 위해서 List 타입의 객체를 만들어준다.
         List<OrderListOrderDto> orderListOrderDtoList = new ArrayList<>();
@@ -430,7 +443,18 @@ public class OrderService {
             long totalPrice = 0;
 
             // 주문건을 이용해서 주문 상세 정보를 가져온다.
-            List<OrderDetail> orderDetailList = this.orderDetailRepository.findByOrder(order);
+            List<OrderDetail> orderDetailList = null;
+            String searchString = orderListRequestDto.getQ();
+
+            // 검색어가 존재하는지 확인한다.
+            if (searchString != null && !searchString.isBlank()) {
+                // 검색어를 이용해서 주문 상세건을 가져온다.
+                orderDetailList = this.orderDetailRepository.findByLessonTitleOrTrainerName(searchString);
+            } else {
+                // 검색어가 없으면 모든 주문 상세건을 가져온다.
+                orderDetailList = this.orderDetailRepository.findByOrder(order);
+            }
+
             // 화면에 출력할 상세 정보들을 담아주기 위해서 새 List 객체를 만든다.
             List<OrderListOrderDetailDto> detailDtoList = new ArrayList<>();
 
