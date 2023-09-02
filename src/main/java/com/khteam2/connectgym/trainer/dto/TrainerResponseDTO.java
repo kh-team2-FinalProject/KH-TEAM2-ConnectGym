@@ -2,6 +2,7 @@ package com.khteam2.connectgym.trainer.dto;
 
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.trainer.License;
+import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,10 +25,19 @@ public class TrainerResponseDTO {
     private String infoContent;
     private String trainerEmail;
 
-    //DTO에서만 받음
+    //트레이너 상세에서만 받음
     private List<License> licenses;
     private Long lessonNo;
 
-
+    public TrainerResponseDTO(Trainer entity) {
+            this.trainerNo = entity.getNo();
+            this.trainerId = entity.getTrainerId();
+            this.trainerName = entity.getTrainerName();
+            this.trainerTel = entity.getTrainerTel();
+            this.profileImg = entity.getProfileImg();
+            this.infoTitle = entity.getInfoTitle();
+            this.infoContent = entity.getInfoContent();
+            this.trainerEmail = entity.getTrainerEmail();
+    }
 
 }
