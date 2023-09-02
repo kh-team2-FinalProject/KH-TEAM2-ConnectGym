@@ -41,12 +41,14 @@ public class FoodController {
         return this.foodService.moveDataToDatabase();
     }
 
-    @GetMapping("/")
+    @GetMapping("/api/getFoodinfodata")
     public String list(Model model){
         List<OpenDataFoodNutrientFoodDto> foodList = foodService.getFoodlist();
 
         model.addAttribute("foodList", foodList);
         return "foodinfo.html";
     }
+
+
 
 }
