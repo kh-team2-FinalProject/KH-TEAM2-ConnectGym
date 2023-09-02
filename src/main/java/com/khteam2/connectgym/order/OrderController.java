@@ -43,7 +43,7 @@ public class OrderController {
 
         model.addAttribute("orderResponse", responseDto);
 
-        return "/content/order";
+        return "content/order";
     }
 
     @GetMapping(value = "/order/process")
@@ -56,8 +56,11 @@ public class OrderController {
         OrderProcessRequestDto requestDto) {
         if (requestDto.getImp_uid() == null
             || requestDto.getMerchant_uid() == null
+            || sLoginMemberNo == null
             || sMerchantUid == null
-            || sTotalPrice == null) {
+            || sTotalPrice == null
+            || sOrderLessonList == null
+            || sOrderLessonList.isEmpty()) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
@@ -100,7 +103,7 @@ public class OrderController {
         model.addAttribute("responseDto", responseDto);
         model.addAttribute("bannerTitle", "MY ORDER LIST");
 
-        return "/mypage/orderList";
+        return "mypage/orderList";
     }
 
     @GetMapping(value = "/order/test_complete")
@@ -111,7 +114,7 @@ public class OrderController {
 
         model.addAttribute("responseDto", responseDto);
 
-        return "/content/orderComplete";
+        return "content/orderComplete";
     }
 
     //    @ExceptionHandler({IamportResponseException.class})

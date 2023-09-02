@@ -2,22 +2,21 @@ package com.khteam2.connectgym.member;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
@@ -26,17 +25,12 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public long loginProcess(String id, String password) {
-        long returnValue = -1;
-        Member member = this.memberRepository.findByUserId(id);
+    //세션 회원정보 불러오기
+    public MemberResponseDTO sessionMem(HttpSession session) {
+        Long sessionUserNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        MemberResponseDTO memberResponseDTO = findOneMember(sessionUserNo);
 
-        log.info("tempLoginProcess Member: {}", member);
-
-        if (member != null && member.getUserPw().equals(password)) {
-            returnValue = member.getNo();
-        }
-
-        return returnValue;
+        return memberResponseDTO;
     }
 
     public void createMember(MemberDTO memberDTO) {

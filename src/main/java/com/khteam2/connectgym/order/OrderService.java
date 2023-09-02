@@ -103,18 +103,17 @@ public class OrderService {
         // 주문 번호를 생성한다.
         String merchantUid = this.generateOrderNo();
 
-        // 결제 전 포트원 서버로 전송할 객체 선언. 주문 번호와 결제할 금액을 넘긴다.
-        PrepareData prepareData = new PrepareData(merchantUid, BigDecimal.valueOf(totalPrice));
         // 포트원 서버로 사전 검증 요청을 전송하고 받아온다.
         IamportResponse<Prepare> postPrepareResponse = null;
         try {
-            postPrepareResponse = this.iamportClient.postPrepare(prepareData);
-        } catch (IOException | IamportResponseException e) {
+            postPrepareResponse = this.preparePortOne(merchantUid, totalPrice);
+        } catch (IamportResponseException e) {
             log.error(e.getMessage(), e);
             responseDto.setMessage(e.getMessage());
             return responseDto;
         }
 
+        // 정상적으로 되지 않았을 경우 객체를 반환한다.
         if (postPrepareResponse.getCode() != 0) {
             responseDto.setMessage(postPrepareResponse.getMessage());
             return responseDto;
@@ -184,7 +183,43 @@ public class OrderService {
     }
 
     /**
+     * 결제 전 포트원 서버에 사전 검증할 때 사용하는 메소드.
+     * 사전 검증을 하는 이유는 클라이언트 측에서 결제 금액을 조작할 가능성이 있기 때문에
+     * 결제하기 전 포트원 서버에 "얼마만큼 결제할 것이다"라고 알려준다.
+     *
+     * @param merchantUid 주문 번호
+     * @param totalPrice  결제할 금액
+     * @return 포트원 서버에서 가져온 사전 검증 결과 반환
+     * @throws IamportResponseException 요청을 보냈으나 포트원 서버에서 오류가 발생할 경우 예외 발생
+     */
+    public IamportResponse<Prepare> preparePortOne(String merchantUid, Long totalPrice)
+        throws IamportResponseException {
+        // 결제 전 포트원 서버로 전송할 객체 선언. 주문 번호와 결제할 금액을 넘긴다.
+        PrepareData prepareData = new PrepareData(merchantUid, BigDecimal.valueOf(totalPrice));
+
+        IamportResponse<Prepare> postPrepareResponse = null;
+        try {
+            // 포트원 서버로 사전 검증 요청을 전송하고 받아온다.
+            postPrepareResponse = this.iamportClient.postPrepare(prepareData);
+        } catch (IOException e) {
+            // 포트원 서버에 요청하지 못 했을 경우 IOException 예외가 발생한다.
+            log.error(e.getMessage(), e);
+        }
+
+        // 포트원 서버에서 받은 객체를 반환하거나 null을 반환한다.
+        return postPrepareResponse;
+    }
+
+    /**
      * 주문 진행 중일 때 실행되는 메소드
+     *
+     * @param requestDto       요청받은 DTO
+     * @param sLoginMemberNo   세션에 저장된 로그인된 멤버 번호
+     * @param sMerchantUid     세션에 저장된 주문 번호
+     * @param sTotalPrice      세션에 저장된 결제할 금액
+     * @param sOrderLessonList 세션에 저장된 결제할 강의 목록
+     * @param isApi            API 이용 여부
+     * @return 응답 객체 반환
      */
     @Transactional
     public OrderProcessResponseDto processOrder(
@@ -230,11 +265,11 @@ public class OrderService {
             return responseDto;
         }
 
-        Payment payment = null;
+        IamportResponse<Payment> response = null;
 
         try {
             // 포트원 서버로 주문 번호를 전송해 해당 결제건을 받아온다.
-            payment = this.iamportClient.paymentByImpUid(impUid).getResponse();
+            response = this.iamportClient.paymentByImpUid(impUid);
         } catch (IamportResponseException e) {
             responseDto.setMessage("결제에 실패했습니다. 서버 메시지: " + errorMsg);
             log.error("포트원 서버에서 오류가 발생했습니다.", e);
@@ -245,9 +280,10 @@ public class OrderService {
             return responseDto;
         }
 
-        // 포트원 서버에서 가져온 결제건과 요청한 결제건이 일치하지 않거나 금액이 일치하지 않으면 실패 메시지를 반환한다.
-        if (!payment.getMerchantUid().equals(merchantUid)
-            || !payment.getAmount().equals(BigDecimal.valueOf(totalPrice))) {
+        Payment payment = response.getResponse();
+
+        // 결제 결과 검증 메소드를 통해 검증에 실패했으면 실패 메시지를 반환한다.
+        if (!this.verifyPortonePayment(response, merchantUid, totalPrice)) {
             responseDto.setMessage("검증 실패");
             return responseDto;
         }
@@ -303,6 +339,22 @@ public class OrderService {
         }
 
         return enrollKey;
+    }
+
+    /**
+     * 결제 결과 검증 메소드
+     *
+     * @param response    포트원 서버에서 받아온 객체
+     * @param merchantUid 검증할 주문 번호
+     * @param totalPrice  결제 금액
+     * @return 포트원 서버에서 가져온 결제건과 요청한 결제건이 일치하고 금액이 일치하면 {@code true} 반환.
+     * 하나라도 일치하지 않으면 {@code false} 반환
+     */
+    public boolean verifyPortonePayment(IamportResponse<Payment> response, String merchantUid, long totalPrice) {
+        Payment payment = response.getResponse();
+
+        return payment != null && payment.getMerchantUid().equals(merchantUid)
+            && payment.getAmount().equals(BigDecimal.valueOf(totalPrice));
     }
 
     public ResponseEntity<Object> paymentCompleteWebhook(String impUid, String sMerchantUid, Long sPrice) {
@@ -417,7 +469,7 @@ public class OrderService {
                     .endDate(lesson.getEnd_date())
                     .price((long) lesson.getPrice())
                     .trainerName(trainer.getTrainerName())
-//                    .imageUrl(trainer.getImgUrl)
+                    .imageUrl(lesson.getLesson_img())
                     .status(status)
                     .build();
                 // 상세 정보 리스트에 담는다.

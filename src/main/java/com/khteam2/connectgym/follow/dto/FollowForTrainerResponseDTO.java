@@ -1,6 +1,6 @@
 package com.khteam2.connectgym.follow.dto;
 
-import com.khteam2.connectgym.trainer.Trainer;
+import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,14 +8,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
-public class FollowUserResponseDTO {
+public class FollowForTrainerResponseDTO {
 
-    private List<Trainer> followTrainerList;
+    private List<MemberResponseDTO> followUserList;
     private int trainerFollowCnt;
     private boolean followStatus;
+
 
 }

@@ -2,7 +2,7 @@ package com.khteam2.connectgym.trainer;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
-import com.khteam2.connectgym.follow.dto.FollowTrainerResponseDTO;
+import com.khteam2.connectgym.follow.dto.FollowForTrainerResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -63,7 +62,7 @@ public class TrainerController {
         Boolean isFollow = followService.followCheck(userNo,trainerNo);
 
 
-        FollowTrainerResponseDTO followTrainerResponseDTO = FollowTrainerResponseDTO.builder()
+        FollowForTrainerResponseDTO followTrainerResponseDTO = FollowForTrainerResponseDTO.builder()
             .trainerFollowCnt(followCount)
             .followStatus(isFollow)
             .build();

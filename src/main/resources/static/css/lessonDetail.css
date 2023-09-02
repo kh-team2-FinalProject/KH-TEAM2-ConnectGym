@@ -1,3 +1,8 @@
+.ld_container {
+    background: white;
+    padding: 50px;
+}
+
 .lessonDetail_container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -65,7 +70,7 @@
 .lessonDetail_trainerBox {
     /* background: red; */
     width: 96%;
-    margin-top: 1vh;
+    margin-top: 3vh;
     /* border-bottom: 1px solid #c7c7c7; */
     /* border-radius: 5px; */
     /* text-align: center; */
@@ -78,7 +83,7 @@
 }
 
 .ld_trainerImg {
-    border: black 1px solid;
+    /*border: black 1px solid;*/
     margin-right: 1vw;
     width: 20%;
     height: 100%;
@@ -95,7 +100,7 @@
 }
 
 .ld_trainerInfo {
-    border: black 1px solid;
+    /*border: black 1px solid;*/
     width: 77%;
     flex-direction: column;
     display: flex;
@@ -144,39 +149,57 @@
 .lessonDetail_infoBox {
     width: 96%;
     margin: 4vh 0 4vh 0;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     /* border-radius: 5px; */
     /* text-align: center; */
-    justify-content: center;
+    justify-content: start;
     display: flex;
     height: 50%;
     /* border-collapse: collapse; */
     /* align-items: center; */
     /* padding: 1vh; */
     flex-direction: column;
+    /* justify-content: space-between;*/
 }
 
 .lessonDetail_infoBox #lesson_name {
-    margin-bottom: 1%;
+
     font-weight: bold;
     font-size: 1.3rem;
-}
-
-.lessonDetail_infoBox #review_count {
-    color: #b2afaf;
-    margin-bottom: 5%;
-    font-size: 0.7rem;
 }
 
 .lessonDetail_infoBox #lesson_price {
     font-size: 1.2rem;
     font-weight: bold;
+    margin-bottom: auto;
+    /* margin-top: auto;*/
 }
+
+.ld_reviewBox {
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid;*/
+    height: 37%;
+    justify-content: space-between;
+}
+
+
+.ld_reviewBox #ld-review-content {
+    font-size: 0.7rem;
+    color: darkgray;
+}
+
+.lessonDetail_infoBox #review_count {
+    color: #b2afaf;
+
+    font-size: 0.7rem;
+}
+
 
 .lessonDetail_btn_box {
     width: 96%;
     /* margin-top: 1vh; */
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     /* border-radius: 5px; */
     /* text-align: center; */
     /* justify-content: center; */
@@ -196,17 +219,65 @@
 
 .ld-jim-btn {
     width: 10%;
+    cursor: pointer;
+    background: white;
+    border-radius: 0;
+    border: 1px solid #ababab;
+    transition: box-shadow 0.3s;
+    color: #ababab;
+}
+
+.ld-jim-btn:hover {
+    color: yellow;
+    border: 1px solid yellow;
+    box-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+}
+
+.ld-jim-btn:active {
+    color: #f4d524;
+    border: 1px solid #f4d524;
 }
 
 .ld-chat-btn {
     width: 40%;
+    cursor: pointer;
+    border-radius: 0;
+    border: 0.5px solid gray;
+    background: white;
+    font-weight: bold;
+}
+
+.ld-chat-btn:hover {
+    background: rgba(180, 180, 180, 0.47);
+    border: 0.5px solid rgba(180, 180, 180, 0.40);
+}
+
+.ld-chat-btn:active {
+    background: rgba(180, 180, 180, 0.3);
+    border: 0.5px solid rgba(180, 180, 180, 0.3);
 }
 
 .ld-order-btn {
     width: 40%;
+    cursor: pointer;
+    border: 1px solid black;
+    background: black;
+    color: white;
+    font-weight: bold;
+    box-shadow: 4px 4px 9px -1px rgb(0 0 0 / 48%);
+
 
 }
 
+.ld-order-btn:hover {
+    background: #A3DC10;
+    border: 1px solid #A3DC10;
+}
+
+.ld-order-btn:active {
+    background: rgba(163, 220, 16, 0.50);
+    border: 1px solid rgba(163, 220, 16, 0.50);
+}
 
 .lessonDetail_bottomContainer {
     /*background: aqua;*/
@@ -217,6 +288,7 @@
     /* width: 100vw; */
     margin-top: 2vh;
     /* height: 34vh;*/
+    border-top: 1px solid #afaeae;
 
 }
 

@@ -104,6 +104,7 @@
     .orderList_order_detail_trainer_image_box
     .orderList_order_detail_trainer_image {
     border-radius: 20px;
+    object-fit: cover;
 }
 
 #orderList_wrap
