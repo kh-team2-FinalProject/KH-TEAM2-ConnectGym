@@ -36,28 +36,28 @@
             <tbody>
             <tr th:each="food: ${foods}">
                 <td>
-                    <span th:text="$food.foodNm}"></span>
+                    <span th:text="${food.foodNm}"></span>
                 </td>
                 <td th:text="${food.foodSize}">
-                    <span th:text="$food.foodSize}" />1회 제공량
+                    <span th:text="${food.foodSize}" />1회 제공량
                 </td>
                 <td>
-                    <span th:text="$food.choc}" />
+                    <span th:text="${food.choc}" />
                     탄수화물</td>
                 <td>
-                    <span th:text="$food.prot}" />
+                    <span th:text="${food.prot}" />
                     단백질</td>
                 <td>
-                    <span th:text="$food.fat}" />
+                    <span th:text="${food.fat}" />
                     지방</td>
                 <td>
-                    <span th:text="$food.nat}" />
+                    <span th:text="${food.nat}" />
                     나트륨</td>
                 <td>
-                    <span th:text="$food.sugar}" />
+                    <span th:text="${food.sugar}" />
                     당</td>
                 <td>
-                    <span th:text="$food.kca}" />
+                    <span th:text="${food.kcal}" />
                     칼로리</td>
             </tr>
             </tbody>
@@ -65,62 +65,66 @@
     </div>
 
 
-
-
-
-
-
-
     <!-- 상품 등록 팝업 -->
+
     <div id="dietPopup" class="dietPop">
-        <form class="pop-content" action="/fooddairy/post" method="POST">
+        <form class="pop-content" th:object="${food}" action="/addFoodinfo" method="POST" >
 
             <button id="closeBtn">X</button>
             <h2> 영양성분 기입 </h2>
 
             <div class="foodInput">
                 <label class="nutriNm">식품명</label>
-                <input class="nutriInput" name="foodNm" type="text"/>
+                <input class="nutriInput" th:field="*{foodNm}" type="text"/>
+                <p class="error" th:if="${#fields.hasErrors('foodNm')}" th:errors="*{foodNm}">식품명을 입력하세요.</p>
             </div>
             <div class="foodInput">
                 <label class="nutriNm">1회 제공량</label>
-                <input class="nutriInput" name="foodSize" type="text"/>
+                <input class="nutriInput" th:field="*{foodSize}" type="text"/>
+                <p class="error" th:if="${#fields.hasErrors('foodSize')}" th:errors="*{foodSize}">1회제공량을 입력하세요.</p>
             </div>
             <div class="foodInput">
                 <label class="nutriNm">칼로리</label>
-                <input class="nutriInput"  name="kcal" type="text"/>
+                <input class="nutriInput"  th:field="*{kcal}" type="text"/>
+                <p class="error" th:if="${#fields.hasErrors('kcal')}" th:errors="*{kcal}">칼로리를 입력하세요.</p>
+
             </div>
             <div class="foodInput">
                 <label class="nutriNm">탄수화물</label>
-                <input class="nutriInput" name="choc" type="text"/>
+                <input class="nutriInput" th:field="*{choc}" type="text"/>
+                <p class="error" th:if="${#fields.hasErrors('choc')}" th:errors="*{choc}">탄수화물을 입력하세요.</p>
+
             </div>
             <div class="foodInput">
                 <label class="nutriNm">단백질</label>
-                <input class="nutriInput" name="prot" type="text"/>
+                <input class="nutriInput" th:field="*{prot}" type="text"/>
+                <p class="error" th:if="${#fields.hasErrors('prot')}" th:errors="*{prot}">단백질을 입력하세요.</p>
             </div>
             <div class="foodInput">
                 <label class="nutriNm">지방</label>
-                <input class="nutriInput" name="fat" type="text"/>
+                <input class="nutriInput" th:field="*{fat}" type="text"/>
+                <p class="error" th:if="${#fields.hasErrors('fat')}" th:errors="*{fat}">지방을 입력하세요.</p>
+
             </div>
             <div class="foodInput">
                 <label class="nutriNm">당류</label>
-                <input class="nutriInput" name="sugar" type="text"/>
+                <input class="nutriInput" th:field="*{sugar}" type="text"/>
             </div>
             <div class="foodInput">
                 <label class="nutriNm">나트륨</label>
-                <input class="nutriInput" name="nat" type="text"/>
+                <input class="nutriInput" th:field="*{nat}" type="text"/>
             </div>
             <div class="foodInput">
                 <label class="nutriNm">포화지방산</label>
-                <input class="nutriInput" name="satFat" type="text"/>
+                <input class="nutriInput" th:field="*{satFat}" type="text"/>
             </div>
             <div class="foodInput">
                 <label class="nutriNm">불포화지방산</label>
-                <input class="nutriInput" name="transFat" type="text"/>
+                <input class="nutriInput" th:field="*{transFat}" type="text"/>
             </div>
             <div class="foodInput">
                 <label class="nutriNm">가공업체</label>
-                <input class="nutriInput" name="animalPlant" type="text"/>
+                <input class="nutriInput" th:field="*{animalPlant}" type="text"/>
             </div>
 
             <!-- 저장 버튼 -->
@@ -128,6 +132,7 @@
 
         </form>
     </div>
+
     <script th:src="@{/js/foodInfo.js}"></script>
 </th:block>
 

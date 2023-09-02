@@ -8,7 +8,6 @@ package com.khteam2.connectgym.dietlist.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.khteam2.connectgym.dietlist.model.*;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,11 +20,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// 서비스 구현 @AllArgsConstructo
+
 @RequiredArgsConstructor
 @Service
 public class FoodServiceImpl implements FoodService {
@@ -33,24 +31,10 @@ public class FoodServiceImpl implements FoodService {
     private FoodRepository foodRepository;
     @Value("${dietApi.key}")
     private String opendataEncodedApiKey;
-/*
-    @Override
-    public List<Food> saveFoodsFromOpenAPI() {
-        String openApiUrl = "https://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1?serviceKey=zYPK1Bj9cpL%2FZ1nD8%2Fr56or2XJaCFvizZqM9ZQ4oxjDhjtfMHceoEtq4%2BrwcNJoynkMj5DWZk9EIxH8bwPzs8Q%3D%3D&type=json";  // 실제 OpenAPI URL로 변경
-
-        RestTemplate restTemplate = new RestTemplate();
-        FoodApiResponse foodApiResponse = restTemplate.getForObject(openApiUrl, FoodApiResponse.class);
-
-
-
-        Food food = convertToFoodEntity(foodApiResponse);
-        foodRepository.save(food);
-        return Collections.singletonList(food);
-    }*/
 
     /* food api로 get */
-    public OpenDataFoodNutrientDto getFoods(int pageNo, int limit) {
-        OpenDataFoodNutrientDto dto = null;
+    public FoodNutrientDto getFoods(int pageNo, int limit) {
+        FoodNutrientDto dto = null;
 
         try {
             URL url = new URL(
@@ -78,7 +62,7 @@ public class FoodServiceImpl implements FoodService {
             }
 
             ObjectMapper mapper = new ObjectMapper();
-            dto = mapper.readValue(body.toString(), OpenDataFoodNutrientDto.class);
+            dto = mapper.readValue(body.toString(), FoodNutrientDto.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -97,54 +81,28 @@ public class FoodServiceImpl implements FoodService {
         int totalPage = 1;
 
         while (totalPage >= page) {
-            OpenDataFoodNutrientDto dto = this.getFoods(page, pageSize);
+            FoodNutrientDto dto = this.getFoods(page, pageSize);
             List<Food> newFoods = dto.getBody().getItems().stream()
-                .map(OpenDataFoodNutrientFoodDto::ofOpenDataFoodNutrientItemDto)
-                .map(OpenDataFoodNutrientFoodDto::toEntity)
+                .map(FoodNutrientFoodDto::ofOpenDataFoodNutrientItemDto)
+                .map(FoodNutrientFoodDto::toEntity)
                 .collect(Collectors.toList());
 
             this.foodRepository.saveAll(newFoods);
 
             totalCount = dto.getBody().getTotalCount();
             totalPage = totalCount / pageSize + (totalCount % pageSize > 0 ? 1 : 0);
-
             page++;
         }
 
         return 1;
     }
 
-    @Override
     @Transactional
-    public Long savePost(OpenDataFoodNutrientFoodDto openDataFoodNutrientFoodDto){
-        return foodRepository.save(openDataFoodNutrientFoodDto.toEntity()).getFoodCd();
-    }
-
     @Override
-    @Transactional
-    public List<OpenDataFoodNutrientFoodDto> getFoodlist(){
-        List<Food> foodentity = foodRepository.findAll();
-        List<OpenDataFoodNutrientFoodDto> foodDtoList = new ArrayList<>();
+    public Food saveFood(Food food) {
 
-        for (Food food : foodentity) {
-            OpenDataFoodNutrientFoodDto foodinfoDTO = OpenDataFoodNutrientFoodDto.builder()
-                .foodCd(food.getFoodCd())
-                .foodNm(food.getFoodNm())
-                .foodSize(food.getFoodSize())
-                .choc(food.getChoc())
-                .prot(food.getProt())
-                .fat(food.getFat())
-                .nat(food.getNat())
-                .sugar(food.getSugar())
-                .kcal(food.getKcal())
-                .build();
-
-            foodDtoList.add(foodinfoDTO);
-        }
-        return foodDtoList;
+        return foodRepository.save(food);
     }
-
-
 
 
 }

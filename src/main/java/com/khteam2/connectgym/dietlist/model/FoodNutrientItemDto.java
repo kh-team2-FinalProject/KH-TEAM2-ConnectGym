@@ -6,10 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OpenDataFoodNutrientItemDto {
+public class FoodNutrientItemDto {
+
+    /* API 매핑 */
+
     @JsonProperty(value = "DESC_KOR")
     private String descKor;
     @JsonProperty(value = "SERVING_WT")

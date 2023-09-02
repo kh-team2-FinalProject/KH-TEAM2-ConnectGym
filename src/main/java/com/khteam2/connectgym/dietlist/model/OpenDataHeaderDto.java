@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OpenDataHeaderDto {
     private String resultCode;
-    private String resultMsg;
+    private String resultMsg; // 메세지
 }
