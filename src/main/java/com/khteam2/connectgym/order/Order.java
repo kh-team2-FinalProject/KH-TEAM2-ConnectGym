@@ -19,14 +19,14 @@ public class Order {
     @Id
     private String no;
     @JoinColumn(name = "member_no", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Member member;
     @Column(nullable = false, length = 50)
     private String type;
-    @Column(name = "day_of_payment", nullable = false)
+    @Column(nullable = false)
     @Comment("주문한 날짜 및 시간")
     private Timestamp dayOfPayment;
-    @Column(name = "order_pay", nullable = false)
+    @Column(nullable = false)
     private Long orderPay;
 }

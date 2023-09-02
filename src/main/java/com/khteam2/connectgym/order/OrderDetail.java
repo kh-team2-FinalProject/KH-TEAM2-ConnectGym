@@ -2,6 +2,7 @@ package com.khteam2.connectgym.order;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,11 +26,11 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
     @JoinColumn(name = "order_no", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
     @JoinColumn(name = "lesson_no", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Lesson lesson;
-    @Column(name = "enroll_key", nullable = false)
+    @Column(nullable = false)
     private Long enrollKey;
 }
