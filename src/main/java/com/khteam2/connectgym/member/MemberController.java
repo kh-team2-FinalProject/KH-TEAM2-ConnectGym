@@ -44,7 +44,7 @@ public class MemberController {
                 + " 로그아웃 하려면 /temp_logout 으로 이동하면 됩니다.");
         }
 
-        return "/content/login";
+        return "content/login";
     }
 
     @PostMapping(value = "/user/loginProcess")
@@ -70,7 +70,7 @@ public class MemberController {
 
     @GetMapping(value = "/temp_join")
     public String tempJoin() {
-        return "/content/tempJoin";
+        return "content/tempJoin";
     }
 
     // 회원가입 버튼 클릭 시 실행

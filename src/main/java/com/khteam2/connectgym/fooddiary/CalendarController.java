@@ -55,7 +55,7 @@ public class CalendarController {
         model.addAttribute("today",today);
         model.addAttribute("weeks", weeks);
         model.addAttribute("todosMap", todosMap);
-        return "/fooddiary/calendar";
+        return "fooddiary/calendar";
     }
 
     @PostMapping("/addTodo")

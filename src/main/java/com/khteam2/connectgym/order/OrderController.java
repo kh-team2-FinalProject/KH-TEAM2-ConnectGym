@@ -43,7 +43,7 @@ public class OrderController {
 
         model.addAttribute("orderResponse", responseDto);
 
-        return "/content/order";
+        return "content/order";
     }
 
     @GetMapping(value = "/order/process")
@@ -100,7 +100,7 @@ public class OrderController {
         model.addAttribute("responseDto", responseDto);
         model.addAttribute("bannerTitle", "MY ORDER LIST");
 
-        return "/mypage/orderList";
+        return "mypage/orderList";
     }
 
     @GetMapping(value = "/order/test_complete")
@@ -111,7 +111,7 @@ public class OrderController {
 
         model.addAttribute("responseDto", responseDto);
 
-        return "/content/orderComplete";
+        return "content/orderComplete";
     }
 
     //    @ExceptionHandler({IamportResponseException.class})
