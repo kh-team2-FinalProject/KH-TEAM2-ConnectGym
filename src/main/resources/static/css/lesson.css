@@ -1,6 +1,10 @@
 
-.lessonlist {
-    margin-top: 80px;
+.l_lessonlist {
+    display: flex;
+    margin-top: 40px;
+    background: white;
+    width: 100%;
+    padding: 20px;
 }
 
 /*============강좌 카드 섹션========*/
@@ -10,102 +14,192 @@
     margin: 20px;
 }
 
-#lessonlist_wrap {
-    display: flex;
-    justify-content: flex-start;
-    /*flex-wrap: wrap;*/
 
+#l_lessonlist_wrap {
+    display: flex;
+    /* justify-content: space-between; */
+    /* flex-wrap: wrap; */
+    gap: 2%;
+    width: 100%;
+    /* overflow: hidden; */
 }
+
 
 .l_card {
-    width: 20vw;
-    height: 25vh;
-    perspective: 1000px;
-    margin: 1vw;
-    max-width: 300px;
-    max-height: 300px;
-    min-width: 100px;
-    min-height: 100px;
-
+    /*background: #4474ee;*/
+    width: 25%;
+    height: 60%;
 }
 
-.l_card-inner {
+.l_card-container {
+    /*background: yellow;*/
     width: 100%;
     height: 100%;
-    position: absolute;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
 }
 
-.l_card:hover .l_card-inner {
-    transform: rotateY(180deg);
+.l_card-img-wrapper {
+    /*background: #aa00ff;*/
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    margin-top: 2px;
 }
 
-.l_card-front,
-.l_card-back {
+.l_card-img {
+    border: 1px solid black;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    transform-origin: center center;
+    transition: transform 0.3s;
 }
 
-.l_card-front {
-    background: #ffffff;
-    /*border:1px solid black;*/
+
+.l_card-img .l_lessonlist_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.l_card-front-bottom {
-    background: rgba(136, 134, 134, 0.34);
-    position: absolute;
-    bottom: 0; /* 아래쪽에 위치 */
-    width: 100%; /* 너비를 100%로 설정 */
-    height: 40%;
-    text-align: center;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    color: #fff;
-    align-items: center;
+.l_lessonlist_img:hover {
+
+    transform: scale(1.2);
+}
+
+
+.l_card-content {
+    /*background: #C24032;*/
     display: flex;
     flex-direction: column;
-
-
 }
 
-.l_card-front-title {
-    color: #0d1416;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin: 0.5vh;
-    margin-top: 2vh;
-}
-
-.l_card-front-trainer {
-    color: #0d1416;
+.l_card-content #l_trainer-name {
+    color: black;
     font-weight: bold;
     font-size: 1rem;
+    margin-top: 5px;
 }
 
-.l_card-back {
-    transform: rotateY(180deg);
-    background-color: #ffffff;
-    color: #333;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: hidden;
+.l_card-content #l_lesson-title {
+    color: darkgray;
+
+    font-size: 0.9rem;
 }
 
-.lessonlist_img {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
+.l_card-content #l_lesson-price {
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
 }
+
+.l_card-bottom {
+    /*background: bisque;*/
+    display: flex;
+    flex-direction: row;
+}
+
+.l_card-bottom #l_jim-count {
+    color: lightgray;
+    margin-right: 6%;
+    font-size: 0.8rem;
+}
+
+.l_card-bottom #l_review-count {
+    color: lightgray;
+    font-size: 0.8rem;
+}
+
+
+/*.l_card {*/
+/*    width: 20vw;*/
+/*    height: 25vh;*/
+/*    perspective: 1000px;*/
+/*    margin: 1vw;*/
+/*    max-width: 300px;*/
+/*    max-height: 300px;*/
+/*    min-width: 100px;*/
+/*    min-height: 100px;*/
+
+/*}*/
+
+/*.l_card-container {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    position: absolute;*/
+/*    transform-style: preserve-3d;*/
+/*    transition: transform 0.5s;*/
+/*}*/
+
+/*.l_card:hover .l_card-container {*/
+/*    !*transform: rotateY(180deg);*!*/
+/*    transform: scale(1.2);*/
+/*}*/
+
+/*.lessonlist_img {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+
+/*.l_card-front,*/
+/*.l_card-back {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    backface-visibility: hidden;*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    border-radius: 5px;*/
+/*    transform-origin: center center;*/
+/*}*/
+
+/*.l_card-front {*/
+/*    background: #ffffff;*/
+/*    !*border:1px solid black;*!*/
+/*}*/
+
+/*.l_card-front-bottom {*/
+/*    background: rgba(136, 134, 134, 0.34);*/
+/*    position: absolute;*/
+/*    bottom: 0; !* 아래쪽에 위치 *!*/
+/*    width: 100%; !* 너비를 100%로 설정 *!*/
+/*    height: 40%;*/
+/*    text-align: center;*/
+/*    border-bottom-left-radius: 5px;*/
+/*    border-bottom-right-radius: 5px;*/
+/*    color: #fff;*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+
+
+/*}*/
+
+/*.l_card-front-title {*/
+/*    color: #0d1416;*/
+/*    font-weight: bold;*/
+/*    font-size: 1.1rem;*/
+/*    margin: 0.5vh;*/
+/*    margin-top: 2vh;*/
+/*}*/
+
+/*.l_card-front-trainer {*/
+/*    color: #0d1416;*/
+/*    font-weight: bold;*/
+/*    font-size: 1rem;*/
+/*}*/
+
+/*.l_card-back {*/
+/*    transform: rotateY(180deg);*/
+/*    background-color: #ffffff;*/
+/*    color: #333;*/
+/*    padding: 20px;*/
+/*    box-sizing: border-box;*/
+/*    overflow: hidden;*/
+/*}*/
+
 
 /*============강좌 카드 섹션 끝========*/
 

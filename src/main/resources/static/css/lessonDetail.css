@@ -97,6 +97,11 @@
 .ld_trainerImg img {
     height: 100%;
     width: 100%;
+    object-fit: contain;
+    max-width: 500px;
+    max-height: 400px;
+    min-height: 100px;
+    min-width: 100px;
 }
 
 .ld_trainerInfo {
