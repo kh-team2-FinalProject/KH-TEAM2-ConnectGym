@@ -7,7 +7,7 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,9 +21,16 @@ public class ChatController {
     private final ChatMessageService chatMessageService;
     private final ChatroomService chatroomService;
 
-    @GetMapping("/chat_test/{chatroomNO}")
-    public String chattest() {
-
+    //    @GetMapping("/chat_test/{chatroomNO}")
+//    public String chattest(Model model) {
+//
+//        model.addAttribute("")
+//        return "/chat_test/chat_test2";
+//    }
+    @PostMapping("/chat_test/{chatroomNO}")
+    public String chattest(@RequestParam Chatroom chatroom, Model model) {
+        String sender = chatroom.getMember().getUserName();
+        model.addAttribute("sender", sender);
 
         return "/chat_test/chat_test2";
     }
