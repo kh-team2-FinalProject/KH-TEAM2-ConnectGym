@@ -218,33 +218,13 @@
     /* padding: 1vh;*/
 }
 
-.lessonDetail_btn_box button {
+.lessonDetail_btn_box button,
+ .lessonDetail_btn_box .ld-jim-btn{
     height: 100%;
 }
 
-.ld-jim-btn {
-    width: 10%;
-    cursor: pointer;
-    background: white;
-    border-radius: 0;
-    border: 1px solid #ababab;
-    transition: box-shadow 0.3s;
-    color: #ababab;
-}
-
-.ld-jim-btn:hover {
-    color: yellow;
-    border: 1px solid yellow;
-    box-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
-}
-
-.ld-jim-btn:active {
-    color: #f4d524;
-    border: 1px solid #f4d524;
-}
-
 .ld-chat-btn {
-    width: 40%;
+    width: 35%;
     cursor: pointer;
     border-radius: 0;
     border: 0.5px solid gray;
@@ -263,7 +243,7 @@
 }
 
 .ld-order-btn {
-    width: 40%;
+    width: 35%;
     cursor: pointer;
     border: 1px solid black;
     background: black;
@@ -304,4 +284,83 @@
 
 .lessonDetail_bottomContainer #lesson_info {
     font-size: 0.9rem;
+}
+
+/*=========찜 버튼=============*/
+
+.ld-jim-btn {
+    width: 20%;
+    background: white;
+    border-radius: 0;
+    border: 1px solid #ababab;
+    transition: box-shadow 0.3s;
+}
+
+.ld-jim-btn:hover {
+    color: #EDD200;
+    cursor: pointer;
+    border: 1px solid #EDD200;
+    box-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+}
+
+.ld-jim-btn:active {
+    color: #f4d524;
+    border: 1px solid #f4d524;
+}
+
+.ld_like_button_group{
+  display:flex;
+  align-items:center;
+  box-sizing: border-box;
+
+}
+
+.ld_like_count{
+    color:#0e1414;
+    width:50%;
+    text-align:center;
+}
+
+.ld_like_button_group svg{
+  height : 20px;
+  overflow-clip-margin: content-box;
+      overflow: clip;
+}
+
+.ld_like_button_group label{
+    width : 50%;
+    cursor: pointer;
+    display:flex;
+    align-items:center;
+
+}
+
+#ld_star{
+    /*라이크 전 회색*/
+    fill: #a6a5a5;
+}
+
+#ld_likeCheckbox:checked + svg #ld_star{
+    fill: #f5de0c;;
+    /*animation: beat 1s linear forwards 3;*/
+}
+
+
+/*두근두근 애니메이션*/
+@keyframes beat {
+    0%{
+        transform: scale(1);
+    }
+
+    60%{
+        transform: scale(1.2);
+    }
+
+    80%{
+         transform: scale(1.3);
+        }
+
+    100%{
+        transform: scale(1);
+    }
 }

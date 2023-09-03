@@ -1,22 +1,15 @@
 package com.khteam2.connectgym.order;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import com.khteam2.connectgym.lesson.Lesson;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "order_detail", comment = "주문 상세 내역")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

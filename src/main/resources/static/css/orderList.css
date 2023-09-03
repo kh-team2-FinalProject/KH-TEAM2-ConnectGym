@@ -2,10 +2,24 @@
     color: initial;
 }
 
+#orderList_wrap a {
+    color: initial;
+}
+
 #orderList_wrap *,
 #orderList_wrap *::before,
 #orderList_wrap *::after {
     box-sizing: border-box;
+}
+
+#orderList_wrap button {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    color: initial;
+    font-size: initial;
 }
 
 #orderList_wrap .orderList_top_bar {
@@ -19,7 +33,10 @@
     flex-direction: column;
 }
 
-#orderList_wrap .orderList_top_bar .orderList_top_bar_item .orderList_top_bar_label_text {
+#orderList_wrap
+    .orderList_top_bar
+    .orderList_top_bar_item
+    .orderList_top_bar_label_text {
     font-size: 0.75rem;
 }
 
@@ -103,6 +120,12 @@
     font-size: 1.5rem;
 }
 
+#orderList_wrap .orderList_top_bar .orderList_top_bar_button {
+    flex-basis: 1.5rem;
+    align-self: end;
+    line-height: 0;
+}
+
 #orderList_wrap .orderList_order_detail_items .orderList_order_detail_item {
     display: flex;
     margin-bottom: 0.75rem;
@@ -120,6 +143,10 @@
     .orderList_order_detail_trainer_image_box {
     margin-right: 1.75rem;
     line-height: 0;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 16px;
 }
 
 #orderList_wrap
@@ -127,8 +154,18 @@
     .orderList_order_detail_item
     .orderList_order_detail_trainer_image_box
     .orderList_order_detail_trainer_image {
-    border-radius: 20px;
     object-fit: cover;
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_trainer_image_box:hover
+    .orderList_order_detail_trainer_image {
+    transform: scale(1.1);
 }
 
 #orderList_wrap
@@ -147,6 +184,16 @@
     .orderList_order_detail_center_box
     .orderList_order_detail_title {
     font-size: 1.5rem;
+    width: fit-content;
+    transition-duration: 300ms;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_center_box
+    .orderList_order_detail_title:hover {
+    opacity: 0.7;
 }
 
 #orderList_wrap

@@ -1,4 +1,4 @@
-.myFollowing_border {
+.myLike_border {
     min-width:50%;
     overflow-y: auto; /*스크롤*/
     min-height: 70vh;
@@ -10,7 +10,7 @@
     box-sizing:border-box;
   }
 
-.myFollowing_search{
+.myLike_search{
     display: flex;
     justify-content: space-around;
     border-radius: 20px;
@@ -20,67 +20,56 @@
     height: 50px;
     width: 100%;
     box-sizing: border-box;
-    position:relative;
 }
 
-.myFollowing_search
- .myFollowing_search_input{
-    width: 90%;
-    position:absolute;
-    top: 0px;
+.myLike_search
+ .myLike_search_input{
+    width: 80%;
     height: 100%;
     border: none;
     outline: none;
     text-align: center;
+    background: #fff;
     transition: 0.5s;
-    background-color: rgba( 255, 255, 255, 0.0 );
-
  }
 
-.myFollowing_search
-.myFollowing_search_input:focus {
+.myLike_search
+.myLike_search_input:focus {
    outline: none;
    text-align: left;
-   left:20px;
-   transition: 1s;
  }
 
-.myFollowing_search_icon {
-    width: 50px;
-    height: 100%;
-    position:absolute;
-    left:90%;
-    top: 0px;
-    border: none;
-    background: #fff;
-    outline: none;
-    float: right;
-    background-color: rgba( 255, 255, 255, 0.0 );
+.myLike_search_icon {
+  width: 50px;
+  height: 100%;
+  border: none;
+  background: #fff;
+  outline: none;
+  float: right;
 }
-
 
 .myLike_search_icon:hover {
     cursor:pointer;
 }
 
-
-.myFollowing_list_trainer{
+/* 본문 */
+.myLike_list_lesson{
   display: flex;
   padding: 10px;
 }
 
 /*한 행 사이즈*/
-.myFollowing_list_trainer_img{ width:110px;}
-.myFollowing_list_trainer_info{ flex: 1;}
-.myFollowing_list_trainer_button{ flex: 1;}
+.myLike_list_lesson_img{ width:110px;}
+.myLike_list_lesson_info{ flex: 1;}
+.myLike_list_lesson_button{ flex: 1;}
 
 
-.myFollowing_list_trainer{
+.myLike_list_lesson{
   border-top: 1px solid #0e1414;
 }
 
-.myFollowing_list_trainer
-.myFollowing_list_trainer_img img{
+.myLike_list_lesson
+.myLike_list_lesson_img img{
   display:flex;
   align-items:center;
   width:100px;
@@ -90,49 +79,66 @@
   background-color: #f9b332; /* 프로필 배경 오렌지색 */
 }
 
-.myFollowing_list_trainer_info{
+.myLike_list_lesson_info{
   display:flex;
   flex-direction: column;
   justify-content:center;
   align-items: flex-start;
-  line-height: 20px;
+  line-height: 25px;
 }
 
-.myFollowing_list_trainer_info
-.myFollowing_list_trainer_name{
+.myLike_list_lesson_info
+.myLike_list_lesson_title_category{
+ display:flex;
+}
+
+
+
+
+
+.myLike_list_lesson_info
+.myLike_list_lesson_title{
   font-size:20px;
   font-weight:bold;
 }
 
-.myFollowing_list_trainer_info
-.myFollowing_list_trainer_id{
-  font-size:14px;
-  padding-left: 4px;
+.myLike_list_lesson_info
+.myLike_list_lesson_category{
+  font-size:18px;
+  color:gray;
+  font-style: italic;
 }
 
-.myFollowing_list_trainer_button{
+
+.myLike_list_lesson_info
+.myLike_list_trainer_name{
+  font-size:14px;
+  /*padding-left: 4px;*/
+}
+
+.myLike_list_lesson_button{
   display:flex;
   justify-content:right;
   align-items: center;
 }
 
-.myFollowing_list_trainer_button button{
+.myLike_list_lesson_button button{
   background:none;
   border:none;
   height:30px;
   transition: all 0.2s linear;
 }
 
-.myFollowing_list_trainer_button img{
+.myLike_list_lesson_button img{
    transition: all 0.2s linear;
 }
 
-.myFollowing_list_trainer_button img:hover {
+.myLike_list_lesson_button img:hover {
   cursor:pointer;
   transform: scale(1.2);
 }
 
-.myFollowing_list_trainer_button button:hover{
+.myLike_list_lesson_button button:hover{
   cursor:pointer;
   color:#f9b332;
 }

@@ -2,6 +2,9 @@ package com.khteam2.connectgym.member;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
+import com.khteam2.connectgym.like.LikeService;
+import com.khteam2.connectgym.like.dto.LikeDto;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.trainer.TrainerService;
@@ -25,6 +28,7 @@ public class MemberController {
     private final MemberService memberService;
     private final MailSendService mailService;
     private final FollowService followService;
+    private final LikeService likeService;
 
     @GetMapping(value = "/user/login")
     public String tempLogin(
@@ -207,6 +211,20 @@ public class MemberController {
         model.addAttribute("following", following);
 
         return "mypage/following";
+    }
+    // 4) 찜
+    @GetMapping("/mypage/myLike")
+    public String myLikes(Model model, HttpSession session) {
+        //배너타이틀
+        model.addAttribute("bannerTitle", "following");
+
+        MemberResponseDTO member = memberService.sessionMem(session);
+
+        List<LessonResponseDTO> likes = likeService.likingList(member.getNo());
+
+        model.addAttribute("likes", likes);
+
+        return "mypage/like";
     }
 
     // 7-1) 회원정보

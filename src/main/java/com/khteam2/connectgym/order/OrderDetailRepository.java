@@ -25,8 +25,8 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
     List<OrderDetail> findByMemberNo(@Param(value = "memberNo") Long memberNo);
 
     @Query(value = "SELECT od FROM OrderDetail od"
-        + " JOIN od.lesson l"
-        + " JOIN l.trainer t"
+        + " JOIN FETCH od.lesson l"
+        + " JOIN FETCH l.trainer t"
         + " WHERE l.title LIKE CONCAT('%', TRIM(:search), '%')"
         + " OR t.trainerName LIKE CONCAT('%', TRIM(:search), '%')")
     List<OrderDetail> findByLessonTitleOrTrainerName(@Param("search") String search);

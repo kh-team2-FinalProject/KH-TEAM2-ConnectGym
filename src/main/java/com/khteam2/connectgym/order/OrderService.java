@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.CommonUtil;
+import com.khteam2.connectgym.common.Pagination;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
@@ -13,8 +14,11 @@ import com.siot.IamportRestClient.request.PrepareData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import com.siot.IamportRestClient.response.Prepare;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,17 +35,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class OrderService {
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private OrderDetailRepository orderDetailRepository;
-    @Autowired
-    private LessonRepository lessonRepository;
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private IamportClient iamportClient;
+    private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
+    private final LessonRepository lessonRepository;
+    private final MemberRepository memberRepository;
+    private final IamportClient iamportClient;
 
     /**
      * 결제 진행 전 실행되는 메소드
@@ -419,7 +419,20 @@ public class OrderService {
             return responseDto;
         }
 
-        List<Order> orderList = null;
+        int pageSize = 5;
+        int currentPage = 0;
+
+        if (orderListRequestDto.getSize() != null) {
+            pageSize = orderListRequestDto.getSize();
+        }
+
+        if (orderListRequestDto.getPage() != null) {
+            currentPage = orderListRequestDto.getPage() - 1;
+        }
+
+        Pageable pageable = PageRequest.of(currentPage, pageSize);
+
+        Page<Order> orderList = null;
 
         // 주문건을 역순으로 가져온다.
         if (orderListRequestDto.getStartDate() != null && orderListRequestDto.getEndDate() != null) {
@@ -427,11 +440,12 @@ public class OrderService {
             orderList = this.orderRepository.findByMemberAndDayOfPaymentBetweenOrderByDayOfPaymentDesc(
                 member,
                 Date.valueOf(orderListRequestDto.getStartDate()),
-                Date.valueOf(orderListRequestDto.getEndDate())
+                Date.valueOf(orderListRequestDto.getEndDate()),
+                pageable
             );
         } else {
             // 시작일 또는 종료일이 존재하지 않을 경우 모든 내용을 가져온다.
-            orderList = this.orderRepository.findByMemberOrderByDayOfPaymentDesc(member);
+            orderList = this.orderRepository.findByMemberOrderByDayOfPaymentDesc(member, pageable);
         }
 
         // 가져온 주문건을 화면에 출력하기 위해서 List 타입의 객체를 만들어준다.
@@ -494,22 +508,29 @@ public class OrderService {
                     .price((long) lesson.getPrice())
                     .trainerName(trainer.getTrainerName())
                     .imageUrl(lesson.getLesson_img())
+                    .lessonNo(lesson.getNo())
                     .status(status)
                     .build();
                 // 상세 정보 리스트에 담는다.
                 detailDtoList.add(detailDto);
             }
 
-            // 주문 DTO를 생성해서 가져온 정보들을 담아준다.
-            OrderListOrderDto orderDto = OrderListOrderDto.builder()
-                .orderNo(order.getNo())
-                .orderDate(order.getDayOfPayment().toLocalDateTime())
-                .detailDtoList(detailDtoList)
-                .totalPrice(totalPrice)
-                .build();
-            // 주문 DTO 리스트에 담는다.
-            orderListOrderDtoList.add(orderDto);
+            // 상세 정보 리스트가 비어있지 않을 때에만 목록에 담아준다.
+            if (!detailDtoList.isEmpty()) {
+                // 주문 DTO를 생성해서 가져온 정보들을 담아준다.
+                OrderListOrderDto orderDto = OrderListOrderDto.builder()
+                    .orderNo(order.getNo())
+                    .orderDate(order.getDayOfPayment().toLocalDateTime())
+                    .detailDtoList(detailDtoList)
+                    .totalPrice(totalPrice)
+                    .build();
+
+                // 주문 DTO 리스트에 담는다.
+                orderListOrderDtoList.add(orderDto);
+            }
         }
+
+        Pagination pagination = new Pagination(orderList);
 
         // 가져온 정보들을 담아준다.
         responseDto.setSearch(orderListRequestDto.getQ());
@@ -517,6 +538,7 @@ public class OrderService {
         responseDto.setEndDate(orderListRequestDto.getEndDate());
         responseDto.setStatus(orderListRequestDto.getStatus());
         responseDto.setOrderListOrderDtoList(orderListOrderDtoList);
+        responseDto.setPagination(pagination);
         responseDto.setSuccess(true);
 
         return responseDto;
