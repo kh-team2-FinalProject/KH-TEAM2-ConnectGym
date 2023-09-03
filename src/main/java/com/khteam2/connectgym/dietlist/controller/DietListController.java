@@ -6,14 +6,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -39,19 +40,24 @@ public class DietListController {
         return "fooddiary/foodInfo";
     }
 
-    @PostMapping("/addFoodinfo")
-    public String addFood(@ModelAttribute @Validated Food food, BindingResult bindingResult, Model model) {
+    @PostMapping("/fooddiary/foodInfo")
+    public String addFood(@ModelAttribute @Valid Food food, Errors errors, Model model) {
 
-        if (bindingResult.hasErrors()) {
-            // 유효성 검사 오류가 있는 경우
+        if (errors.hasErrors()) {
             model.addAttribute("food", food); // 폼 데이터를 모델에 추가
+            // 유효성 통과 못한 필드와 메세지 핸들링
+            Map<String, String> validatorResult = foodService.validateHandling(errors);
+            for(String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
             return "fooddiary/foodInfo"; // 다시 입력 페이지로 이동
         }
 
-
         foodService.saveFood(food);
+
         return "redirect:/fooddiary/foodInfo";
     }
+
 
 
 }
