@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
@@ -35,6 +36,12 @@ dependencies {
 
     // Jasypt
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+
+
+    // Valid
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.hibernate:hibernate-validator:7.0.5.Final'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.4'
 
 
     //채팅관련  stomp,websocket
@@ -63,6 +70,10 @@ dependencies {
 
     // 페이징
     implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+
+
+
+
 
     //oauth2.0 api
 //    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.7'

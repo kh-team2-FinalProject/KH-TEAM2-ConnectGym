@@ -31,6 +31,7 @@ public class Food {
     private Double choc; //탄수화물
     private Double prot; // 단백질
     private Double fat; //지방
+
     private Double satFat; // 포화 지방
     private Double transFat; // 트랜스 지방
     private Double kcal; // 칼로리
