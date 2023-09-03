@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.CommonUtil;
+import com.khteam2.connectgym.common.Pagination;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
@@ -15,6 +16,9 @@ import com.siot.IamportRestClient.response.Payment;
 import com.siot.IamportRestClient.response.Prepare;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -415,7 +419,20 @@ public class OrderService {
             return responseDto;
         }
 
-        List<Order> orderList = null;
+        int pageSize = 5;
+        int currentPage = 0;
+
+        if (orderListRequestDto.getSize() != null) {
+            pageSize = orderListRequestDto.getSize();
+        }
+
+        if (orderListRequestDto.getPage() != null) {
+            currentPage = orderListRequestDto.getPage() - 1;
+        }
+
+        Pageable pageable = PageRequest.of(currentPage, pageSize);
+
+        Page<Order> orderList = null;
 
         // 주문건을 역순으로 가져온다.
         if (orderListRequestDto.getStartDate() != null && orderListRequestDto.getEndDate() != null) {
@@ -423,11 +440,12 @@ public class OrderService {
             orderList = this.orderRepository.findByMemberAndDayOfPaymentBetweenOrderByDayOfPaymentDesc(
                 member,
                 Date.valueOf(orderListRequestDto.getStartDate()),
-                Date.valueOf(orderListRequestDto.getEndDate())
+                Date.valueOf(orderListRequestDto.getEndDate()),
+                pageable
             );
         } else {
             // 시작일 또는 종료일이 존재하지 않을 경우 모든 내용을 가져온다.
-            orderList = this.orderRepository.findByMemberOrderByDayOfPaymentDesc(member);
+            orderList = this.orderRepository.findByMemberOrderByDayOfPaymentDesc(member, pageable);
         }
 
         // 가져온 주문건을 화면에 출력하기 위해서 List 타입의 객체를 만들어준다.
@@ -512,12 +530,15 @@ public class OrderService {
             }
         }
 
+        Pagination pagination = new Pagination(orderList);
+
         // 가져온 정보들을 담아준다.
         responseDto.setSearch(orderListRequestDto.getQ());
         responseDto.setStartDate(orderListRequestDto.getStartDate());
         responseDto.setEndDate(orderListRequestDto.getEndDate());
         responseDto.setStatus(orderListRequestDto.getStatus());
         responseDto.setOrderListOrderDtoList(orderListOrderDtoList);
+        responseDto.setPagination(pagination);
         responseDto.setSuccess(true);
 
         return responseDto;
