@@ -2,8 +2,8 @@ package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.order.dto.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +16,9 @@ import java.util.List;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class OrderController {
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
     @Value("${portone.franchise_id}")
     private String franchiseId;
     @Value("${portone.pg_shop_id}")
