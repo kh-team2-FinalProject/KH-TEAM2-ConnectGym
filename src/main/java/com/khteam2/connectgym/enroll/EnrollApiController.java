@@ -17,13 +17,7 @@ public class EnrollApiController {
     private final MemberService memberService;
     private final EnrollService enrollService;
 
-/*    @GetMapping("/api/lessonlist")
-    public List<EnrollDetail> lessonlist(HttpSession session) {
 
-        MemberResponseDTO member = memberService.sessionMem(session);
-
-        return enrollService.memLessonList(member);
-    }*/
 
     @GetMapping("/api/enrollList")
     public List<EnrollResponseDto> enrollList(HttpSession session) {

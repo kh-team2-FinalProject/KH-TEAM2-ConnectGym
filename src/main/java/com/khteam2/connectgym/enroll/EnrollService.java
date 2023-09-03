@@ -37,16 +37,6 @@ public class EnrollService {
 
         List<Order> orders = orderRepository.findByMember(member);
 
-        System.out.println("orders = " + orders.toString());
-
-/*        if (orders == null) {
-            EnrollResponseDto enrollResponseDto = EnrollResponseDto.builder()
-                .errorMsg("NotFound")
-                .build();
-
-
-            return
-        }*/
 
         for (Order o : orders) {
             OrderDetail orderDetail= orderDetailRepository.findByEnroll(o);

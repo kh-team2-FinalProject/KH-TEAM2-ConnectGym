@@ -38,6 +38,7 @@ public class LessonResponseDTO {
         this.start_date = lesson.getStart_date();
         this.end_date = lesson.getEnd_date();
         this.lesson_img = lesson.getLesson_img();
+        this.errorMsg = "Success";
     }
 
 

@@ -1,5 +1,7 @@
 package com.khteam2.connectgym.order;
 
+import com.khteam2.connectgym.lesson.Lesson;
+import com.khteam2.connectgym.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,4 +30,7 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
         + " WHERE l.title LIKE CONCAT('%', TRIM(:search), '%')"
         + " OR t.trainerName LIKE CONCAT('%', TRIM(:search), '%')")
     List<OrderDetail> findByLessonTitleOrTrainerName(@Param("search") String search);
+
+    @Query("select od from OrderDetail od where lesson.no=?1")
+    List<OrderDetail> enrollList(Long lessonNo);
 }

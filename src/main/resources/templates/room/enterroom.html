@@ -10,10 +10,10 @@
     <script th:src="@{/js/openvidu-browser-2.28.0.js}"></script>
     <script th:inline="javascript">
         var myRoomCode = [[${roomInfo.roomName}]];
-        let userName = [[${type == 'trainer' ? trainer.userName : member.userName}]];
+        let userName = [[${type == 'trainer' ? trainer.trainerName : member.userName}]];
         let userType =  [[${type}]];
     </script>
-    <script th:src="@{${type == 'trainer' ? '/js/enterRoomTrainer.js' : '/js/enterRoomMember.js'}}"></script>
+    <script th:src="@{/js/roomStreaming.js}"></script>
 </th:block>
 
 

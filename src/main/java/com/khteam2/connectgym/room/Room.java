@@ -2,14 +2,15 @@ package com.khteam2.connectgym.room;
 
 import com.khteam2.connectgym.order.OrderDetail;
 import com.khteam2.connectgym.room.dto.RoomStatus;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "gym_rooms")
 public class Room {
 

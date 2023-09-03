@@ -41,6 +41,7 @@ public class CommonApiController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDto);
         }
 
+        System.out.println("responseDto = " + responseDto.toString());
         session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, responseDto.getMemberNo());
         session.setAttribute(SessionConstant.LOGIN_MEMBER_CLASS, responseDto.getMemberClass());
 
