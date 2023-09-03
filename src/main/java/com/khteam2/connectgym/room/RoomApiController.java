@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.room;
 
 
+import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.room.dto.RoomRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -58,7 +59,17 @@ public class RoomApiController {
         }
     }
 
+    // 룸 퇴장
+    @GetMapping("/exit/{sessionId}")
+    public int exitRoom(@PathVariable("sessionId") String sessionId,@RequestParam String userType) {
+        System.out.println("userType = " + userType);
+        if (userType.equals("trainer")) {
+            roomSerivce.exitRoom(sessionId);
+            return 1;
+        }
 
+        return 0;
+    }
 
 
 }

@@ -71,15 +71,35 @@ function joinSession(){
 	});
 }
 
-function leaveSession() {
+function leaveSession(myRoomCode,userType) {
 
-	session.disconnect();
+       $.ajax({
+            type: "GET",
+            url: "/room/exit/"+myRoomCode +"?userType="+userType,
+            contentType: "application/json;charset=UTF-8",
+            success: function (response) {
+              if(response ==1){
+              console.log('트레이너 exit');
+              }
+
+              session.disconnect();
+              removeAllUserData();
+
+              history.go(-1);
+            },
+            error: function (error) {
+                // 요청이 실패했을 때 실행할 코드
+                console.error("Ajax 오류: ", error);
+            }
+        });
+
+/*	session.disconnect();
 
     // 사용자의 닉네임으로 모든 HTML 요소를 제거
     // 세션을 떠날 때 HTML 비디오가 자동으로 제거됨
 	removeAllUserData();
 
-	history.go(-1);
+	history.go(-1);*/
 }
 
 window.onbeforeunload = function () {
@@ -155,7 +175,7 @@ function createSession(sessionId) {
 function createToken(sessionId) {
 	return new Promise((resolve, reject) => {
 		$.ajax({
-			type: 'POST',
+			type: "POST",
 			url: '/room/enter/' + sessionId + '/connection',
 			data: JSON.stringify({}),
 			headers: { "Content-Type": "application/json" },

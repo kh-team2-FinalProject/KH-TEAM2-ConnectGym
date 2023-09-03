@@ -15,9 +15,7 @@ window.onload = function() {
   	function findMyLesson(){
   	$.ajax({
     type:"GET",
-    /*${session.no}*/
   	url : `/api/enrollList`,
-  	/*url : `/api/lessonlist?memberId=${userNo}`,*/
   	dataType:"json",
   	//async:"false",
   	success : function(response){

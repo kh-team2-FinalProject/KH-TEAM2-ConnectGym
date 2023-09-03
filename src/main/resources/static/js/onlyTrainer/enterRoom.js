@@ -21,7 +21,7 @@ function enterRoom(titleCode, enrollKey) {
   $.ajax({
     type: "POST",
     url: "/trainer/checkRoom",
-    data: JSON.stringify({ titleCode: titleCode, enrollKey: enrollKey }), // 데이터를 JSON 형식으로 전달
+    data: JSON.stringify({ titleCode: titleCode, enrollKey: enrollKey }),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     async: false,

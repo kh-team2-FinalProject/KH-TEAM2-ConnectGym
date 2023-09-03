@@ -9,10 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -106,4 +108,9 @@ public class RoomService {
     }
 
 
+    @Transactional
+    public void exitRoom(String sessionId) {
+        Room room = roomRepository.findByRoomName(sessionId).orElse(null);
+        roomRepository.updateRoomStatus(RoomStatus.DISABLE,room.getNo());
+    }
 }

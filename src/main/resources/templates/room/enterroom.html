@@ -24,7 +24,8 @@
     <div class="lessonroom_container">
         <div class="lessonroom_top">
             <div class="lroom-title" th:text="${roomInfo.lessonTitle}"></div>
-            <button type="button" class="lroom-button" id="buttonLeaveSession" onmouseup="leaveSession()">Finish!
+            <button type="button" class="lroom-button" id="buttonLeaveSession"
+                    th:onclick="leaveSession([[${roomInfo.roomName}]],[[${type}]])">Finish!
             </button>
         </div>
 
