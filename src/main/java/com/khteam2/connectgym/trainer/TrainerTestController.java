@@ -35,7 +35,7 @@ public class TrainerTestController {
         return "trainerOnlyView1";
     }
 
-
+    // 회원 불러오기
     @GetMapping("/trainer/memberList/{lessonNo}")
     public String memberList(@PathVariable Long lessonNo, Model model, HttpSession session) {
 

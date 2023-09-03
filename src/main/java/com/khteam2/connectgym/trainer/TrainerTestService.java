@@ -35,8 +35,6 @@ public class TrainerTestService {
 
     //트레이너의 등록 레슨 불러오기
     public LessonResponseDTO registered(HttpSession session) {
-        System.out.println(" 여기 호출 되나요 ");
-
         Long no = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
 
 

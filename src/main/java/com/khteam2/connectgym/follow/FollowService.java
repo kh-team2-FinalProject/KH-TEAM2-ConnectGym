@@ -82,14 +82,25 @@ public class FollowService {
             TrainerResponseDTO trainerResponseDTO = new TrainerResponseDTO(val.getToTrainer());
             followingList.add(trainerResponseDTO);
         }
-/*
-        FollowForUserResponseDTO followForUserResponseDTO = FollowForUserResponseDTO.builder()
-            .followTrainerList(followingList)
-            .build();
-*/
 
         return followingList;
     }
 
+    // 유저가 팔로우한 트레이너 목록 중 이름으로 검색 결과
+    public List<TrainerResponseDTO> searchFollow(Long fromUserNo, String keyword) {
 
+        List<TrainerResponseDTO> followingList = new ArrayList<>();
+
+        if(keyword == ""){
+            return followingList(fromUserNo);
+        }
+
+        for (Follow val : followRepository.searchByTrainerName(fromUserNo, keyword)) {
+            TrainerResponseDTO trainerResponseDTO = new TrainerResponseDTO(val.getToTrainer());
+            followingList.add(trainerResponseDTO);
+        }
+        System.out.println("followingList = " + followingList.toString());
+
+        return followingList;
+    }
 }

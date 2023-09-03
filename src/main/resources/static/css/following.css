@@ -20,32 +20,42 @@
     height: 50px;
     width: 100%;
     box-sizing: border-box;
+    position:relative;
 }
 
 .myFollowing_search
  .myFollowing_search_input{
- width: 80%;
+    width: 90%;
+    position:absolute;
+    top: 0px;
     height: 100%;
     border: none;
     outline: none;
     text-align: center;
-    background: #fff;
     transition: 0.5s;
+    background-color: rgba( 255, 255, 255, 0.0 );
+
  }
 
 .myFollowing_search
 .myFollowing_search_input:focus {
    outline: none;
    text-align: left;
+   left:20px;
+   transition: 1s;
  }
 
 .myFollowing_search_icon {
     width: 50px;
     height: 100%;
+    position:absolute;
+    left:90%;
+    top: 0px;
     border: none;
     background: #fff;
     outline: none;
     float: right;
+    background-color: rgba( 255, 255, 255, 0.0 );
 }
 
 

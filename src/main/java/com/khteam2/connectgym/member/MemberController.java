@@ -220,7 +220,7 @@ public class MemberController {
 
         MemberResponseDTO member = memberService.sessionMem(session);
 
-        List<LessonResponseDTO> likes = likeService.likeingList(member.getNo());
+        List<LessonResponseDTO> likes = likeService.likingList(member.getNo());
 
         model.addAttribute("likes", likes);
 

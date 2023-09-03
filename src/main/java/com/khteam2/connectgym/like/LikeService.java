@@ -1,11 +1,13 @@
 package com.khteam2.connectgym.like;
 
 
+import com.khteam2.connectgym.follow.Follow;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +58,7 @@ public class LikeService {
     }
 
     // 유저가 찜한 레슨 목록
-    public List<LessonResponseDTO> likeingList(Long memberNo) {
+    public List<LessonResponseDTO> likingList(Long memberNo) {
         List<LessonResponseDTO> myLikeList = new ArrayList<>();
 
         for (Like val : likeRepository.findAllByMember(memberNo)) {
@@ -66,4 +68,25 @@ public class LikeService {
 
         return myLikeList;
     }
+
+    // 나중에는 카테고리 드롭박스 별 필터링도 추가하기
+    // 유저가 찜한 레슨 중 이름으로 검색 결과
+    /*public List<LessonResponseDTO> searchLike(Long fromUserNo, String keyword) {
+
+        List<LessonResponseDTO> likingList = new ArrayList<>();
+
+        if(keyword == ""){
+            return likingList(fromUserNo);
+        }
+
+        for (Like val : likeRepository.searchByTrainerName(keyword,fromUserNo)) {
+            LessonResponseDTO lessonResponseDTO = new LessonResponseDTO(val.getLesson());
+            likingList.add(lessonResponseDTO);
+        }
+        System.out.println("followingList = " + likingList.toString());
+
+        return likingList;
+        }*/
+
+
 }
