@@ -490,21 +490,26 @@ public class OrderService {
                     .price((long) lesson.getPrice())
                     .trainerName(trainer.getTrainerName())
                     .imageUrl(lesson.getLesson_img())
+                    .lessonNo(lesson.getNo())
                     .status(status)
                     .build();
                 // 상세 정보 리스트에 담는다.
                 detailDtoList.add(detailDto);
             }
 
-            // 주문 DTO를 생성해서 가져온 정보들을 담아준다.
-            OrderListOrderDto orderDto = OrderListOrderDto.builder()
-                .orderNo(order.getNo())
-                .orderDate(order.getDayOfPayment().toLocalDateTime())
-                .detailDtoList(detailDtoList)
-                .totalPrice(totalPrice)
-                .build();
-            // 주문 DTO 리스트에 담는다.
-            orderListOrderDtoList.add(orderDto);
+            // 상세 정보 리스트가 비어있지 않을 때에만 목록에 담아준다.
+            if (!detailDtoList.isEmpty()) {
+                // 주문 DTO를 생성해서 가져온 정보들을 담아준다.
+                OrderListOrderDto orderDto = OrderListOrderDto.builder()
+                    .orderNo(order.getNo())
+                    .orderDate(order.getDayOfPayment().toLocalDateTime())
+                    .detailDtoList(detailDtoList)
+                    .totalPrice(totalPrice)
+                    .build();
+
+                // 주문 DTO 리스트에 담는다.
+                orderListOrderDtoList.add(orderDto);
+            }
         }
 
         // 가져온 정보들을 담아준다.
