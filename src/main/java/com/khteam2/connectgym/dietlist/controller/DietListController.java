@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +40,15 @@ public class DietListController {
     }
 
     @PostMapping("/addFoodinfo")
-    public String addFood(@ModelAttribute Food food) {
+    public String addFood(@ModelAttribute @Validated Food food, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            // 유효성 검사 오류가 있는 경우
+            model.addAttribute("food", food); // 폼 데이터를 모델에 추가
+            return "fooddiary/foodInfo"; // 다시 입력 페이지로 이동
+        }
+
+
         foodService.saveFood(food);
         return "redirect:/fooddiary/foodInfo";
     }
