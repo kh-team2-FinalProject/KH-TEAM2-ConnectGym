@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.trainer;
 
 
+import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
@@ -10,14 +11,16 @@ import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
-
-import java.io.IOException;
-import java.util.*;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -127,7 +130,8 @@ public class TrainerService {
     }
 
     //트레이너 불러오기(레슨까지)
-    public TrainerResponseDTO findOneTrainer(Long trainerNo) {
+    public TrainerResponseDTO findOneTrainer(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO) Long trainerNo) {
+
         Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
 
         //레슨 번호
@@ -175,9 +179,11 @@ public class TrainerService {
         return null;
     }
 
+    public TrainerResponseDTO sessionT(HttpSession session) {
+        Long sessionTrainerNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+        TrainerResponseDTO trainerResponseDTO = findOneTrainer(sessionTrainerNo);
 
-
-
-
+        return trainerResponseDTO;
+    }
 }
 
