@@ -13,9 +13,11 @@
     <div class="myFollowing_container">
         <div class="myFollowing_border">
             <div class="myFollowing_search">
-                <img class="myFollowing_search_icon" width="16px" height="16px"
-                    src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/search_icon.png"/>
-                <input type="text" class="myFollowing_search_input" name="myFollowing_search_byName" placeholder="검색">
+                <input type="text" class="myFollowing_search_input" name="myFollowing_search_byName" placeholder="트레이너 이름으로 검색">
+                <button class="myFollowing_search_icon">
+                    <img width="24px" height="24px"
+                         src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/search_icon.png"/>
+                </button>
             </div>
             <div class="myFollowing_list">
                 <th:block th:if="${following.size() > 0}">

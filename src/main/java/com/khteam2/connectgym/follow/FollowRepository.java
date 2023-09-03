@@ -12,8 +12,6 @@ import java.util.List;
 
 public interface FollowRepository extends JpaRepository<Follow, Long> {
 
-    List<Follow> findByFromUser(Member fromUser);
-
     @Modifying
     @Query("delete from Follow f where f.fromUser=?1 and f.toTrainer=?2")
     void deleteByFromUserAndToTrainer(Member fromUser, Trainer toTrainer);
@@ -30,6 +28,7 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
     @Query("select f from Follow f where f.fromUser.no=?1")
     List<Follow> findAllByFromUser(Long fromUserNo);
 
+    // 로그인 사용자 팔로우 여부 체크
     @Query("select count(f) from Follow f where f.fromUser.no=?1 and f.toTrainer.no=?2")
     int findAllByFromUserNoAndTrainerNo(Long userNo, Long trainerNo);
 }

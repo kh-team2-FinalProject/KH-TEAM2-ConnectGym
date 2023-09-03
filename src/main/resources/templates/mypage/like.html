@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 팔로잉목록</title>
+</th:block>
+
+
+<th:block layout:fragment="mypage">
+
+    <div class="myLike_container">
+        <div class="myLike_border">
+            <div class="myLike_search">
+                <input type="text" class="myLike_search_input" name="myLike_search_byName" placeholder="강좌명 또는 트레이너 이름으로 검색">
+                <button class="myLike_search_icon"><img width="24px" height="24px"
+                     src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/search_icon.png"/></button>
+            </div>
+
+            <div class="myLike_list">
+                <th:block th:if="${likes.size() > 0}">
+                    <div class="myLike_list_lesson" th:each="lesson:${likes}">
+                        <div class="myLike_list_lesson_img">
+                            <img th:src="${lesson.lesson_img}">
+                        </div>
+                        <div class="myLike_list_lesson_info">
+                            <div class="myLike_list_lesson_title_category">
+                                <div class="myLike_list_lesson_title">[[${lesson.title}]] &nbsp;&nbsp; </div>
+
+                                <div class="myLike_list_lesson_category" th:if="${lesson.category == 1}">Health</div>
+                                <div class="myLike_list_lesson_category" th:if="${lesson.category == 2}">Yoga</div>
+                                <div class="myLike_list_lesson_category" th:if="${lesson.category == 3}">Pilates</div>
+                            </div>
+
+                            <div class="myLike_list_trainer_name">[[${lesson.trainer.trainerName}]]</div>
+                        </div>
+                        <div class="myLike_list_lesson_button">
+                            <!--<img width="50" height="50"
+                                 src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/message_icon.png"/>-->
+                            <button th:onclick="|location.href='/lessonDetail/${lesson.no}'|">레슨 정보 보기</button>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+</th:block>
+
+</body>
+
+</html>
