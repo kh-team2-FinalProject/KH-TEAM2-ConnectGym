@@ -8,8 +8,9 @@ import com.khteam2.connectgym.member.MemberClass;
  * <br />
  * <h2>사용 예시</h2>
  * SessionAttribute 어노테이션을 통해서 값을 꺼내올 때<br />
+ * 
  * <pre>
- GetMapping("/mypage")
+ * GetMapping("/mypage")
  * public String myController(
  *   SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
  *   SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass
@@ -27,10 +28,12 @@ import com.khteam2.connectgym.member.MemberClass;
  *     return "/content/mypages";
  * }
  * </pre>
+ * 
  * <br />
  * HttpSession을 이용해서 세션에 값을 저장할 때<br />
+ * 
  * <pre>
- GetMapping("/login")
+ * GetMapping("/login")
  * public String myController(HttpSession session) {
  *     session.setAttribute(SessionConstant.LOGIN_MEMBER_NO, 1L);
  *     session.setAttribute(SessionConstant.LOGIN_MEMBER_CLASS, MemberClass.MEMBER);
@@ -62,4 +65,7 @@ public class SessionConstant {
      * 주문 시 사용되며 리스트 형태로 들어가는 강의 번호
      */
     public static final String ORDER_LESSON_LIST = "session_order_lesson_list";
+
+    private SessionConstant() {
+    }
 }
