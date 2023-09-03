@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "orders")
+@org.hibernate.annotations.Table(appliesTo = "orders", comment = "주문 내역")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,5 +29,6 @@ public class Order {
     @Comment("주문한 날짜 및 시간")
     private Timestamp dayOfPayment;
     @Column(nullable = false)
+    @Comment("총 결제 금액")
     private Long orderPay;
 }

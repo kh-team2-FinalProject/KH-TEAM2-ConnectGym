@@ -13,8 +13,8 @@ import com.siot.IamportRestClient.request.PrepareData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import com.siot.IamportRestClient.response.Prepare;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,17 +31,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class OrderService {
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private OrderDetailRepository orderDetailRepository;
-    @Autowired
-    private LessonRepository lessonRepository;
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private IamportClient iamportClient;
+    private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
+    private final LessonRepository lessonRepository;
+    private final MemberRepository memberRepository;
+    private final IamportClient iamportClient;
 
     /**
      * 결제 진행 전 실행되는 메소드

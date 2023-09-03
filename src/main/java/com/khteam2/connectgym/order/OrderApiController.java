@@ -1,10 +1,9 @@
 package com.khteam2.connectgym.order;
 
 import com.khteam2.connectgym.common.SessionConstant;
-import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.order.dto.OrderProcessRequestDto;
 import com.khteam2.connectgym.order.dto.OrderProcessResponseDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +16,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/order")
+@RequiredArgsConstructor
 public class OrderApiController {
-    @Autowired
-    private OrderService orderService;
-    @Autowired
-    private MemberRepository memberRepository;
+    private final OrderService orderService;
     @Value("${portone.franchise_id}")
     private String franchiseId;
     @Value("${portone.pg_shop_id}")
