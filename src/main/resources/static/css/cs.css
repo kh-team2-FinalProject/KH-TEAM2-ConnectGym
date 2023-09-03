@@ -134,6 +134,9 @@ button {
 .accodion-item .layer {
   display: none;
 }
+.accodion-item.active .layer{
+    display:block;
+}
 
 .accodion-content {
   padding: 30px 50px 30px;

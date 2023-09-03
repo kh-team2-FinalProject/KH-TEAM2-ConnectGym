@@ -27,13 +27,13 @@
                 -->
                 <div class="module">
                     <div class="ctgyAll ctgyitem active" id="ctgyitem">
-                        <button class="ctgy-btn" type="button" th:onclick="'location.href=\'/change/customer_service?category=All&page=1\''">전체</button>
+                        <button class="ctgy-btn" type="button" th:onclick="reqCategory('All');">전체</button>
                         <!--                        <button class="ctgy-btn" type="button">전체</button>-->
                         <!--                        <a th:href="@{'/customer_service?category=All&page=1'}">전체</a>-->
                     </div>
 
                     <div class="ctgyitem" th:each="ctgyList: ${ctgyList}">
-                        <button class="ctgy-btn" type="button" th:text="${ctgyList.ctgy}" th:onclick="'location.href=\'/change/customer_service?category=' + ${ctgyList.id} + '&page=1\''"></button>
+                        <button class="ctgy-btn" type="button" th:text="${ctgyList.ctgy}" th:onclick="reqCategory(${ctgyList.id});"></button>
                         <!--                        <button class="ctgy-btn" type="button" th:text="${ctgyList.ctgy}"></button>-->
                         <!--                        <a th:href="@{'/customer_service?category=' + ${ctgyList.id} + '&page=1'}" th:text="${ctgyList.ctgy}"></a>-->
                     </div>
