@@ -1,5 +1,6 @@
 package com.khteam2.connectgym.order.dto;
 
+import com.khteam2.connectgym.common.Pagination;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +18,6 @@ public class OrderListResponseDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private String search;
-    List<OrderListOrderDto> orderListOrderDtoList;
+    private List<OrderListOrderDto> orderListOrderDtoList;
+    private Pagination pagination;
 }
