@@ -7,10 +7,18 @@
 </th:block>
 
 <th:block layout:fragment="script">
+<<<<<<< HEAD
     <script th:src="@{/js/like.js}"></script>
 </th:block>
+=======
+
+</th:block>
+
+>>>>>>> chatroom
 
 <th:block layout:fragment="detailOrCrud">
+
+
     <div class="ld_container">
         <div class="lessonDetail_container">
 
@@ -84,6 +92,8 @@
                         </th:block>
                     </div>
                     <button class="ld-chat-btn" th:href="@{/order}">1:1 문의하기</button>
+                    <button class="ld-jim-btn" th:href="@{/order}">찜</button>
+                    <button class="ld-chat-btn" onclick="checkedChatroom()">1:1 문의하기</button>
                     <button class="ld-order-btn" th:href="@{/order}">바로 구매하기</button>
                 </div>
             </div>
@@ -95,6 +105,11 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        const memberNo = [[${session.session_login_member_no}]];
+        const trainerNo = [[${trainerInfo.trainerNo}]];
+    </script>
+    <script th:src="@{/js/chatroom.js}"></script>
 </th:block>
 
 </html>

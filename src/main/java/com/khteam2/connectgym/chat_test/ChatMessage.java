@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -17,7 +15,7 @@ import java.time.LocalDateTime;
 public class ChatMessage {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
 
     @ManyToOne
@@ -28,8 +26,8 @@ public class ChatMessage {
 
     private String sender;
 
-    @CreationTimestamp
-    private LocalDateTime sendAt;
+//    @CreationTimestamp
+//    private LocalDateTime sendAt;
 
 
     //메시지 테스트용 생성자
