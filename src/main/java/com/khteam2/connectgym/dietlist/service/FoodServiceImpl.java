@@ -129,14 +129,14 @@ public class FoodServiceImpl implements FoodService {
     public List<Food> searchFood(String key){
         List<Food> foodinfo = new ArrayList<>();
 
-       /*
-               Optional<Food> optionalfood = foodRepository.findByFoodNmContains(key);
-       if(optionalfood.isPresent()){
-            Food food = optionalfood.get();
+        List<Food> foods = foodRepository.findByFoodNmContains(key);
+        for(Food food: foods){
             foodinfo.add(food);
-        } */
+        }
+
         return foodinfo;
     }
+
 
 }
 
