@@ -168,3 +168,10 @@ font-size: 15px;
 }
 
 
+.swal2-btn{
+    background-color:#878787;
+    border: 0;
+    border-radius: 0.25em;
+    color: #fff;
+    font-size: 2em;
+}

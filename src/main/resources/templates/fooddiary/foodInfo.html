@@ -10,6 +10,7 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="foodD">
     <link rel="stylesheet" th:href="@{/css/foodInfo.css}">
+
     <div class="foodD_search">
         <!-- 헤더 -->
         <div class="search_header">
@@ -121,7 +122,7 @@
                 <input class="nutriInput" th:field="*{sugar}" type="number" step="0.001"/>
             </div>
             <div class="foodInput">
-                <label class="nutriNm">나트륨</label>
+                <label class="nutriNm">나트륨(mg)</label>
                 <input class="nutriInput" th:field="*{nat}" type="number" step="0.001"/>
             </div>
             <div class="foodInput">
@@ -142,11 +143,49 @@
 
         </form>
     </div>
-
-
-
-
     <script th:src="@{/js/foodInfo.js}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script th:src="@{https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js}"></script>
+    <script>
+        document.getElementById("submit").addEventListener("click", function(e) {
+        e.preventDefault(); <!-- 기본 이벤트 (폼 제출) 방지-->
+
+
+        <!--입력 필드 값 가져오기 -->
+        var foodNm = document.querySelector("#foodNm").value;
+        var foodSize = document.querySelector("#foodSize").value;
+        var choc = document.querySelector("#choc").value;
+        var prot = document.querySelector("#prot").value;
+        var fat = document.querySelector("#fat").value;
+
+       <!-- 유효성 -->
+        if (!foodNm || !foodSize || !choc || !prot || !fat) {
+            Swal.fire({
+                  icon: 'error',
+                  title: '필수 입력 항목이 비었습니다.',
+                  buttonsStyling: false,
+                  confirmButtonClass: 'swal2-btn'
+                })
+            return;
+        }else{
+         Swal.fire({
+         title: '저장하시겠습니까?',
+         showDenyButton: true,
+         showCancelButton: true,
+         confirmButtonText: 'Save',
+         denyButtonText: `Don't save`
+         }).then((result) => {
+         if(result.isConfirmed){
+            Swal.fire('저장되었습니다','','success');
+            document.querySelector("form").submit();}
+         else if (result.isDenied) {
+            Swal.fire('저장되지 않았습니다.', '', 'info')}
+    });
+          }
+    });
+    </script>
+
+
 </th:block>
 
 </body>
