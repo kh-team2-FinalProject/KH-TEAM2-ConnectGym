@@ -17,8 +17,10 @@
             <h1 id="food_search">FOOD INFO</h1>
         </div>
         <div class="info_btn">
-            <input  class="searchInput" type="text" placeholder="식품명을 입력하시오" />
-            <button class="search_btn">search</button>
+            <form action="/fooddiary/foodinfo" method="GET">
+            <input  class="searchInput" name="key" type="text" placeholder="식품명을 입력하시오" />
+            <button class="search_btn" onclick="searchFood()">search</button>
+            </form>
             <button class="write_btn" onclick="openPop()">write</button>
         </div>
         <table class="FoodInfo_table">
@@ -35,7 +37,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="food: ${foods}">
+            <tr th:each="food: ${foodinfo}">
                 <td>
                     <span th:text="${food.foodNm}"></span>
                 </td>

@@ -4,13 +4,11 @@ import com.khteam2.connectgym.dietlist.repository.FoodRepository;
 import com.khteam2.connectgym.dietlist.service.FoodService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -25,15 +23,7 @@ public class DietListController {
     @Autowired
     private FoodRepository foodRepository;
 
-    @GetMapping("fooddiary/dietlist")
-    public String diet_WriteForm(Model model) {
-        Food food = foodRepository.findById(29057L).orElse(null);
-        List<Food> foods = new ArrayList<>();
-        foods.add(food);
-        model.addAttribute("foods", foods);
 
-        return "fooddiary/dietlist";
-    }
 
     @GetMapping("fooddiary/foodInfo")
     public String diet_SearchForm(Model model){
@@ -57,6 +47,27 @@ public class DietListController {
         foodService.saveFood(food);
 
         return "redirect:/fooddiary/foodInfo";
+    }
+
+
+    @GetMapping("fooddiary/dietlist")
+    public String diet_WriteForm(Model model) {
+        Food food = foodRepository.findById(29057L).orElse(null);
+        List<Food> foods = new ArrayList<>();
+        foods.add(food);
+        model.addAttribute("foods", foods);
+
+        return "fooddiary/dietlist";
+    }
+
+    @GetMapping("fooddiary/foodinfo")
+    public String searchFood(@RequestParam String key, Model model){
+        if (key != null && !key.isEmpty()) {
+            List<Food> foodinfo = foodService.searchFood(key);
+            model.addAttribute("foodinfo", foodinfo);
+        }
+        model.addAttribute("food", new Food());
+        return "fooddiary/foodinfo";
     }
 
 

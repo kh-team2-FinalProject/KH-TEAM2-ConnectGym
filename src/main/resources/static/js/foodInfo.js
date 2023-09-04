@@ -14,6 +14,15 @@ document.getElementById("closeBtn").addEventListener("click", function() {
 
 
 
+/* 검색 */
+function searchFood() {
+        var foodName = document.getElementById("foodNameInput").value;
+        var form = document.getElementById("foodSearchForm");
+        form.action = "/fooddiary/foodinfo?key=" + foodName;
+        form.submit();
+    }
+
+
 
 
 /*

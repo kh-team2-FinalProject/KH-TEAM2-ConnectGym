@@ -6,6 +6,11 @@ import com.khteam2.connectgym.dietlist.repository.FoodRepository;
 import com.khteam2.connectgym.dietlist.service.FoodService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -74,6 +79,8 @@ public class FoodController {
         return "redirect:/fooddiary/foodInfo"; // 적절한 리다이렉트 URL로 변경
     }
 */
+
+
 
 
 
