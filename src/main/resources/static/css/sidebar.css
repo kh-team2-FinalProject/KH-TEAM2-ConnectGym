@@ -69,6 +69,7 @@
       background-color: #0e181a;*/
     min-height: 100vh;
     flex: 4; /* background: white; */
+    margin-right: 80px;
 }
 
 /*==사이드바 로고==*/
