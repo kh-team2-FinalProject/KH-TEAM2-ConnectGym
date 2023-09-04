@@ -1,12 +1,12 @@
-document.querySelectorAll('.l_card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.querySelector('.l_card-inner').style.transform = 'rotateY(180deg)';
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.querySelector('.l_card-inner').style.transform = 'rotateY(0deg)';
-    });
-});
+// document.querySelectorAll('.l_card').forEach(card => {
+//     card.addEventListener('mouseenter', () => {
+//         card.querySelector('.l_card-inner').style.transform = 'rotateY(180deg)';
+//     });
+//
+//     card.addEventListener('mouseleave', () => {
+//         card.querySelector('.l_card-inner').style.transform = 'rotateY(0deg)';
+//     });
+// });
 
 function truncateText() {
     const cardBackElements = document.querySelectorAll('.l_card-back');

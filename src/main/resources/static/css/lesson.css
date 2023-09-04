@@ -2,7 +2,7 @@
 .l_lessonlist {
     display: flex;
     margin-top: 40px;
-    background: white;
+    /*background: white;*/
     width: 100%;
     padding: 20px;
 }

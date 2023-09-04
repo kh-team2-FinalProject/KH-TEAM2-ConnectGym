@@ -5,137 +5,143 @@
 
 /* 전체 div */
 .side_main_page {
-  background-color:#0e1414;
-  color: #C9D3D4;
-  display: flex;
-  align-items: flex-start;
-  height: 100%;
-  padding: 0px 80px;
+    background-color: #0e1414;
+    color: #C9D3D4;
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    padding: 0px 80px;
 }
 
-.site_banner{
-background-color:silver;
-  height: 350px;
-  display: flex;
-  justify-content : center;
-  align-items : center;
+.site_banner {
+    background-color: silver;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.site_banner_title{
- font-family: 'Staatliches', cursive;
- text-transform: uppercase;
- font-size: 90pt;
- color : #0e181a;
- letter-spacing: 15px;
- height:40%;
+.site_banner_title {
+    font-family: 'Staatliches', cursive;
+    text-transform: uppercase;
+    font-size: 90pt;
+    color: #0e181a;
+    letter-spacing: 15px;
+    height: 40%;
 
 }
-.site_banner_title p{
- margin: 0;
- border : 5px solid;
- padding: 0px 80px;
- box-shadow: 10px 10px 30px 1px #535151;
- background-color: rgba(223, 223, 223, 0.22);
+
+.site_banner_title p {
+    margin: 0;
+    border: 5px solid;
+    padding: 0px 80px;
+    box-shadow: 10px 10px 30px 1px #535151;
+    background-color: rgba(223, 223, 223, 0.22);
 }
 
-.site_banner.health-banner{
-  background: url("/images/banner-health.jpg") center center / cover no-repeat;
-  filter: grayscale(100%);
+.site_banner.health-banner {
+    background: url("/images/banner-health.jpg") center center / cover no-repeat;
+    filter: grayscale(100%);
 }
 
-.site_banner.yoga-banner{
-  background: url("/images/banner-yoga.jpg") center center / cover no-repeat;
-filter: grayscale(100%);
+.site_banner.yoga-banner {
+    background: url("/images/banner-yoga.jpg") center center / cover no-repeat;
+    filter: grayscale(100%);
 }
 
-.site_banner.pilates-banner{
-  background: url("/images/banner-pilates.jpg") center center / cover no-repeat;
+.site_banner.pilates-banner {
+    background: url("/images/banner-pilates.jpg") center center / cover no-repeat;
 }
 
 
 /*== 사이드바 ==*/
 .sidebar {
-/*side_main_page 색으로 조정
-  background-color: #0e181a;*/
- /* width: 300px;*/
-  min-height: 100vh;
-  min-width: 300px;
-  flex: 1;
+    /*side_main_page 색으로 조정
+      background-color: #0e181a;*//* width: 300px; */
+    min-height: 100vh;
+    min-width: 300px;
+    flex: 1; /* width: 21%; *//* background: antiquewhite; */
 }
 
 /*== 본문 ==*/
 .side_page {
-/*side_main_page 색으로 조정
-  background-color: #0e181a;*/
-  min-height: 100vh;
-  flex: 4;
+    /*side_main_page 색으로 조정
+      background-color: #0e181a;*/
+    min-height: 100vh;
+    flex: 4; /* background: white; */
 }
 
 /*==사이드바 로고==*/
 .side_logo {
-  display: flex;
-  justify-content: center;
-  margin: 80px 10px 100px 10px;
+    display: flex;
+    justify-content: center;
+    margin: 80px 10px 100px 10px;
 }
 
 /*==사이드바 메뉴 div==*/
 .side_menu {
-  width: 100%;
-  padding: 0px 30px;
-  text-align: right;
-  line-height: 20px;
-  box-sizing: border-box;
-  margin-top : 10px;
-  width:80%;
+    width: 78%;
+    /* padding: 0px 30px; */
+    /* text-align: right; */
+    line-height: 20px;
+    /* box-sizing: border-box; */
+    margin-top: 10%;
+    /* width:80%; */
+    /* background: aliceblue; */
+    /* justify-content: flex-end; */
+    display: flex;
+    margin-left: 80px;
 }
 
 /*사이드바 타이틀명*/
 .side_title {
-  /*background-color: white;*/
-  border-radius: 5px;
-  text-align : right;
-  font-size: 18pt;
-  padding: 30px 0px;
-  font-weight: 900;
-  letter-spacing: 3px;
+    /*background-color: white;*/
+    border-radius: 5px;
+    /* text-align : right; */
+    font-size: 18pt;
+    padding: 30px 0px;
+    font-weight: 900;
+    letter-spacing: 3px;
 }
 
 .side_items {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    width: 64%;
 }
 
 /*사이드바 소제목명*/
 .side-content {
-  position: relative;
-  margin: 2px 0;
+    position: relative;
+    margin: 2px 0;
 }
 
 .side_menu ul li a {
-  font-size: 16px;
-  line-height: 4em;
-  text-decoration: none;
-  letter-spacing: 5px;
-  color: #C9D3D4;
-  display: block;
-  transition: all ease-out 300ms;
-  font-family: "Open+Sans";
+    font-size: 16px;
+    line-height: 4em;
+    text-decoration: none;
+    letter-spacing: 5px;
+    color: #C9D3D4;
+    display: block;
+    transition: all ease-out 300ms;
+    font-family: "Open+Sans";
 }
 
 .side_menu ul li:hover a {
-  color:#a3dc10;
-  /*opacity: 0.5;*/
+    color: #a3dc10;
+    /*opacity: 0.5;*/
 }
 
 .side_menu ul li:not(:first-child)::after {
-  content: "";
-  float:right;
-  height: 1px;
-  background: black;
-  width:80%;
-  left: 0;
-  bottom: 0;
-  background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+    content: "";
+    float: right;
+    height: 2px;
+    background: black;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to right, #dfdfdf, #FFE400);
 }
 
 /*============사이드바 끝===========*/
