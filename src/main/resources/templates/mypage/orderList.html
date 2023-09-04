@@ -166,6 +166,7 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div
                         th:if="${responseDto.pagination != null}"
                         class="orderList_pagination_container"
@@ -210,6 +211,28 @@
                             </li>
                         </ul>
                     </div>
+=======
+                </div>
+                <div
+                    th:if="${responseDto.pagination != null}"
+                    class="orderList_pagination_container"
+                >
+                    <ul>
+                        <li th:if="${responseDto.pagination.prev}">
+                            <button>이전</button>
+                        </li>
+                        <li
+                            th:each="page : ${#numbers.sequence(responseDto.pagination.firstPage, responseDto.pagination.endPage)}"
+                        >
+                            <button
+                                th:data-page="${page}"
+                                th:text="${page}"></button>
+                        </li>
+                        <li th:if="${responseDto.pagination.next}">
+                            <button>다음</button>
+                        </li>
+                    </ul>
+>>>>>>> feature-faq수정
                 </div>
             </th:block>
             <th:block th:unless="${responseDto.success}">

@@ -24,9 +24,9 @@ public class CS {
     private String content;
     @Column(name = "faq_datetime")
     @CreationTimestamp
-    private LocalDateTime faq_datetime;
+    private LocalDateTime faqDatetime;
     @Column(name = "user_id", nullable = false)
-    private String user_id;
+    private String userId;
     @Column(name = "category_id", nullable = false)
-    private Long category_id;
+    private Long categoryId;
 }

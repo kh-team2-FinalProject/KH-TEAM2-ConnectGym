@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="add-css">
+    <link th:href="@{/css/customer.css}" rel="stylesheet">
+</th:block>
+
+<!-- 스크립트 부분 -->
+<th:block layout:fragment="script">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+</th:block>
+
+<th:block layout:fragment="content">
+
+    <div class="customer">
+        <!-- 메뉴 선택 a태그 -->
+        <div class="ui-tab scroll">
+            <div class="module">
+                <div class="menu-item active">
+                    <a class="menu-btn" th:href="/customer/faq">자주 묻는 질문</a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-btn" th:href="/customer/notice">공지사항</a>
+                </div>
+            </div>
+        </div>
+
+        <section class="content-layout notice">
+            <!-- accodion -->
+            <div class="faq-accodion">
+                <div class="ui-accodion">
+                    <table>
+                        <tbody>
+                        <tr th:each="noticeList : ${noticeList}">
+                            <th class="center" scope="row">
+                                <span class="badge" th:text="${noticeList.id}"></span>
+                            </th>
+                            <td>
+                                <a style="cursor: pointer;" th:text="${noticeList.title}"></a>
+                            </td>
+                            <td class="date center" th:text="${noticeList.created_Date}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- pagination -->
+            <div class="pagination">
+                <ul>
+                    <li th:if="${currentPage > 1}">
+                        <a th:href="@{'/customer_service/notice?category=' + ${category} + '&page=' + ${currentPage - 1}}">이전</a>
+                    </li>
+                    <li th:each="page : ${#numbers.sequence(1, totalPages)}"
+                        th:classappend="${currentPage == page} ? 'active'">
+                        <a th:href="@{'/customer_service/notice?category=' + ${category} + '&page=' + ${page}}" th:text="${page}"></a>
+                    </li>
+                    <li th:if="${currentPage < totalPages}">
+                        <a th:href="@{'/customer_service/notice?category=' + ${category} + '&page=' + ${currentPage + 1}}">다음</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</th:block>
+
+</html>

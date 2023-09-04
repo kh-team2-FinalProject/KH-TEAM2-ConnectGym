@@ -1,33 +1,31 @@
 package com.khteam2.connectgym.customer_service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CSApiController {
+
     @Autowired
     private CSService csService;
 
-    @GetMapping("/api/customer_service")
+    @GetMapping("/api/customer/faq")
     public ResponseEntity<Map<String, Object>> liveView(
         @RequestParam("page") Integer page,
         @RequestParam("category") String category
-    ){
+    ) {
         int itemsPerPage = 5;
 
         List<CS> csList = new ArrayList<>();
         int totalPages = 0;
-        if(category.equals("All")){
+        if (category.equals("All")) {
             csList = csService.viewToAll();
             totalPages = csService.getTotalPages(itemsPerPage, csList);
             csList = csService.getDataForPage(page, itemsPerPage);
@@ -44,12 +42,6 @@ public class CSApiController {
 
         List<CS_Category> ctgyList = csService.viewToAllCategory();
 
-//        model.addAttribute("csList", csList);
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", totalPages);
-//        model.addAttribute("ctgyList", ctgyList);
-//        model.addAttribute("category", category);
-
         Map<String, Object> response = new HashMap<>();
 
         response.put("csList", csList);
@@ -61,8 +53,6 @@ public class CSApiController {
         return ResponseEntity.ok(response);
 
     }
-
-
 
 
 }
