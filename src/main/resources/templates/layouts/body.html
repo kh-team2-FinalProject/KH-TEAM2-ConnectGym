@@ -28,10 +28,10 @@
                 <!--            로그인 안했으면 '로그인 하세요'-->
                 <!--            했으면 토글 내려와서 마이페이지/내수강현황/... 보이게 하기-->
                 <div class="mypage_hover_menu">
-                    <ul>
+                    <ul th:if="${session.session_login_member_no != null}">
                         <li>
-                            <!--                            <a th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/mypage/trainer'}">-->
-                            <a href="mypage/trainer">
+                            <a th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/mypage/trainer'}">
+
                                 <svg class="mypage_header_icon" xmlns="http://www.w3.org/2000/svg" height="1.5em"
                                      viewBox="0 0 512 512">
                                     <style>svg {
