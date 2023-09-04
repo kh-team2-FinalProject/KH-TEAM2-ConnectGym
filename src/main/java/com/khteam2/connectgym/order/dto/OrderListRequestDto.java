@@ -19,4 +19,6 @@ public class OrderListRequestDto {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
     private String q;
+    private Integer page;
+    private Integer size;
 }

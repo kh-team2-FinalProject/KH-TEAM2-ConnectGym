@@ -1,16 +1,19 @@
 package com.khteam2.connectgym.common;
 
 import lombok.Getter;
+import lombok.ToString;
+import org.springframework.data.domain.Page;
 
 /**
  * 페이지네이션
  */
 @Getter
+@ToString
 public class Pagination {
     /**
      * 총 항목
      */
-    private int totalCount;
+    private long totalCount;
     /**
      * 현재 페이지
      */
@@ -52,8 +55,25 @@ public class Pagination {
         this.calculate();
     }
 
+    public Pagination(Page<?> page) {
+        this.totalCount = (int) page.getTotalElements();
+        this.currentPage = page.getNumber() + 1;
+        this.recordPerPage = page.getNumberOfElements();
+        this.pageSize = page.getSize();
+        this.calculate();
+    }
+
     private void calculate() {
-        this.totalPage = ((this.totalCount - 1) / this.recordPerPage) + 1;
+        // ArithmeticException 방지
+        if (this.recordPerPage == 0) {
+            this.recordPerPage = 5;
+        }
+
+        if (this.pageSize == 0) {
+            this.pageSize = 3;
+        }
+
+        this.totalPage = (((((int) this.totalCount) - 1) / this.recordPerPage) + 1);
 
         this.firstPage = ((this.currentPage - 1) / this.pageSize) * this.pageSize + 1;
         if (this.firstPage < 1) {
@@ -69,7 +89,7 @@ public class Pagination {
         this.next = this.endPage < this.totalPage;
     }
 
-    public void setTotalCount(int totalCount) {
+    public void setTotalCount(long totalCount) {
         this.totalCount = totalCount;
         this.calculate();
     }

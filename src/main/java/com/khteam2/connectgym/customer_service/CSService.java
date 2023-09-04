@@ -16,7 +16,6 @@ public class CSService {
 
     public List<CS> viewToAll() {
         List<CS> csList = csRepository.findAll();
-
         return csList;
     }
 
