@@ -25,7 +25,5 @@ public class Chatroom {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trainer_no", nullable = false)
     private Trainer trainer;
-
-
 }
 

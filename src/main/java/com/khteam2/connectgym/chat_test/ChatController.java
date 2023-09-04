@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class ChatController {
@@ -27,6 +29,8 @@ public class ChatController {
         System.out.println("chatroomNo=====================");
         System.out.println(chatroomNo);
 //        System.out.println(chatroomDTO);
+        List<ChatMessage> chatMessages = chatroomService.loadMessage(chatroom);
+        model.addAttribute("chatMessages", chatMessages);
         model.addAttribute("chatroomNo", chatroomNo);
 //        model.addAttribute("chatroomDTO", chatroomDTO);
         model.addAttribute("chatroom", chatroom);
@@ -46,8 +50,11 @@ public class ChatController {
 
     @PostMapping("/checkedChatroom")
     @ResponseBody
-    public Chatroom checkedChatroom(@RequestParam Long memberNo, @RequestParam Long trainerNo) {
-        return chatroomService.enterChatRoom(memberNo, trainerNo);
+    public Chatroom checkedChatroom(@RequestParam Long memberNo, @RequestParam Long trainerNo, Model model) {
+
+        Chatroom chatroom = chatroomService.enterChatRoom(memberNo, trainerNo);
+
+        return chatroom;
     }
 
     @MessageMapping("/chat/{chatroomNo}") // 클라이언트가 메시지 보낼 때의 엔드포인트 설정

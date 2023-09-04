@@ -23,6 +23,7 @@ public class ChatMessageReaponseDTO {
             .chatroomNo(chatMessage.getChatroom().getNo())
             .content(chatMessage.getContent())
             .sender(chatMessage.getSender())
+//            .sendAt(chatMessage.getSendAt())
             .build();
     }
 }
