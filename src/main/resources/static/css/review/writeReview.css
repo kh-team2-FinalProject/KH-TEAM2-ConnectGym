@@ -1,0 +1,14 @@
+.myReview_write form {
+display:flex;
+flex-direction:column;
+}
+
+
+.myReview_write .myReview_write_label {
+width: 30%;
+heigh 30vh:
+}
+
+.myReview_write label:hover {
+cursor:pointer;
+}

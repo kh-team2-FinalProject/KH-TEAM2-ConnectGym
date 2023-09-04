@@ -1,0 +1,285 @@
+.dsh-main-container {
+    width: 100%;
+    height: 80vh;
+    /* position: relative; */
+    display: flex;
+}
+
+.dsh-left-container {
+    width: 66.7%;
+    height: 100%;
+}
+
+.dsh-left-first-row {
+    height: 25%;
+
+}
+
+.dsh-profile-box {
+    height: 50%;
+    padding: 5%;
+    position: relative;
+    display: flex;
+}
+
+.dsh-profile-pic-wrapper {
+
+    height: 100%;
+    width: 16%;
+}
+
+.dsh-profile-pic-wrapper img {
+    width: 100%;
+    height: 100%;
+}
+
+.dsh-profile-update-btn {
+    right: 0;
+    position: absolute;
+    margin-right: 3%;
+}
+
+.dsh-profile-text {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.dsh-profile-id {
+    font-size: 1.4rem;
+    margin: 0 10%;
+    width: 89%;
+}
+
+.dsh-profile-info {
+    font-size: 0.9rem;
+    margin: 3% 10%;
+    width: 89%;
+}
+
+.dsh-left-second-row {
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: row;
+    height: 16%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dsh-second-row-card {
+    width: 30%;
+    height: 83%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5%;
+    border: 1px solid #b6b6b6;
+}
+
+.dsh-card-title {
+    color: black;
+    font-size: 0.7rem;
+    margin: 6% 8%;
+    font-weight: bold;
+}
+
+.dsh-card-content {
+    color: gray;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 6% 0 0 66%;
+}
+
+.dsh-left-third-row {
+    /*border: 1px solid black;*/
+    margin-top: 3%;
+    height: 20%;
+}
+
+.dsh-lesson-info {
+    height: 100%;
+    /*background: blanchedalmond;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 0 2%;
+}
+
+.dsh-class-content {
+    width: 75%;
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dsh-lesson-title {
+    margin: 2% 3% 0 3%;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: black;
+}
+
+.dsh-lesson-text {
+    margin: 0 3%;
+    font-size: 0.8rem;
+    /* font-weight: bold; */
+    color: #494747;
+}
+
+.dsh-lesson-pic-wrapper {
+    width: 22%;
+    margin: 2%;
+}
+
+.dsh-lesson-img {
+    width: 100%;
+    height: 100%;
+
+}
+
+.dsh-left-fourth-row {
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 32%;
+    margin-top: 3%;
+
+}
+
+.dsh-message-box {
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dsh-message-header {
+
+    height: 11%;
+    margin: 2% 5%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid black;
+
+}
+
+.dsh-message-header-title {
+    color: black;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.dsh-message-wrapper {
+    height: 85%;
+    margin: 3% 5%;
+    overflow: scroll;
+}
+
+.dsh-message-content {
+
+}
+
+.message-text {
+
+}
+
+.message-subtext {
+
+}
+
+.dsh-review-box {
+    width: 45%;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.dsh-review-header {
+    height: 11%;
+    margin: 2% 5%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid black;
+}
+
+.dsh-review-header-title {
+    color: black;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.dsh-review-wrapper {
+    height: 81%;
+    overflow: scroll;
+    margin: 3% 5%;
+}
+
+.dsh-review-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dsh-review-title {
+    margin: 0;
+    font-size: 0.8rem;
+    color: black;
+    font-weight: bold;
+}
+
+.dsh-review-subtext {
+    margin-top: 2%;
+    font-size: 0.7rem;
+}
+
+.dsh-right-container {
+    width: 33.3%;
+}
+
+.dsh-lessons-box {
+    border: 1px solid black;
+    margin: 5% 5%;
+    height: 96.5%;
+    border-radius: 5px;
+}
+
+.dsh-lessons-header {
+    justify-content: center;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+}
+
+.dsh-lessons-title {
+    font-size: 0.9rem;
+    color: black;
+    font-weight: bold;
+}
+
+.dsh-lessons-list {
+    display: flex;
+    flex-direction: column;
+    height: 90.5%;
+    /*overflow: scroll;*/
+
+}
+
+.dsh-lesson {
+    margin: 2% 7%;
+    display: flex;
+    padding: 2% 5%;
+    justify-content: space-between;
+}
+
+.dsh-lessons-list-id {
+    font-size: 0.8rem;
+    color: black;
+}
+
+.dsh-lessons-list-name {
+    font-size: 0.8rem;
+    color: black;
+
+}

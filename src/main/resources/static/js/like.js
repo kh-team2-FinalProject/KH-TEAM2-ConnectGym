@@ -38,6 +38,17 @@ function toggleLike() {
 			checkbox.checked = false;
 			$('.ld_like_count').text(parseInt($('.ld_like_count').text()) - 1);
 
+			 Swal.fire({
+                      position: 'center',
+                      width: '300px',
+                      height:'30px',
+                      background:'rgba(215, 214, 214, 0.761)',
+                      html: '<div style="font-size:16px;">찜이 취소되었습니다.</div>',
+                      showConfirmButton: false,
+                      timer: 800
+                    })
+
+
 		}).fail(error => {
 			alert(error.responseText);
 		});
@@ -50,7 +61,15 @@ function toggleLike() {
 			checkbox.setAttribute("data-liked", "true");
 			checkbox.checked = true;
 			$('.ld_like_count').text(parseInt($('.ld_like_count').text()) + 1);
-
+ Swal.fire({
+          position: 'center',
+          width: '300px',
+          height:'30px',
+          background:'rgba(215, 214, 214, 0.761)',
+          html: '<div style="font-size:16px;">찜 되었습니다.</div>',
+          showConfirmButton: false,
+          timer: 800
+        })
 		}).fail(error => {
 			alert(error.responseText);
 		});

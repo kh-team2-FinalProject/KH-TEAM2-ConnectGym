@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js//onlyTrainer/trainerDashboard.js}"></script>
+
+</th:block>
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 대시보드</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="mypage">
+
+    <div class="dsh-main-container">
+        <div class="dsh-left-container">
+            <div class="dsh-left-first-row">
+                <div class="dsh-profile-box">
+                    <button class="dsh-profile-update-btn">수정하기</button>
+                    <div class="dsh-profile-pic-wrapper">
+                        <img th:src="${trainer.profileImg}" alt="profile">
+                    </div>
+                    <div class="dsh-profile-text">
+                        <p class="dsh-profile-id" th:text="${trainer.trainerId}"></p>
+                        <p class="dsh-profile-info" th:text="${trainer.infoTitle}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dsh-left-second-row">
+                <div class="dsh-second-row-card">
+                    <span class="dsh-card-title">나를 찜한 사람 </span>
+                    <span class="dsh-card-content">100명</span>
+                </div>
+                <div class="dsh-second-row-card">
+                    <span class="dsh-card-title">팔로워 </span>
+                    <span class="dsh-card-content">100명</span>
+                </div>
+                <div class="dsh-second-row-card">
+                    <span class="dsh-card-title">누적 수강생 수 </span>
+                    <span class="dsh-card-content">1000명</span>
+                </div>
+            </div>
+            <div class="dsh-left-third-row">
+                <div class="dsh-lesson-info">
+                    <div class="dsh-class-content">
+                        <span class="dsh-lesson-title">개설 강좌 명</span>
+                        <span class="dsh-lesson-text">개설 강좌 설명</span>
+                    </div>
+                    <div class="dsh-lesson-pic-wrapper">
+                        <img class="dsh-lesson-img" src="#" alt="lesson image">
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="dsh-left-fourth-row">
+                <div class="dsh-message-box">
+                    <div class="dsh-message-header">
+                        <p class="dsh-message-header-title">MESSAGE</p>
+                    </div>
+                    <div class="dsh-message-wrapper">
+                        <div class="dsh-message-content">
+                            <p class="message-text"></p>
+                            <p class="message-subtext"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dsh-review-box">
+                    <div class="dsh-review-header">
+                        <p class="dsh-review-header-title">REVIEW</p>
+                    </div>
+                    <div class="dsh-review-wrapper">
+                        <div class="dsh-review-content">
+                            <p class="dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
+                            <p class="dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
+                        </div>
+                        <div class="dsh-review-content">
+                            <p class="dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
+                            <p class="dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
+                        </div>
+                        <div class="dsh-review-content">
+                            <p class="dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
+                            <p class="dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dsh-right-container">
+            <div class="dsh-lessons-box">
+                <div class="dsh-lessons-header">
+                    <p class="dsh-lessons-title">내 강좌를 수강하는 회원 목록</p>
+                </div>
+                <div class="dsh-lessons-list">
+                    <div class="dsh-lesson">
+                        <span class="dsh-lessons-list-id">아이디 : qwer</span>
+                        <span class="dsh-lessons-list-name">이름 : 김가가</span>
+                    </div>
+                    <div class="dsh-lesson">
+                        <span class="dsh-lessons-list-id">아이디 : aaaaaaaa</span>
+                        <span class="dsh-lessons-list-name">이름 : 이나나</span>
+                    </div>
+                    <div class="dsh-lesson">
+                        <span class="dsh-lessons-list-id">아이디 : bbbb</span>
+                        <span class="dsh-lessons-list-name">이름 : 박다다</span>
+                    </div>
+                    <div class="dsh-lesson">
+                        <span class="dsh-lessons-list-id">아이디 : ccccccc</span>
+                        <span class="dsh-lessons-list-name">이름 : 최라라</span>
+                    </div>
+                    <div class="dsh-lesson">
+                        <span class="dsh-lessons-list-id">아이디 : aaaaaaaa</span>
+                        <span class="dsh-lessons-list-name">이름 : 이나나</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+
+</html>

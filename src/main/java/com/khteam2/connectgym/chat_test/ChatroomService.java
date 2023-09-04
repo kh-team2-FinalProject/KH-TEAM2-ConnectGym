@@ -21,7 +21,7 @@ public class ChatroomService {
         Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
 //        if (chatRoomRepository.findByMemberNo(memberNo) == chatRoomRepository.findByTrainerNo(trainerNo))
 
-
+        System.out.println("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         if (chatroomRepository.findByMemberNoAndTrainerNo(memberNo, trainerNo) != null) {
             return chatroomRepository.findByMemberNoAndTrainerNo(memberNo, trainerNo);
         } else {
@@ -36,6 +36,14 @@ public class ChatroomService {
 
 
     }
+
+    public Chatroom inChatroom(Long chatroomNo) {
+
+
+        return chatroomRepository.findById(chatroomNo).orElse(null);
+
+    }
+
 
 }
 

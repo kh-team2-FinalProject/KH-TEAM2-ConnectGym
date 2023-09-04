@@ -17,6 +17,7 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
     @Query("SELECT l.titleCode FROM Lesson l ORDER BY l.titleCode DESC")
     List<String> findLatestTitleCode();
 
+    //
     @Query("select l from Lesson l where l.trainer.no=?1")
     Optional<Lesson> findByTrainerNo(Long trainerNo);
 }

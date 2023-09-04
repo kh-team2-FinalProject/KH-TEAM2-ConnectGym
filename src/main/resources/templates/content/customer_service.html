@@ -26,14 +26,14 @@
                   전체 가입/탈퇴 결제
                 -->
                 <div class="module">
-                    <div class="ctgyAll ctgyitem active" id="ctgyitem">
-                        <button class="ctgy-btn" type="button" th:onclick="'location.href=\'/change/customer_service?category=All&page=1\''">전체</button>
+                    <div class="ctgyAll ctgyitem" id="ctgyitem">
+                        <button class="ctgy-btn active" type="button">전체</button>
 <!--                        <button class="ctgy-btn" type="button">전체</button>-->
 <!--                        <a th:href="@{'/customer_service?category=All&page=1'}">전체</a>-->
                     </div>
 
                     <div class="ctgyitem" th:each="ctgyList: ${ctgyList}">
-                        <button class="ctgy-btn" type="button" th:text="${ctgyList.ctgy}" th:onclick="'location.href=\'/change/customer_service?category=' + ${ctgyList.id} + '&page=1\''"></button>
+                        <button class="ctgy-btn" type="button" th:text="${ctgyList.ctgy}"></button>
 <!--                        <button class="ctgy-btn" type="button" th:text="${ctgyList.ctgy}"></button>-->
 <!--                        <a th:href="@{'/customer_service?category=' + ${ctgyList.id} + '&page=1'}" th:text="${ctgyList.ctgy}"></a>-->
                     </div>
@@ -41,21 +41,21 @@
                 </div>
             </div>
 
-            <!--            전체 카테고리-->
+            <!-- ajax실행후 db호출부분 -->
             <div id="faq-accodion-wrap1" class="faq-accodion">
-                <!-- db에서 가져와 출력할 부분 / 전체 -->
+<!--                &lt;!&ndash; db에서 가져와 출력할 부분 / 전체 &ndash;&gt;-->
                 <div class="faq-accodion-wrap">
                     <div class="ui-accodion">
-                        <div class="accodion-item" th:each="csListAll : ${csListAll}">
+                        <div class="accodion-item" th:each="csList : ${csList}">
                             <button type="button" class="accodion-btn">
                                 <span class="mark">Q</span>
-                                <span class="faq-title" th:text="${csListAll.title}">
+                                <span class="faq-title" th:text="${csList.title}">
                             </span>
                                 <i class="ico arrow md"></i>
                             </button>
                             <div class="layer">
                                 <div class="accodion-content">
-                                    <p class="desc" th:text="${csListAll.content}">
+                                    <p class="desc" th:text="${csList.content}">
                                     </p>
                                 </div>
                             </div>
@@ -66,91 +66,91 @@
                 <div class="pagination">
                     <ul>
                         <li th:if="${currentPage > 1}">
-                            <a th:href="@{'/customer_service?category=All&page=' + ${currentPage - 1}}">이전</a>
+                            <a th:href="@{'/customer_service?category=' + ${category} + '&page=' + ${currentPage - 1}}">이전</a>
                         </li>
-                        <li th:each="page : ${#numbers.sequence(1, totalPages_All)}"
+                        <li th:each="page : ${#numbers.sequence(1, totalPages)}"
                             th:classappend="${currentPage == page} ? 'active'">
-                            <a th:href="@{'/customer_service?category=All&page=' + ${page}}" th:text="${page}"></a>
+                            <a th:href="@{'/customer_service?category=' + ${category} + '&page=' + ${page}}" th:text="${page}"></a>
                         </li>
-                        <li th:if="${currentPage < totalPages_All}">
-                            <a th:href="@{'/customer_service?category=All&page=' + ${currentPage + 1}}">다음</a>
+                        <li th:if="${currentPage < totalPages}">
+                            <a th:href="@{'/customer_service?category=' + ${category} + '&page=' + ${currentPage + 1}}">다음</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
 
-            <div id="faq-accodion-wrap2" class="faq-accodion none">
-                <div class="faq-accodion-wrap">
-                    <div class="ui-accodion">
-                        <div class="accodion-item" th:each="category1 : ${category1}">
-                            <button type="button" class="accodion-btn">
-                                <span class="mark">Q</span>
-                                <span class="faq-title" th:text="${category1.title}">
-                                        </span>
-                                <i class="ico arrow md"></i>
-                            </button>
-                            <div class="layer">
-                                <div class="accodion-content">
-                                    <p class="desc" th:text="${category1.content}">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 페이지 넘기는 부분 -->
-                <div class="pagination">
-                    <ul>
-                        <li th:if="${currentPage > 1}">
-                            <a th:href="@{'/customer_service?category=1&page=' + ${currentPage - 1}}">이전</a>
-                        </li>
-                        <li th:each="page : ${#numbers.sequence(1, totalPages_ctgy1)}"
-                            th:classappend="${currentPage == page} ? 'active'">
-                            <a th:href="@{'/customer_service?category=1&page=' + ${page}}" th:text="${page}"></a>
-                        </li>
-                        <li th:if="${currentPage < totalPages_ctgy1}">
-                            <a th:href="@{'/customer_service?category=1&page=' + ${currentPage + 1}}">다음</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<!--            <div id="faq-accodion-wrap2" class="faq-accodion none">-->
+<!--                <div class="faq-accodion-wrap">-->
+<!--                    <div class="ui-accodion">-->
+<!--                        <div class="accodion-item" th:each="csList : ${csList}">-->
+<!--                            <button type="button" class="accodion-btn">-->
+<!--                                <span class="mark">Q</span>-->
+<!--                                <span class="faq-title" th:text="${csList.title}">-->
+<!--                                        </span>-->
+<!--                                <i class="ico arrow md"></i>-->
+<!--                            </button>-->
+<!--                            <div class="layer">-->
+<!--                                <div class="accodion-content">-->
+<!--                                    <p class="desc" th:text="${csList.content}">-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; 페이지 넘기는 부분 &ndash;&gt;-->
+<!--                <div class="pagination">-->
+<!--                    <ul>-->
+<!--                        <li th:if="${currentPage > 1}">-->
+<!--                            <a th:href="@{'/customer_service?category=1&page=' + ${currentPage - 1}}">이전</a>-->
+<!--                        </li>-->
+<!--                        <li th:each="page : ${#numbers.sequence(1, totalPages)}"-->
+<!--                            th:classappend="${currentPage == page} ? 'active'">-->
+<!--                            <a th:href="@{'/customer_service?category=1&page=' + ${page}}" th:text="${page}"></a>-->
+<!--                        </li>-->
+<!--                        <li th:if="${currentPage < totalPages}">-->
+<!--                            <a th:href="@{'/customer_service?category=1&page=' + ${currentPage + 1}}">다음</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div id="faq-accodion-wrap3" class="faq-accodion none">
-                <div class="faq-accodion-wrap">
-                    <div class="ui-accodion">
-                        <div class="accodion-item" th:each="category2 : ${category2}">
-                            <button type="button" class="accodion-btn">
-                                <span class="mark">Q</span>
-                                <span class="faq-title" th:text="${category2.title}">
-                                        </span>
-                                <i class="ico arrow md"></i>
-                            </button>
-                            <div class="layer">
-                                <div class="accodion-content">
-                                    <p class="desc" th:text="${category2.content}">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 페이지 넘기는 부분 -->
-                <div class="pagination">
-                    <ul>
-                        <li th:if="${currentPage > 1}">
-                            <a th:href="@{'/customer_service?category=2page=' + ${currentPage - 1}}">이전</a>
-                        </li>
-                        <li th:each="page : ${#numbers.sequence(1, totalPages_ctgy2)}"
-                            th:classappend="${currentPage == page} ? 'active'">
-                            <a th:href="@{'/customer_service?category=2&page=' + ${page}}" th:text="${page}"></a>
-                        </li>
-                        <li th:if="${currentPage < totalPages_ctgy2}">
-                            <a th:href="@{'/customer_service?category=2&page=' + ${currentPage + 1}}">다음</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<!--            <div id="faq-accodion-wrap3" class="faq-accodion none">-->
+<!--                <div class="faq-accodion-wrap">-->
+<!--                    <div class="ui-accodion">-->
+<!--                        <div class="accodion-item" th:each="csList : ${csList}">-->
+<!--                            <button type="button" class="accodion-btn">-->
+<!--                                <span class="mark">Q</span>-->
+<!--                                <span class="faq-title" th:text="${csList.title}">-->
+<!--                                        </span>-->
+<!--                                <i class="ico arrow md"></i>-->
+<!--                            </button>-->
+<!--                            <div class="layer">-->
+<!--                                <div class="accodion-content">-->
+<!--                                    <p class="desc" th:text="${csList.content}">-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; 페이지 넘기는 부분 &ndash;&gt;-->
+<!--                <div class="pagination">-->
+<!--                    <ul>-->
+<!--                        <li th:if="${currentPage > 1}">-->
+<!--                            <a th:href="@{'/customer_service?category=2page=' + ${currentPage - 1}}">이전</a>-->
+<!--                        </li>-->
+<!--                        <li th:each="page : ${#numbers.sequence(1, totalPages)}"-->
+<!--                            th:classappend="${currentPage == page} ? 'active'">-->
+<!--                            <a th:href="@{'/customer_service?category=2&page=' + ${page}}" th:text="${page}"></a>-->
+<!--                        </li>-->
+<!--                        <li th:if="${currentPage < totalPages}">-->
+<!--                            <a th:href="@{'/customer_service?category=2&page=' + ${currentPage + 1}}">다음</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
 <input type="hidden" th:value="${category}" class="hidden-category">
