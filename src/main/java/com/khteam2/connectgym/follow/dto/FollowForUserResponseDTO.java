@@ -18,5 +18,6 @@ public class FollowForUserResponseDTO {
     private List<TrainerResponseDTO> followTrainerList;
     private int trainerFollowCnt;
     private boolean followStatus;
+    private String keyword; // 검색용
 
 }

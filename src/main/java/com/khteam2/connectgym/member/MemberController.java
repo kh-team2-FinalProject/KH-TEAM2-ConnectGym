@@ -216,7 +216,7 @@ public class MemberController {
     @GetMapping("/mypage/myLike")
     public String myLikes(Model model, HttpSession session) {
         //배너타이틀
-        model.addAttribute("bannerTitle", "following");
+        model.addAttribute("bannerTitle", "like");
 
         MemberResponseDTO member = memberService.sessionMem(session);
 
@@ -225,6 +225,13 @@ public class MemberController {
         model.addAttribute("likes", likes);
 
         return "mypage/like";
+    }
+
+    // 주문내역 > 리뷰쓰기 버튼 생성
+    @GetMapping("/mypage/writeReview")
+    public String writeReview(Model model, HttpSession session){
+        model.addAttribute("bannerTitle", "following");
+        return "mypage/review/writeReview";
     }
 
     // 7-1) 회원정보

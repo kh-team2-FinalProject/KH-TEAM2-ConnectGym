@@ -1,27 +1,44 @@
 package com.khteam2.connectgym;
 
+import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonService;
 import com.khteam2.connectgym.member.MemberService;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class CommonController {
 
     private final MemberService memberService;
-
+    private final FollowService followService;
     //메인
     @GetMapping("/")
     public String index() {
         return "content/main";
     }
+    @GetMapping("/mypage/myFollowingTest")
+    public String myFolloing(Model model, HttpSession session) {
+        //배너타이틀
+        model.addAttribute("bannerTitle", "following");
 
+        MemberResponseDTO member = memberService.sessionMem(session);
+
+        List<TrainerResponseDTO> following = followService.followingList(member.getNo());
+
+        model.addAttribute("following", following);
+
+        return "mypage/following_test";
+    }
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")
     public String lesson() {

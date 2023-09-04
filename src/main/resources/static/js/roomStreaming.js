@@ -85,7 +85,23 @@ function leaveSession(myRoomCode,userType) {
               session.disconnect();
               removeAllUserData();
 
-              history.go(-1);
+              Swal.fire({
+                title: '<b>오늘의 운동 완료</b>',
+                html:
+                    '<div style="font-size:16px;">오늘의 명언</div><br>실패는 언제나 찾아오는 친구이며 성공은 어쩌다 찾아오는 손님이다. - 미르 임란',
+                width: 600,
+                padding: '3em',
+                confirmButtonColor: '#3085d6',
+                color: '#2f79a6',
+                background: 'url(https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/o_woon_wan3.gif) center center / cover no-repeat',
+
+
+              }).then(result => {
+                    if(result.isConfirmed){
+                           history.go(-1);
+                           //location.href="/mypage/myLessonList";
+                           }
+                        })
             },
             error: function (error) {
                 // 요청이 실패했을 때 실행할 코드
