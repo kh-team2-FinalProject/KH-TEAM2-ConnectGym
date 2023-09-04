@@ -166,50 +166,50 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div
-                    th:if="${responseDto.pagination != null}"
-                    class="orderList_pagination_container"
-                >
-                    <ul class="orderList_pagination_ul">
-                        <li
-                            th:if="${responseDto.pagination.prev}"
-                            class="orderList_pagination_li"
-                        >
-                            <button
-                                th:onclick="|movePage(${responseDto.pagination.firstPage - 1})|"
-                                class="orderList_pagination_li_button orderList_pagination_li_button_lr"
+                    <div
+                        th:if="${responseDto.pagination != null}"
+                        class="orderList_pagination_container"
+                    >
+                        <ul class="orderList_pagination_ul">
+                            <li
+                                th:if="${responseDto.pagination.prev}"
+                                class="orderList_pagination_li"
                             >
-                                <img
-                                    th:src="@{/images/icons/mdi/chevron-left.svg}"
-                                />
-                            </button>
-                        </li>
-                        <li
-                            th:each="page : ${#numbers.sequence(responseDto.pagination.firstPage, responseDto.pagination.endPage)}"
-                            th:classappend="${page == responseDto.pagination.currentPage} ? 'orderList_pagination_li_on'"
-                            class="orderList_pagination_li"
-                        >
-                            <button
-                                class="orderList_pagination_li_button"
-                                th:onclick="|movePage(${page})|"
-                                th:text="${page}"
-                            ></button>
-                        </li>
-                        <li
-                            th:if="${responseDto.pagination.next}"
-                            class="orderList_pagination_li"
-                        >
-                            <button
-                                th:onclick="|movePage(${responseDto.pagination.endPage + 1})|"
-                                class="orderList_pagination_li_button orderList_pagination_li_button_lr"
+                                <button
+                                    th:onclick="|movePage(${responseDto.pagination.firstPage - 1})|"
+                                    class="orderList_pagination_li_button orderList_pagination_li_button_lr"
+                                >
+                                    <img
+                                        th:src="@{/images/icons/mdi/chevron-left.svg}"
+                                    />
+                                </button>
+                            </li>
+                            <li
+                                th:each="page : ${#numbers.sequence(responseDto.pagination.firstPage, responseDto.pagination.endPage)}"
+                                th:classappend="${page == responseDto.pagination.currentPage} ? 'orderList_pagination_li_on'"
+                                class="orderList_pagination_li"
                             >
-                                <img
-                                    th:src="@{/images/icons/mdi/chevron-right.svg}"
-                                />
-                            </button>
-                        </li>
-                    </ul>
+                                <button
+                                    class="orderList_pagination_li_button"
+                                    th:onclick="|movePage(${page})|"
+                                    th:text="${page}"
+                                ></button>
+                            </li>
+                            <li
+                                th:if="${responseDto.pagination.next}"
+                                class="orderList_pagination_li"
+                            >
+                                <button
+                                    th:onclick="|movePage(${responseDto.pagination.endPage + 1})|"
+                                    class="orderList_pagination_li_button orderList_pagination_li_button_lr"
+                                >
+                                    <img
+                                        th:src="@{/images/icons/mdi/chevron-right.svg}"
+                                    />
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </th:block>
             <th:block th:unless="${responseDto.success}">
