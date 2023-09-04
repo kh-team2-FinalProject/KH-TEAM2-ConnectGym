@@ -47,7 +47,7 @@ public class Pagination {
      */
     private boolean next;
 
-    public Pagination(int totalCount, int currentPage, int recordPerPage, int pageSize) {
+    public Pagination(long totalCount, int currentPage, int recordPerPage, int pageSize) {
         this.totalCount = totalCount;
         this.currentPage = currentPage;
         this.recordPerPage = recordPerPage;
@@ -55,11 +55,11 @@ public class Pagination {
         this.calculate();
     }
 
-    public Pagination(Page<?> page) {
-        this.totalCount = (int) page.getTotalElements();
+    public Pagination(Page<?> page, int pageSize) {
+        this.totalCount = page.getTotalElements();
         this.currentPage = page.getNumber() + 1;
         this.recordPerPage = page.getNumberOfElements();
-        this.pageSize = page.getSize();
+        this.pageSize = pageSize;
         this.calculate();
     }
 
@@ -73,7 +73,7 @@ public class Pagination {
             this.pageSize = 3;
         }
 
-        this.totalPage = (((((int) this.totalCount) - 1) / this.recordPerPage) + 1);
+        this.totalPage = (int) ((((this.totalCount) - 1) / this.recordPerPage) + 1);
 
         this.firstPage = ((this.currentPage - 1) / this.pageSize) * this.pageSize + 1;
         if (this.firstPage < 1) {

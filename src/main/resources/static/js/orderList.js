@@ -51,3 +51,13 @@ void (function (D) {
         this.submit();
     });
 })(document);
+
+function movePage(page) {
+    "use strict";
+
+    if (page >= 1) {
+        const params = new URLSearchParams(location.search);
+        params.set("page", page);
+        location.href = location.pathname + "?" + params;
+    }
+}

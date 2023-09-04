@@ -530,7 +530,7 @@ public class OrderService {
             }
         }
 
-        Pagination pagination = new Pagination(orderList);
+        Pagination pagination = new Pagination(orderList, 5);
 
         // 가져온 정보들을 담아준다.
         responseDto.setSearch(orderListRequestDto.getQ());
