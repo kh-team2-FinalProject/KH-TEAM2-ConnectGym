@@ -23,15 +23,13 @@ function checkedChatroom() {
 
 
 function sendMessage() {
-
+    
     var content = document.getElementById('message').value;
     stompClient.send(`/app/chat/${chatroomNo}`, {}, JSON.stringify({
         'chatroomNo': chatroomNo,
-        // 'chatroom': {
-        //     chatroom: chatroom
-        // },
         'content': content,
         'sender': sender
+
     }));
     document.getElementById('message').value = '';
 }

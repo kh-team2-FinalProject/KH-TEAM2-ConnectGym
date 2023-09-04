@@ -16,9 +16,14 @@
     align-items:center;
 }
 
-.info_btn{
+.info_btn, .form{
     display: flex;
 }
+
+.searchInput{
+    padding:3px;
+}
+
 .write_btn{
     margin-left: 68%;
 }
@@ -34,8 +39,8 @@
   background-color: #A3DC10;
    position: relative;
     display: inline-block;
-
-    height:20%;
+/*
+    height:20%;*/
     font-family: 'Black Ops One', cursive;
     padding: 5px 5px;
     color: white;
@@ -74,11 +79,17 @@ background-color: #A7D145;
 }
 
 /* 식품 정보 이름 */
-th{
+th, .FoodInfo_table td{
 padding: 12px;
 font-size: 15px;
+border-bottom: 1px solid #ddd;
 }
 
+/* 결과
+span{
+    font-size: 15px;
+}
+ */
 
 
 
