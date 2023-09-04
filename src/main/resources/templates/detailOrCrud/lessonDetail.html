@@ -55,7 +55,6 @@
                     </div>
                 </div>
                 <div class="lessonDetail_btn_box">
-                    <!--<button class="ld-jim-btn" th:href="@{/order}">찜</button>-->
                     <div class="ld-jim-btn ld_like_button_group">
                         <div class="ld_like_count">
                             [[${likeInfo.likeCnt}]]
@@ -91,9 +90,11 @@
                             </label>
                         </th:block>
                     </div>
-                    <button class="ld-chat-btn" th:href="@{/order}">1:1 문의하기</button>
-                    <button class="ld-jim-btn" th:href="@{/order}">찜</button>
+
+
+
                     <button class="ld-chat-btn" onclick="checkedChatroom()">1:1 문의하기</button>
+
                     <button class="ld-order-btn" th:href="@{/order}">바로 구매하기</button>
                 </div>
             </div>
