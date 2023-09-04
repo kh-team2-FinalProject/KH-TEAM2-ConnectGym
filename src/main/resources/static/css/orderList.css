@@ -245,6 +245,30 @@
     line-height: 0;
     background-color: rgb(230, 230, 230);
     border-radius: 6px;
+    transition: ease-in-out 300ms;
+    transition-property: background-color;
+}
+
+#orderList_wrap
+    .orderList_pagination_container
+    .orderList_pagination_ul
+    > .orderList_pagination_li:hover,
+#orderList_wrap
+    .orderList_pagination_container
+    .orderList_pagination_ul
+    > .orderList_pagination_li.orderList_pagination_li_on:hover {
+    background-color: #a3dc10;
+}
+
+#orderList_wrap
+    .orderList_pagination_container
+    .orderList_pagination_ul
+    > .orderList_pagination_li:active,
+#orderList_wrap
+    .orderList_pagination_container
+    .orderList_pagination_ul
+    > .orderList_pagination_li.orderList_pagination_li_on:active {
+    background-color: #8ec408;
 }
 
 #orderList_wrap
@@ -260,7 +284,7 @@
     .orderList_pagination_container
     .orderList_pagination_ul
     > .orderList_pagination_li.orderList_pagination_li_on {
-    background-color: #a3dc10;
+    background-color: #c7f750;
 }
 
 #orderList_wrap

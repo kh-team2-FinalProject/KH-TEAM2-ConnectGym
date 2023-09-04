@@ -31,7 +31,7 @@ public class CSService {
         List<CS> csList = csRepository.findAll();
         List<CS> select_categoryList = new ArrayList<>();
         for (int i = 0; i < csList.size(); i++) {
-            if (csList.get(i).getCategory_id() == a) {
+            if (csList.get(i).getCategoryId() == a) {
                 select_categoryList.add(csList.get(i));
             }
         }
