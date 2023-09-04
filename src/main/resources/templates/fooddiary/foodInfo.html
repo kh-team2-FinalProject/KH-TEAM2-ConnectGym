@@ -17,7 +17,7 @@
             <h1 id="food_search">FOOD INFO</h1>
         </div>
         <div class="info_btn">
-            <form action="/fooddiary/foodinfo" method="GET">
+            <form class="form" action="/fooddiary/foodinfo" method="GET">
             <input  class="searchInput" name="key" type="text" placeholder="식품명을 입력하시오" />
             <button class="search_btn" onclick="searchFood()">search</button>
             </form>
@@ -42,26 +42,26 @@
                     <span th:text="${food.foodNm}"></span>
                 </td>
                 <td th:text="${food.foodSize}">
-                    <span th:text="${food.foodSize}" />1회 제공량
+                    <span th:text="${food.foodSize}" >g</span>
                 </td>
                 <td>
-                    <span th:text="${food.choc}" />
-                    탄수화물</td>
+                    <span th:text="${food.choc}">g</span>
+                </td>
                 <td>
-                    <span th:text="${food.prot}" />
-                    단백질</td>
+                    <span th:text="${food.prot}">g</span>
+                </td>
                 <td>
-                    <span th:text="${food.fat}" />
-                    지방</td>
+                    <span th:text="${food.fat}">g</span>
+                </td>
                 <td>
-                    <span th:text="${food.nat}" />
-                    나트륨</td>
+                    <span th:text="${food.nat}" >mg</span>
+                </td>
                 <td>
-                    <span th:text="${food.sugar}" />
-                    당</td>
+                    <span th:text="${food.sugar}">g</span>
+                </td>
                 <td>
-                    <span th:text="${food.kcal}" />
-                    칼로리</td>
+                    <span th:text="${food.kcal}">kcal</span>
+                </td>
             </tr>
             </tbody>
         </table>
