@@ -17,7 +17,6 @@ import javax.persistence.*;
 public class Chatroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     private Long no;
 
     @ManyToOne(fetch = FetchType.LAZY)

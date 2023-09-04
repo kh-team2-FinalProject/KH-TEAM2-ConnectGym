@@ -2,49 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>1:1 Chat</title>
+    <script th:inline="javascript">
+        const sender = [[${chatroom.member.userName}]];
+        const chatroomNo = [[${chatroomNo}]];
+        
+        //로그인되어있는 사람을 sender로 지정
+    </script>
     <script src="/webjars/sockjs-client/1.5.1/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/js/chatroom.js}"></script>
 </head>
 
 <body>
 <div id="chat">
-    <form id="messageForm">
-
-        <input type="text" id="message" placeholder="Type your message..."/>
-        <button type="submit">Send</button>
-    </form>
-    <div id="messages"></div>
+    <div id="chat-box"></div>
+    <div>
+        <input type="text" id="message" placeholder="메시지 입력">
+        <button onclick="sendMessage()">전송</button>
+    </div>
 </div>
 
 <script th:inline="javascript">
+
     var socket = new SockJS('/chat');
     var stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function (frame) {
-        console.log('Connected: ' + frame);
+        stompClient.subscribe(`/queue/qqq/${chatroomNo}`, function (message) {
+            var messageText = JSON.parse(message.body);
+            showMessage(messageText);
+        });
     });
 
-    document.querySelector("#messageForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        document.querySelector("");
+    // var socket = new SockJS('/chat');
+    // var stompClient = Stomp.over(socket);
+    //
+    // stompClient.connect({}, function (frame) {
+    //     console.log('Connected: ' + frame);
+    // });
 
-        var messageInput = document.querySelector("#message");
-        var messageContent = messageInput.value;
-        stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify({
-            'content': messageContent,
-            'sender': '우영'
-        }));
-        messageInput.value = '';
-    });
+    // document.querySelector("#messageForm").addEventListener("submit", function (event) {
+    //     event.preventDefault();
+    //     document.querySelector("");
+    //
+    //     var messageInput = document.querySelector("#message");
+    //     var messageContent = messageInput.value;
+    //     stompClient.send(`/app/chat/${chatroomNo}`, {}, JSON.stringify({
+    //         'content': messageContent,
+    //         'sender': sender
+    //     }));
+    //     messageInput.value = '';
+    // });
 
-    function showMessage(message) {
-        var messageDiv = document.createElement("div");
-        messageDiv.textContent = message.sender + ': ' + message.content; // 보낸 사람 정보 표시
-        document.querySelector("#messages").appendChild(messageDiv);
-    }
 
-    stompClient.subscribe('/queue/qqq/${roomId}', function (message) {
-        showMessage(JSON.parse(message.body));
-    });
+    // stompClient.subscribe(`/queue/qqq/${chatroomNo}`, function (message) {
+    //     showMessage(JSON.parse(message.body));
+    // });
 </script>
 </body>
