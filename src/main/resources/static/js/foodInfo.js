@@ -6,7 +6,6 @@ function openPop() {
     modal.style.display= "block";
 }
 
-
 /* 버튼 클릭시 닫힘 */
 document.getElementById("closeBtn").addEventListener("click", function() {
     var modal = document.getElementById("dietPopup");

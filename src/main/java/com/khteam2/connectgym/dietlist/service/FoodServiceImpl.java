@@ -108,6 +108,7 @@ public class FoodServiceImpl implements FoodService {
         return foodRepository.save(food);
     }
 
+    /* 유효성 체크해서 에러 메세지 */
     @Override
     public Map<String, String> validateHandling(Errors errors){
         Map<String, String> validatorResult = new HashMap<>();

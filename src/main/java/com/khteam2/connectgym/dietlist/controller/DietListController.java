@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -24,23 +25,23 @@ public class DietListController {
     @Autowired
     private FoodRepository foodRepository;
 
-    @GetMapping("/fooddiary/dietlist")
+    @GetMapping("fooddiary/dietlist")
     public String diet_WriteForm(Model model) {
         Food food = foodRepository.findById(29057L).orElse(null);
         List<Food> foods = new ArrayList<>();
         foods.add(food);
         model.addAttribute("foods", foods);
 
-        return "/fooddiary/dietlist";
+        return "fooddiary/dietlist";
     }
 
-    @GetMapping("/fooddiary/foodInfo")
+    @GetMapping("fooddiary/foodInfo")
     public String diet_SearchForm(Model model){
         model.addAttribute("food", new Food());
         return "fooddiary/foodInfo";
     }
 
-    @PostMapping("/fooddiary/foodInfo")
+    @PostMapping("fooddiary/foodInfo")
     public String addFood(@ModelAttribute @Valid Food food, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
