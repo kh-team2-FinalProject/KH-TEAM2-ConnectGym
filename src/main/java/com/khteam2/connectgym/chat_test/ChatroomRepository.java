@@ -7,16 +7,13 @@ import java.util.List;
 
 public interface ChatroomRepository extends JpaRepository<Chatroom, Long> {
 
-
-    //ChatRoom findByMemberNoAndTrainerNo(Long memberNo, Long trainerNo);
-
-
+    //유저 로그인시 대화중인 모든 채팅방 목록 출력시 사용
     List<Chatroom> findAllByMemberNo(Long memberNo);
 
+    //트레이너 로그인시 대화중인 모든 채팅방 목록 출력시 사용
+    List<Chatroom> findAllByTrainerNo(Long trainerNo);
 
-//    boolean findByTrainerNo(Long trainerNo);
-
-    //    @Query("select cr from Chatroom cr where cr.member.no=?1 and cr.trainer.no=?2")
+    // 1:1 채팅방을 찾기위한 쿼리
     Chatroom findByMemberNoAndTrainerNo(Long memberNo, Long trainerNo);
 
 

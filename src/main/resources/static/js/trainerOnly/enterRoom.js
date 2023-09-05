@@ -20,7 +20,7 @@ function enterRoom(titleCode,enrollKey) {
 function enterRoom(titleCode, enrollKey) {
   $.ajax({
     type: "POST",
-    url: "/trainer/checkRoom",
+    url: "/trainerOnly/checkRoom",
     data: JSON.stringify({ titleCode: titleCode, enrollKey: enrollKey }),
     contentType: "application/json; charset=utf-8",
     dataType: "json",

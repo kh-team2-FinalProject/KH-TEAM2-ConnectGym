@@ -1,5 +1,7 @@
 package com.khteam2.connectgym.order.dto;
 
+import com.khteam2.connectgym.lesson.Lesson;
+import com.khteam2.connectgym.order.Order;
 import com.khteam2.connectgym.order.OrderDetail;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,18 +14,25 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OrderDetailDto {
     private Long no;
-    private String orderNo;
-    private Long lessonNo;
+    private Order order;
+    private Lesson lesson;
     private Long enrollKey;
 
-    public OrderDetailDto(OrderDetail orderDetail) {
-        this.no = orderDetail.getNo();
-        if (orderDetail.getOrder() != null) {
-            this.orderNo = orderDetail.getOrder().getNo();
-        }
-        if (orderDetail.getLesson() != null) {
-            this.lessonNo = orderDetail.getLesson().getNo();
-        }
-        this.enrollKey = orderDetail.getEnrollKey();
+    public OrderDetail toEntity() {
+        return OrderDetail.builder()
+            .no(no)
+            .order(order)
+            .lesson(lesson)
+            .enrollKey(enrollKey)
+            .build();
+    }
+
+    public static OrderDetailDto of(OrderDetail orderDetail) {
+        return OrderDetailDto.builder()
+            .no(orderDetail.getNo())
+            .order(orderDetail.getOrder())
+            .lesson(orderDetail.getLesson())
+            .enrollKey(orderDetail.getEnrollKey())
+            .build();
     }
 }

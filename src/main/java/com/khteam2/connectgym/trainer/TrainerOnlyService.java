@@ -12,7 +12,7 @@ import com.khteam2.connectgym.order.OrderRepository;
 import com.khteam2.connectgym.room.Room;
 import com.khteam2.connectgym.room.RoomRepository;
 import com.khteam2.connectgym.room.dto.RoomStatus;
-import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomDto;
+import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerRoomResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class TrainerTestService {
+public class TrainerOnlyService {
     //==============트레이너 룸 입장 테스트==================//
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
@@ -34,9 +34,7 @@ public class TrainerTestService {
     private final RoomRepository roomRepository;
 
     //트레이너의 등록 레슨 불러오기
-    public LessonResponseDTO registered(HttpSession session) {
-        Long no = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
-
+    public LessonResponseDTO registered(Long no) {
 
         Lesson lesson = lessonRepository.findByTrainerNo(no).orElse(null);
 
@@ -54,7 +52,7 @@ public class TrainerTestService {
     }
 
     // 레슨 등록한 회원 목록 및 룸 접근을 위한 값 조회
-    public TrainerEnterRoomDto enrollMemList(Long lessonNo, Long trainerNo) {
+    public TrainerEnterRoomResponseDto enrollMemList(Long lessonNo, Long trainerNo) {
 
         // 룸 코드
         Lesson lesson = lessonRepository.findById(lessonNo).orElse(null);
@@ -66,7 +64,7 @@ public class TrainerTestService {
         List<OrderDetail> orderDetails = orderDetailRepository.enrollList(lessonNo);
 
         if (orderDetails.size() == 0){
-            TrainerEnterRoomDto trainerEnterRoomDto = TrainerEnterRoomDto.builder()
+            TrainerEnterRoomResponseDto trainerEnterRoomDto = TrainerEnterRoomResponseDto.builder()
                 .errorMsg("NotFound")
                 .build();
             return trainerEnterRoomDto;
@@ -81,7 +79,7 @@ public class TrainerTestService {
 
         }
 
-        TrainerEnterRoomDto trainerEnterRoomDto = TrainerEnterRoomDto.builder()
+        TrainerEnterRoomResponseDto trainerEnterRoomDto = TrainerEnterRoomResponseDto.builder()
             .titleCode(titleCode)
             .memberMap(memberMap)
             .build();

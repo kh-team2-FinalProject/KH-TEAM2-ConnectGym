@@ -72,39 +72,4 @@ public class TrainerController {
         return "detailOrCrud/trainerDetail";
     }
 
-    @GetMapping("/mypage/trainer")
-    public String myPageT(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
-                          @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
-                          Model model, RedirectAttributes redirectAttributes) {
-
-
-        if (loginMemberClass == null) {
-
-            // 로그인되어 있지 않은 경우
-            redirectAttributes.addFlashAttribute("message", "로그인 해주세요.");
-            return "redirect:/";
-
-        } else if (loginMemberClass == MemberClass.TRAINER) {
-            // 트레이너 회원 로그인된 경우
-
-            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
-            model.addAttribute("trainer", trainerResponseDTO);
-
-            return "mypage/trainer/myDashboard"; // 트레이너 마이페이지로 이동
-        } else {
-            return "redirect:/mypage";
-        }
-
-
-    }
-
-    //트레이너 회원리스트
-    @GetMapping("mypage/trainer/myLessonList")
-    public String myLessonT(Model model, @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
-                            @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo) {
-
-        TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
-        model.addAttribute("trainer", trainerResponseDTO);
-        return "mypage/trainer/myLessonList";
-    }
 }

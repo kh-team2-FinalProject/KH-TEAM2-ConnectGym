@@ -1,5 +1,6 @@
 package com.khteam2.connectgym.chat_test;
 
+import com.khteam2.connectgym.chat_test.dto.ChatroomDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.trainer.Trainer;
@@ -7,6 +8,7 @@ import com.khteam2.connectgym.trainer.TrainerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,6 +48,25 @@ public class ChatroomService {
 
         return chatroomRepository.findById(chatroomNo).orElse(null);
     }
+
+    public List<ChatroomDTO> searchMyTrainerChatroomList(Long mamberNo) {
+        List<ChatroomDTO> myChatroomList = new ArrayList<>();
+        for (Chatroom chatroom : chatroomRepository.findAllByMemberNo(mamberNo)) {
+            ChatroomDTO chatroomDTO = new ChatroomDTO().fromEntity(chatroom);
+            myChatroomList.add(chatroomDTO);
+        }
+        return myChatroomList;
+    }
+
+    public List<ChatroomDTO> searchMyMemberChatroomList(Long trainerNO) {
+        List<ChatroomDTO> myChatroomList = new ArrayList<>();
+        for (Chatroom chatroom : chatroomRepository.findAllByTrainerNo(trainerNO)) {
+            ChatroomDTO chatroomDTO = new ChatroomDTO().fromEntity(chatroom);
+            myChatroomList.add(chatroomDTO);
+        }
+        return myChatroomList;
+    }
+
 }
 
 

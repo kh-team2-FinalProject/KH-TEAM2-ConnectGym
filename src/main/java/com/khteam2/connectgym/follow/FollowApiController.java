@@ -1,7 +1,6 @@
 package com.khteam2.connectgym.follow;
 
 import com.khteam2.connectgym.common.SessionConstant;
-import com.khteam2.connectgym.follow.dto.FollowForTrainerResponseDTO;
 import com.khteam2.connectgym.follow.dto.FollowForUserResponseDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;

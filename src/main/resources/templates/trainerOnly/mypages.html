@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html
+    lang="ko"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{layouts/body}"
+    xmlns:layout="http://www.w3.org/1999/xhtml"
+>
+    <th:block layout:fragment="title">
+        <title>MY PAGE</title>
+    </th:block>
+
+    <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+    <th:block layout:fragment="content">
+        <div class="myp_site_banner">
+            <div class="myp_site_banner_title">
+                <p th:text="${bannerTitle}"></p>
+            </div>
+        </div>
+
+        <div class="myp_side_main_page">
+            <!-- 사이드바 -->
+            <div class="myp_sidebar">
+                <div class="myp_sidebar_child">
+                    <nav class="myp_navbar">
+                        <ul class="myp_navbar__menu">
+                            <!--대시보드-->
+                            <li class="myp_navbar__item">
+                                <a
+                                    href="/trainerOnly/mypage/myDashboard"
+                                    class="myp_navbar__link"
+                                    ><i
+                                        class="fa-solid fa-house fa-xl"
+                                        style="color: #a3dc10"
+                                    ></i
+                                    ><span>DashBoard</span></a
+                                >
+                            </li>
+                            <!--나의강좌-->
+                            <li class="myp_navbar__item">
+                                <a
+                                    href="/trainerOnly/mypage/myLesson"
+                                    class="myp_navbar__link"
+                                    ><i class="fa-solid fa-dumbbell fa-xl"></i
+                                    ><span>MyLesson</span></a
+                                >
+                            </li>
+                            <!--내가 팔로우한 트레이너-->
+                            <li class="myp_navbar__item">
+                                <a
+                                    href="/mypage/myFollowing"
+                                    class="myp_navbar__link"
+                                ><i class="fa-regular fa-heart fa-xl"></i
+                                ><span>Following</span></a
+                                >
+                            </li>
+
+                            <!--내가 찜한 레슨 -->
+                            <li class="myp_navbar__item">
+                                <a
+                                    href="/mypage/myLike"
+                                    class="myp_navbar__link"
+                                ><i class="fa-regular fa-star fa-xl"></i
+                                ><span>Like</span></a
+                                >
+                            </li>
+
+                            <!--트레이너 채팅방 목록-->
+                            <li class="myp_navbar__item">
+                                <a
+                                    href="/mypage/messages"
+                                    class="myp_navbar__link"
+                                    ><i class="fa-regular fa-comment fa-xl"></i
+                                    ><span>Messages</span></a
+                                >
+                            </li>
+                            <!--마이 페이지 또는 결제내역-->
+                            <li class="myp_navbar__item">
+                                <a
+                                    href="/mypage/orderList"
+                                    class="myp_navbar__link"
+                                    ><i
+                                        class="fa-solid fa-money-check-dollar fa-xl"
+                                    ></i
+                                    ><span>OrderList</span></a
+                                >
+                            </li>
+
+                            <!--고객센터?-->
+                            <li class="myp_navbar__item">
+                                <a href="#" class="myp_navbar__link"
+                                    ><i
+                                        class="fa-regular fa-circle-question fa-xl"
+                                    ></i
+                                    ><span>Help</span></a
+                                >
+                            </li>
+
+                            <!--내 정보 수정-->
+                            <li class="myp_navbar__item">
+                                <a
+                                    href="/mypage/myInfo"
+                                    class="myp_navbar__link"
+                                    ><i class="fa-solid fa-user-gear fa-xl"></i
+                                    ><span>MyInfo</span></a
+                                >
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- 사이드바 -->
+
+            <div class="myp_side_page">
+                <th:block layout:fragment="mypage"> </th:block>
+            </div>
+        </div>
+    </th:block>
+
+    <!-- 스크립트 부분 -->
+    <th:block layout:fragment="script">
+        <script th:inline="javascript"></script>
+    </th:block>
+</html>

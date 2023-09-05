@@ -1,48 +1,62 @@
+.l-lessonList-container {
+    width: 100%;
+    height: 100%;
+}
 
 .l_lessonlist {
     display: flex;
-    margin-top: 40px;
-    /*background: white;*/
-    width: 96%;
-    padding: 2%;
+    margin-top: 80px;
+    width: 100%;
+    -webkit-box-flex: 1;
+    flex: 1;
 }
-
-/*============강좌 카드 섹션========*/
 
 .lessonlist_title {
     font-family: "NanumSquareBold";
     margin: 20px;
 }
 
-
 #l_lessonlist_wrap {
     display: flex;
-    /* justify-content: space-between; */
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     gap: 2%;
     width: 100%;
-    /* overflow: hidden; */
+    height: 100%;
+    margin-bottom: 0%;
 }
 
-
 .l_card {
-    /*background: #4474ee;*/
-    width: 25%;
-    height: 60%;
+    background: white;
+    width: 272px;
+    height: 330px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    margin-bottom: 3%;
+    border-radius: 5px;
 }
 
 .l_card-container {
-    /*background: yellow;*/
-    width: 100%;
-    height: 100%;
+    width: 232px;
+    height: 290px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 230px;
+    min-height: 290px;
+    border-radius: 5px;
 }
 
 .l_card-img-wrapper {
-    /*background: #aa00ff;*/
-    position: relative;
-    height: 100%;
+    height: 170px;
+    width: 228px;
     overflow: hidden;
-    margin-top: 2px;
+    display: flex;
+    border-radius: 5px;
+    position: relative;
+    perspective: 300px;
 }
 
 .l_card-img {
@@ -50,6 +64,11 @@
     width: 100%;
     height: 100%;
     transition: transform 0.3s;
+    border-radius: 5px;
+    position: relative;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+
 }
 
 
@@ -57,18 +76,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+
 }
-
-.l_lessonlist_img:hover {
-
-    transform: scale(1.2);
-}
-
 
 .l_card-content {
-    /*background: #C24032;*/
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .l_card-content #l_trainer-name {
@@ -80,7 +94,6 @@
 
 .l_card-content #l_lesson-title {
     color: darkgray;
-
     font-size: 0.9rem;
 }
 
@@ -91,7 +104,6 @@
 }
 
 .l_card-bottom {
-    /*background: bisque;*/
     display: flex;
     flex-direction: row;
 }
@@ -107,99 +119,34 @@
     font-size: 0.8rem;
 }
 
+/* 호버 시에 이미지 표시하기 */
+.l_card:hover .l_card-img {
+    transform: rotateY(180deg);
+    /*opacity: 0; !* 앞 이미지 숨김 *!*/
+}
 
-/*.l_card {*/
-/*    width: 20vw;*/
-/*    height: 25vh;*/
-/*    perspective: 1000px;*/
-/*    margin: 1vw;*/
-/*    max-width: 300px;*/
-/*    max-height: 300px;*/
-/*    min-width: 100px;*/
-/*    min-height: 100px;*/
+.l_card:hover .l_card-back-img {
+    opacity: 1; /* 뒤 이미지 표시 */
+    visibility: visible;
+    transform: rotateY(0deg);
+}
 
-/*}*/
-
-/*.l_card-container {*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    position: absolute;*/
-/*    transform-style: preserve-3d;*/
-/*    transition: transform 0.5s;*/
-/*}*/
-
-/*.l_card:hover .l_card-container {*/
-/*    !*transform: rotateY(180deg);*!*/
-/*    transform: scale(1.2);*/
-/*}*/
-
-/*.lessonlist_img {*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    border-radius: 10px;*/
-/*}*/
+.l_card-back-img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+    border-radius: 5px;
+    position: absolute;
+    backface-visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: rotateY(-180deg);
+}
 
 
-/*.l_card-front,*/
-/*.l_card-back {*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    backface-visibility: hidden;*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    border-radius: 5px;*/
-/*    transform-origin: center center;*/
-/*}*/
+.l_trainer_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 
-/*.l_card-front {*/
-/*    background: #ffffff;*/
-/*    !*border:1px solid black;*!*/
-/*}*/
-
-/*.l_card-front-bottom {*/
-/*    background: rgba(136, 134, 134, 0.34);*/
-/*    position: absolute;*/
-/*    bottom: 0; !* 아래쪽에 위치 *!*/
-/*    width: 100%; !* 너비를 100%로 설정 *!*/
-/*    height: 40%;*/
-/*    text-align: center;*/
-/*    border-bottom-left-radius: 5px;*/
-/*    border-bottom-right-radius: 5px;*/
-/*    color: #fff;*/
-/*    align-items: center;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-
-
-/*}*/
-
-/*.l_card-front-title {*/
-/*    color: #0d1416;*/
-/*    font-weight: bold;*/
-/*    font-size: 1.1rem;*/
-/*    margin: 0.5vh;*/
-/*    margin-top: 2vh;*/
-/*}*/
-
-/*.l_card-front-trainer {*/
-/*    color: #0d1416;*/
-/*    font-weight: bold;*/
-/*    font-size: 1rem;*/
-/*}*/
-
-/*.l_card-back {*/
-/*    transform: rotateY(180deg);*/
-/*    background-color: #ffffff;*/
-/*    color: #333;*/
-/*    padding: 20px;*/
-/*    box-sizing: border-box;*/
-/*    overflow: hidden;*/
-/*}*/
-
-
-/*============강좌 카드 섹션 끝========*/
-
+}

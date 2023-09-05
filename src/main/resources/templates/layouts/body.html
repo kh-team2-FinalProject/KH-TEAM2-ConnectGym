@@ -31,8 +31,13 @@
                 <div class="mypage_hover_menu">
                     <ul th:if="${session.session_login_member_no != null}">
                         <li>
+<<<<<<< HEAD
+                            <!--                            <a th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/mypage/trainer'}">-->
+                            <a href="/trainerOnly/mypage">
+=======
                             <a th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/mypage/trainer'}">
 
+>>>>>>> ac583f9d338e15f3bacc376d3400207f0c3da7d4
                                 <svg class="mypage_header_icon" xmlns="http://www.w3.org/2000/svg" height="1.5em"
                                      viewBox="0 0 512 512">
                                     <style>svg {

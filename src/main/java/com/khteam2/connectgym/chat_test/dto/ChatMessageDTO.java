@@ -35,6 +35,7 @@ public class ChatMessageDTO {
             .chatroom(chatMessage.getChatroom())
             .content(chatMessage.getContent())
             .sender(chatMessage.getSender())
+//            .sendAt(chatMessage.getSendAt())
             .build();
     }
 

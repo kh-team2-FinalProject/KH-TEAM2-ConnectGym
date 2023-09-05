@@ -2,6 +2,8 @@ package com.khteam2.connectgym.chat_test;
 
 import com.khteam2.connectgym.chat_test.dto.ChatMessageDTO;
 import com.khteam2.connectgym.chat_test.dto.ChatMessageReaponseDTO;
+import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.member.MemberClass;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -23,10 +25,10 @@ public class ChatController {
 
     @GetMapping("/chat_test/{chatroomNo}")
     public String chat_open(Model model,
-                            @PathVariable("chatroomNo") Long chatroomNo) {
+                            @PathVariable("chatroomNo") Long chatroomNo,
+                            @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass memberClass) {
         Chatroom chatroom = chatroomService.inChatroom(chatroomNo);
 //        ChatroomDTO chatroomDTO = new ChatroomDTO().fromEntity(chatroom);
-        System.out.println("chatroomNo=====================");
         System.out.println(chatroomNo);
 //        System.out.println(chatroomDTO);
         List<ChatMessage> chatMessages = chatroomService.loadMessage(chatroom);
@@ -36,6 +38,18 @@ public class ChatController {
         model.addAttribute("chatroom", chatroom);
 
 
+        //sender  interlocutor 구분해서 모델전송
+        String sender = "";
+        String interlocutor = "";
+        if (memberClass == MemberClass.MEMBER) {
+            sender = chatroom.getMember().getUserName();
+            interlocutor = chatroom.getTrainer().getTrainerName();
+        } else {
+            sender = chatroom.getTrainer().getTrainerName();
+            interlocutor = chatroom.getMember().getUserName();
+        }
+        model.addAttribute("sender", sender);
+        model.addAttribute("interlocutor", interlocutor);
         return "chat_test/chat_test2";
     }
 //    @PostMapping("/chat_test/{chatroomNo}")
@@ -61,8 +75,7 @@ public class ChatController {
     public void sendMessage(@DestinationVariable Long chatroomNo,
                             @Payload ChatMessageDTO message) {
 
-        System.out.println("chatroomNo = " + chatroomNo);
-        System.out.println("message = " + message);
+
         ChatMessage chatMessage = chatMessageService.saveMessage(chatroomNo, message);
         ChatMessageReaponseDTO chatMessageReaponseDTO = new ChatMessageReaponseDTO().fromEntity(chatMessage);
 

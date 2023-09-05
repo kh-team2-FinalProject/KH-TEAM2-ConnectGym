@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{trainerOnly/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{/css/common/loading.css}">
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</th:block>
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 내 레슨 현황</title>
+</th:block>
+
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="mypage">
+
+        <!--내 수강 목록 출력하는 태그 (mylessonlist.js에서 출력)-->
+        <div id="mylesson-list">
+
+            <h1>내가 등록한 강좌</h1>
+
+            <th:block th:if="${lesson == null}">
+                <div> 현재 등록된 강좌가 없습니다.</div>
+                <div><a href="/createLesson">등록하기</a></div>
+            </th:block>
+
+            <th:block th:if="${lesson != null}">
+                <div>내가 등록한 강좌</div>
+                <div>
+                    <button>수정하기</button>
+                    <button th:onclick="|location.href='/trainerOnly/mypage/memberList/${lesson.no}'|">회원목록</button>
+                </div>
+                <div>[[${lesson.title}]]</div>
+                <div>[[${lesson.lesson_info}]]</div>
+                <div>[[${lesson.start_date}]]</div>~<div>[[${lesson.end_date}]]</div>
+            </th:block>
+
+        </div>
+
+    </div>
+</th:block>
+
+
+</html>

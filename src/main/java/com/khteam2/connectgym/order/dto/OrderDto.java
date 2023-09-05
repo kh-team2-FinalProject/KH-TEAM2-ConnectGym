@@ -1,12 +1,13 @@
 package com.khteam2.connectgym.order.dto;
 
+import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
@@ -14,18 +15,28 @@ import java.time.Instant;
 @Builder
 public class OrderDto {
     private String no;
-    private Long memberNo;
+    private Member member;
     private String type;
-    private Instant dayOfPayment;
+    private Timestamp dayOfPayment;
     private Long orderPay;
 
-    public OrderDto(Order order) {
-        this.no = order.getNo();
-        if (order.getMember() != null) {
-            this.memberNo = order.getMember().getNo();
-        }
-        this.type = order.getType();
-        this.dayOfPayment = order.getDayOfPayment().toInstant();
-        this.orderPay = order.getOrderPay();
+    public Order toEntity() {
+        return Order.builder()
+            .no(no)
+            .member(member)
+            .type(type)
+            .dayOfPayment(dayOfPayment)
+            .orderPay(orderPay)
+            .build();
+    }
+
+    public static OrderDto of(Order order) {
+        return OrderDto.builder()
+            .no(order.getNo())
+            .member(order.getMember())
+            .type(order.getType())
+            .dayOfPayment(order.getDayOfPayment())
+            .orderPay(order.getOrderPay())
+            .build();
     }
 }

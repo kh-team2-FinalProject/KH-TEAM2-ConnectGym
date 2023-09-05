@@ -18,4 +18,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
             // 아래 지정한 URL에 한해서 로그인 유무를 확인한다.
             .addPathPatterns("/order/**","/mypage/**");
     }
+
+
 }

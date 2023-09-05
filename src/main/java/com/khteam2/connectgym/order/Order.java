@@ -15,13 +15,14 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"member"})
+@ToString
 public class Order {
     @Id
     private String no;
     @JoinColumn(name = "member_no", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ToString.Exclude
     private Member member;
     @Column(nullable = false, length = 50)
     private String type;
