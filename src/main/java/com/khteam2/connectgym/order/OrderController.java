@@ -33,10 +33,6 @@ public class OrderController {
         OrderResponseDto responseDto = this.orderService.prepareOrder(loginMemberNo, lessonList);
 
         if (responseDto.isSuccess()) {
-            session.setAttribute(SessionConstant.ORDER_ORDER_NO, responseDto.getOrderNo());
-            session.setAttribute(SessionConstant.ORDER_PRICE, responseDto.getPrice());
-            session.setAttribute(SessionConstant.ORDER_LESSON_LIST, lessonList);
-
             model.addAttribute("franchiseId", this.franchiseId);
             model.addAttribute("pgShopId", this.pgShopId);
         }
@@ -50,22 +46,14 @@ public class OrderController {
     public String processOrder(
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long sLoginMemberNo,
-        @SessionAttribute(name = SessionConstant.ORDER_ORDER_NO, required = false) String sMerchantUid,
-        @SessionAttribute(name = SessionConstant.ORDER_PRICE, required = false) Long sTotalPrice,
-        @SessionAttribute(name = SessionConstant.ORDER_LESSON_LIST, required = false) List<Long> sOrderLessonList,
         OrderProcessRequestDto requestDto) {
         if (requestDto.getImp_uid() == null
             || requestDto.getMerchant_uid() == null
-            || sLoginMemberNo == null
-            || sMerchantUid == null
-            || sTotalPrice == null
-            || sOrderLessonList == null
-            || sOrderLessonList.isEmpty()) {
+            || sLoginMemberNo == null) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
-        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto, sLoginMemberNo, sMerchantUid,
-            sTotalPrice, sOrderLessonList, false);
+        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto, sLoginMemberNo, false);
 
         if (!responseDto.isSuccess()) {
             model.addAttribute("message", responseDto.getMessage());
@@ -81,12 +69,6 @@ public class OrderController {
         String orderId,
         HttpSession session) {
         OrderCompleteResponseDto responseDto = this.orderService.completeOrder(loginMemberNo, orderId);
-
-        if (responseDto.isSuccess()) {
-            session.removeAttribute(SessionConstant.ORDER_ORDER_NO);
-            session.removeAttribute(SessionConstant.ORDER_LESSON_LIST);
-            session.removeAttribute(SessionConstant.ORDER_PRICE);
-        }
 
         model.addAttribute("responseDto", responseDto);
 

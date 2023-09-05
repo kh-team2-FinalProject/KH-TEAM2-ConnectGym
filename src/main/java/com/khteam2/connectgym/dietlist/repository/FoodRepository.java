@@ -14,6 +14,7 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 
     List<Food> findByFoodNmContains(String foodNm);
 
+    /* foodinfo 검색 */
     List<Food> findByFoodNmContains(String foodNm, Pageable pageable);
 
 

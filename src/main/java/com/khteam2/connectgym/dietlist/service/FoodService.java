@@ -28,4 +28,6 @@ public interface FoodService {
 
     List<Food> searchFood(String key);
 
+    List<Food> searchDiet(String key);
+
 }

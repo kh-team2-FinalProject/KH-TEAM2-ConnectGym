@@ -68,16 +68,15 @@ th{
 .dietPop {
     z-index: 1000; /* header 위로 올리는 작업 */
     background-color: rgba(0, 0, 0, 0.5); /* 뒷 배경 */
-    display: none;
+    display: flex;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 650px;
-    justify-content: center;
-    align-items: center;
-    overflow: auto; /* 스크롤 */
+    top: 0;
+    left:40%;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
 }
 
 /* 테이블 가운데 정렬 */
@@ -89,16 +88,23 @@ th{
 
 /* 팝업 내용 */
 .pop-content {
-    width: 100%;
-    height: 600px;
-    /*
     width: 500px;
-    height: 650px;
-    */
+    height:680px;
+    overflow-y: auto;
     background-color: #e6ebe1;
     color: #5f797c;
     padding: 20px;
     border-radius: 10px;
+    text-align:center;
+    overflow: auto;
+    left: 50%; /* 수정: 수평 가운데 정렬을 위해 추가 */
+    top: 50%; /* 수정: 수직 가운데 정렬을 위해 추가 */
+}
+
+.pop_content2 th, .pop_content2 td{
+    padding: 12px;
+    font-size: 15px;
+    border-bottom: 1px solid #ddd;
 }
 
 .pop-content h1{
