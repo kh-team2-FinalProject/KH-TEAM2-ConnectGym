@@ -57,6 +57,16 @@ public class ChatroomService {
         }
         return myChatroomList;
     }
+
+    public List<ChatroomDTO> searchMyMemberChatroomList(Long trainerNO) {
+        List<ChatroomDTO> myChatroomList = new ArrayList<>();
+        for (Chatroom chatroom : chatroomRepository.findAllByTrainerNo(trainerNO)) {
+            ChatroomDTO chatroomDTO = new ChatroomDTO().fromEntity(chatroom);
+            myChatroomList.add(chatroomDTO);
+        }
+        return myChatroomList;
+    }
+
 }
 
 

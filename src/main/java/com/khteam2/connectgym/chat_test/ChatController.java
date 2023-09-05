@@ -29,7 +29,6 @@ public class ChatController {
                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass memberClass) {
         Chatroom chatroom = chatroomService.inChatroom(chatroomNo);
 //        ChatroomDTO chatroomDTO = new ChatroomDTO().fromEntity(chatroom);
-        System.out.println("chatroomNo=====================");
         System.out.println(chatroomNo);
 //        System.out.println(chatroomDTO);
         List<ChatMessage> chatMessages = chatroomService.loadMessage(chatroom);
@@ -37,15 +36,20 @@ public class ChatController {
         model.addAttribute("chatroomNo", chatroomNo);
 //        model.addAttribute("chatroomDTO", chatroomDTO);
         model.addAttribute("chatroom", chatroom);
-        String sender = "";
 
+
+        //sender  interlocutor 구분해서 모델전송
+        String sender = "";
+        String interlocutor = "";
         if (memberClass == MemberClass.MEMBER) {
             sender = chatroom.getMember().getUserName();
+            interlocutor = chatroom.getTrainer().getTrainerName();
         } else {
             sender = chatroom.getTrainer().getTrainerName();
+            interlocutor = chatroom.getMember().getUserName();
         }
         model.addAttribute("sender", sender);
-
+        model.addAttribute("interlocutor", interlocutor);
         return "chat_test/chat_test2";
     }
 //    @PostMapping("/chat_test/{chatroomNo}")

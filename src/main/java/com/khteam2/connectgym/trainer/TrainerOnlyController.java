@@ -1,10 +1,12 @@
 package com.khteam2.connectgym.trainer;
 
+import com.khteam2.connectgym.chat_test.ChatroomService;
+import com.khteam2.connectgym.chat_test.dto.ChatroomDTO;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.MemberClass;
-import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomRequestDto;
+import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerRoomResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class TrainerOnlyController {
 
     private final TrainerService trainerService;
     private final TrainerOnlyService trainerOnlyService;
-
+    private final ChatroomService chatroomService;
 
     @GetMapping("/mypage")
     public String myPageT(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
@@ -37,11 +39,12 @@ public class TrainerOnlyController {
             return "redirect:/";
 
         } else if (loginMemberClass == MemberClass.TRAINER) {
-            // 트레이너 회원 로그인된 경우
-
+            // 트레이너 회원 로그인 된 경우
             TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
-            model.addAttribute("trainer", trainerResponseDTO);
 
+            List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);
+            model.addAttribute("trainer", trainerResponseDTO);
+            model.addAttribute("chatroomList", chatroomList);
             return "trainerOnly/myDashboard"; // 트레이너 마이페이지로 이동
         } else {
             return "redirect:/mypage";

@@ -57,7 +57,7 @@
 
                 </div>
             </div>
-
+            <!--    채팅룸리스트      -->
             <div class="dsh-left-fourth-row">
                 <div class="dsh-message-box">
                     <div class="dsh-message-header">
@@ -65,8 +65,21 @@
                     </div>
                     <div class="dsh-message-wrapper">
                         <div class="dsh-message-content">
-                            <p class="message-text"></p>
-                            <p class="message-subtext"></p>
+                            <th:block th:if="${chatroomList.size() > 0}">
+                                <div class="mychatroom_list_trainer" th:each="chatroom:${chatroomList}">
+
+                                    <div class="mychatroom_list_trainer_info">
+                                        <div class="mmychatroom_list_trainer_name">[[${chatroom.member.userName}]]
+                                        </div>
+                                    </div>
+                                    <div class="mychatroom_list_trainer_button">
+                                        <img width="25" height="20"
+                                             src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/message_icon.png"
+                                             th:onclick="|window.open('/chat_test/'+ ${chatroom.no}, 'chatting-window',
+                'width=430, height=500, location=no, status=no, scrollbars=yes');|"/>
+                                    </div>
+                                </div>
+                            </th:block>
                         </div>
                     </div>
                 </div>
