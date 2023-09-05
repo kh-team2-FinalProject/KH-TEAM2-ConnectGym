@@ -24,9 +24,8 @@ public class DietListController {
     private FoodRepository foodRepository;
 
 
-
     @GetMapping("fooddiary/foodInfo")
-    public String diet_SearchForm(Model model){
+    public String diet_SearchForm(Model model) {
         model.addAttribute("food", new Food());
         return "fooddiary/foodInfo";
     }
@@ -41,15 +40,14 @@ public class DietListController {
 
     @PostMapping("fooddiary/foodInfo")
     public String addFood(@ModelAttribute @Valid Food food, Errors errors, Model model) {
-
+        /* 에러 메세지 */
         if (errors.hasErrors()) {
-            model.addAttribute("food", food); // 폼 데이터를 모델에 추가
-            // 유효성 통과 못한 필드와 메세지 핸들링
+            model.addAttribute("food", food);
             Map<String, String> validatorResult = foodService.validateHandling(errors);
-            for(String key : validatorResult.keySet()) {
+            for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-            return "fooddiary/foodInfo"; // 다시 입력 페이지로 이동
+            return "fooddiary/foodInfo";
         }
 
         foodService.saveFood(food);
@@ -58,7 +56,7 @@ public class DietListController {
     }
 
 
-    @GetMapping("fooddiary/dietwrite")
+/*    @GetMapping("fooddiary/dietwrite")
     public String diet_WriteForm(Model model) {
         Food food = foodRepository.findById(29057L).orElse(null);
         List<Food> foods = new ArrayList<>();
@@ -66,10 +64,10 @@ public class DietListController {
         model.addAttribute("foods", foods);
 
         return "fooddiary/dietlist";
-    }
+    }*/
 
     @GetMapping("fooddiary/foodinfo")
-    public String searchFood(@RequestParam String key, Model model){
+    public String searchFood(@RequestParam String key, Model model) {
         if (key != null && !key.isEmpty()) {
             List<Food> foodinfo = foodService.searchFood(key);
             model.addAttribute("foodinfo", foodinfo);
@@ -81,13 +79,27 @@ public class DietListController {
 
     // dietlist
     @GetMapping("fooddiary/dietlist")
-    public String searchDiet(@RequestParam(name = "key", required = false) String key, Model model){
+    public String searchDiet(@RequestParam(name = "key", required = false) String key, Model model) {
         if (key != null && !key.isEmpty()) {
             List<Food> dietList = foodService.searchDiet(key);
             model.addAttribute("dietList", dietList);
         }
+
+
+        model.addAttribute("selectedFood", null);
+
         model.addAttribute("food", new Food());
         return "fooddiary/dietlist";
+    }
+
+
+    @PostMapping("fooddiary/selectfood")
+    public String selectFood(
+        @RequestParam(name = "selectedKey", required = false) String selectedKey,
+        Model model){
+        Food selectedFood = foodRepository.findByFoodNm(selectedKey);
+        model.addAttribute("selectedFood", selectedFood);
+        return "redirect://fooddiary/dietlist";
     }
 
 

@@ -151,6 +151,12 @@ public class FoodServiceImpl implements FoodService {
     }
 
 
+    @Transactional
+    @Override
+    public Food selectFood(String selectedKey){
+        Food selfood = foodRepository.findByFoodNm(selectedKey);
+        return selfood;
+    }
 }
 
 

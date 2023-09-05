@@ -138,6 +138,7 @@
                     </thead>
                     <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                     <tbody>
+                    <form action="/fooddairy/selectfood" method="Post">
                     <tr th:each="food : ${foods}">
                         <td th:text="${food.foodNm}">식품명</td>
                         <td th:text="${food.foodSize}">1회 제공량</td>
@@ -149,11 +150,12 @@
                             <button class="btn1" onclick="openPop(meal)">+</button>
                         </td>
                     </tr>
+                    </form>
                     </tbody>
                     <tfoot>
                     <tr >
                         <td></td><td></td><td></td><td></td><td></td><td></td>
-                        <td colspan="7" class="sub" title="버튼 자리">
+                        <td class="sub" title="버튼 자리">
                             <button class="btn1" onclick="openPop(meal)">+</button>
                         </td>
                     </tr>
@@ -180,13 +182,14 @@
                     </thead>
                     <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                     <tbody>
-                    <tr th:each="food : ${foods}">
-                        <td th:text="${food.foodNm}">식품명</td>
-                        <td th:text="${food.foodSize}">1회 제공량</td>
-                        <td th:text="${food.choc}">탄수화물</td>
-                        <td th:text="${food.prot}">단백질</td>
-                        <td th:text="${food.fat}">지방</td>
-                        <td th:text="${food.kcal}">칼로리</td>
+
+                    <tr th:each="food1 : ${selectedFood}">
+                        <td th:text="${food1.foodNm}">식품명</td>
+                        <td th:text="${food1.foodSize}">1회 제공량</td>
+                        <td th:text="${food1.choc}">탄수화물</td>
+                        <td th:text="${food1.prot}">단백질</td>
+                        <td th:text="${food1.fat}">지방</td>
+                        <td th:text="${food1.kcal}">칼로리</td>
                         <td class="sub" title="버튼 자리">
                             <button class="btn1" onclick="openPop(meal)">+</button>
                         </td>
@@ -233,7 +236,10 @@
                     <tbody>
                     <tr th:each="food: ${dietList}">
                         <td>
-                            <span th:text="${food.foodNm}"></span>
+                            <form action="/fooddairy/selectfood" method="POST">
+                            <button type="submit" >
+                                <input name="selectedKey" th:value="${food.foodNm}" ></input>
+                            </button></form>
                         </td>
                         <td th:text="${food.foodSize}">
                             <span th:text="${food.foodSize}" >g</span>
