@@ -137,6 +137,19 @@ public class FoodServiceImpl implements FoodService {
         return foodinfo;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<Food> searchDiet(String key){
+        List<Food> dietList = new ArrayList<>();
+
+        List<Food> foods = foodRepository.findByFoodNmContains(key);
+        for(Food food: foods){
+            dietList.add(food);
+        }
+
+        return dietList;
+    }
+
 
 }
 

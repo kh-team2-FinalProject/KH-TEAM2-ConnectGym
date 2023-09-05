@@ -30,6 +30,14 @@ public class DietListController {
         model.addAttribute("food", new Food());
         return "fooddiary/foodInfo";
     }
+/*
+    @GetMapping("fooddiary/dietlist")
+    public String my_DietList(Model model){
+        model.addAttribute("food", new Food());
+        return "fooddiary/dietlist";
+    }
+*/
+
 
     @PostMapping("fooddiary/foodInfo")
     public String addFood(@ModelAttribute @Valid Food food, Errors errors, Model model) {
@@ -50,7 +58,7 @@ public class DietListController {
     }
 
 
-    @GetMapping("fooddiary/dietlist")
+    @GetMapping("fooddiary/dietwrite")
     public String diet_WriteForm(Model model) {
         Food food = foodRepository.findById(29057L).orElse(null);
         List<Food> foods = new ArrayList<>();
@@ -70,6 +78,17 @@ public class DietListController {
         return "fooddiary/foodinfo";
     }
 
+
+    // dietlist
+    @GetMapping("fooddiary/dietlist")
+    public String searchDiet(@RequestParam(name = "key", required = false) String key, Model model){
+        if (key != null && !key.isEmpty()) {
+            List<Food> dietList = foodService.searchDiet(key);
+            model.addAttribute("dietList", dietList);
+        }
+        model.addAttribute("food", new Food());
+        return "fooddiary/dietlist";
+    }
 
 
 }
