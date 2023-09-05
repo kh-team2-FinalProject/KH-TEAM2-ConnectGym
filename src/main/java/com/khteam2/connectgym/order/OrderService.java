@@ -39,6 +39,8 @@ import java.util.stream.Collectors;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
+    private final OrderProgressRepository orderProgressRepository;
+    private final OrderProgressDetailRepository orderProgressDetailRepository;
     private final LessonRepository lessonRepository;
     private final MemberRepository memberRepository;
     private final IamportClient iamportClient;
@@ -49,7 +51,7 @@ public class OrderService {
      * @param loginMemberNo 로그인되어 있는 회원의 no
      * @param lessonNolist  lesson 번호가 담겨있는 List
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public OrderResponseDto prepareOrder(Long loginMemberNo, List<Long> lessonNolist) {
         OrderResponseDto responseDto = OrderResponseDto.builder()
             .success(false)
@@ -120,6 +122,26 @@ public class OrderService {
             return responseDto;
         }
 
+        // 결제할 금액과 주문 번호를 저장하기 위한 객체를 생성한다.
+        OrderProgressDto orderProgressDto = OrderProgressDto.builder()
+            .orderNo(merchantUid)
+            .price(totalPrice)
+            .build();
+
+        // 결제할 금액과 주문 번호를 저장한다.
+        OrderProgress orderProgress = this.orderProgressRepository.save(orderProgressDto.toEntity());
+
+        // 결제할 레슨 등의 상세 정보를 저장하기 위해서 리스트를 생성한다.
+        List<OrderProgressDetail> orderProgressDetailList = lessons.stream()
+            .map(lesson -> OrderProgressDetail.builder()
+                .orderProgress(orderProgress)
+                .lesson(lesson)
+                .build())
+            .collect(Collectors.toList());
+
+        // 결제 예정 상세 정보를 모두 DB에 저장한다.
+        this.orderProgressDetailRepository.saveAll(orderProgressDetailList);
+
         // View로 넘겨줄 값들을 DTO에 넘겨준다.
         responseDto.setSuccess(true);
         responseDto.setLessonList(lessons);
@@ -140,19 +162,10 @@ public class OrderService {
      */
     @Transactional(readOnly = true)
     private boolean hasLesson(Long memberNo, List<Long> lessonNoList) {
-        boolean result = false;
         // 해당 회원이 신청한 레슨을 모두 가져온다.
-        List<Lesson> alreadyLessonList = this.lessonRepository.findByMemberNo(memberNo);
+        List<Lesson> alreadyLessonList = this.lessonRepository.findAllByMemberNoAndLessonNoList(memberNo, lessonNoList);
 
-        // 레슨 리스트를 순환해서 해당 번호가 존재하면 true로 설정한 뒤 반복문에서 빠져나온다.
-        for (Lesson lesson : alreadyLessonList) {
-            if (lessonNoList.contains(lesson.getNo())) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
+        return !alreadyLessonList.isEmpty();
     }
 
     /**
@@ -166,16 +179,17 @@ public class OrderService {
         String orderNo = null;
         String date = CommonUtil.getTodayLocalDate8(); // 20230820
 
-        for (int i = 0; i < 10; i++) {
-            // 1 ~ 999,999 값을 생성함
+        for (int i = 0; i < 100_000; i++) {
+            // 1 ~ 999,999 값을 생성한다.
             int randomValue = CommonUtil.generateRandomNumberInt(6);
             // 주문 번호 형식: 20230820001024 / 20230820123456
             orderNo = String.format("%s%06d", date, randomValue);
 
-            // 해당 주문 번호가 있는지 확인
-            Order order = this.orderRepository.findById(orderNo).orElse(null);
-            if (order == null) {
-                // 해당 주문 번호가 없으면 반복문에서 빠져 나옴
+            // 해당 주문 번호가 있는지 확인한다.
+            OrderProgress orderProgress = this.orderProgressRepository.findByOrderNo(orderNo);
+
+            if (orderProgress == null) {
+                // 해당 주문 번호가 없으면 반복문에서 빠져 나온다.
                 break;
             }
         }
@@ -193,6 +207,7 @@ public class OrderService {
      * @return 포트원 서버에서 가져온 사전 검증 결과 반환
      * @throws IamportResponseException 요청을 보냈으나 포트원 서버에서 오류가 발생할 경우 예외 발생
      */
+    @Transactional
     public IamportResponse<Prepare> preparePortOne(String merchantUid, Long totalPrice)
         throws IamportResponseException {
         // 결제 전 포트원 서버로 전송할 객체 선언. 주문 번호와 결제할 금액을 넘긴다.
@@ -214,55 +229,41 @@ public class OrderService {
     /**
      * 주문 진행 중일 때 실행되는 메소드
      *
-     * @param requestDto       요청받은 DTO
-     * @param sLoginMemberNo   세션에 저장된 로그인된 멤버 번호
-     * @param sMerchantUid     세션에 저장된 주문 번호
-     * @param sTotalPrice      세션에 저장된 결제할 금액
-     * @param sOrderLessonList 세션에 저장된 결제할 강의 목록
-     * @param isApi            API 이용 여부
+     * @param requestDto     요청받은 DTO
+     * @param sLoginMemberNo 세션에 저장된 로그인된 멤버 번호
+     * @param isApi          API 이용 여부
      * @return 응답 객체 반환
      */
     @Transactional
     public OrderProcessResponseDto processOrder(
-        OrderProcessRequestDto requestDto,
-        Long sLoginMemberNo,
-        String sMerchantUid,
-        Long sTotalPrice,
-        List<Long> sOrderLessonList,
-        boolean isApi) {
+        OrderProcessRequestDto requestDto, Long sLoginMemberNo, boolean isApi) {
         OrderProcessResponseDto responseDto = OrderProcessResponseDto.builder()
             .success(false)
             .url("/order/fail")
             .build();
 
-        Long loginMemberNo = sLoginMemberNo;
-        String merchantUid = sMerchantUid;
-        Long totalPrice = sTotalPrice;
-        List<Long> lessonNolist = sOrderLessonList;
         String impUid = requestDto.getImp_uid();
         String errorMsg = requestDto.getError_msg();
 
-        if (loginMemberNo == null) {
+        // 로그인되어 있지 않으면 객체를 리턴한다.
+        if (sLoginMemberNo == null) {
             responseDto.setMessage("로그인되어 있지 않습니다.");
             return responseDto;
         }
 
-        // 레슨 번호가 들어있는 리스트를 통해서 DB에서 레슨 목록을 받아온다.
-        List<Lesson> lessonList = this.lessonRepository.findAllById(lessonNolist);
-
-        // 레슨 번호 리스트와 DB에서 가져온 레슨의 개수를 비교해서 다르면 실패 메시지를 반환한다.
-        if (lessonNolist.size() != lessonList.size()) {
-            log.error("가져온 lesson과 lessonNo 리스트의 사이즈가 다릅니다");
-            responseDto.setMessage("내부 서버 문제로 인해 결제에 실패했습니다.");
-            return responseDto;
-        }
-
         // 로그인되어 있는 사용자 ID를 이용해서 사용자 정보를 DB에서 꺼내온다.
-        Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+        Member member = this.memberRepository.findById(sLoginMemberNo).orElse(null);
 
+        // 사용자 정보를 찾을 수 없으면 객체를 반환한다.
         if (member == null) {
             log.error("DB에서 사용자 정보를 찾을 수 없습니다.");
             responseDto.setMessage("사용자 정보를 찾을 수 없습니다.");
+            return responseDto;
+        }
+
+        // 포트원 결제 번호가 없으면 객체를 반환한다.
+        if (impUid == null || impUid.isEmpty()) {
+            responseDto.setMessage("잘못된 요청입니다.");
             return responseDto;
         }
 
@@ -282,12 +283,27 @@ public class OrderService {
         }
 
         Payment payment = response.getResponse();
+        String merchantUid = payment.getMerchantUid();
+
+        // 결제 주문건을 DB에서 불러온다.
+        OrderProgress orderProgress = this.orderProgressRepository.findByOrderNo(merchantUid);
+
+        if (orderProgress == null) {
+            responseDto.setMessage("해당 주문건이 없습니다.");
+            return responseDto;
+        }
+
+        // 전체 금액을 꺼내온다.
+        Long totalPrice = orderProgress.getPrice();
 
         // 결제 결과 검증 메소드를 통해 검증에 실패했으면 실패 메시지를 반환한다.
         if (!this.verifyPortonePayment(response, merchantUid, totalPrice)) {
             responseDto.setMessage("검증 실패");
             return responseDto;
         }
+
+        // 결제 예정 항목의 주문 번호를 이용해서 레슨 리스트를 가져온다.
+        List<Lesson> lessonList = this.lessonRepository.findAllByOrderProgressOrderNo(merchantUid);
 
         // DTO에 URL을 설정해 준다.
         String tempUrl = "/order/complete?orderId=" + merchantUid;
