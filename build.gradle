@@ -46,7 +46,7 @@ dependencies {
 
     //채팅관련  stomp,websocket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
-    implementation 'org.webjars:sockjs-client:1.5.1'
+    implementation 'org.webjars:sockjs-client:1.0.0'
     implementation 'org.webjars:stomp-websocket:2.3.3'
 
 
@@ -70,10 +70,6 @@ dependencies {
 
     // 페이징
     implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
-
-
-
-
 
 
     //oauth2.0 api
