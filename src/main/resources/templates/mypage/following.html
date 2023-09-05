@@ -33,6 +33,7 @@ function search() {
                 <div class="myFollowing_list_trainer_name">${trainer.trainerName}</div>
                 <div class="myFollowing_list_trainer_id">${trainer.trainerId}</div>
               </div>
+              <
               <div class="myFollowing_list_trainer_button">
                 <img width="50" height="50" src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/message_icon.png" />
                 <button onclick="location.href='/trainerDetail/${trainer.trainerNo}'">프로필보기</button>
@@ -77,6 +78,9 @@ function search() {
                         <div class="myFollowing_list_trainer_info">
                             <div class="myFollowing_list_trainer_name">[[${trainer.trainerName}]]</div>
                             <div class="myFollowing_list_trainer_id">[[${trainer.trainerId}]]</div>
+                        </div>
+                        <div class="myFollowing_list_trainer_title">
+                            <div class="myFollowing_list_trainer_shortTitle">[[${trainer.infoTitle}]]</div>
                         </div>
                         <div class="myFollowing_list_trainer_button">
                             <img width="50" height="50"

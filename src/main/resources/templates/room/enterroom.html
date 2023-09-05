@@ -4,6 +4,7 @@
 
 <th:block layout:fragment="add-css">
     <link rel="stylesheet" th:href="@{/css/enterroom.css}">
+    <link rel="stylesheet" th:href="@{/css/common/loading.css}">
 </th:block>
 
 <th:block layout:fragment="script">
@@ -14,6 +15,7 @@
         let userType =  [[${type}]];
     </script>
     <script th:src="@{/js/roomStreaming.js}"></script>
+
 </th:block>
 
 
@@ -22,6 +24,7 @@
 
 
     <div class="lessonroom_container">
+
         <div class="lessonroom_top">
             <div class="lroom-title" th:text="${roomInfo.lessonTitle}"></div>
             <button type="button" class="lroom-button" id="buttonLeaveSession"
@@ -29,15 +32,16 @@
             </button>
         </div>
 
+        <div class="mylessonlistloading_wrap" id="mylessonlistloading_wrap">
+            <div class="mylessonlist_loading">
+                <div class="bounceball"></div>
+                <div class="text">NOW LOADING</div>
+            </div>
+        </div>
 
-        <div class="lessonroom_content">
+        <div class="lessonroom_content" id="lessonroom_content" style="none">
             <div class="loader">
             </div>
-            <div id="main-video" class="main-video">
-                <!--<video autoplay playsinline="true"></video>
-                <p></p>-->
-            </div>
-
             <div id="video-container" class="video-container">
 
             </div>

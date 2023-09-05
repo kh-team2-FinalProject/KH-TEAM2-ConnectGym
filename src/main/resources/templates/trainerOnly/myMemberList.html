@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{trainerOnly/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>트레이너 마이페이지 > 나의 회원</title>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/trainerOnly/enterRoom.js}"></script>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="mypage">
+
+    <h1>내 레슨을 등록한 회원</h1>
+
+    <th:block th:if="${trainerEnterRoom.errorMsg == 'NotFound'}">
+        <div>현재 등록한 회원이 없습니다.</div>
+    </th:block>
+
+    <th:block th:if="${trainerEnterRoom.errorMsg != 'NotFound'}">
+        <div>나의 레슨을 구매한 회원 목록</div>
+        <div th:each="member : ${trainerEnterRoom.memberMap}">
+            <a href="#">[[${member.value.userName}]]</a>
+
+            <button th:onclick="enterRoom([[${trainerEnterRoom.titleCode}]],[[${member.key}]])">입장하기</button>
+        </div>
+    </th:block>
+
+
+</th:block>
 </body>
 </html>

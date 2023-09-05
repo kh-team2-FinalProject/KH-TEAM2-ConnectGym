@@ -72,6 +72,7 @@
 /*한 행 사이즈*/
 .myFollowing_list_trainer_img{ width:110px;}
 .myFollowing_list_trainer_info{ flex: 1;}
+.myFollowing_list_trainer_title{ flex: 3;}
 .myFollowing_list_trainer_button{ flex: 1;}
 
 
@@ -108,6 +109,16 @@
 .myFollowing_list_trainer_id{
   font-size:14px;
   padding-left: 4px;
+}
+
+.myFollowing_list_trainer_title{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-shadow: 1px 1px black;
+    color: #f9b332;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .myFollowing_list_trainer_button{
