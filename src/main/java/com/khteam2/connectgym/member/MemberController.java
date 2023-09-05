@@ -1,10 +1,11 @@
 package com.khteam2.connectgym.member;
 
+import com.khteam2.connectgym.chat_test.ChatroomService;
+import com.khteam2.connectgym.chat_test.dto.ChatroomDTO;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
-import com.khteam2.connectgym.like.dto.LikeDto;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.trainer.TrainerService;
@@ -29,6 +30,7 @@ public class MemberController {
     private final MailSendService mailService;
     private final FollowService followService;
     private final LikeService likeService;
+    private final ChatroomService chatroomService;
 
     @GetMapping(value = "/user/login")
     public String tempLogin(
@@ -212,6 +214,7 @@ public class MemberController {
 
         return "mypage/following";
     }
+
     // 4) 찜
     @GetMapping("/mypage/myLike")
     public String myLikes(Model model, HttpSession session) {
@@ -227,9 +230,21 @@ public class MemberController {
         return "mypage/like";
     }
 
+    //  5) 채팅방 리스트
+    @GetMapping("/mypage/myChatroomList")
+    public String myChatroomList(Model model, HttpSession session) {
+        // 배너 타이틀
+        model.addAttribute("bannerTitle", "messages");
+        MemberResponseDTO member = memberService.sessionMem(session);
+        List<ChatroomDTO> chatroomList = chatroomService.searchMyTrainerChatroomList(member.getNo());
+        model.addAttribute("chatroomList", chatroomList);
+        return "mypage/messages";
+    }
+
+
     // 주문내역 > 리뷰쓰기 버튼 생성
     @GetMapping("/mypage/writeReview")
-    public String writeReview(Model model, HttpSession session){
+    public String writeReview(Model model, HttpSession session) {
         model.addAttribute("bannerTitle", "following");
         return "mypage/review/writeReview";
     }
