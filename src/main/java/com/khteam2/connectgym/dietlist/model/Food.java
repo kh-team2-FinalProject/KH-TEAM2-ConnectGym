@@ -50,7 +50,11 @@ public class Food {
 
     private Double satFat; // 포화 지방
     private Double transFat; // 트랜스 지방
+
+    @NotNull(message = "칼로리는 필수 입력입니다.")
+    @PositiveOrZero(message = "칼로리는 0 또는 양수이어야 합니다.")
     private Double kcal; // 칼로리
+
     private Double nat; // 나트륨
     private Double sugar; // 당류
     private String animalPlant; // 가공업체

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
@@ -22,9 +23,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -35,6 +34,8 @@ public class FoodServiceImpl implements FoodService {
     private FoodRepository foodRepository;
     @Value("${dietApi.key}")
     private String opendataEncodedApiKey;
+
+
 
     /* food api로 get */
     public FoodNutrientDto getFoods(int pageNo, int limit) {
@@ -108,6 +109,7 @@ public class FoodServiceImpl implements FoodService {
         return foodRepository.save(food);
     }
 
+    /* 유효성 체크해서 에러 메세지 */
     @Override
     public Map<String, String> validateHandling(Errors errors){
         Map<String, String> validatorResult = new HashMap<>();
@@ -118,6 +120,34 @@ public class FoodServiceImpl implements FoodService {
         }
 
         return validatorResult;
+    }
+
+
+    /**/
+    @Transactional(readOnly = true)
+    @Override
+    public List<Food> searchFood(String key){
+        List<Food> foodinfo = new ArrayList<>();
+
+        List<Food> foods = foodRepository.findByFoodNmContains(key);
+        for(Food food: foods){
+            foodinfo.add(food);
+        }
+
+        return foodinfo;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Food> searchDiet(String key){
+        List<Food> dietList = new ArrayList<>();
+
+        List<Food> foods = foodRepository.findByFoodNmContains(key);
+        for(Food food: foods){
+            dietList.add(food);
+        }
+
+        return dietList;
     }
 
 

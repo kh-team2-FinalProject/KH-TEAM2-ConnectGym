@@ -2,15 +2,135 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/mypages}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
-
 <th:block layout:fragment="title">
     <title>마이페이지 > 대시보드</title>
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
+    <div class="m-dsh-main-container">
+        <div class="m-dsh-first-row">
+            <div class="m-dsh-first-row-left">
+                <div class="m-dsh-profile-box">
+                    <button class="m-dsh-profile-update-btn">수정하기</button>
 
+                    <div class="m-dsh-profile-text">
+                        <p class="m-dsh-profile-id">아이디</p>
+                        <p class="m-dsh-profile-info">이름</p>
+                    </div>
+                </div>
+            </div>
+            <div class="m-dsh-first-row-right">
+                <div class="m-dsh-lesson-box">
+                    <div class="m-dsh-lesson-box-title">
+                        <p class="m-dsh-lesson-box-title-text"></p>
+                    </div>
+                    <div class="m-dsh-lesson-box-content">
+                        <div class="m-dsh-lesson-box-img">
+                            <img src="#" alt="lesson img">
+                        </div>
+                        <div class="m-dsh-lesson-box-text">
+                            <span class="m-dsh-lesson-title">강좌명 강좌명 </span>
+                            <span class="m-dsh-lesson-info">강좌내용 강좌내용 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-dsh-left-container">
+            <div class="m-dsh-left-first-row">
+                <div class="m-dsh-left-first-row-card">
+                    <span class="m-dsh-card-title">내가 찜한 강좌 </span>
+                    <span class="m-dsh-card-content">10개</span>
+                </div>
+                <div class="m-dsh-left-first-row-card">
+                    <span class="m-dsh-card-title">팔로잉 </span>
+                    <span class="m-dsh-card-content">100명</span>
+                </div>
+                <div class="m-dsh-left-first-row-card">
+                    <span class="m-dsh-card-title">누적 구매 수 </span>
+                    <span class="m-dsh-card-content">100개</span>
+                </div>
+            </div>
 
+            <div class="m-dsh-left-second-row">
+                <div class="m-dsh-message-box">
+                    <div class="m-dsh-message-header">
+                        <p class="m-dsh-message-header-title">MESSAGE</p>
+                    </div>
+                    <div class="m-dsh-message-wrapper">
+                        <div class="m-dsh-message-content">
+                            <p class="m-message-text"></p>
+                            <p class="m-message-subtext"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-dsh-review-box">
+                    <div class="m-dsh-review-header">
+                        <p class="m-dsh-review-header-title">REVIEW</p>
+                    </div>
+                    <div class="m-dsh-review-wrapper">
+                        <div class="m-dsh-review-content">
+                            <p class="m-dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
+                            <p class="m-dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
+                        </div>
+                        <div class="m-dsh-review-content">
+                            <p class="m-dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
+                            <p class="m-dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
+                        </div>
+                        <div class="m-dsh-review-content">
+                            <p class="m-dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
+                            <p class="m-dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-dsh-left-third-row">
+                <div class="m-dsh-faq-box">
+                    <div class="m-dsh-faq-header">
+                        <span class="m-dsh-faq-header-title"></span>
+                    </div>
+                    <div class="m-dsh-faq-content">
+                        <span class="m-dsh-faq-title"></span>
+                        <span class="m-dsh-faq-text"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-dsh-right-container">
+            <div class="m-dsh-order-box">
+                <div class="m-dsh-order-box-header">
+                    <p class="m-dsh-order-box-title">나의 구매 내역</p>
+                </div>
+                <div class="m-dsh-order-list">
+                    <div class="m-dsh-order-content">
+                        <div class="m-dsh-order-pic-wrapper">
+                            <img src="#" alt="lesson photo" class="m-dsh-order-pic">
+                        </div>
+                        <div class="m-dsh-order-text">
+                            <span class="m-dsh-order-no">주문번호 : 13416465</span>
+                            <span class="m-dsh-order-title">강좌명 강좌명 강좌명</span>
+                            <span class="m-dsh-order-price">100000원</span>
+                            <span class="m-dsh-order-date">2023-08-31 01:56:23</span>
+                        </div>
+                    </div>
+                    <div class="m-dsh-order-content">
+                        <div class="m-dsh-order-pic-wrapper">
+                            <img src="#" alt="lesson photo" class="m-dsh-order-pic">
+                        </div>
+                        <div class="m-dsh-order-text">
+                            <span class="m-dsh-order-no">주문번호 : 13416465</span>
+                            <span class="m-dsh-order-title">강좌명 강좌명 강좌명</span>
+                            <span class="m-dsh-order-price">100000원</span>
+                            <span class="m-dsh-order-date">2023-08-31 01:56:23</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </th:block>
 

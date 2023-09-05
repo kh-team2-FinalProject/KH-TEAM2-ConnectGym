@@ -52,9 +52,10 @@ button {
 }
 
 /* 버튼 클릭시 */
-.ctgyitem.active {
+.ctgy-btn.active {
   border-color: #143c56;
   background-color: #143c56;
+  color: white;
 }
 
 .ctgy-btn {
@@ -68,9 +69,9 @@ button {
   border: none;
 }
 
-.ctgyitem.active .ctgy-btn {
+/*.ctgyitem.active .ctgy-btn {
   color: white;
-}
+}*/
 
 /* 아코디언 wrap */
 .faq-accodion-wrap {

@@ -2,49 +2,131 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>1:1 Chat</title>
+    <style>
+
+        body {
+            background-color: #A8C0D6
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #message-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #A8C0D6;
+        }
+
+        #chat-box {
+            border: none;
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+            background-color: #A8C0D6;
+
+        }
+
+        #message {
+            width: calc(100% - 70px);
+            padding: 7px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+        }
+
+        #sendButton {
+            padding: 7px 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            height: 30px;
+        }
+
+    </style>
+    <script th:inline="javascript">
+        const loginclass = [[${session.session_login_member_class}]];
+        let sender = "";
+        let interlocutor = ""
+        if (loginclass == "MEMBER") {
+            sender = [[${chatroom.member.userName}]];
+            interlocutor = [[${chatroom.trainer.trainerName}]];
+        } else if (loginclass == "TRAINER") {
+            sender = [[${chatroom.trainer.trainerName}]];
+            interlocutor = [[${chatroom.member.userName}]];
+        }
+        const chatroomNo = [[${chatroomNo}]];
+
+        //로그인되어있는 사람을 sender로 지정
+    </script>
     <script src="/webjars/sockjs-client/1.5.1/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/js/chatroom.js}"></script>
 </head>
 
 <body>
 <div id="chat">
-    <form id="messageForm">
+    <!--    채팅 상대방-->
+    <div id="chat-interlocutor">
+        <i class="fa-solid fa-user"></i>
+        <div th:text="${chatroom.trainer.trainerName}"></div>
 
-        <input type="text" id="message" placeholder="Type your message..."/>
-        <button type="submit">Send</button>
-    </form>
-    <div id="messages"></div>
+    </div>
+    <div id="chat-box">
+        <div th:each="chatMessage : ${chatMessages}">
+            <div th:text="|${chatMessage.sender}   :  ${chatMessage.content}|"></div>
+        </div>
+
+
+        <!-- 채팅 내용이 표시될 영역 -->
+    </div>
+    <div id="message-container">
+        <input type="text" id="message" placeholder="메시지 입력">
+        <button id="sendButton" onclick="sendMessage()">전송</button>
+    </div>
 </div>
 
 <script th:inline="javascript">
+
     var socket = new SockJS('/chat');
     var stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function (frame) {
-        console.log('Connected: ' + frame);
+        stompClient.subscribe(`/queue/qqq/${chatroomNo}`, function (message) {
+
+            var messageText = JSON.parse(message.body);
+            showMessage(messageText);
+        });
     });
 
-    document.querySelector("#messageForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        document.querySelector("");
+    // var socket = new SockJS('/chat');
+    // var stompClient = Stomp.over(socket);
+    //
+    // stompClient.connect({}, function (frame) {
+    //     console.log('Connected: ' + frame);
+    // });
 
-        var messageInput = document.querySelector("#message");
-        var messageContent = messageInput.value;
-        stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify({
-            'content': messageContent,
-            'sender': '우영'
-        }));
-        messageInput.value = '';
-    });
+    // document.querySelector("#messageForm").addEventListener("submit", function (event) {
+    //     event.preventDefault();
+    //     document.querySelector("");
+    //
+    //     var messageInput = document.querySelector("#message");
+    //     var messageContent = messageInput.value;
+    //     stompClient.send(`/app/chat/${chatroomNo}`, {}, JSON.stringify({
+    //         'content': messageContent,
+    //         'sender': sender
+    //     }));
+    //     messageInput.value = '';
+    // });
 
-    function showMessage(message) {
-        var messageDiv = document.createElement("div");
-        messageDiv.textContent = message.sender + ': ' + message.content; // 보낸 사람 정보 표시
-        document.querySelector("#messages").appendChild(messageDiv);
-    }
 
-    stompClient.subscribe('/queue/qqq/${roomId}', function (message) {
-        showMessage(JSON.parse(message.body));
-    });
+    // stompClient.subscribe(`/queue/qqq/${chatroomNo}`, function (message) {
+    //     showMessage(JSON.parse(message.body));
+    // });
 </script>
 </body>

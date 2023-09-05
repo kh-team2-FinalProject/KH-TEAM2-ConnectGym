@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/order")
@@ -28,21 +27,14 @@ public class OrderApiController {
     public ResponseEntity<OrderProcessResponseDto> processOrderPc(
         HttpSession session,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long sLoginMemberNo,
-        @SessionAttribute(name = SessionConstant.ORDER_ORDER_NO, required = false) String sMerchantUid,
-        @SessionAttribute(name = SessionConstant.ORDER_PRICE, required = false) Long sTotalPrice,
-        @SessionAttribute(name = SessionConstant.ORDER_LESSON_LIST, required = false) List<Long> sOrderLessonList,
         OrderProcessRequestDto requestDto) {
         if (requestDto.getImp_uid() == null
             || requestDto.getMerchant_uid() == null
-            || sLoginMemberNo == null
-            || sMerchantUid == null
-            || sTotalPrice == null
-            || sOrderLessonList == null
-            || sOrderLessonList.isEmpty()) {
+            || sLoginMemberNo == null) {
             throw new IllegalArgumentException("잘못된 요청입니다.");
         }
 
-        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto, sLoginMemberNo, sMerchantUid, sTotalPrice, sOrderLessonList, true);
+        OrderProcessResponseDto responseDto = this.orderService.processOrder(requestDto, sLoginMemberNo, true);
 
         if (!responseDto.isSuccess()) {
             return ResponseEntity.badRequest().body(responseDto);
