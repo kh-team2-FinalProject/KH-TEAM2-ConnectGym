@@ -17,10 +17,10 @@
         <!-- 메뉴 선택 a태그 -->
         <div class="ui-tab scroll">
             <div class="module">
-                <div class="menu-item active">
+                <div class="menu-item">
                     <a class="menu-btn" th:href="/customer/faq">자주 묻는 질문</a>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item active">
                     <a class="menu-btn" th:href="/customer/notice">공지사항</a>
                 </div>
             </div>
@@ -30,33 +30,32 @@
             <!-- accodion -->
             <div class="faq-accodion">
                 <div class="ui-accodion">
-                    <table>
-                        <tbody>
-                        <tr th:each="noticeList : ${noticeList}">
-                            <th class="center" scope="row">
-                                <span class="badge" th:text="${noticeList.id}"></span>
-                            </th>
-                            <td>
-                                <a style="cursor: pointer;" th:text="${noticeList.title}"></a>
-                            </td>
-                            <td class="date center" th:text="${noticeList.created_Date}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="accodion-item" th:each="noticeList : ${noticeList}">
+                        <button type="button" class="accodion-btn">
+<!--                            <span class="faq-title" th:text="${noticeList.id}"></span>-->
+<!--                            <span class="faq-title" th:text="${noticeList.title}"></span>-->
+<!--                            <span class="faq-title" th:text="${noticeList.created_Date}"></span>-->
+
+                            <span>no</span>
+                            <span>title</span>
+                            <span>date</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <!-- pagination -->
             <div class="pagination">
                 <ul>
                     <li th:if="${currentPage > 1}">
-                        <a th:href="@{'/customer_service/notice?category=' + ${category} + '&page=' + ${currentPage - 1}}">이전</a>
+                        <a th:href="@{'/customer/notice?page=' + ${currentPage - 1}}">이전</a>
                     </li>
                     <li th:each="page : ${#numbers.sequence(1, totalPages)}"
                         th:classappend="${currentPage == page} ? 'active'">
-                        <a th:href="@{'/customer_service/notice?category=' + ${category} + '&page=' + ${page}}" th:text="${page}"></a>
+                        <a th:href="@{'/customer/notice?page=' + ${page}}"
+                           th:text="${page}"></a>
                     </li>
                     <li th:if="${currentPage < totalPages}">
-                        <a th:href="@{'/customer_service/notice?category=' + ${category} + '&page=' + ${currentPage + 1}}">다음</a>
+                        <a th:href="@{'/customer/notice?page=' + ${currentPage + 1}}">다음</a>
                     </li>
                 </ul>
             </div>

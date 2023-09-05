@@ -57,35 +57,15 @@ public class CSController {
 //    @GetMapping(value = "/customer/notice")
 //    public String viewNotice(
 //        @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
-//        @RequestParam(name = "category", required = false, defaultValue = "All") String category,
 //        Model model) {
 ////      페이지당 게시글 수 세팅
 //        int itemsPerPage = 5; // 페이지당 아이템 수
 //
-//        List<CS> csList = new ArrayList<>();
-//        int totalPages = 0;
-//        if (category.equals("All")) {
-//            csList = csService.viewToAll();
-//            totalPages = csService.getTotalPages(itemsPerPage, csList);
-//            csList = csService.getDataForPage(pageNumber, itemsPerPage);
+//        List<Notice> noticeList = noticeService.viewToAll();
+//        int totalPages = noticeService.getTotalPages(itemsPerPage, noticeList);
+//        noticeList = noticeService.getDataForPage(pageNumber, itemsPerPage, noticeList);
 //
-//        } else if (category.equals("1")) {
-//            csList = csService.viewToCategory(1);
-//            totalPages = csService.getTotalPages(itemsPerPage, csList);
-//            csList = csService.getDataForCategoryPage(pageNumber, itemsPerPage, csList);
-//        } else if (category.equals("2")) {
-//            csList = csService.viewToCategory(2);
-//            totalPages = csService.getTotalPages(itemsPerPage, csList);
-//            csList = csService.getDataForCategoryPage(pageNumber, itemsPerPage, csList);
-//        }
-//
-//        // 카테고리 리스트 (버튼용)
-//        List<CS_Category> ctgyList = csService.viewToAllCategory();
-//
-//        model.addAttribute("csList", csList);
-//        model.addAttribute("ctgyList", ctgyList);
-//
-//        model.addAttribute("category", category);
+//        model.addAttribute("noticeList", noticeList);
 //        model.addAttribute("currentPage", pageNumber);
 //        model.addAttribute("totalPages", totalPages);
 //

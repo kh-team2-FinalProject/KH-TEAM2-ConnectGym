@@ -159,8 +159,61 @@ button {
     display: none;
 }
 
-.pagination a{
-    color: black;
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
 }
 
+.pagination .pageNumber{
+    margin: 0 2px;
+}
+
+ul {
+    display: inline-flex;
+}
+
+.pagination .prev{
+    margin-right: 10px;
+}
+
+.pagination .next{
+    margin-left: 10px;
+}
+
+.pagination .next button,
+.pagination .prev button{
+    font-size: 16px;
+    font-weight: 700;
+    color: #9b9eae;
+}
+
+.pagination .pageNumber button{
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #9b9eae;
+}
+
+.pagination .pageNumber.active button{
+    color: #143c56;
+}
+
+.menu-item a{
+    text-decoration: none;
+    color: #9b9eae;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 24px 0 24px;
+}
+
+.menu-item.active a{
+    color: #143c56;
+}
+
+.menu-item:not(:first-child){
+    margin-left: 52px;
+}
 

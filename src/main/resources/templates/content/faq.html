@@ -15,20 +15,18 @@
 
     <!-- 전체 div-wrap -->
     <div class="cs-wrap">
-
-        <div class="ui-tab scroll">
-            <div class="module">
-                <div class="menu-item active">
-                    <a class="menu-btn" th:href=@{"/customer/faq"}>자주 묻는 질문</a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-btn" th:href=@{"/customer/notice"}>공지사항</a>
-                </div>
-            </div>
-        </div>
-
         <!-- faq section -->
         <section class="cs-layout">
+            <div class="ui-tab scroll">
+                <div class="module">
+                    <div class="menu-item active">
+                        <a class="menu-btn" th:href=@{"/customer/faq"}>자주 묻는 질문</a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-btn" th:href=@{"/customer/notice"}>공지사항</a>
+                    </div>
+                </div>
+            </div>
             <!-- 카테고리 버튼 -->
             <div class="ui-tab">
                 <!-- 카테고리 종류
@@ -69,18 +67,14 @@
                 <!-- 페이지 넘기는 부분 -->
                 <div class="pagination">
                     <ul>
-                        <li th:if="${currentPage > 1}">
-<!--                            <button th:href="@{'/customer/faq?category=' + ${category} + '&page=' + ${currentPage - 1}}">이전</button>-->
+                        <li class="prev" th:if="${currentPage > 1}">
                             <button type="button" th:data-category="${category}" th:data-page="${page}-1" onclick="changePage(this);">이전</button>
                         </li>
-                        <li th:each="page : ${#numbers.sequence(1, totalPages)}"
+                        <li class="pageNumber" th:each="page : ${#numbers.sequence(1, totalPages)}"
                             th:classappend="${currentPage == page} ? 'active'">
-<!--                            <a th:href="@{'/customer/faq?category=' + ${category} + '&page=' + ${page}}" th:text="${page}"></a>-->
                             <button type="button" th:data-category="${category}" th:data-page="${page}" onclick="changePage(this);" th:text="${page}"></button>
-<!--                            <button type="button" data-category="${category}" data-page="${page}" th:onclick="|loadCategory(${category}, ${page})|" th:text="${page}"></button>-->
                         </li>
-                        <li th:if="${currentPage < totalPages}">
-<!--                            <a th:href="@{'/customer/faq?category=' + ${category} + '&page=' + ${currentPage + 1}}">다음</a>-->
+                        <li class="next" th:if="${currentPage < totalPages}">
                             <button type="button" th:data-category="${category}" th:data-page="${page}+1" onclick="changePage(this);">다음</button>
                         </li>
                     </ul>
