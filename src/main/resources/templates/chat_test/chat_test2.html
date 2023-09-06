@@ -226,7 +226,7 @@
 <!--웹소켓 연결 및 구독-->
 <script th:inline="javascript">
 
-    var socket = new SockJS('wss://connectgym.store/chat');
+    var socket = new SockJS('https://connectgym.store/chat');
     var stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function (frame) {
