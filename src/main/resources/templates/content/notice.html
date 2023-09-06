@@ -13,49 +13,67 @@
 
 <th:block layout:fragment="content">
 
-    <div class="customer">
-        <!-- 메뉴 선택 a태그 -->
-        <div class="ui-tab scroll">
-            <div class="module">
-                <div class="menu-item">
-                    <a class="menu-btn" th:href="/customer/faq">자주 묻는 질문</a>
-                </div>
-                <div class="menu-item active">
-                    <a class="menu-btn" th:href="/customer/notice">공지사항</a>
+    <div class="cs-wrap">
+
+        <section class="cs-layout">
+            <!-- 메뉴 선택 a태그 -->
+            <div class="ui-tab scroll">
+                <div class="module">
+                    <div class="menu-item">
+                        <a class="menu-btn" href="/customer/faq">자주 묻는 질문</a>
+                    </div>
+                    <div class="menu-item active">
+                        <a class="menu-btn" href="/customer/notice">공지사항</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <section class="content-layout notice">
             <!-- accodion -->
             <div class="faq-accodion">
-                <div class="ui-accodion">
-                    <div class="accodion-item" th:each="noticeList : ${noticeList}">
-                        <button type="button" class="accodion-btn">
-<!--                            <span class="faq-title" th:text="${noticeList.id}"></span>-->
-<!--                            <span class="faq-title" th:text="${noticeList.title}"></span>-->
-<!--                            <span class="faq-title" th:text="${noticeList.created_Date}"></span>-->
+                <div class="faq-accodion-wrap">
+                    <div class="ui-accodion">
+                        <div class="accodion-item notice-top-item"
+                             th:each="noticeTopList : ${noticeTopList}">
+                            <button type="button" class="accodion-btn">
+                                <span class="mark" style="font-size: 16px;">Notice</span>
+                                <span class="faq-title" th:text="${noticeTopList.title}"></span>
+                                <span class="notice-date" style="float: right;"
+                                      th:text="${#temporals.format(noticeTopList.noticeDatetime, 'YYYY-MM-dd')}"></span>
+                            </button>
+                        </div>
+                        <div class="accodion-item notice-other-item"
+                             th:each="noticeOtherList : ${noticeOtherList}">
+                            <button type="button" class="accodion-btn">
+                                <span class="mark" style="font-size: 16px;"
+                                      th:text="${noticeOtherList.no}"></span>
+                                <span class="faq-title" th:text="${noticeOtherList.title}"></span>
+                                <span class="notice-date"
+                                      th:text="${#temporals.format(noticeOtherList.noticeDatetime, 'YYYY-MM-dd')}"></span>
+                            </button>
 
-                            <span>no</span>
-                            <span>title</span>
-                            <span>date</span>
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- pagination -->
             <div class="pagination">
                 <ul>
-                    <li th:if="${currentPage > 1}">
-                        <a th:href="@{'/customer/notice?page=' + ${currentPage - 1}}">이전</a>
+                    <li class="prev" th:if="${currentPage > 1}">
+                        <button type="button" onclick="'location.href = &quot;/customer/notice?page=' + (${currentPage - 1}) + '&quot;'">이전
+<!--                            <a th:href="@{'/customer/notice?page=' + ${currentPage - 1}}">이전</a>-->
+                        </button>
                     </li>
-                    <li th:each="page : ${#numbers.sequence(1, totalPages)}"
+                    <li class="pageNumber" th:each="page : ${#numbers.sequence(1, totalPages)}"
                         th:classappend="${currentPage == page} ? 'active'">
-                        <a th:href="@{'/customer/notice?page=' + ${page}}"
-                           th:text="${page}"></a>
+                        <button type="button" th:onclick="'location.href = &quot;/customer/notice?page=' + ${page} + '&quot;'" th:text="${page}">
+<!--                            <a th:href="@{'/customer/notice?page=' + ${page}}"-->
+<!--                               th:text="${page}"></a>-->
+                        </button>
                     </li>
-                    <li th:if="${currentPage < totalPages}">
-                        <a th:href="@{'/customer/notice?page=' + ${currentPage + 1}}">다음</a>
+                    <li class="next" th:if="${currentPage < totalPages}">
+                        <button type="button" th:onclick="'location.href=&quot;/customer/notice?page=' + (${currentPage + 1}) + '&quot;'">다음
+<!--                            <a th:href="@{'/customer/notice?page=' + ${currentPage + 1}}">다음</a>-->
+                        </button>
                     </li>
                 </ul>
             </div>
