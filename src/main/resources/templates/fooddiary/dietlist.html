@@ -238,7 +238,7 @@
                         <td>
                             <form action="/selectfood" method="POST">
                                 <span th:name="selectedKey" th:value="${food.foodCd}"/>
-                                <span th:text="${food.foodNm}" />
+                                <span type="button" th:text="${food.foodNm}" />
                             <button type="submit" ></button></form>
                         </td>
                         <td th:text="${food.foodSize}">

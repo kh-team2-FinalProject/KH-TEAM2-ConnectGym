@@ -1,14 +1,13 @@
 
 /* 식단 박스 */
 .Diet{
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-left:50px;
     font-family: Arial, sans-serif;
-    display: grid;
-    width: 100%;
-    height: 650px;
+    display: inline-block;
+    width: 90%;
+    height: 100%;
     font-family: Arial, sans-serif;
-    grid-template-columns: 2fr 2fr;
-    grid-column-gap: 50px;
     justify-content: center;
     align-items: center;
 }
@@ -16,13 +15,13 @@
 
 /* 개별 박스 */
 .meal_box {
-    background-color: #e9f8c4;
+    background-color: #ffffffdb;
     display: inline-block;
     align-items: center;
     width: 100%;
     height: 35%;
     border: none;
-    border-radius: 20px;
+    border-radius: 13px;
     padding: 10px;
     box-sizing:inherit;
     justify-items:center;
@@ -35,12 +34,6 @@
     text-align: center;
 }
 
-th{
-    color: black;
-    font-weight:bold;
-}
-
-
 /* 아 점 저 글씨*/
 .Diet1 h3{
     padding: 5px;
@@ -49,25 +42,27 @@ th{
     font-weight:bold
 }
 
-
+th.sub{
+    color:rgb(34 36 38 / 68%);
+}
 
 /* + 버튼 */
 .btn1{
-    background-color: #A3DC10;
-    color: rgb(227, 238, 242);
-    padding: 8px 13px;
+    background-color: #ffffff3d;
+    color: rgb(66 149 176);
+    padding: 5px 8px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 25px;
 }
 
 
 /* 팝업 창 */
 .dietPop {
     z-index: 1000; /* header 위로 올리는 작업 */
-    background-color: rgba(0, 0, 0, 0.5); /* 뒷 배경 */
+ /*   background-color: rgba(0, 0, 0, 0.5);  뒷 배경 */
     display: flex;
     position: fixed;
     top: 0;
@@ -89,26 +84,28 @@ th{
 /* 팝업 내용 */
 .pop-content {
     width: 500px;
-    height:680px;
+    height:90%;
     overflow-y: auto;
-    background-color: #e6ebe1;
+    background-color: #000000de;
     color: #5f797c;
     padding: 20px;
     border-radius: 10px;
     text-align:center;
     overflow: auto;
-    left: 50%; /* 수정: 수평 가운데 정렬을 위해 추가 */
-    top: 50%; /* 수정: 수직 가운데 정렬을 위해 추가 */
+    left: 50%;
+    margin-top: 20px;
 }
 
 .pop_content2 th, .pop_content2 td{
     padding: 12px;
     font-size: 15px;
     border-bottom: 1px solid #ddd;
+    color:white;
 }
 
 .pop-content h1{
     margin-left: 5px;
+    color:white;
 }
 
 /* 팝업 내 음식 데이터 테이블 */
@@ -126,22 +123,23 @@ th{
 
 /* 닫기 버튼 */
 #closeBtn{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
-    background-color: #A3DC10;
-    border-radius:50%;
+    background-color: #000000de;
+    border-radius:30%;
     border: none;
-    margin-left: 85%;
+    margin-left: 88%;
+    color:white;
 }
 
 /* 검색 버튼 */
 #searchBtn{
-    background-color: #A3DC10;
+    background-color: #00000000;
     color: rgb(227, 238, 242);
     border: none;
     cursor: pointer;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 15px;
     padding:10px;
     border-radius:10px;
 
@@ -150,7 +148,7 @@ th{
 
 /* input box */
 #popInput{
- width: 77%;
+ width: 83%;
  height: 30px;
  padding: 10px;
  border-radius: 10px;
