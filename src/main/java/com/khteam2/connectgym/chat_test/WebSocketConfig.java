@@ -12,13 +12,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("https://connectgym.store/queue/qqq"); // 메시지 브로커 주소 설정
-        registry.setApplicationDestinationPrefixes("https://connectgym.store/app"); // 클라이언트에서 보내는 메시지의 prefix 설정
+        registry.enableSimpleBroker("/queue/qqq"); // 메시지 브로커 주소 설정
+        registry.setApplicationDestinationPrefixes("/app"); // 클라이언트에서 보내는 메시지의 prefix 설정
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
 
-        registry.addEndpoint("https://connectgym.store/chat").withSockJS(); // SockJS를 사용하여 호환성 확보
+        registry.addEndpoint("/chat").withSockJS(); // SockJS를 사용하여 호환성 확보
     }
 }
