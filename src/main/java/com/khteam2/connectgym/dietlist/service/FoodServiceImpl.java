@@ -204,6 +204,7 @@ public class FoodServiceImpl implements FoodService {
             .food(food)
             .member(member)
             .foodTime(foodTime)
+            .regDate(date)
             .build();
 
         this.memberFoodRepository.save(memberFood);
