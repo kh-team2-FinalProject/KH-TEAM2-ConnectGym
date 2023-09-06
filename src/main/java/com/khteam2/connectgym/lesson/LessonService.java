@@ -5,13 +5,13 @@ import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import com.khteam2.connectgym.upload.S3Uploader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -72,8 +72,45 @@ public class LessonService {
 
 
     public Lesson getLessonById(Long lessonNo) {
-        return lessonRepository.findById(lessonNo).orElseThrow(() -> new RuntimeException("LessonNo: " + lessonNo + "에 해당하는 레슨을 찾을 수 없습니다."));
+        return lessonRepository.findById(lessonNo).orElseThrow(
+            () -> new RuntimeException("LessonNo: " + lessonNo + "에 해당하는 레슨을 찾을 수 없습니다."));
 
+    }
+
+    public int getTotalPages(int itemsPerPage, List<Lesson> list) {
+
+        int totalItems = list.size();
+        return (int) Math.ceil((double) totalItems / itemsPerPage);
+    }
+
+    public List<Lesson> getDataForPage(int pageNumber, int itemsPerPage,
+        List<Lesson> lessonList) {
+
+        List<Lesson> dataForPage = new ArrayList<>();
+
+        int startIndex = (pageNumber - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, lessonList.size());
+
+        for (int i = startIndex; i < endIndex; i++) {
+            dataForPage.add(lessonList.get(i));
+        }
+        return dataForPage;
+    }
+
+    public List<Lesson> viewCategoryList(List<Lesson> lessonList, int category) {
+        List<Lesson> list = new ArrayList<>();
+        if (category == 0) {
+            for (int i = 0; i < lessonList.size(); i++) {
+                list.add(lessonList.get(i));
+            }
+        } else {
+            for (int i = 0; i < lessonList.size(); i++) {
+                if (lessonList.get(i).getCategory() == category) {
+                    list.add(lessonList.get(i));
+                }
+            }
+        }
+        return list;
     }
 
     //트레이너 넘버로 레슨 가져오기
