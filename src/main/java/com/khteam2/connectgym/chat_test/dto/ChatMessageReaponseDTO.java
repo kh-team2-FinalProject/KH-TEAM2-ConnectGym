@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 
 @Builder
@@ -15,7 +17,7 @@ public class ChatMessageReaponseDTO {
     private Long chatroomNo;
     private String content;
     private String sender;
-//    private LocalDateTime sendAt;
+    private LocalDateTime sendAt;
 
 
     public ChatMessageReaponseDTO fromEntity(ChatMessage chatMessage) {
@@ -23,7 +25,7 @@ public class ChatMessageReaponseDTO {
             .chatroomNo(chatMessage.getChatroom().getNo())
             .content(chatMessage.getContent())
             .sender(chatMessage.getSender())
-//            .sendAt(chatMessage.getSendAt())
+            .sendAt(chatMessage.getSendAt())
             .build();
     }
 }

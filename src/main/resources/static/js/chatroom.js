@@ -24,7 +24,7 @@ function checkedChatroom() {
 
 function sendMessage() {
 
-    var content = document.getElementById('message').value;
+    var content = document.getElementById('message-input').value;
     if (content.trim() !== "") {
 //공백이 아니면 STOMP이용해ㅓㅅ 해당주소로 JSON타입으로 메시지 발송
         stompClient.send(`/app/chat/${chatroomNo}`, {}, JSON.stringify({

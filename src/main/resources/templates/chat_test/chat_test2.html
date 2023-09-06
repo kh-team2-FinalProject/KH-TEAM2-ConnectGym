@@ -3,11 +3,47 @@
 <head>
     <title>1:1 Chat</title>
     <style>
-
+        /*primary: #79C7C5;*/
+        /*$secondary: #A1E2D9;*/
+        /*$white: #F9FBFF;*/
+        /*$dark: #777777;*/
         * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(to bottom left, #79C7C5 20%, #A1E2D9 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 11px;
+            left: 15px;
+        }
+
+        .avatar > p {
+            color: #F9FBFF;
+            margin: 7px 12px;
+        }
+
+        .interlocutor-name {
+            position: absolute;
+            top: 20px;
+            text-transform: uppercase;
+            color: #777777;
+            font-size: 1em;
+            letter-spacing: 2px;
+            font-weight: 500;
+            left: 60px;
+        }
+
+        #chat-top {
+            width: 100%;
+            height: 60px;
+            background: #F9FBFF;
+            border-radius: 10px 10px 0 0;
         }
 
         #chat-box {
@@ -20,14 +56,16 @@
 
             height: 400px;
             padding: 40px 0;
-            background-color: #A8C0D6;
-
+            background: #F9FBFF;
+            width: 100%;
+            opacity: 0.85;
         }
 
         #chat-box .chat {
             display: flex;
             align-items: flex-start;
             padding: 5px;
+
         }
 
 
@@ -48,6 +86,12 @@
             font-size: 1.5rem;
         }
 
+        #chat-box .chat span {
+
+            font-size: 3px;
+            color: #A1E2D9;
+        }
+
         #chat-box .partnerMessageBox .messageBody {
             margin-left: 20px;
             background-color: #ddd;
@@ -65,51 +109,75 @@
 
         #chat-box .myMessageBox .messageBody {
             margin-right: 20px;
-            background-color: #F9EB54;
+            background-color: #79C7C5;
         }
 
         #chat-box .myMessageBox .messageBody::before {
             right: -15px;
             content: "▶";
-            color: #F9EB54;
+            color: #79C7C5;
         }
 
         body {
-            background-color: #A8C0D6
+            background-color: #A8C0D6;
         }
 
 
-        #message {
-            width: calc(100% - 70px);
-            padding: 7px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-
-        }
-
-        /*#message-container{*/
-        /*    display: ;*/
-        /*}*/
         #sendButton {
-            padding: 7px 10px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
+            position: absolute;
+            border: 0;
+            font-size: 1em;
+            color: #A1E2D9;
+            top: 19px;
+            opacity: 0.8;
+            right: 17px;
             cursor: pointer;
-            height: 30px;
+            outline: 0;
+
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.3s ease-in-out;
+                color: #79C7C5;
+            }
         }
+
+
+        #message-container {
+            position: absolute;
+            width: 100%;
+            height: 55px;
+            bottom: 0;
+            background: #F9FBFF;
+            border-radius: 0 0 10px 10px;
+        }
+
+        #message-input {
+            padding: 7px;
+            width: 74%;
+            left: 5%;
+            position: absolute;
+            border: 0;
+            top: 13px;
+            background: #F9FBFF;
+            color: #79C7C5;
+        }
+
+        #message-input:focus {
+            color: #777777;
+            outline: 0;
+        }
+
 
     </style>
     <script th:inline="javascript">
-        //로그인되어있는 사람을 sender로 지정
+        //로그인 되어 있는 사람을 sender 로 지정
         const loginclass = [[${session.session_login_member_class}]];
         let sender = "";
         let interlocutor = ""
-        if (loginclass == "MEMBER") {
+        if (loginclass === "MEMBER") {
             sender = [[${chatroom.member.userName}]];
             interlocutor = [[${chatroom.trainer.trainerName}]];
-        } else if (loginclass == "TRAINER") {
+        } else if (loginclass === "TRAINER") {
             sender = [[${chatroom.trainer.trainerName}]];
             interlocutor = [[${chatroom.member.userName}]];
         }
@@ -129,16 +197,19 @@
 <body>
 <div id="chat">
     <!--    채팅 상대방-->
-    <div id="chat-interlocutor">
-        <i class="fa-solid fa-user"></i>
-        <div th:text="${interlocutor}"></div>
-
+    <div id="chat-top">
+        <div class="avatar">
+            <p th:text="${interlocutor[0]}"></p>
+        </div>
+        <div class="interlocutor-name" th:text="${interlocutor}"></div>
     </div>
     <!-- 채팅 내용이 표시될 영역 -->
     <div id="chat-box">
         <div th:each="chatMessage : ${chatMessages}">
             <div th:class="${chatMessage.sender ==  sender }?'myMessageBox chat' : 'partnerMessageBox chat'">
                 <div class="messageBody" th:text="${chatMessage.content}"></div>
+                <span class="sendAtMessage"
+                      th:text="${chatMessage.sendAt}"></span>
             </div>
             <!--            <div th:onload="showMessage(${chatMessage})"></div>-->
         </div>
@@ -148,8 +219,8 @@
 </div>
 <!--    입력창 전송버튼 영역-->
 <div id="message-container">
-    <input type="text" id="message" placeholder="메시지 입력" onkeydown="handleKeyPress(event)">
-    <button id="sendButton" onclick="sendMessage()">전송</button>
+    <input type="text" id="message-input" placeholder="메시지 입력" onkeydown="handleKeyPress(event)">
+    <button id="sendButton" onclick="sendMessage()"><i class="fas fa-paper-plane">전송</i></button>
 </div>
 
 <!--웹소켓 연결 및 구독-->
