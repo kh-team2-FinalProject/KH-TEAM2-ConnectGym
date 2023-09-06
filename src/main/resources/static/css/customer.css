@@ -197,7 +197,14 @@ ul {
     color: #9b9eae;
 }
 
-.pagination .pageNumber.active button{
+.pagination li a{
+    font-size: 16px;
+    font-weight: 700;
+    color: #9b9eae;
+}
+
+.pagination .pageNumber.active button,
+.pagination .pageNumber.active a{
     color: #143c56;
 }
 
@@ -217,3 +224,9 @@ ul {
     margin-left: 52px;
 }
 
+.notice-date{
+    position: absolute;
+    right: 25px;
+    color: #898989;
+    font-size: 16px;
+}

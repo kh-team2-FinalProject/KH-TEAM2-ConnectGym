@@ -15,15 +15,15 @@
 
     <!-- 전체 div-wrap -->
     <div class="cs-wrap">
-        <!-- faq section -->
+        <!-- 메뉴 선택 a태그 -->
         <section class="cs-layout">
             <div class="ui-tab scroll">
                 <div class="module">
                     <div class="menu-item active">
-                        <a class="menu-btn" th:href=@{"/customer/faq"}>자주 묻는 질문</a>
+                        <a class="menu-btn" th:href=@{/customer/faq}>자주 묻는 질문</a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-btn" th:href=@{"/customer/notice"}>공지사항</a>
+                        <a class="menu-btn" th:href=@{/customer/notice}>공지사항</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,6 @@
 
             <!-- ajax실행후 db호출부분 -->
             <div id="faq-accodion-wrap1" class="faq-accodion">
-<!--                &lt;!&ndash; db에서 가져와 출력할 부분 / 전체 &ndash;&gt;-->
                 <div class="faq-accodion-wrap">
                     <div class="ui-accodion">
                         <div class="accodion-item" th:each="csList : ${csList}">
