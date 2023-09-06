@@ -1,4 +1,4 @@
-package com.khteam2.connectgym.member.interceptor;
+package com.khteam2.connectgym.common.interceptor;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import org.springframework.stereotype.Component;
