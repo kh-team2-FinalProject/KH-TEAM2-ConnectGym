@@ -26,7 +26,7 @@
 }
 
 .l_card {
-    background: white;
+    background: linear-gradient(to bottom right, #ffffff 28%, #e1e0dcbd);
     width: 272px;
     height: 330px;
     display: flex;
@@ -60,7 +60,7 @@
 }
 
 .l_card-img {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 100%;
     height: 100%;
     transition: transform 0.3s;
@@ -149,4 +149,23 @@
     height: 100%;
     object-fit: cover;
 
+}
+
+/* 카드효과 */
+.l_card {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.5s, transform 0.5s, box-shadow 0.3s;
+    box-shadow: 0px 0px 10px rgb(255 255 255 / 59%);
+}
+
+.l_card.scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.l_card:hover {
+    transform: translateY(-10px) translateX(-10px);
+    box-shadow: 12px 12px 5px rgba(255, 255, 255, 0.2);
+    z-index: 1;
 }
