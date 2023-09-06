@@ -30,6 +30,6 @@ public interface FoodService {
 
     List<Food> searchDiet(String key);
 
-    Food selectFood(String selectedKey);
+    Food selectFood(Long selectedKey);
 
 }

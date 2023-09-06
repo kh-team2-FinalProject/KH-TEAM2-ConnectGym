@@ -93,13 +93,13 @@ public class DietListController {
     }
 
 
-    @PostMapping("fooddiary/selectfood")
+    @PostMapping("/selectfood")
     public String selectFood(
-        @RequestParam(name = "selectedKey", required = false) String selectedKey,
+        @RequestParam(name = "selectedKey", required = false) Long selectedKey,
         Model model){
-        Food selectedFood = foodRepository.findByFoodNm(selectedKey);
+        Food selectedFood = foodRepository.findByFoodCd(selectedKey);
         model.addAttribute("selectedFood", selectedFood);
-        return "redirect://fooddiary/dietlist";
+        return "redirect:/fooddiary/dietlist";
     }
 
 

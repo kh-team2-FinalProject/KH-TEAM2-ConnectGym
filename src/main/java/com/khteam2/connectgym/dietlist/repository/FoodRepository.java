@@ -19,4 +19,6 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 
     Food findByFoodNm(String FoodNm);
 
+    Food findByFoodCd(Long FoodCd);
+
 }

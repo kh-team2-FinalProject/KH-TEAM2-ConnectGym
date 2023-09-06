@@ -138,7 +138,7 @@
                     </thead>
                     <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                     <tbody>
-                    <form action="/fooddairy/selectfood" method="Post">
+                    <form action="/fooddiary/selectfood" method="POST">
                     <tr th:each="food : ${foods}">
                         <td th:text="${food.foodNm}">식품명</td>
                         <td th:text="${food.foodSize}">1회 제공량</td>
@@ -236,10 +236,10 @@
                     <tbody>
                     <tr th:each="food: ${dietList}">
                         <td>
-                            <form action="/fooddairy/selectfood" method="POST">
-                            <button type="submit" >
-                                <input name="selectedKey" th:value="${food.foodNm}" ></input>
-                            </button></form>
+                            <form action="/selectfood" method="POST">
+                                <span th:name="selectedKey" th:value="${food.foodCd}"/>
+                                <span th:text="${food.foodNm}" />
+                            <button type="submit" ></button></form>
                         </td>
                         <td th:text="${food.foodSize}">
                             <span th:text="${food.foodSize}" >g</span>
