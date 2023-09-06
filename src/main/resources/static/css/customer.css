@@ -98,7 +98,9 @@ button {
     border-bottom: 1px solid white;
 }
 
-.notice-other-item {
+.notice-other-item,
+.accodion-btn
+ {
     display: flex;
     align-items: center;
     position: relative;
