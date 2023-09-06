@@ -169,3 +169,46 @@
     box-shadow: 12px 12px 5px rgba(255, 255, 255, 0.2);
     z-index: 1;
 }
+
+.l_pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.l_pagination .pageNumber{
+    margin: 0 2px;
+}
+
+.l_pagination ul {
+    display: inline-flex;
+}
+
+.l_pagination .prev{
+    margin-right: 10px;
+}
+
+.l_pagination .next{
+    margin-left: 10px;
+}
+
+.l_pagination .next button,
+.l_pagination .prev button{
+    font-size: 16px;
+    font-weight: 700;
+    color: #9b9eae;
+}
+
+.l_pagination .pageNumber button{
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #9b9eae;
+}
+
+.l_pagination .pageNumber.active button,
+.l_pagination .pageNumber.active a{
+    color: #143c56;
+}

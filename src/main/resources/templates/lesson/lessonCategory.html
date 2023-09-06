@@ -16,11 +16,13 @@
                       #request.getParameter('category') == '2' and lesson.category == 2 or
                       #request.getParameter('category') == '3' and lesson.category == 3}"
                      class="l_card">
-                    <a th:href="@{/lessonDetail/{lessonNo}(lessonNo=${lesson.getNo()})}" class="card-link">
+                    <a th:href="@{/lessonDetail/{lessonNo}(lessonNo=${lesson.getNo()})}"
+                       class="card-link">
                         <div class="l_card-container">
                             <div class="l_card-img-wrapper">
                                 <div class="l_card-img">
-                                    <img class="l_lessonlist_img" th:src="${lesson.lesson_img}" alt="lesson image">
+                                    <img class="l_lessonlist_img" th:src="${lesson.lesson_img}"
+                                         alt="lesson image">
                                 </div>
                                 <div class="l_card-back-img">
                                     <img class="l_trainer_img" th:src="${lesson.trainer.profileImg}"
@@ -41,6 +43,28 @@
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="l_pagination">
+            <ul>
+                <li class="prev" th:if="${currentPage > 1}">
+                    <button type="button"
+                            th:onclick="'location.href=&quot;/lesson-list?page=' + (${currentPage - 1}) + '&quot;'">
+                        이전
+                    </button>
+                </li>
+                <li class="pageNumber" th:each="page : ${#numbers.sequence(1, totalPages)}"
+                    th:classappend="${currentPage == page} ? 'active'">
+                    <button type="button"
+                            th:onclick="'location.href = &quot;/lesson-list?page=' + ${page} + '&quot;'"
+                            th:text="${page}"></button>
+                </li>
+                <li class="next" th:if="${currentPage < totalPages}">
+                    <button type="button"
+                            th:onclick="'location.href=&quot;/lesson-list?page=' + (${currentPage + 1}) + '&quot;'">
+                        다음
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
     <script th:src="@{/js/lessonCategory.js}"></script>
