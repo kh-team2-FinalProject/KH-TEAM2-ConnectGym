@@ -19,6 +19,8 @@
     min-width: 600px;
     padding: 80px;
     overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 10px 10px 8px #525252;
 }
 
 .lessonDetail_leftContainer {

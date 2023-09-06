@@ -6,14 +6,16 @@
 package com.khteam2.connectgym.dietlist.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.khteam2.connectgym.dietlist.FoodTime;
 import com.khteam2.connectgym.dietlist.model.*;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
+import com.khteam2.connectgym.dietlist.repository.MemberFoodRepository;
+import com.khteam2.connectgym.member.Member;
+import com.khteam2.connectgym.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
@@ -23,18 +25,23 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class FoodServiceImpl implements FoodService {
-    @Autowired
-    private FoodRepository foodRepository;
+    private final FoodRepository foodRepository;
+    private final MemberFoodRepository memberFoodRepository;
+    private final MemberRepository memberRepository;
+
     @Value("${dietApi.key}")
     private String opendataEncodedApiKey;
-
 
 
     /* food api로 get */
@@ -111,10 +118,10 @@ public class FoodServiceImpl implements FoodService {
 
     /* 유효성 체크해서 에러 메세지 */
     @Override
-    public Map<String, String> validateHandling(Errors errors){
+    public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();
 
-        for(FieldError error: errors.getFieldErrors()){
+        for (FieldError error : errors.getFieldErrors()) {
             String validKeyName = String.format("valid_%s", error.getField());
             validatorResult.put(validKeyName, error.getDefaultMessage());
         }
@@ -126,11 +133,11 @@ public class FoodServiceImpl implements FoodService {
     /**/
     @Transactional(readOnly = true)
     @Override
-    public List<Food> searchFood(String key){
+    public List<Food> searchFood(String key) {
         List<Food> foodinfo = new ArrayList<>();
 
         List<Food> foods = foodRepository.findByFoodNmContains(key);
-        for(Food food: foods){
+        for (Food food : foods) {
             foodinfo.add(food);
         }
 
@@ -139,11 +146,11 @@ public class FoodServiceImpl implements FoodService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Food> searchDiet(String key){
+    public List<Food> searchDiet(String key) {
         List<Food> dietList = new ArrayList<>();
 
         List<Food> foods = foodRepository.findByFoodNmContains(key);
-        for(Food food: foods){
+        for (Food food : foods) {
             dietList.add(food);
         }
 
@@ -153,9 +160,58 @@ public class FoodServiceImpl implements FoodService {
 
     @Transactional
     @Override
-    public Food selectFood(Long selectedKey){
+    public Food selectFood(Long selectedKey) {
         Food selfood = foodRepository.findByFoodCd(selectedKey);
         return selfood;
+    }
+
+    @Transactional
+    @Override
+    public FoodInsertResponseDto insertFood(FoodInsertRequestDto requestDto, Long loginMemberNo) {
+        FoodInsertResponseDto responseDto = FoodInsertResponseDto.builder()
+            .success(false)
+            .build();
+
+        Long foodNo = requestDto.getSelectedKey();
+        FoodTime foodTime = requestDto.getFoodTime();
+        LocalDate date = requestDto.getDate();
+
+        if (foodNo == null || foodTime == null || date == null) {
+            responseDto.setMessage("잘못된 요청입니다.");
+            return responseDto;
+        }
+
+        if (loginMemberNo == null) {
+            responseDto.setMessage("로그인되어 있지 않습니다.");
+            return responseDto;
+        }
+
+        Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+
+        if (member == null) {
+            responseDto.setMessage("사용자 정보가 없습니다.");
+            return responseDto;
+        }
+
+        Food food = this.foodRepository.findById(foodNo).orElse(null);
+
+        if (food == null) {
+            responseDto.setMessage("해당 음식이 없습니다.");
+            return responseDto;
+        }
+
+        MemberFood memberFood = MemberFood.builder()
+            .food(food)
+            .member(member)
+            .foodTime(foodTime)
+            .regDate(date)
+            .build();
+
+        this.memberFoodRepository.save(memberFood);
+
+        responseDto.setSuccess(true);
+
+        return responseDto;
     }
 }
 

@@ -26,13 +26,14 @@ public class RoomApiController {
 
     private final RoomService roomSerivce;
 
+    // 룸 조건 검사
     @GetMapping("/checkEnroll")
     public Long checkEnroll(String titleCode, Long enrollKey){
         System.out.println("체크인롤 컨트롤러 호출 : " + titleCode+enrollKey);
         return roomSerivce.roomStatusCheck(titleCode,enrollKey);
     }
 
-
+    // 룸 세션 생성
     @PostMapping("/enter/init")
     public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
         throws OpenViduJavaClientException, OpenViduHttpException {

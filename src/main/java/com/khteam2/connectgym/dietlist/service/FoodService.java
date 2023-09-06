@@ -1,12 +1,11 @@
 package com.khteam2.connectgym.dietlist.service;
 
 import com.khteam2.connectgym.dietlist.model.Food;
+import com.khteam2.connectgym.dietlist.model.FoodInsertRequestDto;
+import com.khteam2.connectgym.dietlist.model.FoodInsertResponseDto;
 import com.khteam2.connectgym.dietlist.model.FoodNutrientDto;
-import org.springframework.data.domain.Page;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Map;
 
@@ -32,4 +31,7 @@ public interface FoodService {
 
     Food selectFood(Long selectedKey);
 
+    default FoodInsertResponseDto insertFood(FoodInsertRequestDto requestDto, Long loginMemberNo) {
+        return null;
+    }
 }

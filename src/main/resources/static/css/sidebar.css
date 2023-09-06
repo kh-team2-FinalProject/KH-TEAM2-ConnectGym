@@ -94,6 +94,17 @@
     margin-left: 80px;
 }
 
+.side_menu ul li.active::after {
+    content: "";
+    float: right;
+    height: 2px;
+    background: black;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+}
+
 /*사이드바 타이틀명*/
 .side_title {
     /*background-color: white;*/

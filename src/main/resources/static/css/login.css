@@ -283,6 +283,7 @@
 }
 
 .form-control {
+    box-sizing: border-box;
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -301,10 +302,16 @@
 }
 
 /* 소셜 로그인 버튼 스타일 */
-.social-container .social {
-    font-size: 30px; /* 조절 가능한 아이콘 크기 */
-    color: #333;
-    margin: 0 15px; /* 조절 가능한 마진 값 */
-    text-decoration: none;
-    transition: color 0.3s;
+.social-container {
+    margin-top: 20px;
 }
+
+.find-a{
+    font-size: 14px;
+}
+
+.find-a:hover,
+.join-a:hover{
+    color: rgb(163,219,18);
+}
+

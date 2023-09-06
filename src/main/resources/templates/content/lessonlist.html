@@ -24,42 +24,50 @@
                 </a>
             </div>-->
 
-            <div th:if="${#httpServletRequest.parameterMap['category'] == null}" class="side_menu">
+<!--            <div th:if="${#httpServletRequest.parameterMap['category'] == null}" class="side_menu">-->
+<!--                <ul class="side_items">-->
+<!--                    <p class="side_title">LESSON</p>-->
+<!--                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>-->
+<!--                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>-->
+<!--                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div-->
+<!--                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '1'}"-->
+<!--                class="side_menu_health">-->
+<!--                <ul class="side_items">-->
+<!--                    <p class="side_title">LESSON</p>-->
+<!--                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>-->
+<!--                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>-->
+<!--                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div-->
+<!--                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '2'}"-->
+<!--                class="side_menu_yoga">-->
+<!--                <ul class="side_items">-->
+<!--                    <p class="side_title">LESSON</p>-->
+<!--                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>-->
+<!--                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>-->
+<!--                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div-->
+<!--                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '3'}"-->
+<!--                class="side_menu_pilates">-->
+<!--                <ul class="side_items">-->
+<!--                    <p class="side_title">LESSON</p>-->
+<!--                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>-->
+<!--                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>-->
+<!--                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+            <div class="side_menu">
                 <ul class="side_items">
                     <p class="side_title">LESSON</p>
-                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
-                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
-                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
-                </ul>
-            </div>
-            <div
-                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '1'}"
-                class="side_menu_health">
-                <ul class="side_items">
-                    <p class="side_title">LESSON</p>
-                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
-                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
-                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
-                </ul>
-            </div>
-            <div
-                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '2'}"
-                class="side_menu_yoga">
-                <ul class="side_items">
-                    <p class="side_title">LESSON</p>
-                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
-                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
-                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
-                </ul>
-            </div>
-            <div
-                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '3'}"
-                class="side_menu_pilates">
-                <ul class="side_items">
-                    <p class="side_title">LESSON</p>
-                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
-                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
-                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
+                    <li th:classappend="${category == 1} ? 'active'"><a th:href="@{/lesson-list(category='1')}">Health</a></li>
+                    <li th:classappend="${category == 2} ? 'active'"><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
+                    <li th:classappend="${category == 3} ? 'active'"><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
                 </ul>
             </div>
         </nav>

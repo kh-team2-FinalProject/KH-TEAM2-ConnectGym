@@ -11,7 +11,8 @@
 </th:block>
 
 
-
+<th:block layout:fragment="script">
+<script th:src="@{/js/follow.js}"></script>
     <script th:inline="javascript">
     function isTakingLesson() {
         const lessonNo = /*[[${trainer.lessonNo}]]*/;
@@ -23,7 +24,6 @@
         }
     }
     </script>
-    <script th:src="@{/js/follow.js}"></script>
 
 </th:block>
 
