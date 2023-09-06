@@ -1,5 +1,6 @@
 package com.khteam2.connectgym;
 
+import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonService;
@@ -26,8 +27,11 @@ public class CommonController {
     public String index() {
         return "content/main";
     }
+
+    //팔로일 테스트화면
     @GetMapping("/mypage/myFollowingTest")
     public String myFolloing(Model model, HttpSession session) {
+
         //배너타이틀
         model.addAttribute("bannerTitle", "following");
 
@@ -36,8 +40,9 @@ public class CommonController {
         List<TrainerResponseDTO> following = followService.followingList(member.getNo());
 
         model.addAttribute("following", following);
+        model.addAttribute("follwStatus", "true");
 
-        return "mypage/following_test";
+        return "mypage/following_test2";
     }
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")

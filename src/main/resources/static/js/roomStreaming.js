@@ -100,8 +100,8 @@ function leaveSession(myRoomCode, userType) {
         padding: "3em",
         confirmButtonColor: "#fff",
         color: "#2f79a6",
-        background:
-          "url(https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/o_woon_wan3.gif) center center / cover no-repeat",
+        //background:
+        //  "url(https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/o_woon_wan3.gif) center center / cover no-repeat",
       }).then((result) => {
         if (result.isConfirmed) {
           history.go(-1);
@@ -129,6 +129,7 @@ window.onbeforeunload = function () {
     session.disconnect();
   }
 };
+
 function appendUserData(videoElement, connection) {
   var userData;
   var nodeId;

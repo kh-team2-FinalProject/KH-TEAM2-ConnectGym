@@ -8,7 +8,7 @@ import java.util.List;
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
 
 
-    @Query("select t from Trainer t where t.trainerId = ?1")
+    @Query("SELECT t FROM Trainer t WHERE t.trainerId = ?1")
     List<Trainer> findTrainerId(String id);
 
     Trainer findByTrainerId(String trainerId);

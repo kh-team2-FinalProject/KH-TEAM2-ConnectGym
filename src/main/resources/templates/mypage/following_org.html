@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 팔로잉목록</title>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script>
+function search() {
+  let keyword = document.querySelector(".myFollowing_search_input").value;
+
+  $.ajax({
+    type: "POST",
+    url: "/follow/search",
+    data: JSON.stringify({ keyword: keyword }),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    async: false,
+    success: (response) => {
+      let html = '';
+
+      if (response.length > 0) {
+        response.forEach((trainer) => {
+          html += `
+            <div class="myFollowing_list_trainer">
+              <div class="myFollowing_list_trainer_img">
+                <img src="${trainer.profileImg}" />
+              </div>
+              <div class="myFollowing_list_trainer_info">
+                <div class="myFollowing_list_trainer_name">${trainer.trainerName}</div>
+                <div class="myFollowing_list_trainer_id">${trainer.trainerId}</div>
+              </div>
+              <
+              <div class="myFollowing_list_trainer_button">
+                <img width="50" height="50" src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/message_icon.png" />
+                <button onclick="location.href='/trainerDetail/${trainer.trainerNo}'">프로필보기</button>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        html = '<div>검색한 트레이너가 없습니다.</div>';
+      }
+
+      document.querySelector(".myFollowing_list").innerHTML = html;
+    },
+    error: (error) => {
+      console.error(error);
+    },
+  });
+}
+</script>
+
+</th:block>
+
+
+<th:block layout:fragment="mypage">
+
+    <div class="myFollowing_container">
+        <div class="myFollowing_border">
+            <div class="myFollowing_search">
+                <input type="text" class="myFollowing_search_input" name="myFollowing_search_byName" placeholder="트레이너 이름으로 검색"
+                onkeyup="search();">
+                <button class="myFollowing_search_icon" onclick="search();">
+                    <img width="24px" height="24px"
+                         src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/search_icon.png"/>
+                </button>
+            </div>
+            <div class="myFollowing_list">
+                <th:block th:if="${following.size() > 0}">
+                    <div class="myFollowing_list_trainer" th:each="trainer:${following}">
+                        <div class="myFollowing_list_trainer_img">
+                            <img th:src="${trainer.profileImg}" >
+                        </div>
+                        <div class="myFollowing_list_trainer_info">
+                            <div class="myFollowing_list_trainer_name">[[${trainer.trainerName}]]</div>
+                            <div class="myFollowing_list_trainer_id">[[${trainer.trainerId}]]</div>
+                        </div>
+                        <div class="myFollowing_list_trainer_title">
+                            <div class="myFollowing_list_trainer_shortTitle">[[${trainer.infoTitle}]]</div>
+                        </div>
+                        <div class="myFollowing_list_trainer_button">
+                            <img width="50" height="50"
+                                      src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/message_icon.png"/>
+                            <button th:onclick="|location.href='/trainerDetail/${trainer.trainerNo}'|">프로필보기</button>
+                        </div>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+    </div>
+
+
+</th:block>
+
+</body>
+
+</html>

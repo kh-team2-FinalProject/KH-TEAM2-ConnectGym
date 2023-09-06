@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class RoomService {
 
     private static final Logger logger = LoggerFactory.getLogger(RoomApiController.class);
@@ -39,6 +40,7 @@ public class RoomService {
     }
 
     //룸 상태 확인
+    @Transactional(readOnly = true)
     public Long roomStatusCheck(String titleCode, Long enrollKey) {
 
         // -1 : 룸 생성 전
@@ -63,6 +65,7 @@ public class RoomService {
     }
 
     //룸 정보 불러오기
+    @Transactional(readOnly = true)
     public RoomResponseDto enterRoomInfo(Long roomNo) {
         Room room = roomRepository.findById(roomNo).orElse(null);
 
@@ -74,12 +77,6 @@ public class RoomService {
 
         return roomResponseDto;
     }
-
-
-
-
-
-
 
 
 
@@ -108,7 +105,7 @@ public class RoomService {
     }
 
 
-    @Transactional
+    // 트레이너 퇴장 시 룸 비활성화
     public void exitRoom(String sessionId) {
         Room room = roomRepository.findByRoomName(sessionId).orElse(null);
         roomRepository.updateRoomStatus(RoomStatus.DISABLE,room.getNo());
