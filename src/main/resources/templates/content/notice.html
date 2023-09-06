@@ -32,18 +32,18 @@
             <div class="faq-accodion">
                 <div class="faq-accodion-wrap">
                     <div class="ui-accodion">
-                        <div class="accodion-item notice-top-item"
+                        <div class="accodion-item"
                              th:each="noticeTopList : ${noticeTopList}">
-                            <button type="button" class="accodion-btn">
+                            <button type="button" class="accodion-btn notice-top-item">
                                 <span class="mark" style="font-size: 16px;">Notice</span>
                                 <span class="faq-title" th:text="${noticeTopList.title}"></span>
                                 <span class="notice-date" style="float: right;"
                                       th:text="${#temporals.format(noticeTopList.noticeDatetime, 'YYYY-MM-dd')}"></span>
                             </button>
                         </div>
-                        <div class="accodion-item notice-other-item"
+                        <div class="accodion-item"
                              th:each="noticeOtherList : ${noticeOtherList}">
-                            <button type="button" class="accodion-btn">
+                            <button type="button" class="accodion-btn notice-other-item">
                                 <span class="mark" style="font-size: 16px;"
                                       th:text="${noticeOtherList.no}"></span>
                                 <span class="faq-title" th:text="${noticeOtherList.title}"></span>
@@ -59,20 +59,16 @@
             <div class="pagination">
                 <ul>
                     <li class="prev" th:if="${currentPage > 1}">
-                        <button type="button" onclick="'location.href = &quot;/customer/notice?page=' + (${currentPage - 1}) + '&quot;'">이전
-<!--                            <a th:href="@{'/customer/notice?page=' + ${currentPage - 1}}">이전</a>-->
+                        <button type="button" th:onclick="'location.href=&quot;/customer/notice?page=' + (${currentPage - 1}) + '&quot;'">이전
                         </button>
                     </li>
                     <li class="pageNumber" th:each="page : ${#numbers.sequence(1, totalPages)}"
                         th:classappend="${currentPage == page} ? 'active'">
                         <button type="button" th:onclick="'location.href = &quot;/customer/notice?page=' + ${page} + '&quot;'" th:text="${page}">
-<!--                            <a th:href="@{'/customer/notice?page=' + ${page}}"-->
-<!--                               th:text="${page}"></a>-->
                         </button>
                     </li>
                     <li class="next" th:if="${currentPage < totalPages}">
                         <button type="button" th:onclick="'location.href=&quot;/customer/notice?page=' + (${currentPage + 1}) + '&quot;'">다음
-<!--                            <a th:href="@{'/customer/notice?page=' + ${currentPage + 1}}">다음</a>-->
                         </button>
                     </li>
                 </ul>
