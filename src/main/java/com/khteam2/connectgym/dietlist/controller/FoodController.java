@@ -1,17 +1,13 @@
 package com.khteam2.connectgym.dietlist.controller;
 
-import com.khteam2.connectgym.dietlist.model.Food;
 import com.khteam2.connectgym.dietlist.model.FoodNutrientDto;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
 import com.khteam2.connectgym.dietlist.service.FoodService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
@@ -35,9 +31,9 @@ public class FoodController {
         return dto;
     }
 
-    @GetMapping(value = "/api/renewFoodData")
-    public Object renewFoodData() {
-        return this.foodService.moveDataToDatabase();
-    }
+//    @GetMapping(value = "/api/renewFoodData")
+//    public Object renewFoodData() {
+//        return this.foodService.moveDataToDatabase();
+//    }
 
 }

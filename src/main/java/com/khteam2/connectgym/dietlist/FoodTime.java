@@ -1,4 +1,4 @@
-package com.khteam2.connectgym.dietlist.model;
+package com.khteam2.connectgym.dietlist;
 
 import lombok.AllArgsConstructor;
 
