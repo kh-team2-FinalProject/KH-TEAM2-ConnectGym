@@ -134,7 +134,57 @@
     /*opacity: 0.5;*/
 }
 
-.side_menu ul li:not(:first-child)::after {
+.side_menu ul li::after {
+    content: "";
+    float: left;
+    height: 2px;
+    background: black;
+    width: 0;
+    right: 0;
+    bottom: 0;
+    transition: width 0.3s ease;
+}
+
+.side_menu ul li:hover:after {
+    width: 100%;
+    background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+
+/*============헬스 사이드바==========*/
+
+.side_menu_health {
+    width: 78%;
+    /* padding: 0px 30px; */
+    /* text-align: right; */
+    line-height: 20px;
+    /* box-sizing: border-box; */
+    margin-top: 10%;
+    /* width:80%; */
+    /* background: aliceblue; */
+    /* justify-content: flex-end; */
+    display: flex;
+    margin-left: 80px;
+}
+
+.side_menu_health ul li a {
+    font-size: 16px;
+    line-height: 4em;
+    text-decoration: none;
+    letter-spacing: 5px;
+    color: #C9D3D4;
+    display: block;
+    transition: all ease-out 300ms;
+    font-family: "Open+Sans";
+}
+
+.side_menu_health ul li:hover a {
+    color: #a3dc10;
+    /*opacity: 0.5;*/
+}
+
+.side_menu_health ul li:nth-child(2)::after {
     content: "";
     float: right;
     height: 2px;
@@ -143,6 +193,143 @@
     left: 0;
     bottom: 0;
     background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+}
+
+.side_menu_health ul li:not(:nth-child(2))::after {
+    content: "";
+    float: left;
+    height: 2px;
+    background: black;
+    width: 0;
+    right: 0;
+    bottom: 0;
+    transition: width 0.3s ease;
+}
+
+.side_menu_health ul li:hover:after {
+    width: 100%;
+    background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/*============요가 사이드바==========*/
+
+.side_menu_yoga {
+    width: 78%;
+    /* padding: 0px 30px; */
+    /* text-align: right; */
+    line-height: 20px;
+    /* box-sizing: border-box; */
+    margin-top: 10%;
+    /* width:80%; */
+    /* background: aliceblue; */
+    /* justify-content: flex-end; */
+    display: flex;
+    margin-left: 80px;
+}
+
+.side_menu_yoga ul li a {
+    font-size: 16px;
+    line-height: 4em;
+    text-decoration: none;
+    letter-spacing: 5px;
+    color: #C9D3D4;
+    display: block;
+    transition: all ease-out 300ms;
+    font-family: "Open+Sans";
+}
+
+.side_menu_yoga ul li:hover a {
+    color: #a3dc10;
+    /*opacity: 0.5;*/
+}
+
+.side_menu_yoga ul li:nth-child(3)::after {
+    content: "";
+    float: right;
+    height: 2px;
+    background: black;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+}
+
+.side_menu_yoga ul li:not(:nth-child(3))::after {
+    content: "";
+    float: left;
+    height: 2px;
+    background: black;
+    width: 0;
+    right: 0;
+    bottom: 0;
+    transition: width 0.3s ease;
+}
+
+.side_menu_yoga ul li:hover:after {
+    width: 100%;
+    background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/*============필라테스 사이드바==========*/
+
+.side_menu_pilates {
+    width: 78%;
+    /* padding: 0px 30px; */
+    /* text-align: right; */
+    line-height: 20px;
+    /* box-sizing: border-box; */
+    margin-top: 10%;
+    /* width:80%; */
+    /* background: aliceblue; */
+    /* justify-content: flex-end; */
+    display: flex;
+    margin-left: 80px;
+}
+
+.side_menu_pilates ul li a {
+    font-size: 16px;
+    line-height: 4em;
+    text-decoration: none;
+    letter-spacing: 5px;
+    color: #C9D3D4;
+    display: block;
+    transition: all ease-out 300ms;
+    font-family: "Open+Sans";
+}
+
+.side_menu_pilates ul li:hover a {
+    color: #a3dc10;
+    /*opacity: 0.5;*/
+}
+
+.side_menu_pilates ul li:nth-child(4)::after {
+    content: "";
+    float: right;
+    height: 2px;
+    background: black;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+}
+
+.side_menu_pilates ul li:not(:nth-child(4))::after {
+    content: "";
+    float: left;
+    height: 2px;
+    background: black;
+    width: 0;
+    right: 0;
+    bottom: 0;
+    transition: width 0.3s ease;
+}
+
+.side_menu_pilates ul li:hover:after {
+    width: 100%;
+    background-image: linear-gradient(to right, #dfdfdf, #FFE400);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
 /*============사이드바 끝===========*/
