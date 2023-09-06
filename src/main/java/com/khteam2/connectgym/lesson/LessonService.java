@@ -97,12 +97,10 @@ public class LessonService {
         return dataForPage;
     }
 
-    public List<Lesson> viewCategoryList(List<Lesson> lessonList, int category) {
+    public List<Lesson> viewCategoryList(List<Lesson> lessonList, Integer category) {
         List<Lesson> list = new ArrayList<>();
         if (category == 0) {
-            for (int i = 0; i < lessonList.size(); i++) {
-                list.add(lessonList.get(i));
-            }
+            return lessonList;
         } else {
             for (int i = 0; i < lessonList.size(); i++) {
                 if (lessonList.get(i).getCategory() == category) {

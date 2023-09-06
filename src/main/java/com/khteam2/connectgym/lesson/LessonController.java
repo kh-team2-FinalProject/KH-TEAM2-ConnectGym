@@ -85,7 +85,8 @@ public class LessonController {
         model.addAttribute("lessonList", lessonList);
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", totalPages);
-//        model.addAttribute("category", category);
+        model.addAttribute("category", category);
+        System.out.println(category);
 
         return "lesson/lessonCategory";
     }
