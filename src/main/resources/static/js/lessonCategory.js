@@ -24,3 +24,6 @@ function truncateText() {
 }
 
 window.addEventListener('DOMContentLoaded', truncateText);
+
+
+
