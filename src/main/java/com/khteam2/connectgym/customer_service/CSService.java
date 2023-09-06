@@ -10,12 +10,12 @@ public class CSService {
 
 
     @Autowired
-    CS_CategoryRepository cs_categoryRepository;
+    private CS_CategoryRepository cs_categoryRepository;
     @Autowired
     private CSRepository csRepository;
 
     public List<CS> viewToAll() {
-        List<CS> csList = csRepository.findAll();
+        List<CS> csList = csRepository.findAllByOrderByFaqDatetimeDesc();
         return csList;
     }
 
@@ -28,7 +28,7 @@ public class CSService {
 
     public List<CS> viewToCategory(int a) {
 
-        List<CS> csList = csRepository.findAll();
+        List<CS> csList = csRepository.findAllByOrderByFaqDatetimeDesc();
         List<CS> select_categoryList = new ArrayList<>();
         for (int i = 0; i < csList.size(); i++) {
             if (csList.get(i).getCategoryId() == a) {
@@ -40,7 +40,7 @@ public class CSService {
 
     public List<CS> getDataForPage(int pageNumber, int itemsPerPage) {
         List<CS> dataForPage = new ArrayList<>();
-        List<CS> allData = csRepository.findAll();
+        List<CS> allData = csRepository.findAllByOrderByFaqDatetimeDesc();
 
         int startIndex = (pageNumber - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, allData.size());
@@ -65,7 +65,6 @@ public class CSService {
     }
 
     public int getTotalPages(int itemsPerPage, List<CS> list) {
-//        List<CS> allData = csRepository.findAll();
         int totalItems = list.size();
         return (int) Math.ceil((double) totalItems / itemsPerPage);
     }

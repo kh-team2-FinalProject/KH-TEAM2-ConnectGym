@@ -23,9 +23,40 @@
                     <img th:src="@{/images/logo.png}" width="200"/>
                 </a>
             </div>-->
-            <div class="side_menu">
+
+            <div th:if="${#httpServletRequest.parameterMap['category'] == null}" class="side_menu">
                 <ul class="side_items">
-                    <li class="side_title">LESSON</li>
+                    <p class="side_title">LESSON</p>
+                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
+                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
+                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
+                </ul>
+            </div>
+            <div
+                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '1'}"
+                class="side_menu_health">
+                <ul class="side_items">
+                    <p class="side_title">LESSON</p>
+                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
+                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
+                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
+                </ul>
+            </div>
+            <div
+                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '2'}"
+                class="side_menu_yoga">
+                <ul class="side_items">
+                    <p class="side_title">LESSON</p>
+                    <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
+                    <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
+                    <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
+                </ul>
+            </div>
+            <div
+                th:if="${#httpServletRequest.parameterMap['category'] != null && #httpServletRequest.parameterMap['category'][0] == '3'}"
+                class="side_menu_pilates">
+                <ul class="side_items">
+                    <p class="side_title">LESSON</p>
                     <li><a th:href="@{/lesson-list(category='1')}">Health</a></li>
                     <li><a th:href="@{/lesson-list(category='2')}">Yoga</a></li>
                     <li><a th:href="@{/lesson-list(category='3')}">Pilates</a></li>
@@ -44,10 +75,8 @@
 </th:block>
 
 <!-- 스크립트 부분 -->
-<script th:inline="javascript">
+<script th:src="@{/js/lessonList.js}"></script>
 
-
-</script>
 
 <th:block layout:fragment="script">
 
@@ -55,3 +84,4 @@
 
 
 </html>
+

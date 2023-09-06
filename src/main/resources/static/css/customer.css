@@ -88,13 +88,25 @@ button {
 }
 
 /* 아코디언 부분 버튼 */
-.accodion-btn {
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  height: 72px;
-  border-bottom: 1px solid rgb(226, 226, 229);
+.notice-top-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 72px;
+    background-color: #F2F2F5;
+    border-bottom: 1px solid white;
+}
+
+.notice-other-item,
+.accodion-btn
+ {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 72px;
+    border-bottom: 1px solid rgb(226, 226, 229);
 }
 
 .mark {
@@ -126,6 +138,8 @@ button {
   width: 20px;
   height: 20px;
 }
+
+
 
 .accodion-item.active .arrow {
   background: url(/images/icons/mdi/icon_top_arrowNavi070.svg) no-repeat;
@@ -197,7 +211,14 @@ ul {
     color: #9b9eae;
 }
 
-.pagination .pageNumber.active button{
+.pagination li a{
+    font-size: 16px;
+    font-weight: 700;
+    color: #9b9eae;
+}
+
+.pagination .pageNumber.active button,
+.pagination .pageNumber.active a{
     color: #143c56;
 }
 
@@ -217,3 +238,9 @@ ul {
     margin-left: 52px;
 }
 
+.notice-date{
+    position: absolute;
+    right: 25px;
+    color: #898989;
+    font-size: 16px;
+}

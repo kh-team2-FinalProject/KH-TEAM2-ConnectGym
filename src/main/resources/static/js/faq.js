@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+    $(".accodion-item").click(function () {
+          if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+            $(this).children("div").slideUp(200);
+          } else {
+            $(this).addClass("active");
+            $(this).children("div").slideDown(200);
+          }
+        });
 
 
   $(".ctgy-btn").click(function () {

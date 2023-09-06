@@ -16,6 +16,9 @@ public class CSController {
     @Autowired
     private final CSService csService;
 
+    @Autowired
+    private NoticeService noticeService;
+
     @GetMapping(value = "/customer/faq")
     public String viewFaq(
         @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
@@ -54,21 +57,26 @@ public class CSController {
         return "content/faq";
     }
 
-//    @GetMapping(value = "/customer/notice")
-//    public String viewNotice(
-//        @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
-//        Model model) {
-////      페이지당 게시글 수 세팅
-//        int itemsPerPage = 5; // 페이지당 아이템 수
-//
-//        List<Notice> noticeList = noticeService.viewToAll();
-//        int totalPages = noticeService.getTotalPages(itemsPerPage, noticeList);
-//        noticeList = noticeService.getDataForPage(pageNumber, itemsPerPage, noticeList);
-//
-//        model.addAttribute("noticeList", noticeList);
-//        model.addAttribute("currentPage", pageNumber);
-//        model.addAttribute("totalPages", totalPages);
-//
-//        return "content/notice";
-//    }
+    @GetMapping(value = "/customer/notice")
+    public String viewNotice(
+        @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
+        Model model) {
+//      페이지당 게시글 수 세팅
+        int itemsPerPage = 5; // 페이지당 아이템 수
+
+        List<Notice> noticeList = noticeService.viewToAll();
+
+        List<Notice> noticeTopList = noticeService.viewTopList(noticeList);
+        List<Notice> noticeOtherList = noticeService.viewOtherList(noticeList);
+
+        int totalPages = noticeService.getTotalPages(itemsPerPage, noticeOtherList);
+        noticeOtherList = noticeService.getDataForPage(pageNumber, itemsPerPage, noticeOtherList);
+
+        model.addAttribute("noticeTopList", noticeTopList);
+        model.addAttribute("noticeOtherList", noticeOtherList);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", totalPages);
+
+        return "content/notice";
+    }
 }

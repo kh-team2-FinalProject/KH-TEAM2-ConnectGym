@@ -5,7 +5,7 @@
 */
 
 create table chat_message (
-    no bigint not null,
+    no bigint not null auto_increment,
     content varchar(255),
     send_at datetime(6),
     sender varchar(255),
@@ -78,7 +78,9 @@ create table hibernate_sequence (
     next_val bigint
 );
 
+
 insert into hibernate_sequence values ( 1 );
+
 
 create table lessons (
     no bigint not null auto_increment,
@@ -111,13 +113,39 @@ create table likes (
 );
 
 
+create table notice (
+    no bigint not null auto_increment,
+    content varchar(255) not null,
+    notice_datetime datetime(6),
+    title varchar(255) not null,
+    top_con integer not null,
+    primary key (no)
+);
+
+
+create table order_progress_details (
+    no bigint not null auto_increment,
+    lesson_no bigint not null comment '레슨 번호',
+    order_progress_no bigint not null comment '결제 예정 테이블 번호',
+    primary key (no)
+) comment='주문할 때 사용하는 정보 중 상세 정보를 담는 테이블';
+
+
 create table order_detail (
     no bigint not null auto_increment,
     enroll_key bigint not null,
     lesson_no bigint not null,
     order_no varchar(255) not null,
     primary key (no)
-);
+) comment='주문 상세 내역';
+
+
+create table order_progress (
+    no bigint not null auto_increment,
+    order_no varchar(255) not null comment '주문 번호',
+    price bigint not null comment '결제 예정 금액',
+    primary key (no)
+) comment='주문할 때 사용되는 테이블';
 
 
 create table orders (
@@ -127,6 +155,13 @@ create table orders (
     type varchar(50) not null,
     member_no bigint not null,
     primary key (no)
+) comment='주문 내역';
+
+
+create table review (
+    review_id bigint not null,
+    reviewer_id bigint,
+    primary key (review_id)
 );
 
 
@@ -143,6 +178,7 @@ create table trainers (
     trainer_tel varchar(255),
     primary key (no)
 );
+
 
 create table users (
     no bigint not null auto_increment,
@@ -178,6 +214,14 @@ create table users (
 --     add constraint uk_like_from_to unique (user_no, lesson_no);
 
 
+-- alter table order_progress
+--     drop index UK_gd6prp02vdbsxeeeht32j9pwi;
+
+
+-- alter table order_progress
+--     add constraint UK_gd6prp02vdbsxeeeht32j9pwi unique (order_no);
+
+
 -- alter table users
 --     drop index UK_33uo7vet9c79ydfuwg1w848f;
 
@@ -188,6 +232,7 @@ create table users (
 
 -- alter table users
 --     drop index UK_6efs5vmce86ymf5q7lmvn2uuf;
+
 
 -- alter table users
 --     add constraint UK_6efs5vmce86ymf5q7lmvn2uuf unique (user_id);
@@ -251,6 +296,18 @@ create table users (
 --     add constraint FK3m1x7y3mktd2stpwlwj988f74
 --     foreign key (user_no)
 --     references users (no);
+
+
+-- alter table order_progress_details
+--     add constraint FKci1asg9v90hi6reaao6xc58tq
+--     foreign key (lesson_no)
+--     references lessons (no);
+
+
+-- alter table order_progress_details
+--     add constraint FK5ubd56oyi84dx1erybubwy72r
+--     foreign key (order_progress_no)
+--     references order_progress (no);
 
 
 -- alter table order_detail
