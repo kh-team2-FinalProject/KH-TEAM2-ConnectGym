@@ -59,7 +59,7 @@
             <div class="pagination">
                 <ul>
                     <li class="prev" th:if="${currentPage > 1}">
-                        <button type="button" onclick="'location.href = &quot;/customer/notice?page=' + (${currentPage - 1}) + '&quot;'">이전
+                        <button type="button" th:onclick="'location.href=&quot;/customer/notice?page=' + (${currentPage - 1}) + '&quot;'">이전
                         </button>
                     </li>
                     <li class="pageNumber" th:each="page : ${#numbers.sequence(1, totalPages)}"
