@@ -1,0 +1,19 @@
+diff a/src/main/java/com/khteam2/connectgym/dietlist/controller/DietListController.java b/src/main/java/com/khteam2/connectgym/dietlist/controller/DietListController.java	(rejected hunks)
+@@ -93,13 +93,13 @@
+     }
+ 
+ 
+-    @PostMapping("fooddiary/selectfood")
++    @PostMapping("/selectfood")
+     public String selectFood(
+-        @RequestParam(name = "selectedKey", required = false) String selectedKey,
++        @RequestParam(name = "selectedKey", required = false) Long selectedKey,
+         Model model){
+-        Food selectedFood = foodRepository.findByFoodNm(selectedKey);
++        Food selectedFood = foodRepository.findByFoodCd(selectedKey);
+         model.addAttribute("selectedFood", selectedFood);
+-        return "redirect://fooddiary/dietlist";
++        return "redirect:/fooddiary/dietlist";
+     }
+ 
+ 
