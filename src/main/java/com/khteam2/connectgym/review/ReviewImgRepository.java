@@ -5,9 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ReviewImgorRepository extends JpaRepository<ReviewImg, Long> {
+public interface ReviewImgRepository extends JpaRepository<ReviewImg, Long> {
 
-    @Query("SELECT r FROM ReviewImg r WHERE r.review.member.no = ?1")
-    List<ReviewImg> findReviewImgByMemberNo(Long memberNo);
+    List<ReviewImg> findAllByReviewNo(Long reviewNo);
 }
 

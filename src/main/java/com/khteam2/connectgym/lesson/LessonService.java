@@ -29,8 +29,9 @@ public class LessonService {
 
     //레슨 생성
     @Transactional
-    public Long createLesson(LessonRequestDTO lessonRequestDTO, MultipartFile file) {
-        Trainer trainer = trainerRepository.findById(1L).orElse(null);
+    public Long createLesson(Long trainerNo, LessonRequestDTO lessonRequestDTO, MultipartFile file) {
+        Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
+
         lessonRequestDTO.setTrainer(trainer);
 
         lessonRequestDTO.setTitleCode(generateTitleCode());

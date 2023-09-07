@@ -19,4 +19,5 @@ public class OrderListOrderDetailDto {
     private String imageUrl;
     private Long lessonNo;
     private Long orderDetailNo;
+    private boolean reviewYn;
 }

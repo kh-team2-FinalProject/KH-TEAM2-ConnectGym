@@ -8,9 +8,10 @@ import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
-import com.khteam2.connectgym.order.OrderDetailRepository;
 import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.order.dto.OrderDetailDto;
+import com.khteam2.connectgym.review.ReviewService;
+import com.khteam2.connectgym.review.dto.MyReviewResponseDto;
 import com.khteam2.connectgym.trainer.TrainerService;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import java.util.HashMap;
@@ -20,13 +21,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -40,6 +35,7 @@ public class MemberController {
     private final LikeService likeService;
     private final ChatroomService chatroomService;
     private final OrderDetailService orderDetailService;
+    private  final ReviewService reviewService;
 
 
     @GetMapping(value = "/user/login")
@@ -263,17 +259,30 @@ public class MemberController {
     }
 
 
-    // 6-2) 주문내역 > 리뷰쓰기 ( 6-1) 주문내역 : orderController)
+    // 6-2) 주문내역 > 리뷰 쓰기 ( 6-1) 주문내역 : orderController)
     @GetMapping("/mypage/writeReview/{detailNo}")
-    public String writeReview(@PathVariable Long detailNo, Model model, HttpSession session) {
+    public String writeReview(@PathVariable Long detailNo, Model model) {
         OrderDetailDto odd = orderDetailService.findOrderDetail(detailNo);
 
         model.addAttribute("bannerTitle", "write review");
-        model.addAttribute("order", odd);
+        model.addAttribute("orderDetail", odd);
         return "mypage/review/writeReview";
     }
 
-    // 7-1) 회원정보
+    // 7) 내 리뷰 관리
+    @GetMapping("/mypage/myReviewList")
+    public String showReview(Model model,
+                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo) {
+        model.addAttribute("bannerTitle", "review");
+
+
+        List<MyReviewResponseDto> reviewList = reviewService.myReview(loginMemberNo);
+        model.addAttribute("reviewList", reviewList);
+
+        return "mypage/review/reviewList";
+    }
+
+    // 8-1) 회원정보
     @GetMapping("/mypage/myInfo")
     public String myInfo(Model model, HttpSession session) {
         //배너타이틀
@@ -286,7 +295,7 @@ public class MemberController {
         return "mypage/myInfo";
     }
 
-    // 7-2)회원정보 업데이트
+    // 8-2)회원정보 업데이트
     @PostMapping(value = "/mypage/updateProcess")
     public String updateProcess(MemberDTO memberDTO) {
 
@@ -297,7 +306,7 @@ public class MemberController {
         return "redirect:/mypage/myDashboard";
     }
 
-    // 7-3) 회원정보 내 트레이너 전환
+    // 8-3) 회원정보 내 트레이너 전환
     @GetMapping(value = "/mypage/convertToTrainerAccount")
     public String convertAccount(Model model) {
         model.addAttribute("bannerTitle", "CONVERT TO TRAINER ACCOUNT");

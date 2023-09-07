@@ -1,8 +1,5 @@
 package com.khteam2.connectgym.review.dto;
 
-import com.khteam2.connectgym.lesson.Lesson;
-import com.khteam2.connectgym.order.OrderDetail;
-import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LessonReviewResponseDto {
+public class TrainerReviewResponseDto {
 
     private Long no;
     private String userId;
