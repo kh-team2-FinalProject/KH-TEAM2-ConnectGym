@@ -40,4 +40,8 @@ public interface FoodService {
     default FoodInsertResponseDto insertFood(FoodInsertRequestDto requestDto, Long loginMemberNo) {
         return null;
     }
+
+    default FoodDeleteResponseDto deleteFood(Long loginMemberNo, Long memberFoodNo) {
+        return null;
+    }
 }

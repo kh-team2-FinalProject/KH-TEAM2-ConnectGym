@@ -39,6 +39,20 @@ public class DietListApiController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @PostMapping(value = "/api/dietList/delete")
+    public ResponseEntity<?> delete(
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+        @RequestBody(required = false) FoodDeleteRequestDto requestDto) {
+        Long memberFoodNo = requestDto.getMemberFoodNo();
+        FoodDeleteResponseDto responseDto = this.foodService.deleteFood(loginMemberNo, memberFoodNo);
+
+        if (!responseDto.isSuccess()) {
+            return ResponseEntity.badRequest().body(responseDto);
+        }
+
+        return ResponseEntity.ok(responseDto);
+    }
+
     @GetMapping(value = "/api/dietList/list")
     public DietListResponseDto list(
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,

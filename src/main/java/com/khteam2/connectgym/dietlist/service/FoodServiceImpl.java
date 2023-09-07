@@ -309,4 +309,33 @@ public class FoodServiceImpl implements FoodService {
 
         return responseDto;
     }
+
+    @Transactional
+//    @Override
+    public FoodDeleteResponseDto deleteFood(Long loginMemberNo, Long memberFoodNo) {
+        FoodDeleteResponseDto responseDto = FoodDeleteResponseDto.builder()
+            .success(false)
+            .build();
+
+        if (loginMemberNo == null || memberFoodNo == null) {
+            responseDto.setMessage("잘못된 요청입니다.");
+            return responseDto;
+        }
+
+        Member member = this.memberRepository.findById(loginMemberNo).orElse(null);
+
+        if (member == null) {
+            responseDto.setMessage("사용자 정보가 없습니다.");
+            return responseDto;
+        }
+
+        MemberFood memberFood = this.memberFoodRepository.findByMemberAndNo(member, memberFoodNo);
+
+        if (memberFood != null) {
+            this.memberFoodRepository.delete(memberFood);
+        }
+
+        responseDto.setSuccess(true);
+        return responseDto;
+    }
 }
