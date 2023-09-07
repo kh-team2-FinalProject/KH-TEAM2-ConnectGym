@@ -10,7 +10,7 @@ function checkedChatroom() {
         success: function (chatroom) {
             var chatroomNo = chatroom.no;
             console.log(chatroom.no);
-            window.open('/chat/start/' + chatroomNo, 'chatting-window',
+            window.open('/chatting/' + chatroomNo, 'chatting-window',
                 'width=430, height=500, location=no, status=no, scrollbars=yes');
 
         },
@@ -33,7 +33,7 @@ function sendMessage() {
             'sender': sender
 
         }));
-        document.getElementById('message').value = '';
+        document.getElementById('message-input').value = '';
     }
     endtoscrollbar();
 }
@@ -45,34 +45,34 @@ function showMessage(message) {
     if (message.sender !== sender) {
 
         var chatDiv = document.createElement("div");          //채팅메시지 요소들이 묶이는 영역
-        chatDiv.className = "partnerMessageBox chat"; //chat  ch1
+        chatDiv.className = "partnerMessageBox chat";
 
         var messageBody = document.createElement("div");       //채팅 메시지
-        messageBody.className = "messageBody";   //textbox
+        messageBody.className = "messageBody";
         messageBody.textContent = message.content;
 
-        // var dateSpan = document.createElement('span');                               //보낸시간
-        // dateSpan.className = 'tx-small';
-        // dateSpan.textContent = date;
+        var dateSpan = document.createElement('span');                               //보낸시간
+        dateSpan.className = 'sendtime';
+        dateSpan.textContent = date;
 
         chatDiv.appendChild(messageBody);
-        // chatDiv.appendChild(dateSpan);
+        chatDiv.appendChild(dateSpan);
 
         chatBox.appendChild(chatDiv);
     } else {
         var chatDiv = document.createElement("div");
-        chatDiv.className = "myMessageBox chat";    //chat  ch2
+        chatDiv.className = "myMessageBox chat";
 
         var messageBody = document.createElement("div");
-        messageBody.className = "messageBody";     //textbox
+        messageBody.className = "messageBody";
         messageBody.textContent = message.content;
 
-        // var dateSpan = document.createElement('span');
-        // dateSpan.className = 'tx-small';
-        // dateSpan.textContent = date;
+        var dateSpan = document.createElement('span');
+        dateSpan.className = 'sendtime';
+        dateSpan.textContent = message.sendAt;
 
         chatDiv.appendChild(messageBody);
-        // chatDiv.appendChild(dateSpan);
+        chatDiv.appendChild(dateSpan);
 
         chatBox.appendChild(chatDiv);
 
@@ -80,9 +80,6 @@ function showMessage(message) {
     const scrollTop = chatBox.scrollTop;
     const scrollHeight = chatBox.scrollHeight;
     const clientHeight = chatBox.clientHeight;
-    console.log(scrollTop + clientHeight);
-    console.log(scrollHeight);
-
 
     // 스크롤 위치가 가장 하단에 있을 때만 하단고정
     if (scrollTop + clientHeight + 100 >= scrollHeight) {
@@ -94,7 +91,6 @@ function showMessage(message) {
 function endtoscrollbar() {
 
     const chatcontainer = document.getElementById("chat-box");
-
     requestAnimationFrame(() => {
         chatcontainer.scrollTo(0, chatcontainer.scrollHeight);
     });
