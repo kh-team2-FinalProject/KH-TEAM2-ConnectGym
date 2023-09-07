@@ -1,11 +1,11 @@
 
 .createLesson_container {
     display: flex;
-   /* justify-content: center;*/
+    /* justify-content: center;*/
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
-    height:100%;
+    height: 100%;
 }
 
 .createLesson_form {
@@ -105,13 +105,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 60px;
 }
 
 .input_createLesson li {
     margin-bottom: 3vh;
     text-align: center;
     width: 30vw;
-
 }
 
 .input_createLesson label {
@@ -120,6 +120,18 @@
     margin-bottom: 8px;
     text-align: left;
     color: white;
+}
+
+.cl-price-box {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-items: center;
+    width: 104%;
+}
+
+.cl-price-box span {
+    margin-left: 10px;
 }
 
 .input_createLesson input {
@@ -148,6 +160,7 @@
 #createLessonImgInput {
     display: none;
 }
+
 .createLessonImg_container:hover {
     cursor: pointer;
 }

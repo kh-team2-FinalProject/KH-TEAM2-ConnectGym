@@ -29,7 +29,7 @@ public class LessonController {
     public String createLesson(Model model) {
 
         //배너타이틀
-        model.addAttribute("bannerTitle", "create");
+        model.addAttribute("bannerTitle", "create lesson");
 
         //폼 호출
         model.addAttribute("lessonForm", new Lesson());
@@ -70,7 +70,7 @@ public class LessonController {
                              @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
                              @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
     ) {
-        model.addAttribute("bannerTitle", "lessons");
+        model.addAttribute("lessonCategory", "lessons");
 
         // ---
         int itemsPerPage = 1;   // 한 페이지에 보여질 게시글 수
@@ -138,5 +138,5 @@ public class LessonController {
         return "detailOrCrud/createComplete";
     }
 
-}
 
+}
