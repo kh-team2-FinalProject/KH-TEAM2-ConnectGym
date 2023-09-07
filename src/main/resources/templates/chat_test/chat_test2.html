@@ -25,7 +25,7 @@
 
         .avatar > p {
             color: #F9FBFF;
-            margin: 7px 12px;
+            margin: 9px 11px;
         }
 
         .interlocutor-name {
@@ -47,13 +47,9 @@
         }
 
         #chat-box {
-
             display: flex;
-
             flex-direction: column;
-
             overflow-y: auto;
-
             height: 400px;
             padding: 40px 0;
             background: #F9FBFF;
@@ -63,9 +59,9 @@
 
         #chat-box .chat {
             display: flex;
-            align-items: flex-start;
-            padding: 5px;
 
+            padding: 5px;
+            align-items: flex-end;
         }
 
 
@@ -87,9 +83,9 @@
         }
 
         #chat-box .chat span {
-
+            padding: 1px 3px;
             font-size: 3px;
-            color: #A1E2D9;
+            color: #777777;
         }
 
         #chat-box .partnerMessageBox .messageBody {
@@ -119,7 +115,7 @@
         }
 
         body {
-            background-color: #A8C0D6;
+            background-color: #79C7C5;
         }
 
 
@@ -184,7 +180,7 @@
         const chatroomNo = [[${chatroomNo}]];
 
     </script>
-    <script src="/webjars/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="/webjars/sockjs-client/1.0.0/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
     <script th:src="@{/js/chatroom.js}"></script>
     <script th:inline="javascript">
@@ -211,7 +207,7 @@
                 <span class="sendAtMessage"
                       th:text="${chatMessage.sendAt}"></span>
             </div>
-            <!--            <div th:onload="showMessage(${chatMessage})"></div>-->
+
         </div>
 
 

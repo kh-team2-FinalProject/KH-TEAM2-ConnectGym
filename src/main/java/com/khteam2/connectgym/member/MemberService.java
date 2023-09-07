@@ -7,16 +7,19 @@ import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
@@ -259,5 +262,29 @@ public class MemberService {
         // null 일 경우 기존 데이터 그대로 저장
 
         memberRepository.save(member);
+    }
+
+    public String findMemberID(String name, String email) {
+
+        Member member = memberRepository.findByUserEmail(email);
+
+        if (member.getUserName().equals(name)) {
+            return member.getUserId();
+        } else {
+            return null;
+        }
+    }
+
+    public boolean findAndChangePW(String id, String name, String email, String password) {
+
+        Member member = memberRepository.findByUserEmail(email);
+
+        if (member.getUserName().equals(name) && member.getUserId().equals(id)) {
+            member.setUserPw(password);
+            memberRepository.save(member);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

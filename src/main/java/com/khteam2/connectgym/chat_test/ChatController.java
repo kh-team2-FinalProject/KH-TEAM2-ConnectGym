@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -23,15 +24,15 @@ public class ChatController {
     private final ChatroomService chatroomService;
     private final SimpMessagingTemplate simpMessagingTemplate;
 
-    @GetMapping("/chat/start/{chatroomNo}")
+    @GetMapping("/chatting/{chatroomNo}")
     public String chat_open(Model model,
                             @PathVariable("chatroomNo") Long chatroomNo,
                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass memberClass) {
+
+        //chatroomNo로 특정된 채팅룸 입장
         Chatroom chatroom = chatroomService.inChatroom(chatroomNo);
-//        ChatroomDTO chatroomDTO = new ChatroomDTO().fromEntity(chatroom);
-        System.out.println(chatroomNo);
-//        System.out.println(chatroomDTO);
-        List<ChatMessage> chatMessages = chatroomService.loadMessage(chatroom);
+        //지난 대화내용 전송
+        List<ChatMessageReaponseDTO> chatMessages = chatroomService.loadMessage(chatroom);
         model.addAttribute("chatMessages", chatMessages);
         model.addAttribute("chatroomNo", chatroomNo);
 //        model.addAttribute("chatroomDTO", chatroomDTO);
@@ -52,15 +53,6 @@ public class ChatController {
         model.addAttribute("interlocutor", interlocutor);
         return "chat_test/chat_test2";
     }
-//    @PostMapping("/chat_test/{chatroomNo}")
-//    public String chat_open(@PathVariable("chatroomNO") Long chatroomNo, Model model) {
-//
-//
-//        String sender = chatroom.getMember().getUserName();
-//        model.addAttribute("sender", sender);
-//
-//        return "/chat_test/chat_test2";
-//    }
 
     @PostMapping("/checkedChatroom")
     @ResponseBody
@@ -74,15 +66,16 @@ public class ChatController {
     @MessageMapping("/chat/{chatroomNo}") // 클라이언트가 메시지 보낼 때의 엔드포인트 설정
     public void sendMessage(@DestinationVariable Long chatroomNo,
                             @Payload ChatMessageDTO message) {
-
-
+        //채팅 메시지 DB저장
         ChatMessage chatMessage = chatMessageService.saveMessage(chatroomNo, message);
+
+        chatMessage.setSendAt(LocalDateTime.now());
+        //리턴된 엔티티의 DTO화
         ChatMessageReaponseDTO chatMessageReaponseDTO = new ChatMessageReaponseDTO().fromEntity(chatMessage);
 
-        System.out.println("chatMessageDTO = " + chatMessageReaponseDTO);
+//       채팅메시지 수신하는 주소
         String claQueue = "/queue/qqq/" + chatroomNo;
-
-
+//전송
         simpMessagingTemplate.convertAndSend(claQueue, chatMessageReaponseDTO);
 
     }

@@ -3,6 +3,7 @@ package com.khteam2.connectgym.member;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,5 +36,36 @@ public class MemberApiController {
         map = memberService.findMemberByNo(user_no);
 
         return ResponseEntity.ok(map);
+    }
+
+    @GetMapping("/findIdProcess")
+    public ResponseEntity<Object> findIdProcess(
+        @RequestParam("name") String name,
+        @RequestParam("email") String email
+    ) {
+
+        String findID = memberService.findMemberID(name, email);
+
+        if (findID != null) {
+            return ResponseEntity.ok(findID);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @PostMapping("/findPWProcess")
+    public ResponseEntity<Object> findPwProcess(
+        @RequestParam("userId") String userId,
+        @RequestParam("name") String name,
+        @RequestParam("email") String email,
+        @RequestParam("password") String password
+    ) {
+        boolean result = memberService.findAndChangePW(userId, name, email, password);
+
+        if (result) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }

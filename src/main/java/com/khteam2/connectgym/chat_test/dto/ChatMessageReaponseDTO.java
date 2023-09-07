@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 
@@ -17,7 +17,7 @@ public class ChatMessageReaponseDTO {
     private Long chatroomNo;
     private String content;
     private String sender;
-    private LocalDateTime sendAt;
+    private String sendAt;
 
 
     public ChatMessageReaponseDTO fromEntity(ChatMessage chatMessage) {
@@ -25,7 +25,8 @@ public class ChatMessageReaponseDTO {
             .chatroomNo(chatMessage.getChatroom().getNo())
             .content(chatMessage.getContent())
             .sender(chatMessage.getSender())
-            .sendAt(chatMessage.getSendAt())
+            //Localdatetime 을 스트링 포맷으로 변환
+            .sendAt(chatMessage.getSendAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
             .build();
     }
 }

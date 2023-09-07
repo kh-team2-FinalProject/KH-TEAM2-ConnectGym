@@ -18,4 +18,5 @@ public class OrderListOrderDetailDto {
     private String trainerName;
     private String imageUrl;
     private Long lessonNo;
+    private Long orderDetailNo;
 }

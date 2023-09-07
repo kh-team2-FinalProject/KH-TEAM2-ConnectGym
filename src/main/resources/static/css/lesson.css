@@ -177,38 +177,61 @@
     margin-top: 40px;
 }
 
-.l_pagination .pageNumber{
+.l_pagination .pageNumber {
     margin: 0 2px;
+
 }
 
 .l_pagination ul {
     display: inline-flex;
 }
 
-.l_pagination .prev{
+.l_pagination .prev {
     margin-right: 10px;
 }
 
-.l_pagination .next{
+.l_pagination .next {
     margin-left: 10px;
 }
 
 .l_pagination .next button,
-.l_pagination .prev button{
+.l_pagination .prev button {
     font-size: 16px;
     font-weight: 700;
-    color: #9b9eae;
+    color: white;
+    border: 0;
+    background-color: transparent;
 }
 
-.l_pagination .pageNumber button{
+.l_pagination .prev button:hover {
+    cursor: pointer;
+    color: #A3DC10;
+
+}
+
+.l_pagination .next button:hover {
+    cursor: pointer;
+    color: #A3DC10;
+
+}
+
+.l_pagination .pageNumber button {
     width: 30px;
     height: 30px;
     font-size: 16px;
     font-weight: 700;
-    color: #9b9eae;
+    border: 0;
+    background-color: transparent;
+    color: white;
+}
+
+.l_pagination .pageNumber button:hover {
+    cursor: pointer;
+    color: #A3DC10;
+
 }
 
 .l_pagination .pageNumber.active button,
-.l_pagination .pageNumber.active a{
-    color: #143c56;
+.l_pagination .pageNumber.active a {
+    color: #A3DC10;
 }
