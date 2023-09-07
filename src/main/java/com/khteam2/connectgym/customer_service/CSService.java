@@ -45,9 +45,14 @@ public class CSService {
         int startIndex = (pageNumber - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, allData.size());
 
+        for (int i = 0; i < allData.size(); i++) {
+            allData.get(i).setContent(allData.get(i).getContent().replaceAll("\r\n", "<br>"));
+        }
+
         for (int i = startIndex; i < endIndex; i++) {
             dataForPage.add(allData.get(i));
         }
+
         return dataForPage;
     }
 
@@ -57,6 +62,10 @@ public class CSService {
 
         int startIndex = (pageNumber - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, categoryList.size());
+
+//        for (int i = 0; i < categoryList.size(); i++) {
+//            categoryList.get(i).getContent().replace("\r\n", "<br>");
+//        }
 
         for (int i = startIndex; i < endIndex; i++) {
             dataForPage.add(categoryList.get(i));
