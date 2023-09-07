@@ -20,5 +20,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
 
         registry.addEndpoint("/chat").setAllowedOrigins("*").withSockJS(); // SockJS를 사용하여 호환성 확보
+//        registry.addEndpoint("/chat").setAllowedOrigins("https://connectgym.store").withSockJS(); // SockJS를 사용하여 호환성 확보
     }
 }
