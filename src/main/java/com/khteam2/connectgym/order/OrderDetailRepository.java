@@ -31,4 +31,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
 
     @Query("SELECT od FROM OrderDetail od WHERE lesson.no = ?1")
     List<OrderDetail> enrollList(Long lessonNo);
+
+
 }

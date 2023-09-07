@@ -8,6 +8,9 @@ import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.order.OrderDetailRepository;
+import com.khteam2.connectgym.order.OrderDetailService;
+import com.khteam2.connectgym.order.dto.OrderDetailDto;
 import com.khteam2.connectgym.trainer.TrainerService;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +34,8 @@ public class MemberController {
     private final FollowService followService;
     private final LikeService likeService;
     private final ChatroomService chatroomService;
+    private final OrderDetailService orderDetailService;
+
 
     @GetMapping(value = "/user/login")
     public String tempLogin(
@@ -242,10 +247,13 @@ public class MemberController {
     }
 
 
-    // 주문내역 > 리뷰쓰기 버튼 생성
-    @GetMapping("/mypage/writeReview")
-    public String writeReview(Model model, HttpSession session) {
-        model.addAttribute("bannerTitle", "following");
+    // 6-2) 주문내역 > 리뷰쓰기 ( 6-1) 주문내역 : orderController)
+    @GetMapping("/mypage/writeReview/{detailNo}")
+    public String writeReview(@PathVariable Long detailNo, Model model, HttpSession session) {
+        OrderDetailDto odd = orderDetailService.findOrderDetail(detailNo);
+
+        model.addAttribute("bannerTitle", "write review");
+        model.addAttribute("order", odd);
         return "mypage/review/writeReview";
     }
 

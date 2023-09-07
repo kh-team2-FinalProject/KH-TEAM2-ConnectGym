@@ -15,18 +15,23 @@
 <th:block layout:fragment="mypage">
 
     <div class="myReview_container">
+        <div class="myReviewview_orderInfo">
+            <div class="myReview_orderInfo_grp">
+                <div class="myReview_orderInfo_label">타이틀</div>
+                <div class="myReview_orderInfo_input">테스트</div>
+            </div>
 
+        </div>
         <div class="myReview_write">
             <form name="myReview_write_form"
                   action="/mypage/writeReview" method="post" enctype="multipart/form-data">
-
                 <!--타이틀-->
-                <div class="myReview_write_title_grp">
+                <div class="myReview_write_title_grp myReview_write_grp">
                     <div class="myReview_write_title_div myReview_write_label">타이틀</div>
                     <input class="myReview_write_title_input" type="text">
                 </div>
                 <!--별점-->
-                <div class="myReview_write_rating_grp">
+                <div class="myReview_write_rating_grp myReview_write_grp">
                     <div class="myReview_write_rating_div myReview_write_label">별점</div>
                     <input type="radio" class="star" id="star1" name="rate" value="1" hidden/>
                     <label for="star1">
@@ -70,16 +75,17 @@
                     </label>
                 </div>
                 <!--내용-->
-                <div class="myReview_write_content_grp">
+                <div class="myReview_write_content_grp myReview_write_grp">
                     <div class="myReview_write_content_div myReview_write_label">리뷰</div>
+                    <div class="myReview_write_content_textarea">
                     <textarea class="myReview_write_content_input"
                               onkeyup="countingLength(this);"></textarea>
-                    <div><i id="myReview_write_content_counter">0/300자</i></div>
+                        <i id="myReview_write_content_counter">0/300자</i></div>
                 </div>
                 <!--이미지 첨부-->
-                <div class="myReview_write_upload_img_grp">
+                <div class="myReview_write_upload_img_grp myReview_write_grp">
                     <div class="myReview_write_img_div myReview_write_label">이미지</div>
-                    <input class="myReview_write_img_input" type="text">
+                    <input class="myReview_write_img_input" type="file">
                 </div>
                 <!--버튼-->
                 <div class="myReview_write_button_grp">
