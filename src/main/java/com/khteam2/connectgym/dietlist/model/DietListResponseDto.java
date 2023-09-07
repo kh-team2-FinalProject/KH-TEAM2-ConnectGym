@@ -12,8 +12,8 @@ import java.util.List;
 public class DietListResponseDto {
     private boolean success;
     private String message;
-    private List<FoodDto> breakfastList;
-    private List<FoodDto> lunchList;
-    private List<FoodDto> dinnerList;
-    private List<FoodDto> snackList;
+    private List<DietListFoodDto> breakfastList;
+    private List<DietListFoodDto> lunchList;
+    private List<DietListFoodDto> dinnerList;
+    private List<DietListFoodDto> snackList;
 }
