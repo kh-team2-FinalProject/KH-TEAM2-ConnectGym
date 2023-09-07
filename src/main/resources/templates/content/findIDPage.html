@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<th:block layout:fragment="script">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" rel="script" th:src="@{/js/findID.js}"></script>
+</th:block>
+
+<th:block layout:fragment="add-css">
+    <link th:href="@{/css/findPage.css}" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="content">
+
+    <div class="join_container">
+        <div class="join_border">
+            <div class="join_logo">
+                <a href="/">
+                    <img
+                      class="join_logo_img"
+                      src="/images/logo-white.png"
+                      th:alt="'CONNECT GYM'"
+                    />
+                </a>
+            </div>
+            <div class="find-wrap">
+                <!-- 팝업으로 창 띄워서 id 찾기 및 비밀번호 재설정 -->
+                <div class="find-form-wrap">
+                    <div class="input-wrap">
+                        <span>이름</span><br>
+                        <input id="InputName" type="text" name="userName"></input>
+                    </div>
+
+                    <div class="input-wrap">
+                        <span>이메일</span><br>
+                        <input id="email01" type="text" name="email01" required></input>
+                        <span id="email_middle">@</span>
+                        <input id="email02" name="email02">
+                        <select id="select" name="select">
+                            <option value="1" selected>직접입력</option>
+                            <option value="naver.com">naver.com</option>
+                            <option value="hanmail.net">hanmail.net</option>
+                            <option value="hotmail.com">hotmail.com</option>
+                            <option value="nate.com">nate.com</option>
+                            <option value="yahoo.co.kr">yahoo.co.kr</option>
+                            <option value="empas.com">empas.com</option>
+                            <option value="dreamwiz.com">dreamwiz.com</option>
+                            <option value="freechal.com">freechal.com</option>
+                            <option value="lycos.co.kr">lycos.co.kr</option>
+                            <option value="korea.com">korea.com</option>
+                            <option value="gmail.com">gmail.com</option>
+                            <option value="hanmir.com">hanmir.com</option>
+                            <option value="paran.com">paran.com</option>
+                        </select>
+                        <br>
+                        <input id="checkEmail" type="text" name="checkEmail" readonly maxlength="6"></input>
+                        <button type="button" class="join_request_btn" id="join_request_btn">인증코드 발송</button>
+                        <button type="button" class="join_auth_btn" id="join_auth_btn" value="false">본인인증</button>
+                        <br>
+                        <span id="mail-check-warn"></span>
+                        <input type="hidden" id="userEmail" name="userEmail">
+                    </div>
+
+                    <div class="btn-wrap">
+                        <button type="button" onclick="findMemberID();">아이디 찾기</button>
+                        <button type="button" onclick="history.back();">이전으로</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+</html>
