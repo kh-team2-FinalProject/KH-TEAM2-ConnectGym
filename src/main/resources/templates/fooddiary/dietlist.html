@@ -360,7 +360,8 @@
                 <button id="closeBtn">X</button>
                 <h1 th:text="${mealTime}">time 식사</h1>
                 <form id="foodSearchForm" name="foodSearchForm">
-                    <input type="text" name="foodTime" hidden />
+                    <input type="hidden" name="foodTime" />
+                    <input type="date" name="regDate" hidden />
                     <input
                         id="popInput"
                         name="key"

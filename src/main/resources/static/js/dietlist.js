@@ -9,11 +9,24 @@
 //     });
 // });
 
+const dietPopupContent = document.querySelector("#dietPopup .pop-content");
+const foodSearchTableBodyEl = dietPopupContent.querySelector(
+    "table.foodselect_Tbl > tbody"
+);
+const foodSearchPaginationUlEl = dietPopupContent.querySelector(
+    ".dietList_search_popup_pagination .dietList_search_popup_pagination_ul"
+);
+const foodTimeEl = document.querySelector(
+    'form[name="foodSearchForm"] > input[name="foodTime"]'
+);
+const foodRegDateEl = document.querySelector(
+    'form[name="foodSearchForm"] > input[name="regDate"]'
+);
+
+foodRegDateEl.valueAsDate = selectedDate;
+
 /* 열림 */
 function openPop(meal) {
-    const foodTimeEl = document.querySelector(
-        'form[name="foodSearchForm"] > input[name="foodTime"]'
-    );
     foodTimeEl.value = meal.toUpperCase();
 
     var mealName = "";
@@ -64,14 +77,6 @@ document.getElementById("closeBtn").addEventListener("click", function () {
 // }
 
 function foodSearch(search, page) {
-    const dietPopupContent = document.querySelector("#dietPopup .pop-content");
-    const foodSearchTableBodyEl = dietPopupContent.querySelector(
-        "table.foodselect_Tbl > tbody"
-    );
-    const foodSearchPaginationUlEl = dietPopupContent.querySelector(
-        ".dietList_search_popup_pagination .dietList_search_popup_pagination_ul"
-    );
-
     if (!foodSearchTableBodyEl || !foodSearchPaginationUlEl) {
         console.log("일부 element가 없습니다.");
         return;
@@ -98,10 +103,8 @@ function foodSearch(search, page) {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                 <td>
-                    <form action="/selectfood" method="POST">
-                        <span name="selectedKey">${food.foodNm}</span>
-                        <button type="submit"></button>
-                    </form>
+                    <span>${food.foodNm}</span>
+                    <button type="button" onclick="addFoodToDietList(${food.foodCd})"></button>
                 </td>
                 <td>
                     <span>${food.foodSize}g</span>
@@ -180,6 +183,31 @@ document.forms.foodSearchForm.addEventListener("submit", function (e) {
 
     foodSearch(key.value, 1);
 });
+
+function addFoodToDietList(foodNo) {
+    if (!foodNo) {
+        alert("필수 파라미터가 누락되었습니다.");
+        return;
+    }
+
+    fetch("/api/dietList/insertFood", {
+        method: "POST",
+        body: new URLSearchParams({
+            selectedKey: foodNo,
+            foodTime: foodTimeEl.value,
+            date: foodRegDateEl.value,
+        }),
+    })
+        .then((r) => r.json())
+        .then((v) => {
+            if (v.success) {
+                alert("선택한 음식이 추가되었습니다.");
+                location.reload();
+            } else {
+                alert(v.message);
+            }
+        });
+}
 
 /* - 버튼 활성화 */
 
