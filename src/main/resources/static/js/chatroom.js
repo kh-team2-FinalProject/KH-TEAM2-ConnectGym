@@ -53,11 +53,10 @@ function showMessage(message) {
 
         var dateSpan = document.createElement('span');                               //보낸시간
         dateSpan.className = 'sendtime';
-        dateSpan.textContent = date;
+        dateSpan.textContent = message.sendAt;
 
         chatDiv.appendChild(messageBody);
         chatDiv.appendChild(dateSpan);
-
         chatBox.appendChild(chatDiv);
     } else {
         var chatDiv = document.createElement("div");
@@ -73,7 +72,6 @@ function showMessage(message) {
 
         chatDiv.appendChild(messageBody);
         chatDiv.appendChild(dateSpan);
-
         chatBox.appendChild(chatDiv);
 
     }
