@@ -26,12 +26,12 @@ ratingInputs.forEach(function (input, index) {
 
 // 댓글 글자수 카운팅
 function countingLength(reviewContent) {
-if (reviewContent.value.length > 300) {
+if (reviewContent.value.length > 500) {
 alert('댓글을 300자 이하로 입력해 주세요.');
-reviewContent.value = reviewContent.value.substring(0, 300);
+reviewContent.value = reviewContent.value.substring(0, 500);
 reviewContent.focus();
 }
-document.getElementById('myReview_write_content_counter').innerText = reviewContent.value.length + '/300자';
+document.getElementById('myReview_write_content_counter').innerText = reviewContent.value.length + '/500자';
 }
 
 // 뒤로가기 시 팝업창
@@ -54,6 +54,5 @@ function back(){
                     history.go(-1);
             //재호출도 가능 : Swal.fire('승인이 완료되었습니다.', '내용~!', 'success');-->
         }
-});
+    });
 }
-

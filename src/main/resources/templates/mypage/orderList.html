@@ -166,10 +166,15 @@
                                 <div
                                     class="orderList_order_detail_right orderList_order_detail_right_2_box"
                                 >
-                                    <a
-                                        href="/mypage/writeReview"
+                                    <a th:if="${detail.reviewYn == true}"
+                                        th:href="@{'/mypage/writeReview/' + ${detail.orderDetailNo}}"
                                         class="_js_button_20230904_1"
-                                        >리뷰 쓰기</a
+                                        >리뷰 작성</a
+                                    >
+                                    <div th:if="${detail.reviewYn == false }"
+
+                                       class="_js_button_20230904_1_disable"
+                                    >리뷰 작성 완료</div
                                     >
                                 </div>
                             </div>

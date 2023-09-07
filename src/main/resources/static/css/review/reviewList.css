@@ -1,0 +1,53 @@
+.myReview_list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 500px;
+}
+
+.myReview_list_item {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  color: #0e1414;
+  box-sizing: border-box;
+  padding: 15px 15px;
+}
+
+.myReview_list_item a {
+  color: #0e1414;
+}
+
+.my_Review_list_item_titleAndDel {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+}
+.my_Review_list_item_titleAndDel .my_Review_list_item_del {
+  border: none;
+  border-radius: 10px;
+  background-color: #eee;
+  padding: 3px 10px;
+}
+
+.my_Review_list_item_titleAndDel .my_Review_list_item_del:hover {
+cursor: pointer;
+}
+
+.my_Review_list_item_rating {
+  display: inline-block;
+}
+
+.my_Review_list_item_rating .star{
+  display: inline-block;
+  fill: #ccc;
+}
+
+.my_Review_list_item_rating .star.filled {
+  fill: gold;
+}
+
+.my_Review_list_item_content{
+    font-size: 16px;
+
+}

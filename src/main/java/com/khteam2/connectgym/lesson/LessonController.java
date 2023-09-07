@@ -9,10 +9,7 @@ import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -38,7 +35,8 @@ public class LessonController {
     }
 
     @PostMapping(value = "/createLesson")
-    public String createLesson(Model model, LessonRequestDTO lessonRequestDTO,
+    public String createLesson(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+                               Model model, LessonRequestDTO lessonRequestDTO,
                                @RequestParam("lessonImgFile") MultipartFile file) {
 
         //배너타이틀
@@ -46,7 +44,7 @@ public class LessonController {
 
         System.out.println("lessonRequestDTO = " + lessonRequestDTO.getStart_date());
         //service save() 호출
-        lessonService.createLesson(lessonRequestDTO, file);
+        lessonService.createLesson(loginMemberNo, lessonRequestDTO, file);
 
         return "detailOrCrud/createComplete";
     }

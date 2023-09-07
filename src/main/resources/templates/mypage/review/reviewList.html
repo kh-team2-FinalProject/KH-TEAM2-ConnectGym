@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 나의 리뷰</title>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:src="@{/js/review/reviewList.js}"></script>
+</th:block>
+
+
+<th:block layout:fragment="mypage">
+
+    <div class="myReview_container">
+        <!--<div class="myReview_border">-->
+        <div class="myReview_list">
+            <th:block th:if="${reviewList.size() > 0}">
+                <div class="myReview_list_item" th:each="review:${reviewList}">
+                    <div class="my_Review_list_item_trainerName">
+                        <a th:href="@{'/trainerDetail/'+${review.trainerNo}}">[[${review.trainerName}]] <b>></b> </a>
+                    </div>
+                    <div class="my_Review_list_item_titleAndDel">
+                        <div class="my_Review_list_item_title">[[${review.reviewTitle}]]</div>
+                        <button class="my_Review_list_item_del" th:onclick="deleteReview([[${review.no}]])">삭제</button>
+                    </div>
+                    <div class="my_Review_list_item_rating" th:data-rating="${review.rating}">
+                        <!--별점 출력-->
+                    </div>
+                    <div class="my_Review_list_item_content">
+                        [[${review.reviewContent}]]
+                    </div>
+
+            </th:block>
+            <th:block th:if="${reviewList.size() == 0}">
+                등록한 리뷰가 없습니다.
+            </th:block>
+
+        </div>
+    </div>
+
+
+</th:block>
+
+</body>
+
+</html>

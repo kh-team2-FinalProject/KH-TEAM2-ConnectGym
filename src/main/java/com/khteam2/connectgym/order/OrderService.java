@@ -7,6 +7,8 @@ import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.order.dto.*;
+import com.khteam2.connectgym.review.Review;
+import com.khteam2.connectgym.review.ReviewRepository;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -44,6 +46,7 @@ public class OrderService {
     private final LessonRepository lessonRepository;
     private final MemberRepository memberRepository;
     private final IamportClient iamportClient;
+    private final ReviewRepository reviewRepository;
 
     /**
      * 결제 진행 전 실행되는 메소드
@@ -516,9 +519,20 @@ public class OrderService {
                     status = "수강 완료";
                 }
 
+                //리뷰 작성 여부
+                boolean reviewYn;
+
+                if(reviewRepository.findOrderDetailNo(orderDetail.getNo()).orElse(null) == null){
+                    reviewYn = true;
+                } else {
+                    reviewYn = false;
+                }
+
+
                 // 상세 정보 DTO를 생성해서 가져온 정보들을 담아준다.
                 OrderListOrderDetailDto detailDto = OrderListOrderDetailDto.builder()
                     .orderDetailNo(orderDetail.getNo())
+                    .reviewYn(reviewYn)
                     .title(lesson.getTitle())
                     .startDate(lesson.getStart_date())
                     .endDate(lesson.getEnd_date())

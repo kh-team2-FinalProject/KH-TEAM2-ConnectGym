@@ -1,28 +1,60 @@
 
-.myp_side_page{
-min-height:60vh;
-}
-
-.myReview_container{
+.myReview_write_container{
 display:flex;
-justify-content:center;
-
+flex-direction:column;
+align-items: center;
+color:#0e1414;
 }
 
+/*리뷰 제목9(레슨명,트레이너명,별점)*/
+.myReviewview_orderInfo{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/*강좌명*/
+.myReviewview_orderInfo_lessonTitle{
+font-size: 40px;
+line-height: 45px;
+}
+
+/*강사명*/
+.myReviewview_orderInfo_lessonTrainer{
+font-size: 15px;
+}
+
+/*별점 영역*/
+.myReview_orderInfo_rating{
+margin: 15px 0;
+}
+
+/*별점*/
+.myReview_write_rating_grp label:hover {
+cursor:pointer;
+}
+
+.myReview_write_rating_grp svg{
+ height:1.5em;
+}
+
+
+/*리뷰 입력 폼*/
 .myReview_write{
 display:flex;
 justify-content:center;
 border: 2px solid #0e1414;
     border-radius: 10px;
     width: 100%;
-    min-width:600px;
-    padding: 50px 20px;
+    min-width:500px;
+    max-width: 500px;
+    padding: 20px 20px;
+    box-sizing: border-box;
 }
 
-.myReview_write form {
+.myReview_write .myReview_write_form {
 display:flex;
 flex-direction:column;
-color:#0e1414;
 }
 
 /*각 요소 제목과 입력창 배열*/
@@ -30,39 +62,37 @@ color:#0e1414;
 myReview_orderInfo_grp{
   display:flex;
   margin-bottom:10px;
-
 }
 
+
 /*각 요소 제목*/
-.myReview_write .myReview_write_label,
- myReview_orderInfo_label{
-width: 100px;
+.myReview_write_form
+.myReview_write_label{
+width: 80px;
 }
 
 /*각 요소 입력창*/
-.myReview_write form input[type="text"],
-.myReview_write form textarea{
+.myReview_write .myReview_write_form input[type="text"],
+.myReview_write .myReview_write_form textarea{
 height: 40px;
     border-radius: 6px;
     width: 365px;
-    font-size: 16px;
+    font-size: 14px;
     box-sizing: border-box;
-    padding-left: 20px;
+    padding: 10px;
+
     border: 1px solid #0e1414;
 }
 
+/*리뷰창 높이*/
 .myReview_write_content_div,
-.myReview_write form textarea{
-height: 100px;
-
+.myReview_write .myReview_write_form textarea{
+height: 200px;
+resize: none;
 }
 
 
 
-/*별점*/
-.myReview_write label:hover {
-cursor:pointer;
-}
 
 /*텍스트 입력 수를 위한 그룹*/
 .myReview_write_content_textarea{
@@ -72,6 +102,7 @@ flex-direction:column;
 
 .myReview_write_content_textarea i{
     text-align: right;
+    font-size:14px;
 }
 
 /*버튼그룹 가운데 정렬*/

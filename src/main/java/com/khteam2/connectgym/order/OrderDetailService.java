@@ -19,7 +19,6 @@ public class OrderDetailService {
         OrderDetailDto odd = OrderDetailDto.builder()
             .no(od.getNo())
             .lesson(od.getLesson())
-            .order(od.getOrder())
             .build();
 
         return odd;
