@@ -23,7 +23,7 @@ public class ChatController {
     private final ChatroomService chatroomService;
     private final SimpMessagingTemplate simpMessagingTemplate;
 
-    @GetMapping("/chat_test/{chatroomNo}")
+    @GetMapping("/chat/start/{chatroomNo}")
     public String chat_open(Model model,
                             @PathVariable("chatroomNo") Long chatroomNo,
                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass memberClass) {
