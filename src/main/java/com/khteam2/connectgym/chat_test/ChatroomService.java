@@ -1,5 +1,6 @@
 package com.khteam2.connectgym.chat_test;
 
+import com.khteam2.connectgym.chat_test.dto.ChatMessageReaponseDTO;
 import com.khteam2.connectgym.chat_test.dto.ChatroomDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
@@ -26,10 +27,7 @@ public class ChatroomService {
 
         if (chatroomRepository.findByMemberNoAndTrainerNo(memberNo, trainerNo) != null) {
 
-            Chatroom chatroom = chatroomRepository.findByMemberNoAndTrainerNo(memberNo, trainerNo);
-            List<ChatMessage> chatMessageList = chatMessageRepository.findAllByChatroomNo(chatroom.getNo());
-
-            return chatroom;
+            return chatroomRepository.findByMemberNoAndTrainerNo(memberNo, trainerNo);
         } else {
             Chatroom chatRoom = Chatroom.builder()
                 .member(member)
@@ -39,9 +37,13 @@ public class ChatroomService {
         }
     }
 
-    public List<ChatMessage> loadMessage(Chatroom chatroom) {
-
-        return chatMessageRepository.findAllByChatroomNo(chatroom.getNo());
+    public List<ChatMessageReaponseDTO> loadMessage(Chatroom chatroom) {
+        List<ChatMessageReaponseDTO> chatMessageReaponseDTOs = new ArrayList<>();
+        List<ChatMessage> chatMessages = chatMessageRepository.findAllByChatroomNo(chatroom.getNo());
+        for (ChatMessage chatMessage : chatMessages) {
+            chatMessageReaponseDTOs.add(new ChatMessageReaponseDTO().fromEntity(chatMessage));
+        }
+        return chatMessageReaponseDTOs;
     }
 
     public Chatroom inChatroom(Long chatroomNo) {
