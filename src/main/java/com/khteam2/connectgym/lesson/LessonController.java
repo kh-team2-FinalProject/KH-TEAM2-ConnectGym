@@ -6,8 +6,6 @@ import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
 import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.like.dto.LikeDto;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
-import java.util.List;
-import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,7 +39,7 @@ public class LessonController {
 
     @PostMapping(value = "/createLesson")
     public String createLesson(Model model, LessonRequestDTO lessonRequestDTO,
-        @RequestParam("lessonImgFile") MultipartFile file) {
+                               @RequestParam("lessonImgFile") MultipartFile file) {
 
         //배너타이틀
         model.addAttribute("bannerTitle", "create lesson");
@@ -66,8 +67,8 @@ public class LessonController {
     //레슨 다 가져오기
     @GetMapping("/lesson-list")
     public String lessonList(Model model,
-        @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
-        @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
+                             @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
+                             @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
     ) {
         model.addAttribute("bannerTitle", "lessons");
 
@@ -128,6 +129,14 @@ public class LessonController {
         return "detailOrCrud/lessonDetail";
     }
 
+    //디자인용 (삭제예정)
+    @GetMapping("/createComplete")
+    public String createComplete(Model model) {
+
+        //배너타이틀
+        model.addAttribute("bannerTitle", "complete");
+        return "detailOrCrud/createComplete";
+    }
 
 }
 

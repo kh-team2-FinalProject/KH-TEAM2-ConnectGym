@@ -223,7 +223,7 @@
     /* text-align: center; */
     /* justify-content: center; */
     display: flex;
-    height: 10%;
+    height: 13%;
     /* border-collapse: collapse; */
     align-items: center;
     /* padding: 1vh; */
@@ -238,7 +238,7 @@
 }
 
 .ld-chat-btn {
-    width: 35%;
+    width: 37%;
     cursor: pointer;
     border-radius: 0;
     border: 0.5px solid gray;
@@ -257,7 +257,7 @@
 }
 
 .ld-order-btn {
-    width: 35%;
+    width: 37%;
     cursor: pointer;
     border: 1px solid black;
     background: black;

@@ -10,12 +10,12 @@
     <div class="l-lessonList-container">
         <div class="l_lessonlist">
             <div id="l_lessonlist_wrap">
-<!--                <div th:each="lesson : ${lessonList}"-->
-<!--                     th:if="${#request.getParameter('category') == null or-->
-<!--                      #request.getParameter('category') == '1' and lesson.category == 1 or-->
-<!--                      #request.getParameter('category') == '2' and lesson.category == 2 or-->
-<!--                      #request.getParameter('category') == '3' and lesson.category == 3}"-->
-<!--                     class="l_card">-->
+                <!--                <div th:each="lesson : ${lessonList}"-->
+                <!--                     th:if="${#request.getParameter('category') == null or-->
+                <!--                      #request.getParameter('category') == '1' and lesson.category == 1 or-->
+                <!--                      #request.getParameter('category') == '2' and lesson.category == 2 or-->
+                <!--                      #request.getParameter('category') == '3' and lesson.category == 3}"-->
+                <!--                     class="l_card">-->
                 <div th:each="lesson : ${lessonList}" class="l_card">
                     <a th:href="@{/lessonDetail/{lessonNo}(lessonNo=${lesson.getNo()})}"
                        class="card-link">
@@ -52,6 +52,7 @@
                             th:onclick="'location.href=&quot;/lesson-list?page=' + (${currentPage - 1}) + '&category=' + ${category} + '&quot;'">
                         이전
                     </button>
+
                 </li>
                 <li class="pageNumber" th:each="page : ${#numbers.sequence(1, totalPages)}"
                     th:classappend="${currentPage == page} ? 'active'">
@@ -72,24 +73,3 @@
 
 </th:block>
 </html>
-<!--                    <div class="l_card">-->
-<!--                        <div class="l_card-inner">-->
-<!--                            <div class="l_card-front">-->
-
-<!--                                <img class="lessonlist_img" th:src="${lesson.lesson_img}" alt="lesson image">-->
-
-<!--                                <div class="l_card-front-bottom">-->
-<!--                                    <div class="l_card-front-title"><span th:text="${lesson.title}"></span></div>-->
-<!--                                    <div class="l_card-front-trainer">-->
-<!--                                <span-->
-<!--                                    th:text="${lesson.trainer != null ? lesson.trainer.trainerName : 'Unknown Trainer'}"></span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="l_card-back">-->
-<!--                                <ul>-->
-<!--                                    <li class="l_card_title" th:text="${lesson.lesson_info}"></li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
