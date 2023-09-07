@@ -1,8 +1,7 @@
-
 /* 식단 박스 */
-.Diet{
+.Diet {
     margin-top: 20px;
-    margin-left:50px;
+    margin-left: 50px;
     font-family: Arial, sans-serif;
     display: inline-block;
     width: 90%;
@@ -11,7 +10,6 @@
     justify-content: center;
     align-items: center;
 }
-
 
 /* 개별 박스 */
 .meal_box {
@@ -23,33 +21,33 @@
     border: none;
     border-radius: 13px;
     padding: 10px;
-    box-sizing:inherit;
-    justify-items:center;
+    box-sizing: inherit;
+    justify-items: center;
     box-shadow: 0px 0px 10px rgb(255 255 255);
 }
 
-
 /* 테이블 요소 가운데 정렬 */
-.myFoodTbl{
-    width:100%;
+.myFoodTbl {
+    width: 100%;
     text-align: center;
 }
 
 /* 아 점 저 글씨*/
-.Diet1 h3{
+.Diet1 h3 {
     padding: 5px;
     font-size: 25px;
     color: white;
-    font-weight:bold
+    font-weight: bold;
 }
 
-th.sub{
-    color:rgb(255 255 255 / 90%);
+th.sub {
+    color: rgb(255 255 255 / 90%);
     font-size: 18px;
 }
 
 /* + 버튼 */
-.btn1, .btn2{
+.btn1,
+.btn2 {
     background-color: #ffffff3d;
     color: rgb(243 255 255 / 74%);
     padding: 5px 8px;
@@ -59,18 +57,19 @@ th.sub{
     font-weight: bold;
     font-size: 25px;
 }
-.btn1:hover, .btn2:hover{
+.btn1:hover,
+.btn2:hover {
     transform: scale(1.2);
 }
 
 /* 팝업 창 */
 .dietPop {
     z-index: 1000; /* header 위로 올리는 작업 */
- /*   background-color: rgba(0, 0, 0, 0.5);  뒷 배경 */
+    /*   background-color: rgba(0, 0, 0, 0.5);  뒷 배경 */
     display: flex;
     position: fixed;
     top: 0;
-    left:40%;
+    left: 40%;
     right: 0;
     bottom: 0;
     width: 100%;
@@ -79,86 +78,98 @@ th.sub{
 }
 
 /* 테이블 가운데 정렬 */
-.foodselect_Tbl{
-    display : table;
-    margin-left : auto;
-    margin-right : auto;
+.foodselect_Tbl {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 /* 팝업 내용 */
 .pop-content {
     width: 500px;
-    height:90%;
+    height: 90%;
     overflow-y: auto;
     background-color: #000000de;
     color: #5f797c;
     padding: 20px;
     border-radius: 10px;
-    text-align:center;
+    text-align: center;
     overflow: auto;
     left: 50%;
     margin-top: 30px;
 }
 
-.pop_content2 th, .pop_content2 td{
+.pop_content2 th,
+.pop_content2 td {
     padding: 12px;
     font-size: 15px;
     border-bottom: 1px solid #ddd;
-    color:white;
+    color: white;
 }
 
-.pop-content h1{
+.pop-content h1 {
     margin-left: 5px;
-    color:white;
+    color: white;
 }
 
 /* 팝업 내 음식 데이터 테이블 */
-.pop_content2{
-    width:90%;
-    font-size:15px;
+.pop_content2 {
+    /* width:90%; */
+    font-size: 15px;
     text-align: center;
-    justify-items:center;
+    justify-items: center;
     align-items: center;
 }
 
-.sub1{
-    padding:10px;
+.sub1 {
+    padding: 10px;
 }
 
 /* 닫기 버튼 */
-#closeBtn{
+#closeBtn {
     font-size: 30px;
     font-weight: bold;
     background-color: #000000de;
-    border-radius:30%;
+    border-radius: 30%;
     border: none;
     margin-left: 88%;
-    color:white;
+    color: white;
 }
 
 /* 검색 버튼 */
-#searchBtn{
+#searchBtn {
     background-color: #00000000;
     color: rgb(227, 238, 242);
     border: none;
     cursor: pointer;
     font-weight: bold;
     font-size: 15px;
-    padding:10px;
-    border-radius:10px;
-
+    padding: 10px;
+    border-radius: 10px;
 }
-
 
 /* input box */
-#popInput{
- width: 83%;
- height: 30px;
- padding: 10px;
- border-radius: 10px;
+#popInput {
+    width: 83%;
+    height: 30px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
-.pop-content input, button{
+.pop-content input,
+button {
     vertical-align: middle;
 }
 
+.dietList_search_popup_pagination {
+}
+
+.dietList_search_popup_pagination .dietList_search_popup_pagination_ul {
+    display: flex;
+    justify-content: center;
+}
+
+.dietList_search_popup_pagination
+    .dietList_search_popup_pagination_ul
+    > .dietList_search_popup_pagination_li {
+}

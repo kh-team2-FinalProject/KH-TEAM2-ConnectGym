@@ -1,24 +1,49 @@
 /* 모달 내 시간대별 이름 바뀜 */
-document.addEventListener("DOMContentLoaded", function () {
-    var popbtns = document.querySelectorAll(".btn1");
-    popbtns.forEach(function (button) {
-        button.addEventListener("click", function () {
-            var meal = button.closest(".Diet1").querySelector("h3").textContent;
-            openPop(meal);
-        });
-    });
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//     var popbtns = document.querySelectorAll(".btn1");
+//     popbtns.forEach(function (button) {
+//         button.addEventListener("click", function () {
+//             var meal = button.closest(".Diet1").querySelector("h3").textContent;
+//             openPop(meal);
+//         });
+//     });
+// });
 
 /* 열림 */
 function openPop(meal) {
-    var mealName = meal + " MENU";
+    const foodTimeEl = document.querySelector(
+        'form[name="foodSearchForm"] > input[name="foodTime"]'
+    );
+    foodTimeEl.value = meal.toUpperCase();
+
+    var mealName = "";
+
+    switch (meal) {
+        case "breakfast":
+            mealName += "아침";
+            break;
+        case "lunch":
+            mealName += "점심";
+            break;
+        case "dinner":
+            mealName += "저녁";
+            break;
+        case "snack":
+            mealName += "간식";
+            break;
+        default:
+            alert("알 수 없는 이름입니다. " + meal);
+            return;
+    }
+
+    mealName += " MENU";
     var modal = document.getElementById("dietPopup");
     var mealNameElement = modal.querySelector(".pop-content h1");
     mealNameElement.innerText = mealName;
     modal.style.display = "block";
 }
 
-function deleteMeal() {}
+function deleteMeal(memberFoodNo) {}
 
 /* 버튼 클릭시 닫힘 */
 document.getElementById("closeBtn").addEventListener("click", function () {
@@ -27,16 +52,134 @@ document.getElementById("closeBtn").addEventListener("click", function () {
 });
 
 // 검색 버튼 클릭 시
-function searchDiet() {
-    var foodName = document.getElementById("popInput").value;
-    var form = document.getElementById("foodSearchForm");
-    form.action = "/fooddiary/dietlist?key=" + foodName;
-    if (foodName.trim() !== "") {
-        var modal = document.getElementById("dietPopup");
-        modal.style.display = "block";
+// function searchDiet() {
+//     var foodName = document.getElementById("popInput").value;
+//     var form = document.getElementById("foodSearchForm");
+//     form.action = "/fooddiary/dietlist?key=" + foodName;
+//     if (foodName.trim() !== "") {
+//         var modal = document.getElementById("dietPopup");
+//         modal.style.display = "block";
+//     }
+//     form.submit();
+// }
+
+function foodSearch(search, page) {
+    const dietPopupContent = document.querySelector("#dietPopup .pop-content");
+    const foodSearchTableBodyEl = dietPopupContent.querySelector(
+        "table.foodselect_Tbl > tbody"
+    );
+    const foodSearchPaginationUlEl = dietPopupContent.querySelector(
+        ".dietList_search_popup_pagination .dietList_search_popup_pagination_ul"
+    );
+
+    if (!foodSearchTableBodyEl || !foodSearchPaginationUlEl) {
+        console.log("일부 element가 없습니다.");
+        return;
     }
-    form.submit();
+
+    fetch(
+        "/api/dietList/findFood?" +
+            new URLSearchParams({
+                search,
+                page,
+            })
+    )
+        .then((r) => r.json())
+        .then((v) => {
+            if (!v.success) {
+                alert(v.message);
+                return;
+            }
+
+            foodSearchTableBodyEl.innerHTML = "";
+            foodSearchPaginationUlEl.innerHTML = "";
+
+            for (const food of v.foods) {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                <td>
+                    <form action="/selectfood" method="POST">
+                        <span name="selectedKey">${food.foodNm}</span>
+                        <button type="submit"></button>
+                    </form>
+                </td>
+                <td>
+                    <span>${food.foodSize}g</span>
+                </td>
+                <td>
+                    <span>${food.choc}g</span>
+                </td>
+                <td>
+                    <span>${food.prot}g</span>
+                </td>
+                <td>
+                    <span>${food.fat}g</span>
+                </td>
+                <td>
+                    <span>${food.kcal}kcal</span>
+                </td>
+                `;
+
+                foodSearchTableBodyEl.append(tr);
+            }
+
+            console.log(v.pagination);
+
+            if (v.pagination.prev) {
+                const liPrev = document.createElement("li");
+                liPrev.innerHTML = `
+                <button type="button" onclick="foodSearch('${search}', ${
+                    v.pagination.firstPage - 1
+                })">이전</button>
+                `;
+                foodSearchPaginationUlEl.append(liPrev);
+            }
+
+            for (
+                let i = v.pagination.firstPage;
+                i <= v.pagination.endPage;
+                i++
+            ) {
+                console.log(i === v.pagination.currentPage);
+                const li = document.createElement("li");
+                li.innerHTML = `
+                <button type="button" onclick="foodSearch('${search}', ${i})">${i}</button>
+                `;
+
+                i === v.pagination.currentPage &&
+                    li.classList.add(
+                        "dietList_search_popup_pagination_li_active"
+                    );
+
+                foodSearchPaginationUlEl.append(li);
+            }
+
+            if (v.pagination.next) {
+                const liNext = document.createElement("li");
+                liNext.innerHTML = `
+                <button type="button" onclick="foodSearch('${search}', ${
+                    v.pagination.endPage + 1
+                })">다음</button>
+                `;
+                foodSearchPaginationUlEl.append(liNext);
+            }
+
+            dietPopupContent.scrollTo({ top: 0, behavior: "smooth" });
+        });
 }
+
+document.forms.foodSearchForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const { foodTime, key } = this.elements;
+
+    if (!foodTime || !key) {
+        console.log("일부 element가 없습니다.");
+        return;
+    }
+
+    foodSearch(key.value, 1);
+});
 
 /* - 버튼 활성화 */
 

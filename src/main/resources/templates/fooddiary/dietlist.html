@@ -123,7 +123,7 @@
                                 <td class="sub" title="버튼 자리">
                                     <button
                                         class="btn1"
-                                        onclick="openPop(meal)"
+                                        onclick="openPop('breakfast')"
                                     >
                                         +
                                     </button>
@@ -196,7 +196,7 @@
                                 <td colspan="7" class="sub" title="버튼 자리">
                                     <button
                                         class="btn1"
-                                        onclick="openPop(meal)"
+                                        onclick="openPop('lunch')"
                                     >
                                         +
                                     </button>
@@ -273,7 +273,7 @@
                                 <td class="sub" title="버튼 자리">
                                     <button
                                         class="btn1"
-                                        onclick="openPop(meal)"
+                                        onclick="openPop('dinner')"
                                     >
                                         +
                                     </button>
@@ -342,7 +342,7 @@
                                 <td colspan="7" class="sub" title="버튼 자리">
                                     <button
                                         class="btn1"
-                                        onclick="openPop(meal)"
+                                        onclick="openPop('snack')"
                                     >
                                         +
                                     </button>
@@ -359,20 +359,17 @@
             <div class="pop-content">
                 <button id="closeBtn">X</button>
                 <h1 th:text="${mealTime}">time 식사</h1>
-                <form
-                    id="foodSearchForm"
-                    action="/fooddairy/dietlist"
-                    method="GET"
-                >
+                <form id="foodSearchForm" name="foodSearchForm">
+                    <input type="text" name="foodTime" hidden />
                     <input
                         id="popInput"
                         name="key"
                         type="text"
                         placeholder="음식 찾기"
                     />
-                    <button id="searchBtn" onclick="searchDiet()">검색</button>
+                    <button id="searchBtn" type="submit">검색</button>
                 </form>
-                <div class="pop_content2" style="display: flex">
+                <div class="pop_content2">
                     <table class="foodselect_Tbl">
                         <thead>
                             <tr style="height: 36px">
@@ -434,6 +431,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="dietList_search_popup_pagination">
+                        <ul class="dietList_search_popup_pagination_ul"></ul>
+                    </div>
                 </div>
             </div>
         </div>
