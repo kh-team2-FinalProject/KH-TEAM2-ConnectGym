@@ -27,10 +27,42 @@
 
         <div class="lessonroom_top">
             <div class="lroom-title" th:text="${roomInfo.lessonTitle}"></div>
+
+            <div class="lroom-_resize_button_group">
+                <button onclick="resizeVideo(0, 1, 0.9)">1</button>
+                <button onclick="resizeVideo(0.25, 0.75)">2</button>
+                <button onclick="resetVideoSize()">3</button>
+                <button onclick="resizeVideo(0.75, 0.25)">4</button>
+                <button onclick="resizeVideo(0.9, 0.1)">5</button>
+            </div>
+
+            <script>
+                function resizeVideo(leftRatio, rightRatio) {
+                   const videoContainers = document.querySelectorAll('.enterRoom_video_container');
+                   const videoLeft = videoContainers[0].querySelector('video');
+                   const videoRight = videoContainers[1].querySelector('video');
+
+                  videoLeft.style.flex = leftRatio;
+                  videoRight.style.flex = rightRatio;
+                }
+
+                function resetVideoSize() {
+                  const videoContainers = document.querySelectorAll('.enterRoom_video_container');
+                  const videoLeft = videoContainers[0].querySelector('video');
+                  const videoRight = videoContainers[1].querySelector('video');
+
+                    videoLeft.style.flex = 1;
+                     videoRight.style.flex = 1;
+                }
+
+            </script>
+
             <button type="button" class="lroom-button" id="buttonLeaveSession"
                     th:onclick="leaveSession([[${roomInfo.roomName}]],[[${type}]])">Finish!
             </button>
         </div>
+
+
 
         <div class="mylessonlistloading_wrap" id="mylessonlistloading_wrap">
             <div class="mylessonlist_loading">

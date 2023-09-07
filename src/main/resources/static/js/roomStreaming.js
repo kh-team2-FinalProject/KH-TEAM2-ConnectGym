@@ -12,7 +12,6 @@ window.onload = () => {
 
     loadingElement.style.display = "none";
     element.style.display = "flex";
-    /*videoElement.display = "flex";*/
   }, 3000);
 };
 
@@ -56,7 +55,7 @@ function joinSession() {
           videoSource: undefined, // The source of video. If undefined default webcam
           publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
           publishVideo: true, // Whether you want to start publishing with your video enabled or not
-          resolution: "640x480", // The resolution of your video
+          resolution: "720x480", // The resolution of your video
           frameRate: 30, // The frame rate of your video
           insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
           mirror: false, // Whether to mirror your local video or not
@@ -126,13 +125,14 @@ function leaveSession(myRoomCode, userType) {
 
 window.onbeforeunload = function () {
   if (session) {
-    session.disconnect();
+    leaveSession(myRoomCode, userType);
   }
 };
 
 function appendUserData(videoElement, connection) {
-  var userData;
-  var nodeId;
+  let userData;
+  let nodeId;
+
   if (typeof connection === "string") {
     userData = connection;
     nodeId = connection;
@@ -145,51 +145,51 @@ function appendUserData(videoElement, connection) {
   var containerDiv = document.createElement("div");
   containerDiv.className = "enterRoom_video_container";
 
-  var dataNode = document.createElement("div");
-  dataNode.className = "data-node";
-  dataNode.id = "data-" + nodeId;
-  dataNode.innerHTML = "<p>" + userData + "</p>";
-
-  // videoElement의 부모 요소
-  var parent = videoElement.parentNode;
-
-  // videoElement의 다음 형제 요소 찾기
-  var nextSibling = videoElement.nextElementSibling;
-
-  // 다음 형제 요소가 있는 경우에만 삽입
-  if (nextSibling) {
-    parent.insertBefore(containerDiv, nextSibling);
-  } else {
-    // 다음 형제 요소가 없으면 videoElement를 부모 노드의 마지막 자식으로 추가
-    parent.appendChild(containerDiv);
-  }
-
-  videoElement.id = `enterRoom_video_${userType}`;
-  addClickListener(videoElement, userData);
-}
-
-
-/*
-
-function appendUserData(videoElement, connection) {
-  var userData;
-  var nodeId;
-  if (typeof connection === "string") {
-    userData = connection;
-    nodeId = connection;
-  } else {
-    userData = JSON.parse(connection.data).clientData;
-    nodeId = connection.connectionId;
-  }
-  var dataNode = document.createElement("div");
-  dataNode.className = "data-node";
-  dataNode.id = "data-" + nodeId;
-  dataNode.innerHTML = "<p>" + userData + "</p>";
+  // videoElement를 containerDiv 안에 추가
   videoElement.id=`video_${userType}`;
-  videoElement.parentNode.insertBefore(dataNode, videoElement.nextSibling);
-  addClickListener(videoElement, userData);
+
+  containerDiv.appendChild(videoElement);
+
+  // dataNode 생성
+  var dataNode = document.createElement("div");
+  dataNode.className = "data-node";
+  dataNode.id = "data-" + nodeId;
+  dataNode.innerHTML = "<p>" + userData + "</p>";
+
+  // dataNode를 containerDiv 안에 추가
+  containerDiv.appendChild(dataNode);
+
+  // videoElement와 dataNode가 포함된 containerDiv를 video-container에 추가
+  var videoContainer = document.getElementById("video-container");
+  videoContainer.appendChild(containerDiv);
+
+  // addClickListener 함수를 호출
+/*  addClickListener(videoElement, userData);*/
 }
-*/
+
+
+
+/*원본
+function appendUserData(videoElement, connection) {
+	var userData;
+	var nodeId;
+	if (typeof connection === "string") {
+		userData = connection;
+		nodeId = connection;
+	} else {
+		userData = JSON.parse(connection.data).clientData;
+		nodeId = connection.connectionId;
+	}
+	var dataNode = document.createElement('div');
+	dataNode.className = "data-node";
+	dataNode.id = "data-" + nodeId;
+	dataNode.innerHTML = "<p>" + userData + "</p>";
+	videoElement.id=`video_${userType}`;
+	videoElement.parentNode.insertBefore(dataNode, videoElement.nextSibling);
+	addClickListener(videoElement, userData);
+}*/
+
+
 
 function removeUserData(connection) {
   var dataNode = document.getElementById("data-" + connection.connectionId);
@@ -206,6 +206,7 @@ function removeAllUserData() {
 //비디오를 클릭했을 때 메인 비디오 영역에 해당 비디오 스트림을 크게 보여주는 부분을 처리
 
 /*원본*/
+/*
 function addClickListener(videoElement, userData) {
   videoElement.addEventListener("click", function () {
     var mainVideo = $("#main-video video").get(0);
@@ -218,6 +219,7 @@ function addClickListener(videoElement, userData) {
     }
   });
 }
+*/
 
 function getToken(myRoomCode) {
   return createSession(myRoomCode).then((sessionId) => createToken(sessionId));
