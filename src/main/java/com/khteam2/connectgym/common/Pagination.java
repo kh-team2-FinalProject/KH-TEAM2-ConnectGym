@@ -58,7 +58,7 @@ public class Pagination {
     public Pagination(Page<?> page, int pageSize) {
         this.totalCount = page.getTotalElements();
         this.currentPage = page.getNumber() + 1;
-        this.recordPerPage = page.getNumberOfElements();
+        this.recordPerPage = page.getSize();
         this.pageSize = pageSize;
         this.calculate();
     }
