@@ -306,10 +306,15 @@
     margin-top: 20px;
 }
 
+.find-btn,
 .find-a{
     font-size: 14px;
+    background-color:transparent;
+    border:none;
+    color:white;
 }
 
+.find-btn:hover,
 .find-a:hover,
 .join-a:hover{
     color: rgb(163,219,18);
