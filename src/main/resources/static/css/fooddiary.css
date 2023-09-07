@@ -18,7 +18,8 @@
     border-collapse: collapse;
     table-layout: fixed;
 
-    color: white;
+    color:#a0ffc2;
+        /*white;*/
 }
 
 .foodD_calendar_padding {
@@ -36,10 +37,12 @@ ul > li {
 .foodD_clanedar_datebox {
     padding-top: 4%;
     padding-bottom: 4%;
-     border-radius: 2px;
-     background-color: #a2dc10bf;
-      margin :3px ;
-      vertical-align:center;
+    border-radius: 2px;
+    background-color: #b1b1b152;
+        /*#a2dc10bf;*/
+    margin :3px ;
+    vertical-align:center;
+    border: 2px solid #ffffff;
 
 }
 
@@ -47,7 +50,8 @@ ul > li {
      display : block;
        padding-top :110%;
      border-radius: 2px;
-     background-color: #a2dc1078;
+     background-color: #ffffff0f;
+         /*#a2dc1078;*/
      margin :3px
 }
 
@@ -66,12 +70,12 @@ ul > li {
     color: white;
 }
 
-.foodD_calendar-button {
+/*.foodD_calendar-button {
     background-color: transparent;
     color: #A3DC10;
 
     border: none;
-}
+}*/
 
 .site_banner.Calendar-banner {
     background: url("/images/banner-calendar.jpg") center center / cover no-repeat;
@@ -85,7 +89,8 @@ ul > li {
 
 /* 이전달  다음달 버튼*/
 .foodD_calendar .calendar_header button{
-  background-color: #A3DC10;
+  background-color: #4b6957;
+      /*#A3DC10;*/
    position: relative;
     display: inline-block;
 
@@ -99,21 +104,28 @@ ul > li {
     transition: top .01s linear;
     text-shadow: 0 1px 0 rgba(0,0,0,0.15);
 
-  box-shadow: 0 0 0 1px #A3DC10 inset,
+  box-shadow:0 0 0 1px #a8bfb1 inset,
+            0 0 0 2px rgba(255,255,255,0.15) inset,
+            0 4px 0 0 #c4dbcc,
+            0 4px 0 1px rgb(239 239 239 / 40%),
+            0 4px 4px 1px rgba(0,0,0,0.5);
+
+      /*0 0 0 1px #A3DC10 inset,
         0 0 0 2px rgba(255,255,255,0.15) inset,
         0 4px 0 0 #81BC12,
         0 4px 0 1px rgba(0,0,0,.4),
-        0 4px 4px 1px rgba(0,0,0,0.5);
+        0 4px 4px 1px rgba(0,0,0,0.5);*/
 }
 
 .calendar_header button:active {
   top: 6px;
   border:0px;
-  box-shadow: 0 0 0 1px #A3DC10 inset,
+  box-shadow: 0 0 0 1px #a0ffc2 /*#A3DC10*/ inset,
         0 0 0 2px rgba(255,255,255,0.15) inset,
         0 0 0 1px rgba(0,0,0,0.4);
 }
 
 .calendar_header button:hover{
-background-color: #A7D145;
+    background-color: #a0ffc2; /*#A7D145;*/
+    transform: scale(1.3);
 }

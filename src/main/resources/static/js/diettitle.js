@@ -4,12 +4,19 @@ const calendar = document.getElementById("calendar");
 const selectedDateElement = document.getElementById("selectedDate");
 const yearSelect = document.getElementById("yearSelect");
 const monthSelect = document.getElementById("monthSelect");
-
+const urlParams = new URLSearchParams(window.location.search);
 // 캘린더 초기화
-let currentDate = new Date();
-let selectedDate = currentDate;
-let selectedYear = currentDate.getFullYear();
-let selectedMonth = currentDate.getMonth();
+
+
+let currentDate = "";
+if (urlParams != null) {
+    currentDate = new Date(parseInt(urlParams.get('year')), parseInt(urlParams.get('month')), parseInt(urlParams.get('date')));
+} else {
+    currentDate = new Date();
+}
+selectedDate = currentDate;
+selectedYear = currentDate.getFullYear();
+selectedMonth = currentDate.getMonth();
 
 updateSelectedDate();
 updateYearSelect();
@@ -22,11 +29,13 @@ calendarButton.addEventListener("click", () => {
 });
 
 calendar.addEventListener("click", (event) => {
-    const selectedDay = parseInt(event.target.textContent);
-    if (!isNaN(selectedDay)) {
-        selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
-        updateSelectedDate();
-        calendarDropdown.style.display = "none";
+    if (event.target.classList.contains("calendar-day")) {
+        const selectedDay = parseInt(event.target.textContent);
+        if (!isNaN(selectedDay)) {
+            selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
+            updateSelectedDate();
+            calendarDropdown.style.display = "none";
+        }
     }
 });
 
@@ -49,7 +58,9 @@ monthSelect.addEventListener("change", () => {
 });
 
 function updateSelectedDate() {
-    const formattedDate = `${selectedYear}년 ${selectedMonth + 1}월 ${selectedDate.getDate()}일`;
+    const formattedDate = `${selectedYear}년 ${
+        selectedMonth + 1
+    }월 ${selectedDate.getDate()}일`;
     selectedDateElement.textContent = formattedDate;
 }
 
@@ -89,3 +100,6 @@ function updateCalendar() {
 
     calendar.innerHTML = calendarHTML;
 }
+
+
+

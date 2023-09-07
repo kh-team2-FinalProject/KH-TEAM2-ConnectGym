@@ -10,7 +10,7 @@ function checkedChatroom() {
         success: function (chatroom) {
             var chatroomNo = chatroom.no;
             console.log(chatroom.no);
-            window.open('/chat_test/' + chatroomNo, 'chatting-window',
+            window.open('/chat/start/' + chatroomNo, 'chatting-window',
                 'width=430, height=500, location=no, status=no, scrollbars=yes');
 
         },

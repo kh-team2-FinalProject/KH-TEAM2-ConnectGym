@@ -2,9 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <th:block layout:fragment="script">
-    <script type="text/javascript" rel="script"
-            src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script type="text/javascript" rel="script" th:src="@{/js/tempjoin.js}"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 </th:block>
 
@@ -52,28 +49,26 @@
                         <input type="password" id="password" name="password" class="form-control"
                                required>
                     </div>
-                    <br>
+                    <div class="form-group">
+                        <a class="find-a">아이디/비밀번호 찾기</a>
+                    </div>
                     <!-- 로그인 버튼 -->
                     <button type="submit" class="btn btn-primary">로그인</button>
                 </form>
 
                 <!-- 소셜 로그인 버튼들 -->
                 <div class="social-container">
-                    <a href="/oauth2/authorization/naver" class="social"><i
-                        class="fab fa-facebook-f"></i></a>
-                    <a></a>
                     <!--카카오 로그인 api                   -->
-<!--                    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ae7f5b9c9c8ad78f7f1cc5bbf3379d50&redirect_uri=http://localhost:5000/connectgym/"-->
+<!--                    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ae7f5b9c9c8ad78f7f1cc5bbf3379d50&redirect_uri=https://connectgym.store/connectgym"-->
 <!--                       class="social"><i class="fab fa-google"></i></a>-->
                     <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ae7f5b9c9c8ad78f7f1cc5bbf3379d50&redirect_uri=https://connectgym.store/connectgym"
-                       class="social"><i class="fab fa-google"></i></a>
-                    <a href="" class="social"><i class="fab fa-linkedin-in"></i></a>
+                       class="social"><img src="/images/icons/kakao/en/kakao_login_medium_narrow.png" th:alt="'Kakao Login'"></a>
                 </div>
 
                 <!-- 회원가입 링크 -->
                 <div class="signup-link">
                     <br>
-                    <p>계정이 없으신가요? <a href="/temp_join">회원가입</a></p>
+                    <p>계정이 없으신가요? <a class="join-a" href="/temp_join">회원가입</a></p>
                 </div>
             </div>
         </div>
