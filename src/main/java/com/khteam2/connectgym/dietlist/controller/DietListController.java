@@ -1,5 +1,7 @@
 package com.khteam2.connectgym.dietlist.controller;
 
+import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.dietlist.model.DietListResponseDto;
 import com.khteam2.connectgym.dietlist.model.Food;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
 import com.khteam2.connectgym.dietlist.service.FoodService;
@@ -9,10 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -83,18 +82,22 @@ public class DietListController {
 
     // dietlist
     @GetMapping("fooddiary/dietlist")
-    public String searchDiet(Model model,
-                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public String searchDiet(
+        Model model,
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 //        if (key != null && !key.isEmpty()) {
 //            List<Food> dietList = foodService.searchDiet(key);
 //            model.addAttribute("dietList", dietList);
 //        }
+        DietListResponseDto responseDto = this.foodService.dietList(loginMemberNo, date);
 
-
+        model.addAttribute("responseDto", responseDto);
         model.addAttribute("date", date);
-        model.addAttribute("selectedFood", null);
 
+        model.addAttribute("selectedFood", null);
         model.addAttribute("food", new Food());
+
         return "fooddiary/dietlist";
     }
 
