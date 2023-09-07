@@ -70,14 +70,12 @@
 
 
         function goToDietList(thisday) {
-            var date = parseInt(thisday.querySelector('.foodD_clanedar_datebox').textContent);
+            var date = thisday.querySelector('.foodD_clanedar_datebox').textContent;
             var year = [[${yearMonth.getYear()}]];
             var month = [[${yearMonth.getMonthValue()} -1]];
-            // var selectedDate = new Date(year, month, date);
 
-            window.location.href = '/fooddiary/dietlist?year=' + year
-                + '&month=' + month
-                + '&date=' + date;
+            var dateUrl = year + '-' + (month + '').padStart(2, '0') + '-' + (date + '').padStart(2, '0');
+            window.location.href = '/fooddiary/dietlist?date=' + dateUrl;
         }
 
         /*]]>*/
