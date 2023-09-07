@@ -286,7 +286,7 @@ public class MemberController {
         // 버튼 클릭 시 회원정보 수정해주는 서비스 함수 실행
         memberService.updateMember(memberDTO);
 
-        return "redirect:/mypage/myInfo";
+        return "redirect:/mypage/myDashboard";
     }
 
     // 7-3) 회원정보 내 트레이너 전환
