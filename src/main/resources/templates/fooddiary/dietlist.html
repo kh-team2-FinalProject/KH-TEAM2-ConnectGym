@@ -17,7 +17,10 @@
         <div class="diettitle">
             <div class="calendar-controls">
                 <div id="calendarButton" class="calendar-button">
-                    <span id="selectedDate"></span>
+                    <span
+                        id="selectedDate"
+                        th:text="${#temporals.format(date != null ? date : #temporals.createNow(), 'YYYY년 MM월 dd일')}"
+                    ></span>
                     <div id="calendarDropdown" class="dropdown-content">
                         <div class="calendar-header">
                             <select id="yearSelect"></select>
@@ -352,7 +355,7 @@
         </div>
 
         <!-- 모달 팝업 -->
-        <div id="dietPopup" class="dietPop">
+        <div id="dietPopup" class="dietPop" style="display: none">
             <div class="pop-content">
                 <button id="closeBtn">X</button>
                 <h1 th:text="${mealTime}">time 식사</h1>
