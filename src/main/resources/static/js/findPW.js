@@ -47,6 +47,7 @@ function findMemberPW(){
         },
         success: function(data){
             alert('비밀번호 변경에 성공하였습니다.');
+            window.location.href = "/user/login";
         },
         error: function(error){
             alert('작성 정보가 잘못되었거나 존재하지 않는 정보입니다.');

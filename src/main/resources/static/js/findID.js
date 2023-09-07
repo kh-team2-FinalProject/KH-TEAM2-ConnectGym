@@ -23,7 +23,7 @@ function findMemberID(){
     var inputName = $('#InputName').val();
     var inputEmail = $('#userEmail').val();
 
-    if(!$('#join_auth_btn').value){
+    if(!$('#join_auth_btn').val()){
         alert('이메일 인증을 먼저 진행해주세요.');
         return false;
     }
@@ -37,6 +37,7 @@ function findMemberID(){
         },
         success: function(data){
             alert('찾으시는 아이디는 ' + data + ' 입니다.');
+            window.location.href = "/user/login";
         },
         error: function(error){
             alert('작성 정보가 잘못되었거나 존재하지 않는 정보입니다.');
