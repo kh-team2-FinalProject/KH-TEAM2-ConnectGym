@@ -1,31 +1,31 @@
-.myFollowing_container{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-    color:#0e1414;
+.myFollowing_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #0e1414;
 }
 
 .myFollowing_background {
-	width: 400px;
-	height: 80vh;
-	padding:60px 40px;
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	background-size: 100%;
-    background-image: url('/images/follow_background.jpg');
+    width: 400px;
+    height: 80vh;
+    padding: 60px 40px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-size: 100%;
+    background-image: url('/images/follow-background.jpg');
     background-reeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
 }
 
 .myFollowing_inner {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-.myFollowing_search{
+.myFollowing_search {
     display: flex;
     justify-content: space-around;
     border-radius: 20px;
@@ -36,147 +36,153 @@
     height: 50px;
     width: 100%;
     box-sizing: border-box;
-    position:relative;
+    position: relative;
 }
 
 .myFollowing_search
- .myFollowing_search_input{
+.myFollowing_search_input {
     width: 90%;
-    position:absolute;
+    position: absolute;
     top: 0px;
     height: 100%;
     border: none;
     outline: none;
     text-align: center;
     transition: 0.5s;
-    background-color: rgba( 255, 255, 255, 0.0 );
+    background-color: rgba(255, 255, 255, 0.0);
 
- }
+}
 
 .myFollowing_search
 .myFollowing_search_input:focus {
-   outline: none;
-   text-align: left;
-   left:20px;
-   transition: 1s;
- }
+    outline: none;
+    text-align: left;
+    left: 20px;
+    transition: 1s;
+}
 
 .myFollowing_search_icon {
     width: 50px;
     height: 100%;
-    position:absolute;
-    left:90%;
+    position: absolute;
+    left: 90%;
     top: 0px;
     border: none;
     background: #fff;
     outline: none;
     float: right;
-    background-color: rgba( 255, 255, 255, 0.0 );
+    background-color: rgba(255, 255, 255, 0.0);
 }
 
 
 .myLike_search_icon:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.myFollowing_list{
+.myFollowing_list {
     max-height: 63vh;
     overflow-y: auto;
 }
 
-.myFollowing_list_trainer{
-  display: flex;
-  padding: 10px;
+.myFollowing_list_trainer {
+    display: flex;
+    padding: 10px;
 
 }
 
 /*한 행 사이즈*/
-.myFollowing_list_trainer_img{ width:110px;}
-.myFollowing_list_trainer_info{ flex: 1;}
-.myFollowing_list_trainer_button{ flex: 1;}
+.myFollowing_list_trainer_img {
+    width: 110px;
+}
+
+.myFollowing_list_trainer_info {
+    flex: 1;
+}
+
+.myFollowing_list_trainer_button {
+    flex: 1;
+}
 
 
-.myFollowing_list_trainer{
-  border-top: 1px solid #0e1414;
+.myFollowing_list_trainer {
+    border-top: 1px solid #0e1414;
 }
 
 .myFollowing_list_trainer
-.myFollowing_list_trainer_img img{
-  display:flex;
-  align-items:center;
-  width:100px;
-  height:100px;
-  object-fit: cover;
-  border-radius: 50%;
-  background-color: #f9b332; /* 프로필 배경 오렌지색 */
+.myFollowing_list_trainer_img img {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: #f9b332; /* 프로필 배경 오렌지색 */
 }
 
-.myFollowing_list_trainer_info{
-  display:flex;
-  flex-direction: column;
-  justify-content:center;
-  align-items: flex-start;
-  line-height: 20px;
-}
-
-.myFollowing_list_trainer_info
-.myFollowing_list_trainer_name{
-  font-size:20px;
-  font-weight:bold;
+.myFollowing_list_trainer_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 20px;
 }
 
 .myFollowing_list_trainer_info
-.myFollowing_list_trainer_id{
-  font-size:14px;
-  padding-left: 4px;
+.myFollowing_list_trainer_name {
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.myFollowing_list_trainer_button{
-  display:flex;
-  justify-content:right;
-  align-items: center;
+.myFollowing_list_trainer_info
+.myFollowing_list_trainer_id {
+    font-size: 14px;
+    padding-left: 4px;
 }
 
-.myFollowing_list_trainer_button button{
-  background:none;
-  border:none;
-  height:30px;
-  transition: all 0.2s linear;
+.myFollowing_list_trainer_button {
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 
-.myFollowing_list_trainer_button label{
-   transition: all 0.2s linear;
-   width:25%;
-   height:36%;
+.myFollowing_list_trainer_button button {
+    background: none;
+    border: none;
+    height: 30px;
+    transition: all 0.2s linear;
 }
 
-.myFollowing_list_trainer_button label{
-   transition: all 0.2s linear;
-   width:25%;
-   height:36%;
+.myFollowing_list_trainer_button label {
+    transition: all 0.2s linear;
+    width: 25%;
+    height: 36%;
+}
+
+.myFollowing_list_trainer_button label {
+    transition: all 0.2s linear;
+    width: 25%;
+    height: 36%;
 }
 
 
-.myFollowing_list_trainer_button svg{
-   width:30px;
-   transition: all 0.2s linear;
+.myFollowing_list_trainer_button svg {
+    width: 30px;
+    transition: all 0.2s linear;
 }
 
 .myFollowing_list_trainer_button svg:hover {
-  cursor:pointer;
-  transform: scale(1.2);
+    cursor: pointer;
+    transform: scale(1.2);
 }
 
-#td_heart{
-fill: #ff0000;
+#td_heart {
+    fill: #ff0000;
 }
 
-.myFollowing_list_trainer_button button:hover{
-  cursor:pointer;
-  color:#f9b332;
+.myFollowing_list_trainer_button button:hover {
+    cursor: pointer;
+    color: #f9b332;
 }
-
-
 
 
 /*===================================*/
