@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,13 +20,14 @@ public class MemberResponseDTO {
     private String userAddress;
 
     public MemberResponseDTO(Member entity) {
-        this.no = entity.getNo();
-        this.userId = entity.getUserId();
-        this.userPw = entity.getUserPw();
-        this.userName = entity.getUserName();
-        this.userTel = entity.getUserTel();
-        this.userEmail = entity.getUserEmail();
-        this.userAddress = entity.getUserAddress();
+        if (entity != null) {
+            this.no = entity.getNo();
+            this.userId = entity.getUserId();
+            this.userPw = entity.getUserPw();
+            this.userName = entity.getUserName();
+            this.userTel = entity.getUserTel();
+            this.userEmail = entity.getUserEmail();
+            this.userAddress = entity.getUserAddress();
+        }
     }
-
 }

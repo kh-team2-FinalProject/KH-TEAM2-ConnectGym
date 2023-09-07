@@ -1,7 +1,6 @@
 package com.khteam2.connectgym.follow;
 
 import com.khteam2.connectgym.follow.dto.FollowForTrainerResponseDTO;
-import com.khteam2.connectgym.follow.dto.FollowForUserResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
@@ -46,7 +45,12 @@ public class FollowService {
     }
 
     // 트레이너를 팔로우한 회원 목록 > 트레이너에게만 공개
-    public FollowForTrainerResponseDTO followList(Long trainerNo) {
+    public List<MemberResponseDTO> followList(Long trainerNo) {
+        FollowForTrainerResponseDTO responseDTO = getfollowList(trainerNo);
+        return responseDTO.getFollowUserList();
+    }
+
+    public FollowForTrainerResponseDTO getfollowList(Long trainerNo) {
         List<MemberResponseDTO> followList = new ArrayList<>();
 
         for (Follow val : followRepository.findAllByToTrainer(trainerNo)) {
@@ -91,7 +95,7 @@ public class FollowService {
 
         List<TrainerResponseDTO> followingList = new ArrayList<>();
 
-        if(keyword == ""){
+        if (keyword == "") {
             return followingList(fromUserNo);
         }
 

@@ -3,8 +3,10 @@ package com.khteam2.connectgym.trainer;
 import com.khteam2.connectgym.chat_test.ChatroomService;
 import com.khteam2.connectgym.chat_test.dto.ChatroomDTO;
 import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.MemberClass;
+import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomRequestDto;
 import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -25,6 +28,8 @@ public class TrainerOnlyController {
     private final TrainerService trainerService;
     private final TrainerOnlyService trainerOnlyService;
     private final ChatroomService chatroomService;
+    private final FollowService followService;
+
 
     @GetMapping("/mypage")
     public String myPageT(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
@@ -99,6 +104,16 @@ public class TrainerOnlyController {
             trainerEnterRoomRequestDto.getEnrollKey());
         return roomResponseDto;
 
+    }
+
+    @GetMapping("/mypage/followed")
+    public String followed(Model model, HttpSession session) {
+        model.addAttribute("bannerTitle", "followed");
+        TrainerResponseDTO trainer = trainerService.sessionT(session);
+        List<MemberResponseDTO> followed = followService.followList(trainer.getTrainerNo());
+        model.addAttribute("followed", followed);
+
+        return "trainerOnly/followed";
     }
 
 

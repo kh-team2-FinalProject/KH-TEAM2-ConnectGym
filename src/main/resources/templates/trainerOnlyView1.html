@@ -16,7 +16,8 @@
 
 <th:block th:if="${lesson != null}">
     <div>내가 등록한 강좌</div>
-    <div><div><a th:href="@{/trainer/memberList/{lessonNo}(lessonNo=${lesson.no})}">[[${lesson.title}]]</a></div>
+    <div><a th:href="@{/trainer/memberList/{lessonNo}(lessonNo=${lesson.no})}">[[${lesson.title}]]</a></div>
+
 </th:block>
 
 </body>

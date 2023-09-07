@@ -54,7 +54,7 @@
 }
 
 .lessonDetail_img {
-
+    border-radius: 5px;
     width: 100%;
     height: 100%;
 }
@@ -235,6 +235,7 @@
 .lessonDetail_btn_box button,
 .lessonDetail_btn_box .ld-jim-btn {
     height: 100%;
+    border-radius: 5px;
 }
 
 .ld-chat-btn {
@@ -287,7 +288,7 @@
     /* width: 100vw; */
     margin-top: 2vh;
     /* height: 34vh;*/
-    border-top: 1px solid #afaeae;
+    border-top: 1px solid #afaeae4a;
 
     animation-name: slideFromBottom;
     animation-duration: 0.5s;

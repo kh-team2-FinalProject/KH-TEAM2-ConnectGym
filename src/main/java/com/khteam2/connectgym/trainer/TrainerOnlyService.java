@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.trainer;
 
-import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
@@ -18,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,14 +61,14 @@ public class TrainerOnlyService {
 
         List<OrderDetail> orderDetails = orderDetailRepository.enrollList(lessonNo);
 
-        if (orderDetails.size() == 0){
+        if (orderDetails.size() == 0) {
             TrainerEnterRoomResponseDto trainerEnterRoomDto = TrainerEnterRoomResponseDto.builder()
                 .errorMsg("NotFound")
                 .build();
             return trainerEnterRoomDto;
         }
 
-        for(OrderDetail od : orderDetails){
+        for (OrderDetail od : orderDetails) {
             Order order = orderRepository.findByOrderNo(od.getOrder().getNo()).orElse(null);
 
             MemberResponseDTO memberResponseDTO = new MemberResponseDTO(order.getMember());
@@ -83,7 +81,6 @@ public class TrainerOnlyService {
             .titleCode(titleCode)
             .memberMap(memberMap)
             .build();
-
 
 
         return trainerEnterRoomDto;
@@ -99,7 +96,7 @@ public class TrainerOnlyService {
 
         Room room = roomRepository.findByRoomName(roomName).orElse(null);
 
-        if (room == null ){
+        if (room == null) {
             Room createRoom = Room.builder()
                 .roomName(roomName)
                 .roomStatus(RoomStatus.ACTIVE)
@@ -132,4 +129,6 @@ public class TrainerOnlyService {
 
 
     }
+
+
 }
