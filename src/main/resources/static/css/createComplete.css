@@ -1,0 +1,52 @@
+.createComplete-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 80px 0;
+    flex-direction: column;
+}
+
+.createComplete-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 40px;
+
+}
+
+#viewLesson {
+    background-color: #A3DC10;
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    font-size: 18px;
+    font-family: 'Noto Sans';
+    padding: 10px 20px;
+    color: white;
+    border: 0px;
+    border-radius: 6px;
+    text-align: center;
+    transition: top .01s linear;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+    font-weight: bold;
+
+    box-shadow: 0 0 0 1px #A3DC10 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 8px 0 0 #81BC12,
+    0 8px 0 1px rgba(0, 0, 0, .4),
+    0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+#viewLesson:active {
+    top: 9px;
+    border: 0px;
+    box-shadow: 0 0 0 1px #A3DC10 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+#viewLesson:hover {
+    background-color: #A7D145;
+    cursor: pointer;
+}
