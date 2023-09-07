@@ -37,6 +37,11 @@ function openPop(meal) {
 
 }
 
+function deleteMeal(){
+
+}
+
+
 /* 버튼 클릭시 닫힘 */
 document.getElementById("closeBtn").addEventListener("click", function() {
     var modal = document.getElementById("dietPopup");
@@ -59,3 +64,19 @@ function searchDiet() {
 
 
 
+/* - 버튼 활성화 */
+
+/*
+function toggleButtons(foodName) {
+    if (foodName !== "") {
+        var tr = document.querySelector('tr[th:each="food: ${foods}"]');
+        var btn1 = tr.querySelector('.btn1');
+        var btn2 = tr.querySelector('.btn2');
+        btn1.style.display = 'none';
+        btn2.style.display = 'inline-block';
+    }else {
+        btn1.style.display = 'inline-block';
+        btn2.style.display = 'none';
+    }
+}
+*/

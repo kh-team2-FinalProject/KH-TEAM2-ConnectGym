@@ -43,6 +43,7 @@
                         <th class="sub" title="총 아침 식사단백질 : g">단백질</th>
                         <th class="sub" title="총 아침 식사지방 : g">지방</th>
                         <th class="sub" title="총 아침 식사칼로리 : kcal">칼로리</th>
+                        <th class="sub" title="버튼 자리"> </th>
                     </tr>
                     </thead>
                     <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
@@ -56,16 +57,18 @@
                         <td th:if="${food.foodNm}" th:text="${food.fat}">지방</td>
                         <td th:if="${food.foodNm}" th:text="${food.kcal}">칼로리</td>
                         <td class="sub" title="버튼 자리">
-                            <button class="btn1" onclick="openPop(meal)">+</button>
+                            <button class="btn2" onclick="deleteMeal()">-</button>
                         </td>
+
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr >
                         <td></td><td></td><td></td><td></td><td></td><td></td>
-                        <td colspan="7" class="sub" title="버튼 자리">
+                        <td class="sub" title="버튼 자리">
                             <button class="btn1" onclick="openPop(meal)">+</button>
                         </td>
+
                     </tr>
                     </tfoot>
                     <!--<tfoot>
@@ -103,7 +106,7 @@
                         <td th:text="${food.fat}">지방</td>
                         <td th:text="${food.kcal}">칼로리</td>
                         <td class="sub" title="버튼 자리">
-                            <!--<button class="btn1" onclick="openPop(meal)">+</button>-->
+                            <button class="btn2" onclick="deleteMeal()">-</button>
                         </td>
                     </tr>
 
@@ -147,7 +150,7 @@
                         <td th:text="${food.fat}">지방</td>
                         <td th:text="${food.kcal}">칼로리</td>
                         <td class="sub" title="버튼 자리">
-                            <button class="btn1" onclick="openPop(meal)">+</button>
+                            <button class="btn2" onclick="deleteMeal()">-</button>
                         </td>
                     </tr>
                     </form>
@@ -191,7 +194,7 @@
                         <td th:text="${food1.fat}">지방</td>
                         <td th:text="${food1.kcal}">칼로리</td>
                         <td class="sub" title="버튼 자리">
-                            <button class="btn1" onclick="openPop(meal)">+</button>
+                            <button class="btn2" onclick="deleteMeal()">-</button>
                         </td>
                     </tr>
                     </tbody>
