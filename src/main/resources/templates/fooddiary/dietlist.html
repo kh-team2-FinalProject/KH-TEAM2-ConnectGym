@@ -68,7 +68,7 @@
                         </thead>
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                         <tbody>
-                            <tr th:each="food : ${foods}">
+                            <tr th:each="food : ${responseDto.breakfastList}">
                                 <td
                                     th:if="${food.foodNm}"
                                     th:text="${food.foodNm}"
@@ -171,7 +171,7 @@
                         </thead>
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                         <tbody>
-                            <tr th:each="food : ${foods}">
+                            <tr th:each="food : ${responseDto.lunchList}">
                                 <td th:text="${food.foodNm}">식품명</td>
                                 <td th:text="${food.foodSize}">1회 제공량</td>
                                 <td th:text="${food.choc}">탄수화물</td>
@@ -242,7 +242,7 @@
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                         <tbody>
                             <form action="/fooddiary/selectfood" method="POST">
-                                <tr th:each="food : ${foods}">
+                                <tr th:each="food : ${responseDto.dinnerList}">
                                     <td th:text="${food.foodNm}">식품명</td>
                                     <td th:text="${food.foodSize}">
                                         1회 제공량
@@ -317,13 +317,13 @@
                         </thead>
                         <!-- 데이터를 Thymeleaf 반복문을 사용하여 표에 추가 -->
                         <tbody>
-                            <tr th:each="food1 : ${selectedFood}">
-                                <td th:text="${food1.foodNm}">식품명</td>
-                                <td th:text="${food1.foodSize}">1회 제공량</td>
-                                <td th:text="${food1.choc}">탄수화물</td>
-                                <td th:text="${food1.prot}">단백질</td>
-                                <td th:text="${food1.fat}">지방</td>
-                                <td th:text="${food1.kcal}">칼로리</td>
+                            <tr th:each="food : ${responseDto.snackList}">
+                                <td th:text="${food.foodNm}">식품명</td>
+                                <td th:text="${food.foodSize}">1회 제공량</td>
+                                <td th:text="${food.choc}">탄수화물</td>
+                                <td th:text="${food.prot}">단백질</td>
+                                <td th:text="${food.fat}">지방</td>
+                                <td th:text="${food.kcal}">칼로리</td>
                                 <td class="sub" title="버튼 자리">
                                     <button class="btn2" onclick="deleteMeal()">
                                         -
