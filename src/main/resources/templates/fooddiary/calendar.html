@@ -10,9 +10,9 @@
 <th:block layout:fragment="foodD">
     <div class="foodD_calendar">
         <div class="calendar_header">
-            <button class="foodD_calendar-button" onclick="goToPreviousMonth()"> << Prev </button>
+            <button class="foodD_calendar-button" onclick="goToPreviousMonth()"> << Prev</button>
             <h1 th:id="monthYear" th:text="|${yearMonth.getYear()} . ${yearMonth.getMonth().getValue()} |"></h1>
-            <button class="foodD_calendar-button" onclick="goToNextMonth()" > Next >> </button>
+            <button class="foodD_calendar-button" onclick="goToNextMonth()"> Next >></button>
         </div>
         <table class="foodD_calendar_table">
             <thead>
@@ -28,18 +28,19 @@
             </thead>
             <tbody>
             <tr th:each="week : ${weeks}">
-    <!--날짜카드-->
-                <td   th:each="day : ${week}" th:class="${day != null} ? 'calendar_active foodD_calendar_padding' : 'foodD_calendar_padding'">
-                    <div class="foodD_clanedar_day_layout" >
-        <!--날짜출력-->
+                <!--날짜카드-->
+                <td th:each="day : ${week}"
+                    th:class="${day != null} ? 'calendar_active foodD_calendar_padding' : 'foodD_calendar_padding'">
+                    <div class="foodD_clanedar_day_layout" onclick="goToDietList(this)">
+                        <!--날짜출력-->
                         <div class="foodD_clanedar_datebox" th:if="${day != null}" th:text="${day}">Day</div>
-        <!-- 식단출력-->
-                        <div class= "foodD_clanedar_foodbox" th:if="${day != null}">
+                        <!-- 식단출력-->
+                        <div class="foodD_clanedar_foodbox" th:if="${day != null}">
                             <div th:each="todo : ${todosMap[__${day}__]}"
                                  th:if="${todosMap[__${day}__]} != null">
                                 <span th:text="${todo.task}"></span>
                             </div>
-                            <div  th:unless="${todosMap[__${day}__]} != null">
+                            <div th:unless="${todosMap[__${day}__]} != null">
                                 <!-- Handle case where todosMap[__${day}__] is null -->
                             </div>
                         </div>
@@ -49,23 +50,36 @@
             </tbody>
         </table>
     </div>
-<!-- 달력  이전달  다음달  버튼동작함수-->
+    <!-- 달력  이전달  다음달  버튼동작함수-->
     <script th:inline="javascript">
 
         /*<![CDATA[*/
         var prevYear = [[${yearMonth.minusMonths(1).getYear()}]];
-     var prevMonth = [[${yearMonth.minusMonths(1).getMonthValue()}]];
-     var nextYear = [[${yearMonth.plusMonths(1).getYear()}]];
-     var nextMonth = [[${yearMonth.plusMonths(1).getMonthValue()}]];
+        var prevMonth = [[${yearMonth.minusMonths(1).getMonthValue()}]];
+        var nextYear = [[${yearMonth.plusMonths(1).getYear()}]];
+        var nextMonth = [[${yearMonth.plusMonths(1).getMonthValue()}]];
 
         function goToPreviousMonth() {
-            window.location.href = "/fooddiary/calendar/?year=" +prevYear + "&month=" + prevMonth;
+            window.location.href = "/fooddiary/calendar/?year=" + prevYear + "&month=" + prevMonth;
 
         }
 
         function goToNextMonth() {
             window.location.href = "/fooddiary/calendar/?year=" + nextYear + "&month=" + nextMonth;
         }
+
+
+        function goToDietList(thisday) {
+            var date = parseInt(thisday.querySelector('.foodD_clanedar_datebox').textContent);
+            var year = [[${yearMonth.getYear()}]];
+            var month = [[${yearMonth.getMonthValue()} -1]];
+            // var selectedDate = new Date(year, month, date);
+
+            window.location.href = '/fooddiary/dietlist?year=' + year
+                + '&month=' + month
+                + '&date=' + date;
+        }
+
         /*]]>*/
     </script>
 

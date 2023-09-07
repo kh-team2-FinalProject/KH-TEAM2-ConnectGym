@@ -4,12 +4,19 @@ const calendar = document.getElementById("calendar");
 const selectedDateElement = document.getElementById("selectedDate");
 const yearSelect = document.getElementById("yearSelect");
 const monthSelect = document.getElementById("monthSelect");
-
+const urlParams = new URLSearchParams(window.location.search);
 // 캘린더 초기화
-let currentDate = new Date();
-let selectedDate = currentDate;
-let selectedYear = currentDate.getFullYear();
-let selectedMonth = currentDate.getMonth();
+
+
+let currentDate = "";
+if (urlParams != null) {
+    currentDate = new Date(parseInt(urlParams.get('year')), parseInt(urlParams.get('month')), parseInt(urlParams.get('date')));
+} else {
+    currentDate = new Date();
+}
+selectedDate = currentDate;
+selectedYear = currentDate.getFullYear();
+selectedMonth = currentDate.getMonth();
 
 updateSelectedDate();
 updateYearSelect();
