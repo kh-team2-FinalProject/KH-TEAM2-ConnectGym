@@ -22,11 +22,13 @@ calendarButton.addEventListener("click", () => {
 });
 
 calendar.addEventListener("click", (event) => {
-    const selectedDay = parseInt(event.target.textContent);
-    if (!isNaN(selectedDay)) {
-        selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
-        updateSelectedDate();
-        calendarDropdown.style.display = "none";
+    if (event.target.classList.contains("calendar-day")) {
+        const selectedDay = parseInt(event.target.textContent);
+        if (!isNaN(selectedDay)) {
+            selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
+            updateSelectedDate();
+            calendarDropdown.style.display = "none";
+        }
     }
 });
 
@@ -49,7 +51,9 @@ monthSelect.addEventListener("change", () => {
 });
 
 function updateSelectedDate() {
-    const formattedDate = `${selectedYear}년 ${selectedMonth + 1}월 ${selectedDate.getDate()}일`;
+    const formattedDate = `${selectedYear}년 ${
+        selectedMonth + 1
+    }월 ${selectedDate.getDate()}일`;
     selectedDateElement.textContent = formattedDate;
 }
 
