@@ -10,12 +10,12 @@
     display: flex;
     align-items: flex-start;
     height: 100%;
-    padding: 0px 80px;
+    padding: 5vh 80px;
 }
 
 .site_banner {
-    background-color: silver;
-    height: 350px;
+    /* background-color: silver; */
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,11 +24,11 @@
 .site_banner_title {
     font-family: 'Staatliches', cursive;
     text-transform: uppercase;
-    font-size: 90pt;
+    font-size: 68pt;
     color: #0e181a;
     letter-spacing: 15px;
     height: 40%;
-
+    /* background: white; */
 }
 
 .site_banner_title p {
@@ -37,21 +37,22 @@
     padding: 0px 80px;
     box-shadow: 10px 10px 30px 1px #535151;
     background-color: rgba(223, 223, 223, 0.22);
+    background: white;
 }
 
-.site_banner.health-banner {
-    background: url("/images/banner-health.jpg") center center / cover no-repeat;
-    filter: grayscale(100%);
-}
+/*.site_banner.health-banner {*/
+/*    background: url("/images/banner-health.jpg") center center / cover no-repeat;*/
+/*    filter: grayscale(100%);*/
+/*}*/
 
-.site_banner.yoga-banner {
-    background: url("/images/banner-yoga.jpg") center center / cover no-repeat;
-    filter: grayscale(100%);
-}
+/*.site_banner.yoga-banner {*/
+/*    background: url("/images/banner-yoga.jpg") center center / cover no-repeat;*/
+/*    filter: grayscale(100%);*/
+/*}*/
 
-.site_banner.pilates-banner {
-    background: url("/images/banner-pilates.jpg") center center / cover no-repeat;
-}
+/*.site_banner.pilates-banner {*/
+/*    background: url("/images/banner-pilates.jpg") center center / cover no-repeat;*/
+/*}*/
 
 
 /*== 사이드바 ==*/
@@ -82,17 +83,21 @@
 /*==사이드바 메뉴 div==*/
 .side_menu {
     width: 78%;
-    /* padding: 0px 30px; */
+    padding: 0px 30px;
     /* text-align: right; */
     line-height: 20px;
     /* box-sizing: border-box; */
     /* margin-top: 0%; */
-    width: 13%;
+    width: 9%;
     /* background: aliceblue; */
     /* justify-content: flex-end; */
     display: flex;
     margin-left: 80px;
     position: fixed;
+    /* align-items: flex-start; */
+    min-width: 185px;
+    /* border: 3px solid white; */
+    /* border-radius: 5px 0px 0px 5px; */
 }
 
 .side_menu ul li.active::after {
@@ -112,7 +117,7 @@
     border-radius: 5px;
     /* text-align : right; */
     font-size: 18pt;
-    padding: 30px 0px;
+    /* padding: 30px 0px; */
     font-weight: 900;
     letter-spacing: 3px;
 }
@@ -122,7 +127,7 @@
     flex-direction: column;
     margin-left: 0;
     width: 64%;
-    margin-top: 13%;
+    margin-top: -10%;
 }
 
 /*사이드바 소제목명*/

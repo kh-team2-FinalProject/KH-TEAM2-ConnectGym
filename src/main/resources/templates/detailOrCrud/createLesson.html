@@ -13,20 +13,8 @@
         <form role="form" class="createLesson_form" action="/createLesson"
               th:object="${lessonForm}" method="POST"
               name="createLessonForm"
-              enctype="multipart/form-data" >>
+              enctype="multipart/form-data">
             <ul class="input_createLesson">
-                <li class="profile_picture">
-                    <div class="profile_info">
-                        <img th:src="@{/images/김계란.png}" alt="Profile Picture">
-                        <span th:if="${lesson != null and lesson.trainer != null}"
-                              th:text="${lesson.trainer.trainer_name}"></span>
-                        <div class="attachment">
-                            <button type="button" class="add_attachment">+
-                                <!--<input type="file" id="attachment" name="uploadedFile" class="attachment_input">-->
-                            </button>
-                        </div>
-                    </div>
-                </li>
                 <li>
                     <label th:for="title">강좌명</label>
                     <input type="text" th:field="*{title}">
@@ -34,7 +22,10 @@
 
                 <li>
                     <label th:for="price">가격</label>
-                    <input type="text" th:field="*{price}">
+                    <div class="cl-price-box">
+                        <input type="text" th:field="*{price}">
+                        <span>원</span>
+                    </div>
                 </li>
                 <li>
                     <label th:for="category">카테고리</label>
