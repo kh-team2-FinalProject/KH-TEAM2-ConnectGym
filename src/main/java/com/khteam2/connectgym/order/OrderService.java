@@ -518,6 +518,7 @@ public class OrderService {
 
                 // 상세 정보 DTO를 생성해서 가져온 정보들을 담아준다.
                 OrderListOrderDetailDto detailDto = OrderListOrderDetailDto.builder()
+                    .orderDetailNo(orderDetail.getNo())
                     .title(lesson.getTitle())
                     .startDate(lesson.getStart_date())
                     .endDate(lesson.getEnd_date())
