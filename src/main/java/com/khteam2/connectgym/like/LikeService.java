@@ -1,24 +1,29 @@
 package com.khteam2.connectgym.like;
 
 
-import com.khteam2.connectgym.follow.Follow;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
+import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class LikeService {
+    private static final Logger logger = LoggerFactory.getLogger(LikeService.class);
 
     private final LikeRepository likeRepository;
     private final MemberRepository memberRepository;
@@ -67,6 +72,29 @@ public class LikeService {
         }
 
         return myLikeList;
+    }
+
+    //레슨넘버로 찜한 사람 목록 가져오기
+    public List<MemberResponseDTO> likedList(Long lessonNo) {
+        List<MemberResponseDTO> likedMembers = new ArrayList<>();
+        try {
+            for (Like like : likeRepository.findAllByLessonNo(lessonNo)) {
+                MemberResponseDTO memberResponseDTO = new MemberResponseDTO(like.getMember());
+                likedMembers.add(memberResponseDTO);
+            }
+        } catch (Exception e) {
+            logger.error("likedList에러" + e.getMessage());
+            e.printStackTrace();
+        }
+        return likedMembers;
+    }
+
+    public TrainerResponseDTO findTrainerByLessonNo(Long lessonNo) {
+        Lesson lesson = lessonRepository.findById(lessonNo).orElse(null);
+        if (lesson != null) {
+            return new TrainerResponseDTO(lesson.getTrainer());
+        }
+        return null;
     }
 
     // 나중에는 카테고리 드롭박스 별 필터링도 추가하기

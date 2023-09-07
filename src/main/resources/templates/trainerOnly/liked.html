@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{trainerOnly/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{/css/common/loading.css}">
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</th:block>
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 내 레슨 현황</title>
+</th:block>
+
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="mypage">
+
+
+    <h1>Liked Members</h1>
+    <ul>
+        <li th:each="member : ${likedMembers}">
+            <span th:text="${member.userName}"></span>
+            <span th:text="${member}"></span>
+        </li>
+    </ul>
+
+
+</th:block>
+
+
+</html>

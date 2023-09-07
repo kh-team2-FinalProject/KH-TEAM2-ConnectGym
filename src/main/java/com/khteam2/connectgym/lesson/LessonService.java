@@ -5,13 +5,14 @@ import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import com.khteam2.connectgym.upload.S3Uploader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -84,7 +85,7 @@ public class LessonService {
     }
 
     public List<Lesson> getDataForPage(int pageNumber, int itemsPerPage,
-        List<Lesson> lessonList) {
+                                       List<Lesson> lessonList) {
 
         List<Lesson> dataForPage = new ArrayList<>();
 
@@ -112,4 +113,5 @@ public class LessonService {
     }
 
     //트레이너 넘버로 레슨 가져오기
+
 }

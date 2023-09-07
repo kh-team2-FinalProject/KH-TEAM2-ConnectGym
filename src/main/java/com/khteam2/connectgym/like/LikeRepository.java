@@ -1,7 +1,6 @@
 package com.khteam2.connectgym.like;
 
 
-import com.khteam2.connectgym.follow.Follow;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -38,4 +37,6 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
         + " WHERE le.lesson.no = ?1"
         + " AND t.trainerName LIKE CONCAT('%',?2,'%')")
     List<Follow> searchByTrainerName(Long fromUserNo, String search);*/
+
+
 }

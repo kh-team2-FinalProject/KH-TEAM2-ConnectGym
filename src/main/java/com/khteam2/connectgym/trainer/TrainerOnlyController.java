@@ -5,6 +5,7 @@ import com.khteam2.connectgym.chat_test.dto.ChatroomDTO;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
+import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomRequestDto;
@@ -12,6 +13,8 @@ import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerRoomResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +28,14 @@ import java.util.List;
 @RequestMapping("/trainerOnly")
 public class TrainerOnlyController {
 
+    private static final Logger logger = LoggerFactory.getLogger(TrainerOnlyController.class);
+
+
     private final TrainerService trainerService;
     private final TrainerOnlyService trainerOnlyService;
     private final ChatroomService chatroomService;
     private final FollowService followService;
+    private final LikeService likeService;
 
 
     @GetMapping("/mypage")
@@ -117,4 +124,17 @@ public class TrainerOnlyController {
     }
 
 
+    @GetMapping("/mypage/liked")
+    public String liked(Model model, HttpSession session, Long lessonNo) {
+        try {
+            model.addAttribute("bannerTitle", "liked");
+            TrainerResponseDTO trainer = trainerService.sessionT(session);
+            List<MemberResponseDTO> likedMembers = likeService.likedList(lessonNo);
+            model.addAttribute("likedMembers", likedMembers);
+        } catch (Exception e) {
+            logger.error("TOC liked() 에러" + e.getMessage());
+            e.printStackTrace();
+        }
+        return "trainerOnly/liked";
+    }
 }
