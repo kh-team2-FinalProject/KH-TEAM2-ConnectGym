@@ -1,17 +1,20 @@
 package com.khteam2.connectgym.dietlist.controller;
+
+import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.dietlist.model.DietListResponseDto;
 import com.khteam2.connectgym.dietlist.model.Food;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
 import com.khteam2.connectgym.dietlist.service.FoodService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -79,16 +82,22 @@ public class DietListController {
 
     // dietlist
     @GetMapping("fooddiary/dietlist")
-    public String searchDiet(@RequestParam(name = "key", required = false) String key, Model model) {
-        if (key != null && !key.isEmpty()) {
-            List<Food> dietList = foodService.searchDiet(key);
-            model.addAttribute("dietList", dietList);
-        }
+    public String searchDiet(
+        Model model,
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+//        if (key != null && !key.isEmpty()) {
+//            List<Food> dietList = foodService.searchDiet(key);
+//            model.addAttribute("dietList", dietList);
+//        }
+        DietListResponseDto responseDto = this.foodService.dietList(loginMemberNo, date);
 
+        model.addAttribute("responseDto", responseDto);
+        model.addAttribute("date", date);
 
         model.addAttribute("selectedFood", null);
-
         model.addAttribute("food", new Food());
+
         return "fooddiary/dietlist";
     }
 
@@ -96,7 +105,7 @@ public class DietListController {
     @PostMapping("/selectfood")
     public String selectFood(
         @RequestParam(name = "selectedKey", required = false) Long selectedKey,
-        Model model){
+        Model model) {
         Food selectedFood = foodRepository.findByFoodCd(selectedKey);
         model.addAttribute("selectedFood", selectedFood);
         return "redirect:/fooddiary/dietlist";

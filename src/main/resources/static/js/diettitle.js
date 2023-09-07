@@ -7,18 +7,17 @@ const monthSelect = document.getElementById("monthSelect");
 const urlParams = new URLSearchParams(window.location.search);
 // 캘린더 초기화
 
-
 let currentDate = "";
-if (urlParams != null) {
-    currentDate = new Date(parseInt(urlParams.get('year')), parseInt(urlParams.get('month')), parseInt(urlParams.get('date')));
+if (urlParams.has("date")) {
+    currentDate = new Date(urlParams.get("date"));
 } else {
     currentDate = new Date();
 }
-selectedDate = currentDate;
-selectedYear = currentDate.getFullYear();
-selectedMonth = currentDate.getMonth();
+let selectedDate = currentDate;
+let selectedYear = currentDate.getFullYear();
+let selectedMonth = currentDate.getMonth();
 
-updateSelectedDate();
+// updateSelectedDate();
 updateYearSelect();
 updateMonthSelect();
 updateCalendar();
@@ -33,8 +32,16 @@ calendar.addEventListener("click", (event) => {
         const selectedDay = parseInt(event.target.textContent);
         if (!isNaN(selectedDay)) {
             selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
-            updateSelectedDate();
-            calendarDropdown.style.display = "none";
+            // updateSelectedDate();
+            // calendarDropdown.style.display = "none";
+
+            if (!isNaN(+selectedDate)) {
+                location.href = `?date=${selectedYear}-${(
+                    selectedMonth +
+                    1 +
+                    ""
+                ).padStart(2, "0")}-${(selectedDay + "").padStart(2, "0")}`;
+            }
         }
     }
 });
@@ -100,6 +107,3 @@ function updateCalendar() {
 
     calendar.innerHTML = calendarHTML;
 }
-
-
-
