@@ -15,7 +15,7 @@
 
 /* 개별 박스 */
 .meal_box {
-    background-color: #ffffffdb;
+    background-color: #a9ffff42;
     display: inline-block;
     align-items: center;
     width: 100%;
@@ -25,6 +25,7 @@
     padding: 10px;
     box-sizing:inherit;
     justify-items:center;
+    box-shadow: 0px 0px 10px rgb(255 255 255);
 }
 
 
@@ -43,19 +44,23 @@
 }
 
 th.sub{
-    color:rgb(34 36 38 / 68%);
+    color:rgb(255 255 255 / 90%);
+    font-size: 18px;
 }
 
 /* + 버튼 */
 .btn1{
     background-color: #ffffff3d;
-    color: rgb(66 149 176);
+    color: rgb(243 255 255 / 74%);
     padding: 5px 8px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
     font-size: 25px;
+}
+.btn1:hover{
+    transform: scale(1.2);
 }
 
 
@@ -93,7 +98,7 @@ th.sub{
     text-align:center;
     overflow: auto;
     left: 50%;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .pop_content2 th, .pop_content2 td{
