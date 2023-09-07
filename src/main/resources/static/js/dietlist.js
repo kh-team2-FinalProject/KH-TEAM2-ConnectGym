@@ -56,7 +56,28 @@ function openPop(meal) {
     modal.style.display = "block";
 }
 
-function deleteMeal(memberFoodNo) {}
+function deleteMeal(event) {
+    const memberFoodNo = event.target.dataset.memberFoodNo;
+
+    fetch("/api/dietList/delete", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            memberFoodNo,
+        }),
+    })
+        .then((r) => r.json())
+        .then((v) => {
+            if (v.success) {
+                alert("삭제되었습니다.");
+                location.reload();
+            } else {
+                alert(v.message);
+            }
+        });
+}
 
 /* 버튼 클릭시 닫힘 */
 document.getElementById("closeBtn").addEventListener("click", function () {

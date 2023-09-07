@@ -189,28 +189,32 @@ public class FoodServiceImpl implements FoodService {
         }
 
         List<MemberFood> memberFoodList = this.memberFoodRepository.findByMemberAndRegDate(member, date);
-        List<FoodDto> breakfastList = new ArrayList<>();
-        List<FoodDto> lunchList = new ArrayList<>();
-        List<FoodDto> dinnerList = new ArrayList<>();
-        List<FoodDto> snackList = new ArrayList<>();
+        List<DietListFoodDto> breakfastList = new ArrayList<>();
+        List<DietListFoodDto> lunchList = new ArrayList<>();
+        List<DietListFoodDto> dinnerList = new ArrayList<>();
+        List<DietListFoodDto> snackList = new ArrayList<>();
 
         for (MemberFood memberFood : memberFoodList) {
             FoodTime foodTime = memberFood.getFoodTime();
             Food food = memberFood.getFood();
             FoodDto foodDto = FoodDto.of(food);
+            DietListFoodDto dietListFoodDto = DietListFoodDto.builder()
+                .memberFoodNo(memberFood.getNo())
+                .food(foodDto)
+                .build();
 
             switch (foodTime) {
                 case BREAKFAST:
-                    breakfastList.add(foodDto);
+                    breakfastList.add(dietListFoodDto);
                     break;
                 case LUNCH:
-                    lunchList.add(foodDto);
+                    lunchList.add(dietListFoodDto);
                     break;
                 case DINNER:
-                    dinnerList.add(foodDto);
+                    dinnerList.add(dietListFoodDto);
                     break;
                 case SNACK:
-                    snackList.add(foodDto);
+                    snackList.add(dietListFoodDto);
                     break;
                 default:
                     responseDto.setMessage("알 수 없는 시간대입니다.");
