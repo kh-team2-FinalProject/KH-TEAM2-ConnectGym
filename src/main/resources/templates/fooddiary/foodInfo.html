@@ -22,13 +22,11 @@
                 <form class="form" action="/fooddiary/foodInfo" method="GET">
                     <input
                         class="searchInput"
-                        name="key"
+                        name="search"
                         type="text"
                         placeholder="식품명을 입력하시오"
                     />
-                    <button class="search_btn" onclick="searchFood()">
-                        search
-                    </button>
+                    <button class="search_btn">search</button>
                 </form>
                 <button class="write_btn" onclick="openPop()">write</button>
             </div>
@@ -46,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="food: ${foodinfo}">
+                    <tr th:each="food : ${responseDto.foods}">
                         <td>
                             <span th:text="${food.foodNm}"></span>
                         </td>
@@ -74,6 +72,46 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="foodInfo_search_pagination">
+                <ul class="foodInfo_search_pagination_ul">
+                    <li
+                        th:if="${responseDto.pagination.prev}"
+                        class="foodInfo_search_pagination_li"
+                    >
+                        <button
+                            type="button"
+                            class="foodInfo_search_pagination_li_button"
+                            th:onclick="|movePage(${responseDto.pagination.firstPage - 1})|"
+                        >
+                            이전
+                        </button>
+                    </li>
+                    <li
+                        th:each="page : ${#numbers.sequence(responseDto.pagination.firstPage, responseDto.pagination.endPage)}"
+                        th:classappend="${page == responseDto.pagination.currentPage} ? 'foodInfo_search_pagination_li_on'"
+                        class="foodInfo_search_pagination_li"
+                    >
+                        <button
+                            type="button"
+                            class="foodInfo_search_pagination_li_button"
+                            th:onclick="|movePage(${page})|"
+                            th:text="${page}"
+                        ></button>
+                    </li>
+                    <li
+                        th:if="${responseDto.pagination.next}"
+                        class="foodInfo_search_pagination_li"
+                    >
+                        <button
+                            type="button"
+                            class="foodInfo_search_pagination_li_button"
+                            th:onclick="|movePage(${responseDto.pagination.endPage + 1})|"
+                        >
+                            다음
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <!-- 상품 등록 팝업 -->
