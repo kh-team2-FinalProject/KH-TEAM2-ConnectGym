@@ -149,4 +149,36 @@ public class TrainerOnlyController {
         }
         return "trainerOnly/liked";
     }
+
+    //    @GetMapping("/mypage/messages")
+//    public String messages(HttpSession session, Model model) {
+//        model.addAttribute("bannerTitle", "followed");
+//        TrainerResponseDTO trainer = trainerService.sessionT(session);
+//
+//        return "trainerOnly/messages";
+//    }
+    @GetMapping("/mypage/messages")
+    public String messages(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
+                           @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
+                           Model model, RedirectAttributes redirectAttributes) {
+
+        model.addAttribute("bannerTitle", "messages");
+        if (loginMemberClass == null) {
+            // 로그인되어 있지 않은 경우
+            redirectAttributes.addFlashAttribute("message", "로그인 해주세요.");
+            return "redirect:/";
+
+        } else if (loginMemberClass == MemberClass.TRAINER) {
+            // 트레이너 회원 로그인 된 경우
+            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+
+            //채팅방 목록 보여주기
+            List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);
+            model.addAttribute("trainer", trainerResponseDTO);
+            model.addAttribute("chatroomList", chatroomList);
+            return "trainerOnly/messages"; // 트레이너 마이페이지로 이동
+        } else {
+            return "redirect:/mypage";
+        }
+    }
 }

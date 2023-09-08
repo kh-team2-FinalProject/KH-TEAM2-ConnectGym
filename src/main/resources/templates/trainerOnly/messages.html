@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{trainerOnly/mypages}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="add-css">
+    <link rel="stylesheet" th:href="@{/css/common/loading.css}">
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</th:block>
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 좋아요</title>
+</th:block>
+
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="mypage">
+
+    <div class="dsh-message-box">
+        <div class="dsh-message-header">
+            <p class="dsh-message-header-title">MESSAGE</p>
+        </div>
+        <div class="dsh-message-wrapper">
+            <div class="dsh-message-content">
+                <th:block th:if="${chatroomList.size() > 0}">
+                    <div class="mychatroom_list_trainer" th:each="chatroom:${chatroomList}">
+
+                        <div class="mychatroom_list_trainer_info">
+                            <div class="mmychatroom_list_trainer_name">[[${chatroom.member.userName}]]
+                            </div>
+                        </div>
+                        <div class="mychatroom_list_trainer_button">
+                            <img width="25" height="20"
+                                 src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/message_icon.png"
+                                 th:onclick="|window.open('/chatting/'+ ${chatroom.no}, 'chatting-window ${chatroom.no}',
+                'width=430, height=500, location=no, status=no, scrollbars=yes');|"/>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+
+</th:block>
 </html>
