@@ -90,6 +90,10 @@ public class DietListController {
 //            List<Food> dietList = foodService.searchDiet(key);
 //            model.addAttribute("dietList", dietList);
 //        }
+        if (date == null) {
+            date = LocalDate.now();
+        }
+
         DietListResponseDto responseDto = this.foodService.dietList(loginMemberNo, date);
 
         model.addAttribute("responseDto", responseDto);
