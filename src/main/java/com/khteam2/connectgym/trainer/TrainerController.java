@@ -6,6 +6,7 @@ import com.khteam2.connectgym.follow.dto.FollowForTrainerResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.MemberRepository;
+import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class TrainerController {
     private final MemberRepository memberRepository;
     private final TrainerService trainerService;
     private final FollowService followService;
+    private final ReviewService reviewService;
 
     @GetMapping("/mypage/convertTrainer")
     public String convertTrainer(Model model) {
@@ -53,6 +55,9 @@ public class TrainerController {
         //트레이너 정보
         TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
 
+        //리뷰 수
+        int reviewCount = reviewService.trainerReviewCount(trainerNo);
+
         //트레이너 팔로우 수
         int followCount = followService.followCount(trainerNo);
 
@@ -68,6 +73,7 @@ public class TrainerController {
 
         model.addAttribute("trainer", trainerResponseDTO);
         model.addAttribute("followInfo", followTrainerResponseDTO);
+        model.addAttribute("reviewCount", reviewCount);
 
         return "detailOrCrud/trainerDetail";
     }

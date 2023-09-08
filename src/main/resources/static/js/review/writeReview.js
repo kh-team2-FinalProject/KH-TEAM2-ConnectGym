@@ -11,7 +11,7 @@ ratingInputs.forEach(function (input, index) {
     // 이전 별들을 모두 체크 상태로 변경
     for (let i = 0; i <= selectedIndex; i++) {
       ratingInputs[i].checked = true;
-       ratingLabels[i].querySelector('svg path').style.fill = 'gold';; // 선택한 별까지 색상 변경
+       ratingLabels[i].querySelector('svg path').style.fill = '#f1c164';; // 선택한 별까지 색상 변경
     }
 
     // 이후 별들의 체크 상태 초기화

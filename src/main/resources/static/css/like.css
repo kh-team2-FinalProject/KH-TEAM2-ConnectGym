@@ -1,6 +1,6 @@
 .myLike_border {
     min-width:50%;
-    overflow-y: auto; /*스크롤*/
+
     min-height: 70vh;
     max-height: 70vh;
     border: 3px solid #dad8d8;
@@ -63,6 +63,10 @@
 .myLike_list_lesson_info{ flex: 1;}
 .myLike_list_lesson_button{ flex: 1;}
 
+.myLike_list{
+overflow-y: auto; /*스크롤*/
+max-height:480px;
+}
 
 .myLike_list_lesson{
   border-top: 1px solid #0e1414;

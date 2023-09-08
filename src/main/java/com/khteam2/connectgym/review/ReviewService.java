@@ -2,8 +2,7 @@ package com.khteam2.connectgym.review;
 
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.order.OrderDetailRepository;
-import com.khteam2.connectgym.review.dto.MyReviewResponseDto;
-import com.khteam2.connectgym.review.dto.ReviewRequestDto;
+import com.khteam2.connectgym.review.dto.*;
 import com.khteam2.connectgym.upload.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -88,6 +87,26 @@ public class ReviewService {
         reviewRepository.deleteById(reviewNo);
     }
 
+    public int trainerReviewCount(Long trainerNo) {
+        return reviewRepository.findCountByTrainerNo(trainerNo);
+
+    }
+
     //트레이너별 리뷰
+    public TrainerReviewResponseListDto trainerReview(Long trainerNo){
+
+        List<TrainerReviewResponseDto> dtoList = reviewRepository.findTrainerReviewsByTrainerNo(trainerNo);
+        double ratingAvg = reviewRepository.findAvgRatingByTrainerNo(trainerNo);
+        RatingCountDto ratingCountDto = reviewRepository.findRatingCountsByTrainerNo(trainerNo);
+
+        TrainerReviewResponseListDto listDto = TrainerReviewResponseListDto.builder()
+            .trainerReviewResponseDtoList(dtoList)
+            .ratingAvg(ratingAvg)
+            .ratingCountDto(ratingCountDto)
+            .build();
+
+        return listDto;
+    }
+
 
 }

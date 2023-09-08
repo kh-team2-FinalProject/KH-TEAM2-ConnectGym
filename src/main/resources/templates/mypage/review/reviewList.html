@@ -14,8 +14,7 @@
 
 <th:block layout:fragment="mypage">
 
-    <div class="myReview_container">
-        <!--<div class="myReview_border">-->
+    <div class="myReviewList_container">
         <div class="myReview_list">
             <th:block th:if="${reviewList.size() > 0}">
                 <div class="myReview_list_item" th:each="review:${reviewList}">

@@ -15,7 +15,6 @@ public class TrainerReviewResponseDto {
 
     private Long no;
     private String userId;
-    private String trainerNo;
     private int rating;
     private String reviewTitle;
     private String reviewContent;

@@ -2,6 +2,7 @@ package com.khteam2.connectgym.review;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.review.dto.ReviewRequestDto;
+import com.khteam2.connectgym.review.dto.TrainerReviewResponseListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +34,14 @@ public class ReviewController {
         reviewService.deleteReview(reviewNo);
     }
 
-
     //유저별 리뷰리스트(->MemberController)
-    //레슨별 리뷰리스트
 
+    //레슨별 리뷰리스트
+    @ResponseBody
+    @GetMapping("/review/show/{trainerNo}")
+    public TrainerReviewResponseListDto showTrainerReview(@PathVariable Long trainerNo){
+        return reviewService.trainerReview(trainerNo);
+    }
 
 }
 
