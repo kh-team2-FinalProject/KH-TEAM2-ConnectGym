@@ -23,6 +23,12 @@
                     <!--<li class="h-title"><a href="#"></a></li>-->
                 </ul>
             </div>
+            <div th:if="${session.session_login_member_no != null}">
+                <span class="main-header-login-id" th:if="${memberClass == 'member'}"
+                      th:text="${loginMemberId} + '님 환영합니다.'"></span>
+                <span class="main-header-login-id" th:if="${memberClass == 'trainer'}"
+                      th:text="${loginMemberId} + '트레이너님 환영합니다.'"></span>
+            </div>
             <div class="header-item">
 
                 <!--            avg 아이콘 마우스 올렸을때-->
@@ -31,9 +37,6 @@
                 <div class="mypage_hover_menu">
                     <ul th:if="${session.session_login_member_no != null}">
                         <li>
-
-                            <!--                            <a th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/mypage/trainer'}">-->
-                            <!--<a href="/trainerOnly/mypage">-->
                             <a th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/trainerOnly/mypage'}">
                                 <svg class="mypage_header_icon" xmlns="http://www.w3.org/2000/svg" height="1.5em"
                                      viewBox="0 0 512 512">
