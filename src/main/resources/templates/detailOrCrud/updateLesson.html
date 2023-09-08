@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{content/smallbanner}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>강좌 생성</title>
+</th:block>
+
+
+<th:block layout:fragment="detailOrCrud">
+
+    <div class="createLesson_container">
+        <form role="form" class="createLesson_form" th:action="|/updateLesson/${lesson.no}|"
+              th:object="${lesson}" method="POST"
+              name="createLessonForm"
+              enctype="multipart/form-data">
+            <ul class="input_createLesson">
+                <li>
+                    <label th:for="title">강좌명</label>
+                    <input type="text" th:field="*{title}" th:value="${lesson.title}">
+                </li>
+
+                <li>
+                    <label th:for="price">가격</label>
+                    <div class="cl-price-box">
+                        <input type="text" th:field="*{price}" th:value="${lesson.price}">
+                        <span>원</span>
+                    </div>
+                </li>
+                <li>
+                    <label th:for="category">카테고리</label>
+                    <select id="category" name="category">
+                        <option value="1">헬스</option>
+                        <option value="2">요가</option>
+                        <option value="3">필라테스</option>
+                    </select>
+
+
+                </li>
+
+
+                <li>
+                    <label th:for="lesson_info">강좌 소개</label>
+                    <textarea th:field="*{lesson_info}" th:value="${lesson.lesson_info}"></textarea>
+                </li>
+                <!--                <li>-->
+                <!--                    <label th:for="trainer_info">강사 소개</label>-->
+                <!--                    <textarea th:field="*{trainer_info}></textarea>-->
+                <!--                </li>-->
+
+                <li>
+                    <label th:for="lesson_img">강좌 이미지</label>
+                    <label for="createLessonImgInput"
+                           class="createLessonImg_container">
+                        <input type="file" name="lessonImgFile"
+                               class="createLessonImgInput"
+                               id="createLessonImgInput"
+                               accept="image/*"/>
+                        <img
+                            class="createLessonPhoto"
+                            th:src="${lesson.lesson_img} ?: '/images/icons/img_upload.png'"
+                            width="300"
+                            height="300"
+                        />
+                    </label>
+                    <label>[미리 보기]</label>
+                </li>
+
+                <li>
+                    <label th:for="start_date">시작일</label>
+                    <input type="date" name="start_date" id="start_date"
+                           th:value="${#temporals.format(lesson.start_date, 'YYYY-MM-dd')}">
+                </li>
+                <li>
+                    <label th:for="end_date">종료일</label>
+                    <input type="date" name="end_date" id="end_date"
+                           th:value="${#temporals.format(lesson.end_date, 'YYYY-MM-dd')}">
+                </li>
+
+
+                <input type="hidden" name="titleCode" th:value="${lesson.titleCode}">
+                <li>
+                    <button class="sign_up_btn" type="submit">Sign Up</button>
+                </li>
+            </ul>
+        </form>
+
+        <script th:src="@{/js/createLesson.js}"></script>
+    </div>
+
+</th:block>
+
+
+</html>

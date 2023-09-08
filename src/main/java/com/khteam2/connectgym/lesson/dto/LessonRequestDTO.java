@@ -5,18 +5,17 @@ import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LessonRequestDTO {
 
+    private Long no;
     private String title;
     private String titleCode;
     private Trainer trainer;
@@ -31,7 +30,8 @@ public class LessonRequestDTO {
 
     public Lesson toEntity() {
 
-       return Lesson.builder()
+        return Lesson.builder()
+            .no(no)
             .title(title)
             .titleCode(titleCode)
             .trainer(trainer)
