@@ -30,7 +30,7 @@ public class DietListApiController {
     public ResponseEntity<?> insert(
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         FoodInsertRequestDto requestDto) {
-        FoodInsertResponseDto responseDto = this.foodService.insertFood(requestDto, loginMemberNo);
+        FoodInsertResponseDto responseDto = this.foodService.insertDietListFood(requestDto, loginMemberNo);
 
         if (!responseDto.isSuccess()) {
             return ResponseEntity.badRequest().body(responseDto);
@@ -44,7 +44,7 @@ public class DietListApiController {
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @RequestBody(required = false) FoodDeleteRequestDto requestDto) {
         Long memberFoodNo = requestDto.getMemberFoodNo();
-        FoodDeleteResponseDto responseDto = this.foodService.deleteFood(loginMemberNo, memberFoodNo);
+        FoodDeleteResponseDto responseDto = this.foodService.deleteDietListFood(loginMemberNo, memberFoodNo);
 
         if (!responseDto.isSuccess()) {
             return ResponseEntity.badRequest().body(responseDto);
@@ -58,5 +58,13 @@ public class DietListApiController {
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return this.foodService.dietList(loginMemberNo, date);
+    }
+
+    @PostMapping(value = "/api/food/insert")
+    public ResponseEntity<?> insert(
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+        @RequestBody(required = false) FoodDto foodDto) {
+        
+        return ResponseEntity.ok().build();
     }
 }

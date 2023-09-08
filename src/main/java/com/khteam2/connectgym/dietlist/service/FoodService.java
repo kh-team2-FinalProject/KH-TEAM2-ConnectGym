@@ -37,11 +37,11 @@ public interface FoodService {
         return null;
     }
 
-    default FoodInsertResponseDto insertFood(FoodInsertRequestDto requestDto, Long loginMemberNo) {
+    default FoodInsertResponseDto insertDietListFood(FoodInsertRequestDto requestDto, Long loginMemberNo) {
         return null;
     }
 
-    default FoodDeleteResponseDto deleteFood(Long loginMemberNo, Long memberFoodNo) {
+    default FoodDeleteResponseDto deleteDietListFood(Long loginMemberNo, Long memberFoodNo) {
         return null;
     }
 }

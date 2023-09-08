@@ -267,7 +267,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Transactional
     @Override
-    public FoodInsertResponseDto insertFood(FoodInsertRequestDto requestDto, Long loginMemberNo) {
+    public FoodInsertResponseDto insertDietListFood(FoodInsertRequestDto requestDto, Long loginMemberNo) {
         FoodInsertResponseDto responseDto = FoodInsertResponseDto.builder()
             .success(false)
             .build();
@@ -316,7 +316,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Transactional
 //    @Override
-    public FoodDeleteResponseDto deleteFood(Long loginMemberNo, Long memberFoodNo) {
+    public FoodDeleteResponseDto deleteDietListFood(Long loginMemberNo, Long memberFoodNo) {
         FoodDeleteResponseDto responseDto = FoodDeleteResponseDto.builder()
             .success(false)
             .build();
