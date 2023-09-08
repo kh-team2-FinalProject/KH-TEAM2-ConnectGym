@@ -20,7 +20,6 @@ public class ChatMessageService {
 
         chatMessageDTO.setChatroom(chatroomRepository.findById(chatroomNo).orElse(null));
         ChatMessage chatMessage = chatMessageDTO.toEntity();
-        System.out.println("chatMessageDTO = " + chatMessageDTO);
 
         return chatMessageRepository.save(chatMessage);
 

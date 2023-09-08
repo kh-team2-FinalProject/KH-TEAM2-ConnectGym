@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -69,7 +68,7 @@ public class ChatController {
         //채팅 메시지 DB저장
         ChatMessage chatMessage = chatMessageService.saveMessage(chatroomNo, message);
 
-        chatMessage.setSendAt(LocalDateTime.now());
+
         //리턴된 엔티티의 DTO화
         ChatMessageReaponseDTO chatMessageReaponseDTO = new ChatMessageReaponseDTO().fromEntity(chatMessage);
 
