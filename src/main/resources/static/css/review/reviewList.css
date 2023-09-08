@@ -44,10 +44,11 @@ cursor: pointer;
 }
 
 .my_Review_list_item_rating .star.filled {
-  fill: gold;
+  fill: #f1c164;
 }
 
 .my_Review_list_item_content{
-    font-size: 16px;
+  font-size: 15px;
+  line-height: 20px;
 
 }

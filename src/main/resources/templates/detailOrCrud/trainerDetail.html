@@ -13,6 +13,8 @@
 
 <th:block layout:fragment="script">
 <script th:src="@{/js/follow.js}"></script>
+<script th:src="@{/js/trainerReview.js}"></script>
+<script th:src="@{/js/review/rating.js}"></script>
     <script th:inline="javascript">
     function isTakingLesson() {
         const lessonNo = /*[[${trainer.lessonNo}]]*/;
@@ -94,7 +96,7 @@
                     </div>
                     <div class="trainerDetail_profile_header_item">
                         <div class="trainerDetail_profile_header_item_sub1">리뷰</div>
-                        <div class="trainerDetail_profile_header_item_sub2" onclick=""> 00건
+                        <div class="trainerDetail_profile_header_item_sub2" th:onclick="showReview([[${trainer.trainerNo}]]);">[[${reviewCount}]]건
                         </div>
                     </div>
                     <div class="trainerDetail_profile_header_item">
@@ -107,7 +109,6 @@
                 </div>
             </div>
             <div class="trainerDetail_profile_about">
-
                 <div class="trainerDetail_profile_about_textGrp">
                     <h2>[[${trainer.infoTitle}]]</h2>
                     <p>[[${trainer.infoContent}]]</p>

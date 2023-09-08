@@ -1,30 +1,30 @@
-
-
-body{
+body {
   background: -webkit-linear-gradient(transparent, rgba(110, 110, 110, 0.3)),
     -webkit-linear-gradient(350deg, rgba(250, 214, 195, 0.8) 30%, #b0eae8 120%);
   background: linear-gradient(transparent, rgba(110, 110, 110, 0.3)),
-    linear-gradient(100deg, rgba(250, 214, 195, 0.8) 30%, #b0eae8 120%);
+    linear-gradient(37deg, #e2a354 30%, #ec453b 120%);
 
-    /*원본 색
-     background: linear-gradient(transparent, rgba(110, 110, 110, 0.3)),
-        linear-gradient(100deg, rgba(250, 214, 195, 0.8) 30%, #b0eae8 120%);
-    */
+  /* background: linear-gradient(transparent, rgba(110, 110, 110, 0.3)), linear-gradient(276deg, #f1c164 30%, #2d63a7 120%); */
+
+  /*원본 색
+               background: linear-gradient(transparent, rgba(110, 110, 110, 0.3)),
+                  linear-gradient(100deg, rgba(250, 214, 195, 0.8) 30%, #b0eae8 120%);
+              */
 }
 
-.trainerDetail_container{
+.trainerDetail_container {
   margin-top: 15vh;
   margin-bottom: 15vh;
   min-height: 80vh;
-  height:100%;
-  --c: #FF0000;
-  }
-
+  height: 100%;
+  --c: #ff0000;
+}
 
 /*본문*/
 .trainerDetail_about-dev {
   width: 100%;
-  min-width: 60vw;
+  min-width: 500px;
+  max-width: 750px;
   margin: auto;
   box-shadow: 2px 4px 2px -2px rgba(0, 0, 0, 0.3),
     -2px -4px 15px -2px rgba(0, 0, 0, 0.2);
@@ -51,7 +51,7 @@ body{
 
 .trainerDetail_profile_header {
   background: #272727;
-  border-left: 0.625rem solid #97ece1;
+  border-left: 0.625rem solid #e85d34;
   padding: 1.5em 4em 2em;
   text-align: center;
   display: flex;
@@ -68,8 +68,8 @@ body{
   overflow: hidden;
   border-radius: 50%;
   margin: auto;
-  background: rgba(250, 214, 195, 1);
-  border: 0.375rem solid rgba(250, 214, 195, 1);
+  background: #e85d34;
+  border: 0.375rem solid #e85d34;
 }
 
 .trainerDetail_profile_header img {
@@ -96,78 +96,68 @@ body{
   color: rgba(220, 220, 220, 0.95);
   margin-top: 0.25em;
   padding-top: 0.25em;
-  border-top: 0.075em solid rgba(250, 214, 195, 1);
+  border-top: 0.075em solid #e85d34;
 }
 
-.trainerDetail_profile_header_items{
-  display:flex;
-  width:80%;
+.trainerDetail_profile_header_items {
+  display: flex;
+  width: 80%;
   justify-content: space-around;
   background: #ecebeb;
-  border-radius:10px;
+  border-radius: 10px;
   padding: 5px;
 }
 
-.trainerDetail_profile_header_item{
-   display:flex;
-   flex-direction:column;
-    align-items: center;
-    justify-content: center;
-    width: 10vw;
-
+.trainerDetail_profile_header_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
 }
 
-.trainerDetail_profile_header_item:not(:first-child):hover{
-  cursor:pointer;
+.trainerDetail_profile_header_item:not(:first-child):hover {
+  cursor: pointer;
 }
 
 /* 문의하기만 애니메이션 효과 넣어보기 */
 
-
-
-.trainerDetail_profile_header_item
-.trainerDetail_profile_header_item_sub1{
-  display:flex;
+.trainerDetail_profile_header_item .trainerDetail_profile_header_item_sub1 {
+  display: flex;
   align-items: center;
-  font-size:15px;
-  height:4vh;
+  font-size: 15px;
+  height: 4vh;
 }
 
-.trainerDetail_profile_header_item
-.trainerDetail_profile_header_item_sub2{
-  display:flex;
+.trainerDetail_profile_header_item .trainerDetail_profile_header_item_sub2 {
+  display: flex;
   align-items: center;
-  font-size:20px;
+  font-size: 20px;
   font-weight: bold;
-  height:5vh;
+  height: 5vh;
 }
-
 
 /*여기까지 헤더 끝*/
 
-
-
 /*팔로우*/
-.trainerDetail_profile_follow{
-  display:flex;
+.trainerDetail_profile_follow {
+  display: flex;
   justify-content: space-between;
-  padding : 1vh 1vw;
+  padding: 1vh 1vw;
   color: white;
-
 }
 
-.td_trainer_follow_count_group{
-  display:flex;
+.td_trainer_follow_count_group {
+  display: flex;
   align-items: center;
 }
 
-.td_trainer_follow_count{
-    font-weight: bold;
-    font-size: 17px;
-    color: #A3DC10;
-    /* margin-left: 10vw;*/
+.td_trainer_follow_count {
+  font-weight: bold;
+  font-size: 17px;
+  color: #a3dc10;
+  /* margin-left: 10vw;*/
 }
-
 
 /* about section */
 
@@ -176,7 +166,7 @@ body{
   background: #ededed;
   padding: 1.5em 2rem;
   color: #222;
-  font-family: "Lato", sans-serif;
+/*  font-family: "Lato", sans-serif;*/
 }
 
 .trainerDetail_profile_about h2 {
@@ -196,10 +186,8 @@ body{
   content: "";
   position: absolute;
   width: 110%;
-  /*  max-width: 13.8rem;
-*/
   height: 1rem;
-  background: #c6f1eb;
+  background: #f1c16469;
   left: -5px;
   top: 50%;
   z-index: -1;
@@ -209,38 +197,36 @@ body{
   font-weight: 300;
 }
 
-
-
-.trainerDetail_profile_license_subTitle{
+.trainerDetail_profile_license_subTitle {
   width: 12vw;
   text-align: center;
   padding: 10px 10px;
-  border-radius:30px;
-  background:#e1e1e1;
-  font-weight:bold;
+  border-radius: 30px;
+  background: #e1e1e1;
+  font-weight: bold;
 }
 
-.trainerDetail_profile_license_img{
-  display:flex;
+.trainerDetail_profile_license_img {
+  display: flex;
 }
 
 /*태그 내 생성되는 img 태그 > 위랑 같은거 아님*/
-.trainerDetail_profile_license img{
+.trainerDetail_profile_license img {
   object-fit: cover;
   padding: 10px;
   flex-wrap: wrap;
 }
 
-.trainerDetail_profile_license_img p{
+.trainerDetail_profile_license_img p {
   font-size: 15px;
-  margin:0;
+  margin: 0;
   padding: 10px;
 }
 
 .trainerDetail_profile_bottom {
   margin-top: 1.5em;
   text-align: right;
-   font-size: 15px;
+  font-size: 15px;
 }
 
 /* back to profile link */
@@ -254,7 +240,7 @@ body{
   text-decoration: none;
   font-weight: bold;
   border-top: 0.3125rem solid rgba(0, 0, 0, 0);
-  border-bottom: 0.3125rem solid #97ece1;
+  border-bottom: 0.3125rem solid #e85d34;
   -webkit-transition: border 0.3s ease-in-out;
   transition: border 0.3s ease-in-out;
 }
@@ -268,9 +254,8 @@ body{
 .trainerDetail_profile_lesson:hover,
 .trainerDetail_profile_lesson:focus {
   border-top-color: #222;
-  border-bottom-color: #fdc1a0;
+  border-bottom-color: #e2a354;
 }
-
 
 /*밑에서 위로 애니메이션*/
 @media screen and (max-width: 26em) {
@@ -302,138 +287,220 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  .trainerDetail_about-dev {
-    max-width: 26rem;
-  }
 }
-
 
 /*=============팔로우버튼===============*/
 
-.td_follow_button_group svg{
-    width: 30px;
-    /*상대포지션*/
-   position: relative;
-    /*z-index: 10;*/
+.td_follow_button_group svg {
+  width: 30px;
+  /*상대포지션*/
+  position: relative;
+  /*z-index: 10;*/
 }
 
-#td_heart{
-    /*색 보충*/
-    fill: #a6a5a5;
+#td_heart {
+  /*색 보충*/
+  fill: #a6a5a5;
 
-    /*stroke속성은 선, 문자, 원소등의 테두리에대해서 디자인 가능*/
-    stroke: var(--c);
-    /*선의 넓이*/
-    stroke-width: 40px;
-    /*선을 점선으로 설정, 점선의 길이 설정*/
-    stroke-dasharray: 3000;
-    /*displacement of line*/
-    stroke-dashoffset: 3000;
-    /*끝점은 둥글게*/
-    stroke-linecap: round;
+  /*stroke속성은 선, 문자, 원소등의 테두리에대해서 디자인 가능*/
+  stroke: var(--c);
+  /*선의 넓이*/
+  stroke-width: 40px;
+  /*선을 점선으로 설정, 점선의 길이 설정*/
+  stroke-dasharray: 3000;
+  /*displacement of line*/
+  stroke-dashoffset: 3000;
+  /*끝점은 둥글게*/
+  stroke-linecap: round;
 }
 
-.td_follow_button_group svg{
-     /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
-    animation: beat 1s linear forwards 3;
+.td_follow_button_group svg {
+  /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
+  animation: beat 1s linear forwards 3;
 }
 
-.td_follow_button_group span{
-    display: block;
-    width: 24px;
-    height: 24px;
-    background-color: transparent;
-    border-radius: 50%;
-    /*절대적 포지션: center*/
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    /*각 방향의 쉐도우 설정*/
-    /*var함수로 쉐도우 컬러 설정*/
-    box-shadow: 0 -160px 0 var(--c),
-    0 160px 0 var(--c),
-    -160px 0 0 var(--c),
-    160px 0 0 var(--c),
-    -120px -120px 0 var(--c),
-    120px -120px 0 var(--c),
-    120px 120px 0 var(--c),
-    -120px 120px 0 var(--c);
+.td_follow_button_group span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border-radius: 50%;
+  /*절대적 포지션: center*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  /*각 방향의 쉐도우 설정*/
+  /*var함수로 쉐도우 컬러 설정*/
+  box-shadow: 0 -160px 0 var(--c), 0 160px 0 var(--c), -160px 0 0 var(--c),
+    160px 0 0 var(--c), -120px -120px 0 var(--c), 120px -120px 0 var(--c),
+    120px 120px 0 var(--c), -120px 120px 0 var(--c);
 }
 
 /*checkbox를 클릭할 경우 애니메이션 실행*/
-#td_followCheckbox:checked + svg #td_heart{
-
-    /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
-     animation: drawHeart 1s linear forwards;
+#td_followCheckbox:checked + svg #td_heart {
+  /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
+  animation: drawHeart 1s linear forwards;
 }
 
-#td_followCheckbox:checked ~ .td_follow_button_group span{
-    /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
-    animation: blink 0.5s ease-in-out forwards;
-    /*애니메이션 딜레이*/
-    animation-delay: 0.8s ;
+#td_followCheckbox:checked ~ .td_follow_button_group span {
+  /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
+  animation: blink 0.5s ease-in-out forwards;
+  /*애니메이션 딜레이*/
+  animation-delay: 0.8s;
 }
 
-#td_followCheckbox:checked + .td_follow_button_group svg{
-     /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
-    animation: beat 1s linear forwards;
+#td_followCheckbox:checked + .td_follow_button_group svg {
+  /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
+  animation: beat 1s linear forwards;
 }
 
-.td_follow_button_group label{
-    /*마우스 heart로 이동시 마우스 커서변동*/
-    cursor: pointer;
+.td_follow_button_group label {
+  /*마우스 heart로 이동시 마우스 커서변동*/
+  cursor: pointer;
 }
 
 /*애니메이션 효과 설정*/
 /*heart 애니메이션*/
-@keyframes drawHeart{
-    0%{
-        stroke-dashoffset: 2000;
-    }
-    80%{
-        fill: #eee;
-        stroke-dashoffset: 0;
-    }
-    100%{
-        fill: var(--c);
-        stroke-dashoffset: 0;
-    }
-
+@keyframes drawHeart {
+  0% {
+    stroke-dashoffset: 2000;
+  }
+  80% {
+    fill: #eee;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    fill: var(--c);
+    stroke-dashoffset: 0;
+  }
 }
 /*점 애니메이션*/
-@keyframes blink{
-    0%{
-        transform: translate(-50%, -50%) scale(0.5);
-        opacity: 0.8;
-    }
-    80%{
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
-    100%{
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 0;
-    }
+@keyframes blink {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.8;
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0;
+  }
 }
 
 /*두근두근 애니메이션*/
 @keyframes beat {
-    0%{
-        transform: scale(1);
-    }
-    50%{
-        transform: scale(1);
-    }
-    60%{
-        transform: scale(1.2);
-    }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.2);
+  }
 
-    80%{
-            transform: scale(1.5);
-        }
+  80% {
+    transform: scale(1.5);
+  }
 
-    100%{
-        transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/*=======트레이너별 리뷰 보기=========*/
+/*등록된 리뷰 없음*/
+.trainerDetail_review_none {
+}
+
+/* 뒤로가기 */
+.trainerDetail_review_item_back a i {
+  color: #0e1414;
+}
+
+.trainerDetail_review_item_score {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 30px 0px;
+}
+
+/*평균*/
+.trainerDetail_review_item_score_avg {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 900;
+  color: #f1c164;
+  text-shadow: 2px 4px #2d63a7;
+}
+
+/* avg 글씨 작게 */
+.trainerDetail_review_item_score_avg div:first-child {
+  font-size: 20px;
+}
+
+/*별 개수*/
+.trainerDetail_review_item_score_cnt {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 10px;
+  padding-right: 30px;
+}
+
+.trainerDetail_review_item_score_cnt .stars {
+  display: flex;
+  justify-content: space-between;
+}
+
+.trainerDetail_review_item_score_cnt .stars .stars_icon {
+  width: 135px;
+}
+
+.trainerDetail_review_item_score_cnt i {
+  color: #f1c164;
+}
+
+.trainerDetail_review_item_memReview {
+  box-shadow: rgba(0, 0, 0, 0.16) 2px 2px 6px 0px;
+  border-radius: 10px;
+  padding: 13px 13px;
+  margin: 10px 0;
+  background: #e3e3e3;
+}
+
+.trainerDetail_review_item_memReview_line1{
+  display:flex;
+  justify-content: space-between;
+}
+
+.trainerDetail_review_item_memReview .trainerDetail_review_item_membeId {
+  font-size: 14px;
+}
+
+.trainerDetail_review_item_memReview_line1 .review_item_rating .star{
+  fill: #ccc;
+}
+
+.trainerDetail_review_item_memReview_line1 .review_item_rating .star.filled{
+  fill: #f1c164;
+}
+
+
+.trainerDetail_review_item_memReview_title{
+  font-size: 14px;
+  color: #6f6f6f;
+  padding: 3px 0px;
+}
+
+.trainerDetail_review_item_memReview .trainerDetail_review_item_content {
+  font-size: 14px;
 }
