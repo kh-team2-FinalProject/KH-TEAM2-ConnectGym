@@ -7,19 +7,16 @@ import com.khteam2.connectgym.member.dto.MemberDTO;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
-import javax.servlet.http.HttpSession;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
@@ -70,8 +67,8 @@ public class MemberService {
 
     public MemberLoginResponseDto memberLogin(MemberLoginRequestDto requestDto) {
         MemberLoginResponseDto responseDto = MemberLoginResponseDto.builder()
-            .success(false)
-            .build();
+                .success(false)
+                .build();
 
         if (requestDto == null) {
             responseDto.setMessage("잘못된 요청입니다.");
@@ -287,4 +284,6 @@ public class MemberService {
             return false;
         }
     }
+
+
 }
