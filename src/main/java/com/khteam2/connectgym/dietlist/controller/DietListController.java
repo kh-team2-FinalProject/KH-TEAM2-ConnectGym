@@ -3,10 +3,11 @@ package com.khteam2.connectgym.dietlist.controller;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.dietlist.model.DietListResponseDto;
 import com.khteam2.connectgym.dietlist.model.Food;
+import com.khteam2.connectgym.dietlist.model.FoodFindRequestDto;
+import com.khteam2.connectgym.dietlist.model.FoodFindResponseDto;
 import com.khteam2.connectgym.dietlist.repository.FoodRepository;
 import com.khteam2.connectgym.dietlist.service.FoodService;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,25 +16,19 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DietListController {
-
     private final FoodService foodService;
-    @Autowired
-    private FoodRepository foodRepository;
-
+    private final FoodRepository foodRepository;
 
     @GetMapping("fooddiary/foodInfo")
-    public String diet_SearchForm(@RequestParam(required = false) String key, Model model) {
-        if (key != null && !key.isEmpty()) {
-            List<Food> foodinfo = foodService.searchFood(key);
-            model.addAttribute("foodinfo", foodinfo);
-        }
+    public String diet_SearchForm(Model model, FoodFindRequestDto requestDto) {
+        FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
 
+        model.addAttribute("responseDto", responseDto);
         model.addAttribute("food", new Food());
         return "fooddiary/foodInfo";
     }
