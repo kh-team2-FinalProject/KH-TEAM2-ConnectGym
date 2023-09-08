@@ -34,4 +34,6 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
     //
     @Query("select l from Lesson l where l.trainer.no=?1")
     Optional<Lesson> findByTrainerNo(Long trainerNo);
+
+
 }
