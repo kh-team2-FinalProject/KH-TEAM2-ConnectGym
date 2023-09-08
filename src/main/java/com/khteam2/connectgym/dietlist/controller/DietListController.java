@@ -28,7 +28,12 @@ public class DietListController {
 
 
     @GetMapping("fooddiary/foodInfo")
-    public String diet_SearchForm(Model model) {
+    public String diet_SearchForm(@RequestParam(required = false) String key, Model model) {
+        if (key != null && !key.isEmpty()) {
+            List<Food> foodinfo = foodService.searchFood(key);
+            model.addAttribute("foodinfo", foodinfo);
+        }
+
         model.addAttribute("food", new Food());
         return "fooddiary/foodInfo";
     }
@@ -69,15 +74,15 @@ public class DietListController {
         return "fooddiary/dietlist";
     }*/
 
-    @GetMapping("fooddiary/foodinfo")
-    public String searchFood(@RequestParam String key, Model model) {
-        if (key != null && !key.isEmpty()) {
-            List<Food> foodinfo = foodService.searchFood(key);
-            model.addAttribute("foodinfo", foodinfo);
-        }
-        model.addAttribute("food", new Food());
-        return "fooddiary/foodinfo";
-    }
+//    @GetMapping("fooddiary/foodinfo")
+//    public String searchFood(@RequestParam String key, Model model) {
+//        if (key != null && !key.isEmpty()) {
+//            List<Food> foodinfo = foodService.searchFood(key);
+//            model.addAttribute("foodinfo", foodinfo);
+//        }
+//        model.addAttribute("food", new Food());
+//        return "fooddiary/foodinfo";
+//    }
 
 
     // dietlist
