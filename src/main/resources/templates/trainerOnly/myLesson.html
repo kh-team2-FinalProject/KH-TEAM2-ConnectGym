@@ -18,30 +18,35 @@
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
+    <div class="tmp-myl-container">
 
         <!--내 수강 목록 출력하는 태그 (mylessonlist.js에서 출력)-->
-        <div id="mylesson-list">
+        <div id="tmp-myl-list">
 
             <h1>내가 등록한 강좌</h1>
+            <div class="tmp-myl-item">
 
-            <th:block th:if="${lesson == null}">
-                <div> 현재 등록된 강좌가 없습니다.</div>
-                <div><a href="/createLesson">등록하기</a></div>
-            </th:block>
+                <th:block th:if="${lesson == null}">
+                    <div> 현재 등록된 강좌가 없습니다.</div>
+                    <div><a href="/createLesson">등록하기</a></div>
+                </th:block>
 
-            <th:block th:if="${lesson != null}">
-                <div>내가 등록한 강좌</div>
-                <div>
-                    <button th:onclick="|location.href='/updateLesson/${lesson.no}'|">수정하기</button>
-                    <button th:onclick="|location.href='/trainerOnly/mypage/memberList/${lesson.no}'|">회원목록</button>
-                </div>
-                <div>[[${lesson.title}]]</div>
-                <div>[[${lesson.lesson_info}]]</div>
-                <div>[[${lesson.start_date}]]</div>~<div>[[${lesson.end_date}]]</div>
-            </th:block>
+                <th:block th:if="${lesson != null}">
+                    <div class="tmp-myl-title-date">
+                        <span id="tmp-myl-title">[[${lesson.title}]]</span>
+                        <span id="tmp-myl-date">[[${lesson.start_date}]] ~ [[${lesson.end_date}]]</span>
+                    </div>
 
+                    <div class="tmp-myl-info">[[${lesson.lesson_info}]]</div>
+
+                    <div class="tmp-myl-btns">
+                        <button th:onclick="|location.href='/updateLesson/${lesson.no}'|">수정하기</button>
+                        <button th:onclick="|location.href='/trainerOnly/mypage/memberList/${lesson.no}'|">회원목록
+                        </button>
+                    </div>
+                </th:block>
+            </div>
         </div>
-
     </div>
 </th:block>
 
