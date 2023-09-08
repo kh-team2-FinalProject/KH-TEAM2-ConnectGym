@@ -72,7 +72,7 @@
         function goToDietList(thisday) {
             var date = thisday.querySelector('.foodD_clanedar_datebox').textContent;
             var year = [[${yearMonth.getYear()}]];
-            var month = [[${yearMonth.getMonthValue()} -1]];
+            var month = [[${yearMonth.getMonthValue()}]];
 
             var dateUrl = year + '-' + (month + '').padStart(2, '0') + '-' + (date + '').padStart(2, '0');
             window.location.href = '/fooddiary/dietlist?date=' + dateUrl;

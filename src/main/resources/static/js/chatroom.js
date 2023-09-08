@@ -92,7 +92,4 @@ function endtoscrollbar() {
     requestAnimationFrame(() => {
         chatcontainer.scrollTo(0, chatcontainer.scrollHeight);
     });
-
-    // chatcontainer.scrollIntoView({block: 'end', behavior: 'smooth'});
-    // }
 }

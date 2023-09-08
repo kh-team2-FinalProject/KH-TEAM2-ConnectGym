@@ -25,7 +25,7 @@ public class ChatMessageReaponseDTO {
             .chatroomNo(chatMessage.getChatroom().getNo())
             .content(chatMessage.getContent())
             .sender(chatMessage.getSender())
-            //Localdatetime 을 스트링 포맷으로 변환
+            //Localdatetime 을 원하는 포맷으로 변환
             .sendAt(chatMessage.getSendAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
             .build();
     }
