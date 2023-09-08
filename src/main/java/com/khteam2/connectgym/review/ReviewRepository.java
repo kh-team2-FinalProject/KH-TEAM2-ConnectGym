@@ -44,14 +44,15 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
         + "JOIN od.lesson l "
         + "JOIN l.trainer t "
         + "WHERE t.no = ?1")
-    Double findAvgRatingByTrainerNo(Long trainerNo);
+    Optional<Double> findAvgRatingByTrainerNo(Long trainerNo);
 
     @Query("SELECT NEW com.khteam2.connectgym.review.dto.RatingCountDto( "
-        + "SUM(CASE WHEN r.rating = 1 THEN 1 ELSE 0 END), "
-        + "SUM(CASE WHEN r.rating = 2 THEN 1 ELSE 0 END), "
-        + "SUM(CASE WHEN r.rating = 3 THEN 1 ELSE 0 END), "
-        + "SUM(CASE WHEN r.rating = 4 THEN 1 ELSE 0 END), "
-        + "SUM(CASE WHEN r.rating = 5 THEN 1 ELSE 0 END)) "
+        + "COALESCE(SUM(CASE WHEN r.rating = 1 THEN 1 ELSE 0 END), 0), "
+        + "COALESCE(SUM(CASE WHEN r.rating = 2 THEN 1 ELSE 0 END), 0), "
+        + "COALESCE(SUM(CASE WHEN r.rating = 3 THEN 1 ELSE 0 END), 0), "
+        + "COALESCE(SUM(CASE WHEN r.rating = 4 THEN 1 ELSE 0 END), 0), "
+        + "COALESCE(SUM(CASE WHEN r.rating = 5 THEN 1 ELSE 0 END), 0)"
+        + ") "
         + "FROM Review r "
         + "WHERE r.orderDetail.lesson.trainer.no = ?1")
     RatingCountDto findRatingCountsByTrainerNo(Long trainerNo);

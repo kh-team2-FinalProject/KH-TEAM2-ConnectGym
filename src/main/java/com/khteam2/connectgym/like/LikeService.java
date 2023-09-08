@@ -88,6 +88,25 @@ public class LikeService {
         return likedMembers;
     }
 
+    //트레이너명 또는 강사명으로 검색
+    public List<LessonResponseDTO> searchLike(Long userNo, String keyword) {
+
+        List<LessonResponseDTO> likingList = new ArrayList<>();
+
+        if (keyword == "") {
+            return likingList(userNo);
+        }
+
+        for (Like val : likeRepository.searchByTrainerNameOrLessonTitle(userNo, keyword)) {
+            LessonResponseDTO lessonResponseDTO = new LessonResponseDTO(val.getLesson());
+            likingList.add(lessonResponseDTO);
+        }
+
+        return likingList;
+    }
+
+
+}
 //    public TrainerResponseDTO findTrainerByLessonNo(Long lessonNo) {
 //        Lesson lesson = lessonRepository.findById(lessonNo).orElse(null);
 //        if (lesson != null) {
@@ -95,25 +114,3 @@ public class LikeService {
 //        }
 //        return null;
 //    }
-
-    // 나중에는 카테고리 드롭박스 별 필터링도 추가하기
-    // 유저가 찜한 레슨 중 이름으로 검색 결과
-    /*public List<LessonResponseDTO> searchLike(Long fromUserNo, String keyword) {
-
-        List<LessonResponseDTO> likingList = new ArrayList<>();
-
-        if(keyword == ""){
-            return likingList(fromUserNo);
-        }
-
-        for (Like val : likeRepository.searchByTrainerName(keyword,fromUserNo)) {
-            LessonResponseDTO lessonResponseDTO = new LessonResponseDTO(val.getLesson());
-            likingList.add(lessonResponseDTO);
-        }
-        System.out.println("followingList = " + likingList.toString());
-
-        return likingList;
-        }*/
-
-
-}

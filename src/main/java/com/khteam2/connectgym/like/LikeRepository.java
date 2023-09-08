@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.like;
 
 
+import com.khteam2.connectgym.follow.Follow;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,11 +33,14 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
     @Query("select count(l) from Like l where l.member.no=?1 and l.lesson.no=?2")
     int findAllByMemberNoAndLessonNo(Long userNo, Long lessonNo);
 
-    /*@Query("SELECT l FROM Like l"
+    @Query(value = "SELECT l FROM Like l"
         + " JOIN l.lesson le"
-        + " WHERE le.lesson.no = ?1"
-        + " AND t.trainerName LIKE CONCAT('%',?2,'%')")
-    List<Follow> searchByTrainerName(Long fromUserNo, String search);*/
+        + " JOIN l.lesson.trainer t"
+        + " JOIN l.member m"
+        + " WHERE m.no = ?1"
+        + " AND (t.trainerName LIKE CONCAT('%',TRIM(?2),'%')"
+        + " OR le.title LIKE CONCAT('%',TRIM(?2),'%'))")
+    List<Like> searchByTrainerNameOrLessonTitle(Long userNo, String search);
 
 
 }

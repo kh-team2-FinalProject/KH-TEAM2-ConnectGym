@@ -2,14 +2,16 @@ package com.khteam2.connectgym.like;
 
 
 import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.follow.dto.FollowForUserResponseDTO;
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
+import com.khteam2.connectgym.like.dto.LikeDto;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +30,13 @@ public class LikeApiController {
         Long memberNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
         likeService.delLike(memberNo, lessonNo);
         return ResponseEntity.ok().body("unLike");
+    }
+
+    @PostMapping("/like/search")
+    public List<LessonResponseDTO> searchFollow(HttpSession session, @RequestBody(required = false) LikeDto like){
+        Long userNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
+
+        return likeService.searchLike(userNo, like.getKeyword());
     }
 
 

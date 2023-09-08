@@ -8,12 +8,79 @@
 </th:block>
 
 
+<th:block layout:fragment="script">
+    <script>
+function search() {
+  let keyword = document.querySelector(".myLike_search_input").value;
+
+  $.ajax({
+    type: "POST",
+    url: "/like/search",
+    data: JSON.stringify({ keyword: keyword }),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    async: false,
+    success: (response) => {
+      let html = '';
+
+      if (response.length > 0) {
+        response.forEach((lesson) => {
+
+        let categoryLabel = '';
+
+        if (lesson.category == 1) {
+            categoryLabel = 'Health';
+            } else if (lesson.category == 2) {
+            categoryLabel = 'Yoga';
+            } else if (lesson.category == 3) {
+            categoryLabel = 'Pilates';
+        }
+
+          html += `
+            <div class="myLike_list_lesson">
+              <div class="myLike_list_lesson_img">
+                <img src="${lesson.lesson_img}" />
+              </div>
+              <div class="myLike_list_lesson_info">
+                <div class="myLike_list_lesson_title_category">
+                    <div class="myLike_list_lesson_title">${lesson.title}&nbsp;&nbsp;</div>
+                    <div class="myLike_list_lesson_category">${categoryLabel}</div>
+
+                </div>
+
+                <div class="myLike_list_trainer_name">${lesson.trainer.trainerName}</div>
+              </div>
+              <div class="myLike_list_lesson_button">
+                    <button th:onclick="location.href='/lessonDetail/${lesson.no}'">레슨 정보 보기</button>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        html = '<div>검색결과가 없습니다.</div>';
+      }
+
+      document.querySelector(".myLike_list").innerHTML = html;
+    },
+    error: (error) => {
+      console.error(error);
+    },
+  });
+}
+
+    </script>
+    <!--<script th:src="@{/js/follow.js}"></script>-->
+</th:block>
+
+
 <th:block layout:fragment="mypage">
 
     <div class="myLike_container">
         <div class="myLike_border">
             <div class="myLike_search">
-                <input type="text" class="myLike_search_input" name="myLike_search_byName" placeholder="강좌명 또는 트레이너 이름으로 검색">
+                <input type="text" class="myLike_search_input" name="myLike_search_byName"
+                       onkeyup="search();"
+                       placeholder="강좌명 또는 트레이너 이름으로 검색">
                 <button class="myLike_search_icon"><img width="24px" height="24px"
                      src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/search_icon.png"/></button>
             </div>

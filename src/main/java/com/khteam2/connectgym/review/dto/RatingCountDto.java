@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class RatingCountDto {
@@ -15,8 +14,6 @@ public class RatingCountDto {
     private Long rating3Count;
     private Long rating4Count;
     private Long rating5Count;
-
-
 
 
 }

@@ -96,16 +96,16 @@ public class ReviewService {
     public TrainerReviewResponseListDto trainerReview(Long trainerNo){
 
         List<TrainerReviewResponseDto> dtoList = reviewRepository.findTrainerReviewsByTrainerNo(trainerNo);
-        double ratingAvg = reviewRepository.findAvgRatingByTrainerNo(trainerNo);
+        double ratingAvg = reviewRepository.findAvgRatingByTrainerNo(trainerNo).orElse(0.0);
         RatingCountDto ratingCountDto = reviewRepository.findRatingCountsByTrainerNo(trainerNo);
 
-        TrainerReviewResponseListDto listDto = TrainerReviewResponseListDto.builder()
-            .trainerReviewResponseDtoList(dtoList)
-            .ratingAvg(ratingAvg)
-            .ratingCountDto(ratingCountDto)
-            .build();
+            TrainerReviewResponseListDto listDto = TrainerReviewResponseListDto.builder()
+                .trainerReviewResponseDtoList(dtoList)
+                .ratingAvg(ratingAvg)
+                .ratingCountDto(ratingCountDto)
+                .build();
+            return listDto;
 
-        return listDto;
     }
 
 

@@ -19,4 +19,5 @@ public class LikeDto {
     private List<LessonResponseDTO> myLikeList;
     private int likeCnt;
     private boolean likeStatus;
+    private String keyword; // 검색용
 }
