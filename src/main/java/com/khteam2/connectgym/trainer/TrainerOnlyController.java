@@ -125,12 +125,24 @@ public class TrainerOnlyController {
 
 
     @GetMapping("/mypage/liked")
-    public String liked(Model model, HttpSession session, Long lessonNo) {
+    public String liked(Model model, HttpSession session) {
         try {
             model.addAttribute("bannerTitle", "liked");
-            TrainerResponseDTO trainer = trainerService.sessionT(session);
-            List<MemberResponseDTO> likedMembers = likeService.likedList(lessonNo);
-            model.addAttribute("likedMembers", likedMembers);
+            TrainerResponseDTO trainerSession = trainerService.sessionT(session);
+            //세션에서 트레이너 번호 가져옴
+            long trainerNo = trainerSession.getTrainerNo();
+
+            //트레이너 번호로 레슨 번호 찾음
+            Long lessonNo = trainerOnlyService.findLessonNoByTrainerNo(trainerNo);
+
+            //트레이너가 만든 레슨 있을 때
+            if (lessonNo != null) {
+                List<MemberResponseDTO> likedMembers = likeService.likedList(lessonNo);
+                model.addAttribute("likedMembers", likedMembers);
+            } else {
+                //레슨 없을 때
+                model.addAttribute("errorMsg", "레슨을 찾을 수 없습니다.");
+            }
         } catch (Exception e) {
             logger.error("TOC liked() 에러" + e.getMessage());
             e.printStackTrace();

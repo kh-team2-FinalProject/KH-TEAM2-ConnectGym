@@ -7,7 +7,6 @@ import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -89,13 +88,13 @@ public class LikeService {
         return likedMembers;
     }
 
-    public TrainerResponseDTO findTrainerByLessonNo(Long lessonNo) {
-        Lesson lesson = lessonRepository.findById(lessonNo).orElse(null);
-        if (lesson != null) {
-            return new TrainerResponseDTO(lesson.getTrainer());
-        }
-        return null;
-    }
+//    public TrainerResponseDTO findTrainerByLessonNo(Long lessonNo) {
+//        Lesson lesson = lessonRepository.findById(lessonNo).orElse(null);
+//        if (lesson != null) {
+//            return new TrainerResponseDTO(lesson.getTrainer());
+//        }
+//        return null;
+//    }
 
     // 나중에는 카테고리 드롭박스 별 필터링도 추가하기
     // 유저가 찜한 레슨 중 이름으로 검색 결과
