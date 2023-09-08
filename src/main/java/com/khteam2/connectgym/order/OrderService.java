@@ -7,7 +7,6 @@ import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.order.dto.*;
-import com.khteam2.connectgym.review.Review;
 import com.khteam2.connectgym.review.ReviewRepository;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.siot.IamportRestClient.IamportClient;
@@ -309,8 +308,7 @@ public class OrderService {
         List<Lesson> lessonList = this.lessonRepository.findAllByOrderProgressOrderNo(merchantUid);
 
         // DTO에 URL을 설정해 준다.
-        String tempUrl = "/order/complete?orderId=" + merchantUid;
-        responseDto.setUrl(isApi ? tempUrl : "redirect:" + tempUrl);
+        responseDto.setUrl("/order/complete?orderId=" + merchantUid);
 
         // DB에 주문을 저장하기 위해 객체를 생성한다.
         Order newOrder = Order.builder()
@@ -401,7 +399,7 @@ public class OrderService {
     public OrderCompleteResponseDto completeOrder(Long loginMemberId, String orderId) {
         OrderCompleteResponseDto responseDto = OrderCompleteResponseDto.builder()
             .success(false)
-            .url("/content/orderComplete")
+            .url("content/orderComplete")
             .build();
 
         Order order = this.orderRepository.findById(orderId).orElse(null);
@@ -522,7 +520,7 @@ public class OrderService {
                 //리뷰 작성 여부
                 boolean reviewYn;
 
-                if(reviewRepository.findOrderDetailNo(orderDetail.getNo()).orElse(null) == null){
+                if (reviewRepository.findOrderDetailNo(orderDetail.getNo()).orElse(null) == null) {
                     reviewYn = true;
                 } else {
                     reviewYn = false;
