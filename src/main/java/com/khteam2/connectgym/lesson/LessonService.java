@@ -2,6 +2,7 @@ package com.khteam2.connectgym.lesson;
 
 
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
 import com.khteam2.connectgym.upload.S3Uploader;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +25,11 @@ public class LessonService {
     private final TrainerRepository trainerRepository;
     private final S3Uploader s3Uploader;
 
-    public Lesson getLesson(Long lessonNo) {
+
+    public LessonResponseDTO getLessonOne(Long lessonNo) {
         System.out.println("겟레슨 서비스 호출");
-        return lessonRepository.findById(lessonNo).orElse(null);
+        //lessonNO로 검색한 엔티티결과 가 null이 아닌경우 DTO화 해서 반환
+        return new LessonResponseDTO(Objects.requireNonNull(lessonRepository.findById(lessonNo).orElse(null)));
     }
 
     //레슨 생성
@@ -79,6 +83,8 @@ public class LessonService {
 
     }
 
+    /////getLessonOne 함수랑 중복?
+
     public int getTotalPages(int itemsPerPage, List<Lesson> list) {
 
         int totalItems = list.size();
@@ -113,6 +119,30 @@ public class LessonService {
         return list;
     }
 
+    @Transactional
+    public void updateLesson(Long trainerNo, LessonRequestDTO lessonRequestDTO, MultipartFile file) {
+        Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
+        lessonRequestDTO.setTrainer(trainer);
+        System.out.println("123123" + lessonRequestDTO);
+        String fileUrl = "";
+        System.out.println(file.getOriginalFilename());
+        if (!file.isEmpty()) {
+            try {
+                fileUrl = s3Uploader.uploadLessonFile(file, lessonRequestDTO.getTitleCode());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        //로그인한 세션에 트레이너 객체의 no가 있으니까
+        lessonRequestDTO.setLesson_img(fileUrl);
+
+
+        lessonRepository.save(lessonRequestDTO.toEntity());
+
+
+    }
+
     //트레이너 넘버로 레슨 가져오기
+
 
 }

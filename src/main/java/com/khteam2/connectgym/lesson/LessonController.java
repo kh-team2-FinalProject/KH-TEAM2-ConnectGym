@@ -3,6 +3,7 @@ package com.khteam2.connectgym.lesson;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
+import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.like.dto.LikeDto;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
@@ -134,6 +135,31 @@ public class LessonController {
         //배너타이틀
         model.addAttribute("bannerTitle", "complete");
         return "detailOrCrud/createComplete";
+    }
+
+
+    //레슨 수정하기
+
+    @GetMapping("/updateLesson/{lessonNo}")
+    public String updateLesson(Model model,
+                               @PathVariable Long lessonNo) {
+        //레슨넘버로 쿼리조회해서 넘겨받은 DTO 모델로 쏨
+        LessonResponseDTO lesson = lessonService.getLessonOne(lessonNo);
+        model.addAttribute("lesson", lesson);
+        return "detailOrCrud/updateLesson";
+    }
+
+    @PostMapping("/updateLesson/{lessonNo}")
+    public String updateLessonComplete(@PathVariable Long lessonNo,
+                                       @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+                                       LessonRequestDTO lessonRequestDTO,
+                                       Model model,
+                                       @RequestParam("lessonImgFile") MultipartFile file) {
+
+        lessonRequestDTO.setNo(lessonNo);
+
+        lessonService.updateLesson(loginMemberNo, lessonRequestDTO, file);
+        return "detailOrCrud/updateComplete";
     }
 
 
