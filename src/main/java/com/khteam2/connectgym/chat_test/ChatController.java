@@ -5,6 +5,7 @@ import com.khteam2.connectgym.chat_test.dto.ChatMessageReaponseDTO;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.MemberClass;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -13,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class ChatController {
 
@@ -67,8 +70,8 @@ public class ChatController {
                             @Payload ChatMessageDTO message) {
         //채팅 메시지 DB저장
         ChatMessage chatMessage = chatMessageService.saveMessage(chatroomNo, message);
-
-
+        System.out.println("chatMessage.getSendAt().format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm\")) = " + chatMessage.getSendAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        log.trace(chatMessage.getSendAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         //리턴된 엔티티의 DTO화
         ChatMessageReaponseDTO chatMessageReaponseDTO = new ChatMessageReaponseDTO().fromEntity(chatMessage);
 
