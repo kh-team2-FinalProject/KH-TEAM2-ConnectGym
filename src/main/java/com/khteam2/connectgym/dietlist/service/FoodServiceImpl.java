@@ -243,14 +243,26 @@ public class FoodServiceImpl implements FoodService {
         int pageSize = 10;
         String search = requestDto.getSearch();
 
-        if (page == null || page < 1 || search == null || search.isBlank()) {
-            responseDto.setMessage("잘못된 요청입니다.");
-            return responseDto;
+        if (page == null || page < 1) {
+            page = 1;
+
+            // responseDto.setMessage("페이지 파라미터가 없습니다.");
+            // return responseDto;
         }
 
-        Pageable pageable = PageRequest.of(page - 1, recordSize);
+        // if (search == null || search.isBlank()) {
+        //     responseDto.setMessage("검색어를 입력해 주세요.");
+        //     return responseDto;
+        // }
 
-        Page<Food> foodPageList = this.foodRepository.findByFoodNmContains(search, pageable);
+        Pageable pageable = PageRequest.of(page - 1, recordSize);
+        Page<Food> foodPageList = null;
+
+        if (search != null && !search.isBlank()) {
+            foodPageList = this.foodRepository.findByFoodNmContains(search, pageable);
+        } else {
+            foodPageList = this.foodRepository.findAll(pageable);
+        }
 
         List<FoodDto> foodDtoList = foodPageList.stream()
             .map(FoodDto::of)
