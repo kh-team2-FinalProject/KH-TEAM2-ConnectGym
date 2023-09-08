@@ -198,21 +198,38 @@
     display: flex;
     flex-direction: column;
     /*border: 1px solid;*/
-    height: 37%;
-    justify-content: space-between;
+    height: 120px;
+    margin-top:10px;
+    /*justify-content: space-between;*/
 }
 
 
-.ld_reviewBox #ld-review-content {
-    font-size: 0.7rem;
+.ld_reviewBox .ld_reviewBox_item_title{
+     font-size: 14px;
+     padding: 5px 0px;
+}
+
+.ld_reviewBox .ld_reviewBox_item {
+    font-size: 12px;
+    height: 20px;
+    min-width:280px;
+    width:100%;
+    white-space: nowrap;
     color: darkgray;
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 
 .lessonDetail_infoBox #review_count {
     color: #b2afaf;
-
-    font-size: 0.7rem;
+    font-size: 14px;
+    padding: 5px 0px;
 }
+
+.lessonDetail_infoBox #review_count:hover {
+  text-decoration : #b2afaf underline;
+}
+
 
 
 .lessonDetail_btn_box {

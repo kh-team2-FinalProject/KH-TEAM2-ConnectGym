@@ -36,7 +36,7 @@ public class ReviewController {
 
     //유저별 리뷰리스트(->MemberController)
 
-    //레슨별 리뷰리스트
+    //트레이너별 리뷰리스트
     @ResponseBody
     @GetMapping("/review/show/{trainerNo}")
     public TrainerReviewResponseListDto showTrainerReview(@PathVariable Long trainerNo){

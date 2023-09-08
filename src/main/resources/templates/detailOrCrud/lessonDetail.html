@@ -45,9 +45,27 @@
                     <span th:text="${lesson.title}" id="lesson_name"></span>
                     <span th:text="${lesson.price}+원" id="lesson_price"></span>
                     <div class="ld_reviewBox">
-                        <span id="ld-review-content">여기에는 리뷰가 들어갈 예정 </span>
-                        <a href id="review_count"> 123개 리뷰 보기</a>
+                        <span class="ld_reviewBox_item_title">트레이너 평점 <i class="fa-solid fa-star fa-2xs"></i> [[${reviews.ratingAvg}]]</a></span>
+                        <th:block th:if="${reviews.trainerReviewResponseDtoList.size() < 3}">
+                            <th:block th:each="review : ${reviews.trainerReviewResponseDtoList}"
+                                      th:limit="${reviews.trainerReviewResponseDtoList.size()}">
+                            <span class="ld_reviewBox_item">[[${review.userId}]] <i class="fa-solid fa-star fa-2xs"></i>[[${review.rating}]]
+                                    <th:block
+                                        th:text="${#strings.substring(review.reviewContent, 0, 50)}"></th:block></span>
+                            </th:block>
+                        </th:block>
+                        <th:block th:if="${reviews.trainerReviewResponseDtoList.size() >= 3}">
+                            <th:block th:each="review : ${reviews.trainerReviewResponseDtoList}" th:limit="3">
+                                <span class="ld_reviewBox_item">[[${review.userId}]] <i
+                                    class="fa-solid fa-star fa-2xs"></i>[[${review.rating}]]
+                                    <th:block
+                                        th:text="${#strings.substring(review.reviewContent, 0, 50)}"></th:block></span>
+                            </th:block>
+                        </th:block>
 
+                        <a th:href="@{'/trainerDetail/'+${trainerInfo.trainerNo}}" id="review_count">[[${reviews.trainerReviewResponseDtoList.size()}]]개의
+                            리뷰 <i class="fa-solid fa-angle-right fa-xs"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="lessonDetail_btn_box">
@@ -84,6 +102,11 @@
                                         checkbox.checked = false;
                                     }
 
+
+
+
+
+
                                 </script>
                             </label>
                         </th:block>
@@ -108,6 +131,11 @@
     <script th:inline="javascript">
         const memberNo = [[${session.session_login_member_no}]];
         const trainerNo = [[${trainerInfo.trainerNo}]];
+
+
+
+
+
     </script>
     <script>
         $(document).ready(function () {
@@ -119,6 +147,11 @@
 
             });
         });
+
+
+
+
+
     </script>
     <script th:src="@{/js/chatroom.js}"></script>
 </th:block>

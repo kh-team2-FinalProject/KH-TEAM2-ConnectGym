@@ -32,7 +32,8 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
         "JOIN od.order.member m " +
         "JOIN od.lesson l " +
         "JOIN l.trainer t " +
-        "WHERE t.no = ?1")
+        "WHERE t.no = ?1 " +
+        "ORDER BY r.regDate DESC")
     List<TrainerReviewResponseDto> findTrainerReviewsByTrainerNo(Long trainerNo);
 
 

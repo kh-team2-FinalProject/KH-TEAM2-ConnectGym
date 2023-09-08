@@ -422,6 +422,10 @@ body {
   color: #0e1414;
 }
 
+.trainerDetail_review_item_back a i {
+  color: #0e1414;
+}
+
 .trainerDetail_review_item_score {
   display: flex;
   justify-content: center;
@@ -437,8 +441,8 @@ body {
   justify-content: center;
   font-size: 40px;
   font-weight: 900;
-  color: #f1c164;
-  text-shadow: 2px 4px #2d63a7;
+  color: #fff;
+  text-shadow: 2px 4px #0e181a;
 }
 
 /* avg 글씨 작게 */

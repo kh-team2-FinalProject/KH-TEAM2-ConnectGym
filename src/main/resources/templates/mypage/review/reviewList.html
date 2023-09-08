@@ -15,8 +15,8 @@
 <th:block layout:fragment="mypage">
 
     <div class="myReviewList_container">
-        <div class="myReview_list">
             <th:block th:if="${reviewList.size() > 0}">
+        <div class="myReview_list">
                 <div class="myReview_list_item" th:each="review:${reviewList}">
                     <div class="my_Review_list_item_trainerName">
                         <a th:href="@{'/trainerDetail/'+${review.trainerNo}}">[[${review.trainerName}]] <b>></b> </a>
@@ -31,7 +31,7 @@
                     <div class="my_Review_list_item_content">
                         [[${review.reviewContent}]]
                     </div>
-
+                </div>
             </th:block>
             <th:block th:if="${reviewList.size() == 0}">
                 등록한 리뷰가 없습니다.
