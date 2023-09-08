@@ -208,6 +208,11 @@ span{
 
 .foodInfo_search_pagination
     > .foodInfo_search_pagination_ul
+    > .foodInfo_search_pagination_li_on {
+}
+
+.foodInfo_search_pagination
+    > .foodInfo_search_pagination_ul
     > .foodInfo_search_pagination_li
     .foodInfo_search_pagination_li_button {
     background-color: initial;

@@ -151,10 +151,17 @@ function foodSearch(search, page) {
 
             if (v.pagination.prev) {
                 const liPrev = document.createElement("li");
+                liPrev.className = "dietList_search_popup_pagination_li";
                 liPrev.innerHTML = `
-                <button type="button" onclick="foodSearch('${search}', ${
+                <button
+                    type="button"
+                    class="dietList_search_popup_pagination_li_button"
+                    onclick="foodSearch('${search}', ${
                     v.pagination.firstPage - 1
-                })">이전</button>
+                })"
+                >
+                    이전
+                </button>
                 `;
                 foodSearchPaginationUlEl.append(liPrev);
             }
@@ -166,24 +173,36 @@ function foodSearch(search, page) {
             ) {
                 console.log(i === v.pagination.currentPage);
                 const li = document.createElement("li");
+                li.className = "dietList_search_popup_pagination_li";
                 li.innerHTML = `
-                <button type="button" onclick="foodSearch('${search}', ${i})">${i}</button>
+                <button
+                    type="button"
+                    class="dietList_search_popup_pagination_li_button"
+                    onclick="foodSearch('${search}', ${i})"
+                >
+                    ${i}
+                </button>
                 `;
 
                 i === v.pagination.currentPage &&
-                    li.classList.add(
-                        "dietList_search_popup_pagination_li_active"
-                    );
+                    li.classList.add("dietList_search_popup_pagination_li_on");
 
                 foodSearchPaginationUlEl.append(li);
             }
 
             if (v.pagination.next) {
                 const liNext = document.createElement("li");
+                liNext.className = "dietList_search_popup_pagination_li";
                 liNext.innerHTML = `
-                <button type="button" onclick="foodSearch('${search}', ${
+                <button
+                    type="button"
+                    class="dietList_search_popup_pagination_li_button"
+                    onclick="foodSearch('${search}', ${
                     v.pagination.endPage + 1
-                })">다음</button>
+                })"
+                >
+                    다음
+                </button>
                 `;
                 foodSearchPaginationUlEl.append(liNext);
             }
