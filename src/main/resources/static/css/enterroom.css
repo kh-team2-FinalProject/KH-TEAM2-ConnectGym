@@ -144,18 +144,22 @@ body {
   justify-content: flex-start;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 14px 3px;
+    flex: 1;
+    max-width: 50%;
+    background: #62a4dc33;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
 }
 
-.enterRoom_video_container {
-  flex: 1;
-  max-width: 50%;
-  background: #62a4dc33;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
-}
 
 /*비디오 크기 조절*/
+.enterRoom_video_container video {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
 .enterRoom_video_container.video-20-80:nth-child(1) {
   flex: 1;
   max-width: 20%;
@@ -204,14 +208,11 @@ body {
   transition: 500ms;
 }
 
-.enterRoom_video_container video {
-  width: 100%;
-  height: 100%;
-}
+
 
 .enterRoom_video_container
 .data-node{
-background: url("/images/room/nameplate_1.png") center center / cover;
+background: url("/images/room/nametag.png") center center / cover;
     margin-top:5px;
     padding:3px;
     box-sizing: border-box;

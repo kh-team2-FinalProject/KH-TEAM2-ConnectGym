@@ -7,45 +7,128 @@
     <link rel="stylesheet" th:href="@{/css/common/loading.css}">
 </th:block>
 
+
 <th:block layout:fragment="script">
-    <script th:src="@{/js/openvidu-browser-2.28.0.js}"></script>
     <script th:inline="javascript">
-        var myRoomCode = [[${roomInfo.roomName}]];
-        let userName = [[${type == 'trainer' ? trainer.trainerName : member.userName}]];
-        let userType =  [[${type}]];
+        window.onload=()=>{
+        setTimeout(function () {
+        timer30min();
+        setTimeout(timer50min, 8000)
+        }, 8000);
+        }
 
 
+        function timer30min(){
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        width: "300px",
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
+
+        Toast.fire({
+        html: '<div style="display:flex;">'
+        +'<div style="font-size:20px; margin: 0px 10px;">👊</div>'
+        +'<div style="font-size:14px;">30분이 경과되었습니다.<br>힘내세요!</div>'
+        +'</div>'
+
+        })
+
+        }
+
+        function timer50min(){
+
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        width: "300px",
+        timerProgressBar: true,
+        didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
+
+        Toast.fire({
+        html: '<div style="display:flex;">'
+        +'<div style="font-size:20px;">💪</div>'
+        +'<div style="font-size:14px; margin: 0px 10px;">50분이 경과되었습니다.<br>수고하셨습니다!</div>'
+        +'</div>'
+
+        })
+
+        }
     </script>
-    <script th:src="@{/js/roomStreaming.js}"></script>
-
 </th:block>
+
 
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
 
 
-    <div class="lessonroom_container">
+    <div class="lessonRoom_container">
 
-        <div class="lessonroom_top">
-            <div class="lroom-title" th:text="${roomInfo.lessonTitle}"></div>
-
-            <div class="lroom-_resize_button_group">
-                <button id="lroom_button_1">1</button>
-                <button id="lroom_button_2">2</button>
-                <button id="lroom_button_3">3</button>
-                <button id="lroom_button_4">4</button>
-                <button id="lroom_button_5">5</button>
+        <div class="lessonRoom_top">
+            <div class="lesson_top_title lessonRoom_top_width">
+                여름 준비! 11자 복근 만들기
             </div>
 
-            <!--버튼별 화면 비율 변경-->
-            <script>
+            <div class="lessonRoom_top_item_center lessonRoom_top_width">
+                <ul class="lessonRoom_top_item_center_ul">
+                    <li class="lessonRoom_top_item_center_li">
+                        <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_1">x0.2</button>
+                    </li>
+                    <li class="lessonRoom_top_item_center_li">
+                        <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_2">x0.35</button>
+                    </li>
+                    <li class="lessonRoom_top_item_center_li">
+                        <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_3">x1.0</button>
+                    </li>
+                    <li class="lessonRoom_top_item_center_li">
+                        <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_4">x1.65</button>
+                    </li>
+                    <li class="lessonRoom_top_item_center_li">
+                        <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_5">x1.8</button>
+                    </li>
+                </ul>
+            </div>
 
-const button1 = document.getElementById('lroom_button_1');
-const button2 = document.getElementById('lroom_button_2');
-const button3 = document.getElementById('lroom_button_3');
-const button4 = document.getElementById('lroom_button_4');
-const button5 = document.getElementById('lroom_button_5');
+            <div class="lessonRoom_top_item_left lessonRoom_top_width">
+                <button type="button" class="lessonRoom_top_exit_btn" id="buttonLeaveSession"
+                >Finish!
+                </button>
+            </div>
+        </div>
+
+
+        <div id="video-container" class="video-container">
+            <div class="enterRoom_video_container">
+                <video width="1024" height="850" th:src="@{/images/room/trainer.mp4}" controls autoplay></video>
+                <div class="data-node">OOO 트레이너</div>
+            </div>
+            <div class="enterRoom_video_container">
+                <video width="1024" height="850" th:src="@{/images/room/member.mp4}" controls autoplay></video>
+                <div class="data-node">OOO 회원</div>
+            </div>
+        </div>
+    </div>
+
+    <!--버튼별 화면 비율 변경-->
+    <script>
+const button1 = document.getElementById('lessonRoom_button_1');
+const button2 = document.getElementById('lessonRoom_button_2');
+const button3 = document.getElementById('lessonRoom_button_3');
+const button4 = document.getElementById('lessonRoom_button_4');
+const button5 = document.getElementById('lessonRoom_button_5');
 
 // 버튼 클릭 이벤트 핸들러
 button1.addEventListener('click', () => {
@@ -88,26 +171,7 @@ function toggleVideoSize(className) {
   });
 }
 
-            </script>
-
-            <button type="button" class="lroom-button" id="buttonLeaveSession"
-                    th:onclick="leaveSession([[${roomInfo.roomName}]],[[${type}]])">Finish!
-            </button>
-        </div>
-
-
-        <div class="mylessonlistloading_wrap" id="mylessonlistloading_wrap">
-            <div class="mylessonlist_loading">
-                <div class="bounceball"></div>
-                <div class="text">NOW LOADING</div>
-            </div>
-        </div>
-
-        <div id="video-container" class="video-container" style="none">
-
-        </div>
-    </div>
-    </div>
+    </script>
 
 
 </th:block>

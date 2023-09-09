@@ -1,4 +1,5 @@
 
+
 function applyStarRating() {
     const starRatingElements = document.querySelectorAll('.review_item_rating');
 

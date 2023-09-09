@@ -17,10 +17,26 @@
     /* align-items: center;*/
     min-height: 600px;
     min-width: 600px;
-    padding: 80px;
+    padding: 43px 80px 80px 80px;
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 10px 10px 8px #525252;
+}
+
+.lessonDetail_back{
+display:flex;
+align-items:center;
+}
+
+.lessonDetail_back:hover{
+cursor:pointer;
+}
+
+
+.lessonDetail_back img{
+  width:13px;
+  height:15px;
+  margin-right:10px;
 }
 
 .lessonDetail_leftContainer {

@@ -255,6 +255,7 @@ body {
 .trainerDetail_profile_lesson:focus {
   border-top-color: #222;
   border-bottom-color: #e2a354;
+  cursor: pointer;
 }
 
 /*밑에서 위로 애니메이션*/

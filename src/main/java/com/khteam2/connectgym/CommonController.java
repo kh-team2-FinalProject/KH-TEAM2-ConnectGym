@@ -66,6 +66,11 @@ public class CommonController {
 
         return "content/main";
     }
+    @GetMapping("/testRoom")
+    public String testRoom() {
+        return "room/bak_enterroom";
+    }
+
 
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")

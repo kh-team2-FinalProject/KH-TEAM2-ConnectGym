@@ -17,13 +17,17 @@
 
     <div class="ld_container">
         <div class="lessonDetail_container">
-
+            <!--뒤로가기 버튼-->
+            <div class="lessonDetail_back" onclick="location.href='/lesson-list'">
+                <img th:src="@{/images/icons/left-long-solid.svg}" />
+                <div class="lessonDetail_back_text">목록으로</div>
+            </div>
+            <br>
             <div class="lessonDetail_leftContainer">
                 <div class="lessonDetail_content">
                     <img class="lessonDetail_img" th:src="${lesson.lesson_img}" alt="Lesson Picture">
                 </div>
             </div>
-
 
             <div class="lessonDetail_rightContainer">
                 <div class="lessonDetail_trainerBox">
