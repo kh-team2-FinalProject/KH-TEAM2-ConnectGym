@@ -4,7 +4,7 @@
 
 <th:block layout:fragment="script">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script th:src="@{/js//onlyTrainer/trainerDashboard.js}"></script>
+    <script th:src="@{/js/onlyTrainer/trainerDashboard.js}"></script>
 
 </th:block>
 
@@ -47,11 +47,11 @@
             <div class="dsh-left-third-row">
                 <div class="dsh-lesson-info">
                     <div class="dsh-class-content">
-                        <span class="dsh-lesson-title">개설 강좌 명</span>
-                        <span class="dsh-lesson-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</span>
+                        <span class="dsh-lesson-title" th:text="${lessonInfo.title}"></span>
+                        <span class="dsh-lesson-text" th:text="${lessonInfo.lesson_info}"></span>
                     </div>
                     <div class="dsh-lesson-pic-wrapper">
-                        <img class="dsh-lesson-img" src="#" alt="lesson image">
+                        <img class="dsh-lesson-img" th:src="${lessonInfo.getLesson_img()}" alt="lesson image">
                     </div>
 
 
@@ -72,7 +72,7 @@
                                         <div class="mmychatroom_list_trainer_name">[[${chatroom.member.userName}]]
                                         </div>
                                     </div>
-                                    <div class="mychatroom_list_trainer_button">
+                                    <div class="dsh-mychatroom_list_trainer_button">
                                         <img width="25" height="20"
                                              src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/message_icon.png"
                                              th:onclick="|window.open('/chatting/'+ ${chatroom.no}, 'chatting-window ${chatroom.no}',
@@ -89,17 +89,15 @@
                         <p class="dsh-review-header-title">REVIEW</p>
                     </div>
                     <div class="dsh-review-wrapper">
-                        <div class="dsh-review-content">
-                            <p class="dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
-                            <p class="dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
+                        <div class="dsh-review-null"
+                             th:if="${#lists.isEmpty(trainerReview.trainerReviewResponseDtoList)}">
+                            <p class="dsh-review-null-msg"> 등록된 리뷰가 없습니다. </p>
                         </div>
-                        <div class="dsh-review-content">
-                            <p class="dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
-                            <p class="dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
-                        </div>
-                        <div class="dsh-review-content">
-                            <p class="dsh-review-title">리뷰 제목 리뷰 제목 리뷰 제목 </p>
-                            <p class="dsh-review-subtext">리뷰입니다. 리뷰입니다. 리뷰입니다. 리뷰입니다.리뷰입니다.리뷰입니다. 리뷰입니다.</p>
+                        <div class="dsh-review-content"
+                             th:unless="${#lists.isEmpty(trainerReview.trainerReviewResponseDtoList)}"
+                             th:each="review:${trainerReview.trainerReviewResponseDtoList}">
+                            <p class="dsh-review-title" th:text="${review.userId}"></p>
+                            <p class="dsh-review-subtext" th:text="${review.reviewContent}"></p>
                         </div>
                     </div>
                 </div>
