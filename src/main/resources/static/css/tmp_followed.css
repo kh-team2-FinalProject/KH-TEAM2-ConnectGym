@@ -40,3 +40,15 @@
     border-bottom: 1px solid gray;
     margin: 10px 20px;
 }
+
+.tmp-fld-list span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tmp-fld-list svg {
+    width: 30px;
+    margin-left: 50px;
+
+}
+
