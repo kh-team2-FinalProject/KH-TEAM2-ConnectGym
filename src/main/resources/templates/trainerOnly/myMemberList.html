@@ -14,18 +14,24 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
 
-    <h1>내 레슨을 등록한 회원</h1>
+    <div class="tmp-mll-ttl">
+        <h3>나의 레슨을 등록한 회원</h3>
+    </div>
 
     <th:block th:if="${trainerEnterRoom.errorMsg == 'NotFound'}">
-        <div>현재 등록한 회원이 없습니다.</div>
+        <div class="tmp-mll-none">현재 등록한 회원이 없습니다.</div>
     </th:block>
 
     <th:block th:if="${trainerEnterRoom.errorMsg != 'NotFound'}">
-        <div>나의 레슨을 구매한 회원 목록</div>
-        <div th:each="member : ${trainerEnterRoom.memberMap}">
-            <a href="#">[[${member.value.userName}]]</a>
 
-            <button th:onclick="enterRoom([[${trainerEnterRoom.titleCode}]],[[${member.key}]])">입장하기</button>
+        <div th:each="member : ${trainerEnterRoom.memberMap}" class="tmp-mll-content">
+            <div class="tmp-mll-name">
+                <span>[[${member.value.userName}]]</span>
+                <span>[[${member.value.userId}]]</span>
+            </div>
+            <div class="tmp-mll-btn">
+                <button th:onclick="enterRoom([[${trainerEnterRoom.titleCode}]],[[${member.key}]])">CONNECT</button>
+            </div>
         </div>
     </th:block>
 
