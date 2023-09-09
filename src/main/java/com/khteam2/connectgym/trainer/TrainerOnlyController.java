@@ -73,6 +73,9 @@ public class TrainerOnlyController {
                 int orderCount = orderDetailService.findTotalOrderCountByLessonNo(lessonNo);
                 model.addAttribute("orderCount", orderCount);
 
+                //레슨 수강하는 회원 목록
+                TrainerEnterRoomResponseDto trainerEnterRoomDto = trainerOnlyService.enrollMemList(lessonNo, trainerNo);
+                model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);
 
                 //채팅룸
                 List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);

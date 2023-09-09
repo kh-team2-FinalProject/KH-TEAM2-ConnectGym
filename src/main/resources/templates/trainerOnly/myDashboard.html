@@ -110,32 +110,20 @@
                 <div class="dsh-lessons-header">
                     <p class="dsh-lessons-title">내 강좌를 수강하는 회원 목록</p>
                 </div>
-                <div class="dsh-lessons-list">
-                    <div class="dsh-lesson">
-                        <span class="dsh-lessons-list-id">아이디 : qwer</span>
-                        <span class="dsh-lessons-list-name">이름 : 김가가</span>
+                <th:block th:if="${trainerEnterRoom.errorMsg == 'NotFound'}">
+                    <div class="noEnrollMem">현재 등록한 회원이 없습니다.</div>
+                </th:block>
+                <th:block th:if="${trainerEnterRoom.errorMsg != 'NotFound'}">
+                    <div class="dsh-lessons-list">
+                        <div class="dsh-lesson" th:each="member : ${trainerEnterRoom.memberMap}">
+                            <span class="dsh-lessons-list-id" th:text="${member.value.userId}"> </span>
+                            <span class="dsh-lessons-list-name" th:text="${member.value.userName}"></span>
+                        </div>
                     </div>
-                    <div class="dsh-lesson">
-                        <span class="dsh-lessons-list-id">아이디 : aaaaaaaa</span>
-                        <span class="dsh-lessons-list-name">이름 : 이나나</span>
-                    </div>
-                    <div class="dsh-lesson">
-                        <span class="dsh-lessons-list-id">아이디 : bbbb</span>
-                        <span class="dsh-lessons-list-name">이름 : 박다다</span>
-                    </div>
-                    <div class="dsh-lesson">
-                        <span class="dsh-lessons-list-id">아이디 : ccccccc</span>
-                        <span class="dsh-lessons-list-name">이름 : 최라라</span>
-                    </div>
-                    <div class="dsh-lesson">
-                        <span class="dsh-lessons-list-id">아이디 : aaaaaaaa</span>
-                        <span class="dsh-lessons-list-name">이름 : 이나나</span>
-                    </div>
-                </div>
+                </th:block>
             </div>
         </div>
     </div>
-
 </th:block>
 
 
