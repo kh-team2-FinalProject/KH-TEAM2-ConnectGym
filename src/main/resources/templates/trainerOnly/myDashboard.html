@@ -33,15 +33,15 @@
             <div class="dsh-left-second-row">
                 <div class="dsh-second-row-card">
                     <span class="dsh-card-title">나를 찜한 사람 </span>
-                    <span class="dsh-card-content">100명</span>
+                    <span class="dsh-card-content" th:text="${likeCount}+명"></span>
                 </div>
                 <div class="dsh-second-row-card">
                     <span class="dsh-card-title">팔로워 </span>
-                    <span class="dsh-card-content">100명</span>
+                    <span class="dsh-card-content" th:text="${followCount} +명"></span>
                 </div>
                 <div class="dsh-second-row-card">
                     <span class="dsh-card-title">누적 수강생 수 </span>
-                    <span class="dsh-card-content">1000명</span>
+                    <span class="dsh-card-content" th:text="${orderCount}+명"></span>
                 </div>
             </div>
             <div class="dsh-left-third-row">

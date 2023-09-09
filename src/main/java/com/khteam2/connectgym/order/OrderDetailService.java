@@ -13,7 +13,7 @@ public class OrderDetailService {
 
     //리뷰쓰기에 넘겨줄 정보
     @Transactional
-    public OrderDetailDto findOrderDetail(Long orderDetailNo){
+    public OrderDetailDto findOrderDetail(Long orderDetailNo) {
         OrderDetail od = orderDetailRepository.findById(orderDetailNo).orElse(null);
 
         OrderDetailDto odd = OrderDetailDto.builder()
@@ -22,6 +22,11 @@ public class OrderDetailService {
             .build();
 
         return odd;
+    }
+
+    //레슨별 누적 수강생
+    public int findTotalOrderCountByLessonNo(Long lessonNo) {
+        return orderDetailRepository.findTotalOrderCountByLessonNo(lessonNo);
     }
 
 }

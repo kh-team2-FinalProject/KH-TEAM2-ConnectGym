@@ -142,7 +142,5 @@ public class LessonService {
 
     }
 
-    //트레이너 넘버로 레슨 가져오기
-
 
 }

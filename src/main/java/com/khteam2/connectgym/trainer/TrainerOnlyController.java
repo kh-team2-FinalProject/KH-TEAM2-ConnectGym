@@ -8,6 +8,7 @@ import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomRequestDto;
 import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
@@ -36,13 +37,13 @@ public class TrainerOnlyController {
     private final ChatroomService chatroomService;
     private final FollowService followService;
     private final LikeService likeService;
+    private final OrderDetailService orderDetailService;
 
-
+    ////////////////////////////////////////////////////////
     @GetMapping("/mypage")
     public String myPageT(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                           @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
                           Model model, RedirectAttributes redirectAttributes) {
-
 
         if (loginMemberClass == null) {
 
@@ -54,15 +55,64 @@ public class TrainerOnlyController {
             // 트레이너 회원 로그인 된 경우
             TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
 
-            List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);
-            model.addAttribute("trainer", trainerResponseDTO);
-            model.addAttribute("chatroomList", chatroomList);
-            return "trainerOnly/myDashboard"; // 트레이너 마이페이지로 이동
-        } else {
-            return "redirect:/mypage";
+            //트레이너 번호로 레슨 번호 찾음
+            Long lessonNo = trainerOnlyService.findLessonNoByTrainerNo(trainerNo);
+
+            //트레이너가 만든 레슨 있을 때
+            if (lessonNo != null) {
+
+                //찜된 수
+                int likeCount = likeService.likeCount(lessonNo);
+                model.addAttribute("likeCount", likeCount);
+
+                //팔로워 수
+                int followCount = followService.followCount(trainerNo);
+                model.addAttribute("followCount", followCount);
+
+                //누적 수강생 수
+                int orderCount = orderDetailService.findTotalOrderCountByLessonNo(lessonNo);
+                model.addAttribute("orderCount", orderCount);
+
+
+                //채팅룸
+                List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);
+                model.addAttribute("chatroomList", chatroomList);
+
+
+                model.addAttribute("trainer", trainerResponseDTO);
+                return "trainerOnly/myDashboard"; // 트레이너 마이페이지로 이동
+            } else {
+                //레슨 없을 때
+                model.addAttribute("errorMsg", "레슨을 찾을 수 없습니다.");
+            }
         }
+        return "redirect:/mypage";
+    }
 
+    @GetMapping("/mypage/liked")
+    public String liked(Model model, HttpSession session) {
+        try {
+            model.addAttribute("bannerTitle", "liked");
+            TrainerResponseDTO trainerSession = trainerService.sessionT(session);
+            //세션에서 트레이너 번호 가져옴
+            long trainerNo = trainerSession.getTrainerNo();
 
+            //트레이너 번호로 레슨 번호 찾음
+            Long lessonNo = trainerOnlyService.findLessonNoByTrainerNo(trainerNo);
+
+            //트레이너가 만든 레슨 있을 때
+            if (lessonNo != null) {
+                List<MemberResponseDTO> likedMembers = likeService.likedList(lessonNo);
+                model.addAttribute("likedMembers", likedMembers);
+            } else {
+                //레슨 없을 때
+                model.addAttribute("errorMsg", "레슨을 찾을 수 없습니다.");
+            }
+        } catch (Exception e) {
+            logger.error("TOC liked() 에러" + e.getMessage());
+            e.printStackTrace();
+        }
+        return "trainerOnly/liked";
     }
 
     //내가 등록한 강좌 정보
@@ -123,32 +173,6 @@ public class TrainerOnlyController {
         return "trainerOnly/followed";
     }
 
-
-    @GetMapping("/mypage/liked")
-    public String liked(Model model, HttpSession session) {
-        try {
-            model.addAttribute("bannerTitle", "liked");
-            TrainerResponseDTO trainerSession = trainerService.sessionT(session);
-            //세션에서 트레이너 번호 가져옴
-            long trainerNo = trainerSession.getTrainerNo();
-
-            //트레이너 번호로 레슨 번호 찾음
-            Long lessonNo = trainerOnlyService.findLessonNoByTrainerNo(trainerNo);
-
-            //트레이너가 만든 레슨 있을 때
-            if (lessonNo != null) {
-                List<MemberResponseDTO> likedMembers = likeService.likedList(lessonNo);
-                model.addAttribute("likedMembers", likedMembers);
-            } else {
-                //레슨 없을 때
-                model.addAttribute("errorMsg", "레슨을 찾을 수 없습니다.");
-            }
-        } catch (Exception e) {
-            logger.error("TOC liked() 에러" + e.getMessage());
-            e.printStackTrace();
-        }
-        return "trainerOnly/liked";
-    }
 
     //    @GetMapping("/mypage/messages")
 //    public String messages(HttpSession session, Model model) {

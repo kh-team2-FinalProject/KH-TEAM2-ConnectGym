@@ -38,4 +38,9 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
         "AND od.lesson.no")
     int findCountbyTrainerAndLesson();*/
 
+
+    //레슨별 누적 수강생
+    @Query("SELECT COUNT(od) from OrderDetail od where od.lesson.no=?1")
+    int findTotalOrderCountByLessonNo(Long lessonNo);
+
 }
