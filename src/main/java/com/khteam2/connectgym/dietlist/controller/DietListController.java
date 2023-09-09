@@ -32,52 +32,26 @@ public class DietListController {
         model.addAttribute("food", new Food());
         return "fooddiary/foodInfo";
     }
-/*
-    @GetMapping("fooddiary/dietlist")
-    public String my_DietList(Model model){
-        model.addAttribute("food", new Food());
-        return "fooddiary/dietlist";
-    }
-*/
+
 
 
     @PostMapping("fooddiary/foodInfo")
     public String addFood(@ModelAttribute @Valid Food food, Errors errors, Model model) {
         /* 에러 메세지 */
         if (errors.hasErrors()) {
-            model.addAttribute("food", food);
             Map<String, String> validatorResult = foodService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
+            model.addAttribute("food", food);
             return "fooddiary/foodInfo";
         }
-
         foodService.saveFood(food);
-
-        return "redirect:/fooddiary/foodInfo";
+        return "fooddiary/foodInfo";
     }
 
 
-/*    @GetMapping("fooddiary/dietwrite")
-    public String diet_WriteForm(Model model) {
-        Food food = foodRepository.findById(29057L).orElse(null);
-        List<Food> foods = new ArrayList<>();
-        foods.add(food);
-        model.addAttribute("foods", foods);
 
-        return "fooddiary/dietlist";
-    }*/
-
-//    @GetMapping("fooddiary/foodinfo")
-//    public String searchFood(@RequestParam String key, Model model) {
-//        if (key != null && !key.isEmpty()) {
-//            List<Food> foodinfo = foodService.searchFood(key);
-//            model.addAttribute("foodinfo", foodinfo);
-//        }
-//        model.addAttribute("food", new Food());
-//        return "fooddiary/foodinfo";
-//    }
 
 
     // dietlist
@@ -86,10 +60,8 @@ public class DietListController {
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-//        if (key != null && !key.isEmpty()) {
-//            List<Food> dietList = foodService.searchDiet(key);
-//            model.addAttribute("dietList", dietList);
-//        }
+
+
         if (date == null) {
             date = LocalDate.now();
         }
