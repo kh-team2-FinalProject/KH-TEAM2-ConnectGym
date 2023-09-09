@@ -7,6 +7,7 @@ import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.order.dto.*;
+import com.khteam2.connectgym.review.Review;
 import com.khteam2.connectgym.review.ReviewRepository;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.siot.IamportRestClient.IamportClient;
@@ -163,7 +164,7 @@ public class OrderService {
      * @return 회원이 신청한 레슨이 존재하면 {@code true}, 아니면 {@code false} 반환
      */
     @Transactional(readOnly = true)
-    private boolean hasLesson(Long memberNo, List<Long> lessonNoList) {
+    public boolean hasLesson(Long memberNo, List<Long> lessonNoList) {
         // 해당 회원이 신청한 레슨을 모두 가져온다.
         List<Lesson> alreadyLessonList = this.lessonRepository.findAllByMemberNoAndLessonNoList(memberNo, lessonNoList);
 
@@ -177,7 +178,7 @@ public class OrderService {
      * @return 사용되지 않은 새 주문 번호
      */
     @Transactional(readOnly = true)
-    private String generateOrderNo() {
+    public String generateOrderNo() {
         String orderNo = null;
         String date = CommonUtil.getTodayLocalDate8(); // 20230820
 
@@ -344,13 +345,17 @@ public class OrderService {
      *
      * @return 중복되지 않는 고유한 값
      */
-    private long generateEnrollKey() {
+    public long generateEnrollKey() {
         long enrollKey = -1;
 
         for (int i = 0; i < 10_000; i++) {
+            // 12자리 난수를 생성한다.
             enrollKey = CommonUtil.generateRandomNumberLong(12);
+
+            // 생성한 난수를 이용해 DB에서 불러온다.
             OrderDetail orderDetail = this.orderDetailRepository.findByEnrollKey(enrollKey);
 
+            // 해당 enroll_key 값이 존재하지 않으면 반복문에서 빠져나간다.
             if (orderDetail == null) {
                 break;
             }
@@ -395,6 +400,9 @@ public class OrderService {
         return ResponseEntity.internalServerError().build();
     }
 
+    /**
+     * 주문이 완료되었을 때 사용하는 메소드
+     */
     @Transactional(readOnly = true)
     public OrderCompleteResponseDto completeOrder(Long loginMemberId, String orderId) {
         OrderCompleteResponseDto responseDto = OrderCompleteResponseDto.builder()
@@ -402,8 +410,10 @@ public class OrderService {
             .url("content/orderComplete")
             .build();
 
-        Order order = this.orderRepository.findById(orderId).orElse(null);
-        List<OrderDetail> orderDetailList = this.orderDetailRepository.findByOrder(order);
+        // Order order = this.orderRepository.findById(orderId).orElse(null);
+        // List<OrderDetail> orderDetailList = this.orderDetailRepository.findByOrder(order);
+
+        responseDto.setSuccess(true);
 
         return responseDto;
     }
@@ -436,17 +446,23 @@ public class OrderService {
             return responseDto;
         }
 
+        // 한 페이지에 출력되는 주문건 변수를 선언한다.
         int pageSize = 5;
+        // 현재 페이지 변수를 선언한다.
+        // PageRequest 객체에 넘겨줄 때 현재 페이지 번호에 1을 빼서 넘겨줘야 하기에 0으로 초기화한다.
         int currentPage = 0;
 
+        // 한 페이지에 출력되는 주문건 개수을 지정했을 경우 해당 개수로 다시 지정한다.
         if (orderListRequestDto.getSize() != null) {
             pageSize = orderListRequestDto.getSize();
         }
 
+        // 현재 페이지 번호를 지정했을 경우 해당 페이지 번호로 다시 지정한다.
         if (orderListRequestDto.getPage() != null) {
             currentPage = orderListRequestDto.getPage() - 1;
         }
 
+        // DB에 페이징 정보를 넘겨주기 위해 PageRequest 객체를 이용해 객체를 생성한다.
         Pageable pageable = PageRequest.of(currentPage, pageSize);
 
         Page<Order> orderList = null;
@@ -494,6 +510,8 @@ public class OrderService {
                 Lesson lesson = orderDetail.getLesson();
                 // 레슨에서 트레이너 정보를 가져온다.
                 Trainer trainer = lesson.getTrainer();
+                // 주문 상세 정보 번호를 가져온다.
+                Long orderDetailNo = orderDetail.getNo();
 
                 // 전체 금액에 레슨 가격을 더 한다.
                 totalPrice += lesson.getPrice();
@@ -517,20 +535,14 @@ public class OrderService {
                     status = "수강 완료";
                 }
 
-                //리뷰 작성 여부
-                boolean reviewYn;
-
-                if (reviewRepository.findOrderDetailNo(orderDetail.getNo()).orElse(null) == null) {
-                    reviewYn = true;
-                } else {
-                    reviewYn = false;
-                }
-
+                // 리뷰를 가져온다.
+                Review review = reviewRepository.findOrderDetailNo(orderDetailNo).orElse(null);
 
                 // 상세 정보 DTO를 생성해서 가져온 정보들을 담아준다.
                 OrderListOrderDetailDto detailDto = OrderListOrderDetailDto.builder()
                     .orderDetailNo(orderDetail.getNo())
-                    .reviewYn(reviewYn)
+                    // 리뷰 작성 여부
+                    .reviewYn(review == null)
                     .title(lesson.getTitle())
                     .startDate(lesson.getStart_date())
                     .endDate(lesson.getEnd_date())
@@ -540,6 +552,7 @@ public class OrderService {
                     .lessonNo(lesson.getNo())
                     .status(status)
                     .build();
+
                 // 상세 정보 리스트에 담는다.
                 detailDtoList.add(detailDto);
             }
@@ -559,6 +572,7 @@ public class OrderService {
             }
         }
 
+        // 페이징 정보를 DTO에 전달하기 위해 Pagination 객체를 생성한다.
         Pagination pagination = new Pagination(orderList, 5);
 
         // 가져온 정보들을 담아준다.
