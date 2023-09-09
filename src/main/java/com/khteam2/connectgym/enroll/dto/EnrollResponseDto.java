@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class EnrollResponseDto {
 
     private LessonResponseDTO lesson;
+    private String lessonTitleCode;
     private Long enrollKey;
     private String errorMsg;
 

@@ -42,7 +42,7 @@ function toggleFollow() {
           position: 'center',
           width: '300px',
           height:'30px',
-  background:'rgba(215, 214, 214, 0.761)',
+          background:'rgba(215, 214, 214, 0.761)',
           html: '<div style="font-size:16px;">팔로우가 취소되었습니다.</div>',
           showConfirmButton: false,
           timer: 800

@@ -23,45 +23,39 @@
 <th:block layout:fragment="content">
 
 
-    <div class="lessonroom_container">
+    <div class="lessonRoom_container">
 
-        <div class="lessonroom_top">
-            <div class="lroom-title" th:text="${roomInfo.lessonTitle}"></div>
-
-            <div class="lroom-_resize_button_group">
-                <button onclick="resizeVideo(0, 1, 0.9)">1</button>
-                <button onclick="resizeVideo(0.25, 0.75)">2</button>
-                <button onclick="resetVideoSize()">3</button>
-                <button onclick="resizeVideo(0.75, 0.25)">4</button>
-                <button onclick="resizeVideo(0.9, 0.1)">5</button>
+        <div class="lessonRoom_top">
+            <div class="lesson_top_title lessonRoom_top_width">
+                [[${roomInfo.lessonTitle}]]
             </div>
 
-            <script>
-                function resizeVideo(leftRatio, rightRatio) {
-                   const videoContainers = document.querySelectorAll('.enterRoom_video_container');
-                   const videoLeft = videoContainers[0].querySelector('video');
-                   const videoRight = videoContainers[1].querySelector('video');
+            <div class="lessonRoom_top_item_center lessonRoom_top_width">
+                <ul class="lessonRoom_top_item_center_ul">
+                        <li class="lessonRoom_top_item_center_li">
+                            <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_1">x0.2</button>
+                        </li>
+                        <li class="lessonRoom_top_item_center_li">
+                            <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_2">x0.35</button>
+                        </li>
+                        <li class="lessonRoom_top_item_center_li">
+                            <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_3">x1.0</button>
+                        </li>
+                        <li class="lessonRoom_top_item_center_li">
+                            <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_4">x1.65</button>
+                        </li>
+                        <li class="lessonRoom_top_item_center_li">
+                            <button class="lessonRoom_top_item_center_btn" id="lessonRoom_button_5">x1.8</button>
+                        </li>
+                </ul>
+            </div>
 
-                  videoLeft.style.flex = leftRatio;
-                  videoRight.style.flex = rightRatio;
-                }
-
-                function resetVideoSize() {
-                  const videoContainers = document.querySelectorAll('.enterRoom_video_container');
-                  const videoLeft = videoContainers[0].querySelector('video');
-                  const videoRight = videoContainers[1].querySelector('video');
-
-                    videoLeft.style.flex = 1;
-                     videoRight.style.flex = 1;
-                }
-
-            </script>
-
-            <button type="button" class="lroom-button" id="buttonLeaveSession"
-                    th:onclick="leaveSession([[${roomInfo.roomName}]],[[${type}]])">Finish!
-            </button>
+            <div class="lessonRoom_top_item_left lessonRoom_top_width">
+                <button type="button" class="lessonRoom_top_exit_btn" id="buttonLeaveSession"
+                        th:onclick="leaveSession([[${roomInfo.roomName}]],[[${type}]])">Finish!
+                </button>
+            </div>
         </div>
-
 
 
         <div class="mylessonlistloading_wrap" id="mylessonlistloading_wrap">
@@ -71,14 +65,60 @@
             </div>
         </div>
 
-        <div class="lessonroom_content" id="lessonroom_content" style="none">
-            <div class="loader">
-            </div>
-            <div id="video-container" class="video-container">
+        <div id="video-container" class="video-container" style="none">
 
-            </div>
         </div>
     </div>
+
+<!--버튼별 화면 비율 변경-->
+    <script>
+const button1 = document.getElementById('lessonRoom_button_1');
+const button2 = document.getElementById('lessonRoom_button_2');
+const button3 = document.getElementById('lessonRoom_button_3');
+const button4 = document.getElementById('lessonRoom_button_4');
+const button5 = document.getElementById('lessonRoom_button_5');
+
+// 버튼 클릭 이벤트 핸들러
+button1.addEventListener('click', () => {
+  resetVideoContainer();
+  toggleVideoSize('video-20-80');
+});
+
+button2.addEventListener('click', () => {
+  resetVideoContainer();
+  toggleVideoSize('video-35-65');
+});
+
+button3.addEventListener('click', () => {
+  resetVideoContainer();
+});
+
+button4.addEventListener('click', () => {
+  resetVideoContainer();
+  toggleVideoSize('video-65-35');
+});
+
+button5.addEventListener('click', () => {
+  resetVideoContainer();
+  toggleVideoSize('video-80-20');
+});
+
+// 비디오 컨테이너 클래스 초기화 함수
+function resetVideoContainer() {
+  const videoContainers = document.querySelectorAll('.enterRoom_video_container');
+  videoContainers.forEach(container => {
+    container.classList.remove('video-20-80', 'video-35-65', 'video-65-35', 'video-80-20');
+  });
+}
+
+// 비디오 컨테이너 클래스 토글 함수
+function toggleVideoSize(className) {
+  const videoContainers = document.querySelectorAll('.enterRoom_video_container');
+  videoContainers.forEach(container => {
+    container.classList.add(className);
+  });
+}
+    </script>
 
 
 </th:block>

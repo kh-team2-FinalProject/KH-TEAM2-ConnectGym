@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.room;
 
 
+import com.khteam2.connectgym.enroll.dto.EnrollResponseDto;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.room.dto.RoomRequest;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +28,9 @@ public class RoomApiController {
     private final RoomService roomSerivce;
 
     // 룸 조건 검사
-    @GetMapping("/checkEnroll")
-    public Long checkEnroll(String titleCode, Long enrollKey){
-        System.out.println("체크인롤 컨트롤러 호출 : " + titleCode+enrollKey);
-        return roomSerivce.roomStatusCheck(titleCode,enrollKey);
+    @PostMapping("/checkEnroll")
+    public Long checkEnroll(@RequestBody EnrollResponseDto dto){
+        return roomSerivce.roomStatusCheck(dto.getLessonTitleCode(),dto.getEnrollKey());
     }
 
     // 룸 세션 생성

@@ -5,6 +5,8 @@ import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.MemberService;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.review.ReviewService;
+import com.khteam2.connectgym.review.dto.ReviewResponseDto;
 import com.khteam2.connectgym.trainer.TrainerService;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class CommonController {
     private final MemberService memberService;
     private final FollowService followService;
     private final TrainerService trainerService;
+    private final ReviewService reviewService;
     Logger logger = LoggerFactory.getLogger(CommonController.class);
 
     //*******************************************
@@ -53,6 +56,10 @@ public class CommonController {
             } else {
                 model.addAttribute("errorMsg", "로그인 정보가 없습니다.");
             }
+
+            List<ReviewResponseDto> top3Reviews = reviewService.top3Review();
+            model.addAttribute("reviews", top3Reviews);
+
         } catch (Exception e) {
             logger.error("welcomeOrIndex() 에러");
         }
