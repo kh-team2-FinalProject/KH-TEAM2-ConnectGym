@@ -19,31 +19,26 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
 
-    <div class="dsh-message-box">
-        <div class="dsh-message-header">
-            <p class="dsh-message-header-title">MESSAGE</p>
-        </div>
-        <div class="dsh-message-wrapper">
-            <div class="dsh-message-content">
+    <div class="myFollowing_container">
+        <div class="myFollowing_border">
+            <div class="myFollowing_list">
                 <th:block th:if="${chatroomList.size() > 0}">
-                    <div class="mychatroom_list_trainer" th:each="chatroom:${chatroomList}">
+                    <div class="myFollowing_list_trainer" th:each="chatroom:${chatroomList}">
 
-                        <div class="mychatroom_list_trainer_info">
-                            <div class="mmychatroom_list_trainer_name">[[${chatroom.member.userName}]]
-                            </div>
+                        <div class="myFollowing_list_trainer_info">
+                            <div class="myFollowing_list_trainer_info">[[${chatroom.member.userName}]]</div>
+                            <div class="myFollowing_list_trainer_id">[[${chatroom.member.userId}]]</div>
                         </div>
-                        <div class="mychatroom_list_trainer_button">
-                            <img width="25" height="20"
+                        <div class="myFollowing_list_trainer_button">
+                            <img width="50" height="50"
                                  src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/message_icon.png"
                                  th:onclick="|window.open('/chatting/'+ ${chatroom.no}, 'chatting-window ${chatroom.no}',
-                'width=430, height=500, location=no, status=no, scrollbars=yes');|"/>
+                'width=430, height=500, location=no, status=no, scrollbars=yes')|"/>
                         </div>
                     </div>
                 </th:block>
             </div>
         </div>
     </div>
-
-
 </th:block>
 </html>

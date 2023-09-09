@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +36,7 @@ public class MemberController {
     private final LikeService likeService;
     private final ChatroomService chatroomService;
     private final OrderDetailService orderDetailService;
-    private  final ReviewService reviewService;
+    private final ReviewService reviewService;
 
 
     @GetMapping(value = "/user/login")
@@ -189,7 +190,7 @@ public class MemberController {
     @GetMapping("/mypage")
     public String myPage() {
 
-        return "redirect:/mypage/myDashboard";
+        return "redirect:/mypage/myLessonList";
     }
 
     // 1) 대시보드
