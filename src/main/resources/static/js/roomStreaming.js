@@ -3,15 +3,14 @@ var session;
 
 /* OPENVIDU METHODS */
 window.onload = () => {
-  setTimeout(joinSession, 0);
+  setTimeout(joinSession, 2000);
 
   setTimeout(function () {
-    const element = document.getElementById("lessonroom_content");
+    const lessonElement = document.getElementById("lessonroom_content");
     const loadingElement = document.getElementById("mylessonlistloading_wrap");
-    /*const videoElement = document.getElementById("video-container");*/
 
     loadingElement.style.display = "none";
-    element.style.display = "flex";
+    lessonElement.style.display = "flex";
   }, 3000);
 };
 
@@ -55,7 +54,7 @@ function joinSession() {
           videoSource: undefined, // The source of video. If undefined default webcam
           publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
           publishVideo: true, // Whether you want to start publishing with your video enabled or not
-          resolution: "720x480", // The resolution of your video
+          resolution: "1024x768", // The resolution of your video
           frameRate: 30, // The frame rate of your video
           insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
           mirror: false, // Whether to mirror your local video or not
@@ -93,19 +92,17 @@ function leaveSession(myRoomCode, userType) {
       removeAllUserData();
 
       Swal.fire({
-        title: "<b>오늘의 운동 완료</b>",
-        html: '<div style="font-size:16px;">오늘의 명언</div><br>실패는 언제나 찾아오는 친구이며 성공은 어쩌다 찾아오는 손님이다. - 미르 임란',
-        width: 600,
+        html: '<div style="font-size:18px;">오늘도 수고하셨습니다.😊<br>3초 뒤에 종료됩니다.</div>',
+        width: "350px",
+        height: "50px",
         padding: "3em",
-        confirmButtonColor: "#fff",
         color: "#2f79a6",
-        //background:
-        //  "url(https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/o_woon_wan3.gif) center center / cover no-repeat",
+        showConfirmButton: false,
+        timer: 3000,
+        //background: "url(https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/o_woon_wan3.gif) center center / cover no-repeat",
       }).then((result) => {
-        if (result.isConfirmed) {
-          history.go(-1);
-          //location.href="/mypage/myLessonList";
-        }
+        history.go(-1);
+        //location.href="/mypage/myLessonList";
       });
     },
     error: function (error) {
@@ -113,19 +110,38 @@ function leaveSession(myRoomCode, userType) {
       console.error("Ajax 오류: ", error);
     },
   });
-
-  /*	session.disconnect();
-
-    // 사용자의 닉네임으로 모든 HTML 요소를 제거
-    // 세션을 떠날 때 HTML 비디오가 자동으로 제거됨
-	removeAllUserData();
-
-	history.go(-1);*/
 }
 
 window.onbeforeunload = function () {
   if (session) {
-    leaveSession(myRoomCode, userType);
+    $.ajax({
+      type: "GET",
+      url: "/room/exit/" + myRoomCode + "?userType=" + userType,
+      contentType: "application/json;charset=UTF-8",
+      success: function (response) {
+        if (response == 1) {
+          console.log("트레이너 exit");
+        }
+
+        session.disconnect();
+        removeAllUserData();
+
+        Swal.fire({
+          html: '<div style="font-size:16px;">페이지를 벗어났습니다.🤔</div>',
+          width: "350px",
+          height: 50,
+          color: "#2f79a6",
+          background: "rgba(215, 214, 214, 0.761)",
+          showConfirmButton: false,
+          timer: 800,
+          //background: "url(https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/o_woon_wan3.gif) center center / cover no-repeat",
+        });
+      },
+      error: function (error) {
+        // 요청이 실패했을 때 실행할 코드
+        console.error("Ajax 오류: ", error);
+      },
+    });
   }
 };
 
@@ -146,7 +162,8 @@ function appendUserData(videoElement, connection) {
   containerDiv.className = "enterRoom_video_container";
 
   // videoElement를 containerDiv 안에 추가
-  videoElement.id=`video_${userType}`;
+  videoElement.id = `video_${userType}`;
+  videoElement.setAttribute("controls", true);
 
   containerDiv.appendChild(videoElement);
 
@@ -154,7 +171,7 @@ function appendUserData(videoElement, connection) {
   var dataNode = document.createElement("div");
   dataNode.className = "data-node";
   dataNode.id = "data-" + nodeId;
-  dataNode.innerHTML = "<p>" + userData + "</p>";
+  dataNode.innerHTML = userData;
 
   // dataNode를 containerDiv 안에 추가
   containerDiv.appendChild(dataNode);
@@ -162,39 +179,23 @@ function appendUserData(videoElement, connection) {
   // videoElement와 dataNode가 포함된 containerDiv를 video-container에 추가
   var videoContainer = document.getElementById("video-container");
   videoContainer.appendChild(containerDiv);
-
-  // addClickListener 함수를 호출
-/*  addClickListener(videoElement, userData);*/
 }
-
-
-
-/*원본
-function appendUserData(videoElement, connection) {
-	var userData;
-	var nodeId;
-	if (typeof connection === "string") {
-		userData = connection;
-		nodeId = connection;
-	} else {
-		userData = JSON.parse(connection.data).clientData;
-		nodeId = connection.connectionId;
-	}
-	var dataNode = document.createElement('div');
-	dataNode.className = "data-node";
-	dataNode.id = "data-" + nodeId;
-	dataNode.innerHTML = "<p>" + userData + "</p>";
-	videoElement.id=`video_${userType}`;
-	videoElement.parentNode.insertBefore(dataNode, videoElement.nextSibling);
-	addClickListener(videoElement, userData);
-}*/
-
-
 
 function removeUserData(connection) {
   var dataNode = document.getElementById("data-" + connection.connectionId);
-  dataNode.parentNode.removeChild(dataNode);
+  if (dataNode) {
+    var videoContainer = dataNode.closest(".enterRoom_video_container");
+    if (videoContainer && videoContainer.parentNode) {
+      videoContainer.parentNode.removeChild(videoContainer);
+    }
+  }
 }
+
+/*
+function removeUserData(connection) {
+  var dataNode = document.getElementById("data-" + connection.connectionId);
+  dataNode.parentNode.removeChild(dataNode);
+}*/
 
 function removeAllUserData() {
   var nicknameElements = document.getElementsByClassName("data-node");
@@ -202,24 +203,6 @@ function removeAllUserData() {
     nicknameElements[0].parentNode.removeChild(nicknameElements[0]);
   }
 }
-
-//비디오를 클릭했을 때 메인 비디오 영역에 해당 비디오 스트림을 크게 보여주는 부분을 처리
-
-/*원본*/
-/*
-function addClickListener(videoElement, userData) {
-  videoElement.addEventListener("click", function () {
-    var mainVideo = $("#main-video video").get(0);
-    if (mainVideo.srcObject !== videoElement.srcObject) {
-      $("#main-video").fadeOut("fast", () => {
-        $("#main-video p").html(userData);
-        mainVideo.srcObject = videoElement.srcObject;
-        $("#main-video").fadeIn("fast");
-      });
-    }
-  });
-}
-*/
 
 function getToken(myRoomCode) {
   return createSession(myRoomCode).then((sessionId) => createToken(sessionId));
@@ -250,3 +233,41 @@ function createToken(sessionId) {
     });
   });
 }
+
+//비디오를 클릭했을 때 메인 비디오 영역에 해당 비디오 스트림을 크게 보여주는 부분을 처리
+
+/*원본*/
+/*
+function addClickListener(videoElement, userData) {
+  videoElement.addEventListener("click", function () {
+    var mainVideo = $("#main-video video").get(0);
+    if (mainVideo.srcObject !== videoElement.srcObject) {
+      $("#main-video").fadeOut("fast", () => {
+        $("#main-video p").html(userData);
+        mainVideo.srcObject = videoElement.srcObject;
+        $("#main-video").fadeIn("fast");
+      });
+    }
+  });
+}
+*/
+
+/*원본
+function appendUserData(videoElement, connection) {
+	var userData;
+	var nodeId;
+	if (typeof connection === "string") {
+		userData = connection;
+		nodeId = connection;
+	} else {
+		userData = JSON.parse(connection.data).clientData;
+		nodeId = connection.connectionId;
+	}
+	var dataNode = document.createElement('div');
+	dataNode.className = "data-node";
+	dataNode.id = "data-" + nodeId;
+	dataNode.innerHTML = "<p>" + userData + "</p>";
+	videoElement.id=`video_${userType}`;
+	videoElement.parentNode.insertBefore(dataNode, videoElement.nextSibling);
+	addClickListener(videoElement, userData);
+}*/

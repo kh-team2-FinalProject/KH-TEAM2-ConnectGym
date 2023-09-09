@@ -2,7 +2,7 @@ package com.khteam2.connectgym.review;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.review.dto.ReviewRequestDto;
-import com.khteam2.connectgym.review.dto.TrainerReviewResponseListDto;
+import com.khteam2.connectgym.review.dto.ReviewResponseListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +39,7 @@ public class ReviewController {
     //트레이너별 리뷰리스트
     @ResponseBody
     @GetMapping("/review/show/{trainerNo}")
-    public TrainerReviewResponseListDto showTrainerReview(@PathVariable Long trainerNo){
+    public ReviewResponseListDto showTrainerReview(@PathVariable Long trainerNo){
         return reviewService.trainerReview(trainerNo);
     }
 

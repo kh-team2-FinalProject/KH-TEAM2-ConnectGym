@@ -1,12 +1,10 @@
 package com.khteam2.connectgym.enroll;
 
 import com.khteam2.connectgym.enroll.dto.EnrollResponseDto;
-import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.order.*;
-import com.khteam2.connectgym.trainer.TrainerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +44,7 @@ public class EnrollService {
 
             EnrollResponseDto enrollResponseDto = EnrollResponseDto.builder()
                 .lesson(lessonResponseDTO)
+                .lessonTitleCode(lessonResponseDTO.getTitleCode())
                 .enrollKey(orderDetail.getEnrollKey())
                 .build();
 

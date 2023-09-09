@@ -7,7 +7,7 @@ import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.like.dto.LikeDto;
 import com.khteam2.connectgym.review.ReviewService;
-import com.khteam2.connectgym.review.dto.TrainerReviewResponseListDto;
+import com.khteam2.connectgym.review.dto.ReviewResponseListDto;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -113,7 +113,7 @@ public class LessonController {
             .build();
 
         //리뷰 정보
-        TrainerReviewResponseListDto reviews = reviewService.trainerReview(lesson.getTrainer().getNo());
+        ReviewResponseListDto reviews = reviewService.trainerReview(lesson.getTrainer().getNo());
 
         //찜 정보
         int likeCount = likeService.likeCount(lessonNo);

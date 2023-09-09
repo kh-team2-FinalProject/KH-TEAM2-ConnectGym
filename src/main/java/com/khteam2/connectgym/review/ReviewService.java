@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.review;
 
-import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.order.OrderDetailRepository;
 import com.khteam2.connectgym.review.dto.*;
 import com.khteam2.connectgym.upload.S3Uploader;
@@ -92,19 +91,25 @@ public class ReviewService {
 
     }
 
-    //트레이너별 리뷰
-    public TrainerReviewResponseListDto trainerReview(Long trainerNo){
+    //트레이너별 리뷰(repository 반환타입 Dto)
+    public ReviewResponseListDto trainerReview(Long trainerNo){
 
-        List<TrainerReviewResponseDto> dtoList = reviewRepository.findTrainerReviewsByTrainerNo(trainerNo);
+        List<ReviewResponseDto> dtoList = reviewRepository.findTrainerReviewsByTrainerNo(trainerNo);
         double ratingAvg = reviewRepository.findAvgRatingByTrainerNo(trainerNo).orElse(0.0);
         RatingCountDto ratingCountDto = reviewRepository.findRatingCountsByTrainerNo(trainerNo);
 
-            TrainerReviewResponseListDto listDto = TrainerReviewResponseListDto.builder()
+            ReviewResponseListDto listDto = ReviewResponseListDto.builder()
                 .trainerReviewResponseDtoList(dtoList)
                 .ratingAvg(ratingAvg)
                 .ratingCountDto(ratingCountDto)
                 .build();
             return listDto;
+
+    }
+
+    //메인 메뉴 TOP3 리뷰(repository 반환타입 Dto)
+    public List<ReviewResponseDto> top3Review(){
+        return reviewRepository.findReviewOrderByRating();
 
     }
 

@@ -1,14 +1,17 @@
 /*@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");*/
 @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Changa:wght@300&display=swap"); /*전체페이지 글꼴(미정)*/
+@import url("https://fonts.googleapis.com/css2?family=Changa:wght@300&display=swap");
+
+/*전체페이지 글꼴*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;500;600;700;800;900&display=swap');
 /*============공통===========*/
 
 body {
     background-color: #0e1414;
     margin: 0px;
     color: #0e181a;
-    font-family: "Changa", sans-serif; /*전체페이지 글꼴(미정)*/
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 a {

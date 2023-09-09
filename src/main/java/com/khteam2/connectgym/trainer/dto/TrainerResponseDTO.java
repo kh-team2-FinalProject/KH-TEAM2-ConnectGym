@@ -28,6 +28,7 @@ public class TrainerResponseDTO {
     //트레이너 상세에서만 받음
     private List<License> licenses;
     private Long lessonNo;
+    private int memberCount;
 
     public TrainerResponseDTO(Trainer entity) {
             this.trainerNo = entity.getNo();

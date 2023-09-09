@@ -1,13 +1,17 @@
 
-
 function checkRoom(titleCode, enrollKey) {
 
+    const params = {
+        lessonTitleCode:titleCode,
+        enrollKey: enrollKey
+    }
+
   $.ajax({
-    type: "get",
-    url: `/room/checkEnroll?titleCode=${titleCode}&enrollKey=${enrollKey}`,
+    type: "POST",
+    url: `/room/checkEnroll`,
+    data: JSON.stringify(params),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
-    async : false,
     success: (response) => {
         //룸 입장 (response는 roomNo)
         // -1 : 룸 생성 전

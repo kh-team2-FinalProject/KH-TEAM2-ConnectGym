@@ -36,7 +36,7 @@ window.onload = function() {
                 <div class="myl-trainer">트레이너 ${enroll.lesson.trainer.trainerName}</div>
             </div>
             <div class="enter-button">
-                <button onclick="checkRoom('${enroll.lesson.titleCode}','${enroll.enrollKey}');">Connect GYM!</button>
+                <button onclick="checkRoom('${enroll.lessonTitleCode}','${enroll.enrollKey}');">Connect GYM!</button>
 
             </div>
         </div>

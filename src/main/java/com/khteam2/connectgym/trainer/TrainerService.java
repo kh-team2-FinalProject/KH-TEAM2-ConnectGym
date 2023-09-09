@@ -8,6 +8,7 @@ import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
+import com.khteam2.connectgym.order.OrderDetailRepository;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
@@ -30,6 +31,7 @@ public class TrainerService {
     private final TrainerRepository trainerRepository;
     private final LessonRepository lessonRepository;
     private final LicenseRepository licenseRepository;
+    private final OrderDetailRepository orderDetailRepository;
     private final S3Uploader s3Uploader;
 
     //중복 검사 메소드
@@ -137,6 +139,8 @@ public class TrainerService {
         //레슨 번호
         Lesson lesson = lessonRepository.findByTrainerNo(trainerNo).orElse(null);
 
+        //누적 수강생
+        int memberCount = orderDetailRepository.findCountByTrainer(trainerNo);
 
         //라이선스 목록
         List<License> licenses = licenseRepository.findAllTrainerNo(trainerNo);
@@ -150,6 +154,7 @@ public class TrainerService {
             .infoTitle(trainer.getInfoTitle())
             .infoContent(trainer.getInfoContent())
             .licenses(licenses)
+            .memberCount(memberCount)
             .build();
 
         if (lesson == null) {
