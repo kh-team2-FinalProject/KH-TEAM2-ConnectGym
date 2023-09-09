@@ -7,23 +7,26 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
-<h1>내 레슨을 등록한 회원</h1>
-
+<div class="tmp-mll-ttl">
+    <h1>나의 레슨을 등록한 회원</h1>
+</div>
 <th:block layout:fragment="script">
     <script th:src="@{/js/onlyTrainer/enterRoom.js}"></script>
 </th:block>
 
 <th:block th:if="${trainerEnterRoom.errorMsg == 'NotFound'}">
-    <div>현재 등록한 회원이 없습니다.</div>
+    <div class="tmp-mll-none">현재 등록한 회원이 없습니다.</div>
 </th:block>
 
 <th:block th:if="${trainerEnterRoom.errorMsg != 'NotFound'}">
-    <div>나의 레슨을 구매한 회원 목록</div>
-    <div th:each="member : ${trainerEnterRoom.memberMap}">
-        <a href="#">[[${member.value.userName}]]</a>
-
-        <button th:onclick="enterRoom([[${trainerEnterRoom.titleCode}]],[[${member.key}]])">입장하기</button>
+    <div class="tmp-mll">나의 레슨을 구매한 회원 목록</div>
+    <div th:each="member : ${trainerEnterRoom.memberMap}" class="tmp-mll-content">
+        <div class="tmp-mll-name">
+            <span>[[${member.value.userName}]]</span>
+        </div>
+        <div class="tmp-mll-btn">
+            <button th:onclick="enterRoom([[${trainerEnterRoom.titleCode}]],[[${member.key}]])">입장하기</button>
+        </div>
     </div>
 </th:block>
 

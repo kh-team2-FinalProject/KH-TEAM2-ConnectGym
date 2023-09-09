@@ -3,7 +3,7 @@
     height: 80vh;
     /* position: relative; */
     display: flex;
-    min-height: 500px;
+    min-height: 800px;
     min-width: 697px;
 
 }
@@ -73,12 +73,14 @@
     font-size: 1.4rem;
     margin: 0 10%;
     width: 89%;
+    color: black;
 }
 
 .dsh-profile-info {
     font-size: 0.9rem;
     margin: 3% 10%;
     width: 89%;
+    color: #575757;
 }
 
 .dsh-left-second-row {
@@ -205,6 +207,13 @@
     height: 85%;
     margin: 3% 5%;
     overflow: scroll;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.dsh-mychatroom_list_trainer_button img {
+    cursor: pointer;
 }
 
 .dsh-message-content {
@@ -285,6 +294,7 @@
     justify-content: center;
     display: flex;
     border-bottom: 1px solid lightgray;
+    margin: 0 10%;
 }
 
 .dsh-lessons-title {
