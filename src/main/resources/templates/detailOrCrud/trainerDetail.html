@@ -94,9 +94,9 @@
                         <div class="trainerDetail_profile_header_item_sub2">[[${trainer.memberCount}]]명
                         </div>
                     </div>
-                    <div class="trainerDetail_profile_header_item">
+                    <div class="trainerDetail_profile_header_item" th:onclick="showReview([[${trainer.trainerNo}]]);">
                         <div class="trainerDetail_profile_header_item_sub1">리뷰</div>
-                        <div class="trainerDetail_profile_header_item_sub2" th:onclick="showReview([[${trainer.trainerNo}]]);">[[${reviewCount}]]건
+                        <div class="trainerDetail_profile_header_item_sub2">[[${reviewCount}]]건
                         </div>
                     </div>
                     <div class="trainerDetail_profile_header_item">

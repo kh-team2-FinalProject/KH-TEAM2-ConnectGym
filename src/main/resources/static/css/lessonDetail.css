@@ -211,6 +211,7 @@
 
 .ld_reviewBox .ld_reviewBox_item {
     font-size: 12px;
+    font-weight: 300;
     height: 20px;
     min-width:280px;
     width:100%;

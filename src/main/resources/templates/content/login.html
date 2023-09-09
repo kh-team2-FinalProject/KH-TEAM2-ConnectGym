@@ -9,6 +9,13 @@
     <link th:href="@{/css/login.css}" rel="stylesheet">
 </th:block>
 
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        let requestUrl = [[${requestUrl}]];
+    </script>
+</th:block>
+
+
 <th:block layout:fragment="content">
     <div class="join_container">
         <div class="join_border">
@@ -21,7 +28,7 @@
 
             <div class="join_form">
                 <!-- 회원가입/로그인 폼 -->
-                <form class="join_signInUpForm" action="/user/loginProcess" name="loginForm">
+                <form class="join_signInUpForm" action="" name="loginForm">
                     <div class="login_select_class">
                         <label>
                             <input
@@ -148,7 +155,7 @@
                     .then((v) => v.json())
                     .then((v) => {
                         if (v.success) {
-                            location.href = "/";
+                            location.href = ""+requestUrl;
                         } else {
                             alert(v.message);
                         }

@@ -2,6 +2,8 @@ window.onload = () => {
   const checkbox = document.getElementById("td_followCheckbox");
   let followed = checkbox.getAttribute("data-followed");
 
+  applyStarRating();
+
   //초기상태
   updateCheckboxState(followed);
 
@@ -36,7 +38,7 @@ function toggleFollow() {
         checkbox.setAttribute("data-followed", "false");
         checkbox.checked = false;
         $(".td_trainer_follow_count").text(
-          parseInt($(".td_trainer_follow_count").text()) - 1
+          parseInt($(".td_trainer_follow_count").text())-1
         );
         Swal.fire({
           position: 'center',
@@ -61,7 +63,7 @@ function toggleFollow() {
         checkbox.setAttribute("data-followed", "true");
         checkbox.checked = true;
         $(".td_trainer_follow_count").text(
-          parseInt($(".td_trainer_follow_count").text()) + 1
+          parseInt($(".td_trainer_follow_count").text())+1
         );
          Swal.fire({
                   position: 'center',

@@ -65,6 +65,7 @@ public class TrainerController {
         Long userNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
         Boolean isFollow = followService.followCheck(userNo, trainerNo);
 
+        System.out.println("isFollow = " + isFollow);
 
         FollowForTrainerResponseDTO followTrainerResponseDTO = FollowForTrainerResponseDTO.builder()
             .trainerFollowCnt(followCount)

@@ -67,23 +67,6 @@ public class CommonController {
         return "content/main";
     }
 
-    //팔로일 테스트화면
-    @GetMapping("/mypage/myFollowingTest")
-    public String myFolloing(Model model, HttpSession session) {
-
-        //배너타이틀
-        model.addAttribute("bannerTitle", "following");
-
-        MemberResponseDTO member = memberService.sessionMem(session);
-
-        List<TrainerResponseDTO> following = followService.followingList(member.getNo());
-
-        model.addAttribute("following", following);
-        model.addAttribute("follwStatus", "true");
-
-        return "mypage/following_test2";
-    }
-
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")
     public String lesson() {

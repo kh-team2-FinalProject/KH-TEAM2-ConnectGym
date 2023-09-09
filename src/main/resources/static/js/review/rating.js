@@ -1,4 +1,3 @@
-window.onload = applyStarRating;
 
 function applyStarRating() {
     const starRatingElements = document.querySelectorAll('.review_item_rating');
@@ -28,3 +27,28 @@ function applyStarRating() {
         }
     });
 }
+
+/* 로컬 svg 이모티콘 사용 시
+function applyStarRating() {
+      const starRatingElements = document.querySelectorAll('.review_item_rating');
+
+      starRatingElements.forEach(starRating => {
+          const rating = parseInt(starRating.getAttribute('data-rating'));
+
+          for (let i = 1; i <= 5; i++) {
+              // <img> 태그 생성
+              const starImg = document.createElement("img");
+              starImg.classList.add('star');
+              starImg.setAttribute('src', '/images/icons/star-solid.svg'); // 이미지 파일 경로 설정
+
+              // 별 아이콘의 색상을 설정합니다.
+              if (i <= rating) {
+                  starImg.classList.add('filled');
+              }
+
+              // <img> 태그를 요소에 추가
+              starRating.appendChild(starImg);
+          }
+      });
+  }
+*/
