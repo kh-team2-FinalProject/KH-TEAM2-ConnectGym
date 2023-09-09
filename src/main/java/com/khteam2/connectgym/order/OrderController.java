@@ -59,7 +59,7 @@ public class OrderController {
             model.addAttribute("message", responseDto.getMessage());
         }
 
-        return responseDto.getUrl();
+        return "redirect:" + responseDto.getUrl();
     }
 
     @GetMapping(value = "/order/complete")

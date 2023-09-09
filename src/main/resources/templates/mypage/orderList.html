@@ -27,6 +27,7 @@
                         type="date"
                         name="startDate"
                         placeholder="시작 날짜"
+                        class="js_input_date_20230909_1"
                         th:max="${#temporals.format(#temporals.createNow(), 'YYYY-MM-dd')}"
                         th:value="${#temporals.format(responseDto.startDate, 'YYYY-MM-dd')}"
                     />
@@ -39,6 +40,7 @@
                         type="date"
                         name="endDate"
                         placeholder="마지막 날짜"
+                        class="js_input_date_20230909_1"
                         th:max="${#temporals.format(#temporals.createNow(), 'YYYY-MM-dd')}"
                         th:value="${#temporals.format(responseDto.endDate ?: #temporals.createNow(), 'YYYY-MM-dd')}"
                     />
@@ -48,6 +50,7 @@
                     <input
                         type="search"
                         name="q"
+                        class="js_input_date_20230909_1"
                         th:value="${responseDto.search}"
                     />
                 </label>
@@ -166,16 +169,18 @@
                                 <div
                                     class="orderList_order_detail_right orderList_order_detail_right_2_box"
                                 >
-                                    <a th:if="${detail.reviewYn == true}"
+                                    <a
+                                        th:if="${detail.reviewYn == true}"
                                         th:href="@{'/mypage/writeReview/' + ${detail.orderDetailNo}}"
                                         class="_js_button_20230904_1"
                                         >리뷰 작성</a
                                     >
-                                    <div th:if="${detail.reviewYn == false }"
-
-                                       class="_js_button_20230904_1_disable"
-                                    >리뷰 작성 완료</div
+                                    <div
+                                        th:if="${detail.reviewYn == false }"
+                                        class="_js_button_20230904_1_disable"
                                     >
+                                        리뷰 작성 완료
+                                    </div>
                                 </div>
                             </div>
                         </div>

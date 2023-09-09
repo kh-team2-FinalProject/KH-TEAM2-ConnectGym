@@ -3,6 +3,9 @@
     height: 80vh;
     /* position: relative; */
     display: flex;
+    min-height: 500px;
+    min-width: 697px;
+
 }
 
 .dsh-left-container {
@@ -95,6 +98,7 @@
     border-radius: 5px;
     border: 1px solid #b6b6b6;
     overflow: hidden;
+    justify-content: space-around;
 }
 
 .dsh-card-title {
@@ -126,6 +130,8 @@
     border: 1px solid gray;
     border-radius: 5px;
     margin: 0 2%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dsh-class-content {

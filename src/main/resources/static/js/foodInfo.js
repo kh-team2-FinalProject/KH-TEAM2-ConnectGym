@@ -19,22 +19,6 @@ function searchFood() {
 }
 
 /* 검색 기능 */
-// $(document).ready(function () {
-//     // Enter
-//     $("#popInput").keypress(function (e) {
-//         if (e.which === 13) {
-//             const searchValue = $("#popInput").val();
-//             if (searchValue.trim() !== "") {
-//                 searchFoods(searchValue);
-//             }
-//         }
-//     });
-// });
-
-// window.onload = function () {
-//     var modal = document.getElementById("dietPopup");
-//     modal.style.display = "none";
-// };
 
 function movePage(page) {
     const params = new URLSearchParams(location.search);
