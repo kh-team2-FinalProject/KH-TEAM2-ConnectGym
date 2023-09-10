@@ -179,12 +179,17 @@ public class TrainerOnlyController {
 
     }
 
+
+    //팔로우
     @GetMapping("/mypage/followed")
     public String followed(Model model, HttpSession session) {
         model.addAttribute("bannerTitle", "followed");
+//        logger.info("세션 상태 확인: " + session.getAttribute(SessionConstant.LOGIN_MEMBER_CLASS));
+
         TrainerResponseDTO trainer = trainerService.sessionT(session);
         List<MemberResponseDTO> followed = followService.followList(trainer.getTrainerNo());
         model.addAttribute("followed", followed);
+//        logger.info("세션 상태 확인: " + session.getAttribute(SessionConstant.LOGIN_MEMBER_CLASS));
 
         return "trainerOnly/followed";
     }
