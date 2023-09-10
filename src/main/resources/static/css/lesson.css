@@ -3,6 +3,50 @@
     height: 100%;
 }
 
+/*검색창*/
+.l_lessonList_search{
+display: flex;
+    padding: 25px 10px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: -88px;
+
+}
+
+/*select,input 크기 맞추기*/
+.l_lessonList_search .l_lessonList_search_category,
+.l_lessonList_search .l_lessonList_search_keyword{
+margin: 0px 5px;
+height: 40px;
+box-sizing: border-box;
+}
+
+/*select 태그*/
+.l_lessonList_search .l_lessonList_search_category{
+width:90px;
+}
+
+/*input 태그*/
+.l_lessonList_search .l_lessonList_search_keyword{
+width:180px;
+}
+
+.l_lessonList_search button{
+background:none;
+border:none;
+height: 40px;
+}
+
+.l_lessonList_search button img{
+filter: invert(92%) sepia(99%) saturate(0%) hue-rotate(264deg) brightness(104%) contrast(100%);
+width: 30px;
+height: 30px;
+}
+
+.l_lessonList_search button img:hover{
+cursor:pointer;
+}
+
 .l_lessonlist {
     display: flex;
     /*margin-top: 80px;*/

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>Lesson > ${lessonCategory}</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="content">
+    <div class="trainerList_container">
+
+        <div class="trainerList_all_banner">
+            Trainers
+
+        </div>
+        <div class="trainerList_all_content">
+            <div class="trainerList_all_content_detail">
+                <div class="trainerList_all_content_detail_item" th:each="trainer : ${trainerList}">
+                    <img th:src="${trainer.profileImg}">
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+                <!--  <div class="t979__grid " style="height: 2259.63px;">
+                      <div class="t979__grid-item " style="width: 272.032px; top: 0px; left: 0px; height: 181.355px;" itemscope=""
+                           itemtype="http://schema.org/ImageObject">
+                          <meta itemprop="image"
+                                content="https://static.tildacdn.com/tild6637-3330-4534-b534-363634323461/0N1A1486.jpg">
+                          <img class="t979__image t-slds__img t-img t-zoomable loaded"
+                               src="https://thumb.tildacdn.com/tild6637-3330-4534-b534-363634323461/-/resize/544x/-/format/webp/0N1A1486.jpg"
+                               data-original="https://static.tildacdn.com/tild6637-3330-4534-b534-363634323461/0N1A1486.jpg"
+                               data-zoomable="yes"
+                               data-img-zoom-url="https://static.tildacdn.com/tild6637-3330-4534-b534-363634323461/0N1A1486.jpg">
+                      </div>
+                      <div class="t979__grid-item " style="width: 272.032px; top: 0px; left: 272.032px; height: 181.355px;"
+                           itemscope="" itemtype="http://schema.org/ImageObject">
+                          <meta itemprop="image"
+                                content="https://static.tildacdn.com/tild3763-3331-4831-b734-336332373363/0N1A1351.jpg">
+                          <img class="t979__image t-slds__img t-img t-zoomable loaded"
+                               src="https://thumb.tildacdn.com/tild3763-3331-4831-b734-336332373363/-/resize/544x/-/format/webp/0N1A1351.jpg"
+                               data-original="https://static.tildacdn.com/tild3763-3331-4831-b734-336332373363/0N1A1351.jpg"
+                               data-zoomable="yes"
+                               data-img-zoom-url="https://static.tildacdn.com/tild3763-3331-4831-b734-336332373363/0N1A1351.jpg">
+                      </div>
+
+                  </div>-->
+</th:block>
+
+
+</html>

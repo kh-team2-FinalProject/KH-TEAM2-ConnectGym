@@ -22,7 +22,7 @@ window.onload = function() {
 
   	    if(!response.length){
                     document.querySelector('#mylesson-list').innerHTML=
-                    '<div class="mylesson_none"><div><p>아직 등록한 레슨이 없습니다!</p></div><div><a href="/lesson-list">💪레슨 둘러보기</a></div></div>';
+                    '<div class="mylesson_none"><div><p>아직 등록한 레슨이 없습니다!</p></div><div><a href="/lessonList">💪레슨 둘러보기</a></div></div>';
                     return false;
         }
         // 강좌가 있는 경우

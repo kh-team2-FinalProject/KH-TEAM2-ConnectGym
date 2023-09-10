@@ -53,7 +53,7 @@ public class LessonController {
         return "detailOrCrud/createComplete";
     }
 //    레슨 다 가져오기 // 기존 mapping
-//    @GetMapping("/lesson-list")
+//    @GetMapping("/lessonList")
 //    public String lessonList(Model model) {
 //        model.addAttribute("bannerTitle", "lessons");
 //
@@ -67,12 +67,13 @@ public class LessonController {
 //    }
 
     //레슨 다 가져오기
-    @GetMapping("/lesson-list")
+    @GetMapping("/lessonList")
     public String lessonList(Model model,
                              @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
                              @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
     ) {
         model.addAttribute("lessonCategory", "lessons");
+
 
         // ---
         int itemsPerPage = 1;   // 한 페이지에 보여질 게시글 수
@@ -93,6 +94,36 @@ public class LessonController {
 
         return "lesson/lessonCategory";
     }
+
+    //레슨 검색해서 가져오기
+    @ResponseBody
+    @GetMapping("/lessonList/search")
+    public String lessonSearchList(Model model,
+                             @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
+                             @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
+    ) {
+
+
+        // ---
+        int itemsPerPage = 1;   // 한 페이지에 보여질 게시글 수
+
+        List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
+        lessonList = lessonService.viewCategoryList(lessonList,
+            category); // 카테고리별 lesson 카테고리 0일경우 모든 lesson
+
+        int totalPages = lessonService.getTotalPages(itemsPerPage, lessonList); // 총 페이지 수
+        lessonList = lessonService.getDataForPage(pageNumber, itemsPerPage,
+            lessonList); // 카테고리에 따른 한 페이지당 나오는 게시글
+
+        model.addAttribute("lessonList", lessonList);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("category", category);
+        System.out.println(category);
+
+        return "lesson/lessonCategory";
+    }
+
 
     //레슨 한 개만 불러오기
     @GetMapping("/lessonDetail/{lessonNo}")

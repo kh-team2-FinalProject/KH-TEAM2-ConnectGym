@@ -2,6 +2,8 @@ package com.khteam2.connectgym.trainer;
 
 
 import com.khteam2.connectgym.common.SessionConstant;
+import com.khteam2.connectgym.follow.FollowRepository;
+import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class TrainerService {
     private final LessonRepository lessonRepository;
     private final LicenseRepository licenseRepository;
     private final OrderDetailRepository orderDetailRepository;
+    private final FollowRepository followRepository;
     private final S3Uploader s3Uploader;
 
     //중복 검사 메소드
@@ -189,6 +193,23 @@ public class TrainerService {
         TrainerResponseDTO trainerResponseDTO = findOneTrainer(sessionTrainerNo);
 
         return trainerResponseDTO;
+    }
+
+    public List<TrainerResponseDTO> trainerAll() {
+        List<TrainerResponseDTO> trainerAll = new ArrayList<>();
+
+        List<Trainer> trainers = trainerRepository.findAll();
+
+        for (Trainer val : trainers) {
+            TrainerResponseDTO dto = new TrainerResponseDTO(val);
+            trainerAll.add(dto);
+
+            dto.setFollowCount(followRepository.findAllByToTrainerCount(val.getNo()));
+
+        }
+
+        return trainerAll;
+
     }
 }
 

@@ -30,6 +30,8 @@ public class TrainerResponseDTO {
     private Long lessonNo;
     private int memberCount;
 
+    private int followCount;
+
     public TrainerResponseDTO(Trainer entity) {
             this.trainerNo = entity.getNo();
             this.trainerId = entity.getTrainerId();

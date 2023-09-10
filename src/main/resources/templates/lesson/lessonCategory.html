@@ -8,6 +8,21 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="lesson">
     <div class="l-lessonList-container">
+        <div class="l_lessonList_search">
+            <select class="l_lessonList_search_category" name="searchType">
+                <option value="all">전체</option>
+                <option value="trainerName">트레이너명</option>
+                <option value="lessonTitle">레슨명</option>
+            </select>
+
+            <input type="text" name="keyword"
+                   class="l_lessonList_search_keyword"
+                   placeholder="검색어를 입력하세요."/>
+            <button class="l_lessonList_search_button"><img th:src="@{/images/icons/mdi/magnify.svg}"></button>
+
+
+        </div>
+
         <div class="l_lessonlist">
             <div id="l_lessonlist_wrap">
                 <!--                <div th:each="lesson : ${lessonList}"-->
@@ -49,7 +64,7 @@
             <ul>
                 <li class="prev" th:if="${currentPage > 1}">
                     <button type="button"
-                            th:onclick="'location.href=&quot;/lesson-list?page=' + (${currentPage - 1}) + '&category=' + ${category} + '&quot;'">
+                            th:onclick="'location.href=&quot;/lessonList?page=' + (${currentPage - 1}) + '&category=' + ${category} + '&quot;'">
                         이전
                     </button>
 
@@ -57,12 +72,12 @@
                 <li class="pageNumber" th:each="page : ${#numbers.sequence(1, totalPages)}"
                     th:classappend="${currentPage == page} ? 'active'">
                     <button type="button"
-                            th:onclick="'location.href = &quot;/lesson-list?page=' + ${page} + '&category=' + ${category} + '&quot;'"
+                            th:onclick="'location.href = &quot;/lessonList?page=' + ${page} + '&category=' + ${category} + '&quot;'"
                             th:text="${page}"></button>
                 </li>
                 <li class="next" th:if="${currentPage < totalPages}">
                     <button type="button"
-                            th:onclick="'location.href=&quot;/lesson-list?page=' + (${currentPage + 1}) + '&category=' + ${category} + '&quot;'">
+                            th:onclick="'location.href=&quot;/lessonList?page=' + (${currentPage + 1}) + '&category=' + ${category} + '&quot;'">
                         다음
                     </button>
                 </li>
