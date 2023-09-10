@@ -76,7 +76,7 @@ public class LessonController {
 
 
         // ---
-        int itemsPerPage = 1;   // 한 페이지에 보여질 게시글 수
+        int itemsPerPage = 10;   // 한 페이지에 보여질 게시글 수
 
         List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
         lessonList = lessonService.viewCategoryList(lessonList,
@@ -99,13 +99,13 @@ public class LessonController {
     @ResponseBody
     @GetMapping("/lessonList/search")
     public String lessonSearchList(Model model,
-                             @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
-                             @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
+                                   @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
+                                   @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
     ) {
 
 
         // ---
-        int itemsPerPage = 1;   // 한 페이지에 보여질 게시글 수
+        int itemsPerPage = 10;   // 한 페이지에 보여질 게시글 수
 
         List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
         lessonList = lessonService.viewCategoryList(lessonList,
@@ -161,7 +161,7 @@ public class LessonController {
         model.addAttribute("likeInfo", likeDto);
         model.addAttribute("trainerInfo", trainerLessonResponseDTO);
         model.addAttribute("lesson", lesson);
-        model.addAttribute("reviews",reviews);
+        model.addAttribute("reviews", reviews);
 
         return "detailOrCrud/lessonDetail";
     }

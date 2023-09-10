@@ -151,8 +151,6 @@ public class TrainerOnlyController {
         model.addAttribute("trainer", trainerResponseDTO);
         return "trainerOnly/myLesson";
     }
-    //트레이너 회원리스트
-    //트레이너 페이지
 
     // 회원 불러오기
     @GetMapping("/mypage/memberList/{lessonNo}")
