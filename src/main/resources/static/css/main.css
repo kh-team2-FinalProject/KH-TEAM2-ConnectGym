@@ -44,16 +44,14 @@
 /*==========메인 비디오========*/
 
 /*==========카테고리 바로가기========*/
-section-1 {
+.section-1 {
   margin: 0;
-  min-height: 50vh;
-  background: #000;
+  background: #0e1414;
   font-family: sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 200px;
-  ;
+  margin-bottom: 100px;
 }
 
 .sc-container {
@@ -75,7 +73,7 @@ section-1 {
 .sc-container .sc-card {
   flex: 1;
   transition: all 1s ease-in-out;
-  height: 700px;
+  height: 750px;
   position: relative;
 }
 .sc-container .sc-card .sc-card__head {
