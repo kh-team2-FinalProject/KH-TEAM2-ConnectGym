@@ -25,27 +25,31 @@ public class DietListController {
     private final FoodRepository foodRepository;
 
     @GetMapping("fooddiary/foodInfo")
-    public String diet_SearchForm(Model model, FoodFindRequestDto requestDto) {
+    public String diet_SearchForm(Model model, FoodFindRequestDto requestDto, Food foodForm) {
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
 
         model.addAttribute("responseDto", responseDto);
+/*
+        model.addAttribute("foodForm", foodForm);
+*/
         model.addAttribute("food", new Food());
 
         return "fooddiary/foodInfo";
     }
 
 
+
+/*    public String addFood(@Valid @ModelAttribute("foodForm") Food foodForm, Errors errors, Model model) {*/
     @PostMapping("fooddiary/foodInfo")
-    public String addFood(@Valid @ModelAttribute("foodForm") Food foodForm, Errors errors, Model model) {
-    /*public String addFood(
-        @ModelAttribute @Valid Food food,
+    public String addFood(
+        @ModelAttribute("food") @Valid Food food,
         Errors errors,
         Model model,
         FoodFindRequestDto requestDto) {
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
-*/
-        model.addAttribute("responseDto", responseDto);
 
+        model.addAttribute("responseDto", responseDto);
+        model.addAttribute("food", food);
         /* 에러 메세지 */
 
         if (errors.hasErrors()) {
@@ -56,7 +60,8 @@ public class DietListController {
 
             return "fooddiary/foodInfo";
         }
-        foodService.saveFood(foodForm);
+
+        foodService.saveFood(food);
         return "fooddiary/foodInfo";
     }
 

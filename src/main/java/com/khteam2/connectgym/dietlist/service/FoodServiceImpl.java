@@ -115,9 +115,9 @@ public class FoodServiceImpl implements FoodService {
 
     @Transactional
     @Override
-    public Food saveFood(Food foodForm) {
+    public Food saveFood(Food food) {
 
-        return foodRepository.save(foodForm);
+        return foodRepository.save(food);
     }
 
 
