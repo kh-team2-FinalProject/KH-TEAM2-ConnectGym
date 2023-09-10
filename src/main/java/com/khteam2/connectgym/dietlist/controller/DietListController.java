@@ -34,9 +34,16 @@ public class DietListController {
     }
 
 
-
     @PostMapping("fooddiary/foodInfo")
-    public String addFood(@ModelAttribute @Valid Food food, Errors errors, Model model) {
+    public String addFood(
+        @ModelAttribute @Valid Food food,
+        Errors errors,
+        Model model,
+        FoodFindRequestDto requestDto) {
+        FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
+
+        model.addAttribute("responseDto", responseDto);
+
         /* 에러 메세지 */
         if (errors.hasErrors()) {
             Map<String, String> validatorResult = foodService.validateHandling(errors);
@@ -49,9 +56,6 @@ public class DietListController {
         foodService.saveFood(food);
         return "fooddiary/foodInfo";
     }
-
-
-
 
 
     // dietlist
