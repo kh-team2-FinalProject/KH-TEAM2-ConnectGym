@@ -56,7 +56,7 @@ public class TrainerService {
         //중복검사
         boolean check = validateDuplicate(member.getUserId());
         if (!check) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+                throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
 
         String fileUrl = "";

@@ -35,7 +35,6 @@ public class EnrollService {
 
         List<Order> orders = orderRepository.findByMember(member);
 
-
         for (Order o : orders) {
             OrderDetail orderDetail= orderDetailRepository.findByEnroll(o);
 
@@ -53,7 +52,6 @@ public class EnrollService {
         }
 
         return enrolls;
-
     }
 
 

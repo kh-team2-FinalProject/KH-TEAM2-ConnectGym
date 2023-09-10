@@ -25,7 +25,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Transactional
 public class TrainerOnlyService {
-    //==============트레이너 룸 입장 테스트==================//
+
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final LessonRepository lessonRepository;
@@ -93,7 +93,6 @@ public class TrainerOnlyService {
         OrderDetail orderDetail = orderDetailRepository.findByEnrollKey(enrollKey);
 
         String roomName = titleCode + "" + enrollKey;
-
         Room room = roomRepository.findByRoomName(roomName).orElse(null);
 
         if (room == null) {
@@ -102,7 +101,6 @@ public class TrainerOnlyService {
                 .roomStatus(RoomStatus.ACTIVE)
                 .orderDetail(orderDetail)
                 .build();
-
             Room saveRoom = roomRepository.save(createRoom);
 
             TrainerRoomResponseDto roomResponseDto = TrainerRoomResponseDto.builder()
@@ -126,8 +124,6 @@ public class TrainerOnlyService {
 
             return roomResponseDto;
         }
-
-
     }
 
     public Long findLessonNoByTrainerNo(Long trainerNo) {

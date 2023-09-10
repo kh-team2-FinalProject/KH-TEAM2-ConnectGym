@@ -44,11 +44,7 @@ function joinSession() {
     console.warn(exception);
   });
 
-  // --- 4) Connect to the session with a valid user token ---
-  // Get a token from the OpenVidu deployment
   getToken(myRoomCode).then((token) => {
-    // 토큰 발급 확인용
-    console.log("Token received:", token);
 
     // 첫 번째 매개 변수는 OpenVidu 배포에서 가져온 토큰, 두 번째 매개 변수는 이벤트 시 모든 사용자가 검색할 수 있음
     // 'streamCreated'(PropertyStream.connection.data)이며 사용자 닉네임으로 DOM에 추가
@@ -209,6 +205,7 @@ function removeAllUserData() {
     nicknameElements[0].parentNode.removeChild(nicknameElements[0]);
   }
 }
+
 
 function getToken(myRoomCode) {
   return createSession(myRoomCode).then((sessionId) => createToken(sessionId));

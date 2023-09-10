@@ -82,7 +82,7 @@ function showReview(trainerNo) {
                     <div class="trainerDetail_review_item_memReview_title">
                         레슨명 : ${review.reviewTitle}
                     </div>
-                    <div class="trainerDetail_review_item_content">트레이너 ${review.reviewContent}</div>
+                    <div class="trainerDetail_review_item_content">${review.reviewContent}</div>
                 </div>
 
 

@@ -53,3 +53,14 @@ cursor: pointer;
   line-height: 20px;
 
 }
+
+.my_Review_list_item_content_image{
+width:300px;
+height:300px;
+padding-top: 20px;
+}
+
+.my_Review_list_item_content_image img{
+width:100%;
+border-radius: 20px;
+}
