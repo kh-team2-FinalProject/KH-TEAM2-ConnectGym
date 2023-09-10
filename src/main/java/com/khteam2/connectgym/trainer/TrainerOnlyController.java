@@ -50,6 +50,7 @@ public class TrainerOnlyController {
                           @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
                           Model model, RedirectAttributes redirectAttributes) {
 
+        model.addAttribute("bannerTitle", "my page");
         if (loginMemberClass == null) {
 
             // 로그인되어 있지 않은 경우
@@ -139,7 +140,7 @@ public class TrainerOnlyController {
                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo) {
         LessonResponseDTO registered = trainerOnlyService.registered(trainerNo);
 
-
+        model.addAttribute("bannerTitle", "my lesson");
         if (registered.getErrorMsg().equals("NotFound")) {
             model.addAttribute("lesson", null);
         } else {
@@ -158,7 +159,7 @@ public class TrainerOnlyController {
     public String memberList(@PathVariable Long lessonNo, Model model,
                              @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                              @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo) {
-
+        model.addAttribute("bannerTitle", "my lesson");
         // 멤버 정보
         TrainerEnterRoomResponseDto trainerEnterRoomDto = trainerOnlyService.enrollMemList(lessonNo, trainerNo);
         model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);

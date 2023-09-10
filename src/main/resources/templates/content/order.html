@@ -27,7 +27,11 @@
                                             class="order_lesson"
                                             th:each="lesson : ${orderResponse.lessonList}"
                                         >
-                                            <div class="order_lesson_photo">
+                                            <a
+                                                th:href="@{'/lessonDetail/' + ${lesson.no}}"
+                                                target="_blank"
+                                                class="order_lesson_photo"
+                                            >
                                                 <img
                                                     th:src="@{${lesson.lesson_img}}"
                                                     alt="레슨 사진"
@@ -35,20 +39,24 @@
                                                     width="100"
                                                     height="100"
                                                 />
-                                            </div>
+                                            </a>
                                             <div
                                                 class="order_lesson_descriptions"
                                             >
-                                                <div
-                                                    class="order_lesson_title"
-                                                    th:text="${lesson.title}"
-                                                ></div>
+                                                <div>
+                                                    <a
+                                                        th:href="@{'/lessonDetail/' + ${lesson.no}}"
+                                                        th:text="${lesson.title}"
+                                                        target="_blank"
+                                                        class="order_lesson_title"
+                                                    ></a>
+                                                </div>
                                                 <div
                                                     class="order_lesson_descriptions_2"
                                                 >
                                                     <div
                                                         class="order_lesson_trainerName"
-                                                        th:text="${lesson.trainer.trainerName}"
+                                                        th:text="${lesson.trainer.trainerName} + ' / ' + |${lesson.start_date} ~ ${lesson.end_date}|"
                                                     ></div>
                                                     <div
                                                         class="order_lesson_price"
@@ -59,6 +67,40 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div style="display: none">
+                                    <input
+                                        type="hidden"
+                                        name="pgShopId"
+                                        th:value="${pgShopId}"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="franchiseId"
+                                        th:value="${franchiseId}"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="orderNo"
+                                        th:value="${orderResponse.orderNo}"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="userName"
+                                        th:value="${orderResponse.name}"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="userTelNo"
+                                        th:value="${orderResponse.telNo}"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="price"
+                                        th:value="${orderResponse.price}"
+                                    />
+                                </div>
+
                                 <div class="order_order_info">
                                     <h3>주문자 정보</h3>
                                     <div class="order_order_info_container">
@@ -91,37 +133,16 @@
                                             ></div>
                                         </th:block>
                                     </div>
+                                    <div class="order_suggest_messages">
+                                        <span
+                                            >주문자 정보는
+                                            <a th:href="@{/mypage/myInfo}"
+                                                >내 정보</a
+                                            >
+                                            페이지에서 수정할 수 있습니다.</span
+                                        >
+                                    </div>
                                 </div>
-                                <input
-                                    type="hidden"
-                                    name="pgShopId"
-                                    th:value="${pgShopId}"
-                                />
-                                <input
-                                    type="hidden"
-                                    name="franchiseId"
-                                    th:value="${franchiseId}"
-                                />
-                                <input
-                                    type="hidden"
-                                    name="orderNo"
-                                    th:value="${orderResponse.orderNo}"
-                                />
-                                <input
-                                    type="hidden"
-                                    name="userName"
-                                    th:value="${orderResponse.name}"
-                                />
-                                <input
-                                    type="hidden"
-                                    name="userTelNo"
-                                    th:value="${orderResponse.telNo}"
-                                />
-                                <input
-                                    type="hidden"
-                                    name="price"
-                                    th:value="${orderResponse.price}"
-                                />
                             </div>
 
                             <div class="order_right">

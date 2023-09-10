@@ -43,12 +43,7 @@ public class RoomService {
     @Transactional(readOnly = true)
     public Long roomStatusCheck(String titleCode, Long enrollKey) {
 
-        // -1 : 룸 생성 전
-        // 0 : 트레이너 입장 전
-        // 1 : 입장 가능
-
         String reqRoomName = titleCode + "" + enrollKey;
-        System.out.println("roomRepository reqRoomName = " + reqRoomName);
 
         Room room = roomRepository.findByRoomName(reqRoomName).orElse(null);
 
@@ -79,9 +74,6 @@ public class RoomService {
     }
 
 
-
-
-
     // 룸 입장을 위한 세션 생성
     public String initializeSession(Map<String, Object> params)
         throws OpenViduJavaClientException, OpenViduHttpException {
@@ -90,6 +82,7 @@ public class RoomService {
         return session.getSessionId();
     }
 
+    // 커넥션
     public String createConnection(String sessionId, RoomRequest roomRequest)
         throws OpenViduJavaClientException, OpenViduHttpException {
         Session session = openvidu.getActiveSession(sessionId);
@@ -108,6 +101,6 @@ public class RoomService {
     // 트레이너 퇴장 시 룸 비활성화
     public void exitRoom(String sessionId) {
         Room room = roomRepository.findByRoomName(sessionId).orElse(null);
-        roomRepository.updateRoomStatus(RoomStatus.DISABLE,room.getNo());
+        roomRepository.updateRoomStatus(RoomStatus.DISABLE, room.getNo());
     }
 }

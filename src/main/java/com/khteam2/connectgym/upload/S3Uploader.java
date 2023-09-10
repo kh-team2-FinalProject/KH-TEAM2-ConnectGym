@@ -35,7 +35,7 @@ public class S3Uploader {
 
         amazonS3Client.putObject(bucket + "/profile/" + trainerId, s3FileName, file.getInputStream(), metadata);
 
-        return amazonS3Client.getUrl(bucket, s3FileName).toString();
+        return amazonS3Client.getUrl(bucket + "/profile/" + trainerId, s3FileName).toString();
 
     }
 
@@ -75,7 +75,7 @@ public class S3Uploader {
 
         amazonS3Client.putObject(bucket + "/review/" + userNo, s3FileName, file.getInputStream(), metadata);
 
-        return amazonS3Client.getUrl(bucket, s3FileName).toString();
+        return amazonS3Client.getUrl(bucket + "/review/" + userNo, s3FileName).toString();
 
     }
 

@@ -54,9 +54,10 @@ public class TrainerController {
         Member member = memberRepository.findById(userNo).orElse(null);
 
         //트레이너로 등록
-        trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile, licenseImgFiles);
+        Long trainerNewNo = trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile, licenseImgFiles);
 
         return "redirect:/mypage";
+
     }
 
     //트레이너 상세 페이지

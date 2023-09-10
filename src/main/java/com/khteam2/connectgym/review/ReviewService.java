@@ -23,7 +23,7 @@ public class ReviewService {
 
     //리뷰 저장
     @Transactional
-    public Long createReview(Long userNo,Long orderDetailNo,
+    public Long createReview(Long userNo, Long orderDetailNo,
                              ReviewRequestDto dto, MultipartFile[] reviewImgs) {
 
         dto.setOrderDetail(orderDetailRepository.findById(orderDetailNo).orElse(null));
@@ -32,21 +32,20 @@ public class ReviewService {
         Review getReview = reviewRepository.save(review);
 
         //리뷰 사진
-        if (reviewImgs != null && reviewImgs.length > 0) {
             try {
                 for (MultipartFile file : reviewImgs) {
-                    String reviewImgUrl = s3Uploader.uploadReviewFile(file, userNo);
-                    ReviewImg reviewImg = ReviewImg.builder()
-                        .reviewImg(reviewImgUrl)
-                        .review(getReview)
-                        .build();
-                    reviewImgRepository.save(reviewImg);
-
+                    if (!file.isEmpty()) {
+                        String reviewImgUrl = s3Uploader.uploadReviewFile(file, userNo);
+                        ReviewImg reviewImg = ReviewImg.builder()
+                            .reviewImg(reviewImgUrl)
+                            .review(getReview)
+                            .build();
+                        reviewImgRepository.save(reviewImg);
+                    }
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }
 
 
         return getReview.getNo();
@@ -57,10 +56,9 @@ public class ReviewService {
     public List<MyReviewResponseDto> myReview(Long userNo) {
         List<MyReviewResponseDto> reviewList = new ArrayList<>();
 
-
         List<Review> reviews = reviewRepository.findByMemberNo(userNo);
 
-        if(reviews.size() > 0) {
+        if (reviews.size() > 0) {
             for (Review val : reviews) {
 
                 MyReviewResponseDto myReviewResponseDto = MyReviewResponseDto.builder()
@@ -92,23 +90,24 @@ public class ReviewService {
     }
 
     //트레이너별 리뷰(repository 반환타입 Dto)
-    public ReviewResponseListDto trainerReview(Long trainerNo){
+    public ReviewResponseListDto trainerReview(Long trainerNo) {
 
         List<ReviewResponseDto> dtoList = reviewRepository.findTrainerReviewsByTrainerNo(trainerNo);
         double ratingAvg = reviewRepository.findAvgRatingByTrainerNo(trainerNo).orElse(0.0);
+        double ratingAvgDecimal = Math.round(ratingAvg * 10.0) / 10.0;
         RatingCountDto ratingCountDto = reviewRepository.findRatingCountsByTrainerNo(trainerNo);
 
-            ReviewResponseListDto listDto = ReviewResponseListDto.builder()
-                .trainerReviewResponseDtoList(dtoList)
-                .ratingAvg(ratingAvg)
-                .ratingCountDto(ratingCountDto)
-                .build();
-            return listDto;
+        ReviewResponseListDto listDto = ReviewResponseListDto.builder()
+            .trainerReviewResponseDtoList(dtoList)
+            .ratingAvg(ratingAvgDecimal)
+            .ratingCountDto(ratingCountDto)
+            .build();
+        return listDto;
 
     }
 
     //메인 메뉴 TOP3 리뷰(repository 반환타입 Dto)
-    public List<ReviewResponseDto> top3Review(){
+    public List<ReviewResponseDto> top3Review() {
         return reviewRepository.findReviewOrderByRating();
 
     }
