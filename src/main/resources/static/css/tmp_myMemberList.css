@@ -1,0 +1,78 @@
+.tmp-mll-ttl {
+    color: black;
+}
+
+.tmp-mll {
+
+}
+
+.tmp-mll-content {
+    display: flex;
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 5px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.tmp-mll-name {
+    /*border: 1px solid;*/
+    padding: 10px;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.tmp-mll-name span {
+    margin-right: 10px;
+}
+
+.tmp-mll-btn {
+
+    display: flex;
+
+    text-align: center;
+
+    align-items: center;
+}
+
+
+.tmp-mll-btn button {
+    background-color: #A3DC10;
+    position: relative;
+    display: flex;
+    width: 164px;
+    font-size: 18px;
+    font-family: 'Noto sans-serif';
+    font-weight: bold;
+    padding: 20px 20px;
+    color: white;
+    border: 0px;
+    border-radius: 6px;
+    height: 45px;
+    text-align: center;
+    justify-content: center;
+    line-height: 6px;
+    margin-top: -9px;
+    /*letter-spacing: 2px;*/
+    transition: top .01s linear;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 1px #A3DC10 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 8px 0 0 #81BC12,
+    0 8px 0 1px rgba(0, 0, 0, .4),
+    0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+.tmp-mll-btn button:active {
+    top: 9px;
+    border: 0px;
+    box-shadow: 0 0 0 1px #A3DC10 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.tmp-mll-btn button:hover {
+    background-color: #A7D145;
+    cursor: pointer;
+}

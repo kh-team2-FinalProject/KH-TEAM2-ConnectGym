@@ -4,11 +4,14 @@ import com.khteam2.connectgym.chat_test.ChatroomService;
 import com.khteam2.connectgym.chat_test.dto.ChatroomDTO;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
+import com.khteam2.connectgym.lesson.LessonService;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.order.OrderDetailService;
+import com.khteam2.connectgym.review.ReviewService;
+import com.khteam2.connectgym.review.dto.ReviewResponseListDto;
 import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomRequestDto;
 import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomResponseDto;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
@@ -38,6 +41,8 @@ public class TrainerOnlyController {
     private final FollowService followService;
     private final LikeService likeService;
     private final OrderDetailService orderDetailService;
+    private final LessonService lessonService;
+    private final ReviewService reviewService;
 
     ////////////////////////////////////////////////////////
     @GetMapping("/mypage")
@@ -45,6 +50,7 @@ public class TrainerOnlyController {
                           @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
                           Model model, RedirectAttributes redirectAttributes) {
 
+        model.addAttribute("bannerTitle", "my page");
         if (loginMemberClass == null) {
 
             // 로그인되어 있지 않은 경우
@@ -77,13 +83,22 @@ public class TrainerOnlyController {
                 TrainerEnterRoomResponseDto trainerEnterRoomDto = trainerOnlyService.enrollMemList(lessonNo, trainerNo);
                 model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);
 
+                //개설 강좌 정보
+                LessonResponseDTO lessonInfo = lessonService.getLessonOne(lessonNo);
+                model.addAttribute("lessonInfo", lessonInfo);
+
                 //채팅룸
                 List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);
                 model.addAttribute("chatroomList", chatroomList);
 
+                //리뷰
+                ReviewResponseListDto trainerReview = reviewService.trainerReview(trainerNo);
+                model.addAttribute("trainerReview", trainerReview);
+
 
                 model.addAttribute("trainer", trainerResponseDTO);
-                return "trainerOnly/myDashboard"; // 트레이너 마이페이지로 이동
+
+                return "trainerOnly/myDashboard"; // 트레이너 대시보드로 이동
             } else {
                 //레슨 없을 때
                 model.addAttribute("errorMsg", "레슨을 찾을 수 없습니다.");
@@ -125,7 +140,7 @@ public class TrainerOnlyController {
                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo) {
         LessonResponseDTO registered = trainerOnlyService.registered(trainerNo);
 
-
+        model.addAttribute("bannerTitle", "my lesson");
         if (registered.getErrorMsg().equals("NotFound")) {
             model.addAttribute("lesson", null);
         } else {
@@ -144,7 +159,7 @@ public class TrainerOnlyController {
     public String memberList(@PathVariable Long lessonNo, Model model,
                              @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                              @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo) {
-
+        model.addAttribute("bannerTitle", "my lesson");
         // 멤버 정보
         TrainerEnterRoomResponseDto trainerEnterRoomDto = trainerOnlyService.enrollMemList(lessonNo, trainerNo);
         model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);

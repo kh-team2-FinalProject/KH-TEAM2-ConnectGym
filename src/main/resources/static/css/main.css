@@ -1,62 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
-/*==========메인만 헤더 로고 출력 HEAD========*/
-/*
-.logo_img {
-  display:block;
-}
-*/
+@import url("https://fonts.googleapis.com/css2?family=Gugi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap");
 
-/*==========메인만 헤더 로고 출력 END========*/
+.main_section_all {
+  box-sizing: border-box;
+}
 
 /*==========메인 비디오========*/
 .video-container {
-    position: relative;
-    display: inline-block;
-    width : 100%;
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 .typing-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    width: 22ch;
-    animation: typing 2s steps(22), blink .5s step-end infinite alternate;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid;
-    font-family: 'Cutive Mono', monospace;
-    font-weight:900;
-    font-size: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  width: 22ch;
+  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: "Cutive Mono", monospace;
+  font-weight: 900;
+  font-size: 2em;
 }
 
 @keyframes typing {
-    from {
-        width: 0
-    }
+  from {
+    width: 0;
+  }
 }
 
 @keyframes blink {
-    50% {
-        border-color: transparent
-    }
+  50% {
+    border-color: transparent;
+  }
 }
 
 /*==========메인 비디오========*/
 
 /*==========카테고리 바로가기========*/
-section-1 {
-background-color:
+.section-1 {
   margin: 0;
-  min-height: 50vh;
-  background: #000;
+  background: #0e1414;
   font-family: sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 .sc-container {
@@ -67,10 +62,10 @@ background-color:
   overflow: hidden;
   transform: skew(5deg);
 }
-.section-1 .sc-title-top{
+.section-1 .sc-title-top {
   color: white;
 
-  text-align:center;
+  text-align: center;
   font-size: 50px;
   letter-spacing: 0.01em;
 }
@@ -78,12 +73,12 @@ background-color:
 .sc-container .sc-card {
   flex: 1;
   transition: all 1s ease-in-out;
-  height: 75vmin;
+  height: 750px;
   position: relative;
 }
 .sc-container .sc-card .sc-card__head {
   color: black;
-  background: #A3DC10;
+  background: #a3dc10;
   padding: 0.5em;
   transform: rotate(-90deg);
   transform-origin: 0% 0%;
@@ -122,137 +117,242 @@ background-color:
   margin-right: 1em;
 }
 
-/*==========카테고리 바로가기========*/
+/*==========카테고리 바로가기 END========*/
 
-/*==========모집중인 레슨(session-1)========*/
+/*============수업소개 섹션4 HEAD=============*/
+.section-4 {
+  display: flex;
+  align-items: center;
+  background-color: #0d1416;
+  height:100%;
+/*  min-height: 500px;*/
+/*  margin-bottom: 85px;*/
+}
 
-/*==========모집중인 레슨========*/
-
-/*==========인기 트레이너(session-2)========*/
-.section-2{
+.s4_lesson_demo {
   display: flex;
   flex-direction: column;
-/*  justify-content: center;*/
-  align-items: center;
-  background-color: #0D1416;
-  height: 60vh;
-  margin: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
-.person-title{
-font-size: 36pt;
-font-family: 'Anton', sans-serif;
-font-weight : bolder;
-color : #B2B5B5;
 
+.s4_lesson_demo_text {
+  padding:30px 50px;
+  z-index:999;
+      height: 150px;
+      display: flex;
+      align-items: flex-end;
+}
+
+.s4_lesson_demo_text_top {
+  display: flex;
+  justify-content: center;
+
+}
+
+.s4_lesson_demo_text_titleBox{
+    background: url(/images/room/main_s4_img_box.gif) center center / contain no-repeat;
+    width: 35%;
+    height: 50%;
+    position: absolute;
+    right: 0px;
+    top: -60px;
+}
+
+.s4_lesson_demo_text_titleBox div{
+    position: absolute;
+    right: 211px;
+    top: 5px;
+    font-weight: 600;
+}
+
+
+.s4_lesson_demo_text_top div{
+    background: url(/images/room/nametag.png) center center / cover;
+    color: #0e1414;
+    margin: 10px 20px;
+    padding: 10px 110px;
+    font-size: 30px;
+    font-weight: 700;
+    text-shadow: 3px 2px #E5E6EF;
+}
+
+.s4_lesson_demo_text .s4_lesson_demo_text_mid{
+    /* background: #A3DC10; */
+    color: #E5E6EF;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 800;
+    /*margin-left: 35px;*/
+    padding: 0px 16px;
+    text-align:center;
+}
+
+.s4_lesson_demo_text_content {
+  display:flex;
+  justify-content: center;
+  color : #E5E6EF;
+  margin: 30px 0px;
+  font-size: 12px;
+}
+.s4_lesson_demo_text_content span{
+      width: 500px;
+      box-shadow: -6px 0px 0px 0px #2778c4;
+      padding: 0px 20px;
+}
+
+
+.s4_lesson_demo_img {
+  display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+  border-start-start-radius: 30px;
+  border-top: 1px solid white;
+
+  padding-top:30px;
+
+/* 텍스트 추가 시,
+margin-top:-297px;*/
+}
+
+.s4_lesson_demo_img img {
+  width: 80%;
+  border-start-start-radius: 30px;
+  border-start-end-radius: 30px;
+  z-index: 999;
+}
+/*==========수업소개 섹션4 END========*/
+
+/*==========인기 트레이너(session-2)========*/
+.section-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0d1416;
+  height: 700px;
+  min-height: 500px;
+  margin-bottom: 30px;
+}
+.person-title {
+    font-size: 36pt;
+    font-family: "Anton", sans-serif;
+    font-weight: bolder;
+    color: #b2b5b5;
+    text-shadow: 0px -10px 3px #a7d145;
+    padding: 50px 0px;
 }
 
 .person-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .person {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    width: 320px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
 }
 
 .p-container {
-    border-radius: 50%;
-    height: 330px;
-    width: 500px;
-    -webkit-tap-highlight-color: transparent;
-    transform: scale(0.48);
-    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  height: 330px;
+  width: 500px;
+  -webkit-tap-highlight-color: transparent;
+  transform: scale(0.48);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .p-container:after {
-    background-color: #f2f2f2;
-    height: 10px;
-    position: absolute;
-    top: 390px;
-    width: 100%;
+  background-color: #f2f2f2;
+  height: 10px;
+  position: absolute;
+  top: 390px;
+  width: 100%;
 }
 
 .p-container:hover {
-    transform: scale(0.54);
-    cursor:pointer;
+  transform: scale(0.54);
+  cursor: pointer;
 }
 
 .p-container-inner {
-    clip-path: path("M 468,480 C 468,605.92092 365.92092,708 240,708 114.07908,708 12,605.92092 12,480 V 12 H 240 468 Z");
-    position: relative;
-    transform-origin: 50%;
-    top: -200px;
+  clip-path: path(
+    "M 468,480 C 468,605.92092 365.92092,708 240,708 114.07908,708 12,605.92092 12,480 V 12 H 240 468 Z"
+  );
+  position: relative;
+  transform-origin: 50%;
+  top: -200px;
 }
 
 .p-circle {
-    border-radius: 50%;
+border-radius: 50%;
     cursor: pointer;
     height: 450px;
     width: 450px;
-    left: 15px;
+    left: 22px;
     pointer-events: none;
     position: absolute;
-    top: 240px;
+    top: 210px;
 }
 
 .p-img {
-    pointer-events: none;
-    position: relative;
-    cursor: pointer;
-    transform: translateY(20px) scale(1.15);
-    transform-origin: 50% bottom;
-    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  position: relative;
+  cursor: pointer;
+  transform: translateY(20px) scale(1.15);
+  transform-origin: 50% bottom;
+transition: transform 300ms cubic-bezier(0.4, 0, 0.79, -0.19);
 }
 
 .p-container:hover .p-img {
-    transform: translateY(0) scale(1.2);
+  transform: translateY(0) scale(1.2);
 }
 
 .p-img1 {
-    /*left: -30px;*/
-    top: 110px;
-    width: 550px;
+  /*left: -30px;*/
+  top: 110px;
+  width: 550px;
 }
 
 .p-img2 {
-    /*left: -32px;*/
-    top: 190px;
-    width: 500px;
+  /*left: -32px;*/
+  top: 190px;
+  width: 500px;
 }
 
 .p-img3 {
-    left: -30px;
-    top: 180px;
-    width: 550px;
+  left: -30px;
+  top: 180px;
+  width: 550px;
 }
 
 .divider {
-
-  background-color: #C9D3D4;
+  background-color: #c9d3d4;
   height: 1px;
   width: 160px;
-
+  margin-top: 17px;
 }
 
 .p-name {
-    color: white;
-    font-size: 28px;
-    font-weight: 600;
-    margin-top: 16px;
-    text-align: center;
+  color: white;
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 16px;
+  text-align: center;
 }
 
 .p-cat {
-    color: #6e6e6e;
-    font-family: arial;
-    font-size: 14pt;
-    font-style: italic;
-    margin-bottom: 10px;
+  color: #6e6e6e;
+  font-family: arial;
+  font-size: 14pt;
+  font-style: italic;
+  margin-bottom: 10px;
 }
 
 /*==========인기 트레이너========*/
@@ -267,19 +367,19 @@ color : #B2B5B5;
   display: flex;
 }
 
-.review-left-content{
-flex:0.6;
-display: flex;
-margin-left:100px;
+.review-left-content {
+  flex: 0.6;
+  display: flex;
+  margin-left: 70px;
 }
 
-.review-right-content{
-flex:0.4;
-display: flex;
-flex-direction:column;
-justify-content:center;
-align-items:flex-start;
-margin-right:30px;
+.review-right-content {
+  flex: 0.4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: 30px;
 }
 
 .review-slider-wrap {
@@ -302,7 +402,7 @@ margin-right:30px;
   background-color: #ffffff;
   height: 180px;
   max-height: 190px;
-  box-sizing:border-box;
+  box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
   position: absolute;
@@ -334,7 +434,7 @@ margin-right:30px;
 .r-slider-item .r-animation-card_content {
   width: 100%;
   max-width: 374px;
-  max-height:190px;
+  max-height: 190px;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-left: 25px;
@@ -342,8 +442,8 @@ margin-right:30px;
 }
 
 .r-animation-card_content_title_line1 {
-  display:flex;
-  justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
   color: #4a4545;
   font-size: 15px;
   font-weight: 900;
@@ -352,16 +452,16 @@ margin-right:30px;
   margin: 0;
 }
 
-.r-animation-card_content_title_line1 .star{
-  fill:#eee
+.r-animation-card_content_title_line1 .star {
+  fill: #eee;
 }
 
-.r-animation-card_content_title_line1 .star.filled{
+.r-animation-card_content_title_line1 .star.filled {
   fill: #f1c164;
 }
 
 .r-animation-card_content_title_line2 {
-  color: #a6a4a4;;
+  color: #a6a4a4;
   font-size: 13px;
   letter-spacing: -0.18px;
   line-height: 24px;
@@ -373,46 +473,43 @@ margin-right:30px;
   font-size: 14px;
   letter-spacing: normal;
   line-height: 24px;
-
 }
 
-.review-right-content p{
-    margin: 0px;
-    max-width: 550px;
-    word-wrap: break-word;
+.review-right-content p {
+  margin: 0px;
+  max-width: 550px;
+  min-width: 550px;
+  word-wrap: break-word;
 }
 
-.review-right-content .review-right-content_line1 p{
-    color:white;
-    font-size:28px;
-    font-weight:900;
-    margin:20px 0px;
-    text-shadow: 5px 5px #f27474;
-
+.review-right-content .review-right-content_line1 p {
+  color: white;
+  font-size: 28px;
+  font-weight: 900;
+  margin: 20px 0px;
+  text-shadow: 5px 5px #f27474;
 }
 
-.review-right-content .review-right-content_line2 p{
-    color:white;
-    font-size:28px;
-    font-weight:900;
-    line-height:35px;
+.review-right-content .review-right-content_line2 p {
+  color: white;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 35px;
 }
 
-.review-right-content .review-right-content_line3 p{
-    color:white;
-    font-size:24px;
-    font-weight:900;
-    line-height:60px;
+.review-right-content .review-right-content_line3 p {
+  color: white;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 60px;
 }
-
-
-
 
 /*========== mychat 트레이너 카드 ========*/
 .mychat.p-name {
-            color: #041717;
-            font-size: 28px;
-            font-weight: 600;
-            margin-top: 16px;
-            text-align: center;
-        }
+  color: #041717;
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 16px;
+  text-align: center;
+}
+

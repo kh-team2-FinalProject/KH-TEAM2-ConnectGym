@@ -25,10 +25,14 @@ public class TrainerResponseDTO {
     private String infoContent;
     private String trainerEmail;
 
+    private int trainerCategory;
+
     //트레이너 상세에서만 받음
     private List<License> licenses;
     private Long lessonNo;
     private int memberCount;
+
+    private int followCount;
 
     public TrainerResponseDTO(Trainer entity) {
             this.trainerNo = entity.getNo();

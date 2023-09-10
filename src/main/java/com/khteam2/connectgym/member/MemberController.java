@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -42,12 +43,18 @@ public class MemberController {
     @GetMapping(value = "/user/login")
     public String tempLogin(
         Model model,
+        HttpServletRequest request,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo
     ) {
         if (loginMemberNo != null) {
             model.addAttribute("message", "이미 로그인되어 있는 상태입니다."
                 + " 로그아웃 하려면 /temp_logout 으로 이동하면 됩니다.");
         }
+
+        String referer = request.getHeader("Referer");
+        model.addAttribute("requestUrl",referer);
+
+        System.out.println("referer = " + referer);
 
         return "content/login";
     }

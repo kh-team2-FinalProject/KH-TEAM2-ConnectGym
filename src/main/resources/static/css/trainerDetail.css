@@ -255,6 +255,7 @@ body {
 .trainerDetail_profile_lesson:focus {
   border-top-color: #222;
   border-bottom-color: #e2a354;
+  cursor: pointer;
 }
 
 /*밑에서 위로 애니메이션*/
@@ -313,6 +314,7 @@ body {
   /*끝점은 둥글게*/
   stroke-linecap: round;
 }
+
 
 .td_follow_button_group svg {
   /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
@@ -418,12 +420,8 @@ body {
 }
 
 /* 뒤로가기 */
-.trainerDetail_review_item_back a i {
-  color: #0e1414;
-}
-
-.trainerDetail_review_item_back a i {
-  color: #0e1414;
+.trainerDetail_review_item_back_svg{
+  width: 18px;
 }
 
 .trainerDetail_review_item_score {
@@ -469,8 +467,11 @@ body {
   width: 135px;
 }
 
-.trainerDetail_review_item_score_cnt i {
-  color: #f1c164;
+/*별 img 태그로 변경*/
+.trainerDetail_review_item_score_cnt
+ .stars .stars_icon img {
+  filter: invert(86%) sepia(76%) saturate(6025%) hue-rotate(312deg) brightness(102%) contrast(89%);
+  width: 13px;
 }
 
 .trainerDetail_review_item_memReview {

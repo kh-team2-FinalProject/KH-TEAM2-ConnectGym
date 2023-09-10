@@ -12,8 +12,6 @@ function showReview(trainerNo) {
         return false;
       }
 
-
-
       // 리뷰가 있는 경우
       let listHtml = "";
 
@@ -21,7 +19,7 @@ function showReview(trainerNo) {
       listHtml += `<div class="trainerDetail_review_item">
                         <div clas="trainerDetail_review_item_back">
                             <a href="javascript:void(0);" onclick="window.location.reload();">
-                                <i class="fa-solid fa-arrow-left-long" style="color: #0e1414;"></i>
+                                <img class="trainerDetail_review_item_back_svg" src="/images/icons/left-long-solid.svg">
                             </a>
                         </div>
                 <div class="trainerDetail_review_item_score">
@@ -32,41 +30,41 @@ function showReview(trainerNo) {
                     <div class="trainerDetail_review_item_score_cnt">
                         <div class="stars" data-count="5">
                             <div class="stars_icon">5
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
                             </div>
                             ${response.ratingCountDto.rating5Count}
                         </div><br>
                         <div class="stars" data-count="4">
                             <div class="stars_icon">4
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
                             </div>
                             ${response.ratingCountDto.rating4Count}
                         </div><br>
                         <div class="stars" data-count="3">
                             <div class="stars_icon">3
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
                             </div>
                             ${response.ratingCountDto.rating3Count}
                         </div><br>
                         <div class="stars" data-count="2">
                             <div class="stars_icon">2
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <i class="fa-solid fa-star fa-xs"></i>
+                                <img src="/images/icons/star-solid.svg">
+                                <img src="/images/icons/star-solid.svg">
                             </div>
                             ${response.ratingCountDto.rating2Count}
                         </div><br>
                         <div class="stars" data-count="1">
                             <div class="stars_icon">1
-                                <i class="fa-solid fa-star fa-xs"></i>
+                                <img src="/images/icons/star-solid.svg">
                             </div>
                             ${response.ratingCountDto.rating1Count}
                         </div>
@@ -84,7 +82,7 @@ function showReview(trainerNo) {
                     <div class="trainerDetail_review_item_memReview_title">
                         레슨명 : ${review.reviewTitle}
                     </div>
-                    <div class="trainerDetail_review_item_content">트레이너 ${review.reviewContent}</div>
+                    <div class="trainerDetail_review_item_content">${review.reviewContent}</div>
                 </div>
 
 

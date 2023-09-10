@@ -16,12 +16,15 @@
     <script src="https://cdn.jsdelivr.net/gsap/1.19.1/TweenMax.min.js"></script>
     <script src="js/design/main_section3.js"></script>
     <script src="js/review/rating.js"></script>
+    <script>
+            applyStarRating();
+        </script>
 
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="content">
-    <div>
+    <div class="main_section_all">
         <!-- 메인 영상 -->
         <div class="video-container">
             <video src="video/main-video.mp4" style="width:100%;" autoplay loop muted playsinline></video>
@@ -33,24 +36,21 @@
 
         <!-- 카테고리 메뉴 바로가기 -->
         <div class="section-1">
-            <!--      <div class="sc-title-top">
-                      <p>세 가지 운동을 커넥트짐 한 곳에서</p>
-                  </div>-->
             <div class="sc-container">
                 <div class="sc-card">
-                    <a th:href="@{/lesson/health}">
+                    <a th:href="@{/lessonList(category='1')}">
                         <img th:src="@{/images/main-health.png}">
                         <div class="sc-card__head">Health</div>
                     </a>
                 </div>
                 <div class="sc-card">
-                    <a th:href="@{/lesson/yoga}">
+                    <a th:href="@{/lessonList(category='2')}">
                         <img th:src="@{/images/main-yoga.jpg}">
                         <div class="sc-card__head">Yoga</div>
                     </a>
                 </div>
                 <div class="sc-card">
-                    <a th:href="@{/lesson/pilates}">
+                    <a th:href="@{/lessonList(category='3')}">
                         <img th:src="@{/images/main-pilates.jpg}">
                         <div class="sc-card__head">Pilates</div>
                     </a>
@@ -60,42 +60,98 @@
 
         <!-- 카테고리 메뉴 바로가기 끝 -->
 
-        <!-- 모집 중인 강좌 -->
+        <!-- 수업소개 -->
+        <div class="section-4">
+            <div class="s4_lesson_demo">
+                <div class="s4_lesson_demo_text_top">
+                    <!--<div data-aos="flip-right"
+                         data-delay="500"
+                         data-aos-duration="2000"
+                    >
+                        소개합니다. CONNECT GYM!
+                    </div>-->
+                </div>
+                <div class="s4_lesson_demo_text_titleBox"
+                     data-aos="fade-left"
+                     data-aos-duration="2200"
+                >
+                </div>
+                <div class="s4_lesson_demo_text">
+                    <div class="s4_lesson_demo_text_mid"
+                         data-aos="fade-up"
+                         data-aos-duration="2000"
+                    >
+                        <!-- data-aos="flip-left"
+                         data-aos-easing="ease-out-cubic"
+                         data-aos-duration="2000"
+                         data-delay="800"-->
 
 
-        <!-- 모집 중인 강좌 끝-->
+                        커넥트짐 만의 레슨 룸, 언택트 운동의 끝.
+                    </div>
+
+                </div>
+                <div>
+
+                </div>
+                <div class="s4_lesson_demo_img"
+                     data-aos="fade-up"
+                     data-aos-duration="2500"
+                >
+                    <img src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/lesson_demo.gif">
+                </div>
+                <div class="s4_lesson_demo_text_content">
+                        <span>
+                        더 이상 헬스장에 가야만 가능한 것이 아닙니다.
+                        우리는 언제 어디서나
+                        운동을 즐길 수 있는 새로운 방법을 제시합니다.
+                        전 세계의 운동 팬들을 위한 디지털 플랫폼으로 나아갈 것이며,
+                        다양한 운동 루틴과 프로그램을 제공합니다.
+                        사용자는 스마트폰 또는 태블릿을 통해 실시간으로 트레이너와 소통하고,
+                        운동 비디오를 시청하며, 개인 맞춤형 운동 계획을 수립할 수 있습니다.
+                        더 이상 운동 시간을 찾느라 스트레스 받을 필요가 없습니다.
+                        커넥트짐은 여러분이 언제든 운동을 즐길 수 있도록 합니다.
+                        아무 곳에서나, 언제나 연결하세요, 커넥트짐과 함께하세요!</span>
+                </div>
+
+            </div>
+        </div>
+        <!-- 수업소개 끝 -->
 
         <!-- 인기 트레이너 -->
         <div class="section-2">
-            <div class="person-title">
+            <div data-aos="fade-down"
+                class="person-title">
                 Popular Trainer
             </div>
             <div class="person-content">
                 <!--요가-->
-                <div class="person">
+                <div class="person" th:each="trainer : ${trainerList}" th:onclick="|location.href='/trainerDetail/${trainer.trainerNo}'|">
                     <div class="p-container">
                         <div class="p-container-inner">
                             <img class="p-circle" th:src="@{/images/background.png}"/>
-                            <img class="p-img p-img1" th:src="@{/images/주양.png}"/> <!--트레이너 프로필 변수-->
+                            <img class="p-img p-img1" th:src="${trainer.profileImg}"/> <!--트레이너 프로필 변수-->
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="p-name">주양</div> <!--트레이너 이름 변수-->
-                    <div class="p-cat">yoga</div> <!--레슨 카테고리 변수-->
+                    <div class="p-name">[[${trainer.trainerName}]]</div> <!--트레이너 이름 변수-->
+                    <div class="p-cat" th:if="${trainer.trainerCategory == 1}">Health</div> <!--레슨 카테고리 변수-->
+                    <div class="p-cat" th:if="${trainer.trainerCategory == 2}">Yoga</div> <!--레슨 카테고리 변수-->
+                    <div class="p-cat" th:if="${trainer.trainerCategory == 3}">Pilates</div> <!--레슨 카테고리 변수-->
                 </div>
                 <!--헬스-->
-                <div class="person">
+               <!-- <div class="person">
                     <div class="p-container">
                         <div class="p-container-inner">
                             <img class="p-circle" th:src="@{/images/background.png}"/>
-                            <img class="p-img p-img2" th:src="@{/images/심으뜸.png}"/> <!--트레이너 프로필 변수-->
+                            <img class="p-img p-img2" th:src="@{/images/심으뜸.png}"/> &lt;!&ndash;트레이너 프로필 변수&ndash;&gt;
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="p-name">심으뜸</div> <!--트레이너 이름 변수-->
-                    <div class="p-cat">health</div> <!--레슨 카테고리 변수-->
+                    <div class="p-name">심으뜸</div> &lt;!&ndash;트레이너 이름 변수&ndash;&gt;
+                    <div class="p-cat">health</div> &lt;!&ndash;레슨 카테고리 변수&ndash;&gt;
                 </div>
-                <!--필라테스-->
+                &lt;!&ndash;필라테스&ndash;&gt;
                 <div class="person">
                     <div class="p-container">
                         <div class="p-container-inner">
@@ -106,12 +162,13 @@
                     <div class="divider"></div>
                     <div class="p-name">김계란</div>
                     <div class="p-cat">pilates</div>
-                </div>
+                </div>-->
             </div>
         </div>
         <!-- 인기 트레이너 끝 -->
 
         <!-- 운동리뷰 또는 식단리뷰 -->
+
         <div class="section-3">
             <div class="review-left-content">
                 <div class="review-slider-wrap">

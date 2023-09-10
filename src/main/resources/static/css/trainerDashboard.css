@@ -3,9 +3,10 @@
     height: 80vh;
     /* position: relative; */
     display: flex;
-    min-height: 500px;
+    min-height: 800px;
+    background: linear-gradient(45deg, #98cbff54, #c197ef2b);
     min-width: 697px;
-
+    border-radius: 5px;
 }
 
 .dsh-left-container {
@@ -73,12 +74,14 @@
     font-size: 1.4rem;
     margin: 0 10%;
     width: 89%;
+    color: black;
 }
 
 .dsh-profile-info {
     font-size: 0.9rem;
     margin: 3% 10%;
     width: 89%;
+    color: #575757;
 }
 
 .dsh-left-second-row {
@@ -96,9 +99,11 @@
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    border: 1px solid #b6b6b6;
+    /* border: 1px solid #b6b6b6; */
     overflow: hidden;
     justify-content: space-around;
+    background: linear-gradient(45deg, #ffffffa6, #ffffff3d);
+    box-shadow: gray;
 }
 
 .dsh-card-title {
@@ -123,11 +128,11 @@
 
 .dsh-lesson-info {
     height: 100%;
-    /*background: blanchedalmond;*/
+    background: linear-gradient(45deg, #ffffffa6, #ffffff3d);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     border-radius: 5px;
     margin: 0 2%;
     overflow: hidden;
@@ -163,7 +168,7 @@
 .dsh-lesson-img {
     width: 100%;
     height: 100%;
-
+    border-radius: 5px;
 }
 
 .dsh-left-fourth-row {
@@ -177,11 +182,13 @@
 }
 
 .dsh-message-box {
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     border-radius: 5px;
     width: 45%;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    background: linear-gradient(45deg, #ffffffa6, #ffffff3d);
 }
 
 .dsh-message-header {
@@ -205,6 +212,13 @@
     height: 85%;
     margin: 3% 5%;
     overflow: scroll;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.dsh-mychatroom_list_trainer_button img {
+    cursor: pointer;
 }
 
 .dsh-message-content {
@@ -225,11 +239,12 @@
 }
 
 .dsh-review-box {
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     border-radius: 5px;
     width: 45%;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(45deg, #ffffffa6, #ffffff3d);
 }
 
 .dsh-review-header {
@@ -248,7 +263,7 @@
 }
 
 .dsh-review-wrapper {
-    height: 85%;
+    /* height: 100%; */
     margin: 3% 5%;
     overflow: scroll;
 }
@@ -275,16 +290,18 @@
 }
 
 .dsh-lessons-box {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 9% 5%;
     height: 94.5%;
     border-radius: 5px;
+    background: linear-gradient(45deg, #ffffffa6, #ffffff3d);
 }
 
 .dsh-lessons-header {
     justify-content: center;
     display: flex;
     border-bottom: 1px solid lightgray;
+    margin: 0 10%;
 }
 
 .dsh-lessons-title {
@@ -298,7 +315,7 @@
     flex-direction: column;
     height: 90.5%;
     /*overflow: scroll;*/
-
+    /* background: linear-gradient(45deg, #ffffffa6, #ffffff3d); */
 }
 
 .dsh-lesson {

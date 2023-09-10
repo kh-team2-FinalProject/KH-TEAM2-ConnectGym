@@ -12,6 +12,13 @@
     <script th:inline="javascript">
         var myRoomCode = [[${roomInfo.roomName}]];
         let userName = [[${type == 'trainer' ? trainer.trainerName : member.userName}]];
+
+        if([[${trainer}]]){
+            userName+=' 트레이너';
+        }else {
+            userName+=' 회원';
+        }
+
         let userType =  [[${type}]];
     </script>
     <script th:src="@{/js/roomStreaming.js}"></script>

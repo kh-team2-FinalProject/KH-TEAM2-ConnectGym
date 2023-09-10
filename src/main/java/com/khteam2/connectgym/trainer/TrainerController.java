@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,6 +27,16 @@ public class TrainerController {
     private final TrainerService trainerService;
     private final FollowService followService;
     private final ReviewService reviewService;
+
+
+    @GetMapping("/trainerList")
+    public String trainerList(Model model){
+        List<TrainerResponseDTO> trainerAll = trainerService.trainerAll();
+
+        model.addAttribute("trainerList", trainerAll);
+        return "content/trainer";
+    }
+
 
     @GetMapping("/mypage/convertTrainer")
     public String convertTrainer(Model model) {
@@ -43,9 +54,10 @@ public class TrainerController {
         Member member = memberRepository.findById(userNo).orElse(null);
 
         //트레이너로 등록
-        trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile, licenseImgFiles);
+        Long trainerNewNo = trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile, licenseImgFiles);
 
         return "redirect:/mypage";
+
     }
 
     //트레이너 상세 페이지
@@ -65,6 +77,7 @@ public class TrainerController {
         Long userNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
         Boolean isFollow = followService.followCheck(userNo, trainerNo);
 
+        System.out.println("isFollow = " + isFollow);
 
         FollowForTrainerResponseDTO followTrainerResponseDTO = FollowForTrainerResponseDTO.builder()
             .trainerFollowCnt(followCount)

@@ -5,6 +5,7 @@ import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.MemberService;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.review.dto.ReviewResponseDto;
 import com.khteam2.connectgym.trainer.TrainerService;
@@ -27,8 +28,8 @@ import java.util.List;
 public class CommonController {
 
     private final MemberService memberService;
-    private final FollowService followService;
     private final TrainerService trainerService;
+    private final OrderDetailService orderDetailService;
     private final ReviewService reviewService;
     Logger logger = LoggerFactory.getLogger(CommonController.class);
 
@@ -57,8 +58,16 @@ public class CommonController {
                 model.addAttribute("errorMsg", "로그인 정보가 없습니다.");
             }
 
+
+            //메인 메뉴 TOP3 트레이너
+            List<TrainerResponseDTO> trainerList = orderDetailService.findTop3Trainer();
+            model.addAttribute("trainerList", trainerList);
+
+            System.out.println("trainerList = " + trainerList);
             List<ReviewResponseDto> top3Reviews = reviewService.top3Review();
             model.addAttribute("reviews", top3Reviews);
+
+
 
         } catch (Exception e) {
             logger.error("welcomeOrIndex() 에러");
@@ -66,23 +75,11 @@ public class CommonController {
 
         return "content/main";
     }
-
-    //팔로일 테스트화면
-    @GetMapping("/mypage/myFollowingTest")
-    public String myFolloing(Model model, HttpSession session) {
-
-        //배너타이틀
-        model.addAttribute("bannerTitle", "following");
-
-        MemberResponseDTO member = memberService.sessionMem(session);
-
-        List<TrainerResponseDTO> following = followService.followingList(member.getNo());
-
-        model.addAttribute("following", following);
-        model.addAttribute("follwStatus", "true");
-
-        return "mypage/following_test2";
+    @GetMapping("/testRoom")
+    public String testRoom() {
+        return "room/bak_enterroom";
     }
+
 
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")

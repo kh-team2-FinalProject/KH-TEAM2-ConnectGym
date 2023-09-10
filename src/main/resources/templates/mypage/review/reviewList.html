@@ -31,6 +31,11 @@
                     <div class="my_Review_list_item_content">
                         [[${review.reviewContent}]]
                     </div>
+                    <th:block th:if="${review.reviewImgList.size() > 0}">
+                    <div class="my_Review_list_item_content_image" th:each="reviewImgSrc : ${review.reviewImgList}">
+                        <img th:src="${reviewImgSrc.reviewImg}">
+                    </div>
+                    </th:block>
                 </div>
             </th:block>
             <th:block th:if="${reviewList.size() == 0}">

@@ -28,9 +28,9 @@ public class CommonApiController {
         @RequestBody(required = false) MemberLoginRequestDto requestDto) {
         MemberLoginResponseDto responseDto = null;
 
-
         if (requestDto.getMemberClass() == MemberClass.MEMBER) {
             responseDto = this.memberService.memberLogin(requestDto);
+
         } else if (requestDto.getMemberClass() == MemberClass.TRAINER) {
             responseDto = this.trainerService.trainerLogin(requestDto);
         } else {

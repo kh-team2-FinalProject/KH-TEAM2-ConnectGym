@@ -5,6 +5,12 @@ var session;
 window.onload = () => {
   setTimeout(joinSession, 2000);
 
+    setTimeout(function () {
+    timer30min();
+    setTimeout(timer50min, 15000)
+    }, 10000);
+
+
   setTimeout(function () {
     const lessonElement = document.getElementById("lessonroom_content");
     const loadingElement = document.getElementById("mylessonlistloading_wrap");
@@ -38,11 +44,7 @@ function joinSession() {
     console.warn(exception);
   });
 
-  // --- 4) Connect to the session with a valid user token ---
-  // Get a token from the OpenVidu deployment
   getToken(myRoomCode).then((token) => {
-    // 토큰 발급 확인용
-    console.log("Token received:", token);
 
     // 첫 번째 매개 변수는 OpenVidu 배포에서 가져온 토큰, 두 번째 매개 변수는 이벤트 시 모든 사용자가 검색할 수 있음
     // 'streamCreated'(PropertyStream.connection.data)이며 사용자 닉네임으로 DOM에 추가
@@ -54,7 +56,7 @@ function joinSession() {
           videoSource: undefined, // The source of video. If undefined default webcam
           publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
           publishVideo: true, // Whether you want to start publishing with your video enabled or not
-          resolution: "1024x768", // The resolution of your video
+          resolution: "720x480", // The resolution of your video
           frameRate: 30, // The frame rate of your video
           insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
           mirror: false, // Whether to mirror your local video or not
@@ -96,7 +98,7 @@ function leaveSession(myRoomCode, userType) {
         width: "350px",
         height: "50px",
         padding: "3em",
-        color: "#2f79a6",
+        color: "black",
         showConfirmButton: false,
         timer: 3000,
         //background: "url(https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/o_woon_wan3.gif) center center / cover no-repeat",
@@ -127,7 +129,7 @@ window.onbeforeunload = function () {
         removeAllUserData();
 
         Swal.fire({
-          html: '<div style="font-size:16px;">페이지를 벗어났습니다.🤔</div>',
+          html: '<div style="font-size:16px;">페이지를 벗어났습니다.</div>',
           width: "350px",
           height: 50,
           color: "#2f79a6",
@@ -204,6 +206,7 @@ function removeAllUserData() {
   }
 }
 
+
 function getToken(myRoomCode) {
   return createSession(myRoomCode).then((sessionId) => createToken(sessionId));
 }
@@ -233,6 +236,56 @@ function createToken(sessionId) {
     });
   });
 }
+
+function timer30min(){
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  width: "300px",
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+   html: '<div style="display:flex;">'
+   +'<div style="font-size:20px; margin: 0px 10px;">👊</div>'
+   +'<div style="font-size:14px;">30분이 경과되었습니다.<br>힘내세요!</div>'
+   +'</div>'
+
+})
+
+}
+
+function timer50min(){
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  width: "300px",
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+   html: '<div style="display:flex;">'
+   +'<div style="font-size:20px;">💪</div>'
+   +'<div style="font-size:14px; margin: 0px 10px;">50분이 경과되었습니다.<br>수고하셨습니다!</div>'
+   +'</div>'
+
+})
+
+}
+
 
 //비디오를 클릭했을 때 메인 비디오 영역에 해당 비디오 스트림을 크게 보여주는 부분을 처리
 

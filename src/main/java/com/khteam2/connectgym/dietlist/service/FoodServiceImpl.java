@@ -330,7 +330,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Transactional
-//    @Override
+    @Override
     public FoodDeleteResponseDto deleteDietListFood(Long loginMemberNo, Long memberFoodNo) {
         FoodDeleteResponseDto responseDto = FoodDeleteResponseDto.builder()
             .success(false)

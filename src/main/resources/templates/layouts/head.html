@@ -8,6 +8,12 @@
     <!--팝업창-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!--aos 라이브러리-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+
+
     <!-- 글꼴 -->
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
@@ -22,6 +28,7 @@
     <link rel="stylesheet" th:href="@{/css/sidebar.css}">
 
     <link rel="stylesheet" th:href="@{/css/lesson.css}">
+    <link rel="stylesheet" th:href="@{/css/trainer.css}">
 
     <link rel="stylesheet" th:href="@{/css/mypageside.css}">
     <link rel="stylesheet" th:href="@{/css/mylessonlist.css}">
@@ -43,7 +50,11 @@
     <link rel="stylesheet" th:href="@{/css/createComplete.css}">
     <link rel="stylesheet" th:href="@{/css/tmp_myLesson.css}">
     <link rel="stylesheet" th:href="@{/css/tmp_followed.css}">
+
+    <link rel="stylesheet" th:href="@{/css/tmp_myMemberList.css}">
+
     <th:block layout:fragment="script"></th:block>
+
     <th:block layout:fragment="add-css"></th:block>
 </head>
 </html>

@@ -3,6 +3,7 @@ package com.khteam2.connectgym.review;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 
 @Builder
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="review_imgs")
