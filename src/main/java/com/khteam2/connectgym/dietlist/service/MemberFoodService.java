@@ -33,18 +33,32 @@ public class MemberFoodService {
         return memberFoodResponseDtoList;
     }
 
-    public List<MemberFoodResponseDto> getUniqueDayAndFoodTime(LocalDate startDate, LocalDate endDate) {
 
-        List<MemberFoodResponseDto> memberFoodListByDateRange = getMemberFoodListByDateRange(startDate, endDate);
+    public List<MemberFoodResponseDto> getMemberFoodListByMemberNoAndDateRange(Long memberNo, LocalDate startDate, LocalDate endDate) {
+        List<MemberFood> memberFoodList = memberFoodRepository.findByMemberNoAndRegDateBetween(memberNo, startDate, endDate);
+        List<MemberFoodResponseDto> memberFoodResponseDtoList = new ArrayList<>();
+        for (MemberFood m : memberFoodList) {
+
+            memberFoodResponseDtoList.add(new MemberFoodResponseDto().formEntity(m));
+        }
+
+
+        return memberFoodResponseDtoList;
+
+    }
+
+    public List<MemberFoodResponseDto> getUniqueDayAndFoodTime(Long memberNo, LocalDate startDate, LocalDate endDate) {
+
+        List<MemberFoodResponseDto> memberFoodListByDateRange = getMemberFoodListByMemberNoAndDateRange(memberNo, startDate, endDate);
 
         List<MemberFoodResponseDto> uniqueDayAndFoodTime = new ArrayList<>();
-        Set<String> chechDayAndFooTime = new HashSet<>();
+        Set<String> checkDayAndFooTime = new HashSet<>();
 
 
         for (MemberFoodResponseDto m : memberFoodListByDateRange) {
             String check = m.getDay() + "-" + m.getFoodTime();
-            if (!chechDayAndFooTime.contains(check)) {
-                chechDayAndFooTime.add(check);
+            if (!checkDayAndFooTime.contains(check)) {
+                checkDayAndFooTime.add(check);
                 uniqueDayAndFoodTime.add(m);
             }
 

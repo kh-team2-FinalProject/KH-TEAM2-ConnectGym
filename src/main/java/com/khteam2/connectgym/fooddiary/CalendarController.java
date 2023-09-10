@@ -1,5 +1,6 @@
 package com.khteam2.connectgym.fooddiary;
 
+import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.dietlist.model.MemberFoodResponseDto;
 import com.khteam2.connectgym.dietlist.service.MemberFoodService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -22,6 +24,7 @@ public class CalendarController {
     @GetMapping("/fooddiary/calendar")
     public String getCalendar(@RequestParam(value = "year", required = false) Integer year,
                               @RequestParam(value = "month", required = false) Integer month,
+                              @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
                               Model model) {
         String foodDCategory = "Calendar";
         model.addAttribute("lessonCategory", foodDCategory);
@@ -52,7 +55,7 @@ public class CalendarController {
             weeks.add(week);
         }
 //푸드 정보 출력용
-        List<MemberFoodResponseDto> memberFoodList = memberFoodService.getUniqueDayAndFoodTime(firstDayOfMonth, firstDayOfMonth.plusMonths(1).minusDays(1));
+        List<MemberFoodResponseDto> memberFoodList = memberFoodService.getUniqueDayAndFoodTime(loginMemberNo, firstDayOfMonth, firstDayOfMonth.plusMonths(1).minusDays(1));
 
         model.addAttribute("memberFoodList", memberFoodList);
         model.addAttribute("yearMonth", yearMonth);
