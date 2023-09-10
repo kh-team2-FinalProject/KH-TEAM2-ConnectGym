@@ -31,18 +31,23 @@
                 <!--날짜카드-->
                 <td th:each="day : ${week}"
                     th:class="${day != null} ? 'calendar_active foodD_calendar_padding' : 'foodD_calendar_padding'">
+
                     <div class="foodD_clanedar_day_layout" onclick="goToDietList(this)">
                         <!--날짜출력-->
+
                         <div class="foodD_clanedar_datebox" th:if="${day != null}" th:text="${day}">Day</div>
                         <!-- 식단출력-->
                         <div class="foodD_clanedar_foodbox" th:if="${day != null}">
-                            <div th:each="todo : ${todosMap[__${day}__]}"
-                                 th:if="${todosMap[__${day}__]} != null">
-                                <span th:text="${todo.task}"></span>
+                            <div class="foodD_foodTime">
+                                <div th:class="${memberfooddto.foodTime.name}"
+                                     th:each="memberfooddto : ${memberFoodList}"
+                                     th:if="${memberfooddto.day==day}">
+                                    <span
+                                        th:text="${memberfooddto.foodTime.name}"></span>
+
+                                </div>
                             </div>
-                            <div th:unless="${todosMap[__${day}__]} != null">
-                                <!-- Handle case where todosMap[__${day}__] is null -->
-                            </div>
+
                         </div>
                     </div>
                 </td>
