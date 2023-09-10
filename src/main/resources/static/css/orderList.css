@@ -261,7 +261,7 @@
     .orderList_order_detail_item
     .orderList_order_detail_center_box
     .orderList_order_detail_title {
-    font-size: 1.5rem;
+    font-size: 1.625rem;
     width: fit-content;
     transition-duration: 300ms;
 }
@@ -282,6 +282,15 @@
     display: flex;
     justify-content: space-between;
     align-items: end;
+}
+
+#orderList_wrap
+    .orderList_order_detail_items
+    .orderList_order_detail_item
+    .orderList_order_detail_center_box
+    .orderList_order_detail_center_bottom
+    .orderList_order_detail_date {
+    font-size: 0.875rem;
 }
 
 #orderList_wrap
