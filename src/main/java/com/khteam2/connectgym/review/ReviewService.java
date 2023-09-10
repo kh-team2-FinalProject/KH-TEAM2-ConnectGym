@@ -1,7 +1,9 @@
 package com.khteam2.connectgym.review;
 
 import com.khteam2.connectgym.order.OrderDetailRepository;
+import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.review.dto.*;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;

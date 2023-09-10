@@ -56,7 +56,7 @@ public class TrainerService {
         //중복검사
         boolean check = validateDuplicate(member.getUserId());
         if (!check) {
-                throw new IllegalStateException("이미 존재하는 회원입니다.");
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
 
         String fileUrl = "";
@@ -84,9 +84,10 @@ public class TrainerService {
         Trainer trainer = trainerRepository.save(dto.toEntity());
 
         //자격증사진
-        if (licenseImgFiles.length != 0) {
-            try {
-                for (MultipartFile file : licenseImgFiles) {
+
+        try {
+            for (MultipartFile file : licenseImgFiles) {
+                if (!file.isEmpty()) {
                     String licenseImgUrl = s3Uploader.uploadProfileFile(file, member.getUserId());
                     License license = License.builder()
                         .licenseImg(licenseImgUrl)
@@ -94,10 +95,10 @@ public class TrainerService {
                         .build();
                     licenseRepository.save(license);
                 }
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         return trainer.getNo();
@@ -169,6 +170,7 @@ public class TrainerService {
 
         return trainerResponseDTO;
     }
+
 
     public HashMap<String, Object> findTrainerByEmail(String email) {
         List<Trainer> TrainerList = trainerRepository.findAll();
