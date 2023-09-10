@@ -115,10 +115,12 @@ public class FoodServiceImpl implements FoodService {
 
     @Transactional
     @Override
-    public Food saveFood(Food food) {
+    public Food saveFood(Food foodForm) {
 
-        return foodRepository.save(food);
+        return foodRepository.save(foodForm);
     }
+
+
 
     /* 유효성 체크해서 에러 메세지 */
     @Override
@@ -127,7 +129,8 @@ public class FoodServiceImpl implements FoodService {
 
         for (FieldError error : errors.getFieldErrors()) {
             String validKeyName = String.format("valid_%s", error.getField());
-            validatorResult.put(validKeyName, error.getDefaultMessage());
+            String errorMessage = error.getDefaultMessage();
+            validatorResult.put(validKeyName, errorMessage);
         }
 
         return validatorResult;

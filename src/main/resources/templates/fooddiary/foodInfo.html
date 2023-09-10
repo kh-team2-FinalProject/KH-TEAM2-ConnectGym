@@ -117,8 +117,8 @@
         <!-- 상품 등록 팝업 -->
         <div id="dietPopup" style="display: none">
             <div class="dietPop">
-                <form id="myWriteForm" class="pop-content" th:object="${food}" th:action="@{/fooddiary/foodInfo}" method="POST">
-                    <button id="closeBtn">X</button>
+                <form id="myWriteForm" class="pop-content" th:object="${foodForm}" th:action="@{/fooddiary/foodInfo}" method="POST">
+                    <button id="closeBtn" type="button">X</button>
                     <h2>영양성분 기입</h2>
 
                     <div class="foodInput">

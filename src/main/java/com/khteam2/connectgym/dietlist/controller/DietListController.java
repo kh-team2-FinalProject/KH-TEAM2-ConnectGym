@@ -30,23 +30,25 @@ public class DietListController {
 
         model.addAttribute("responseDto", responseDto);
         model.addAttribute("food", new Food());
+
         return "fooddiary/foodInfo";
     }
 
 
 
     @PostMapping("fooddiary/foodInfo")
-    public String addFood(@ModelAttribute @Valid Food food, Errors errors, Model model) {
+    public String addFood(@Valid @ModelAttribute("foodForm") Food foodForm, Errors errors, Model model) {
         /* 에러 메세지 */
+
         if (errors.hasErrors()) {
             Map<String, String> validatorResult = foodService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-            model.addAttribute("food", food);
+
             return "fooddiary/foodInfo";
         }
-        foodService.saveFood(food);
+        foodService.saveFood(foodForm);
         return "fooddiary/foodInfo";
     }
 
