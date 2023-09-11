@@ -46,8 +46,12 @@ void (function (D) {
      */
     const agreementButtonClickEvent = (e) => {
         if (e.target === agreeAll) {
+            // 모두 동의 버튼을 클릭했을 때 실행되는 조건문
+            //   다른 동의 항목들을 모두 체크 표시한다.
             agree1.checked = agree2.checked = agreeAll.checked;
         } else if (e.target === agree1 || e.target === agree2) {
+            // 각 동의 버튼을 클릭했을 때 실행되는 조건문
+            //   다른 항목을 모두 체크하면 모두 동의 항목이 체크 표시된다.
             agreeAll.checked = agree1.checked && agree2.checked;
         }
     };
