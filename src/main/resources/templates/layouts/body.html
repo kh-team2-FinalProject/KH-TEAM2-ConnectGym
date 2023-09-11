@@ -59,9 +59,19 @@
                             </ul>
 
                             <ul class="header_mypage_popup_menu" th:if="${session.session_login_member_no != null}">
-                                <li><a href="/mypage/myDashboard">대시보드</a></li>
-                                <li><a href="/mypage/myLessonList">수강현황</a></li>
-                                <li><a href="/mypage/myInfo">내 정보</a></li>
+                                <li><a
+                                    th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/trainerOnly/mypage'}">
+                                    마이페이지</a>
+                                </li>
+                                <li>
+                                    <a
+                                        th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage/myLessonList' : '/trainerOnly/mypage/myLesson'}">
+                                        수강현황</a></li>
+                                <li>
+                                    <a
+                                        th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage/myInfo' : '/trainerOnly/mypage/trainerInfo'}">
+                                        내 정보</a>
+                                </li>
                             </ul>
                         </li>
 
