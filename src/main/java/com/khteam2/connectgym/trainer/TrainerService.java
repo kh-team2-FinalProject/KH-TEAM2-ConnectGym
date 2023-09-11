@@ -3,7 +3,6 @@ package com.khteam2.connectgym.trainer;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowRepository;
-import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
@@ -158,6 +157,7 @@ public class TrainerService {
             .profileImg(trainer.getProfileImg())
             .infoTitle(trainer.getInfoTitle())
             .infoContent(trainer.getInfoContent())
+            .trainerEmail(trainer.getTrainerEmail())
             .licenses(licenses)
             .memberCount(memberCount)
             .build();

@@ -14,6 +14,7 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long> {
 
     Trainer findByTrainerId(String trainerId);
 
+
     @Query("SELECT t FROM Trainer t WHERE t.no = :trainerNo")
     Trainer findTrainerByLessonNo(@Param("trainerNo") Long trainerNo);
 

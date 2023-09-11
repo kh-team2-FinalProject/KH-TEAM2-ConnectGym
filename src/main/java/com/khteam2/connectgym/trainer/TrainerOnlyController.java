@@ -151,8 +151,6 @@ public class TrainerOnlyController {
         model.addAttribute("trainer", trainerResponseDTO);
         return "trainerOnly/myLesson";
     }
-    //트레이너 회원리스트
-    //트레이너 페이지
 
     // 회원 불러오기
     @GetMapping("/mypage/memberList/{lessonNo}")
@@ -181,12 +179,17 @@ public class TrainerOnlyController {
 
     }
 
+
+    //팔로우
     @GetMapping("/mypage/followed")
     public String followed(Model model, HttpSession session) {
         model.addAttribute("bannerTitle", "followed");
+//        logger.info("세션 상태 확인: " + session.getAttribute(SessionConstant.LOGIN_MEMBER_CLASS));
+
         TrainerResponseDTO trainer = trainerService.sessionT(session);
         List<MemberResponseDTO> followed = followService.followList(trainer.getTrainerNo());
         model.addAttribute("followed", followed);
+//        logger.info("세션 상태 확인: " + session.getAttribute(SessionConstant.LOGIN_MEMBER_CLASS));
 
         return "trainerOnly/followed";
     }
@@ -223,4 +226,32 @@ public class TrainerOnlyController {
             return "redirect:/mypage";
         }
     }
+
+    @GetMapping("/mypage/trainerInfo")
+    public String trainerMyInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
+                                @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
+                                Model model, RedirectAttributes redirectAttributes) {
+        if (loginMemberClass == null) {
+            // 로그인되어 있지 않은 경우
+            redirectAttributes.addFlashAttribute("message", "로그인 해주세요.");
+            return "redirect:/";
+
+        } else if (loginMemberClass == MemberClass.TRAINER) {
+            // 트레이너 회원 로그인 된 경우
+
+            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+            System.out.println("trainerResponseDTO = " + trainerResponseDTO);
+            model.addAttribute(trainerResponseDTO);
+
+            return "trainerOnly/trainerInfo";
+
+
+        } else {
+            return "redirect:/mypage";
+        }
+
+
+    }
+
+
 }

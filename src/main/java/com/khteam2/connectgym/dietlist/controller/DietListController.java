@@ -25,33 +25,45 @@ public class DietListController {
     private final FoodRepository foodRepository;
 
     @GetMapping("fooddiary/foodInfo")
-    public String diet_SearchForm(Model model, FoodFindRequestDto requestDto) {
+    public String diet_SearchForm(Model model, FoodFindRequestDto requestDto, Food foodForm) {
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
 
         model.addAttribute("responseDto", responseDto);
+/*
+        model.addAttribute("foodForm", foodForm);
+*/
         model.addAttribute("food", new Food());
+
         return "fooddiary/foodInfo";
     }
 
 
 
+/*    public String addFood(@Valid @ModelAttribute("foodForm") Food foodForm, Errors errors, Model model) {*/
     @PostMapping("fooddiary/foodInfo")
-    public String addFood(@ModelAttribute @Valid Food food, Errors errors, Model model) {
+    public String addFood(
+        @ModelAttribute("food") @Valid Food food,
+        Errors errors,
+        Model model,
+        FoodFindRequestDto requestDto) {
+        FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
+
+        model.addAttribute("responseDto", responseDto);
+        model.addAttribute("food", food);
         /* 에러 메세지 */
+
         if (errors.hasErrors()) {
             Map<String, String> validatorResult = foodService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-            model.addAttribute("food", food);
+
             return "fooddiary/foodInfo";
         }
+
         foodService.saveFood(food);
         return "fooddiary/foodInfo";
     }
-
-
-
 
 
     // dietlist

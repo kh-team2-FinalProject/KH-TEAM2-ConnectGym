@@ -24,10 +24,14 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
 
     @Query(value = "SELECT od FROM OrderDetail od"
         + " JOIN FETCH od.lesson l"
+        + " JOIN FETCH od.order o"
         + " JOIN FETCH l.trainer t"
-        + " WHERE l.title LIKE CONCAT('%', TRIM(:search), '%')"
-        + " OR t.trainerName LIKE CONCAT('%', TRIM(:search), '%')")
-    List<OrderDetail> findByLessonTitleOrTrainerName(@Param("search") String search);
+        + " WHERE o = :order"
+        + " AND ("
+        + " l.title LIKE CONCAT('%', TRIM(:search), '%')"
+        + " OR t.trainerName LIKE CONCAT('%', TRIM(:search), '%')"
+        + " )")
+    List<OrderDetail> findByOrderAndLessonTitleOrTrainerName(@Param("order") Order order, @Param("search") String search);
 
     @Query("SELECT od FROM OrderDetail od WHERE lesson.no = ?1")
     List<OrderDetail> enrollList(Long lessonNo);
