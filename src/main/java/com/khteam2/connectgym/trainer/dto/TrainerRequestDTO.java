@@ -1,15 +1,10 @@
 package com.khteam2.connectgym.trainer.dto;
 
-import com.khteam2.connectgym.trainer.License;
 import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,11 +12,12 @@ import java.util.List;
 @Builder
 public class TrainerRequestDTO {
 
+    private Long no;
     private String trainerId;
     private String trainerPw;
     private String trainerName;
     private String trainerTel;
-/*    private List<License> licenseList = new ArrayList<>();*/
+    /*    private List<License> licenseList = new ArrayList<>();*/
     private String profileImg;
     private String infoTitle;
     private String infoContent;

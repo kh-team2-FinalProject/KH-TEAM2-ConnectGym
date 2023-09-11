@@ -123,9 +123,9 @@ public class LessonService {
     public void updateLesson(Long trainerNo, LessonRequestDTO lessonRequestDTO, MultipartFile file) {
         Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
         lessonRequestDTO.setTrainer(trainer);
-        System.out.println("123123" + lessonRequestDTO);
+
         String fileUrl = "";
-        System.out.println(file.getOriginalFilename());
+
         if (!file.isEmpty()) {
             try {
                 fileUrl = s3Uploader.uploadLessonFile(file, lessonRequestDTO.getTitleCode());
@@ -133,7 +133,7 @@ public class LessonService {
                 throw new RuntimeException(e);
             }
         }
-        //로그인한 세션에 트레이너 객체의 no가 있으니까
+
         lessonRequestDTO.setLesson_img(fileUrl);
 
 

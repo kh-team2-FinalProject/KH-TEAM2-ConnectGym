@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +33,8 @@ public class MemberFoodService {
 
     public List<MemberFoodResponseDto> getMemberFoodListByMemberNoAndDateRange(Long memberNo, LocalDate startDate, LocalDate endDate) {
         List<MemberFood> memberFoodList = memberFoodRepository.findByMemberNoAndRegDateBetween(memberNo, startDate, endDate);
+        Collections.sort(memberFoodList, Comparator.comparingInt(MemberFood::getFoodTimeNo));
+
         List<MemberFoodResponseDto> memberFoodResponseDtoList = new ArrayList<>();
         for (MemberFood m : memberFoodList) {
 
@@ -47,6 +46,8 @@ public class MemberFoodService {
 
     }
 
+
+    //중복제거
     public List<MemberFoodResponseDto> getUniqueDayAndFoodTime(Long memberNo, LocalDate startDate, LocalDate endDate) {
 
         List<MemberFoodResponseDto> memberFoodListByDateRange = getMemberFoodListByMemberNoAndDateRange(memberNo, startDate, endDate);
@@ -54,15 +55,12 @@ public class MemberFoodService {
         List<MemberFoodResponseDto> uniqueDayAndFoodTime = new ArrayList<>();
         Set<String> checkDayAndFooTime = new HashSet<>();
 
-
         for (MemberFoodResponseDto m : memberFoodListByDateRange) {
             String check = m.getDay() + "-" + m.getFoodTime();
             if (!checkDayAndFooTime.contains(check)) {
                 checkDayAndFooTime.add(check);
                 uniqueDayAndFoodTime.add(m);
             }
-
-
         }
         return uniqueDayAndFoodTime;
     }

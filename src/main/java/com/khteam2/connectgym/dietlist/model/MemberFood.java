@@ -30,4 +30,9 @@ public class MemberFood {
     private FoodTime foodTime;
     @Column(nullable = false)
     private LocalDate regDate;
+
+    public int getFoodTimeNo() {
+        return foodTime.getNo();
+       
+    }
 }

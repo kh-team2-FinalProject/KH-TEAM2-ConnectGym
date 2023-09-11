@@ -1,8 +1,10 @@
 package com.khteam2.connectgym.dietlist;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public enum FoodTime {
     BREAKFAST(1, "아침"),
     LUNCH(2, "점심"),

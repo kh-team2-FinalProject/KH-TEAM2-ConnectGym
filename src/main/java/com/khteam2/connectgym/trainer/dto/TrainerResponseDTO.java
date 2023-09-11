@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.trainer.dto;
 
-import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.trainer.License;
 import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
@@ -17,6 +16,7 @@ import java.util.List;
 public class TrainerResponseDTO {
 
     private Long trainerNo;
+    private String trainerPw;
     private String trainerId;
     private String trainerName;
     private String trainerTel;
@@ -35,14 +35,16 @@ public class TrainerResponseDTO {
     private int followCount;
 
     public TrainerResponseDTO(Trainer entity) {
-            this.trainerNo = entity.getNo();
-            this.trainerId = entity.getTrainerId();
-            this.trainerName = entity.getTrainerName();
-            this.trainerTel = entity.getTrainerTel();
-            this.profileImg = entity.getProfileImg();
-            this.infoTitle = entity.getInfoTitle();
-            this.infoContent = entity.getInfoContent();
-            this.trainerEmail = entity.getTrainerEmail();
+        this.trainerNo = entity.getNo();
+        this.trainerPw = entity.getTrainerPw();
+        this.trainerId = entity.getTrainerId();
+        this.trainerName = entity.getTrainerName();
+        this.trainerTel = entity.getTrainerTel();
+        this.profileImg = entity.getProfileImg();
+        this.infoTitle = entity.getInfoTitle();
+        this.infoContent = entity.getInfoContent();
+        this.trainerEmail = entity.getTrainerEmail();
+
     }
 
 }
