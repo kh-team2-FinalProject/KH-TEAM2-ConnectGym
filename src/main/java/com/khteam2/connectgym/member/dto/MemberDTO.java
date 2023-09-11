@@ -1,11 +1,11 @@
 package com.khteam2.connectgym.member.dto;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class MemberDTO {
-
     private Long no;
     private String userId;
     private String userPw;

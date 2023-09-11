@@ -1,9 +1,8 @@
-
 /*트레이너 전환 버튼 HEAD*/
-.myinfo_converTrainer_top{
-display:flex;
-justify-content:right;
-min-height:70px;
+.myinfo_converTrainer_top {
+    display: flex;
+    justify-content: right;
+    min-height: 70px;
 }
 
 /*.myinfo_converTrainer_button {
@@ -17,19 +16,23 @@ min-height:70px;
     text-transform: uppercase;
     font-size: 20px;
 }
+
 .myinfo_converTrainer_button a span {
     padding: 10px 20px;
     transition: .5s;
     position: relative;
 }
+
 .myinfo_converTrainer_button a span:nth-child(1) {
     color: #fff;
     background: #262626;
 }
+
 .myinfo_converTrainer_button a span:nth-child(2) {
     color: #fff;
     background: #f09e98;
 }
+
 .myinfo_converTrainer_button a span:nth-child(1):before {
     content: attr(data-attr);
     position: absolute;
@@ -41,9 +44,11 @@ min-height:70px;
     transform-origin: top;
     transform: rotateX(90deg) translateY(-50%);
 }
+
 .myinfo_converTrainer_button a:hover span:nth-child(1):before {
     transform: rotateX(0deg) translateY(0%);
 }
+
 .myinfo_converTrainer_button a span:nth-child(2):before {
     content: attr(data-attr);
     position: absolute;
@@ -55,23 +60,27 @@ min-height:70px;
     transform-origin: bottom;
     transform: rotateX(90deg) translateY(50%);
 }
+
 .myinfo_converTrainer_button a:hover span:nth-child(2):before {
     transform: rotateX(0deg) translateY(0%);
 }
-.myinfo_converTrainer_button a  span:nth-child(1):after {
-  content: attr(data-attr);
-  padding: 10px 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #262626;
-  transform-origin: bottom;
-  transform: rotateX(0deg) translateY(0%);
-  transition: 0.5s;
+
+.myinfo_converTrainer_button a span:nth-child(1):after {
+    content: attr(data-attr);
+    padding: 10px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #262626;
+    transform-origin: bottom;
+    transform: rotateX(0deg) translateY(0%);
+    transition: 0.5s;
 }
+
 .myinfo_converTrainer_button a:hover span:nth-child(1):after {
-  transform: rotateX(90deg) translateY(50%);
+    transform: rotateX(90deg) translateY(50%);
 }
+
 .myinfo_converTrainer_button a span:nth-child(2):after {
     content: attr(data-attr);
     position: absolute;
@@ -83,6 +92,7 @@ min-height:70px;
     transform-origin: top;
     transform: rotateX(0deg) translateY(0%);
 }
+
 .myinfo_converTrainer_button a:hover span:nth-child(2):after {
     transform: rotateX(90deg) translateY(-50%);
 }
@@ -91,11 +101,12 @@ min-height:70px;
 /*트레이너 전환 버튼 END*/
 
 .form_wrap input[type="button"],
-.form_wrap button{
+.form_wrap button {
     cursor: pointer;
 }
+
 /* 외곽 테두리 */
-.join_border{
+.join_border {
     border: 4px solid #0e1414;
     border-radius: 10px;
     width: 100%;
@@ -109,26 +120,27 @@ min-height:70px;
     box-shadow: 0 0 6px rgb(0 0 0 / 0.3);
 }
 
-.form_wrap{
+.form_wrap {
     display: flex;
     flex-direction: column;
     width: 600px;
-    align-items:center;
+    align-items: center;
 }
 
 /* logo */
-.join_logo{
+.join_logo {
     display: flex;
     justify-content: center;
 }
-.join_logo_img{
+
+.join_logo_img {
     height: 100px;
     width: 180px;
     text-align: left;
 }
 
 /* 각 입력 폼 div */
-.input_wrap{
+.input_wrap {
     width: 100%;
     height: 80px;
     margin-top: 10px;
@@ -147,16 +159,17 @@ min-height:70px;
 }
 
 .input_wrap input::placeholder,
-.input_address_wrap input::placeholder{
+.input_address_wrap input::placeholder {
     font-size: 14px;
 }
-.form_wrap span{
+
+.form_wrap span {
     color: #0e1414;
     font-size: 15px;
 }
 
 /* 주소 입력폼 */
-.input_address_wrap{
+.input_address_wrap {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -164,16 +177,17 @@ min-height:70px;
 
 /* 주소 입력폼 안의 input */
 
-.input_address_wrap input{
+.input_address_wrap input {
     height: 40px;
     border-radius: 5px;
     margin-bottom: 10px;
     font-size: 13px;
     box-sizing: border-box;
     padding-left: 20px;
-     border: 1px solid #0e1414;
+    border: 1px solid #0e1414;
 }
-.input_address_wrap input[type=button]{
+
+.input_address_wrap input[type=button] {
     width: 150px;
     text-align: center;
     padding: 0;
@@ -183,18 +197,21 @@ min-height:70px;
 }
 
 /* 주소 api 사용 input */
-#sample6_postcode{
+#sample6_postcode {
     width: 200px;
 }
-#sample6_address{
+
+#sample6_address {
     width: 365px;
 }
-#sample6_detailAddress{
+
+#sample6_detailAddress {
     width: 600px;
 }
-#sample6_extraAddress{
+
+#sample6_extraAddress {
     width: 220px;
-    padding:0;
+    padding: 0;
     text-align: center;
     margin-left: 10px;
 }
@@ -207,36 +224,37 @@ min-height:70px;
 }
 */
 
-.input_email_wrap{
+.input_email_wrap {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
     height: 80px;
 }
 
-.input_email_wrap input{
+.input_email_wrap input {
     height: 40px;
     border-radius: 5px;
     font-size: 15px;
     box-sizing: border-box;
     padding-left: 20px;
-     border: 1px solid #0e1414;
+    border: 1px solid #0e1414;
     color: black;
 }
 
-#email01{
+#email01 {
     width: 180px;
     margin-right: 8px;
 }
 
-#email02{
+#email02 {
     width: 180px;
     text-align: center;
     padding: 0;
     margin-right: 10px;
     margin-left: 8px;
 }
-#select{
+
+#select {
     width: 180px;
     height: 40px;
     margin-top: 10px;
@@ -246,18 +264,19 @@ min-height:70px;
     border: none;
     text-align: center;
 }
-#checkEmail{
+
+#checkEmail {
     width: 130px;
     margin-right: 10px;
 }
 
-.join_btn_wrap{
+.join_btn_wrap {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
 
-.join_btn_wrap button{
+.join_btn_wrap button {
     height: 40px;
     border-radius: 5px;
     font-size: 16px;
@@ -267,16 +286,45 @@ min-height:70px;
     font-weight: bold;
 }
 
-.join_btn1{
-    width: 150px;
-    margin: 0px 10px;
-}
-.join_btn2{
+.join_btn1 {
     width: 150px;
     margin: 0px 10px;
 }
 
-#id_check_message, #pw_check_message, #checkpw_check_message, #mail-check-warn{
-    font-size:14px;
+.join_btn2 {
+    width: 150px;
+    margin: 0px 10px;
+}
+
+#id_check_message, #pw_check_message, #checkpw_check_message, #mail-check-warn {
+    font-size: 14px;
     padding-left: 10px;
 }
+
+.text_area_wrap .trainer_infoContent_box {
+
+    width: 600px;
+}
+
+.trainer_infoTitle_box {
+    width: 100%;
+}
+
+#update_trainer_profile_imgbox {
+    display: none;
+}
+
+#update_trainer_license_input {
+    display: none;
+}
+
+.update_trainer_certificate_container .update_trainer_certificate_top .update_trainer_certificate_add_button_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.update_trainer_certificate_container_label .plus_box_img {
+    cursor: pointer;
+}
+

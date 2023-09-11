@@ -1,14 +1,13 @@
 package com.khteam2.connectgym.customer_service;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CSService {
-
-
     @Autowired
     private CS_CategoryRepository cs_categoryRepository;
     @Autowired
@@ -19,7 +18,6 @@ public class CSService {
         return csList;
     }
 
-
     public List<CS_Category> viewToAllCategory() {
         List<CS_Category> ctgyList = cs_categoryRepository.findAll();
 
@@ -27,7 +25,6 @@ public class CSService {
     }
 
     public List<CS> viewToCategory(int a) {
-
         List<CS> csList = csRepository.findAllByOrderByFaqDatetimeDesc();
         List<CS> select_categoryList = new ArrayList<>();
         for (int i = 0; i < csList.size(); i++) {
@@ -57,15 +54,11 @@ public class CSService {
     }
 
     public List<CS> getDataForCategoryPage(int pageNumber, int itemsPerPage,
-        List<CS> categoryList) {
+                                           List<CS> categoryList) {
         List<CS> dataForPage = new ArrayList<>();
 
         int startIndex = (pageNumber - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, categoryList.size());
-
-//        for (int i = 0; i < categoryList.size(); i++) {
-//            categoryList.get(i).getContent().replace("\r\n", "<br>");
-//        }
 
         for (int i = startIndex; i < endIndex; i++) {
             dataForPage.add(categoryList.get(i));
@@ -77,5 +70,4 @@ public class CSService {
         int totalItems = list.size();
         return (int) Math.ceil((double) totalItems / itemsPerPage);
     }
-
 }

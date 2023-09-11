@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ChatroomService {
-
     private final ChatMessageRepository chatMessageRepository;
     private final ChatroomRepository chatroomRepository;
     private final MemberRepository memberRepository;
@@ -47,7 +46,6 @@ public class ChatroomService {
     }
 
     public Chatroom inChatroom(Long chatroomNo) {
-
         return chatroomRepository.findById(chatroomNo).orElse(null);
     }
 
@@ -68,9 +66,4 @@ public class ChatroomService {
         }
         return myChatroomList;
     }
-
 }
-
-
-
-

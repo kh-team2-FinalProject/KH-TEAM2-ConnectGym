@@ -1,13 +1,14 @@
 package com.khteam2.connectgym.lesson;
 
-
 import com.khteam2.connectgym.trainer.Trainer;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -39,5 +40,4 @@ public class Lesson {
     private LocalDate end_date;
 
     private String lesson_img;
-
 }

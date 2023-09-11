@@ -13,11 +13,9 @@ import lombok.NoArgsConstructor;
 public class LicenseDTO {
     private String licenseImg;
 
-    public License toEntity(){
+    public License toEntity() {
         return License.builder()
             .licenseImg(licenseImg)
-
             .build();
     }
-
 }

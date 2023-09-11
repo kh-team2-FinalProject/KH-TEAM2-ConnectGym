@@ -39,11 +39,11 @@
                         <!-- 식단출력-->
                         <div class="foodD_clanedar_foodbox" th:if="${day != null}">
                             <div class="foodD_foodTime">
-                                <div th:class="${memberfooddto.foodTime.name}"
+                                <div th:class="${memberfooddto.foodTime}"
                                      th:each="memberfooddto : ${memberFoodList}"
                                      th:if="${memberfooddto.day==day}">
                                     <span
-                                        th:text="${memberfooddto.foodTime.name}"></span>
+                                        th:text="${memberfooddto.foodTime}"></span>
 
                                 </div>
                             </div>

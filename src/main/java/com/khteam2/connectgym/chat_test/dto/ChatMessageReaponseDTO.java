@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.format.DateTimeFormatter;
 
 @Data
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +17,6 @@ public class ChatMessageReaponseDTO {
     private String content;
     private String sender;
     private String sendAt;
-
 
     public ChatMessageReaponseDTO fromEntity(ChatMessage chatMessage) {
         return ChatMessageReaponseDTO.builder()

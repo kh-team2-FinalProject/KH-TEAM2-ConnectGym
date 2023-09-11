@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessage {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
@@ -31,13 +30,9 @@ public class ChatMessage {
     @CreationTimestamp
     private LocalDateTime sendAt;
 
-
     //메시지 테스트용 생성자
     public ChatMessage(String content, String sender) {
         this.content = content;
         this.sender = sender;
     }
-
-
 }
-

@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class FollowApiController {
-
     private final FollowService followService;
 
     @PostMapping("/follow/{toTrainerNo}")
@@ -24,14 +23,14 @@ public class FollowApiController {
     }
 
     @DeleteMapping("/follow/{toTrainerNo}")
-    public ResponseEntity<String> unFollow(@PathVariable Long toTrainerNo,HttpSession session){
+    public ResponseEntity<String> unFollow(@PathVariable Long toTrainerNo, HttpSession session) {
         Long fromUserNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
         followService.delFollow(fromUserNo, toTrainerNo);
         return ResponseEntity.ok().body("unFollow");
     }
 
     @PostMapping("/follow/search")
-    public List<TrainerResponseDTO> searchFollow(HttpSession session, @RequestBody(required = false) FollowForUserResponseDTO follow){
+    public List<TrainerResponseDTO> searchFollow(HttpSession session, @RequestBody(required = false) FollowForUserResponseDTO follow) {
         Long fromUserNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
 
         return followService.searchFollow(fromUserNo, follow.getKeyword());

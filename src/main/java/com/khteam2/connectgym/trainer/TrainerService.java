@@ -29,7 +29,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class TrainerService {
-
     private final TrainerRepository trainerRepository;
     private final LessonRepository lessonRepository;
     private final LicenseRepository licenseRepository;
@@ -74,7 +73,6 @@ public class TrainerService {
             .trainerName(member.getUserName())
             .trainerTel(member.getUserTel())
             .trainerEmail(member.getUserEmail())
-            /*  .licenseList(trainerRequestDTO.getLicenseList())*/
             .profileImg(fileUrl)
             .infoTitle(trainerRequestDTO.getInfoTitle())
             .infoContent(trainerRequestDTO.getInfoContent())
@@ -151,6 +149,7 @@ public class TrainerService {
 
         TrainerResponseDTO trainerResponseDTO = TrainerResponseDTO.builder()
             .trainerNo(trainerNo)
+            .trainerPw(trainer.getTrainerPw())
             .trainerId(trainer.getTrainerId())
             .trainerName(trainer.getTrainerName())
             .trainerTel(trainer.getTrainerTel())
@@ -170,7 +169,6 @@ public class TrainerService {
 
         return trainerResponseDTO;
     }
-
 
     public HashMap<String, Object> findTrainerByEmail(String email) {
         List<Trainer> TrainerList = trainerRepository.findAll();
@@ -212,6 +210,12 @@ public class TrainerService {
         }
 
         return trainerAll;
+    }
+
+    public void updateTrainer(TrainerRequestDTO trainerRequestDTO, MultipartFile file) {
+
+
+        trainerRepository.save(trainerRequestDTO.toEntity());
 
     }
 }

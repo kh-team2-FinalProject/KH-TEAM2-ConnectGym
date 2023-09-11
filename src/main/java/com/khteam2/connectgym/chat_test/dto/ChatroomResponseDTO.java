@@ -10,9 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ChatroomResponseDTO {
-
     private Long no;
     private Long memberNo;
     private Long trainerNo;
-
 }

@@ -14,14 +14,12 @@ import java.time.format.DateTimeFormatter;
 @Service
 @RequiredArgsConstructor
 public class S3Uploader {
-
     private final AmazonS3Client amazonS3Client;
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
     public String uploadProfileFile(MultipartFile file, String trainerId) throws IOException {
-
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String formattedDateTime = now.format(dateTimeFormatter);
@@ -36,12 +34,9 @@ public class S3Uploader {
         amazonS3Client.putObject(bucket + "/profile/" + trainerId, s3FileName, file.getInputStream(), metadata);
 
         return amazonS3Client.getUrl(bucket + "/profile/" + trainerId, s3FileName).toString();
-
     }
 
-
     public String uploadLessonFile(MultipartFile file, String lessonCode) throws IOException {
-
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String formattedDateTime = now.format(dateTimeFormatter);
@@ -57,11 +52,9 @@ public class S3Uploader {
         amazonS3Client.putObject(bucket + "/profile/" + lessonCode, s3FileName, file.getInputStream(), metadata);
 
         return amazonS3Client.getUrl(bucket + "/profile/" + lessonCode, s3FileName).toString();
-
     }
 
     public String uploadReviewFile(MultipartFile file, Long userNo) throws IOException {
-
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String formattedDateTime = now.format(dateTimeFormatter);
@@ -76,8 +69,5 @@ public class S3Uploader {
         amazonS3Client.putObject(bucket + "/review/" + userNo, s3FileName, file.getInputStream(), metadata);
 
         return amazonS3Client.getUrl(bucket + "/review/" + userNo, s3FileName).toString();
-
     }
-
-
 }

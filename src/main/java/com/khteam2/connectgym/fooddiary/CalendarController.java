@@ -18,7 +18,6 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class CalendarController {
-
     private final MemberFoodService memberFoodService;
 
     @GetMapping("/fooddiary/calendar")
@@ -63,6 +62,4 @@ public class CalendarController {
         model.addAttribute("weeks", weeks);
         return "fooddiary/calendar";
     }
-
-
 }

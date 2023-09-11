@@ -26,4 +26,3 @@ public class Chatroom {
     @JoinColumn(name = "trainer_no", nullable = false)
     private Trainer trainer;
 }
-

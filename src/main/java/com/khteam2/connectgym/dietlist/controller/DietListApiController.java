@@ -64,7 +64,7 @@ public class DietListApiController {
     public ResponseEntity<?> insert(
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @RequestBody(required = false) FoodDto foodDto) {
-        
+
         return ResponseEntity.ok().build();
     }
 }

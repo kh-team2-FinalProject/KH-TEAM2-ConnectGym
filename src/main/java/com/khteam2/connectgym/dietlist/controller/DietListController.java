@@ -29,17 +29,11 @@ public class DietListController {
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
 
         model.addAttribute("responseDto", responseDto);
-/*
-        model.addAttribute("foodForm", foodForm);
-*/
         model.addAttribute("food", new Food());
 
         return "fooddiary/foodInfo";
     }
 
-
-
-/*    public String addFood(@Valid @ModelAttribute("foodForm") Food foodForm, Errors errors, Model model) {*/
     @PostMapping("fooddiary/foodInfo")
     public String addFood(
         @ModelAttribute("food") @Valid Food food,
@@ -65,16 +59,14 @@ public class DietListController {
         return "fooddiary/foodInfo";
     }
 
-
     // dietlist
     @GetMapping("fooddiary/dietlist")
     public String searchDiet(
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-
-
         if (date == null) {
+            // 파라미터가 없으면 현재 날짜를 기준으로 보여준다.
             date = LocalDate.now();
         }
 
@@ -89,7 +81,6 @@ public class DietListController {
         return "fooddiary/dietlist";
     }
 
-
     @PostMapping("/selectfood")
     public String selectFood(
         @RequestParam(name = "selectedKey", required = false) Long selectedKey,
@@ -98,6 +89,4 @@ public class DietListController {
         model.addAttribute("selectedFood", selectedFood);
         return "redirect:/fooddiary/dietlist";
     }
-
-
 }

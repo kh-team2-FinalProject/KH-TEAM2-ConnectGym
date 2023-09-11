@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class LessonResponseDTO {
-
     private Long no;
     private String title;
     private String titleCode;
@@ -40,6 +39,4 @@ public class LessonResponseDTO {
         this.lesson_img = lesson.getLesson_img();
         this.errorMsg = "Success";
     }
-
-
 }

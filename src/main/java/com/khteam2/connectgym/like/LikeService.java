@@ -90,7 +90,6 @@ public class LikeService {
 
     //트레이너명 또는 강사명으로 검색
     public List<LessonResponseDTO> searchLike(Long userNo, String keyword) {
-
         List<LessonResponseDTO> likingList = new ArrayList<>();
 
         if (keyword == "") {
@@ -104,13 +103,4 @@ public class LikeService {
 
         return likingList;
     }
-
-
 }
-//    public TrainerResponseDTO findTrainerByLessonNo(Long lessonNo) {
-//        Lesson lesson = lessonRepository.findById(lessonNo).orElse(null);
-//        if (lesson != null) {
-//            return new TrainerResponseDTO(lesson.getTrainer());
-//        }
-//        return null;
-//    }

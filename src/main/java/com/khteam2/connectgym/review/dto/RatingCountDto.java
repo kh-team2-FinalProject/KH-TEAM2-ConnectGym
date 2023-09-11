@@ -3,7 +3,6 @@ package com.khteam2.connectgym.review.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +13,4 @@ public class RatingCountDto {
     private Long rating3Count;
     private Long rating4Count;
     private Long rating5Count;
-
-
 }
