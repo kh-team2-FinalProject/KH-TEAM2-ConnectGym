@@ -151,6 +151,7 @@ public class TrainerService {
 
         TrainerResponseDTO trainerResponseDTO = TrainerResponseDTO.builder()
             .trainerNo(trainerNo)
+            .trainerPw(trainer.getTrainerPw())
             .trainerId(trainer.getTrainerId())
             .trainerName(trainer.getTrainerName())
             .trainerTel(trainer.getTrainerTel())
@@ -211,6 +212,13 @@ public class TrainerService {
         }
 
         return trainerAll;
+
+    }
+
+    public void updateTrainer(TrainerRequestDTO trainerRequestDTO, MultipartFile file) {
+
+
+        trainerRepository.save(trainerRequestDTO.toEntity());
 
     }
 }

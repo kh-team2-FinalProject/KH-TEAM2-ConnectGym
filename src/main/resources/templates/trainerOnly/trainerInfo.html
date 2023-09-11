@@ -16,6 +16,7 @@
     <script th:inline="javascript">
         const loginMemberNo = [[${session.session_login_member_no}]];
         var trainerEmail = [[${trainerResponseDTO.trainerEmail}]];
+
         document.addEventListener("DOMContentLoaded", function () {
             function email_split(trainerEmail) {
                 var email = trainerEmail.split("@");
@@ -31,6 +32,38 @@
 
             email_split(trainerEmail);
         });
+
+        function checkpwAndUpdate() {
+            Swal.fire({
+                title: '비밀번호를 입력하세요',
+                input: 'password', // 입력 필드의 유형을 'password'로 지정
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showLoaderOnConfirm: true,
+                showCancelButton: true,
+                confirmButtonText: '비밀번호 확인',
+                cancelButtonText: '취소',
+                preConfirm: (password) => {
+
+                    console.log([[${trainerResponseDTO.trainerPw}]]);
+                    if (password === [[${trainerResponseDTO.trainerPw}]]) {
+                        return true;
+                    } else {
+                        Swal.showValidationMessage('비밀번호가 잘못되었습니다');
+                        return false;
+                    }
+                },
+                allowOutsideClick: () => !Swal.isLoading(),
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+
+                        window.location.href = '/trainerOnly/mypage/updateInfo';
+                    }
+                });
+
+        }
     </script>
 
 </th:block>
@@ -78,11 +111,7 @@
                     <input type="hidden" id="userEmail" name="userEmail">
                 </div>
                 <div class="join_btn_wrap">
-                    <!--                                    <button type="reset" class="join_btn1">RESET-->
-                    <!--                                    </button>-->
-                    <!--                    <button type="button" class="join_btn2" onclick="joinform_check();">수정하기-->
-                    <!--                                    </button>-->
-                    <!-- submit -> button 수정 후 onclick으로 유효성검사 실행 -->
+
                 </div>
                 <div class="input_wrap" style="width: 150px; height: 200px">
                     <span>강사 프로필 이미지</span><br>
@@ -106,7 +135,7 @@
 
                 <div class="join_btn_wrap">
 
-                    <button type="button" class="join_btn2" onclick="">정보 수정하기
+                    <button type="button" class="join_btn2" onclick="checkpwAndUpdate()">정보 수정하기
                     </button>
 
                 </div>

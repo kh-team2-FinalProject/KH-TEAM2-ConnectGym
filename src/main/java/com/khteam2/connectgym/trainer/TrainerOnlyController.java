@@ -12,16 +12,14 @@ import com.khteam2.connectgym.member.dto.MemberResponseDTO;
 import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.review.dto.ReviewResponseListDto;
-import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomRequestDto;
-import com.khteam2.connectgym.trainer.dto.TrainerEnterRoomResponseDto;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
-import com.khteam2.connectgym.trainer.dto.TrainerRoomResponseDto;
+import com.khteam2.connectgym.trainer.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -227,6 +225,7 @@ public class TrainerOnlyController {
         }
     }
 
+
     @GetMapping("/mypage/trainerInfo")
     public String trainerMyInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                                 @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
@@ -253,5 +252,40 @@ public class TrainerOnlyController {
 
     }
 
+    @GetMapping("/mypage/updateInfo")
+    public String trainerUpdateInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
+                                    @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
+                                    Model model, RedirectAttributes redirectAttributes) {
+        if (loginMemberClass == null) {
+            // 로그인되어 있지 않은 경우
+            redirectAttributes.addFlashAttribute("message", "로그인 해주세요.");
+            return "redirect:/";
 
+        } else if (loginMemberClass == MemberClass.TRAINER) {
+            // 트레이너 회원 로그인 된 경우
+
+            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+            System.out.println("trainerResponseDTO = " + trainerResponseDTO);
+            model.addAttribute("trainerDTO", trainerResponseDTO);
+
+            return "trainerOnly/updateInfo";
+
+
+        } else {
+            return "redirect:/mypage";
+        }
+
+    }
+
+    @PostMapping("/mypage/trainerUpdate")
+    public String trainerUpdate(TrainerRequestDTO trainerRequestDTO,
+                                @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+                                @RequestParam("lessonImgFile") MultipartFile file) {
+
+
+        trainerRequestDTO.setNo(loginMemberNo);
+
+        trainerService.updateTrainer(trainerRequestDTO, file);
+        return "detailOrCrud/updateComplete";
+    }
 }

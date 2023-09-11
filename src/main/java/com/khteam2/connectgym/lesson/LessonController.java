@@ -191,7 +191,6 @@ public class LessonController {
     public String updateLessonComplete(@PathVariable Long lessonNo,
                                        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
                                        LessonRequestDTO lessonRequestDTO,
-                                       Model model,
                                        @RequestParam("lessonImgFile") MultipartFile file) {
 
         lessonRequestDTO.setNo(lessonNo);
