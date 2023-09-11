@@ -65,9 +65,8 @@ public class DietListController {
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-
-
         if (date == null) {
+            // 파라미터가 없으면 현재 날짜를 기준으로 보여준다.
             date = LocalDate.now();
         }
 
