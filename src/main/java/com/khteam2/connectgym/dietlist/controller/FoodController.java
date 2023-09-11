@@ -22,7 +22,6 @@ public class FoodController {
         this.foodService = foodService;
     }
 
-
     @GetMapping(value = "/api/food_test_2/{pageNo}")
     public Object foodTest2(
         @PathVariable Integer pageNo) {
@@ -30,10 +29,4 @@ public class FoodController {
 
         return dto;
     }
-
-//    @GetMapping(value = "/api/renewFoodData")
-//    public Object renewFoodData() {
-//        return this.foodService.moveDataToDatabase();
-//    }
-
 }

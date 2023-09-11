@@ -29,7 +29,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class TrainerService {
-
     private final TrainerRepository trainerRepository;
     private final LessonRepository lessonRepository;
     private final LicenseRepository licenseRepository;
@@ -74,7 +73,6 @@ public class TrainerService {
             .trainerName(member.getUserName())
             .trainerTel(member.getUserTel())
             .trainerEmail(member.getUserEmail())
-            /*  .licenseList(trainerRequestDTO.getLicenseList())*/
             .profileImg(fileUrl)
             .infoTitle(trainerRequestDTO.getInfoTitle())
             .infoContent(trainerRequestDTO.getInfoContent())
@@ -171,7 +169,6 @@ public class TrainerService {
         return trainerResponseDTO;
     }
 
-
     public HashMap<String, Object> findTrainerByEmail(String email) {
         List<Trainer> TrainerList = trainerRepository.findAll();
         HashMap<String, Object> findTrainer = new HashMap<>();
@@ -211,7 +208,6 @@ public class TrainerService {
         }
 
         return trainerAll;
-
     }
 }
 

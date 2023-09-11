@@ -4,8 +4,6 @@ import lombok.Data;
 
 @Data
 public class CS_CategoryDTO {
-
     private int id;
     private String ctgy;
-
 }

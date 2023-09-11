@@ -13,10 +13,7 @@ import java.util.List;
 @Data
 @Builder
 public class FollowForTrainerResponseDTO {
-
     private List<MemberResponseDTO> followUserList;
     private int trainerFollowCnt;
     private boolean followStatus;
-
-
 }

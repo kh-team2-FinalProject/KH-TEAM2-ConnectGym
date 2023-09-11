@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderDetailService {
-
     private final OrderDetailRepository orderDetailRepository;
     private final LessonRepository lessonRepository;
 
@@ -56,10 +55,5 @@ public class OrderDetailService {
         }
 
         return dtoList;
-
     }
-
-
-
-
 }

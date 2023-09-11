@@ -98,13 +98,4 @@ public class OrderController {
 
         return "content/orderComplete";
     }
-
-    //    @ExceptionHandler({IamportResponseException.class})
-    //    public String portOneExceptionHandler() {}
-
-    //    @ExceptionHandler({IllegalArgumentException.class})
-    //    public String illegalArgumentExceptionHandler() {}
-
-    //    @ExceptionHandler({IamportResponseException.class})
-    //    public String IamportResponseExceptionHandler() {}
 }

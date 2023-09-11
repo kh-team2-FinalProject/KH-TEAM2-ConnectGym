@@ -29,17 +29,11 @@ public class DietListController {
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
 
         model.addAttribute("responseDto", responseDto);
-/*
-        model.addAttribute("foodForm", foodForm);
-*/
         model.addAttribute("food", new Food());
 
         return "fooddiary/foodInfo";
     }
 
-
-
-/*    public String addFood(@Valid @ModelAttribute("foodForm") Food foodForm, Errors errors, Model model) {*/
     @PostMapping("fooddiary/foodInfo")
     public String addFood(
         @ModelAttribute("food") @Valid Food food,
@@ -65,7 +59,6 @@ public class DietListController {
         return "fooddiary/foodInfo";
     }
 
-
     // dietlist
     @GetMapping("fooddiary/dietlist")
     public String searchDiet(
@@ -89,7 +82,6 @@ public class DietListController {
         return "fooddiary/dietlist";
     }
 
-
     @PostMapping("/selectfood")
     public String selectFood(
         @RequestParam(name = "selectedKey", required = false) Long selectedKey,
@@ -98,6 +90,4 @@ public class DietListController {
         model.addAttribute("selectedFood", selectedFood);
         return "redirect:/fooddiary/dietlist";
     }
-
-
 }

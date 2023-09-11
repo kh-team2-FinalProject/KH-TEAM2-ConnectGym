@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class TrainerRoomResponseDto {
-
     private Long no;
     private String roomName;
     private RoomStatus roomStatus;
-
 }

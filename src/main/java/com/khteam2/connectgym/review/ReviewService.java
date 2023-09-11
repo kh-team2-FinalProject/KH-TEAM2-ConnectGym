@@ -1,9 +1,7 @@
 package com.khteam2.connectgym.review;
 
 import com.khteam2.connectgym.order.OrderDetailRepository;
-import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.review.dto.*;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import com.khteam2.connectgym.upload.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -27,28 +25,26 @@ public class ReviewService {
     @Transactional
     public Long createReview(Long userNo, Long orderDetailNo,
                              ReviewRequestDto dto, MultipartFile[] reviewImgs) {
-
         dto.setOrderDetail(orderDetailRepository.findById(orderDetailNo).orElse(null));
 
         Review review = dto.toEntity();
         Review getReview = reviewRepository.save(review);
 
         //리뷰 사진
-            try {
-                for (MultipartFile file : reviewImgs) {
-                    if (!file.isEmpty()) {
-                        String reviewImgUrl = s3Uploader.uploadReviewFile(file, userNo);
-                        ReviewImg reviewImg = ReviewImg.builder()
-                            .reviewImg(reviewImgUrl)
-                            .review(getReview)
-                            .build();
-                        reviewImgRepository.save(reviewImg);
-                    }
+        try {
+            for (MultipartFile file : reviewImgs) {
+                if (!file.isEmpty()) {
+                    String reviewImgUrl = s3Uploader.uploadReviewFile(file, userNo);
+                    ReviewImg reviewImg = ReviewImg.builder()
+                        .reviewImg(reviewImgUrl)
+                        .review(getReview)
+                        .build();
+                    reviewImgRepository.save(reviewImg);
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
             }
-
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         return getReview.getNo();
     }
@@ -88,12 +84,10 @@ public class ReviewService {
 
     public int trainerReviewCount(Long trainerNo) {
         return reviewRepository.findCountByTrainerNo(trainerNo);
-
     }
 
     //트레이너별 리뷰(repository 반환타입 Dto)
     public ReviewResponseListDto trainerReview(Long trainerNo) {
-
         List<ReviewResponseDto> dtoList = reviewRepository.findTrainerReviewsByTrainerNo(trainerNo);
         double ratingAvg = reviewRepository.findAvgRatingByTrainerNo(trainerNo).orElse(0.0);
         double ratingAvgDecimal = Math.round(ratingAvg * 10.0) / 10.0;
@@ -105,14 +99,10 @@ public class ReviewService {
             .ratingCountDto(ratingCountDto)
             .build();
         return listDto;
-
     }
 
     //메인 메뉴 TOP3 리뷰(repository 반환타입 Dto)
     public List<ReviewResponseDto> top3Review() {
         return reviewRepository.findReviewOrderByRating();
-
     }
-
-
 }

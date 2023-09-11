@@ -31,9 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/trainerOnly")
 public class TrainerOnlyController {
-
     private static final Logger logger = LoggerFactory.getLogger(TrainerOnlyController.class);
-
 
     private final TrainerService trainerService;
     private final TrainerOnlyService trainerOnlyService;
@@ -49,7 +47,6 @@ public class TrainerOnlyController {
     public String myPageT(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                           @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
                           Model model, RedirectAttributes redirectAttributes) {
-
         model.addAttribute("bannerTitle", "my page");
         if (loginMemberClass == null) {
 
@@ -176,32 +173,20 @@ public class TrainerOnlyController {
             = trainerOnlyService.createOrUptedaRoom(trainerEnterRoomRequestDto.getTitleCode(),
             trainerEnterRoomRequestDto.getEnrollKey());
         return roomResponseDto;
-
     }
-
 
     //팔로우
     @GetMapping("/mypage/followed")
     public String followed(Model model, HttpSession session) {
         model.addAttribute("bannerTitle", "followed");
-//        logger.info("세션 상태 확인: " + session.getAttribute(SessionConstant.LOGIN_MEMBER_CLASS));
 
         TrainerResponseDTO trainer = trainerService.sessionT(session);
         List<MemberResponseDTO> followed = followService.followList(trainer.getTrainerNo());
         model.addAttribute("followed", followed);
-//        logger.info("세션 상태 확인: " + session.getAttribute(SessionConstant.LOGIN_MEMBER_CLASS));
 
         return "trainerOnly/followed";
     }
 
-
-    //    @GetMapping("/mypage/messages")
-//    public String messages(HttpSession session, Model model) {
-//        model.addAttribute("bannerTitle", "followed");
-//        TrainerResponseDTO trainer = trainerService.sessionT(session);
-//
-//        return "trainerOnly/messages";
-//    }
     @GetMapping("/mypage/messages")
     public String messages(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                            @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
@@ -245,13 +230,8 @@ public class TrainerOnlyController {
 
             return "trainerOnly/trainerInfo";
 
-
         } else {
             return "redirect:/mypage";
         }
-
-
     }
-
-
 }
