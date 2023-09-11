@@ -30,7 +30,6 @@ public class Review {
     private String reviewTitle;
     private String reviewContent;
 
-    @Column(name = "reg_date")
     private LocalDateTime regDate;
 
     @PrePersist

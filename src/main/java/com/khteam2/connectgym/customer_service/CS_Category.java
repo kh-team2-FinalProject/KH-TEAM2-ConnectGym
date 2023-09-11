@@ -11,6 +11,6 @@ public class CS_Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "ctgy", nullable = false)
+    @Column(nullable = false)
     private String ctgy;
 }

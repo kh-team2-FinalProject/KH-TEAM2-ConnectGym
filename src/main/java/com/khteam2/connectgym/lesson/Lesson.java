@@ -23,7 +23,6 @@ public class Lesson {
 
     private String title;
 
-    @Column(name = "title_code")
     private String titleCode;
 
     @OneToOne

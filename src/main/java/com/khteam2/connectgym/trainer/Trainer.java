@@ -22,7 +22,6 @@ public class Trainer {
     private String trainerId;
     private String trainerPw;
 
-    @Column(name = "trainer_name")
     private String trainerName;
 
     private String trainerTel;
@@ -33,6 +32,5 @@ public class Trainer {
     private String infoContent;
 
     private LocalDate regDate;
-    @Column(name = "trainer_email")
     private String trainerEmail;
 }

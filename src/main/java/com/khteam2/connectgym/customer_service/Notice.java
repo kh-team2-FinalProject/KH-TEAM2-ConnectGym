@@ -13,11 +13,10 @@ public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
-    @Column(name = "title", nullable = false)
+    @Column(nullable = false)
     private String title;
-    @Column(name = "content", nullable = false)
+    @Column(nullable = false)
     private String content;
-    @Column(name = "notice_datetime")
     @CreationTimestamp
     private LocalDateTime noticeDatetime;
     @Column(name = "top_con", nullable = false)
