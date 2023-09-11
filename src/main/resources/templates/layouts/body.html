@@ -26,14 +26,14 @@
                     <!--<li class="h-title"><a href="#"></a></li>-->
                 </ul>
             </div>
-            <div th:if="${session.session_login_member_no != null and #httpServletRequest.getRequestURI() == '/'}">                <span
-                class="main-header-login-id" th:if="${memberClass == 'member'}"
-                th:text="${loginMemberId} + '님 환영합니다.'"></span>
-                <span class="main-header-login-id" th:if="${memberClass == 'trainer'}"
-                      th:text="${loginMemberId} + ' 트레이너님 환영합니다.'"></span>
-            </div>
-            <div class="header-item">
 
+            <div class="header-item">
+                <div th:if="${session.session_login_member_no != null and #httpServletRequest.getRequestURI() == '/'}">                <span
+                    class="main-header-login-id" th:if="${memberClass == 'member'}"
+                    th:text="${loginMemberId} + '님 환영합니다.'"></span>
+                    <span class="main-header-login-id" th:if="${memberClass == 'trainer'}"
+                          th:text="${loginMemberId} + ' 트레이너님 환영합니다.'"></span>
+                </div>
                 <!--            avg 아이콘 마우스 올렸을때-->
                 <!--            로그인 안했으면 '로그인 하세요'-->
                 <!--            했으면 토글 내려와서 마이페이지/내수강현황/... 보이게 하기-->
