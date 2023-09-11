@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +27,15 @@ public class DietListController {
 
     @GetMapping("fooddiary/foodInfo")
     public String diet_SearchForm(Model model, FoodFindRequestDto requestDto, Food foodForm) {
+
+        String foodDCategory = "FoodInfo";
+        model.addAttribute("lessonCategory", foodDCategory);
+
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
 
         model.addAttribute("responseDto", responseDto);
-/*
-        model.addAttribute("foodForm", foodForm);
-*/
+
+
         model.addAttribute("food", new Food());
 
         return "fooddiary/foodInfo";
@@ -42,25 +46,27 @@ public class DietListController {
 /*    public String addFood(@Valid @ModelAttribute("foodForm") Food foodForm, Errors errors, Model model) {*/
     @PostMapping("fooddiary/foodInfo")
     public String addFood(
-        @ModelAttribute("food") @Valid Food food,
+        @ModelAttribute("food")
+        @Valid Food food,
         Errors errors,
         Model model,
-        FoodFindRequestDto requestDto) {
+/*        BindingResult bindingResult,*/
+        FoodFindRequestDto requestDto) throws Exception {
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
 
-        model.addAttribute("responseDto", responseDto);
-        model.addAttribute("food", food);
-        /* 에러 메세지 */
+        /*model.addAttribute("responseDto", responseDto);*/
+/*      model.addAttribute("food", food);*/
 
+        /* 에러 메세지 */
         if (errors.hasErrors()) {
+            model.addAttribute("responseDto", responseDto);
+            model.addAttribute("food", food);
             Map<String, String> validatorResult = foodService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-
             return "fooddiary/foodInfo";
         }
-
         foodService.saveFood(food);
         return "fooddiary/foodInfo";
     }
@@ -72,6 +78,8 @@ public class DietListController {
         Model model,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        String foodDCategory = "DietList";
+        model.addAttribute("lessonCategory", foodDCategory);
 
 
         if (date == null) {

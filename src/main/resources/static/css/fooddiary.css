@@ -14,12 +14,18 @@
     min-width: 900px;
     border-collapse: collapse;
     table-layout: fixed;
-    color: #a0ffc2;
+    color: white;
     /*white;*/
 }
 
 .foodD_calendar_padding {
     padding: 2px;
+    /* 그라데이션 컬러 */
+    background: -webkit-linear-gradient(transparent, rgba(110, 110, 110, 0.3)),
+      -webkit-linear-gradient(350deg, rgba(250, 214, 195, 0.8) 30%, #b0eae8 120%);
+    background: linear-gradient(transparent, rgba(110, 110, 110, 0.3)),
+      linear-gradient(37deg, #e2a354 30%, #ec453b 120%);
+    border: 1px solid white;
 }
 
 
@@ -108,7 +114,7 @@ ul > li {
 
 .site_banner.Calendar-banner {
     background: url("/images/banner-calendar.jpg") center center / cover no-repeat;
-    filter: grayscale(100%);
+/*    filter: grayscale(100%);*/
 
 
     background-color: #d0dda1;
@@ -118,7 +124,7 @@ ul > li {
 
 /* 이전달  다음달 버튼*/
 .foodD_calendar .calendar_header button {
-    background-color: #4b6957;
+    background-color: #b5b0a9;
     /*#A3DC10;*/
     position: relative;
     display: inline-block;
@@ -133,11 +139,11 @@ ul > li {
     transition: top .01s linear;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 
-    box-shadow: 0 0 0 1px #a8bfb1 inset,
-    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
-    0 4px 0 0 #c4dbcc,
-    0 4px 0 1px rgb(239 239 239 / 40%),
-    0 4px 4px 1px rgba(0, 0, 0, 0.5);
+    box-shadow:
+    0 0 0 1px #aaaeac inset,
+     0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+     0 4px 0 0 #ffedcd, 0 4px 0 1px rgb(239 239 239 / 40%),
+     0 4px 4px 1px rgba(0, 0, 0, 0.5);
 
     /*0 0 0 1px #A3DC10 inset,
       0 0 0 2px rgba(255,255,255,0.15) inset,
@@ -155,6 +161,6 @@ ul > li {
 }
 
 .calendar_header button:hover {
-    background-color: #a0ffc2; /*#A7D145;*/
+    background-color: #fad693; /*#A7D145;*/
     transform: scale(1.3);
 }

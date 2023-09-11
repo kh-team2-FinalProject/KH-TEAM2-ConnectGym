@@ -446,15 +446,15 @@
                             <tr th:each="food: ${dietList}">
                                 <td>
                                     <form action="/selectfood" method="POST">
-                                        <span
+                                        <input
                                             th:name="selectedKey"
                                             th:value="${food.foodCd}"
-                                        ></span>
-                                        <span
+                                        ></input>
+                                        <!--<span
                                             type="button"
                                             th:text="${food.foodNm}"
-                                        ></span>
-                                        <button type="submit"></button>
+                                        ></span>-->
+                                        <button id="foodNmBtn" type="submit">+</button>
                                     </form>
                                 </td>
                                 <td th:text="${food.foodSize}">

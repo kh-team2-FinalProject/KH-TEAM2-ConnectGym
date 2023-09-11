@@ -11,9 +11,13 @@
     align-items: center;
 }
 
+#foodNmBtn{
+    font-size:10px;
+}
+
 /* 개별 박스 */
 .meal_box {
-    background-color: #a9ffff42;
+    background-color: #eee;
     display: inline-block;
     align-items: center;
     width: 100%;
@@ -30,6 +34,9 @@
 .myFoodTbl {
     width: 100%;
     text-align: center;
+
+    /*안에 font color*/
+    color:#38484ba3;
 }
 
 /* 아 점 저 글씨*/
@@ -41,14 +48,14 @@
 }
 
 th.sub {
-    color: rgb(255 255 255 / 90%);
+    color: #38484ba3;
     font-size: 18px;
 }
 
 /* + 버튼 */
 .btn1,
 .btn2 {
-    background-color: #ffffff3d;
+    background-color: #0e181a3b;
     color: rgb(243 255 255 / 74%);
     padding: 5px 8px;
     border: none;
@@ -60,6 +67,7 @@ th.sub {
 .btn1:hover,
 .btn2:hover {
     transform: scale(1.2);
+    background-color: #fad693;
 }
 
 /* 팝업 창 */
@@ -199,3 +207,11 @@ button {
     .dietList_search_popup_pagination_li_button {
     color: white;
 }
+
+/* banner */
+.site_banner.DietList-banner{
+    background: url("/images/banner-dietlist.jpg") center center / cover no-repeat;
+/*    filter: grayscale(100%);*/
+    background-color: #d0dda1;
+}
+

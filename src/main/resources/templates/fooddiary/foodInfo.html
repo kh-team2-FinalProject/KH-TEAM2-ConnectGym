@@ -6,8 +6,10 @@
     xmlns:layout="http://www.w3.org/1999/xhtml"
 >
     <th:block layout:fragment="title">
-        <title>식단 등록, 기입 페이지</title>
+        <title>클래스리스트 > ${lessonCategory}</title>
     </th:block>
+
+
 
     <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
     <th:block layout:fragment="foodD">
@@ -125,10 +127,9 @@
                         <label class="nutriNm">식품명</label>
                         <input id="foodNm" class="nutriInput" th:field="*{foodNm}"
                             type="text"/>
+                    <p id="valid_foodNm" class="error" th:if="${#fields.hasErrors('foodNm')}"
+                        th:errors="*{foodNm}" style="color: red;"></p>
                     </div>
-                    <p class="error" th:if="${#fields.hasErrors('foodNm')}"
-                        th:errors="*{foodNm}"></p>
-
                     <div class="foodInput">
                         <label class="nutriNm">1회 제공량(g)</label>
                         <input id="foodSize" class="nutriInput" th:field="*{foodSize}"
@@ -244,4 +245,6 @@
 });
         </script>
     </th:block>
+
+
 </html>

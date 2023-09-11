@@ -120,15 +120,15 @@ public class FoodServiceImpl implements FoodService {
         return foodRepository.save(food);
     }
 
-
-
-    /* 유효성 체크해서 에러 메세지 */
     @Override
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();
 
         for (FieldError error : errors.getFieldErrors()) {
             String validKeyName = String.format("valid_%s", error.getField());
+/*
+                String.format("valid_%s", error.getField());
+*/
             String errorMessage = error.getDefaultMessage();
             validatorResult.put(validKeyName, errorMessage);
         }
@@ -248,15 +248,8 @@ public class FoodServiceImpl implements FoodService {
 
         if (page == null || page < 1) {
             page = 1;
-
-            // responseDto.setMessage("페이지 파라미터가 없습니다.");
-            // return responseDto;
         }
 
-        // if (search == null || search.isBlank()) {
-        //     responseDto.setMessage("검색어를 입력해 주세요.");
-        //     return responseDto;
-        // }
 
         Pageable pageable = PageRequest.of(page - 1, recordSize);
         Page<Food> foodPageList = null;
