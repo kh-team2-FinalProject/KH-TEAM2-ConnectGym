@@ -3,7 +3,6 @@ package com.khteam2.connectgym.trainer;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowRepository;
-import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.member.Member;
@@ -30,7 +29,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class TrainerService {
-
     private final TrainerRepository trainerRepository;
     private final LessonRepository lessonRepository;
     private final LicenseRepository licenseRepository;
@@ -75,7 +73,6 @@ public class TrainerService {
             .trainerName(member.getUserName())
             .trainerTel(member.getUserTel())
             .trainerEmail(member.getUserEmail())
-            /*  .licenseList(trainerRequestDTO.getLicenseList())*/
             .profileImg(fileUrl)
             .infoTitle(trainerRequestDTO.getInfoTitle())
             .infoContent(trainerRequestDTO.getInfoContent())
@@ -152,12 +149,14 @@ public class TrainerService {
 
         TrainerResponseDTO trainerResponseDTO = TrainerResponseDTO.builder()
             .trainerNo(trainerNo)
+            .trainerPw(trainer.getTrainerPw())
             .trainerId(trainer.getTrainerId())
             .trainerName(trainer.getTrainerName())
             .trainerTel(trainer.getTrainerTel())
             .profileImg(trainer.getProfileImg())
             .infoTitle(trainer.getInfoTitle())
             .infoContent(trainer.getInfoContent())
+            .trainerEmail(trainer.getTrainerEmail())
             .licenses(licenses)
             .memberCount(memberCount)
             .build();
@@ -170,7 +169,6 @@ public class TrainerService {
 
         return trainerResponseDTO;
     }
-
 
     public HashMap<String, Object> findTrainerByEmail(String email) {
         List<Trainer> TrainerList = trainerRepository.findAll();
@@ -207,10 +205,17 @@ public class TrainerService {
             trainerAll.add(dto);
 
             dto.setFollowCount(followRepository.findAllByToTrainerCount(val.getNo()));
+            dto.setMemberCount(orderDetailRepository.findCountByTrainer(val.getNo()));
 
         }
 
         return trainerAll;
+    }
+
+    public void updateTrainer(TrainerRequestDTO trainerRequestDTO, MultipartFile file) {
+
+
+        trainerRepository.save(trainerRequestDTO.toEntity());
 
     }
 }

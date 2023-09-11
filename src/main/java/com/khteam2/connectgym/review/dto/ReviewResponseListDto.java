@@ -7,13 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ReviewResponseListDto {
-
     private List<ReviewResponseDto> trainerReviewResponseDtoList;
     private double ratingAvg;
     private RatingCountDto ratingCountDto;

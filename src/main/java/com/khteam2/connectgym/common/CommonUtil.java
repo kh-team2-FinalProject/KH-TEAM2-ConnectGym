@@ -1,19 +1,17 @@
 package com.khteam2.connectgym.common;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CommonUtil {
-    private static final ThreadLocalRandom random = ThreadLocalRandom.current();
-
     /**
      * 오늘 날짜를 반환하는 메소드
      *
      * @return yyyyMMdd 형식의 날짜 (예: {@code "20230828"})
      */
     public static String getTodayLocalDate8() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 
     /**
@@ -25,6 +23,8 @@ public class CommonUtil {
      * 유효하지 않은 digit을 넘길 경우 음수 반환
      */
     public static int generateRandomNumberInt(int digit) {
+        final ThreadLocalRandom random = ThreadLocalRandom.current();
+
         if (digit < 1 || digit > 9) {
             return -1;
         }
@@ -44,6 +44,8 @@ public class CommonUtil {
      * 유효하지 않은 digit을 넘길 경우 음수 반환
      */
     public static long generateRandomNumberLong(int digit) {
+        final ThreadLocalRandom random = ThreadLocalRandom.current();
+
         if (digit < 1 || digit > 18) {
             return -1L;
         }
@@ -66,5 +68,8 @@ public class CommonUtil {
 
     public static Double opendataParseDouble(String str) {
         return (str == null || str.isEmpty() || str.equals("N/A")) ? null : Double.parseDouble(str);
+    }
+
+    private CommonUtil() {
     }
 }

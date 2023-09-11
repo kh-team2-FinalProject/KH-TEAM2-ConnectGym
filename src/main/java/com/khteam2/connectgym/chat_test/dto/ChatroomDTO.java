@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.chat_test.dto;
 
-
 import com.khteam2.connectgym.chat_test.Chatroom;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.trainer.Trainer;
@@ -14,8 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatroomDTO {
-
-
     private Long no;
     private Member member;
     private Trainer trainer;

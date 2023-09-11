@@ -2,7 +2,6 @@ package com.khteam2.connectgym.like;
 
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.member.Member;
-import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "likes", uniqueConstraints = {
-    @UniqueConstraint(name = "uk_like_from_to",columnNames = {"user_no", "lesson_no"})
+    @UniqueConstraint(name = "uk_like_from_to", columnNames = {"user_no", "lesson_no"})
 })
 public class Like {
     @Id

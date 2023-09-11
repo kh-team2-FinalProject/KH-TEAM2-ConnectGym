@@ -42,10 +42,4 @@ public interface OrderRepository extends JpaRepository<Order, String> {
         @Param("endDate") Date endDate,
         Pageable pageable
     );
-
-    // @Query(value = "SELECT * FROM orders o" +
-    // " JOIN order_details od ON od.order_no = o.no" +
-    // " JOIN lesson l ON l.id = od.lesson_no"
-    // , nativeQuery = true)
-    // List<Order> findOrderListByMemberNo();
 }

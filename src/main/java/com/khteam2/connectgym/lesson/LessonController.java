@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.lesson;
 
-
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
@@ -21,14 +20,12 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class LessonController {
-
     private final LessonService lessonService;
     private final LikeService likeService;
     private final ReviewService reviewService;
 
     @GetMapping(value = "/createLesson")
     public String createLesson(Model model) {
-
         //배너타이틀
         model.addAttribute("bannerTitle", "create lesson");
 
@@ -42,7 +39,6 @@ public class LessonController {
     public String createLesson(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
                                Model model, LessonRequestDTO lessonRequestDTO,
                                @RequestParam("lessonImgFile") MultipartFile file) {
-
         //배너타이틀
         model.addAttribute("bannerTitle", "create lesson");
 
@@ -52,19 +48,6 @@ public class LessonController {
 
         return "detailOrCrud/createComplete";
     }
-//    레슨 다 가져오기 // 기존 mapping
-//    @GetMapping("/lessonList")
-//    public String lessonList(Model model) {
-//        model.addAttribute("bannerTitle", "lessons");
-//
-//        List<Lesson> lessonList = lessonService.getAllLessons();
-//        model.addAttribute("lessonList", lessonList);
-//
-//        // start paging
-//
-//
-//        return "lesson/lessonCategory";
-//    }
 
     //레슨 다 가져오기
     @GetMapping("/lessonList")
@@ -74,9 +57,7 @@ public class LessonController {
     ) {
         model.addAttribute("lessonCategory", "lessons");
 
-
-        // ---
-        int itemsPerPage = 1;   // 한 페이지에 보여질 게시글 수
+        int itemsPerPage = 10;   // 한 페이지에 보여질 게시글 수
 
         List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
         lessonList = lessonService.viewCategoryList(lessonList,
@@ -99,13 +80,10 @@ public class LessonController {
     @ResponseBody
     @GetMapping("/lessonList/search")
     public String lessonSearchList(Model model,
-                             @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
-                             @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
+                                   @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
+                                   @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
     ) {
-
-
-        // ---
-        int itemsPerPage = 1;   // 한 페이지에 보여질 게시글 수
+        int itemsPerPage = 10;   // 한 페이지에 보여질 게시글 수
 
         List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
         lessonList = lessonService.viewCategoryList(lessonList,
@@ -123,7 +101,6 @@ public class LessonController {
 
         return "lesson/lessonCategory";
     }
-
 
     //레슨 한 개만 불러오기
     @GetMapping("/lessonDetail/{lessonNo}")
@@ -161,7 +138,7 @@ public class LessonController {
         model.addAttribute("likeInfo", likeDto);
         model.addAttribute("trainerInfo", trainerLessonResponseDTO);
         model.addAttribute("lesson", lesson);
-        model.addAttribute("reviews",reviews);
+        model.addAttribute("reviews", reviews);
 
         return "detailOrCrud/lessonDetail";
     }
@@ -169,15 +146,12 @@ public class LessonController {
     //디자인용 (삭제예정)
     @GetMapping("/createComplete")
     public String createComplete(Model model) {
-
         //배너타이틀
         model.addAttribute("bannerTitle", "complete");
         return "detailOrCrud/createComplete";
     }
 
-
     //레슨 수정하기
-
     @GetMapping("/updateLesson/{lessonNo}")
     public String updateLesson(Model model,
                                @PathVariable Long lessonNo) {
@@ -191,14 +165,10 @@ public class LessonController {
     public String updateLessonComplete(@PathVariable Long lessonNo,
                                        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
                                        LessonRequestDTO lessonRequestDTO,
-                                       Model model,
                                        @RequestParam("lessonImgFile") MultipartFile file) {
-
         lessonRequestDTO.setNo(lessonNo);
 
         lessonService.updateLesson(loginMemberNo, lessonRequestDTO, file);
         return "detailOrCrud/updateComplete";
     }
-
-
 }

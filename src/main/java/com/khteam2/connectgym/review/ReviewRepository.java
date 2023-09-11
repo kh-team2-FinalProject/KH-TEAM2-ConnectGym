@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-
     // 리뷰 작성 여부
     @Query("SELECT r FROM Review r WHERE r.orderDetail.no = ?1")
     Optional<Review> findOrderDetailNo(Long no);
@@ -35,7 +34,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
         "WHERE t.no = ?1 " +
         "ORDER BY r.regDate DESC")
     List<ReviewResponseDto> findTrainerReviewsByTrainerNo(Long trainerNo);
-
 
     // 트레이너별 리뷰 평균
     @Query("SELECT AVG(r.rating) "
@@ -67,7 +65,4 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
         "JOIN l.trainer t " +
         "ORDER BY r.rating DESC")
     List<ReviewResponseDto> findReviewOrderByRating();
-
-
-
 }

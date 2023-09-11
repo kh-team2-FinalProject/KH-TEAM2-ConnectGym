@@ -19,8 +19,17 @@
     function isTakingLesson() {
         const lessonNo = /*[[${trainer.lessonNo}]]*/;
 
-        if (lessonNo === -1) {
-            alert('현재 모집중인 레슨이 없습니다.');
+        if (lessonNo == -1) {
+
+                 Swal.fire({
+                  position: 'center',
+                  width: '300px',
+                  height:'30px',
+                  background:'rgba(215, 214, 214, 0.761)',
+                  html: '<div style="font-size:16px;">현재는 모집중인 레슨이 없습니다.🥺</div>',
+                  showConfirmButton: false,
+                  timer: 800
+                })
         } else {
             location.href = '/lessonDetail/' + lessonNo;
         }
@@ -75,9 +84,19 @@
                                     <span></span>
                                     <script>
                                                 function showLoginAlert(checkbox) {
-                                                    alert('로그인 후 이용해 주세요.');
-                                                    checkbox.checked = false;
-                                                }
+                                        Swal.fire({
+                  position: 'center',
+                  width: '300px',
+                  height:'30px',
+                  background:'rgba(215, 214, 214, 0.761)',
+                  html: '<div style="font-size:16px;">로그인 후 이용해 주세요.</div>',
+                  showConfirmButton: false,
+                  timer: 800
+                }).then(result => {
+                                        checkbox.checked = false;
+                                        })
+
+                                    }
 
                                     </script>
                                 </label>

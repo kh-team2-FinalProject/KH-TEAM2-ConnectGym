@@ -41,9 +41,6 @@ public class DietListController {
         return "fooddiary/foodInfo";
     }
 
-
-
-/*    public String addFood(@Valid @ModelAttribute("foodForm") Food foodForm, Errors errors, Model model) {*/
     @PostMapping("fooddiary/foodInfo")
     public String addFood(
         @ModelAttribute("food")
@@ -71,7 +68,6 @@ public class DietListController {
         return "fooddiary/foodInfo";
     }
 
-
     // dietlist
     @GetMapping("fooddiary/dietlist")
     public String searchDiet(
@@ -83,6 +79,7 @@ public class DietListController {
 
 
         if (date == null) {
+            // 파라미터가 없으면 현재 날짜를 기준으로 보여준다.
             date = LocalDate.now();
         }
 
@@ -97,7 +94,6 @@ public class DietListController {
         return "fooddiary/dietlist";
     }
 
-
     @PostMapping("/selectfood")
     public String selectFood(
         @RequestParam(name = "selectedKey", required = false) Long selectedKey,
@@ -106,6 +102,4 @@ public class DietListController {
         model.addAttribute("selectedFood", selectedFood);
         return "redirect:/fooddiary/dietlist";
     }
-
-
 }

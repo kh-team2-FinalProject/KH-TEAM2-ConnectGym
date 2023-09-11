@@ -16,7 +16,7 @@ public class WebClientConfig {
     public static int MAX_CONNECTION_PER_ROUTE = 50;
     public static int READ_TIMEOUT = 10000;
     public static int CONNECT_TIMEOUT = 5000;
-    
+
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         HttpClient httpClient = HttpClientBuilder.create()

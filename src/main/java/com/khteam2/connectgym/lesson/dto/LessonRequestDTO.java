@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.lesson.dto;
 
-
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LessonRequestDTO {
-
     private Long no;
     private String title;
     private String titleCode;
@@ -29,7 +27,6 @@ public class LessonRequestDTO {
     private String lesson_img;
 
     public Lesson toEntity() {
-
         return Lesson.builder()
             .no(no)
             .title(title)
@@ -43,5 +40,4 @@ public class LessonRequestDTO {
             .lesson_img(lesson_img)
             .build();
     }
-
 }

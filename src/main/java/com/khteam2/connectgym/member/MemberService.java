@@ -21,7 +21,6 @@ import java.util.List;
 @Service
 @Slf4j
 public class MemberService {
-
     @Autowired
     private MemberRepository memberRepository;
 
@@ -45,7 +44,6 @@ public class MemberService {
             member.setUserAddress(memberDTO.getUserAddress());
         }
         memberRepository.save(member);
-
     }
 
     public MemberResponseDTO findOneMember(Long no) {
@@ -67,8 +65,8 @@ public class MemberService {
 
     public MemberLoginResponseDto memberLogin(MemberLoginRequestDto requestDto) {
         MemberLoginResponseDto responseDto = MemberLoginResponseDto.builder()
-                .success(false)
-                .build();
+            .success(false)
+            .build();
 
         if (requestDto == null) {
             responseDto.setMessage("잘못된 요청입니다.");
@@ -257,12 +255,10 @@ public class MemberService {
         }
 
         // null 일 경우 기존 데이터 그대로 저장
-
         memberRepository.save(member);
     }
 
     public String findMemberID(String name, String email) {
-
         Member member = memberRepository.findByUserEmail(email);
 
         if (member.getUserName().equals(name)) {
@@ -273,7 +269,6 @@ public class MemberService {
     }
 
     public boolean findAndChangePW(String id, String name, String email, String password) {
-
         Member member = memberRepository.findByUserEmail(email);
 
         if (member.getUserName().equals(name) && member.getUserId().equals(id)) {
@@ -284,6 +279,4 @@ public class MemberService {
             return false;
         }
     }
-
-
 }

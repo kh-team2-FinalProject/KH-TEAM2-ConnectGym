@@ -18,13 +18,12 @@ import java.time.LocalDateTime;
     uniqueConstraints = {@UniqueConstraint(columnNames = {"order_detail_no"})}
 )
 public class Review {
-
     @Id
     @GeneratedValue
     private Long no;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="order_detail_no", unique = true)
+    @JoinColumn(name = "order_detail_no", unique = true)
     private OrderDetail orderDetail;
 
     private int rating;
@@ -38,6 +37,4 @@ public class Review {
     protected void onCreate() {
         regDate = LocalDateTime.now();
     }
-
-
 }

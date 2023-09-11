@@ -1,5 +1,7 @@
 package com.khteam2.connectgym.order;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.khteam2.connectgym.common.CommonUtil;
 import com.khteam2.connectgym.common.Pagination;
 import com.khteam2.connectgym.lesson.Lesson;
@@ -47,6 +49,7 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final IamportClient iamportClient;
     private final ReviewRepository reviewRepository;
+    private final ObjectMapper mapper = new ObjectMapper();
 
     /**
      * 결제 진행 전 실행되는 메소드
@@ -173,7 +176,8 @@ public class OrderService {
 
     /**
      * 주문 번호 생성 메소드.
-     * 생성한 주문 번호를 DB에서 조회해서 만약 존재하면 새로운 주문 번호를 생성한다.
+     * 생성한 주문 번호를 DB와 포트원 서버에서 조회해서
+     * 두 곳 다 아무런 결과가 없을 때까지 계속 반복문을 돌려서 새 주문 번호를 반환한다.
      *
      * @return 사용되지 않은 새 주문 번호
      */
@@ -182,23 +186,62 @@ public class OrderService {
         String orderNo = null;
         String date = CommonUtil.getTodayLocalDate8(); // 20230820
 
-        for (int i = 0; i < 100_000; i++) {
-            // 1 ~ 999,999 값을 생성한다.
-            int randomValue = CommonUtil.generateRandomNumberInt(6);
-            // 주문 번호 형식: 20230820001024 / 20230820123456
-            orderNo = String.format("%s%06d", date, randomValue);
+        for (int i = 0; i < 100_000_000; i++) {
+            // 1 ~ 99,999,999 값을 생성한다.
+            int randomValue = CommonUtil.generateRandomNumberInt(8);
+            // 주문 번호 형식: 2023082010245760 / 2023082012345678
+            orderNo = String.format("%s%08d", date, randomValue);
 
-            // 해당 주문 번호가 있는지 확인한다.
+            // DB에 해당 주문 번호가 있는지 확인한다.
             OrderProgress orderProgress = this.orderProgressRepository.findByOrderNo(orderNo);
 
-            if (orderProgress == null) {
-                // 해당 주문 번호가 없으면 반복문에서 빠져 나온다.
-                break;
+            try {
+                // 포트원 서버에 해당 주문 번호로 조회한다.
+                IamportResponse<Prepare> prepareResponse = this.iamportClient.getPrepare(orderNo);
+
+                // DB에 해당 주문 진행 내역이 없는 경우 DB에 저장한다.
+                if (orderProgress == null && prepareResponse.getCode() == 0) {
+                    // 포트원 서버에서 받아온 요청을 객체로 가져온다.
+                    Prepare prepare = prepareResponse.getResponse();
+                    // getter가 없기 때문에 ObjectMapper를 이용해서 직렬화한다.
+                    String jsonStr = this.mapper.writeValueAsString(prepare);
+                    JsonNode prepareNode = this.mapper.readTree(jsonStr);
+
+                    // 객체에서 값을 꺼낸다.
+                    String merchantUid = prepareNode.get("merchant_uid").asText();
+                    long amount = prepareNode.get("amount").asLong();
+
+                    // 주문 진행 건을 DB에 넣는다.
+                    OrderProgress newOrderProgress = OrderProgress.builder()
+                        .orderNo(merchantUid)
+                        .price(amount)
+                        .build();
+                    this.orderProgressRepository.save(newOrderProgress);
+                }
+            } catch (IamportResponseException e) {
+                // HTTP 코드 400 이상일 때 예외가 발생한다.
+
+                if (orderProgress == null) {
+                    // DB에 주문건이 존재하지 않으면 실행되는 조건문
+
+                    if (e.getHttpStatusCode() == 404) {
+                        // 포트원 서버에서 해당 주문건을 찾을 수 없으면 반복문에서 빠져 나간다.
+                        break;
+                    } else {
+                        // 알 수 없는 오류가 발생 시 예외를 발생시킨다.
+                        log.error(e.getMessage(), e);
+                        throw new RuntimeException("결제 번호 중복 확인 중 알 수 없는 오류가 발생했습니다.", e);
+                    }
+                }
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+                throw new RuntimeException("포트원 서버에 연결할 수 없습니다.", e);
             }
         }
 
         return orderNo;
     }
+
 
     /**
      * 결제 전 포트원 서버에 사전 검증할 때 사용하는 메소드.
@@ -496,7 +539,7 @@ public class OrderService {
             // 검색어가 존재하는지 확인한다.
             if (searchString != null && !searchString.isBlank()) {
                 // 검색어를 이용해서 주문 상세건을 가져온다.
-                orderDetailList = this.orderDetailRepository.findByLessonTitleOrTrainerName(searchString);
+                orderDetailList = this.orderDetailRepository.findByOrderAndLessonTitleOrTrainerName(order, searchString);
             } else {
                 // 검색어가 없으면 모든 주문 상세건을 가져온다.
                 orderDetailList = this.orderDetailRepository.findByOrder(order);
@@ -573,7 +616,7 @@ public class OrderService {
         }
 
         // 페이징 정보를 DTO에 전달하기 위해 Pagination 객체를 생성한다.
-        Pagination pagination = new Pagination(orderList, 5);
+        Pagination pagination = new Pagination(orderListOrderDtoList.size(), currentPage + 1, pageSize, 5);
 
         // 가져온 정보들을 담아준다.
         responseDto.setSearch(orderListRequestDto.getQ());

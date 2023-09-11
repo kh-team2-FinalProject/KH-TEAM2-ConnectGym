@@ -103,7 +103,7 @@ li {
     display: none;
     position: absolute;
     font-size: 15px;
-    background-color: #dde6e8;
+    background-color: #dde6e8a6;
     border-radius: 10px;
 }
 
@@ -232,6 +232,14 @@ li {
         0.5
     ); /* Change background color and opacity on scroll */
     border: 1px solid #ccc;
+}
+
+.main-header-login-id {
+    color: white;
+}
+
+.header_mypage_popup_menu {
+    font-family: "Noto Sans";
 }
 
 /*============헤더 끝===========*/

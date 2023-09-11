@@ -20,7 +20,6 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class ChatController {
-
     private final ChatMessageService chatMessageService;
     private final ChatroomService chatroomService;
     private final SimpMessagingTemplate simpMessagingTemplate;
@@ -29,16 +28,13 @@ public class ChatController {
     public String chat_open(Model model,
                             @PathVariable("chatroomNo") Long chatroomNo,
                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass memberClass) {
-
         //chatroomNo로 특정된 채팅룸 입장
         Chatroom chatroom = chatroomService.inChatroom(chatroomNo);
         //지난 대화내용 전송
         List<ChatMessageReaponseDTO> chatMessages = chatroomService.loadMessage(chatroom);
         model.addAttribute("chatMessages", chatMessages);
         model.addAttribute("chatroomNo", chatroomNo);
-//        model.addAttribute("chatroomDTO", chatroomDTO);
         model.addAttribute("chatroom", chatroom);
-
 
         //sender  interlocutor 구분해서 모델전송
         String sender = "";
@@ -52,13 +48,12 @@ public class ChatController {
         }
         model.addAttribute("sender", sender);
         model.addAttribute("interlocutor", interlocutor);
-        return "chat_test/chat_test2";
+        return "chattingroom/chatting";
     }
 
     @PostMapping("/checkedChatroom")
     @ResponseBody
     public Chatroom checkedChatroom(@RequestParam Long memberNo, @RequestParam Long trainerNo, Model model) {
-
         Chatroom chatroom = chatroomService.enterChatRoom(memberNo, trainerNo);
 
         return chatroom;
@@ -69,15 +64,12 @@ public class ChatController {
                             @Payload ChatMessageDTO message) {
         //채팅 메시지 DB저장
         ChatMessage chatMessage = chatMessageService.saveMessage(chatroomNo, message);
-//        System.out.println("chatMessage.getSendAt().format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm\")) = " + chatMessage.getSendAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-//        log.error(chatMessage.getSendAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         //리턴된 엔티티의 DTO화
         ChatMessageReaponseDTO chatMessageReaponseDTO = new ChatMessageReaponseDTO().fromEntity(chatMessage);
         log.error(chatMessageReaponseDTO.getSendAt());
-//       채팅메시지 수신하는 주소
+        // 채팅메시지 수신하는 주소
         String claQueue = "/queue/qqq/" + chatroomNo;
-//전송
+        // 전송
         simpMessagingTemplate.convertAndSend(claQueue, chatMessageReaponseDTO);
-
     }
 }

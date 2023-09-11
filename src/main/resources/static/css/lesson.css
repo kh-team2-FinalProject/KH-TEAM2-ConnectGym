@@ -1,11 +1,12 @@
 .l-lessonList-container {
     width: 100%;
     height: 100%;
+    background: #0e14147a;
 }
 
 /*검색창*/
-.l_lessonList_search{
-display: flex;
+.l_lessonList_search {
+    display: flex;
     padding: 25px 10px;
     justify-content: flex-end;
     align-items: center;
@@ -15,39 +16,40 @@ display: flex;
 
 /*select,input 크기 맞추기*/
 .l_lessonList_search .l_lessonList_search_category,
-.l_lessonList_search .l_lessonList_search_keyword{
-margin: 0px 5px;
-height: 40px;
-box-sizing: border-box;
+.l_lessonList_search .l_lessonList_search_keyword {
+    margin: 0px 5px;
+    height: 40px;
+    box-sizing: border-box;
 }
 
 /*select 태그*/
-.l_lessonList_search .l_lessonList_search_category{
-width:90px;
+.l_lessonList_search .l_lessonList_search_category {
+    width: 90px;
 }
 
 /*input 태그*/
-.l_lessonList_search .l_lessonList_search_keyword{
-width:180px;
+.l_lessonList_search .l_lessonList_search_keyword {
+    width: 180px;
 }
 
-.l_lessonList_search button{
-background:none;
-border:none;
-height: 40px;
+.l_lessonList_search button {
+    background: none;
+    border: none;
+    height: 40px;
 }
 
-.l_lessonList_search button img{
-filter: invert(92%) sepia(99%) saturate(0%) hue-rotate(264deg) brightness(104%) contrast(100%);
-width: 30px;
-height: 30px;
+.l_lessonList_search button img {
+    filter: invert(92%) sepia(99%) saturate(0%) hue-rotate(264deg) brightness(104%) contrast(100%);
+    width: 30px;
+    height: 30px;
 }
 
-.l_lessonList_search button img:hover{
-cursor:pointer;
+.l_lessonList_search button img:hover {
+    cursor: pointer;
 }
 
 .l_lessonlist {
+    /* background: linear-gradient(45deg, #1b3088bf, transparent); */
     display: flex;
     /*margin-top: 80px;*/
     width: 100%;
@@ -127,10 +129,12 @@ cursor:pointer;
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-top: 9px;
+    margin-bottom: 0px;
 }
 
 .l_card-content #l_trainer-name {
-    color: black;
+    color: white;
     font-weight: bold;
     font-size: 1rem;
     margin-top: 5px;
@@ -142,7 +146,7 @@ cursor:pointer;
 }
 
 .l_card-content #l_lesson-price {
-    color: black;
+    color: white;
     font-size: 1rem;
     font-weight: bold;
 }
@@ -200,7 +204,9 @@ cursor:pointer;
     opacity: 0;
     transform: translateY(100px);
     transition: opacity 0.5s, transform 0.5s, box-shadow 0.3s;
-    /*box-shadow: 0px 0px 10px rgb(255 255 255 / 59%);*/
+    box-shadow: 0px 0px 10px rgb(255 255 255 / 59%);
+    background: #65646480;
+    /* border: 3px solid #A3DC10; */
 }
 
 .l_card.scroll-visible {
@@ -210,7 +216,7 @@ cursor:pointer;
 
 .l_card:hover {
     transform: translateY(-10px) translateX(-10px);
-    box-shadow: 12px 12px 5px rgba(255, 255, 255, 0.2);
+    box-shadow: 10px 10px 20px rgb(255 255 255 / 30%);
     z-index: 1;
 }
 

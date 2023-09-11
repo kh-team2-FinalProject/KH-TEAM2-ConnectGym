@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class LessonAllResponseDto {
-
     private Long no;
     private String title;
     private String titleCode;
@@ -33,7 +32,6 @@ public class LessonAllResponseDto {
     private String searchType;
     private String searchKeyword;
 
-
     public LessonAllResponseDto(Lesson lesson) {
         this.no = lesson.getNo();
         this.title = lesson.getTitle();
@@ -46,6 +44,5 @@ public class LessonAllResponseDto {
         this.end_date = lesson.getEnd_date();
         this.lesson_img = lesson.getLesson_img();
         this.errorMsg = "Success";
-
     }
 }

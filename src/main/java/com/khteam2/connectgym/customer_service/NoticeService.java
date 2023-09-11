@@ -1,13 +1,13 @@
 package com.khteam2.connectgym.customer_service;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class NoticeService {
-
     @Autowired
     private NoticeRepository noticeRepository;
 
@@ -44,7 +44,7 @@ public class NoticeService {
     }
 
     public List<Notice> getDataForPage(int pageNumber, int itemsPerPage,
-        List<Notice> list) {
+                                       List<Notice> list) {
         List<Notice> dataForPage = new ArrayList<>();
 
         int startIndex = (pageNumber - 1) * itemsPerPage;
@@ -55,5 +55,4 @@ public class NoticeService {
         }
         return dataForPage;
     }
-
 }

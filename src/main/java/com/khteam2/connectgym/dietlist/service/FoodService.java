@@ -9,9 +9,7 @@ import java.util.Map;
 
 // OpenAPI에서 음식 데이터를 가져와 저장하는 메소드
 
-
 public interface FoodService {
-
     FoodNutrientDto getFoods(int pageNo, int limit);
 
     int moveDataToDatabase();

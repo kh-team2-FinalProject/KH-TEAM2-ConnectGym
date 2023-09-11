@@ -1,11 +1,11 @@
 package com.khteam2.connectgym.customer_service.dto;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class CSDTO {
-
     private Long no;
     private String title;
     private String content;

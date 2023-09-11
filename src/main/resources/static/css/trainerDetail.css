@@ -187,6 +187,7 @@ body {
   position: absolute;
   width: 110%;
   height: 1rem;
+      max-width: 680px;
   background: #f1c16469;
   left: -5px;
   top: 50%;
