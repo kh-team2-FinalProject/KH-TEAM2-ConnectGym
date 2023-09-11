@@ -55,7 +55,6 @@ public class CommonController {
                 model.addAttribute("errorMsg", "로그인 정보가 없습니다.");
             }
 
-
             //메인 메뉴 TOP3 트레이너
             List<TrainerResponseDTO> trainerList = orderDetailService.findTop3Trainer();
             model.addAttribute("trainerList", trainerList);
@@ -63,7 +62,6 @@ public class CommonController {
             System.out.println("trainerList = " + trainerList);
             List<ReviewResponseDto> top3Reviews = reviewService.top3Review();
             model.addAttribute("reviews", top3Reviews);
-
 
         } catch (Exception e) {
             logger.error("welcomeOrIndex() 에러");

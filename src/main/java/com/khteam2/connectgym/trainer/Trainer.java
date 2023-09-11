@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.trainer;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +22,6 @@ public class Trainer {
     private String trainerId;
     private String trainerPw;
 
-    @Column(name = "trainer_name")
     private String trainerName;
 
     private String trainerTel;
@@ -34,6 +32,5 @@ public class Trainer {
     private String infoContent;
 
     private LocalDate regDate;
-    @Column(name = "trainer_email")
     private String trainerEmail;
 }

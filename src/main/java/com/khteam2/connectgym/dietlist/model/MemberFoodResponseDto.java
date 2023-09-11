@@ -21,7 +21,6 @@ public class MemberFoodResponseDto {
     private LocalDate regDate;
     private String day;
 
-
     public MemberFoodResponseDto formEntity(MemberFood memberFood) {
         return MemberFoodResponseDto.builder()
             .no(memberFood.getNo())
@@ -32,6 +31,4 @@ public class MemberFoodResponseDto {
             .day(String.valueOf(memberFood.getRegDate().getDayOfMonth()))
             .build();
     }
-
-
 }

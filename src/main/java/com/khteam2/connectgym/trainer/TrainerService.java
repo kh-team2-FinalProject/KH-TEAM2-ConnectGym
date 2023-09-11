@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.trainer;
 
-
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowRepository;
 import com.khteam2.connectgym.lesson.Lesson;
@@ -135,7 +134,6 @@ public class TrainerService {
 
     //트레이너 불러오기(레슨까지)
     public TrainerResponseDTO findOneTrainer(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO) Long trainerNo) {
-
         Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
 
         //레슨 번호
@@ -206,17 +204,13 @@ public class TrainerService {
 
             dto.setFollowCount(followRepository.findAllByToTrainerCount(val.getNo()));
             dto.setMemberCount(orderDetailRepository.findCountByTrainer(val.getNo()));
-
         }
 
         return trainerAll;
     }
 
     public void updateTrainer(TrainerRequestDTO trainerRequestDTO, MultipartFile file) {
-
-
         trainerRepository.save(trainerRequestDTO.toEntity());
-
     }
 }
 

@@ -12,15 +12,7 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
     @Query("SELECT o FROM OrderDetail o WHERE o.order = ?1")
     OrderDetail findByEnroll(Order order);
 
-    List<OrderDetail> findByOrderOrderByNoDesc(Order order);
-
     OrderDetail findByEnrollKey(Long enrollKey);
-
-    @Query(value = "SELECT od FROM OrderDetail od"
-        + " JOIN FETCH od.order o"
-        + " JOIN FETCH o.member m"
-        + " WHERE m.no = :memberNo")
-    List<OrderDetail> findByMemberNo(@Param("memberNo") Long memberNo);
 
     @Query(value = "SELECT od FROM OrderDetail od"
         + " JOIN FETCH od.lesson l"
@@ -28,8 +20,8 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
         + " JOIN FETCH l.trainer t"
         + " WHERE o = :order"
         + " AND ("
-        + " l.title LIKE CONCAT('%', TRIM(:search), '%')"
-        + " OR t.trainerName LIKE CONCAT('%', TRIM(:search), '%')"
+        + "     l.title LIKE CONCAT('%', TRIM(:search), '%')"
+        + "     OR t.trainerName LIKE CONCAT('%', TRIM(:search), '%')"
         + " )")
     List<OrderDetail> findByOrderAndLessonTitleOrTrainerName(@Param("order") Order order, @Param("search") String search);
 
@@ -45,12 +37,10 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
 
     //트레이너별 누적 수강생
     @Query("SELECT COUNT(od) FROM OrderDetail od " +
-        "WHERE od.lesson.trainer.no=?1 ")
+        "WHERE od.lesson.trainer.no = ?1")
     int findCountByTrainer(Long trainerNo);
 
-
     //레슨별 누적 수강생
-    @Query("SELECT COUNT(od) from OrderDetail od where od.lesson.no=?1")
+    @Query("SELECT COUNT(od) from OrderDetail od WHERE od.lesson.no = ?1")
     int findTotalOrderCountByLessonNo(Long lessonNo);
-
 }

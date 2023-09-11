@@ -14,18 +14,21 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Optional<Review> findOrderDetailNo(Long no);
 
     // 회원별 리뷰
-    @Query("SELECT r FROM Review r WHERE r.orderDetail.order.member.no =?1")
+    @Query("SELECT r FROM Review r WHERE r.orderDetail.order.member.no = ?1")
     List<Review> findByMemberNo(Long userNo);
 
     // 트레이너별 리뷰 개수
     @Query("SELECT COUNT(r) FROM Review r "
         + "JOIN r.orderDetail od "
         + "JOIN od.lesson l "
-        + "JOIN l.trainer t WHERE t.no = ?1")
+        + "JOIN l.trainer t "
+        + "WHERE t.no = ?1")
     int findCountByTrainerNo(Long trainerNo);
 
     // 트레이너별 리뷰(+멤버 ID 를 위해 DTO로 반환)
-    @Query("SELECT NEW com.khteam2.connectgym.review.dto.ReviewResponseDto(r.no, m.userId, r.rating, r.reviewTitle, r.reviewContent, r.regDate) " +
+    @Query("SELECT NEW com.khteam2.connectgym.review.dto.ReviewResponseDto(" +
+        "r.no, m.userId, r.rating, r.reviewTitle, r.reviewContent, r.regDate" +
+        ") " +
         "FROM Review r " +
         "JOIN r.orderDetail od " +
         "JOIN od.order.member m " +
@@ -36,8 +39,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<ReviewResponseDto> findTrainerReviewsByTrainerNo(Long trainerNo);
 
     // 트레이너별 리뷰 평균
-    @Query("SELECT AVG(r.rating) "
-        + "FROM Review r "
+    @Query("SELECT AVG(r.rating) FROM Review r "
         + "JOIN r.orderDetail od "
         + "JOIN od.lesson l "
         + "JOIN l.trainer t "
@@ -57,7 +59,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     RatingCountDto findRatingCountsByTrainerNo(Long trainerNo);
 
     // 메인 TOP3 리뷰 출력(+멤버 ID 를 위해 DTO로 반환)
-    @Query("SELECT NEW com.khteam2.connectgym.review.dto.ReviewResponseDto(r.no, m.userId, r.rating, r.reviewTitle, r.reviewContent, r.regDate) " +
+    @Query("SELECT NEW com.khteam2.connectgym.review.dto.ReviewResponseDto(" +
+        "r.no, m.userId, r.rating, r.reviewTitle, r.reviewContent, r.regDate" +
+        ") " +
         "FROM Review r " +
         "JOIN r.orderDetail od " +
         "JOIN od.order.member m " +

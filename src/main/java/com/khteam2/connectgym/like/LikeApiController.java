@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.like;
 
-
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.dto.LikeDto;

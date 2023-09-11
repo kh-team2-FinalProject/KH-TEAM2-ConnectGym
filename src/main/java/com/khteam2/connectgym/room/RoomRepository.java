@@ -7,12 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-
 public interface RoomRepository extends JpaRepository<Room, Long> {
     @Modifying
-    @Query("update Room r set r.roomStatus = ?1 where r.no = ?2")
+    @Query("UPDATE Room r SET r.roomStatus = ?1 WHERE r.no = ?2")
     int updateRoomStatus(RoomStatus roomStatus, Long roomNo);
 
-    @Query("select r from Room r where r.roomName=?1")
+    @Query("SELECT r FROM Room r WHERE r.roomName = ?1")
     Optional<Room> findByRoomName(String reqRoomName);
 }

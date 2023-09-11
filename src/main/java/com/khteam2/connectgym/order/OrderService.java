@@ -513,7 +513,7 @@ public class OrderService {
         // 주문건을 역순으로 가져온다.
         if (orderListRequestDto.getStartDate() != null && orderListRequestDto.getEndDate() != null) {
             // 사용자 정보와 시작일, 종료일을 이용해서 그에 해당하는 주문건을 주문일 역순으로 가져온다.
-            orderList = this.orderRepository.findByMemberAndDayOfPaymentBetweenOrderByDayOfPaymentDesc(
+            orderList = this.orderRepository.findByMemberDayOfPaymentBetween(
                 member,
                 Date.valueOf(orderListRequestDto.getStartDate()),
                 Date.valueOf(orderListRequestDto.getEndDate()),
