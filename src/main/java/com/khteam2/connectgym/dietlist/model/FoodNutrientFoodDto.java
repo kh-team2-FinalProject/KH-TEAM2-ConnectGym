@@ -7,7 +7,6 @@ import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
 
 @Data
-/*NoArgsConstructor*/
 @ToString
 @Builder
 public class FoodNutrientFoodDto {

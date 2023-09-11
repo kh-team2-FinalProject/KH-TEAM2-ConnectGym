@@ -158,7 +158,6 @@ public class TrainerOnlyController {
         model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);
 
         return "trainerOnly/myMemberList";
-
     }
 
     // 룸 입장(없을 시 생성, 있을 시 상태 ACTIVE)
@@ -189,7 +188,6 @@ public class TrainerOnlyController {
     public String messages(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                            @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
                            Model model, RedirectAttributes redirectAttributes) {
-
         model.addAttribute("bannerTitle", "messages");
         if (loginMemberClass == null) {
             // 로그인되어 있지 않은 경우
@@ -209,7 +207,6 @@ public class TrainerOnlyController {
             return "redirect:/mypage";
         }
     }
-
 
     @GetMapping("/mypage/trainerInfo")
     public String trainerMyInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
@@ -251,20 +248,15 @@ public class TrainerOnlyController {
             model.addAttribute("trainerDTO", trainerResponseDTO);
 
             return "trainerOnly/updateInfo";
-
-
         } else {
             return "redirect:/mypage";
         }
-
     }
 
     @PostMapping("/mypage/trainerUpdate")
     public String trainerUpdate(TrainerRequestDTO trainerRequestDTO,
                                 @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
                                 @RequestParam("lessonImgFile") MultipartFile file) {
-
-
         trainerRequestDTO.setNo(loginMemberNo);
 
         trainerService.updateTrainer(trainerRequestDTO, file);

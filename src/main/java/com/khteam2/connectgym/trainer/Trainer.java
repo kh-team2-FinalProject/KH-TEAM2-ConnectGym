@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.trainer;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -7,16 +7,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
-
-
     @Query("SELECT t FROM Trainer t WHERE t.trainerId = ?1")
     List<Trainer> findTrainerId(String id);
 
     Trainer findByTrainerId(String trainerId);
 
-
     @Query("SELECT t FROM Trainer t WHERE t.no = :trainerNo")
     Trainer findTrainerByLessonNo(@Param("trainerNo") Long trainerNo);
-
-
 }

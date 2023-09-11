@@ -23,7 +23,6 @@ public class RoomController {
 
     @GetMapping("/enterRoom/{roomNo}")
     public String enterRoom(@PathVariable Long roomNo, Model model, HttpSession session) {
-
         RoomResponseDto roomResponseDto = roomService.enterRoomInfo(roomNo);
 
         model.addAttribute("roomInfo", roomResponseDto);

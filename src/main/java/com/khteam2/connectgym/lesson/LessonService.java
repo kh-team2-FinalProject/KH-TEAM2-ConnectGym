@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.lesson;
 
-
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.trainer.Trainer;

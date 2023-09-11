@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.like;
 
-
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
@@ -30,7 +29,6 @@ public class LikeService {
 
     @Transactional
     public void addLike(Long memberNo, Long lessonNo) {
-
         Member member = memberRepository.findById(memberNo).orElse(null);
         Lesson lesson = lessonRepository.findById(lessonNo).orElse(null);
 
