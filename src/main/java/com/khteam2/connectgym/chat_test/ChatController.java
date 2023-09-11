@@ -52,7 +52,7 @@ public class ChatController {
         }
         model.addAttribute("sender", sender);
         model.addAttribute("interlocutor", interlocutor);
-        return "chat_test/chat_test2";
+        return "chattingroom/chatting";
     }
 
     @PostMapping("/checkedChatroom")
