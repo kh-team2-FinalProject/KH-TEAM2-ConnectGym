@@ -13,7 +13,25 @@
 
 <th:block layout:fragment="script">
     <!-- 기존 스크립트 -->
+    <script th:inline="javascript">
+        const loginMemberNo = [[${session.session_login_member_no}]];
+        var trainerEmail = [[${trainerResponseDTO.trainerEmail}]];
+        document.addEventListener("DOMContentLoaded", function () {
+            function email_split(trainerEmail) {
+                var email = trainerEmail.split("@");
+                var email01 = email[0];
+                var email02 = email[1];
+                var em1 = document.getElementById('email001');
+                em1.value = email01;
+                document.getElementById('email002').value = email02;
 
+                document.getElementById('email001').setAttribute('readonly', true);
+                document.getElementById('email002').setAttribute('readonly', true);
+            }
+
+            email_split(trainerEmail);
+        });
+    </script>
 
 </th:block>
 
@@ -86,28 +104,17 @@
                         name="trainerInfoContent" th:text="${trainerResponseDTO.infoContent}"></div>
                 </div>
 
+                <div class="join_btn_wrap">
+
+                    <button type="button" class="join_btn2" onclick="">정보 수정하기
+                    </button>
+
+                </div>
+
             </form>
         </div>
     </div>
 </th:block>
 
-<script th:inline="javascript">
-    const loginMemberNo = [[${session.session_login_member_no}]];
-    var trainerEmail = [[${trainerResponseDTO.trainerEmail}]];
-    document.addEventListener("DOMContentLoaded", function () {
-        function email_split(trainerEmail) {
-            var email = trainerEmail.split("@");
-            var email01 = email[0];
-            var email02 = email[1];
-            var em1 = document.getElementById('email001');
-            em1.value = email01;
-            document.getElementById('email002').value = email02;
 
-            document.getElementById('email001').setAttribute('readonly', true);
-            document.getElementById('email002').setAttribute('readonly', true);
-        }
-
-        email_split(trainerEmail);
-    });
-</script>
 </html>
