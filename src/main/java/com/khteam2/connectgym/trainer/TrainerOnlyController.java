@@ -223,4 +223,32 @@ public class TrainerOnlyController {
             return "redirect:/mypage";
         }
     }
+
+    @GetMapping("/mypage/trainerInfo")
+    public String trainerMyInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
+                                @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
+                                Model model, RedirectAttributes redirectAttributes) {
+        if (loginMemberClass == null) {
+            // 로그인되어 있지 않은 경우
+            redirectAttributes.addFlashAttribute("message", "로그인 해주세요.");
+            return "redirect:/";
+
+        } else if (loginMemberClass == MemberClass.TRAINER) {
+            // 트레이너 회원 로그인 된 경우
+
+            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+            System.out.println("trainerResponseDTO = " + trainerResponseDTO);
+            model.addAttribute(trainerResponseDTO);
+
+            return "trainerOnly/trainerInfo";
+
+
+        } else {
+            return "redirect:/mypage";
+        }
+
+
+    }
+
+
 }
