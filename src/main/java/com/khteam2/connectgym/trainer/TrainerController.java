@@ -33,6 +33,7 @@ public class TrainerController {
     public String trainerList(Model model){
         List<TrainerResponseDTO> trainerAll = trainerService.trainerAll();
 
+
         model.addAttribute("trainerList", trainerAll);
         return "content/trainer";
     }

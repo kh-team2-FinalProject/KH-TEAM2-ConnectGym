@@ -207,6 +207,7 @@ public class TrainerService {
             trainerAll.add(dto);
 
             dto.setFollowCount(followRepository.findAllByToTrainerCount(val.getNo()));
+            dto.setMemberCount(orderDetailRepository.findCountByTrainer(val.getNo()));
 
         }
 
