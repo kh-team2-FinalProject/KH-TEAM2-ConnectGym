@@ -539,7 +539,7 @@ public class OrderService {
             // 검색어가 존재하는지 확인한다.
             if (searchString != null && !searchString.isBlank()) {
                 // 검색어를 이용해서 주문 상세건을 가져온다.
-                orderDetailList = this.orderDetailRepository.findByLessonTitleOrTrainerName(searchString);
+                orderDetailList = this.orderDetailRepository.findByOrderAndLessonTitleOrTrainerName(order, searchString);
             } else {
                 // 검색어가 없으면 모든 주문 상세건을 가져온다.
                 orderDetailList = this.orderDetailRepository.findByOrder(order);
@@ -616,7 +616,7 @@ public class OrderService {
         }
 
         // 페이징 정보를 DTO에 전달하기 위해 Pagination 객체를 생성한다.
-        Pagination pagination = new Pagination(orderList, 5);
+        Pagination pagination = new Pagination(orderListOrderDtoList.size(), currentPage + 1, pageSize, 5);
 
         // 가져온 정보들을 담아준다.
         responseDto.setSearch(orderListRequestDto.getQ());
