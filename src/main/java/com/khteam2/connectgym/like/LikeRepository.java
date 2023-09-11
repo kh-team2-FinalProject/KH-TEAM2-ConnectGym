@@ -1,7 +1,6 @@
 package com.khteam2.connectgym.like;
 
 
-import com.khteam2.connectgym.follow.Follow;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface LikeRepository extends JpaRepository<Like, Long> {
-
-
     @Modifying
     @Query("delete from Like l where l.member=?1 and l.lesson=?2")
     void deleteByMemberAndLesson(Member member, Lesson lesson);
@@ -41,6 +38,4 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
         + " AND (t.trainerName LIKE CONCAT('%',TRIM(?2),'%')"
         + " OR le.title LIKE CONCAT('%',TRIM(?2),'%'))")
     List<Like> searchByTrainerNameOrLessonTitle(Long userNo, String search);
-
-
 }

@@ -1,8 +1,6 @@
 package com.khteam2.connectgym.order;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.khteam2.connectgym.lesson.Lesson;
-import com.khteam2.connectgym.review.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

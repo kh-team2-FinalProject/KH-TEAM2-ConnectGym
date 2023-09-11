@@ -1,7 +1,6 @@
 package com.khteam2.connectgym;
 
 import com.khteam2.connectgym.common.SessionConstant;
-import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.MemberService;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
@@ -21,12 +20,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class CommonController {
-
     private final MemberService memberService;
     private final TrainerService trainerService;
     private final OrderDetailService orderDetailService;
@@ -68,46 +65,23 @@ public class CommonController {
             model.addAttribute("reviews", top3Reviews);
 
 
-
         } catch (Exception e) {
             logger.error("welcomeOrIndex() 에러");
         }
 
         return "content/main";
     }
+
     @GetMapping("/testRoom")
     public String testRoom() {
         return "room/bak_enterroom";
     }
-
 
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")
     public String lesson() {
         return "redirect:/lesson/health";
     }
-
-    /*@GetMapping("/lesson/health")
-    public String lessonHealth(Model model) {
-        String lessonCategory = "health";
-        model.addAttribute("lessonCategory", lessonCategory);
-        return "lesson/health";
-    }
-
-    @GetMapping("/lesson/yoga")
-    public String lessonYoga(Model model) {
-        String lessonCategory = "yoga";
-        model.addAttribute("lessonCategory", lessonCategory);
-        return "lesson/yoga";
-    }
-
-    @GetMapping("/lesson/pilates")
-    public String lessonPilates(Model model) {
-        String lessonCategory = "pilates";
-        model.addAttribute("lessonCategory", lessonCategory);
-        return "lesson/pilates";
-    }*/
-
 
     @GetMapping("/mypage/messages")
     public String chattingRoomList(Model model) {
@@ -121,27 +95,8 @@ public class CommonController {
         return "mypage/messages";
     }
 
-
     @GetMapping("/fooddiary")
     public String fooddiary() {
         return "redirect:/fooddiary/calendar";
     }
-
 }
-//    @GetMapping("/")
-//    public String welcome(Model model, HttpSession session) {
-//        String userRole = (String) session.getAttribute(SessionConstant.LOGIN_MEMBER_CLASS);
-//
-//        if ("MEMBER".equals(userRole)) {
-//            MemberResponseDTO member = memberService.sessionMem(session);
-//            String userId = member.getUserId();
-//            model.addAttribute("userId", userId);
-//
-//        } else if ("TRAINER".equals(userRole)) {
-//            TrainerResponseDTO trainerResponseDTO = trainerService.sessionT(session);
-//            String trainerId = trainerResponseDTO.getTrainerId();
-//            model.addAttribute("trainerId", trainerId);
-//        }
-//        return "main";
-//    }
-//}

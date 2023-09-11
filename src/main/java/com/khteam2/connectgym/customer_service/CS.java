@@ -1,20 +1,15 @@
 package com.khteam2.connectgym.customer_service;
 
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @Table(name = "customer_service")
 public class CS {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;

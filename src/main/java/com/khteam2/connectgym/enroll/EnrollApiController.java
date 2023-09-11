@@ -13,18 +13,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class EnrollApiController {
-
     private final MemberService memberService;
     private final EnrollService enrollService;
 
-
-
     @GetMapping("/api/enrollList")
     public List<EnrollResponseDto> enrollList(HttpSession session) {
-
         MemberResponseDTO member = memberService.sessionMem(session);
 
         return enrollService.enrollList(member);
     }
-
 }

@@ -12,20 +12,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessageDTO {
-
     private Long no;
     private Chatroom chatroom;
     private String content;
     private String sender;
-//    private LocalDateTime sendAt;
-
 
     public ChatMessage toEntity() {
         return ChatMessage.builder()
             .chatroom(chatroom)
             .content(content)
             .sender(sender)
-//                .sendAt(sendAt)
             .build();
     }
 
@@ -35,8 +31,6 @@ public class ChatMessageDTO {
             .chatroom(chatMessage.getChatroom())
             .content(chatMessage.getContent())
             .sender(chatMessage.getSender())
-//            .sendAt(chatMessage.getSendAt())
             .build();
     }
-
 }

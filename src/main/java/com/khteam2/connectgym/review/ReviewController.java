@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Controller
 @RequiredArgsConstructor
 public class ReviewController {
@@ -21,16 +20,15 @@ public class ReviewController {
                                @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long userNo,
                                @RequestParam("orderDetailNo") Long orderDetailNo,
                                @RequestParam("reviewImg") MultipartFile[] reviewImgs) {
-        reviewService.createReview(userNo, orderDetailNo,dto, reviewImgs);
+        reviewService.createReview(userNo, orderDetailNo, dto, reviewImgs);
 
         return "redirect:/mypage/myReviewList";
-
     }
 
     //리뷰 삭제
     @ResponseBody
     @DeleteMapping("/review/del/{reviewNo}")
-    public void deleteReview(@PathVariable Long reviewNo){
+    public void deleteReview(@PathVariable Long reviewNo) {
         reviewService.deleteReview(reviewNo);
     }
 
@@ -39,9 +37,7 @@ public class ReviewController {
     //트레이너별 리뷰리스트
     @ResponseBody
     @GetMapping("/review/show/{trainerNo}")
-    public ReviewResponseListDto showTrainerReview(@PathVariable Long trainerNo){
+    public ReviewResponseListDto showTrainerReview(@PathVariable Long trainerNo) {
         return reviewService.trainerReview(trainerNo);
     }
-
 }
-

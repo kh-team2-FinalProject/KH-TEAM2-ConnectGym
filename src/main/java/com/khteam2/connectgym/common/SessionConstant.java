@@ -8,7 +8,7 @@ import com.khteam2.connectgym.member.MemberClass;
  * <br />
  * <h2>사용 예시</h2>
  * SessionAttribute 어노테이션을 통해서 값을 꺼내올 때<br />
- * 
+ *
  * <pre>
  * GetMapping("/mypage")
  * public String myController(
@@ -28,10 +28,10 @@ import com.khteam2.connectgym.member.MemberClass;
  *     return "/content/mypages";
  * }
  * </pre>
- * 
+ * <p>
  * <br />
  * HttpSession을 이용해서 세션에 값을 저장할 때<br />
- * 
+ *
  * <pre>
  * GetMapping("/login")
  * public String myController(HttpSession session) {

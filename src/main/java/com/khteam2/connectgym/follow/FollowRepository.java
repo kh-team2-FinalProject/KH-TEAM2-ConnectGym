@@ -6,11 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface FollowRepository extends JpaRepository<Follow, Long> {
-
     @Modifying
     @Query("delete from Follow f where f.fromUser=?1 and f.toTrainer=?2")
     void deleteByFromUserAndToTrainer(Member fromUser, Trainer toTrainer);
@@ -36,5 +34,4 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
         + " WHERE f.fromUser.no = ?1"
         + " AND t.trainerName LIKE CONCAT('%',TRIM(?2),'%')")
     List<Follow> searchByTrainerName(Long fromUserNo, String search);
-
 }

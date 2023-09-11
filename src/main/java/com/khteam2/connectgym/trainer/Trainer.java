@@ -1,14 +1,13 @@
 package com.khteam2.connectgym.trainer;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.khteam2.connectgym.lesson.Lesson;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -17,7 +16,6 @@ import java.util.List;
 @Builder
 @Table(name = "trainers")
 public class Trainer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
@@ -30,10 +28,6 @@ public class Trainer {
 
     private String trainerTel;
 
-/*    @OneToMany(mappedBy = "trainer")
-    @JsonIgnore
-    private List<License> licenseList;*/
-
     private String profileImg;
 
     private String infoTitle;
@@ -42,8 +36,4 @@ public class Trainer {
     private LocalDate regDate;
     @Column(name = "trainer_email")
     private String trainerEmail;
-
 }
-
-
-

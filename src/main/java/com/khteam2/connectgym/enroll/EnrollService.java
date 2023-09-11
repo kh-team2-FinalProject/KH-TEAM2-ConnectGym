@@ -4,7 +4,10 @@ import com.khteam2.connectgym.enroll.dto.EnrollResponseDto;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.dto.MemberResponseDTO;
-import com.khteam2.connectgym.order.*;
+import com.khteam2.connectgym.order.Order;
+import com.khteam2.connectgym.order.OrderDetail;
+import com.khteam2.connectgym.order.OrderDetailRepository;
+import com.khteam2.connectgym.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +19,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class EnrollService {
-
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
 
-    public List<EnrollResponseDto> enrollList(MemberResponseDTO mem){
+    public List<EnrollResponseDto> enrollList(MemberResponseDTO mem) {
         List<EnrollResponseDto> enrolls = new ArrayList<>();
-        System.out.println("mem = " + mem.getNo()+","+mem.getUserName());
+        System.out.println("mem = " + mem.getNo() + "," + mem.getUserName());
 
         Member member = Member.builder()
             .no(mem.getNo())
@@ -36,7 +38,7 @@ public class EnrollService {
         List<Order> orders = orderRepository.findByMember(member);
 
         for (Order o : orders) {
-            OrderDetail orderDetail= orderDetailRepository.findByEnroll(o);
+            OrderDetail orderDetail = orderDetailRepository.findByEnroll(o);
 
             LessonResponseDTO lessonResponseDTO =
                 new LessonResponseDTO(orderDetail.getLesson());
@@ -53,6 +55,4 @@ public class EnrollService {
 
         return enrolls;
     }
-
-
 }

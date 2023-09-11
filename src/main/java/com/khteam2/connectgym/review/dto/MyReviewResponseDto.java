@@ -1,9 +1,6 @@
 package com.khteam2.connectgym.review.dto;
 
-import com.khteam2.connectgym.lesson.Lesson;
-import com.khteam2.connectgym.order.OrderDetail;
 import com.khteam2.connectgym.review.ReviewImg;
-import com.khteam2.connectgym.trainer.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class MyReviewResponseDto {
-
     private Long no;
     private Long trainerNo;
     private String trainerName;
@@ -26,6 +22,4 @@ public class MyReviewResponseDto {
     private String reviewContent;
     private LocalDateTime regDate;
     private List<ReviewImg> reviewImgList;
-
-
 }

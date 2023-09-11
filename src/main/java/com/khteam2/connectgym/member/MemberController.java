@@ -29,7 +29,6 @@ import java.util.List;
 @Controller
 @Slf4j
 public class MemberController {
-
     private final TrainerService trainerService;
     private final MemberService memberService;
     private final MailSendService mailService;
@@ -38,7 +37,6 @@ public class MemberController {
     private final ChatroomService chatroomService;
     private final OrderDetailService orderDetailService;
     private final ReviewService reviewService;
-
 
     @GetMapping(value = "/user/login")
     public String tempLogin(
@@ -52,7 +50,7 @@ public class MemberController {
         }
 
         String referer = request.getHeader("Referer");
-        model.addAttribute("requestUrl",referer);
+        model.addAttribute("requestUrl", referer);
 
         System.out.println("referer = " + referer);
 
@@ -91,7 +89,6 @@ public class MemberController {
     @RequestMapping(value = "/connectgym", method = RequestMethod.GET)
     public String kakaoLogin(@RequestParam(value = "code", required = false) String code,
                              HttpSession session) {
-
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
 
@@ -138,7 +135,6 @@ public class MemberController {
     @RequestMapping(value = "/connectgym.store", method = RequestMethod.GET)
     public String kakaoLogindomain(@RequestParam(value = "code", required = false) String code,
                                    HttpSession session) {
-
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
 
@@ -265,7 +261,6 @@ public class MemberController {
         model.addAttribute("chatroomList", chatroomList);
         return "mypage/messages";
     }
-
 
     // 6-2) 주문내역 > 리뷰 쓰기 ( 6-1) 주문내역 : orderController)
     @GetMapping("/mypage/writeReview/{detailNo}")

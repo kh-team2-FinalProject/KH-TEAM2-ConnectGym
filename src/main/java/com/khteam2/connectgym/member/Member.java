@@ -1,17 +1,13 @@
 package com.khteam2.connectgym.member;
 
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -20,7 +16,6 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "users")
 @Builder
 public class Member {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
@@ -39,5 +34,4 @@ public class Member {
     @Column(name = "reg_date")
     @CreationTimestamp
     private LocalDateTime regDate;
-
 }

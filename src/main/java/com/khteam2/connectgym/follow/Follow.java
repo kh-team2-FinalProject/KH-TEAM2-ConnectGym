@@ -2,7 +2,10 @@ package com.khteam2.connectgym.follow;
 
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.trainer.Trainer;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -12,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "follows", uniqueConstraints = {
-    @UniqueConstraint(name = "uk_follow_from_to",columnNames = {"from_user_no", "to_trainer_no"})
+    @UniqueConstraint(name = "uk_follow_from_to", columnNames = {"from_user_no", "to_trainer_no"})
 })
 public class Follow {
     @Id

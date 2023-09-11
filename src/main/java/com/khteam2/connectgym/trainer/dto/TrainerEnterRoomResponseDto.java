@@ -13,9 +13,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 public class TrainerEnterRoomResponseDto {
-
     private String titleCode;
-    private Map<Long,MemberResponseDTO> memberMap;
+    private Map<Long, MemberResponseDTO> memberMap;
     private String errorMsg = "Success";
-
 }

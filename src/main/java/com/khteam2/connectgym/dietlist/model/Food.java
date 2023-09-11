@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 // Data 전달 용도
-
 @Data
 @Entity
 @Builder
@@ -19,7 +18,6 @@ import javax.validation.constraints.PositiveOrZero;
 @AllArgsConstructor
 @Table(name = "foods")
 public class Food {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long foodCd; // 식품 번호
@@ -59,5 +57,4 @@ public class Food {
     private Double nat; // 나트륨
     private Double sugar; // 당류
     private String animalPlant; // 가공업체
-
 }
