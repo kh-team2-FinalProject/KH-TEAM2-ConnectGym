@@ -32,6 +32,13 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
     @Query("SELECT od FROM OrderDetail od WHERE lesson.no = ?1")
     List<OrderDetail> enrollList(Long lessonNo);
 
+    //메인 'Popular Trainer' > 누적 수강생 Top3
+    @Query("SELECT od.lesson.trainer AS trainerNo, COUNT(*) AS studentCount " +
+        "FROM OrderDetail od " +
+        "GROUP BY od.lesson.trainer.no " +
+        "ORDER BY studentCount DESC")
+    List<Object[]> findCountGroupByTrainer();
+
     //트레이너별 누적 수강생
     @Query("SELECT COUNT(od) FROM OrderDetail od " +
         "WHERE od.lesson.trainer.no=?1 ")

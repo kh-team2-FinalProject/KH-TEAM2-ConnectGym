@@ -38,19 +38,19 @@
         <div class="section-1">
             <div class="sc-container">
                 <div class="sc-card">
-                    <a th:href="@{/lesson/health}">
+                    <a th:href="@{/lessonList(category='1')}">
                         <img th:src="@{/images/main-health.png}">
                         <div class="sc-card__head">Health</div>
                     </a>
                 </div>
                 <div class="sc-card">
-                    <a th:href="@{/lesson/yoga}">
+                    <a th:href="@{/lessonList(category='2')}">
                         <img th:src="@{/images/main-yoga.jpg}">
                         <div class="sc-card__head">Yoga</div>
                     </a>
                 </div>
                 <div class="sc-card">
-                    <a th:href="@{/lesson/pilates}">
+                    <a th:href="@{/lessonList(category='3')}">
                         <img th:src="@{/images/main-pilates.jpg}">
                         <div class="sc-card__head">Pilates</div>
                     </a>
@@ -120,35 +120,38 @@
 
         <!-- 인기 트레이너 -->
         <div class="section-2">
-            <div class="person-title">
+            <div data-aos="fade-down"
+                class="person-title">
                 Popular Trainer
             </div>
             <div class="person-content">
                 <!--요가-->
-                <div class="person">
+                <div class="person" th:each="trainer : ${trainerList}" th:onclick="|location.href='/trainerDetail/${trainer.trainerNo}'|">
                     <div class="p-container">
                         <div class="p-container-inner">
                             <img class="p-circle" th:src="@{/images/background.png}"/>
-                            <img class="p-img p-img1" th:src="@{/images/주양.png}"/> <!--트레이너 프로필 변수-->
+                            <img class="p-img p-img1" th:src="${trainer.profileImg}"/> <!--트레이너 프로필 변수-->
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="p-name">주양</div> <!--트레이너 이름 변수-->
-                    <div class="p-cat">yoga</div> <!--레슨 카테고리 변수-->
+                    <div class="p-name">[[${trainer.trainerName}]]</div> <!--트레이너 이름 변수-->
+                    <div class="p-cat" th:if="${trainer.trainerCategory == 1}">Health</div> <!--레슨 카테고리 변수-->
+                    <div class="p-cat" th:if="${trainer.trainerCategory == 2}">Yoga</div> <!--레슨 카테고리 변수-->
+                    <div class="p-cat" th:if="${trainer.trainerCategory == 3}">Pilates</div> <!--레슨 카테고리 변수-->
                 </div>
                 <!--헬스-->
-                <div class="person">
+               <!-- <div class="person">
                     <div class="p-container">
                         <div class="p-container-inner">
                             <img class="p-circle" th:src="@{/images/background.png}"/>
-                            <img class="p-img p-img2" th:src="@{/images/심으뜸.png}"/> <!--트레이너 프로필 변수-->
+                            <img class="p-img p-img2" th:src="@{/images/심으뜸.png}"/> &lt;!&ndash;트레이너 프로필 변수&ndash;&gt;
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="p-name">심으뜸</div> <!--트레이너 이름 변수-->
-                    <div class="p-cat">health</div> <!--레슨 카테고리 변수-->
+                    <div class="p-name">심으뜸</div> &lt;!&ndash;트레이너 이름 변수&ndash;&gt;
+                    <div class="p-cat">health</div> &lt;!&ndash;레슨 카테고리 변수&ndash;&gt;
                 </div>
-                <!--필라테스-->
+                &lt;!&ndash;필라테스&ndash;&gt;
                 <div class="person">
                     <div class="p-container">
                         <div class="p-container-inner">
@@ -159,7 +162,7 @@
                     <div class="divider"></div>
                     <div class="p-name">김계란</div>
                     <div class="p-cat">pilates</div>
-                </div>
+                </div>-->
             </div>
         </div>
         <!-- 인기 트레이너 끝 -->

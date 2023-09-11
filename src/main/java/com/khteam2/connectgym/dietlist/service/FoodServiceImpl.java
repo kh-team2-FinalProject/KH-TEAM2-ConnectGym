@@ -120,6 +120,8 @@ public class FoodServiceImpl implements FoodService {
         return foodRepository.save(food);
     }
 
+
+
     /* 유효성 체크해서 에러 메세지 */
     @Override
     public Map<String, String> validateHandling(Errors errors) {
@@ -127,7 +129,8 @@ public class FoodServiceImpl implements FoodService {
 
         for (FieldError error : errors.getFieldErrors()) {
             String validKeyName = String.format("valid_%s", error.getField());
-            validatorResult.put(validKeyName, error.getDefaultMessage());
+            String errorMessage = error.getDefaultMessage();
+            validatorResult.put(validKeyName, errorMessage);
         }
 
         return validatorResult;
@@ -327,7 +330,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Transactional
-//    @Override
+    @Override
     public FoodDeleteResponseDto deleteDietListFood(Long loginMemberNo, Long memberFoodNo) {
         FoodDeleteResponseDto responseDto = FoodDeleteResponseDto.builder()
             .success(false)

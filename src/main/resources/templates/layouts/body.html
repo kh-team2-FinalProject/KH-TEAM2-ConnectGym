@@ -7,7 +7,7 @@
 <body th:fragment="main-body">
 <div>
     <script>
-    AOS.init();
+        AOS.init();
     </script>
     <!--  실제 헤더 부분-->
     <header>
@@ -58,7 +58,7 @@
                                 </li>
                             </ul>
 
-                            <ul th:if="${session.session_login_member_no != null}">
+                            <ul class="header_mypage_popup_menu" th:if="${session.session_login_member_no != null}">
                                 <li><a href="/mypage/myDashboard">대시보드</a></li>
                                 <li><a href="/mypage/myLessonList">수강현황</a></li>
                                 <li><a href="/mypage/myInfo">내 정보</a></li>

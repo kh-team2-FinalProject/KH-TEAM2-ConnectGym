@@ -174,7 +174,7 @@ span{
     font-size: 10px;
 }
 
-#submit {
+#submitBtn {
     background-color: #878787;
     color: white;
     padding: 10px;
@@ -182,7 +182,7 @@ span{
     font-weight: bolder;
 }
 
-#submit:hover {
+#submitBtn:hover {
     background-color: #cbffde;
     color: #0d1416;
 }
