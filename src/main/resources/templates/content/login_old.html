@@ -119,7 +119,18 @@
             })(document);
         </script>
         <script th:if="${message != null}" th:inline="javascript">
-            alert([[${message}]]);
+           Swal.fire({
+          position: "center",
+          width: "500px",
+          height: "30px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">${message}</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#df1811",
+        });
+
+           <!-- alert([[${message}]]);-->
         </script>
     </th:block>
 

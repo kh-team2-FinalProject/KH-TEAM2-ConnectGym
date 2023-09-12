@@ -15,7 +15,16 @@ function checkedChatroom() {
 
         },
         error: function (error) {
-            alert("채팅방 연결에 실패하였습니다.")
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">채팅방 연결에 실패하였습니다.</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#eb4315"
+                });
+            /*alert("채팅방 연결에 실패하였습니다.")*/
         }
     });
 

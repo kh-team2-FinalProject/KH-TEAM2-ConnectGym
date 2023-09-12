@@ -27,12 +27,31 @@ function findMemberPW(){
     var checkPW = $('#CheckPW').val();
 
     if($('#join_auth_btn').val() == false){
-        alert('이메일 인증을 먼저 진행해주세요.');
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">이메일 인증을 먼저 진행해주세요.</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#eb4315"
+                });
+        /*alert('이메일 인증을 먼저 진행해주세요.');*/
         return false;
     }
 
     if(!(inputPW === checkPW)){
-        alert('비밀번호를 확인해주세요.');
+     Swal.fire({
+                      position: "center",
+                      width: "500px",
+                      background: "rgba(215, 214, 214, 0.761)",
+                      html: `<div style="font-size:14px;">비밀번호를 확인해주세요.</div>`,
+                      showConfirmButton: true,
+                      showCancelButton: false,
+                      confirmButtonColor: "#eb4315"
+                    });
+
+        /*alert('비밀번호를 확인해주세요.');*/
         return false;
     }
 
@@ -46,11 +65,30 @@ function findMemberPW(){
             password:inputPW
         },
         success: function(data){
-            alert('비밀번호 변경에 성공하였습니다.');
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">비밀번호 변경에 성공하였습니다.</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#A3DC10"
+                });
+            /*alert('비밀번호 변경에 성공하였습니다.');*/
             window.location.href = "/user/login";
         },
         error: function(error){
-            alert('작성 정보가 잘못되었거나 존재하지 않는 정보입니다.');
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">작성된 정보가 잘못되었거나 존재하지 않는 정보입니다.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+           /* alert('작성 정보가 잘못되었거나 존재하지 않는 정보입니다.');*/
             return false;
         }
     });
@@ -107,7 +145,17 @@ $('#join_request_btn').click(function(){
         success: function(data){
             checkInput.attr('readonly', false);
             code=data;
-            alert('인증번호가 전송되었습니다.');
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">인증번호가 전송되었습니다.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#A3DC10"
+        });
+
+            /*alert('인증번호가 전송되었습니다.');*/
         }
     }); // ajax 끝
 

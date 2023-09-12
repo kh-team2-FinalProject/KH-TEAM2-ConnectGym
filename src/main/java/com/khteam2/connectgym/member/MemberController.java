@@ -39,26 +39,24 @@ public class MemberController {
     private final ReviewService reviewService;
 
     @GetMapping(value = "/user/login")
-    public String tempLogin(
+    public String login(
         Model model,
         HttpServletRequest request,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo
     ) {
         if (loginMemberNo != null) {
-            model.addAttribute("message", "이미 로그인되어 있는 상태입니다."
-                + " 로그아웃 하려면 /temp_logout 으로 이동하면 됩니다.");
+            model.addAttribute("message", "이미 로그인되어 있는 상태입니다.");
+            return "redirect:/";
         }
 
         String referer = request.getHeader("Referer");
         model.addAttribute("requestUrl", referer);
 
-        System.out.println("referer = " + referer);
-
         return "content/login";
     }
 
     @GetMapping(value = "/user/logout")
-    public String tempLogout(HttpSession session) {
+    public String logout(HttpSession session) {
         session.removeAttribute(SessionConstant.LOGIN_MEMBER_NO);
         session.removeAttribute(SessionConstant.LOGIN_MEMBER_CLASS);
 

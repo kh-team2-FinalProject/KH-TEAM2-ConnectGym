@@ -114,21 +114,52 @@
   	const form = document.getElementById('convertToTrainerAccount_wrap');
 
 	if (!form.title.value.trim()) {
-		alert('제목을 입력해 주세요.');
+	Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">제목을 입력해 주세요./div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+		//alert('제목을 입력해 주세요.');
 		form.title.value = '';
 		form.title.focus();
 		return false;
 	}
 
 	if (!form.writer.value.trim()) {
-		alert('작성자를 입력해 주세요.');
+	Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">작성자를 입력해 주세요.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+		//alert('작성자를 입력해 주세요.');
 		form.writer.value = '';
 		form.writer.focus();
 		return false;
 	}
 
 	if (!form.content.value.trim()) {
-		alert('내용을 입력해 주세요.');
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">내용을 입력해 주세요.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+
+		//alert('내용을 입력해 주세요.');
 		form.content.value = '';
 		form.content.focus();
 		return false;

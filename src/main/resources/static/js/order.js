@@ -62,7 +62,17 @@ void (function (D) {
 
         // 동의 항목에 모두 체크하지 않았으면 알림을 띄우고 리턴
         if (!agree1.checked || !agree2.checked || !agreeAll.checked) {
-            alert("모든 항목에 동의해 주시기 바랍니다.");
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">모든 항목에 동의해 주시기 바랍니다.</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#eb4315"
+                });
+
+            /*alert("모든 항목에 동의해 주시기 바랍니다.");*/
             return;
         }
 
@@ -73,8 +83,17 @@ void (function (D) {
             case "phone":
                 break;
             default:
+            Swal.fire({
+                      position: "center",
+                      width: "500px",
+                      background: "rgba(215, 214, 214, 0.761)",
+                      html: `<div style="font-size:14px;">결제 수단을 선택해 주시기 바랍니다.</div>`,
+                      showConfirmButton: true,
+                      showCancelButton: false,
+                      confirmButtonColor: "#eb4315"
+                    });
                 // 결제 수단이 올바르지 않으면 더 이상 진행하지 않고 리턴한다.
-                alert("결제 수단을 선택해 주시기 바랍니다.");
+                /*alert("결제 수단을 선택해 주시기 바랍니다.");*/
                 return;
         }
 
@@ -126,7 +145,16 @@ void (function (D) {
                             }
                         });
                 } else {
-                    alert(res.error_msg);
+                Swal.fire({
+                          position: "center",
+                          width: "500px",
+                          background: "rgba(215, 214, 214, 0.761)",
+                          html: `<div style="font-size:14px;">${res.error_msg}</div>`,
+                          showConfirmButton: true,
+                          showCancelButton: false,
+                          confirmButtonColor: "#eb4315"
+                        });
+                    /*alert(res.error_msg);*/
                 }
             }
         );

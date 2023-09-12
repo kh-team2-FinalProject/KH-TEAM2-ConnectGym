@@ -42,7 +42,17 @@ function updateform_check() {
     var InputTel = document.getElementById("InputTel");
 
     if (InputName.value === "") {
-        alert("이름을 입력하세요.");
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">이름을 입력하세요.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+        /*alert("이름을 입력하세요.");*/
         InputName.focus();
         return false;
     }
@@ -50,13 +60,31 @@ function updateform_check() {
     var phoneRule = /^(010)[0-9]{4}[0-9]{4}$/;
 
     if (!phoneRule.test(InputTel.value)) {
-        alert("전화번호를 확인해주세요.");
+    Swal.fire({
+              position: "center",
+              width: "500px",
+              background: "rgba(215, 214, 214, 0.761)",
+              html: `<div style="font-size:14px;">전화번호를 확인해주세요.</div>`,
+              showConfirmButton: true,
+              showCancelButton: false,
+              confirmButtonColor: "#eb4315"
+            });
+        /*alert("전화번호를 확인해주세요.");*/
         InputTel.focus();
         return false;
     }
 
     if (InputTel.value === "") {
-        alert("전화번호를 입력해주세요.");
+    Swal.fire({
+              position: "center",
+              width: "500px",
+              background: "rgba(215, 214, 214, 0.761)",
+              html: `<div style="font-size:14px;">전화번호를 입력해주세요.</div>`,
+              showConfirmButton: true,
+              showCancelButton: false,
+              confirmButtonColor: "#eb4315"
+            });
+        /*alert("전화번호를 입력해주세요.");*/
         InputTel.focus();
         return false;
     }
