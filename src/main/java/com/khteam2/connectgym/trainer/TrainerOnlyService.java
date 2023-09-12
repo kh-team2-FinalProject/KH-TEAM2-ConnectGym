@@ -123,7 +123,7 @@ public class TrainerOnlyService {
 
         //해당 트레이너의 레슨이 없는 경우
         if (lesson == null) {
-            return null;
+            return 0L;
         }
         //있는 경우 레슨넘버 반환
         return lesson.getNo();

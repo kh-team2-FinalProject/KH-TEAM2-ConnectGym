@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FollowRepository extends JpaRepository<Follow, Long> {
     @Modifying
@@ -19,7 +20,7 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
 
     //트레이너 팔로우된 수 출력
     @Query("SELECT COUNT(f) FROM Follow f WHERE f.toTrainer.no = ?1")
-    int findAllByToTrainerCount(Long toTrainerNo);
+    Optional<Integer> findAllByToTrainerCount(Long toTrainerNo);
 
     //유저가 팔로우한 트레이너 목록 출력
     @Query("SELECT f FROM Follow f WHERE f.fromUser.no = ?1")

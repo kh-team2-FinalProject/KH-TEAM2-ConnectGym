@@ -24,7 +24,6 @@ public class EnrollService {
 
     public List<EnrollResponseDto> enrollList(MemberResponseDTO mem) {
         List<EnrollResponseDto> enrolls = new ArrayList<>();
-        System.out.println("mem = " + mem.getNo() + "," + mem.getUserName());
 
         Member member = Member.builder()
             .no(mem.getNo())
@@ -37,20 +36,22 @@ public class EnrollService {
 
         List<Order> orders = orderRepository.findByMember(member);
 
-        for (Order o : orders) {
-            OrderDetail orderDetail = orderDetailRepository.findByEnroll(o);
+        if (orders.size() > 0) {
+            for (Order o : orders) {
+                OrderDetail orderDetail = orderDetailRepository.findByEnroll(o);
 
-            LessonResponseDTO lessonResponseDTO =
-                new LessonResponseDTO(orderDetail.getLesson());
+                LessonResponseDTO lessonResponseDTO =
+                    new LessonResponseDTO(orderDetail.getLesson());
 
-            EnrollResponseDto enrollResponseDto = EnrollResponseDto.builder()
-                .lesson(lessonResponseDTO)
-                .lessonTitleCode(lessonResponseDTO.getTitleCode())
-                .enrollKey(orderDetail.getEnrollKey())
-                .build();
+                EnrollResponseDto enrollResponseDto = EnrollResponseDto.builder()
+                    .lesson(lessonResponseDTO)
+                    .lessonTitleCode(lessonResponseDTO.getTitleCode())
+                    .enrollKey(orderDetail.getEnrollKey())
+                    .build();
 
-            enrolls.add(enrollResponseDto);
+                enrolls.add(enrollResponseDto);
 
+            }
         }
 
         return enrolls;

@@ -146,7 +146,7 @@ public class TrainerService {
         Lesson lesson = lessonRepository.findByTrainerNo(trainerNo).orElse(null);
 
         //누적 수강생
-        int memberCount = orderDetailRepository.findCountByTrainer(trainerNo);
+        int memberCount = orderDetailRepository.findCountByTrainer(trainerNo).orElse(0);
 
         //라이선스 목록
         List<License> licenses = licenseRepository.findAllTrainerNo(trainerNo);
@@ -209,7 +209,9 @@ public class TrainerService {
             TrainerResponseDTO dto = new TrainerResponseDTO(val);
             trainerAll.add(dto);
 
-            dto.setFollowCount(followRepository.findAllByToTrainerCount(val.getNo()));
+
+
+            dto.setFollowCount(followRepository.findAllByToTrainerCount(val.getNo()).orElse(0));
 
         }
         return trainerAll;
@@ -229,10 +231,10 @@ public class TrainerService {
             TrainerResponseDTO dto = new TrainerResponseDTO(val);
 
             //팔로우 수
-            dto.setFollowCount(followRepository.findAllByToTrainerCount(dto.getTrainerNo()));
+            dto.setFollowCount(followRepository.findAllByToTrainerCount(dto.getTrainerNo()).orElse(0));
 
             //누적 수강생 수
-            dto.setMemberCount(orderDetailRepository.findCountByTrainer(dto.getTrainerNo()));
+            dto.setMemberCount(orderDetailRepository.findCountByTrainer(dto.getTrainerNo()).orElse(0));
 
             dtoList.add(dto);
         }
@@ -285,7 +287,6 @@ public class TrainerService {
 
     @Transactional
     public void updateProfile(Long trainerNo, TrainerRequestDTO trainerRequestDTO, MultipartFile profileImgFile) {
-
 
         String fileUrl = "";
         if (!profileImgFile.isEmpty()) {

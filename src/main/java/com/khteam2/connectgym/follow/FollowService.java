@@ -66,7 +66,7 @@ public class FollowService {
 
     // 트레이너 팔로우 수 조회
     public int followCount(Long trainerNo) {
-        return followRepository.findAllByToTrainerCount(trainerNo);
+        return followRepository.findAllByToTrainerCount(trainerNo).orElse(0);
     }
 
     // 로그인 사용자 팔로우 여부 체크

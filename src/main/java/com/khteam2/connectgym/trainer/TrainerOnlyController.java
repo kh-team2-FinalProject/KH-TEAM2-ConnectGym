@@ -40,7 +40,6 @@ public class TrainerOnlyController {
     private final LessonService lessonService;
     private final ReviewService reviewService;
 
-    ////////////////////////////////////////////////////////
     @GetMapping("/mypage")
     public String myPageT(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                           @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
@@ -59,46 +58,59 @@ public class TrainerOnlyController {
             //트레이너 번호로 레슨 번호 찾음
             Long lessonNo = trainerOnlyService.findLessonNoByTrainerNo(trainerNo);
 
-            //트레이너가 만든 레슨 있을 때
-            if (lessonNo != null) {
+            //팔로워 수
+            int followCount = followService.followCount(trainerNo);
+            model.addAttribute("followCount", followCount);
 
-                //찜된 수
-                int likeCount = likeService.likeCount(lessonNo);
-                model.addAttribute("likeCount", likeCount);
-
-                //팔로워 수
-                int followCount = followService.followCount(trainerNo);
-                model.addAttribute("followCount", followCount);
-
-                //누적 수강생 수
-                int orderCount = orderDetailService.findTotalOrderCountByLessonNo(lessonNo);
-                model.addAttribute("orderCount", orderCount);
-
-                //레슨 수강하는 회원 목록
-                TrainerEnterRoomResponseDto trainerEnterRoomDto = trainerOnlyService.enrollMemList(lessonNo, trainerNo);
-                model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);
-
-                //개설 강좌 정보
+            //개설 강좌 정보
+            if (lessonNo > 0L) {
                 LessonResponseDTO lessonInfo = lessonService.getLessonOne(lessonNo);
-                model.addAttribute("lessonInfo", lessonInfo);
 
-                //채팅룸
-                List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);
-                model.addAttribute("chatroomList", chatroomList);
+                    //찜된 수
+                    int likeCount = likeService.likeCount(lessonNo);
+                    model.addAttribute("likeCount", likeCount);
 
-                //리뷰
-                ReviewResponseListDto trainerReview = reviewService.trainerReview(trainerNo);
-                model.addAttribute("trainerReview", trainerReview);
+                    //누적 수강생 수
+                    int orderCount = orderDetailService.findTotalOrderCountByLessonNo(lessonNo);
+                    model.addAttribute("orderCount", orderCount);
 
+                    //레슨 수강하는 회원 목록
+                    TrainerEnterRoomResponseDto trainerEnterRoomDto = trainerOnlyService.enrollMemList(lessonNo, trainerNo);
+                    model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);
+                    model.addAttribute("lessonInfo", lessonInfo);
 
-                model.addAttribute("trainer", trainerResponseDTO);
+            } else{
+                // 레슨이 없는 트레이너는 레슨 객체에 에러메세지 전달
+                LessonResponseDTO lessonInfo = new LessonResponseDTO();
+                lessonInfo.setErrorMsg("현재 등록한 강좌가 없습니다.");
+                lessonInfo.setNo(-1L);
+                model.addAttribute("lessonInfo",lessonInfo);
 
-                return "trainerOnly/myDashboard"; // 트레이너 대시보드로 이동
-            } else {
-                //레슨 없을 때
-                model.addAttribute("errorMsg", "레슨을 찾을 수 없습니다.");
+                // 레슨이 없는 트레이너는 룸 객체에 에러메세지 전달
+                TrainerEnterRoomResponseDto trainerEnterRoomDto = new TrainerEnterRoomResponseDto();
+                trainerEnterRoomDto.setErrorMsg("NoMembers");
+                model.addAttribute("trainerEnterRoom",trainerEnterRoomDto);
+
+                // 레슨이 없어져도 보여져아 하나 일단 0으로 리턴(추후 처리)
+                model.addAttribute("likeCount", 0);
+                model.addAttribute("orderCount", 0);
             }
+
+
+            //채팅룸
+            List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);
+            model.addAttribute("chatroomList", chatroomList);
+
+            //리뷰
+            ReviewResponseListDto trainerReview = reviewService.trainerReview(trainerNo);
+            model.addAttribute("trainerReview", trainerReview);
+
+
+            model.addAttribute("trainer", trainerResponseDTO);
+
+            return "trainerOnly/myDashboard"; // 트레이너 대시보드로 이동
         }
+
         return "redirect:/mypage";
     }
 
