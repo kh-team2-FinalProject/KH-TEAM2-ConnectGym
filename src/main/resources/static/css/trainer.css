@@ -72,10 +72,12 @@ max-width: 1000px;
   .trainerList_search_result {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
+    transition: max-height 1s ease-in-out;
   }
 
   .trainerList_search_result.show {
+    margin : 30px 0px;
+    min-height: 300px;
     max-height: 1000px; /* 적절한 크기로 조절하세요. */
   }
 

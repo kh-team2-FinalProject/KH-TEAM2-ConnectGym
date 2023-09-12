@@ -17,7 +17,7 @@
 <th:block layout:fragment="content">
     <script type="text/javascript" th:src="@{/js/trainer.js}"></script>
     <script>
-    function search() {
+ function search() {
   let keyword = document.querySelector(".trainerList_search_input").value;
 
   $.ajax({
@@ -28,44 +28,42 @@
     dataType: "json",
     success: (response) => {
       const searchResult = document.querySelector(".trainerList_search_result");
-      let html = "";
+      let html = '';
+
+      if(keyword === ''){
+       html = '';
+       searchResult.classList.remove("show");
+      }
 
       if (response.length > 0) {
         response.forEach((trainer) => {
           html += `
-              <li class="trainerList_all_content_detail_card">
-                <a class="trainerList_all_content_detail_card_a" href="/trainerDetail/${trainer.trainerNo}">
-                  <div class="trainerList_all_content_detail_card_photo">
-                    <img src="${trainer.profileImg}" alt="트레이너 이미지">
-                  </div>
-                  <div class="trainerList_all_item_text" title="트레이너의 팔로우와 누적 수강생 수입니다.">
-                    <span class="trainerList_all_item_text_color">
-                      <img id="followingHeart" width="15" height="15" src="/images/icons/heart-solid.svg">
-                      ${trainer.followCount}
-                    </span>
-                    <span class="trainerList_all_item_text_color">
-                      <img id="memberCount" width="15" height="15" src="/images/icons/face-smile-regular.svg">
-                      ${trainer.memberCount}
-                    </span>
-                  </div>
-                </a>
-              </li>
-            `;
+            <li class="trainerList_all_content_detail_card">
+              <a class="trainerList_all_content_detail_card_a" href="/trainerDetail/${trainer.trainerNo}">
+                <div class="trainerList_all_content_detail_card_photo">
+                  <img src="${trainer.profileImg}" alt="트레이너 이미지">
+                </div>
+                <div class="trainerList_all_item_text" title="트레이너의 팔로우와 누적 수강생 수입니다.">
+                  <span class="trainerList_all_item_text_color">
+                    <img id="followingHeart" width="15" height="15" src="/images/icons/heart-solid.svg">
+                    ${trainer.followCount}
+                  </span>
+                  <span class="trainerList_all_item_text_color">
+                    <img id="memberCount" width="15" height="15" src="/images/icons/face-smile-regular.svg">
+                    ${trainer.memberCount}
+                  </span>
+                </div>
+              </a>
+            </li>
+          `;
         });
 
         searchResult.innerHTML = html;
         searchResult.classList.add("show");
-      } else {
-        // 검색 결과가 없을 때 바로 메시지 표시
-        searchResult.innerHTML = "";
-        searchResult.innerHTML = "<div>검색한 트레이너가 없습니다.</div>";
-        searchResult.classList.add("show");
 
-        // 2초 후에 사라지도록 타이머 설정
-        setTimeout(() => {
-          searchResult.innerHTML = "";
-          searchResult.classList.remove("show");
-        }, 2000);
+      } else {
+          searchResult.innerHTML = '<div> 검색하신 결과가 없습니다. </div>';
+
       }
     },
     error: (error) => {
@@ -73,7 +71,6 @@
     },
   });
 }
-
 </script>
 
 
