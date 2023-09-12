@@ -99,9 +99,9 @@ public class OrderService {
 
         long totalPrice = 0L;
         for (Lesson lesson : lessons) {
-            // 강의를 시작한 이후인지 확인하고 객체를 반환한다.
-            if (localDateToday.isAfter(lesson.getStart_date())) {
-                responseDto.setMessage("이미 시작했거나 종료된 강의가 포함되어 있어 결제할 수 없습니다.");
+            // 강의가 종료된 이후인지 확인하고 객체를 반환한다.
+            if (localDateToday.isAfter(lesson.getEnd_date())) {
+                responseDto.setMessage("이미 종료된 강의가 포함되어 있어 결제할 수 없습니다.");
                 return responseDto;
             }
 
@@ -570,7 +570,10 @@ public class OrderService {
                 if (localDateToday.isBefore(startDate)) {
                     // 강의를 수강하기 전이면 실행되는 조건문
                     status = "결제 완료";
-                } else if (localDateToday.isAfter(startDate) && localDateToday.isBefore(endDate)) {
+                } else if (
+                    (localDateToday.isAfter(startDate) && localDateToday.isBefore(endDate))
+                        || localDateToday.isEqual(startDate) || localDateToday.isEqual(endDate)
+                ) {
                     // 강의를 수강하는 중일 때 실행되는 조건문
                     status = "수강 중";
                 } else if (localDateToday.isAfter(endDate)) {
