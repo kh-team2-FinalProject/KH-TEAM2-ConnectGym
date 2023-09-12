@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+    lang="ko"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{layouts/body}"
+    xmlns:layout="http://www.w3.org/1999/xhtml"
+>
+    <th:block layout:fragment="add-css"></th:block>
+
+    <th:block layout:fragment="script"></th:block>
+
+    <th:block layout:fragment="content">
+        <script th:if="${message}" th:inline="javascript">
+            void function () {
+                const message = [[${message}]];
+                const returnBackPage = [[${returnBackPage}]];
+
+                alert(message);
+
+                if (returnBackPage) {
+                    history.back();
+                }
+            }();
+        </script>
+    </th:block>
+</html>

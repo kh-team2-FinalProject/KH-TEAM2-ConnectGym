@@ -281,7 +281,7 @@ public class TrainerOnlyController {
         trainerService.updateTrainer(loginMemberNo, trainerRequestDTO, profileImgFile, licenseImgFiles);
 
 
-        return "detailOrCrud/updateComplete";
+        return "redirect:/trainerOnly/updateComplete/success";
     }
 
 
@@ -312,7 +312,7 @@ public class TrainerOnlyController {
     @GetMapping("/mypage/updatePassword")
     public String updatePassword(Model model) {
         model.addAttribute("bannerTitle", "Update Password");
-        return "/trainerOnly/updatePassword";
+        return "trainerOnly/updatePassword";
     }
 
     @PostMapping("/mypage/updatePassword")
@@ -321,6 +321,12 @@ public class TrainerOnlyController {
 
         trainerService.updatePassword(loginMemberNo, trainerRequestDTO);
 
+        return "redirect:/trainerOnly/updateComplete/success";
+    }
+
+    @GetMapping("/updateComplete/success")
+    public String updateSuccess(Model model) {
+        model.addAttribute("bannerTitle", "Success");
         return "detailOrCrud/updateComplete";
     }
 }

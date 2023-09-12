@@ -169,6 +169,6 @@ public class LessonController {
         lessonRequestDTO.setNo(lessonNo);
 
         lessonService.updateLesson(loginMemberNo, lessonRequestDTO, file);
-        return "detailOrCrud/updateComplete";
+        return "redirect:/trainerOnly/updateComplete/success";
     }
 }
