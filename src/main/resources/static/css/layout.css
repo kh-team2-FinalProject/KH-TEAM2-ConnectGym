@@ -83,7 +83,7 @@ li {
 .header-item li a {
     text-decoration: none;
     color: #dde6e8;
-    text-shadow: 4px 1px #0e1414;
+
 }
 
 .mypage_hover_menu {
@@ -137,6 +137,7 @@ li {
     letter-spacing: 4px;
     padding: 0;
     text-align: center;
+    text-shadow: 4px 1px #0e1414;
 }
 
 .h-title::after {
@@ -250,28 +251,30 @@ li {
     /*margin-top: 10.5vh;*/
 }
 
-.cs_access_icon{
-/*형광초록*/
+.cs_access_icon {
+    /*형광초록*/
     filter: invert(74%) sepia(81%) saturate(465%) hue-rotate(24deg) brightness(102%) contrast(86%);
-     /*filter: invert(64%) sepia(61%) saturate(6323%) hue-rotate(343deg) brightness(97%) contrast(88%);*/
-     position: fixed;
-     bottom: 50px;
-     right: 50px;
-     z-index: 999;
+    /*filter: invert(64%) sepia(61%) saturate(6323%) hue-rotate(343deg) brightness(97%) contrast(88%);*/
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 999;
 
- }
-.cs_access_icon img{
-    width: 70px;
-    height:70px;
 }
-.cs_access_icon:hover{
-cursor: help;
+
+.cs_access_icon img {
+    width: 70px;
+    height: 70px;
+}
+
+.cs_access_icon:hover {
+    cursor: help;
 }
 
 
 /* 기본 스타일 */
 
-.cs_access_hover_icon{
+.cs_access_hover_icon {
 
     position: fixed;
     bottom: 120px;
@@ -280,13 +283,13 @@ cursor: help;
     animation: headShake 0.7s infinite;
 }
 
-.cs_access_hover_icon img{
+.cs_access_hover_icon img {
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
     width: 70px;
-    height:50px;
+    height: 50px;
 }
 
-.cs_access_hover_icon{
+.cs_access_hover_icon {
     cursor: help;
 }
 
@@ -302,8 +305,6 @@ cursor: help;
         transform: rotate(10deg); /* 오른쪽으로 흔들림 */
     }
 }
-
-
 
 
 /*============바디 끝===========*/

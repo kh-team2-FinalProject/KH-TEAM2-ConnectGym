@@ -19,6 +19,31 @@
     box-sizing: border-box;
 }
 
+
+.tmp-myl-create {
+    padding: 10px 10px;
+    background-color: #a3dc10;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    width: 90px;
+    font-weight: bold;
+    transition: background-color 0.3s; /* Add transition for background */
+    /*opacity: 0.8;*/
+    align-items: center;
+    margin-top: 10px;
+}
+
+.tmp-myl-create:hover {
+    background-color: rgba(163, 220, 16, 0.6);
+}
+
+.tmp-myl-create:active {
+    background-color: rgba(163, 220, 16, 0.8);
+}
+
+
 .tmp-myl-title-date {
     display: flex;
     align-items: center;
