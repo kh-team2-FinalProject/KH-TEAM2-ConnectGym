@@ -103,7 +103,8 @@
                 <!-- 아이디 -->
                 <div class="input_wrap">
                     <span>아이디</span><br>
-                    <input id="InputID" type="text" name="trainerId" th:value="${trainerDTO.trainerId}"><br>
+                    <input class="trainer_info_input_L"
+                           id="InputID" type="text" name="trainerId" th:value="${trainerDTO.trainerId}"><br>
                     <span id="id_check_message"></span>
                 </div>
 
@@ -111,13 +112,15 @@
                 <!-- 이름 -->
                 <div class="input_wrap">
                     <span>이름</span><br>
-                    <input id="InputName" type="text" name="trainerName" th:value="${trainerDTO.trainerName}"></input>
+                    <input class="trainer_info_input_L"
+                           id="InputName" type="text" name="trainerName" th:value="${trainerDTO.trainerName}"></input>
                 </div>
 
                 <!-- 전화번호 -->
                 <div class="input_wrap">
                     <span>전화번호</span><br>
-                    <input id="InputTel" type="text" placeholder="'-'를 제외하고 작성하여주세요."
+                    <input class="trainer_info_input_L"
+                           id="InputTel" type="text" placeholder="'-'를 제외하고 작성하여주세요."
                            name="trainerTel" th:value="${trainerDTO.trainerTel}">
                 </div>
 

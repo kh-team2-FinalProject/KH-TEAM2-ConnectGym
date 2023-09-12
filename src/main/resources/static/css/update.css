@@ -383,3 +383,22 @@
     align-items: center;
     box-shadow: 0 0 6px rgb(0 0 0 / 0.3);
 }
+
+.input_wrap input.trainer_info_input_L {
+    width: 600px;
+}
+
+#email01.trainer_info_input_S {
+    width: 280px;
+}
+
+#email02.trainer_info_input_S {
+    width: 280px;
+    margin-right: 0px;
+}
+
+textarea.trainer_info_input_L {
+    width: 600px;
+    border-radius: 10px;
+
+}
