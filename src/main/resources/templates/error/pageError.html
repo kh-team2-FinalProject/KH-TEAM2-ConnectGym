@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<th:block layout:fragment="script">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" rel="script" th:src="@{/js/findPW.js}"></script>
+</th:block>
+
+<th:block layout:fragment="add-css">
+    <link th:href="@{/css/error/error.css}" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="error_page_all">
+
+        <div class="error_page_info">
+            <h1>[[${error}]] ERROR</h1>
+        </div>
+
+        <div class="error_page_img">
+            <img th:src="@{/images/error.gif}"/>
+        </div>
+
+    </div>
+</th:block>
+
+</html>

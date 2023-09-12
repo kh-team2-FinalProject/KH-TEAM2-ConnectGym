@@ -102,7 +102,17 @@
                                 </svg>
                                 <script>
                                     function showLoginAlert(checkbox) {
-                                        alert('로그인 후 이용해 주세요.');
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">로그인 후 이용해 주세요.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+                                        //alert('로그인 후 이용해 주세요.');
                                         checkbox.checked = false;
                                     }
 

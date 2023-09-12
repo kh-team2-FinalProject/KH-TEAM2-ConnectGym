@@ -45,7 +45,17 @@ function openPop(meal) {
             mealName += "간식";
             break;
         default:
-            alert("알 수 없는 이름입니다. " + meal);
+                Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  height: "30px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">알 수 없는 이름입니다.(${meal}) </div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#df1811"
+                });
+
             return;
     }
 
@@ -71,10 +81,29 @@ function deleteMeal(event) {
         .then((r) => r.json())
         .then((v) => {
             if (v.success) {
-                alert("삭제되었습니다.");
+            Swal.fire({
+                      position: "center",
+                      width: "500px",
+                      background: "rgba(215, 214, 214, 0.761)",
+                      html: `<div style="font-size:14px;">삭제되었습니다.</div>`,
+                      showConfirmButton: true,
+                      showCancelButton: false,
+                      confirmButtonColor: "#A3DC10"
+                    });
+
+                /*alert("삭제되었습니다.");*/
                 location.reload();
             } else {
-                alert(v.message);
+             Swal.fire({
+                                  position: "center",
+                                  width: "500px",
+                                  background: "rgba(215, 214, 214, 0.761)",
+                                  html: `<div style="font-size:14px;">${v.message}</div>`,
+                                  showConfirmButton: true,
+                                  showCancelButton: false,
+                                  confirmButtonColor: "#eb4315"
+                                });
+               /* alert(v.message);*/
             }
         });
 }
@@ -113,7 +142,16 @@ function foodSearch(search, page) {
         .then((r) => r.json())
         .then((v) => {
             if (!v.success) {
-                alert(v.message);
+            Swal.fire({
+                      position: "center",
+                      width: "500px",
+                      background: "rgba(215, 214, 214, 0.761)",
+                      html: `<div style="font-size:14px;">${v.message}</div>`,
+                      showConfirmButton: true,
+                      showCancelButton: false,
+                      confirmButtonColor: "#eb4315"
+                    });
+                /*alert(v.message);*/
                 return;
             }
 
@@ -226,7 +264,16 @@ document.forms.foodSearchForm.addEventListener("submit", function (e) {
 
 function addFoodToDietList(foodNo) {
     if (!foodNo) {
-        alert("필수 파라미터가 누락되었습니다.");
+    Swal.fire({
+              position: "center",
+              width: "500px",
+              background: "rgba(215, 214, 214, 0.761)",
+              html: `<div style="font-size:14px;">필수 파라미터가 누락되었습니다.</div>`,
+              showConfirmButton: true,
+              showCancelButton: false,
+              confirmButtonColor: "#eb4315"
+            });
+        /*alert("필수 파라미터가 누락되었습니다.");*/
         return;
     }
 
@@ -241,10 +288,28 @@ function addFoodToDietList(foodNo) {
         .then((r) => r.json())
         .then((v) => {
             if (v.success) {
-                alert("선택한 음식이 추가되었습니다.");
+            Swal.fire({
+                      position: "center",
+                      width: "500px",
+                      background: "rgba(215, 214, 214, 0.761)",
+                      html: `<div style="font-size:14px;">선택한 음식이 추가되었습니다.</div>`,
+                      showConfirmButton: true,
+                      showCancelButton: false,
+                      confirmButtonColor: "#A3DC10"
+                    });
+                /*alert("선택한 음식이 추가되었습니다.");*/
                 location.reload();
             } else {
-                alert(v.message);
+            Swal.fire({
+                      position: "center",
+                      width: "500px",
+                      background: "rgba(215, 214, 214, 0.761)",
+                      html: `<div style="font-size:14px;">${v.message}</div>`,
+                      showConfirmButton: true,
+                      showCancelButton: false,
+                      confirmButtonColor: "#eb4315"
+                    });
+                /*alert(v.message);*/
             }
         });
 }

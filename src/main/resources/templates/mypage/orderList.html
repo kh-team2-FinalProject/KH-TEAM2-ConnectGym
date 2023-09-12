@@ -234,7 +234,17 @@
             <th:block th:unless="${responseDto.success}">
                 <div class="orderList_list_container">
                     <script th:inline="javascript">
-                        alert([[${responseDto.message}]])
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">${responseDto.message}</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+                        //alert([[${responseDto.message}]])
                     </script>
                 </div>
             </th:block>

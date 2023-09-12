@@ -35,7 +35,7 @@ function deleteReview(reviewNo) {
     width: "300px",
     height: "100px",
     background: "rgba(215, 214, 214, 0.761)",
-    html: '<div style="font-size:16px;">정말 삭제하시겠습니까?</div>',
+    html: '<div style="font-size:14px;">정말 삭제하시겠습니까?</div>',
     confirmButtonColor:'#eb3e3e',
     cancelButtonColor:'#aaaaaa',
     showCancelButton: true,
@@ -53,14 +53,23 @@ function deleteReview(reviewNo) {
             height: "30px",
 
             background: "rgba(215, 214, 214, 0.761)",
-            html: '<div style="font-size:16px;">삭제되었습니다.</div>',
+            html: '<div style="font-size:14px;">삭제되었습니다.</div>',
             showConfirmButton: false,
             timer: 800,
           });
           location.reload();
         })
         .fail((error) => {
-          alert(error.responseText);
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">${error.responseText}</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#eb4315"
+                });
+          /*alert(error.responseText);*/
         });
     }
   });
