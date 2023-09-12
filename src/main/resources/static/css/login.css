@@ -5,20 +5,41 @@
 
 /* 전체 랩 */
 .join_container {
-    margin-top: 20vh;
-    margin-bottom: 20vh;
+    margin-top: 10vh;
+    margin-bottom: 7vh;
     display: flex;
     flex-direction: column;
-/*    justify-content: center;*/
-    align-items: center;
+    justify-content: center;
+    align-items: end;
     min-height: 50vh;
-    background-color: #0e1414;
+    background-image: url('/images/login_background3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+}
+
+.join_right {
+
+    height: 100vh;
+
+    background: #a39e9e91;
+
+    width: 50vw;
+
+    /* float: right; */
+
+    display: flex;
+
+    justify-content: right;
+
+    align-items: center;
 }
 
 /* 외곽 테두리 */
-.join_border{
-    background: #0E181A;
-    border: 4px solid white;
+.join_border {
+    /* background: #0E181A; */
+    /* border: 4px solid white; */
     border-radius: 10px;
     width: 800px;
     margin-top: 10vh;
@@ -31,25 +52,34 @@
 }
 
 /* form 크기 설정 */
-.form_wrap{
+.form_wrap {
     display: flex;
     flex-direction: column;
     width: 600px;
 }
 
 /* logo */
-.join_logo{
+.join_logo {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
-.join_logo_img{
-    height: 100px;
-    width: 180px;
+
+.join_logo_img {
+    height: 67px;
+    width: 179px;
     text-align: left;
 }
 
+.login_logo_text {
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
 /* 각 입력 폼 div */
-.input_wrap{
+.input_wrap {
     width: 100%;
     height: 80px;
     margin-top: 10px;
@@ -68,44 +98,46 @@
 }
 
 .input_wrap input::placeholder,
-.input_address_wrap input::placeholder{
+.input_address_wrap input::placeholder {
     font-size: 14px;
 }
 
 /* 입력폼 안의 span */
-.input_wrap span, .join_agree_wrap span{
+.input_wrap span, .join_agree_wrap span {
     color: white;
     font-size: 18px;
 }
 
-.input_email_wrap span, .input_address_wrap span{
+.input_email_wrap span, .input_address_wrap span {
     color: white;
     font-size: 18px;
 }
 
 /*회원유형 선택*/
 .login_select_class {
-    margin:10px 0px;
-    text-align:center;
+    margin: 10px 0px 10px 0px;
+    text-align: center;
+    margin-bottom: 15px;
+    /* background: white; */
 }
 
 /*항목 이름*/
-.login_select_class label{
- color : white;
- font-size: 14px;
- margin: 0px 5px;
+.login_select_class label {
+    color: white;
+    font-size: 14px;
+    margin: 0px 5px;
 }
 
 
 /* 주소 입력폼 */
-.input_address_wrap{
+.input_address_wrap {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 /* 주소 입력폼 안의 input */
-.input_address_wrap input{
+.input_address_wrap input {
     height: 40px;
     margin-top: 10px;
     border-radius: 5px;
@@ -114,7 +146,8 @@
     padding-left: 20px;
     border: none;
 }
-.input_address_wrap input[type=button]{
+
+.input_address_wrap input[type=button] {
     width: 150px;
     text-align: center;
     padding: 0;
@@ -122,32 +155,36 @@
     font-size: 16px;
     font-weight: bold;
 }
+
 /* 주소 api 사용 input */
-#sample6_postcode{
+#sample6_postcode {
     width: 200px;
 }
-#sample6_address{
+
+#sample6_address {
     width: 365px;
 }
-#sample6_detailAddress{
+
+#sample6_detailAddress {
     width: 600px;
 }
-#sample6_extraAddress{
+
+#sample6_extraAddress {
     width: 220px;
-    padding:0;
+    padding: 0;
     text-align: center;
     margin-left: 10px;
 }
 
 /* email wrap */
-.input_email_wrap{
+.input_email_wrap {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
     height: 160px;
 }
 
-.input_email_wrap input{
+.input_email_wrap input {
     height: 40px;
     margin-top: 10px;
     border-radius: 5px;
@@ -158,18 +195,20 @@
     color: black;
 }
 
-#email01{
+#email01 {
     width: 180px;
     margin-right: 8px;
 }
-#email02{
+
+#email02 {
     width: 180px;
     text-align: center;
     padding: 0;
     margin-right: 10px;
     margin-left: 8px;
 }
-#select{
+
+#select {
     width: 180px;
     height: 40px;
     margin-top: 10px;
@@ -179,11 +218,13 @@
     border: none;
     text-align: center;
 }
-#checkEmail{
+
+#checkEmail {
     width: 130px;
     margin-right: 10px;
 }
-.join_request_btn, .join_auth_btn{
+
+.join_request_btn, .join_auth_btn {
     width: 120px;
     height: 40px;
     border-radius: 5px;
@@ -191,22 +232,23 @@
     margin-top: 10px;
     font-size: 16px;
 }
-.join_request_btn{
+
+.join_request_btn {
     margin-right: 10px;
 }
 
-.join_agree_wrap{
+.join_agree_wrap {
     width: 100%;
     margin-top: 15px;
 }
 
-.join_btn_wrap{
+.join_btn_wrap {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
 
-.join_btn_wrap button{
+.join_btn_wrap button {
     height: 40px;
     border-radius: 5px;
     font-size: 16px;
@@ -216,44 +258,48 @@
     font-weight: bold;
 }
 
-.join_btn1{
+.join_btn1 {
     width: 150px;
 }
-.join_btn2{
+
+.join_btn2 {
     width: 100px;
 }
 
-#id_check_message, #pw_check_message, #checkpw_check_message, #mail-check-warn{
-    font-size:14px;
+#id_check_message, #pw_check_message, #checkpw_check_message, #mail-check-warn {
+    font-size: 14px;
     padding-left: 10px;
 }
 
 /* 개인정보수집이용동의 */
-.join_agree_wrap{
-    display:flex;
+.join_agree_wrap {
+    display: flex;
     flex-direction: column;
 }
-.join_agree_wrap textarea{
+
+.join_agree_wrap textarea {
     padding-left: 20px;
     border-radius: 5px;
     box-sizing: border-box;
 }
-.agreement label{
+
+.agreement label {
     color: white;
 }
-.agreement_radio_wrap{
+
+.agreement_radio_wrap {
     float: right;
 }
 
-.agreement_contents{
+.agreement_contents {
     width: 600px;
 }
 
-.agreement_radio_wrap input[type=radio]{
+.agreement_radio_wrap input[type=radio] {
     margin-right: 4px;
 }
 
-.agreement_radio_wrap .select1{
+.agreement_radio_wrap .select1 {
     margin-right: 10px;
 }
 
@@ -261,16 +307,17 @@
 
 /* Style for the form border */
 .join_border {
-    background-color: #000000;
-    border-radius: 10px;
+    background-color: #e7e7e754;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
     width: 400px; /* Adjust the width as needed */
     text-align: center; /* Center the form elements */
     margin: 0 auto; /* Horizontally center the form */
 }
+
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center; /* Center the form elements */
 }
 
@@ -278,8 +325,9 @@
     font-size: 14px;
     color: white;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     text-align: left; /* Align label text to the left */
+    margin-top: 10px;
 }
 
 .form-control {
@@ -291,42 +339,82 @@
     font-size: 14px;
     text-align: left; /* Align input text to the left */
 }
+
 .btn-primary {
     background-color: #0E181A;
     border: none;
     border-radius: 5px;
     color: #fff;
-    padding: 12px 24px; /* 조절 가능한 패딩값 */
+    /* padding: 12px 24px; */ /* 조절 가능한 패딩값 */
     cursor: pointer;
     font-size: 16px; /* 조절 가능한 폰트 크기 */
+    width: 100%;
+    height: 40px;
+}
+
+/*로그인 버튼 그룹*/
+.login-btns-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.login-btns-group button {
+
+    margin-bottom: 10px;
+
+    text-align: center;
+
+    justify-content: center;
+
+    /* display: flex; */
+
+    height: 42px;
+
+    margin-top: 10px;
 }
 
 /* 소셜 로그인 버튼 스타일 */
-.social-container {
-    margin-top: 20px;
+/*.social-container {*/
+/*    !* margin-top: 20px; *!*/
+/*    margin-left: 16px;*/
+/*    width: 35px;*/
+/*    height: 30px;*/
+/*}*/
+.login-btns-group img {
+    width: 192px;
+    height: 44px;
+}
+
+.login-form-group {
+    margin-top: 10px;
 }
 
 .find-btn,
-.find-a{
+.find-a {
     font-size: 14px;
-    background-color:transparent;
-    border:none;
-    color:white;
+    background-color: transparent;
+    border: none;
+    color: white;
 }
 
 .find-btn:hover,
 .find-a:hover,
-.join-a:hover{
-    color: rgb(163,219,18);
+.join-a:hover {
+    color: rgb(163, 219, 18);
 }
 
-.signup-link{
-  font-size: 14px;
-  font-weight:300;
-  color:white;
+.signup-link {
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
 }
 
-.join-a{
-font-size: 16px;
- font-weight:500;
+.join-a {
+    font-size: 16px;
+    font-weight: 500;
 }
+
+
