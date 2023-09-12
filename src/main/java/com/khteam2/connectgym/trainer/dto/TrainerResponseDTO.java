@@ -44,7 +44,6 @@ public class TrainerResponseDTO {
         this.infoTitle = entity.getInfoTitle();
         this.infoContent = entity.getInfoContent();
         this.trainerEmail = entity.getTrainerEmail();
-
     }
 
 

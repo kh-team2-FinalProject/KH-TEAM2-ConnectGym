@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -25,7 +24,6 @@ public class FollowService {
 
     @Transactional
     public void addFollow(Long fromUserNo, Long toTrainerNo) {
-
         Member fromMember = memberRepository.findById(fromUserNo).orElse(null);
         Trainer toTrainer = trainerRepository.findById(toTrainerNo).orElse(null);
 
@@ -92,7 +90,6 @@ public class FollowService {
 
     // 유저가 팔로우한 트레이너 목록 중 이름으로 검색 결과
     public List<TrainerResponseDTO> searchFollow(Long fromUserNo, String keyword) {
-
         List<TrainerResponseDTO> followingList = new ArrayList<>();
 
         if (keyword == "") {

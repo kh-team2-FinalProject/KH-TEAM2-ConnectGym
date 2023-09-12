@@ -4,7 +4,6 @@ import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.follow.dto.FollowForTrainerResponseDTO;
 import com.khteam2.connectgym.member.Member;
-import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
@@ -12,9 +11,11 @@ import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -22,21 +23,19 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class TrainerController {
-
     private final MemberRepository memberRepository;
     private final TrainerService trainerService;
     private final FollowService followService;
     private final ReviewService reviewService;
 
-
     @GetMapping("/trainerList")
-    public String trainerList(Model model){
+    public String trainerList(Model model) {
         List<TrainerResponseDTO> trainerAll = trainerService.trainerAll();
+
 
         model.addAttribute("trainerList", trainerAll);
         return "content/trainer";
     }
-
 
     @GetMapping("/mypage/convertTrainer")
     public String convertTrainer(Model model) {
@@ -57,13 +56,11 @@ public class TrainerController {
         Long trainerNewNo = trainerService.registerTrainer(trainerRequestDTO, member, profileImgFile, licenseImgFiles);
 
         return "redirect:/mypage";
-
     }
 
     //트레이너 상세 페이지
     @GetMapping(value = "/trainerDetail/{trainerNo}")
     public String trainerDetail(@PathVariable Long trainerNo, HttpSession session, Model model) {
-
         //트레이너 정보
         TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
 
@@ -90,5 +87,4 @@ public class TrainerController {
 
         return "detailOrCrud/trainerDetail";
     }
-
 }

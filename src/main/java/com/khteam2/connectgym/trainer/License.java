@@ -7,21 +7,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Builder
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
-@Table(name="licenses")
+@Table(name = "licenses")
 public class License {
-
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long no;
 
-    @Column(name="license_img")
     private String licenseImg;
 
-
     @ManyToOne
-    @JoinColumn(name="trainer_no")
+    @JoinColumn(name = "trainer_no")
     private Trainer trainer;
-
-
 }

@@ -1,18 +1,17 @@
 package com.khteam2.connectgym.review.dto;
 
-import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.order.OrderDetail;
 import com.khteam2.connectgym.review.Review;
-import com.khteam2.connectgym.trainer.Trainer;
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ReviewRequestDto {
-
     private OrderDetail orderDetail;
     private int rating;
     private String reviewTitle;
@@ -25,7 +24,5 @@ public class ReviewRequestDto {
             .reviewTitle(reviewTitle)
             .reviewContent(reviewContent)
             .build();
-
     }
-
 }

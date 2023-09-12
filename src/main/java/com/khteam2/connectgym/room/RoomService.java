@@ -11,16 +11,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import javax.annotation.PostConstruct;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class RoomService {
-
     private static final Logger logger = LoggerFactory.getLogger(RoomApiController.class);
 
     private final RoomRepository roomRepository;
@@ -30,7 +27,6 @@ public class RoomService {
 
     @Value("${OPENVIDU_SECRET}")
     private String OPENVIDU_SECRET;
-
 
     private OpenVidu openvidu;
 
@@ -42,7 +38,6 @@ public class RoomService {
     //룸 상태 확인
     @Transactional(readOnly = true)
     public Long roomStatusCheck(String titleCode, Long enrollKey) {
-
         String reqRoomName = titleCode + "" + enrollKey;
 
         Room room = roomRepository.findByRoomName(reqRoomName).orElse(null);
@@ -56,7 +51,6 @@ public class RoomService {
         } else {
             return 0L;
         }
-
     }
 
     //룸 정보 불러오기
@@ -72,7 +66,6 @@ public class RoomService {
 
         return roomResponseDto;
     }
-
 
     // 룸 입장을 위한 세션 생성
     public String initializeSession(Map<String, Object> params)
@@ -96,7 +89,6 @@ public class RoomService {
         Connection connection = session.createConnection(properties);
         return connection.getToken();
     }
-
 
     // 트레이너 퇴장 시 룸 비활성화
     public void exitRoom(String sessionId) {

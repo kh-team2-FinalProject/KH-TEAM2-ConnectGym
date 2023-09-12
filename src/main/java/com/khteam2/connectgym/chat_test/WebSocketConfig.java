@@ -9,7 +9,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
-
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/queue/qqq"); // 메시지 브로커 주소 설정
@@ -18,10 +17,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-
         registry.addEndpoint("/chat")
             .setAllowedOrigins("https://connectgym.store")
             .withSockJS(); // SockJS를 사용하여 호환성 확보
-//        registry.addEndpoint("/chat").withSockJS(); // SockJS를 사용하여 호환성 확보
     }
 }

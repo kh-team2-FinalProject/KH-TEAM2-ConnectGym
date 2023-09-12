@@ -1,72 +1,74 @@
 /* 기본 세팅 */
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 button {
-  background-color: #fff;
-  cursor: pointer;
-  border: 0;
+    background-color: #fff;
+    cursor: pointer;
+    border: 0;
 }
 
 /* wrap 세팅 */
 .cs-wrap {
-  margin: 10vh auto 10vh;
+    margin: 10vh auto 10vh;
 }
 
 .cs-layout {
-  overflow: hidden;
-  position: relative;
-  max-width: 1146px;
-  margin: 20vh auto;
-  border-radius: 5px;
-  background: white;
-  padding: 30px;
-  box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    max-width: 1146px;
+    margin: 20vh auto;
+    border-radius: 5px;
+    background: white;
+    padding: 30px 50px;
+    box-sizing: border-box;
 }
 
 .ui-tab {
-  margin-top: 60px;
+    margin-top: 25px;
+    margin-bottom: 30px;
 }
 
 /* 버튼 배치 */
 .module {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 /* 버튼 창 */
 .ctgyitem {
-  flex: 1;
-  border: 1px solid #9b9eae;
+    flex: 1;
+    border: 1px solid #9b9eae;
 }
+
 .ctgyitem:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .ctgyitem:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 /* 버튼 클릭시 */
 .ctgy-btn.active {
-  border-color: #143c56;
-  background-color: #143c56;
-  color: white;
+    border-color: #143c56;
+    background-color: #143c56;
+    color: white;
 }
 
 .ctgy-btn {
-  width: 100%;
-  height: 60px;
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: 700;
-  color: black;
-  background-color: transparent;
-  border: none;
+    width: 100%;
+    height: 60px;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    color: black;
+    background-color: transparent;
+    border: none;
 }
 
 /*.ctgyitem.active .ctgy-btn {
@@ -75,16 +77,17 @@ button {
 
 /* 아코디언 wrap */
 .faq-accodion-wrap {
-  margin-top: 40px;
+    margin-top: 40px;
 }
-.faq-accodion-wrap.none{
-    display:none;
+
+.faq-accodion-wrap.none {
+    display: none;
 }
 
 
 .ui-accodion {
-  border-top: 2px solid #2e2e2e;
-  border-bottom: 1px solid #5c5c5c;
+    border-top: 2px solid #2e2e2e;
+    border-bottom: 1px solid #5c5c5c;
 }
 
 /* 아코디언 부분 버튼 */
@@ -99,8 +102,7 @@ button {
 }
 
 .notice-other-item,
-.accodion-btn
- {
+.accodion-btn {
     display: flex;
     align-items: center;
     position: relative;
@@ -110,66 +112,67 @@ button {
 }
 
 .mark {
-  flex: 0 auto;
-  width: 102px;
-  font-size: 26px;
-  font-weight: 700;
-  color: #3c536f;
+    flex: 0 auto;
+    width: 102px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #3c536f;
 }
 
-.faq-title{
+.faq-title {
     font-size: 19px;
 }
 
 /* 아이콘. 파일경로 확인필요 */
 .ico {
-  display: inline-block;
-  vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .accodion-item .arrow {
-  position: absolute;
-  top: 50%;
-  right: 25px;
-  background: url(/images/icons/mdi/icon_bot_arrowNavi070.svg) no-repeat;
-  transform: translate(0, -50%);
-}
-.ico.md {
-  width: 20px;
-  height: 20px;
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    background: url(/images/icons/mdi/icon_bot_arrowNavi070.svg) no-repeat;
+    transform: translate(0, -50%);
 }
 
+.ico.md {
+    width: 20px;
+    height: 20px;
+}
 
 
 .accodion-item.active .arrow {
-  background: url(/images/icons/mdi/icon_top_arrowNavi070.svg) no-repeat;
+    background: url(/images/icons/mdi/icon_top_arrowNavi070.svg) no-repeat;
 }
 
 /* accodion 펼쳐졌을때의 div wrap */
 .accodion-item .layer {
-  display: none;
+    display: none;
 }
-.accodion-item.active .layer{
-    display:block;
+
+.accodion-item.active .layer {
+    display: block;
 }
 
 .accodion-content {
-  padding: 30px 50px 30px;
-  box-sizing: border-box;
+    padding: 30px 50px 30px;
+    box-sizing: border-box;
 }
 
 .desc {
-  font-size: 16px;
-  line-height: 28px;
-  color: black;
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  font-weight: 400;
-  white-space: normal;
+    font-size: 16px;
+    line-height: 28px;
+    color: black;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    font-weight: 400;
+    white-space: normal;
 }
 
-.none{
+.none {
     display: none;
 }
 
@@ -180,7 +183,7 @@ button {
     margin-top: 40px;
 }
 
-.pagination .pageNumber{
+.pagination .pageNumber {
     margin: 0 2px;
 }
 
@@ -188,22 +191,22 @@ ul {
     display: inline-flex;
 }
 
-.pagination .prev{
+.pagination .prev {
     margin-right: 10px;
 }
 
-.pagination .next{
+.pagination .next {
     margin-left: 10px;
 }
 
 .pagination .next button,
-.pagination .prev button{
+.pagination .prev button {
     font-size: 16px;
     font-weight: 700;
     color: #9b9eae;
 }
 
-.pagination .pageNumber button{
+.pagination .pageNumber button {
     width: 30px;
     height: 30px;
     font-size: 16px;
@@ -211,18 +214,18 @@ ul {
     color: #9b9eae;
 }
 
-.pagination li a{
+.pagination li a {
     font-size: 16px;
     font-weight: 700;
     color: #9b9eae;
 }
 
 .pagination .pageNumber.active button,
-.pagination .pageNumber.active a{
+.pagination .pageNumber.active a {
     color: #143c56;
 }
 
-.menu-item a{
+.menu-item a {
     text-decoration: none;
     color: #9b9eae;
     font-size: 24px;
@@ -230,15 +233,15 @@ ul {
     padding: 24px 0 24px;
 }
 
-.menu-item.active a{
+.menu-item.active a {
     color: #143c56;
 }
 
-.menu-item:not(:first-child){
+.menu-item:not(:first-child) {
     margin-left: 52px;
 }
 
-.notice-date{
+.notice-date {
     position: absolute;
     right: 25px;
     color: #898989;

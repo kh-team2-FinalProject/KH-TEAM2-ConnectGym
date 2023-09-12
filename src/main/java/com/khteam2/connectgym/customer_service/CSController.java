@@ -1,7 +1,5 @@
 package com.khteam2.connectgym.customer_service;
 
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class CSController {
-
     @Autowired
     private final CSService csService;
 
@@ -24,7 +24,7 @@ public class CSController {
         @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
         @RequestParam(name = "category", required = false, defaultValue = "All") String category,
         Model model) {
-//      페이지당 게시글 수 세팅
+        // 페이지당 게시글 수 세팅
         int itemsPerPage = 5; // 페이지당 아이템 수
 
         List<CS> csList = new ArrayList<>();

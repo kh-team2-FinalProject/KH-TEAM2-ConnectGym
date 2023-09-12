@@ -1,8 +1,6 @@
 package com.khteam2.connectgym.order;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.khteam2.connectgym.lesson.Lesson;
-import com.khteam2.connectgym.review.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +24,6 @@ public class OrderDetail {
     @JoinColumn(name = "lesson_no", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Lesson lesson;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long enrollKey;
-
 }

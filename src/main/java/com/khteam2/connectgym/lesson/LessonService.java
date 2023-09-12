@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.lesson;
 
-
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.trainer.Trainer;
@@ -20,11 +19,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class LessonService {
-
     private final LessonRepository lessonRepository;
     private final TrainerRepository trainerRepository;
     private final S3Uploader s3Uploader;
-
 
     public LessonResponseDTO getLessonOne(Long lessonNo) {
         System.out.println("겟레슨 서비스 호출");
@@ -76,24 +73,20 @@ public class LessonService {
         return lessonRepository.findAll();
     }
 
-
     public Lesson getLessonById(Long lessonNo) {
         return lessonRepository.findById(lessonNo).orElseThrow(
             () -> new RuntimeException("LessonNo: " + lessonNo + "에 해당하는 레슨을 찾을 수 없습니다."));
-
     }
 
     /////getLessonOne 함수랑 중복?
 
     public int getTotalPages(int itemsPerPage, List<Lesson> list) {
-
         int totalItems = list.size();
         return (int) Math.ceil((double) totalItems / itemsPerPage);
     }
 
     public List<Lesson> getDataForPage(int pageNumber, int itemsPerPage,
                                        List<Lesson> lessonList) {
-
         List<Lesson> dataForPage = new ArrayList<>();
 
         int startIndex = (pageNumber - 1) * itemsPerPage;
@@ -138,11 +131,6 @@ public class LessonService {
 
         lessonRequestDTO.setLesson_img(fileUrl);
 
-
         lessonRepository.save(lessonRequestDTO.toEntity());
-
-
     }
-
-
 }

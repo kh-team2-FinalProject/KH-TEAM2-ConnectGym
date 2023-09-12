@@ -1,19 +1,16 @@
 package com.khteam2.connectgym.member;
 
-import java.util.Random;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Component
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.Random;
+
 @Service
 public class MailSendService {
-
     @Autowired
     private JavaMailSender mailSender;
     private int authNumber;
@@ -42,7 +39,6 @@ public class MailSendService {
 
     // 이메일 전송 메서드
     public void mailSend(String setFrom, String toMail, String title, String content) {
-
         MimeMessage message = mailSender.createMimeMessage();
 
         try {

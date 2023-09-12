@@ -8,7 +8,7 @@ import com.khteam2.connectgym.member.MemberClass;
  * <br />
  * <h2>사용 예시</h2>
  * SessionAttribute 어노테이션을 통해서 값을 꺼내올 때<br />
- * 
+ *
  * <pre>
  * GetMapping("/mypage")
  * public String myController(
@@ -28,10 +28,10 @@ import com.khteam2.connectgym.member.MemberClass;
  *     return "/content/mypages";
  * }
  * </pre>
- * 
+ * <p>
  * <br />
  * HttpSession을 이용해서 세션에 값을 저장할 때<br />
- * 
+ *
  * <pre>
  * GetMapping("/login")
  * public String myController(HttpSession session) {
@@ -57,14 +57,6 @@ public class SessionConstant {
      * 열거형 클래스 {@link MemberClass}의 값을 저장한다.
      */
     public static final String LOGIN_MEMBER_CLASS = "session_login_member_class";
-
-    // ============================== 주문 ==============================
-    public static final String ORDER_ORDER_NO = "session_order_order_no";
-    public static final String ORDER_PRICE = "session_order_price";
-    /**
-     * 주문 시 사용되며 리스트 형태로 들어가는 강의 번호
-     */
-    public static final String ORDER_LESSON_LIST = "session_order_lesson_list";
 
     private SessionConstant() {
     }

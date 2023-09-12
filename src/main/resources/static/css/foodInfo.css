@@ -37,7 +37,7 @@
 }
 
 .info_btn button {
-    background-color: #4b6957;
+    background-color: #b5b0a9;
     position: relative;
     display: inline-block;
     /*
@@ -51,9 +51,10 @@
     transition: top 0.01s linear;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 
-    box-shadow: 0 0 0 1px #a8bfb1 inset,
-        0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 #c4dbcc,
-        0 4px 0 1px rgba(0, 0, 0, 0.4), 0 4px 4px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 1px #aaaeac inset,
+                     0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+                     0 4px 0 0 #ffedcd, 0 4px 0 1px rgb(239 239 239 / 40%),
+                     0 4px 4px 1px rgba(0, 0, 0, 0.5);
 }
 
 .search_header button:active {
@@ -64,7 +65,7 @@
 }
 
 .info_btn button:hover {
-    background-color: #a0ffc2;
+    background-color: #fad693;
     transform: scale(1.3);
 }
 
@@ -142,7 +143,7 @@ span{
 #closeBtn {
     font-size: 20px;
     font-weight: bold;
-    background-color: #cbffde;
+    background-color: #fad693;
     border-radius: 50%;
     margin-left: 90%;
     padding: 5px 10px;
@@ -183,7 +184,7 @@ span{
 }
 
 #submitBtn:hover {
-    background-color: #cbffde;
+    background-color: ##fad693;
     color: #0d1416;
 }
 
@@ -229,4 +230,13 @@ span{
     > .foodInfo_search_pagination_li_on
     .foodInfo_search_pagination_li_button {
     color: white;
+}
+
+
+
+/* banner */
+.site_banner.FoodInfo-banner{
+    background: url("/images/banner-fooddiary.jpg") center center / cover no-repeat;
+/*    filter: grayscale(100%);*/
+    background-color: #d0dda1;
 }

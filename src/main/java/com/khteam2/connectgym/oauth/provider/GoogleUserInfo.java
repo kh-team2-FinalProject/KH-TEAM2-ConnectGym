@@ -2,14 +2,13 @@ package com.khteam2.connectgym.oauth.provider;
 
 import java.util.Map;
 
-public class GoogleUserInfo implements OAuth2UserInfo{
+public class GoogleUserInfo implements OAuth2UserInfo {
+    private Map<String, Object> attributes;
 
-	private Map<String, Object> attributes;
-	
     public GoogleUserInfo(Map<String, Object> attributes) {
         this.attributes = attributes;
     }
-	
+
     @Override
     public String getProviderId() {
         return (String) attributes.get("sub");
@@ -25,9 +24,8 @@ public class GoogleUserInfo implements OAuth2UserInfo{
         return (String) attributes.get("email");
     }
 
-	@Override
-	public String getProvider() {
-		return "google";
-	}
-
+    @Override
+    public String getProvider() {
+        return "google";
+    }
 }

@@ -8,16 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FoodRepository extends JpaRepository<Food, Long> {
-    List<Food> findByAnimalPlantContains(String animalPlant, Pageable pageable);
-
-
     List<Food> findByFoodNmContains(String foodNm);
 
     /* foodinfo 검색 */
     Page<Food> findByFoodNmContains(String foodNm, Pageable pageable);
 
-    Food findByFoodNm(String FoodNm);
-
     Food findByFoodCd(Long FoodCd);
-
 }

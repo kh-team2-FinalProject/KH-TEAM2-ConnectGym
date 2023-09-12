@@ -1,15 +1,15 @@
 package com.khteam2.connectgym.dietlist.model;
 
 import com.khteam2.connectgym.common.CommonUtil;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
 
 @Data
-/*NoArgsConstructor*/
 @ToString
 @Builder
 public class FoodNutrientFoodDto {
-
     private Long foodCd; // 식품 번호
 
     @NotNull
@@ -76,7 +76,6 @@ public class FoodNutrientFoodDto {
     }
 
 
-
     public static FoodNutrientFoodDto foodInfosave(Long foodCd, String foodNm, Double foodSize, Double kcal,
                                                    Double choc, Double prot, Double fat, Double sugar, Double nat, Double satFat,
                                                    Double transFat, String animalPlant) {
@@ -95,5 +94,4 @@ public class FoodNutrientFoodDto {
             .animalPlant(animalPlant)
             .build();
     }
-
 }

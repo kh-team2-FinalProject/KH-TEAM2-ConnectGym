@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.upload;
 
-
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class S3Config {
-
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
 
@@ -22,7 +20,7 @@ public class S3Config {
     private String region;
 
     @Bean
-    public AmazonS3Client amazonS3Client(){
+    public AmazonS3Client amazonS3Client() {
         BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 
         return (AmazonS3Client) AmazonS3ClientBuilder
@@ -31,5 +29,9 @@ public class S3Config {
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
             .build();
     }
-
 }
+
+
+
+
+
