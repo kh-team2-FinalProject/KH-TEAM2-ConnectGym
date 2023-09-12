@@ -55,7 +55,7 @@
                                       th:limit="${reviews.trainerReviewResponseDtoList.size()}">
                             <span class="ld_reviewBox_item">[[${review.userId}]] <i class="fa-solid fa-star fa-2xs"></i>[[${review.rating}]]
                                     <th:block
-                                        th:text="${#strings.substring(review.reviewContent, 0, 50)}"></th:block></span>
+                                        th:text="${#strings.length(review.reviewContent) > 50 ? #strings.substring(review.reviewContent, 0, 50) : review.reviewContent}"></th:block></span>
                             </th:block>
                         </th:block>
                         <th:block th:if="${reviews.trainerReviewResponseDtoList.size() >= 3}">
@@ -63,7 +63,7 @@
                                 <span class="ld_reviewBox_item">[[${review.userId}]] <i
                                     class="fa-solid fa-star fa-2xs"></i>[[${review.rating}]]
                                     <th:block
-                                        th:text="${#strings.substring(review.reviewContent, 0, 50)}"></th:block></span>
+                                        th:text="${#strings.length(review.reviewContent) > 50 ? #strings.substring(review.reviewContent, 0, 50) : review.reviewContent}"></th:block></span>
                             </th:block>
                         </th:block>
 

@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>1:1 Chat</title>
+    <title>
+        1:1 Chat
+        <th:block th:if="${session.session_login_member_class != null}
+            and ${chatroom != null}
+            and ${chatroom.trainer != null}
+            and ${chatroom.member != null}" >
+            <th:block
+                th:if="${session.session_login_member_class.name() == 'MEMBER'}"
+                th:text="| > ${chatroom.trainer.trainerName}|"
+            ></th:block>
+            <th:block
+                th:if="${session.session_login_member_class.name() == 'TRAINER'}"
+                th:text="| > ${chatroom.member.userName}|"></th:block>
+        </th:block>
+    </title>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
     <style>
         /*primary: #79C7C5;*/
         /*$secondary: #A1E2D9;*/
@@ -50,11 +66,11 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            height: 100vh;
-            padding: 40px 0;
+            height: calc(100vh - 115px);
+
             background: #F9FBFF;
             width: 100%;
-            opacity: 0.85;
+            opacity: 0.80;
         }
 
         #chat-box .chat {
@@ -116,6 +132,7 @@
 
         body {
             background-color: #79C7C5;
+            font-family: 'Noto Sans KR';
         }
 
 
@@ -129,6 +146,8 @@
             right: 17px;
             cursor: pointer;
             outline: 0;
+            text-shadow: 1px 1px 1px #000;
+            background: none;
 
             &:hover {
                 transform: scale(1.1);
@@ -180,6 +199,8 @@
         const chatroomNo = [[${chatroomNo}]];
 
     </script>
+
+    <script src="https://kit.fontawesome.com/a18e5e64b7.js" crossorigin="anonymous"></script>
     <script src="/webjars/sockjs-client/1.0.0/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
     <script th:src="@{/js/chatroom.js}"></script>
@@ -207,17 +228,14 @@
                 <span class="sendAtMessage"
                       th:text="${chatMessage.sendAt}"></span>
             </div>
-
         </div>
-
-
     </div>
 </div>
-<!--    입력창 전송버튼 영역-->
 <div id="message-container">
     <input type="text" id="message-input" placeholder="메시지 입력" onkeyup="handleKeyPress(event)">
-    <button id="sendButton" onclick="sendMessage()"><i class="fas fa-paper-plane">전송</i></button>
+    <button id="sendButton" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
 </div>
+<!--    입력창 전송버튼 영역-->
 
 <!--웹소켓 연결 및 구독-->
 <script th:inline="javascript">

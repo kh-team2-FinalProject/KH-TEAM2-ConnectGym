@@ -3,7 +3,7 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
 <th:block layout:fragment="title">
-    <title>강사 상세</title>
+    <title th:text="|강사 상세 > ${trainer.trainerName}|"></title>
 </th:block>
 
 <th:block layout:fragment="add-css">

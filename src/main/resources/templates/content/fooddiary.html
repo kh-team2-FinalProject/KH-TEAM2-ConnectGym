@@ -1,55 +1,58 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
+<html
+    lang="ko"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{layouts/body}"
+    xmlns:layout="http://www.w3.org/1999/xhtml"
+>
+    <th:block layout:fragment="title">
+        <title th:text="|FoodDiary > ${lessonCategory}|"></title>
+    </th:block>
 
-<th:block layout:fragment="title">
-    <title>FoodDiary > ${lessonCategory}</title>
-</th:block>
-
-<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
-<th:block layout:fragment="content">
-    <div th:class="${lessonCategory + '-banner site_banner'}">
-        <div class="site_banner_title">
-            <p th:text="${lessonCategory}"></p>
+    <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+    <th:block layout:fragment="content">
+        <div th:class="${lessonCategory + '-banner site_banner'}">
+            <div class="site_banner_title">
+                <p th:text="${lessonCategory}"></p>
+            </div>
         </div>
-    </div>
 
-    <div class="side_main_page">
-        <!-- 사이드바 -->
-        <nav class="sidebar">
-            <!--<div class="side_logo">
+        <div class="side_main_page">
+            <!-- 사이드바 -->
+            <nav class="sidebar">
+                <!--<div class="side_logo">
                 <a href="/">
                     <img th:src="@{/images/logo.png}" width="200"/>
                 </a>
             </div>-->
-            <div class="side_menu">
-                <ul class="side_items">
-                    <p class="side_title">FoodDiary</p>
-                    <li class="side-content"><a href="/fooddiary/calendar" class="on">Calendar</a></li>
-                    <li class="side-content"><a href="/fooddiary/dietlist">Diet List</a></li>
-                    <li class="side-content"><a href="/fooddiary/foodInfo">Food Info</a></li>
-                </ul>
+                <div class="side_menu">
+                    <ul class="side_items">
+                        <p class="side_title">FoodDiary</p>
+                        <li class="side-content">
+                            <a href="/fooddiary/calendar" class="on"
+                                >Calendar</a
+                            >
+                        </li>
+                        <li class="side-content">
+                            <a href="/fooddiary/dietlist">Diet List</a>
+                        </li>
+                        <li class="side-content">
+                            <a href="/fooddiary/foodInfo">Food Info</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- 사이드바 -->
+
+            <!--페이지-->
+            <div class="side_page">
+                <th:block layout:fragment="foodD"> </th:block>
             </div>
-        </nav>
-        <!-- 사이드바 -->
-
-        <!--페이지-->
-        <div class="side_page">
-            <th:block layout:fragment="foodD">
-            </th:block>
         </div>
-    </div>
-</th:block>
+    </th:block>
 
-<!-- 스크립트 부분 -->
-<script th:inline="javascript">
+    <!-- 스크립트 부분 -->
+    <script th:inline="javascript"></script>
 
-
-</script>
-
-<th:block layout:fragment="script">
-
-</th:block>
-
-
+    <th:block layout:fragment="script"> </th:block>
 </html>

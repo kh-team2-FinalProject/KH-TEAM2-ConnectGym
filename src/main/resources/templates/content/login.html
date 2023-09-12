@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title>로그인</title>
+</th:block>
+
 <th:block layout:fragment="script">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 </th:block>
@@ -18,16 +23,18 @@
 
 <th:block layout:fragment="content">
     <div class="join_container">
+        <div class="join_right">
         <div class="join_border">
             <div class="join_logo">
                 <!-- 메인 헤드에있는 이미지로 변경 예정 -->
-                <a href="/">
-                    <img class="join_logo_img" src="/images/logo-white.png" th:alt="'CONNECT GYM'">
-                </a>
+                    <img class="join_logo_img" src="/images/login_logo1.png" th:alt="'CONNECT GYM'">
+                <span class="login_logo_text">CONNECT GYM</span>
+
             </div>
 
             <div class="join_form">
                 <!-- 회원가입/로그인 폼 -->
+
                 <form class="join_signInUpForm" action="" name="loginForm">
                     <div class="login_select_class">
                         <label>
@@ -56,8 +63,21 @@
                         <input type="password" id="password" name="password" class="form-control"
                                required>
                     </div>
-                    <div class="form-group">
-<!--                        <button type="button" class="find-btn" th:href="@{/user/findId}">아이디 찾기</button>-->
+
+                    <div class="login-btns-group">
+                    <!-- 로그인 버튼 -->
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                        <!-- 소셜 로그인 버튼들 -->
+<!--                        <div class="social-container">-->
+                            <!--카카오 로그인 api                   -->
+                            <!--                    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ae7f5b9c9c8ad78f7f1cc5bbf3379d50&redirect_uri=https://connectgym.store/connectgym"-->
+                            <!--                       class="social"><i class="fab fa-google"></i></a>-->
+                            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ae7f5b9c9c8ad78f7f1cc5bbf3379d50&redirect_uri=https://connectgym.store/connectgym"
+                               class="social"><img src="/images/icons/kakao/kr/kakao_login_medium_narrow.png" th:alt="'Kakao Login'"></a>
+<!--                        </div>-->
+                    </div>
+                    <div class="login-form-group">
+                        <!--                        <button type="button" class="find-btn" th:href="@{/user/findId}">아이디 찾기</button>-->
                         <a class="find-a" th:href="@{/user/findId}">아이디 찾기</a>
                         <div style="
                             height: 12px;
@@ -68,21 +88,12 @@
                             margin-left: 5px;
                             margin-right: 5px;
                         "></div>
-<!--                        <button type="button" class="find-btn" th:onclick="@{/user/findPw}">비밀번호 찾기</button>-->
+                        <!--                        <button type="button" class="find-btn" th:onclick="@{/user/findPw}">비밀번호 찾기</button>-->
                         <a class="find-a" th:href="@{/user/findPw}">비밀번호 찾기</a>
                     </div>
-                    <!-- 로그인 버튼 -->
-                    <button type="submit" class="btn btn-primary">로그인</button>
                 </form>
 
-                <!-- 소셜 로그인 버튼들 -->
-                <div class="social-container">
-                    <!--카카오 로그인 api                   -->
-<!--                    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ae7f5b9c9c8ad78f7f1cc5bbf3379d50&redirect_uri=https://connectgym.store/connectgym"-->
-<!--                       class="social"><i class="fab fa-google"></i></a>-->
-                    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ae7f5b9c9c8ad78f7f1cc5bbf3379d50&redirect_uri=https://connectgym.store/connectgym"
-                       class="social"><img src="/images/icons/kakao/en/kakao_login_medium_narrow.png" th:alt="'Kakao Login'"></a>
-                </div>
+
 
                 <!-- 회원가입 링크 -->
                 <div class="signup-link">
@@ -90,6 +101,7 @@
                     <p>계정이 없으신가요? <a class="join-a" href="/temp_join">회원가입</a></p>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 
