@@ -45,7 +45,6 @@
                 confirmButtonText: '비밀번호 확인',
                 cancelButtonText: '취소',
                 preConfirm: (password) => {
-
                     console.log([[${trainerResponseDTO.trainerPw}]]);
                     if (password === [[${trainerResponseDTO.trainerPw}]]) {
                         return true;
@@ -58,12 +57,41 @@
             })
                 .then((result) => {
                     if (result.isConfirmed) {
-
                         window.location.href = '/trainerOnly/mypage/updateInfo';
                     }
                 });
-
         }
+
+        function checkpwAndPWUpdate() {
+            Swal.fire({
+                title: '비밀번호를 입력하세요',
+                input: 'password', // 입력 필드의 유형을 'password'로 지정
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showLoaderOnConfirm: true,
+                showCancelButton: true,
+                confirmButtonText: '비밀번호 확인',
+                cancelButtonText: '취소',
+                preConfirm: (password) => {
+                    console.log([[${trainerResponseDTO.trainerPw}]]);
+                    if (password === [[${trainerResponseDTO.trainerPw}]]) {
+                        return true;
+                    } else {
+                        Swal.showValidationMessage('비밀번호가 잘못되었습니다');
+                        return false;
+                    }
+                },
+                allowOutsideClick: () => !Swal.isLoading(),
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/trainerOnly/mypage/updatePassword';
+                    }
+                });
+        }
+
+
     </script>
 
 </th:block>
@@ -89,7 +117,7 @@
                 <!-- 비밀번호 -->
                 <div class="input_wrap">
                     <span>비밀번호</span><br>
-                    <button type="button">비밀번호 변경</button>
+                    <button type="button" onclick="checkpwAndPWUpdate()">비밀번호 변경</button>
                 </div>
                 <!-- 이름 -->
                 <!-- 전화번호 -->

@@ -208,10 +208,7 @@ public class TrainerOnlyController {
         }
     }
 
-<<<<<<< HEAD
-    //트레이너 정보페이지
-=======
->>>>>>> 53cb92ec070ae90605fcb6711f501aae56eb717e
+
     @GetMapping("/mypage/trainerInfo")
     public String trainerMyInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                                 @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
@@ -264,18 +261,14 @@ public class TrainerOnlyController {
     @PostMapping("/mypage/trainerUpdate")
     public String trainerUpdate(TrainerRequestDTO trainerRequestDTO,
                                 @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
-<<<<<<< HEAD
+
                                 @RequestParam("profileImgFile") MultipartFile profileImgFile,
                                 @RequestParam("licenseImgFiles") MultipartFile[] licenseImgFiles) {
 
 
         trainerService.updateTrainer(loginMemberNo, trainerRequestDTO, profileImgFile, licenseImgFiles);
-=======
-                                @RequestParam("lessonImgFile") MultipartFile file) {
-        trainerRequestDTO.setNo(loginMemberNo);
 
-        trainerService.updateTrainer(trainerRequestDTO, file);
->>>>>>> 53cb92ec070ae90605fcb6711f501aae56eb717e
+
         return "detailOrCrud/updateComplete";
     }
 
@@ -297,11 +290,26 @@ public class TrainerOnlyController {
                                 @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
                                 @RequestParam("profileImgFile") MultipartFile profileImgFile) {
 
-        System.out.println("1111111111111111trainerRequestDTO = " + trainerRequestDTO);
+
         trainerService.updateProfile(loginMemberNo, trainerRequestDTO, profileImgFile);
 
 
         return "redirect:/trainerOnly/mypage";
+    }
+
+    @GetMapping("mypage/updatePassword")
+    public String updatePassword(Model model) {
+        model.addAttribute("bannerTitle", "Update Password");
+        return "/trainerOnly/updatePassword";
+    }
+
+    @PostMapping("mypage/updatePassword")
+    public String updatePasswordProcess(TrainerRequestDTO trainerRequestDTO,
+                                        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo) {
+
+        trainerService.updatePassword(loginMemberNo, trainerRequestDTO);
+
+        return "detailOrCrud/updateComplete";
     }
 }
 

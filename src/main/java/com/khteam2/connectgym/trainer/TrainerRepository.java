@@ -27,4 +27,8 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long> {
     @Modifying
     @Query("UPDATE Trainer t SET t.profileImg = :profileImg WHERE t.no = :no ")
     void updateProfileImg(@Param("profileImg") String profileImg, @Param("no") Long no);
+
+    @Modifying
+    @Query("UPDATE Trainer t SET t.trainerPw = :trainerPw WHERE t.no = :no")
+    void updatePassword(String trainerPw, Long no);
 }
