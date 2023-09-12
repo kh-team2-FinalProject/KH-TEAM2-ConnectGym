@@ -81,7 +81,7 @@ public class MemberController {
     @PostMapping("/user/joinProcess")
     public String saveUser(MemberDTO memberDTO) {
         memberService.createMember(memberDTO);
-        return "content/main";
+        return "redirect:/user/login";
     }
 
     //    // email 인증시 사용

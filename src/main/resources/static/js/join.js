@@ -151,17 +151,20 @@ $('#InputID').on("propertychange change keyup paste input", function () {
                 $('#id_check_message').empty();
                 $('#id_check_message').css('color', 'red');
                 $('#id_check_message').text("중복된 아이디입니다.");
+                $('#id_check_message').attr('value', false);
             } else {
                 if (!idCheck.test(liveValue)) {
                     $('#InputID').css('border', '2px solid red');
                     $('#id_check_message').empty();
                     $('#id_check_message').css('color', 'red');
                     $('#id_check_message').text("영문 + 숫자 조합으로 6~16자리 입력해주세요.");
+                    $('#id_check_message').attr('value', false);
                 } else {
                     $('#InputID').css('border', '2px solid green');
                     $('#id_check_message').empty();
                     $('#id_check_message').css('color', 'green');
                     $('#id_check_message').text("사용 가능한 아이디입니다.");
+                    $('#id_check_message').attr('value', true);
                 }
             }
         },
@@ -236,21 +239,26 @@ function joinform_check() {
         InputID.focus();
         return false;
     }
-    ;
+
+    if($('#id_check_message').attr('value') != 'true'){
+        alert("아이디를 확인하세요.");
+        InputID.focus();
+        return false;
+    }
 
     if (InputID.value.length < 6 || InputID.value.length > 16) {
         alert("영문 + 숫자 조합으로 6~16자리 입력해주세요.");
         InputID.focus();
         return false;
     }
-    ;
+
 
     if (InputPW.value == "") {
         alert("비밀번호를 입력하세요.");
         InputPW.focus();
         return false;
     }
-    ;
+
 
     // 비밀번호 영문자 + 숫자 조합 (6~25자리 입력) 정규식
     var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,25}$/;
@@ -260,21 +268,21 @@ function joinform_check() {
         CheckPW.focus();
         return false;
     }
-    ;
+
 
     if (InputPW.value != CheckPW.value) {
         alert("비밀번호가 일치하지 않습니다.");
         CheckPW.focus();
         return false;
     }
-    ;
+
 
     if (InputName.value == "") {
         alert("이름을 입력하세요.");
         InputName.focus();
         return false;
     }
-    ;
+
 
     // 숫자만 입력하는 정규식
     var phoneRule = /^(010)[0-9]{4}[0-9]{4}$/;
@@ -284,7 +292,7 @@ function joinform_check() {
         InputTel.focus();
         return false;
     }
-    ;
+
 
     if (InputTel.value == "") {
         alert("전화번호를 입력해주세요.");
@@ -299,26 +307,26 @@ function joinform_check() {
 //    };
 
     // 이메일 인증 후 안되어있으면 진행하라 메시지로 수정할 것
-    if (!$('#join_auth_btn')) {
+    if ($('#join_auth_btn').val() != 'true') {
         alert("이메일 인증을 완료해주세요.");
-        returnEmail.focus();
+        userEmail.focus();
         return false;
     }
-    ;
+
 
     if (!check1.checked) {
         alert("약관 동의를 체크해주세요.");
         check.focus();
         return false;
     }
-    ;
+
 
     if (!check2.checked) {
         alert("약관 동의를 체크해주세요.");
         check.focus();
         return false;
     }
-    ;
+
 
     document.join_form.submit();
 };
