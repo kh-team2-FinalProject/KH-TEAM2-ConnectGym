@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 트레이너 회원만 이용할 수 있게 하는 인터셉터
+ */
 @Component
 public class TrainerOnlyInterceptor implements HandlerInterceptor {
     @Override
