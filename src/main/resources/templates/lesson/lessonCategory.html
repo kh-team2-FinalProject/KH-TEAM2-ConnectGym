@@ -8,24 +8,24 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="lesson">
     <div class="l-lessonList-container">
-        <div class="l_lessonList_search">
-            <select class="l_lessonList_search_category" name="searchType">
-                <option value="all">전체</option>
-                <option value="trainerName">트레이너명</option>
-                <option value="lessonTitle">레슨명</option>
-            </select>
+        <!--        <div class="l_lessonList_search">-->
+        <!--            <select class="l_lessonList_search_category" name="searchType">-->
+        <!--                <option value="all">전체</option>-->
+        <!--                <option value="trainerName">트레이너명</option>-->
+        <!--                <option value="lessonTitle">레슨명</option>-->
+        <!--            </select>-->
 
-            <input type="text" name="keyword"
-                   class="l_lessonList_search_keyword"
-                   placeholder="검색어를 입력하세요."/>
-            <button class="l_lessonList_search_button"><img th:src="@{/images/icons/mdi/magnify.svg}"></button>
+        <!--            <input type="text" name="keyword"-->
+        <!--                   class="l_lessonList_search_keyword"-->
+        <!--                   placeholder="검색어를 입력하세요."/>-->
+        <!--            <button class="l_lessonList_search_button"><img th:src="@{/images/icons/mdi/magnify.svg}"></button>-->
 
 
-        </div>
+        <!--        </div>-->
 
         <div class="l_lessonlist">
             <div id="l_lessonlist_wrap">
-            
+
                 <div th:each="lesson : ${lessonList}" class="l_card">
                     <a th:href="@{/lessonDetail/{lessonNo}(lessonNo=${lesson.getNo()})}"
                        class="card-link">
@@ -45,10 +45,10 @@
                               th:text="${lesson.trainer != null ? lesson.trainer.trainerName : 'Unknown Trainer'}"></span>
                                 <span id="l_lesson-title" th:text="${lesson.title}"></span>
                                 <span id="l_lesson-price" th:text="${lesson.price}+원"></span>
-                                <div class="l_card-bottom">
-                                    <span id="l_jim-count">하트 3개</span>
-                                    <span id="l_review-count">리뷰 100개</span>
-                                </div>
+                                <!--                                <div class="l_card-bottom">-->
+                                <!--                                    <span id="l_jim-count">하트 3개</span>-->
+                                <!--                                    <span id="l_review-count">리뷰 100개</span>-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                     </a>

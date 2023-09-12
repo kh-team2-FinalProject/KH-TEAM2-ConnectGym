@@ -4,6 +4,12 @@
     background: #0e14147a;
 }
 
+.site_banner.lessons-banner {
+    background: url(/images/lessonList_banner2.jpg) center center / cover no-repeat;
+    filter: grayscale(35%);
+    /*background-color: #d0dda1;*/
+}
+
 /*검색창*/
 .l_lessonList_search {
     display: flex;
@@ -134,7 +140,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 9px;
+    margin-top: 17px;
     margin-bottom: 0px;
 }
 
@@ -143,11 +149,13 @@
     font-weight: bold;
     font-size: 1rem;
     margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .l_card-content #l_lesson-title {
     color: darkgray;
     font-size: 0.9rem;
+    margin-bottom: 5px;
 }
 
 .l_card-content #l_lesson-price {
