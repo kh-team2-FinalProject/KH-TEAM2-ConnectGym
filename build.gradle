@@ -23,11 +23,16 @@ repositories {
 }
 
 dependencies {
-
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
     // OpenVidu
     implementation 'io.openvidu:openvidu-java-client:2.25.0'
 
@@ -37,58 +42,40 @@ dependencies {
     // Jasypt
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 
-
     // Valid
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.hibernate:hibernate-validator:7.0.5.Final'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.4'
-
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.4'
 
     //채팅관련  stomp,websocket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.webjars:sockjs-client:1.0.0'
     implementation 'org.webjars:stomp-websocket:2.3.3'
 
-
     //devtools
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-
-
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     // 포트원(아임포트) 결제
     implementation 'com.github.iamport:iamport-rest-client-java:0.2.23'
 
     // 이메일 인증
-    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'org.springframework:spring-context-support:5.3.29'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     // 페이징
-    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
-
-
-    //oauth2.0 api
-//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.7'
-//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '2.5.7'
-
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-Xlint:deprecation"
 }
 
 /*
-
 tasks.withType(JavaCompile) {
     options.incremental = false
 }
