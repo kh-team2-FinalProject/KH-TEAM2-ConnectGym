@@ -12,31 +12,18 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, String> {
-
-    @Query("select o from Order o where o.no=?1")
+    @Query("SELECT o FROM Order o WHERE o.no = ?1")
     Optional<Order> findByOrderNo(String OrderNo);
 
     List<Order> findByMember(Member member);
 
-    List<Order> findByMemberOrderByDayOfPaymentDesc(Member member);
-
     Page<Order> findByMemberOrderByDayOfPaymentDesc(Member member, Pageable pageable);
 
-    @Query(value = "SELECT o FROM Order o WHERE o.member = :member"
-
+    @Query("SELECT o FROM Order o"
+        + " WHERE o.member = :member"
         + " AND (o.dayOfPayment BETWEEN :startDate AND CONCAT(:endDate, ' 23:59:59'))"
         + " ORDER BY o.dayOfPayment DESC")
-    List<Order> findByMemberAndDayOfPaymentBetweenOrderByDayOfPaymentDesc(
-        @Param("member") Member member,
-        @Param("startDate") Date startDate,
-        @Param("endDate") Date endDate
-    );
-
-    @Query(value = "SELECT o FROM Order o WHERE o.member = " +
-        ":member"
-        + " AND (o.dayOfPayment BETWEEN :startDate AND CONCAT(:endDate, ' 23:59:59'))"
-        + " ORDER BY o.dayOfPayment DESC")
-    Page<Order> findByMemberAndDayOfPaymentBetweenOrderByDayOfPaymentDesc(
+    Page<Order> findByMemberDayOfPaymentBetween(
         @Param("member") Member member,
         @Param("startDate") Date startDate,
         @Param("endDate") Date endDate,

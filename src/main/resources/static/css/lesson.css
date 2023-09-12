@@ -20,16 +20,19 @@
     margin: 0px 5px;
     height: 40px;
     box-sizing: border-box;
+    border-radius: 5px;
 }
 
 /*select 태그*/
 .l_lessonList_search .l_lessonList_search_category {
     width: 90px;
+    padding: 7px;
 }
 
 /*input 태그*/
 .l_lessonList_search .l_lessonList_search_keyword {
     width: 180px;
+    padding: 7px;
 }
 
 .l_lessonList_search button {
@@ -63,16 +66,18 @@
 }
 
 #l_lessonlist_wrap {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     gap: 2%;
     width: 100%;
     height: 100%;
-    margin-bottom: 0%;
+    margin-bottom: 0;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 .l_card {
-    background: linear-gradient(to bottom right, #ffffff 28%, #e1e0dcbd);
+    /*background: linear-gradient(to bottom right, #ffffff 28%, #e1e0dcbd);*/
     width: 272px;
     height: 330px;
     display: flex;
@@ -204,8 +209,8 @@
     opacity: 0;
     transform: translateY(100px);
     transition: opacity 0.5s, transform 0.5s, box-shadow 0.3s;
-    box-shadow: 0px 0px 10px rgb(255 255 255 / 59%);
-    background: #65646480;
+    box-shadow: 0px 0px 10px #ecf7cfb0;
+    /*background: #65646480;*/
     /* border: 3px solid #A3DC10; */
 }
 

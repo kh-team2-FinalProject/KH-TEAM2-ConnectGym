@@ -110,13 +110,15 @@ public class FoodServiceImpl implements FoodService {
         return foodRepository.save(food);
     }
 
-    /* 유효성 체크해서 에러 메세지 */
     @Override
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();
 
         for (FieldError error : errors.getFieldErrors()) {
             String validKeyName = String.format("valid_%s", error.getField());
+/*
+                String.format("valid_%s", error.getField());
+*/
             String errorMessage = error.getDefaultMessage();
             validatorResult.put(validKeyName, errorMessage);
         }
@@ -269,6 +271,7 @@ public class FoodServiceImpl implements FoodService {
         if (page == null || page < 1) {
             page = 1;
         }
+
 
         // 페이징하기 위해서 DB에 넘겨줄 객체를 생성한다.
         Pageable pageable = PageRequest.of(page - 1, recordSize);

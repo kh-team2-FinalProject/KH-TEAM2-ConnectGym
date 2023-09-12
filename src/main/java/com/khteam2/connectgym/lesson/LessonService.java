@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.lesson;
 
-
 import com.khteam2.connectgym.lesson.dto.LessonRequestDTO;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.trainer.Trainer;
@@ -126,6 +125,8 @@ public class LessonService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            lessonRequestDTO.setLesson_img(lessonRepository.findByTrainerNo(trainerNo).orElse(null).getLesson_img());
         }
 
         lessonRequestDTO.setLesson_img(fileUrl);

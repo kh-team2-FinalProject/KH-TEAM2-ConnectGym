@@ -38,7 +38,6 @@ public class RoomService {
     //룸 상태 확인
     @Transactional(readOnly = true)
     public Long roomStatusCheck(String titleCode, Long enrollKey) {
-
         String reqRoomName = titleCode + "" + enrollKey;
 
         Room room = roomRepository.findByRoomName(reqRoomName).orElse(null);

@@ -12,24 +12,18 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class MemberFoodService {
-
     private final MemberFoodRepository memberFoodRepository;
 
-
     public List<MemberFoodResponseDto> getMemberFoodListByDateRange(LocalDate startDate, LocalDate endDate) {
-
         List<MemberFood> memberFoodList = memberFoodRepository.findByRegDateBetween(startDate, endDate);
         List<MemberFoodResponseDto> memberFoodResponseDtoList = new ArrayList<>();
 
         for (MemberFood m : memberFoodList) {
-
             memberFoodResponseDtoList.add(new MemberFoodResponseDto().formEntity(m));
         }
 
-
         return memberFoodResponseDtoList;
     }
-
 
     public List<MemberFoodResponseDto> getMemberFoodListByMemberNoAndDateRange(Long memberNo, LocalDate startDate, LocalDate endDate) {
         List<MemberFood> memberFoodList = memberFoodRepository.findByMemberNoAndRegDateBetween(memberNo, startDate, endDate);
@@ -37,19 +31,14 @@ public class MemberFoodService {
 
         List<MemberFoodResponseDto> memberFoodResponseDtoList = new ArrayList<>();
         for (MemberFood m : memberFoodList) {
-
             memberFoodResponseDtoList.add(new MemberFoodResponseDto().formEntity(m));
         }
 
-
         return memberFoodResponseDtoList;
-
     }
-
 
     //중복제거
     public List<MemberFoodResponseDto> getUniqueDayAndFoodTime(Long memberNo, LocalDate startDate, LocalDate endDate) {
-
         List<MemberFoodResponseDto> memberFoodListByDateRange = getMemberFoodListByMemberNoAndDateRange(memberNo, startDate, endDate);
 
         List<MemberFoodResponseDto> uniqueDayAndFoodTime = new ArrayList<>();
@@ -64,6 +53,4 @@ public class MemberFoodService {
         }
         return uniqueDayAndFoodTime;
     }
-
-
 }

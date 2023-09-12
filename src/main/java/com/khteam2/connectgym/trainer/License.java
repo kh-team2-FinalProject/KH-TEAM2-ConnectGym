@@ -16,7 +16,6 @@ public class License {
     @GeneratedValue
     private Long no;
 
-    @Column(name = "license_img")
     private String licenseImg;
 
     @ManyToOne

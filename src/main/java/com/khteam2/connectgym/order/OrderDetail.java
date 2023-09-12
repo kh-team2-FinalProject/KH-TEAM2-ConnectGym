@@ -24,7 +24,6 @@ public class OrderDetail {
     @JoinColumn(name = "lesson_no", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Lesson lesson;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long enrollKey;
-
 }

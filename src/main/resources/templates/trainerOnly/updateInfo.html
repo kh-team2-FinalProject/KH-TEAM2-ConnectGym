@@ -17,31 +17,94 @@
     <script type="text/javascript" rel="script"
             src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script th:inline="javascript">
-        const loginMemberNo = [[${session.session_login_member_no}]];
-        var trainerEmail = [[${trainerResponseDTO.trainerEmail}]];
+
+        var trainerEmail = [[${trainerDTO.trainerEmail}]];
+        document.addEventListener("DOMContentLoaded", function () {
+            function email_split(trainerEmail) {
+                var email = trainerEmail.split("@");
+                var email01 = email[0];
+                var email02 = email[1];
+                document.getElementById('email01').value = email01;
+
+                document.getElementById('email02').value = email02;
+
+            }
+
+            email_split(trainerEmail);
+        });
+
+        void (function (D) {
+            "use strict";
+
+            /**
+             * @type {HTMLCollectionOf.<HTMLFormElement> & {
+             *   trainer_update_form: HTMLFormElement
+             * }}
+             */
+            const {trainer_update_form} = D.forms;
+            /**
+             * @type {HTMLFormControlsCollection & {
+             *   profilePhoto: HTMLInputElement
+             * }}
+             */
+                // 프로필 이미지 등록 시
+            const {profileImgFile} = trainer_update_form.elements;
+            /** @type {HTMLImageElement} */
+            const profilePhotoImgEl = trainer_update_form.querySelector(
+                "img.convertToTrainerAccount_photo"
+            );
+
+            profileImgFile.addEventListener("change", function (e) {
+                const file = this.files[0];
+                const profilePhotoUrl = URL.createObjectURL(file);
+                profilePhotoImgEl.src = profilePhotoUrl;
+
+                setTimeout(() => URL.revokeObjectURL(profilePhotoUrl), 1000);
+            });
+
+            // 자격증 이미지 등록 시
+            const {licenseImgFiles} = trainer_update_form.elements;
+            const licensePhotoDiv = document.getElementById("licensePhotoDiv");
+            /** @type {HTMLImageElement} */
+            const licensePhotoImgEl = trainer_update_form.querySelector(
+                "img.convertToTrainerAccount_photo"
+            );
+
+            licenseImgFiles.addEventListener("change", function (e) {
+
+                const files = this.files;
+                for (const file of files) {
+                    const licensePhotoUrl = URL.createObjectURL(file);
+
+                    const imgElement = document.createElement("img");
+                    imgElement.src = licensePhotoUrl;
+                    imgElement.classList.add("convertToTrainerAccount_License_photo"); // 이미지 클래스 추가
+                    imgElement.width = 100;
+                    licensePhotoDiv.appendChild(imgElement);
+
+                    setTimeout(() => URL.revokeObjectURL(licensePhotoUrl), 500);
+                }
+            });
+
+        })(document);
     </script>
-    <script type="text/javascript" rel="script" th:src="@{/js/trainerUpdateInfo.js}"></script>
+
 </th:block>
 
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
-    <link rel="stylesheet" th:href="@{/css/convertToTrainerAccount.css}"/>
-    <div class="join_container">
-        <div class="myinfo_converTrainer_top">
-            <div class="myinfo_converTrainer_button">
-                <a href="/mypage/convertTrainer">
-                    <span data-attr="트레이너">트레이너</span><span data-attr="전환">전환</span>
-                </a>
-            </div>
-        </div>
+
+
 
         <div class="join_border">
-            <form action="trainerOnly/mypage/updateProcess" method="post" class="form_wrap"
-                  name="trainer_update_form">
+            <form action="/trainerOnly/mypage/trainerUpdate" method="post" class="form_wrap"
+                  name="trainer_update_form"
+                  enctype="multipart/form-data">
                 <!-- 아이디 -->
                 <div class="input_wrap">
                     <span>아이디</span><br>
-                    <input id="InputID" type="text" name="userId" th:value="${trainerDTO.trainerId}"><br>
+                    <input class="trainer_info_input_L"
+                           id="InputID" type="text" name="trainerId" th:value="${trainerDTO.trainerId}"><br>
                     <span id="id_check_message"></span>
                 </div>
 
@@ -49,36 +112,56 @@
                 <!-- 이름 -->
                 <div class="input_wrap">
                     <span>이름</span><br>
-                    <input id="InputName" type="text" name="userName" th:value="${trainerDTO.trainerName}"></input>
+                    <input class="trainer_info_input_L"
+                           id="InputName" type="text" name="trainerName" th:value="${trainerDTO.trainerName}"></input>
                 </div>
 
                 <!-- 전화번호 -->
                 <div class="input_wrap">
                     <span>전화번호</span><br>
-                    <input id="InputTel" type="text" placeholder="'-'를 제외하고 작성하여주세요."
-                           name="userTel" th:value="${trainerDTO.trainerTel}">
+                    <input class="trainer_info_input_L"
+                           id="InputTel" type="text" placeholder="'-'를 제외하고 작성하여주세요."
+                           name="trainerTel" th:value="${trainerDTO.trainerTel}">
                 </div>
 
 
                 <!-- email -->
                 <div class="input_email_wrap">
                     <span>이메일</span><br>
-                    <input id="email01" type="text" name="email01" required>
+                    <input id="email01" type="text" name="email01" >
                     <span id="email_middle">@</span>
                     <input id="email02" name="email02">
+                    <select id="select" name="select">
+                        <option value="1" selected>직접입력</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="yahoo.co.kr">yahoo.co.kr</option>
+                        <option value="empas.com">empas.com</option>
+                        <option value="dreamwiz.com">dreamwiz.com</option>
+                        <option value="freechal.com">freechal.com</option>
+                        <option value="lycos.co.kr">lycos.co.kr</option>
+                        <option value="korea.com">korea.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="hanmir.com">hanmir.com</option>
+                        <option value="paran.com">paran.com</option>
+                    </select>
 
-                    <input type="hidden" id="userEmail" name="userEmail">
+                    <input type="hidden" id="trainerEmail" name="trainerEmail">
                 </div>
 
 
-                <label>
+                <label for="update_trainer_profile_imgbox"
+                        class="update_trainer_profile_container">
                     <input type="file"
                            id="update_trainer_profile_imgbox"
                            name="profileImgFile"
+
                            accept="image/*"/>
                     <img
                         class="convertToTrainerAccount_photo"
-                        th:src="${trainerDTO.profileImg}"
+                        th:src="${trainerDTO.profileImg} ?: '/images/icons/img_upload.png'"
                         width="150"
                         height="150"
                     />
@@ -99,7 +182,7 @@
                         wrap="hard"
 
                         class="trainer_infoContent_box"
-                        th:value="${trainerDTO.infoContent}"
+                        th:text="${trainerDTO.infoContent}"
                     ></textarea>
                 </div>
 
@@ -127,8 +210,6 @@
                                     <img class="plus_box_img" src="/images/icons/mdi/plus-box.svg" width="30"
                                          height="30">
                                 </label>
-
-
                             </button>
                         </div>
                     </div>
@@ -139,7 +220,7 @@
 
                 <div class="join_btn_wrap">
 
-                    <button type="button" class="join_btn2" onclick="trainer_updateform_check();">수정 완료하기
+                    <button type="button" class="join_btn2" onclick="updateform_check()">수정 완료하기
                     </button>
 
                 </div>
@@ -148,6 +229,7 @@
             </form>
         </div>
     </div>
+    <script type="text/javascript" rel="script" th:src="@{/js/trainerUpdateInfo.js}"></script>
 </th:block>
 
 

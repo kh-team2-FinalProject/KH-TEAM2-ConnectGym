@@ -25,88 +25,86 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
     <div class="join_container">
-    <div class="myinfo_converTrainer_top">
-        <div class="myinfo_converTrainer_button">
-            <a href="/mypage/convertTrainer">
-                <span data-attr="트레이너">트레이너</span><span data-attr="전환">전환</span>
-            </a>
+        <div class="myinfo_converTrainer_top">
+            <div class="myinfo_converTrainer_button">
+                <a href="/mypage/convertTrainer">
+                    <span data-attr="트레이너">트레이너</span><span data-attr="전환">전환</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="join_border">
+            <form action="/mypage/updateProcess" method="post" class="form_wrap"
+                  name="join_form">
+                <!-- 아이디 -->
+                <div class="input_wrap">
+                    <span>아이디</span><br>
+                    <input id="InputID" type="text" name="userId" readonly></input><br>
+                    <span id="id_check_message"></span>
+                </div>
+
+                <!-- 비밀번호 -->
+                <div class="input_wrap">
+                    <span>비밀번호</span><br>
+                    <input id="InputPW" type="password" name="userPw"
+                           placeholder="영문 + 숫자 조합으로 6~25자리 입력해주세요."></input><br>
+                    <span id="pw_check_message"></span>
+                </div>
+
+                <!-- 비밀번호 확인 -->
+                <div class="input_wrap">
+                    <span>비밀번호 재확인</span><br>
+                    <input id="CheckPW" type="password" name="CheckPW"><br>
+                    <span id="checkpw_check_message"></span>
+                </div>
+
+                <!-- 이름 -->
+                <div class="input_wrap">
+                    <span>이름</span><br>
+                    <input id="InputName" type="text" name="userName"></input>
+                </div>
+
+                <!-- 전화번호 -->
+                <div class="input_wrap">
+                    <span>전화번호</span><br>
+                    <input id="InputTel" type="text" placeholder="'-'를 제외하고 작성하여주세요."
+                           name="userTel"></input>
+                </div>
+
+                <!-- 주소 -->
+                <div class="input_address_wrap">
+                    <span>주소</span><br>
+                    <input type="text" id="sample6_postcode" placeholder="우편번호">
+                    <input type="button" onclick="sample6_execDaumPostcode()"
+                           value="우편번호 찾기"><br>
+                    <input type="text" id="sample6_address" placeholder="주소">
+                    <input type="text" id="sample6_extraAddress">
+                    <br>
+                    <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+                    <input type="hidden" name="userAddress" id="userAddress">
+                </div>
+
+                <!-- email -->
+                <div class="input_email_wrap">
+                    <span>이메일</span><br>
+                    <input id="email01" type="text" name="email01" required></input>
+                    <span id="email_middle">@</span>
+                    <input id="email02" name="email02">
+
+                    <input type="hidden" id="userEmail" name="userEmail">
+                </div>
+
+
+                <div class="join_btn_wrap">
+                    <button type="reset" class="join_btn1">RESET
+                    </button>
+                    <button type="button" class="join_btn2" onclick="joinform_check();">회원정보 수정
+                    </button>
+                    <!-- submit -> button 수정 후 onclick으로 유효성검사 실행 -->
+                </div>
+            </form>
         </div>
     </div>
-
-    <div class="join_border">
-        <form action="/mypage/updateProcess" method="post" class="form_wrap"
-              name="join_form">
-            <!-- 아이디 -->
-            <div class="input_wrap">
-                <span>아이디</span><br>
-                <input id="InputID" type="text" name="userId" readonly></input><br>
-                <span id="id_check_message"></span>
-            </div>
-
-            <!-- 비밀번호 -->
-            <div class="input_wrap">
-                <span>비밀번호</span><br>
-                <input id="InputPW" type="password" name="userPw"
-                       placeholder="영문 + 숫자 조합으로 6~25자리 입력해주세요."></input><br>
-                <span id="pw_check_message"></span>
-            </div>
-
-            <!-- 비밀번호 확인 -->
-            <div class="input_wrap">
-                <span>비밀번호 재확인</span><br>
-                <input id="CheckPW" type="password" name="CheckPW"><br>
-                <span id="checkpw_check_message"></span>
-            </div>
-
-            <!-- 이름 -->
-            <div class="input_wrap">
-                <span>이름</span><br>
-                <input id="InputName" type="text" name="userName"></input>
-            </div>
-
-            <!-- 전화번호 -->
-            <div class="input_wrap">
-                <span>전화번호</span><br>
-                <input id="InputTel" type="text" placeholder="'-'를 제외하고 작성하여주세요."
-                       name="userTel"></input>
-            </div>
-
-            <!-- 주소 -->
-            <div class="input_address_wrap">
-                <span>주소</span><br>
-                <input type="text" id="sample6_postcode" placeholder="우편번호">
-                <input type="button" onclick="sample6_execDaumPostcode()"
-                       value="우편번호 찾기"><br>
-                <input type="text" id="sample6_address" placeholder="주소">
-                <input type="text" id="sample6_extraAddress">
-                <br>
-                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-                <input type="hidden" name="userAddress" id="userAddress">
-            </div>
-
-            <!-- email -->
-            <div class="input_email_wrap">
-                <span>이메일</span><br>
-                <input id="email01" type="text" name="email01" required></input>
-                <span id="email_middle">@</span>
-                <input id="email02" name="email02">
-
-                <input type="hidden" id="userEmail" name="userEmail">
-            </div>
-
-
-            <div class="join_btn_wrap">
-                <button type="reset" class="join_btn1">RESET
-                </button>
-                <button type="button" class="join_btn2" onclick="joinform_check();">회원정보 수정
-                </button>
-                <!-- submit -> button 수정 후 onclick으로 유효성검사 실행 -->
-            </div>
-        </form>
-    </div>
-    </div>
-</th:block>
-
 </th:block>
 
 

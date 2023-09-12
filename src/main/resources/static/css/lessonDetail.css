@@ -23,20 +23,20 @@
     box-shadow: 10px 10px 8px #525252;
 }
 
-.lessonDetail_back{
-display:flex;
-align-items:center;
+.lessonDetail_back {
+    display: flex;
+    align-items: center;
 }
 
-.lessonDetail_back:hover{
-cursor:pointer;
+.lessonDetail_back:hover {
+    cursor: pointer;
 }
 
 
-.lessonDetail_back img{
-  width:13px;
-  height:15px;
-  margin-right:10px;
+.lessonDetail_back img {
+    width: 13px;
+    height: 15px;
+    margin-right: 10px;
 }
 
 .lessonDetail_leftContainer {
@@ -215,25 +215,25 @@ cursor:pointer;
     flex-direction: column;
     /*border: 1px solid;*/
     height: 120px;
-    margin-top:10px;
+    margin-top: 10px;
     /*justify-content: space-between;*/
 }
 
 
-.ld_reviewBox .ld_reviewBox_item_title{
-     font-size: 14px;
-     padding: 5px 0px;
+.ld_reviewBox .ld_reviewBox_item_title {
+    font-size: 14px;
+    padding: 5px 0px;
 }
 
 .ld_reviewBox .ld_reviewBox_item {
     font-size: 12px;
     font-weight: 300;
     height: 20px;
-    min-width:280px;
-    width:100%;
+    min-width: 280px;
+    width: 100%;
     white-space: nowrap;
     color: darkgray;
-    overflow:hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
@@ -244,9 +244,8 @@ cursor:pointer;
 }
 
 .lessonDetail_infoBox #review_count:hover {
-  text-decoration : #b2afaf underline;
+    text-decoration: #b2afaf underline;
 }
-
 
 
 .lessonDetail_btn_box {
@@ -257,7 +256,7 @@ cursor:pointer;
     /* text-align: center; */
     /* justify-content: center; */
     display: flex;
-    height: 13%;
+    height: 10%;
     /* border-collapse: collapse; */
     align-items: center;
     /* padding: 1vh; */

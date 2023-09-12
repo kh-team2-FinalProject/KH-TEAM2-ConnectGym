@@ -1,6 +1,5 @@
 package com.khteam2.connectgym.room;
 
-
 import com.khteam2.connectgym.enroll.dto.EnrollResponseDto;
 import com.khteam2.connectgym.room.dto.RoomRequest;
 import io.openvidu.java.client.OpenViduHttpException;

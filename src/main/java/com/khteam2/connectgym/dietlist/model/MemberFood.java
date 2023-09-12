@@ -33,6 +33,5 @@ public class MemberFood {
 
     public int getFoodTimeNo() {
         return foodTime.getNo();
-       
     }
 }

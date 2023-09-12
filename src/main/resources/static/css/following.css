@@ -75,7 +75,7 @@
 }
 
 .myFollowing_list_trainer_info {
-    flex: 1;
+    /*flex: 1;*/
 }
 
 .myFollowing_list_trainer_title {
@@ -88,7 +88,8 @@
 
 
 .myFollowing_list_trainer {
-    border-top: 1px solid #0e1414;
+    border-bottom: 1px solid #d3d3d3;
+    margin-bottom: 10px;
 }
 
 .myFollowing_list_trainer

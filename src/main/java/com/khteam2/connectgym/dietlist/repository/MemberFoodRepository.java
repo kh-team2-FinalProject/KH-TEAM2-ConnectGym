@@ -16,5 +16,4 @@ public interface MemberFoodRepository extends JpaRepository<MemberFood, Long> {
     List<MemberFood> findByRegDateBetween(LocalDate startDate, LocalDate endDate);
 
     List<MemberFood> findByMemberNoAndRegDateBetween(Long memverNo, LocalDate startDate, LocalDate endDate);
-
 }

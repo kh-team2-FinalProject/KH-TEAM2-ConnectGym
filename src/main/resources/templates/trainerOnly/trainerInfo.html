@@ -14,7 +14,7 @@
 <th:block layout:fragment="script">
     <!-- 기존 스크립트 -->
     <script th:inline="javascript">
-        const loginMemberNo = [[${session.session_login_member_no}]];
+
         var trainerEmail = [[${trainerResponseDTO.trainerEmail}]];
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -22,12 +22,12 @@
                 var email = trainerEmail.split("@");
                 var email01 = email[0];
                 var email02 = email[1];
-                var em1 = document.getElementById('email001');
+                var em1 = document.getElementById('email01');
                 em1.value = email01;
-                document.getElementById('email002').value = email02;
+                document.getElementById('email02').value = email02;
 
-                document.getElementById('email001').setAttribute('readonly', true);
-                document.getElementById('email002').setAttribute('readonly', true);
+                document.getElementById('email01').setAttribute('readonly', true);
+                document.getElementById('email02').setAttribute('readonly', true);
             }
 
             email_split(trainerEmail);
@@ -45,7 +45,6 @@
                 confirmButtonText: '비밀번호 확인',
                 cancelButtonText: '취소',
                 preConfirm: (password) => {
-
                     console.log([[${trainerResponseDTO.trainerPw}]]);
                     if (password === [[${trainerResponseDTO.trainerPw}]]) {
                         return true;
@@ -58,12 +57,41 @@
             })
                 .then((result) => {
                     if (result.isConfirmed) {
-
                         window.location.href = '/trainerOnly/mypage/updateInfo';
                     }
                 });
-
         }
+
+        function checkpwAndPWUpdate() {
+            Swal.fire({
+                title: '비밀번호를 입력하세요',
+                input: 'password', // 입력 필드의 유형을 'password'로 지정
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showLoaderOnConfirm: true,
+                showCancelButton: true,
+                confirmButtonText: '비밀번호 확인',
+                cancelButtonText: '취소',
+                preConfirm: (password) => {
+                    console.log([[${trainerResponseDTO.trainerPw}]]);
+                    if (password === [[${trainerResponseDTO.trainerPw}]]) {
+                        return true;
+                    } else {
+                        Swal.showValidationMessage('비밀번호가 잘못되었습니다');
+                        return false;
+                    }
+                },
+                allowOutsideClick: () => !Swal.isLoading(),
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/trainerOnly/mypage/updatePassword';
+                    }
+                });
+        }
+
+
     </script>
 
 </th:block>
@@ -71,17 +99,18 @@
 <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
 <th:block layout:fragment="mypage">
     <div class="join_container">
-        <div class="myinfo_converTrainer_top">
+        <div class="trainerInfo_converTrainer_top">
 
         </div>
 
-        <div class="join_border">
+        <div class="trainerInfo_join_border">
             <form action="/mypage/updateProcess" method="post" class="form_wrap"
                   name="join_form">
                 <!-- 아이디 -->
                 <div class="input_wrap">
                     <span>아이디</span><br>
-                    <div id="InputID" name="userId" th:text="${trainerResponseDTO.trainerId}"></div>
+                    <input class="trainer_info_input_L" id="InputID" name="userId"
+                           th:value="${trainerResponseDTO.trainerId}" readonly></input>
                     <br>
                     <span id="id_check_message"></span>
                 </div>
@@ -89,25 +118,26 @@
                 <!-- 비밀번호 -->
                 <div class="input_wrap">
                     <span>비밀번호</span><br>
-                    <button type="button">비밀번호 변경</button>
+                    <button type="button" onclick="checkpwAndPWUpdate()">비밀번호 변경</button>
                 </div>
                 <!-- 이름 -->
                 <!-- 전화번호 -->
                 <div class="input_wrap">
                     <span>이름</span><br>
-                    <div id="InputName" name="userName" th:text="${trainerResponseDTO.trainerName}"></div>
+                    <input class="trainer_info_input_L" id="InputName" name="userName"
+                           th:value="${trainerResponseDTO.trainerName}" readonly></input>
                 </div>
                 <!-- email -->
                 <div class="input_wrap">
                     <span>전화번호</span><br>
-                    <div id="InputTel"
-                         name="userTel" th:text="${trainerResponseDTO.trainerTel}"></div>
+                    <input class="trainer_info_input_L" id="InputTel"
+                           name="userTel" th:value="${trainerResponseDTO.trainerTel}" readonly></input>
                 </div>
                 <div class="input_email_wrap">
                     <span>이메일</span><br>
-                    <input id="email001" type="text" name="email01">
+                    <input class="trainer_info_input_S" id="email01" type="text" name="email01" readonly>
                     <span id="email_middle">@</span>
-                    <input id="email002" name="email02">
+                    <input class="trainer_info_input_S" id="email02" name="email02" readonly>
                     <input type="hidden" id="userEmail" name="userEmail">
                 </div>
                 <div class="join_btn_wrap">
@@ -124,13 +154,14 @@
                     /></div>
                 <div class="input_wrap">
                     <span>title</span><br>
-                    <div class="trainerinfoTitle"
-                         name="trainerinfoTitle" th:text="${trainerResponseDTO.infoTitle}"></div>
+                    <input class="trainerinfoTitle trainer_info_input_L"
+                           name="trainerinfoTitle" th:value="${trainerResponseDTO.infoTitle}" readonly></input>
                 </div>
                 <div class="input_wrap">
                     <span>강사 소개</span><br>
-                    <div
-                        name="trainerInfoContent" th:text="${trainerResponseDTO.infoContent}"></div>
+                    <textarea class="trainer_info_input_L"
+                              rows="5"
+                              name="trainerInfoContent" th:text="${trainerResponseDTO.infoContent}" readonly></textarea>
                 </div>
 
                 <div class="join_btn_wrap">

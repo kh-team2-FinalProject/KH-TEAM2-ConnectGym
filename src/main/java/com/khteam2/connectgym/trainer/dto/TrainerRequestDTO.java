@@ -25,6 +25,7 @@ public class TrainerRequestDTO {
 
     public Trainer toEntity() {
         return Trainer.builder()
+            .no(no)
             .trainerId(trainerId)
             .trainerPw(trainerPw)
             .trainerName(trainerName)

@@ -19,19 +19,16 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
-    @Column(name = "user_id", unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String userId;
-    @Column(name = "user_pw", nullable = false)
+    @Column(nullable = false)
     private String userPw;
-    @Column(name = "user_name", nullable = false)
+    @Column(nullable = false)
     private String userName;
-    @Column(name = "user_tel")
     private String userTel;
-    @Column(name = "user_address")
     private String userAddress;
-    @Column(name = "user_email", unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String userEmail;
-    @Column(name = "reg_date")
     @CreationTimestamp
     private LocalDateTime regDate;
 }

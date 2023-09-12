@@ -25,7 +25,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Transactional
 public class TrainerOnlyService {
-
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final LessonRepository lessonRepository;
@@ -33,7 +32,6 @@ public class TrainerOnlyService {
 
     //트레이너의 등록 레슨 불러오기
     public LessonResponseDTO registered(Long no) {
-
         Lesson lesson = lessonRepository.findByTrainerNo(no).orElse(null);
 
         if (lesson == null) {
@@ -46,12 +44,10 @@ public class TrainerOnlyService {
         lessonResponseDTO.setErrorMsg("Success");
 
         return lessonResponseDTO;
-
     }
 
     // 레슨 등록한 회원 목록 및 룸 접근을 위한 값 조회
     public TrainerEnterRoomResponseDto enrollMemList(Long lessonNo, Long trainerNo) {
-
         // 룸 코드
         Lesson lesson = lessonRepository.findById(lessonNo).orElse(null);
         String titleCode = lesson.getTitleCode();
@@ -74,7 +70,6 @@ public class TrainerOnlyService {
             MemberResponseDTO memberResponseDTO = new MemberResponseDTO(order.getMember());
 
             memberMap.put(od.getEnrollKey(), memberResponseDTO);
-
         }
 
         TrainerEnterRoomResponseDto trainerEnterRoomDto = TrainerEnterRoomResponseDto.builder()
@@ -82,9 +77,7 @@ public class TrainerOnlyService {
             .memberMap(memberMap)
             .build();
 
-
         return trainerEnterRoomDto;
-
     }
 
     //트레이너 입장 시 방이 활성화, 기존 방이 없으면 새로 만들고 있으면 기존방의 상태를 'ACTIVE' 업데이트
@@ -121,7 +114,6 @@ public class TrainerOnlyService {
                 .roomStatus(existRoom.getRoomStatus())
                 .build();
 
-
             return roomResponseDto;
         }
     }
@@ -136,5 +128,6 @@ public class TrainerOnlyService {
         //있는 경우 레슨넘버 반환
         return lesson.getNo();
     }
+
 
 }
