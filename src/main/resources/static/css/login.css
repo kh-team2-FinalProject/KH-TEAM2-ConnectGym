@@ -342,7 +342,7 @@
 }
 
 .btn-primary {
-    background-color: #0E181A;
+    background-color: #a3dc10;
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -351,6 +351,11 @@
     font-size: 16px; /* 조절 가능한 폰트 크기 */
     width: 100%;
     height: 40px;
+    font-weight: bold;
+}
+
+.btn-primary:hover{
+    background-color: rgba(163, 220, 16, 0.6);
 }
 
 /*로그인 버튼 그룹*/

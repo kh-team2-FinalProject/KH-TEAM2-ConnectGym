@@ -9,7 +9,7 @@
 <th:block layout:fragment="script">
     <script type="text/javascript" rel="script"
             src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script type="text/javascript" rel="script" th:src="@{/js/tempjoin.js}"></script>
+    <script type="text/javascript" rel="script" th:src="@{/js/join.js}"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script th:inline="javascript">
         var kakaoEmail = [[${session.kakaoEmail}]];
@@ -29,7 +29,7 @@
                 </a>
             </div>
 
-            <form action="/temp_joinProcess" method="post" class="form_wrap" name="join_form">
+            <form action="/user/joinProcess" method="post" class="form_wrap" name="join_form">
                 <!-- 아이디 -->
                 <div class="input_wrap">
                     <span>아이디</span><br>
