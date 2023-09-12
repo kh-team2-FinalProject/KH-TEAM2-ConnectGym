@@ -3,50 +3,136 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 
 <th:block layout:fragment="title">
-    <title>Lesson > ${lessonCategory}</title>
+    <title>트레이너 리스트</title>
 </th:block>
 
-<th:block layout:fragment="javascript">
-    <script type="text/javascript" th:src="@{/js/trainer.js}"></script>
+<th:block layout:fragment="add-css">
+    <link th:href="@{/css/trainer.css}" rel="stylesheet">
 </th:block>
 
-<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="script">
+
+</th:block>
+
 <th:block layout:fragment="content">
-    <div class="trainerList_container">
+    <script type="text/javascript" th:src="@{/js/trainer.js}"></script>
+    <script>
+    function search() {
+  let keyword = document.querySelector(".trainerList_search_input").value;
 
-        <div class="trainerList_all_banner">
-           멋있는 헤더 넣을 예정
+  $.ajax({
+    type: "POST",
+    url: "/trainerList/search",
+    data: JSON.stringify({ keyword: keyword }),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: (response) => {
+      const searchResult = document.querySelector(".trainerList_search_result");
+      let html = "";
+
+      if (response.length > 0) {
+        response.forEach((trainer) => {
+          html += `
+              <li class="trainerList_all_content_detail_card">
+                <a class="trainerList_all_content_detail_card_a" href="/trainerDetail/${trainer.trainerNo}">
+                  <div class="trainerList_all_content_detail_card_photo">
+                    <img src="${trainer.profileImg}" alt="트레이너 이미지">
+                  </div>
+                  <div class="trainerList_all_item_text" title="트레이너의 팔로우와 누적 수강생 수입니다.">
+                    <span class="trainerList_all_item_text_color">
+                      <img id="followingHeart" width="15" height="15" src="/images/icons/heart-solid.svg">
+                      ${trainer.followCount}
+                    </span>
+                    <span class="trainerList_all_item_text_color">
+                      <img id="memberCount" width="15" height="15" src="/images/icons/face-smile-regular.svg">
+                      ${trainer.memberCount}
+                    </span>
+                  </div>
+                </a>
+              </li>
+            `;
+        });
+
+        searchResult.innerHTML = html;
+        searchResult.classList.add("show");
+      } else {
+        // 검색 결과가 없을 때 바로 메시지 표시
+        searchResult.innerHTML = "";
+        searchResult.innerHTML = "<div>검색한 트레이너가 없습니다.</div>";
+        searchResult.classList.add("show");
+
+        // 2초 후에 사라지도록 타이머 설정
+        setTimeout(() => {
+          searchResult.innerHTML = "";
+          searchResult.classList.remove("show");
+        }, 2000);
+      }
+    },
+    error: (error) => {
+      console.error(error);
+    },
+  });
+}
+
+</script>
+
+
+    <div class="trainerList_all_content_detail_banner">Find a Personal Trainer Just for You!</div>
+
+    <div class="trainerList_all_content_detail_container">
+
+        <div class="trainerList_search">
+            <input type="text" class="trainerList_search_input" name="trainerList__search_trainerName"
+                   placeholder="트레이너 이름으로 검색"
+                   onkeyup="search();">
+            <button class="trainerList_search_icon" onclick="search();">
+                <img width="24px" height="24px"
+                     src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/search_icon.png"/>
+            </button>
         </div>
 
-        <div class="trainerList_all_content">
+        <div class="trainerList_search_result"></div>
 
-            <div class="trainerList_all_content_detail">
-
-                <div class="trainerList_all_content_detail_card" th:each="trainer : ${trainerList}">
-                    <a th:href="@{/trainerDetail/{trainerNo}(trainerNo=${trainer.trainerNo})}">
-                        <div class="trainerList_all_item_border">
-                            <div class="trainerList_all_item_container">
-                                <div class="trainerList_all_item_front">
+        <div class="trainerList_all_content_detail_rolling">
+            <div class="trainerList_all_content_detail_wrap">
+                <div class="trainerList_all_content_detail_roller">
+                    <ul>
+                        <li class="trainerList_all_content_detail_card" th:each="trainer : ${trainerList}">
+                            <a class="trainerList_all_content_detail_card_a"
+                               th:href="@{/trainerDetail/{trainerNo}(trainerNo=${trainer.trainerNo})}">
+                                <div class="trainerList_all_content_detail_card_photo">
                                     <img th:src="${trainer.profileImg}">
                                 </div>
 
-                                <div class="trainerList_all_item_back">
-                                    <div class="trainerList_all_item_text">
-                                        <p>하트 <span class="trainerList_all_item_text_color"><img id="heart" th:src="@{/images/icons/heart-solid.svg}">[[${trainer.followCount}]]</span>개</p>
-                                        <p>누적 수강생 <span class="trainerList_all_item_text_color">[[${trainer.memberCount}]]</span>명</p>
-                                    </div>
+                                <div class="trainerList_all_item_text" title="트레이너의 팔로우와 누적 수강생 수입니다.">
+                                    <span class="trainerList_all_item_text_color">
+                                    <img id="followingHeart" width="15"
+                                         height="15"
+                                         th:src="@{/images/icons/heart-solid.svg}">
+                                        [[${trainer.followCount}]]</span>
+                                    <span class="trainerList_all_item_text_color">
+                                       <img id="memberCount" width="15"
+                                            height="15"
+                                            th:src="@{/images/icons/face-smile-regular.svg}">
+                                       [[${trainer.memberCount}]]</span>
                                 </div>
-                            </div>
-                        </div>
-                    </a>
+
+                            </a>
+                        </li>
+
+                    </ul>
                 </div>
-
             </div>
-
         </div>
     </div>
+
+    <th:block layout:fragment="script">
+
+    </th:block>
 
 </th:block>
 
 
 </html>
+
+

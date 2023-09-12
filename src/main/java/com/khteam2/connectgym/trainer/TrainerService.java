@@ -213,10 +213,33 @@ public class TrainerService {
     }
 
     public void updateTrainer(TrainerRequestDTO trainerRequestDTO, MultipartFile file) {
-
-
         trainerRepository.save(trainerRequestDTO.toEntity());
+    }
 
+    //트레이너 리스트에서 트레이너 검색
+    public List<TrainerResponseDTO> searchTrainer(String keyword) {
+        List<TrainerResponseDTO> dtoList = new ArrayList<>();
+
+        if (keyword == "" || keyword.equals("")) {
+            return dtoList;
+        }
+
+        List<Trainer> trainerList = trainerRepository.searchByTrainerName(keyword);
+
+        for (Trainer val : trainerList) {
+            TrainerResponseDTO dto = new TrainerResponseDTO(val);
+
+            //팔로우 수
+            dto.setFollowCount(followRepository.findAllByToTrainerCount(dto.getTrainerNo()));
+
+            //누적 수강생 수
+            dto.setMemberCount(orderDetailRepository.findCountByTrainer(dto.getTrainerNo()));
+
+            dtoList.add(dto);
+        }
+
+
+        return dtoList;
     }
 }
 

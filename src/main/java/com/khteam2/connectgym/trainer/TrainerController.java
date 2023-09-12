@@ -2,7 +2,7 @@ package com.khteam2.connectgym.trainer;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
-import com.khteam2.connectgym.follow.dto.FollowForTrainerResponseDTO;
+import com.khteam2.connectgym.follow.dto.FollowForTrainerDto;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.review.ReviewService;
@@ -11,10 +11,7 @@ import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -32,10 +29,17 @@ public class TrainerController {
     public String trainerList(Model model) {
         List<TrainerResponseDTO> trainerAll = trainerService.trainerAll();
 
-
         model.addAttribute("trainerList", trainerAll);
+
         return "content/trainer";
     }
+
+    @ResponseBody
+    @PostMapping("/trainerList/search")
+    public List<TrainerResponseDTO> searchTrainer(@RequestBody(required = false) TrainerRequestDTO trainer) {
+        return trainerService.searchTrainer(trainer.getKeyword());
+    }
+
 
     @GetMapping("/mypage/convertTrainer")
     public String convertTrainer(Model model) {
@@ -76,7 +80,7 @@ public class TrainerController {
 
         System.out.println("isFollow = " + isFollow);
 
-        FollowForTrainerResponseDTO followTrainerResponseDTO = FollowForTrainerResponseDTO.builder()
+        FollowForTrainerDto followTrainerResponseDTO = FollowForTrainerDto.builder()
             .trainerFollowCnt(followCount)
             .followStatus(isFollow)
             .build();

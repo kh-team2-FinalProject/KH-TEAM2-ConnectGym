@@ -21,6 +21,8 @@ public class TrainerRequestDTO {
     private String infoContent;
     private String trainerEmail;
 
+    private String keyword;
+
     public Trainer toEntity() {
         return Trainer.builder()
             .trainerId(trainerId)

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<th:block layout:fragment="title">
+    <title></title>
+</th:block>
+
+<th:block layout:fragment="add-css">
+    <link th:href="@{/css/test.css}" rel="stylesheet">
+</th:block>
+
+
+<th:block layout:fragment="content">
+    <div class="trainerList_all_content_detail_banner"> 헤더 입니다.</div>
+
+    <div class="trainerList_all_content_detail_container">
+
+        <div class="myFollowing_search">
+            <input type="text" class="myFollowing_search_input" name="myFollowing_search_byName"
+                   placeholder="트레이너 이름으로 검색"
+                   onkeyup="search();">
+            <button class="myFollowing_search_icon" onclick="search();">
+                <img width="24px" height="24px"
+                     src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/search_icon.png"/>
+            </button>
+        </div>
+
+        <div class="trainerList_all_content_detail_rolling">
+            <div class="trainerList_all_content_detail_wrap">
+                <div class="trainerList_all_content_detail_roller">
+                    <ul>
+                        <li class="trainerList_all_content_detail_card" th:each="trainer : ${trainerList}">
+                            <a class="trainerList_all_content_detail_card_a"
+                               th:href="@{/trainerDetail/{trainerNo}(trainerNo=${trainer.trainerNo})}">
+                                <div class="trainerList_all_content_detail_card_photo">
+                                    <img th:src="${trainer.profileImg}">
+                                </div>
+
+                                <div class="trainerList_all_item_text" title="트레이너의 팔로우와 누적 수강생 수입니다.">
+                                    <span class="trainerList_all_item_text_color">
+                                    <img id="followingHeart" width="15"
+                                         height="15"
+                                         th:src="@{/images/icons/heart-solid.svg}">
+                                        [[${trainer.followCount}]]</span>
+                                   <span class="trainerList_all_item_text_color">
+                                       <img id="memberCount" width="15"
+                                            height="15"
+                                            th:src="@{/images/icons/face-smile-regular.svg}">
+                                       [[${trainer.memberCount}]]</span>
+                                </div>
+
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span class="cursor"></span>
+
+    <th:block layout:fragment="javascript">
+        <script type="text/javascript" th:src="@{/js/test.js}"></script>
+    </th:block>
+</th:block>
+
+
+</html>
+
+

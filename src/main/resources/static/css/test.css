@@ -1,91 +1,18 @@
-body{
-background:#f0f0f0;
-}
-
 .trainerList_all_content_detail_banner{
-min-height: 200px;
+min-height: 400px;
 margin: 10vh;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:100px;
-font-weight:600;
-min-width: 900px;
-max-width: 1000px;
+background:#f0f0f0;
 }
 
 
 /*배너 끝*/
 
-.trainerList_search {
-    display: flex;
-    justify-content: space-around;
-    border-radius: 20px;
-    border: 2px solid #dad8d8;
-    margin-bottom: 30px;
-    padding: 10px;
-    height: 50px;
-    width: 70%;
-    box-sizing: border-box;
-    position: relative;
-}
 
-.trainerList_search
-.trainerList_search_input {
-    width: 90%;
-    position: absolute;
-    top: 0px;
-    height: 100%;
-    border: none;
-    outline: none;
-    text-align: center;
-    transition: 0.5s;
-    background-color: rgba(255, 255, 255, 0.0);
-
-}
-
-.trainerList_search
-.trainerList_search_input:focus {
-    outline: none;
-    text-align: left;
-    left: 20px;
-    transition: 1s;
-}
-
-.trainerList_search_icon {
-    width: 50px;
-    height: 100%;
-    position: absolute;
-    left: 90%;
-    top: 0px;
-    border: none;
-    background: #fff;
-    outline: none;
-    float: right;
-    background-color: rgba(255, 255, 255, 0.0);
-}
-
-.trainerList_search_icon:hover {
-    cursor: pointer;
-}
-
-  .trainerList_search_result {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-  }
-
-  .trainerList_search_result.show {
-    max-height: 1000px; /* 적절한 크기로 조절하세요. */
-  }
-
-
-/*카드 슬라이더*/
 .trainerList_all_content_detail_container {
     display: flex;
-    flex-direction: column;
     height: 100%;
-	min-height: 70vh;
+	min-height: 60vh;
+    justify-content: center;
     align-items: center;
     /*
 	justify-content: center;
@@ -164,9 +91,15 @@ max-width: 1000px;
 
 .trainerList_all_content_detail_card {
 	 display: inline-block;
+
+	/*justify-content: center;
+	align-items: center;
+	grid-template-columns: repeat(auto-fill, minmax(10rem, 15rem));
+	grid-template-rows: repeat(auto-fill, 1fr);*/
 	padding: 20px;
 	gap: 20px;
 	width: 250px;
+/*	width: clamp(40%, 60em, 90%);*/
 	margin: 1em;
 	background-color: white;
 	border-radius: 10px;
@@ -176,6 +109,7 @@ max-width: 1000px;
 
 .trainerList_all_content_detail_card_photo {
 	text-align: center;
+	/*overflow: hidden;*/
 	display: flex;
 	justify-content: center;
 	align-items: center;
