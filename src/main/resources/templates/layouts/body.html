@@ -42,7 +42,7 @@
                 <div class="mypage_hover_menu">
                     <ul th:if="${session.session_login_member_no != null}">
                         <li>
-                            <a th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/trainerOnly/mypage'}">
+                            <a th:href="${(session.session_login_member_class != null and session.session_login_member_class.name() == 'TRAINER') ? '/trainerOnly/mypage' : '/mypage'}">
                                 <svg class="mypage_header_icon" xmlns="http://www.w3.org/2000/svg" height="1.5em"
                                      viewBox="0 0 512 512">
                                     <style>svg {
@@ -64,16 +64,16 @@
 
                             <ul class="header_mypage_popup_menu" th:if="${session.session_login_member_no != null}">
                                 <li><a
-                                    th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage' : '/trainerOnly/mypage'}">
+                                    th:href="${(session.session_login_member_class != null and session.session_login_member_class.name() == 'TRAINER') ? '/trainerOnly/mypage' : '/mypage'}">
                                     마이페이지</a>
                                 </li>
                                 <li>
                                     <a
-                                        th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage/myLessonList' : '/trainerOnly/mypage/myLesson'}">
+                                        th:href="${(session.session_login_member_class != null and session.session_login_member_class.name() == 'TRAINER') ? '/trainerOnly/mypage/myLesson' : '/mypage/myLessonList'}">
                                         수강현황</a></li>
                                 <li>
                                     <a
-                                        th:href="${#session.getAttribute('LOGIN_MEMBER_CLASS') == 'MEMBER' ? '/mypage/myInfo' : '/trainerOnly/mypage/trainerInfo'}">
+                                        th:href="${(session.session_login_member_class != null and session.session_login_member_class.name() == 'TRAINER') ? '/trainerOnly/mypage/trainerInfo' : '/mypage/myInfo'}">
                                         내 정보</a>
                                 </li>
                             </ul>

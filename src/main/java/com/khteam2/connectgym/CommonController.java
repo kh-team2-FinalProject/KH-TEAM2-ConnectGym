@@ -97,4 +97,9 @@ public class CommonController {
     public String fooddiary() {
         return "redirect:/fooddiary/calendar";
     }
+
+    @GetMapping("/error/error")
+    public String errorPage() {
+        return "error/error";
+    }
 }
