@@ -14,21 +14,28 @@ import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.review.dto.MyReviewResponseDto;
 import com.khteam2.connectgym.trainer.TrainerService;
 import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import java.util.HashMap;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RequiredArgsConstructor
 @Controller
 @Slf4j
 public class MemberController {
+
     private final TrainerService trainerService;
     private final MemberService memberService;
     private final MailSendService mailService;
@@ -63,16 +70,16 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/temp_join")
+    @GetMapping(value = "/user/join")
     public String tempJoin() {
-        return "content/tempJoin";
+        return "content/join";
     }
 
     // 회원가입 버튼 클릭 시 실행
-    @PostMapping("/temp_joinProcess")
+    @PostMapping("/user/joinProcess")
     public String saveUser(MemberDTO memberDTO) {
         memberService.createMember(memberDTO);
-        return "content/main";
+        return "redirect:/user/login";
     }
 
     //    // email 인증시 사용
@@ -86,7 +93,7 @@ public class MemberController {
     //  로컬호스트일 때의 urlmapping
     @RequestMapping(value = "/connectgym", method = RequestMethod.GET)
     public String kakaoLogin(@RequestParam(value = "code", required = false) String code,
-                             HttpSession session) {
+        HttpSession session) {
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
 
@@ -111,7 +118,7 @@ public class MemberController {
 
             // 휴대폰 번호 받아올 수 있을 때 그 정보도 추가해야함.
 
-            return "redirect:/temp_join";
+            return "redirect:/user/join";
         } else {
             System.out.println("==============member: " + m);
             System.out.println("==============trainer: " + t);
@@ -132,7 +139,7 @@ public class MemberController {
 
     @RequestMapping(value = "/connectgym.store", method = RequestMethod.GET)
     public String kakaoLogindomain(@RequestParam(value = "code", required = false) String code,
-                                   HttpSession session) {
+        HttpSession session) {
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
 
@@ -157,7 +164,7 @@ public class MemberController {
 
             // 휴대폰 번호 받아올 수 있을 때 그 정보도 추가해야함.
 
-            return "redirect:/temp_join";
+            return "redirect:/user/join";
         } else {
             System.out.println("==============member: " + m);
             System.out.println("==============trainer: " + t);
@@ -273,9 +280,8 @@ public class MemberController {
     // 7) 내 리뷰 관리
     @GetMapping("/mypage/myReviewList")
     public String showReview(Model model,
-                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo) {
+        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo) {
         model.addAttribute("bannerTitle", "review");
-
 
         List<MyReviewResponseDto> reviewList = reviewService.myReview(loginMemberNo);
         model.addAttribute("reviewList", reviewList);

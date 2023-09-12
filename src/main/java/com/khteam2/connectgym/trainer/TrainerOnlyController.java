@@ -66,30 +66,30 @@ public class TrainerOnlyController {
             if (lessonNo > 0L) {
                 LessonResponseDTO lessonInfo = lessonService.getLessonOne(lessonNo);
 
-                    //찜된 수
-                    int likeCount = likeService.likeCount(lessonNo);
-                    model.addAttribute("likeCount", likeCount);
+                //찜된 수
+                int likeCount = likeService.likeCount(lessonNo);
+                model.addAttribute("likeCount", likeCount);
 
-                    //누적 수강생 수
-                    int orderCount = orderDetailService.findTotalOrderCountByLessonNo(lessonNo);
-                    model.addAttribute("orderCount", orderCount);
+                //누적 수강생 수
+                int orderCount = orderDetailService.findTotalOrderCountByLessonNo(lessonNo);
+                model.addAttribute("orderCount", orderCount);
 
-                    //레슨 수강하는 회원 목록
-                    TrainerEnterRoomResponseDto trainerEnterRoomDto = trainerOnlyService.enrollMemList(lessonNo, trainerNo);
-                    model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);
-                    model.addAttribute("lessonInfo", lessonInfo);
+                //레슨 수강하는 회원 목록
+                TrainerEnterRoomResponseDto trainerEnterRoomDto = trainerOnlyService.enrollMemList(lessonNo, trainerNo);
+                model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);
+                model.addAttribute("lessonInfo", lessonInfo);
 
-            } else{
+            } else {
                 // 레슨이 없는 트레이너는 레슨 객체에 에러메세지 전달
                 LessonResponseDTO lessonInfo = new LessonResponseDTO();
                 lessonInfo.setErrorMsg("현재 등록한 강좌가 없습니다.");
                 lessonInfo.setNo(-1L);
-                model.addAttribute("lessonInfo",lessonInfo);
+                model.addAttribute("lessonInfo", lessonInfo);
 
                 // 레슨이 없는 트레이너는 룸 객체에 에러메세지 전달
                 TrainerEnterRoomResponseDto trainerEnterRoomDto = new TrainerEnterRoomResponseDto();
                 trainerEnterRoomDto.setErrorMsg("NoMembers");
-                model.addAttribute("trainerEnterRoom",trainerEnterRoomDto);
+                model.addAttribute("trainerEnterRoom", trainerEnterRoomDto);
 
                 // 레슨이 없어져도 보여져아 하나 일단 0으로 리턴(추후 처리)
                 model.addAttribute("likeCount", 0);
@@ -281,7 +281,7 @@ public class TrainerOnlyController {
         trainerService.updateTrainer(loginMemberNo, trainerRequestDTO, profileImgFile, licenseImgFiles);
 
 
-        return "detailOrCrud/updateComplete";
+        return "redirect:/trainerOnly/updateComplete/success";
     }
 
 
@@ -309,18 +309,24 @@ public class TrainerOnlyController {
         return "redirect:/trainerOnly/mypage";
     }
 
-    @GetMapping("mypage/updatePassword")
+    @GetMapping("/mypage/updatePassword")
     public String updatePassword(Model model) {
         model.addAttribute("bannerTitle", "Update Password");
-        return "/trainerOnly/updatePassword";
+        return "trainerOnly/updatePassword";
     }
 
-    @PostMapping("mypage/updatePassword")
+    @PostMapping("/mypage/updatePassword")
     public String updatePasswordProcess(TrainerRequestDTO trainerRequestDTO,
                                         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo) {
 
         trainerService.updatePassword(loginMemberNo, trainerRequestDTO);
 
+        return "redirect:/trainerOnly/updateComplete/success";
+    }
+
+    @GetMapping("/updateComplete/success")
+    public String updateSuccess(Model model) {
+        model.addAttribute("bannerTitle", "Success");
         return "detailOrCrud/updateComplete";
     }
 }

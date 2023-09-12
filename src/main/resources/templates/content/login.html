@@ -27,7 +27,7 @@
         <div class="join_border">
             <div class="join_logo">
                 <!-- 메인 헤드에있는 이미지로 변경 예정 -->
-                    <img class="join_logo_img" src="/images/login_logo1.png" th:alt="'CONNECT GYM'">
+                    <img class="join_logo_img" src="/images/login_logo2.png" th:alt="'CONNECT GYM'">
                 <span class="login_logo_text">CONNECT GYM</span>
 
             </div>
@@ -44,11 +44,11 @@
                                 value="normal"
                                 checked
                             />
-                            <span>일반 회원</span>
+                            <span>일반회원</span>
                         </label>
                         <label>
                             <input type="radio" name="accountClass" value="trainer"/>
-                            <span>트레이너 회원</span>
+                            <span>트레이너</span>
                         </label>
                     </div>
                     <!-- 아이디 입력란 -->
@@ -98,7 +98,7 @@
                 <!-- 회원가입 링크 -->
                 <div class="signup-link">
                     <br>
-                    <p>계정이 없으신가요? <a class="join-a" href="/temp_join">회원가입</a></p>
+                    <p>계정이 없으신가요? <a class="join-a" href="/user/join">회원가입</a></p>
                 </div>
             </div>
         </div>
@@ -187,7 +187,7 @@
                     .then((v) => v.json())
                     .then((v) => {
                         if (v.success) {
-                            location.href = ""+requestUrl;
+                            location.href = (typeof requestUrl === "string" && requestUrl.length > 0) ? requestUrl : "/";
                         } else {
                         Swal.fire({
           position: "center",

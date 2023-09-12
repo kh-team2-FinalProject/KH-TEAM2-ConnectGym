@@ -17,9 +17,9 @@ public class ExceptionHandlingController implements ErrorController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // 에러 페이지 정의
-    private final String ERROR_404_PAGE_PATH = "error/error";
-    private final String ERROR_500_PAGE_PATH = "error/error";
-    private final String ERROR_ETC_PAGE_PATH = "error/error";
+    private final String ERROR_404_PAGE_PATH = "error/errorPage";
+    private final String ERROR_500_PAGE_PATH = "error/errorPage";
+    private final String ERROR_ETC_PAGE_PATH = "error/errorPage";
 
     @RequestMapping(value = "/error")
     public String handleError(HttpServletRequest request, Model model) {

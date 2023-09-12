@@ -25,12 +25,7 @@
 
         <div class="l_lessonlist">
             <div id="l_lessonlist_wrap">
-                <!--                <div th:each="lesson : ${lessonList}"-->
-                <!--                     th:if="${#request.getParameter('category') == null or-->
-                <!--                      #request.getParameter('category') == '1' and lesson.category == 1 or-->
-                <!--                      #request.getParameter('category') == '2' and lesson.category == 2 or-->
-                <!--                      #request.getParameter('category') == '3' and lesson.category == 3}"-->
-                <!--                     class="l_card">-->
+            
                 <div th:each="lesson : ${lessonList}" class="l_card">
                     <a th:href="@{/lessonDetail/{lessonNo}(lessonNo=${lesson.getNo()})}"
                        class="card-link">

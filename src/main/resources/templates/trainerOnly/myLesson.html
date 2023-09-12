@@ -28,7 +28,9 @@
 
                 <th:block th:if="${lesson == null}">
                     <div> 현재 등록된 강좌가 없습니다.</div>
-                    <div><a href="/createLesson">등록하기</a></div>
+                    <div>
+                        <button class="tmp-myl-create" th:onclick="|location.href='/createLesson'|">등록하기</button>
+                    </div>
                 </th:block>
 
                 <th:block th:if="${lesson != null}">

@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/body}"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
-<th:block layout:fragment="script">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" rel="script" th:src="@{/js/findPW.js}"></script>
-</th:block>
+<html
+    lang="ko"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{layouts/body}"
+    xmlns:layout="http://www.w3.org/1999/xhtml"
+>
+    <th:block layout:fragment="add-css"></th:block>
 
-<th:block layout:fragment="add-css">
-    <link th:href="@{/css/error/error.css}" rel="stylesheet">
-</th:block>
+    <th:block layout:fragment="script"></th:block>
 
-<th:block layout:fragment="content">
-    <div class="error_page_all">
+    <th:block layout:fragment="content">
+        <script th:if="${message}" th:inline="javascript">
+            void function () {
+                const message = [[${message}]];
+                const returnBackPage = [[${returnBackPage}]];
 
-        <div class="error_page_info">
-            <h1>[[${error}]] ERROR</h1>
-        </div>
+                alert(message);
 
-        <div class="error_page_img">
-            <img th:src="@{/images/error.gif}"/>
-        </div>
-
-
-    </div>
-</th:block>
+                if (returnBackPage) {
+                    history.back();
+                }
+            }();
+        </script>
+    </th:block>
 </html>
