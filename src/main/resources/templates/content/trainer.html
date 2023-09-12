@@ -10,15 +10,17 @@
     <link th:href="@{/css/trainer.css}" rel="stylesheet">
 </th:block>
 
-<th:block layout:fragment="script">
-
-</th:block>
 
 <th:block layout:fragment="content">
-    <script type="text/javascript" th:src="@{/js/trainer.js}"></script>
+
     <script>
  function search() {
   let keyword = document.querySelector(".trainerList_search_input").value;
+    if (keyword === '' || keyword == null) {
+       document.querySelector(".trainerList_search_result").innerHTML = '';
+       document.querySelector(".trainerList_search_result").classList.remove("show");
+      } else {
+
 
   $.ajax({
     type: "POST",
@@ -29,11 +31,6 @@
     success: (response) => {
       const searchResult = document.querySelector(".trainerList_search_result");
       let html = '';
-
-      if(keyword === ''){
-       html = '';
-       searchResult.classList.remove("show");
-      }
 
       if (response.length > 0) {
         response.forEach((trainer) => {
@@ -62,19 +59,23 @@
         searchResult.classList.add("show");
 
       } else {
-          searchResult.innerHTML = '<div> 검색하신 결과가 없습니다. </div>';
-
+                searchResult.innerHTML = '검색하신 결과가 없습니다.';
+                searchResult.classList.add("show");
       }
     },
     error: (error) => {
       console.error(error);
     },
   });
+  }
 }
-</script>
+
+    </script>
 
 
-    <div class="trainerList_all_content_detail_banner">Find a Personal Trainer Just for You!</div>
+        <div class="trainerList_all_content_detail_banner">
+            <div>Trainer, Just for You!</div>
+    </div>
 
     <div class="trainerList_all_content_detail_container">
 
@@ -83,7 +84,7 @@
                    placeholder="트레이너 이름으로 검색"
                    onkeyup="search();">
             <button class="trainerList_search_icon" onclick="search();">
-                <img width="24px" height="24px"
+                <img width="24px" height="24px" class="search_icon_img"
                      src="https://connectgym-bucket.s3.ap-northeast-2.amazonaws.com/commonData/search_icon.png"/>
             </button>
         </div>
@@ -100,21 +101,21 @@
                                 <div class="trainerList_all_content_detail_card_photo">
                                     <img th:src="${trainer.profileImg}">
                                 </div>
-
-                                <div class="trainerList_all_item_text" title="트레이너의 팔로우와 누적 수강생 수입니다.">
+                            </a>
+                            <div class="trainerList_all_item_text" title="트레이너의 팔로우와 누적 수강생 수입니다.">
                                     <span class="trainerList_all_item_text_color">
                                     <img id="followingHeart" width="15"
                                          height="15"
                                          th:src="@{/images/icons/heart-solid.svg}">
                                         [[${trainer.followCount}]]</span>
-                                    <span class="trainerList_all_item_text_color">
+                                <span class="trainerList_all_item_text_color">
                                        <img id="memberCount" width="15"
                                             height="15"
                                             th:src="@{/images/icons/face-smile-regular.svg}">
                                        [[${trainer.memberCount}]]</span>
-                                </div>
+                            </div>
 
-                            </a>
+
                         </li>
 
                     </ul>
@@ -123,10 +124,10 @@
         </div>
     </div>
 
+
     <th:block layout:fragment="script">
-
+        <script type="text/javascript" th:src="@{/js/trainer.js}"></script>
     </th:block>
-
 </th:block>
 
 

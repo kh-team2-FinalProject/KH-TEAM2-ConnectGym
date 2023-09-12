@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LikeRepository extends JpaRepository<Like, Long> {
     // 사용자와 레슨 사이의 좋아요 관계 삭제
@@ -20,7 +21,7 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
 
     //레슨 찜 수 출력
     @Query("SELECT COUNT(l) FROM Like l WHERE l.lesson.no = ?1")
-    int findAllByLessonCount(Long lessonNo);
+    Optional<Integer> findAllByLessonCount(Long lessonNo);
 
     //유저가 찜한 레슨 목록 출력
     @Query("SELECT l FROM Like l WHERE l.member.no = ?1")

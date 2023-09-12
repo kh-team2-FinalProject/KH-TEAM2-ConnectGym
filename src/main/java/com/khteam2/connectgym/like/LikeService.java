@@ -49,7 +49,7 @@ public class LikeService {
 
     // 레슨 찜 수 조회
     public int likeCount(Long lessonNo) {
-        return likeRepository.findAllByLessonCount(lessonNo);
+        return likeRepository.findAllByLessonCount(lessonNo).orElse(0);
     }
 
     // 로그인 사용자 찜 여부 체크

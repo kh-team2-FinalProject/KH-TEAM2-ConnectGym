@@ -1,60 +1,79 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:fragment="main-head">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/head-icon.png}">
+<html
+    lang="ko"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+    <head th:fragment="main-head">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            th:href="@{/images/head-icon.png}"
+        />
 
-    <!--팝업창-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- 타이틀 시작 -->
+        <th:block layout:fragment="title">
+            <title>CONNECT GYM</title>
+        </th:block>
+        <!-- 타이틀 끝 -->
 
-    <!--aos 라이브러리-->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <!--팝업창-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+        <!--aos 라이브러리-->
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-    <!-- 글꼴 -->
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
+        <!-- 글꼴 -->
+        <link
+            href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css"
+            rel="stylesheet"
+        />
 
-    <!--  자바스크립트 파일 추가 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!--폰트어썸-->
-    <script src="https://kit.fontawesome.com/a18e5e64b7.js" crossorigin="anonymous"></script>
+        <!--  자바스크립트 파일 추가 -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!--폰트어썸-->
+        <script
+            src="https://kit.fontawesome.com/a18e5e64b7.js"
+            crossorigin="anonymous"
+        ></script>
 
-    <!-- 커스터마이징 -->
-    <link rel="stylesheet" th:href="@{/css/layout.css}">
-    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+        <!-- 커스터마이징 -->
+        <link rel="stylesheet" th:href="@{/css/layout.css}" />
+        <link rel="stylesheet" th:href="@{/css/sidebar.css}" />
 
-    <link rel="stylesheet" th:href="@{/css/lesson.css}">
-   <!-- <link rel="stylesheet" th:href="@{/css/trainer.css}">-->
+        <link rel="stylesheet" th:href="@{/css/lesson.css}" />
+        <!-- <link rel="stylesheet" th:href="@{/css/trainer.css}">-->
 
-    <link rel="stylesheet" th:href="@{/css/mypageside.css}">
-    <link rel="stylesheet" th:href="@{/css/mylessonlist.css}">
-    <link rel="stylesheet" th:href="@{/css/following.css}">
-    <link rel="stylesheet" th:href="@{/css/like.css}">
-    <link rel="stylesheet" th:href="@{/css/review/writeReview.css}">
-    <link rel="stylesheet" th:href="@{/css/review/reviewList.css}">
+        <link rel="stylesheet" th:href="@{/css/mypageside.css}" />
+        <link rel="stylesheet" th:href="@{/css/mylessonlist.css}" />
+        <link rel="stylesheet" th:href="@{/css/following.css}" />
+        <link rel="stylesheet" th:href="@{/css/like.css}" />
+        <link rel="stylesheet" th:href="@{/css/review/writeReview.css}" />
+        <link rel="stylesheet" th:href="@{/css/review/reviewList.css}" />
 
+        <link rel="stylesheet" th:href="@{/css/smallbanner.css}" />
+        <link rel="stylesheet" th:href="@{/css/createLesson.css}" />
+        <link rel="stylesheet" th:href="@{/css/lessonDetail.css}" />
 
-    <link rel="stylesheet" th:href="@{/css/smallbanner.css}">
-    <link rel="stylesheet" th:href="@{/css/createLesson.css}">
-    <link rel="stylesheet" th:href="@{/css/lessonDetail.css}">
+        <link rel="stylesheet" th:href="@{/css/fooddiary.css}" />
 
-    <link rel="stylesheet" th:href="@{/css/fooddiary.css}">
+        <link rel="stylesheet" th:href="@{/css/trainerDashboard.css}" />
+        <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+        <link rel="stylesheet" th:href="@{/css/createComplete.css}" />
+        <link rel="stylesheet" th:href="@{/css/tmp_myLesson.css}" />
+        <link rel="stylesheet" th:href="@{/css/tmp_followed.css}" />
 
+        <link rel="stylesheet" th:href="@{/css/tmp_myMemberList.css}" />
 
+        <th:block layout:fragment="script"></th:block>
 
-    <link rel="stylesheet" th:href="@{/css/trainerDashboard.css}">
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
-    <link rel="stylesheet" th:href="@{/css/createComplete.css}">
-    <link rel="stylesheet" th:href="@{/css/tmp_myLesson.css}">
-    <link rel="stylesheet" th:href="@{/css/tmp_followed.css}">
-
-    <link rel="stylesheet" th:href="@{/css/tmp_myMemberList.css}">
-
-    <th:block layout:fragment="script"></th:block>
-
-    <th:block layout:fragment="add-css"></th:block>
-</head>
+        <th:block layout:fragment="add-css"></th:block>
+    </head>
 </html>

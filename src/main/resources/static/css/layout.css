@@ -250,6 +250,62 @@ li {
     /*margin-top: 10.5vh;*/
 }
 
+.cs_access_icon{
+/*형광초록*/
+    filter: invert(74%) sepia(81%) saturate(465%) hue-rotate(24deg) brightness(102%) contrast(86%);
+     /*filter: invert(64%) sepia(61%) saturate(6323%) hue-rotate(343deg) brightness(97%) contrast(88%);*/
+     position: fixed;
+     bottom: 50px;
+     right: 50px;
+     z-index: 999;
+
+ }
+.cs_access_icon img{
+    width: 70px;
+    height:70px;
+}
+.cs_access_icon:hover{
+cursor: help;
+}
+
+
+/* 기본 스타일 */
+
+.cs_access_hover_icon{
+
+    position: fixed;
+    bottom: 120px;
+    right: 50px;
+    z-index: 1000;
+    animation: headShake 0.7s infinite;
+}
+
+.cs_access_hover_icon img{
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    width: 70px;
+    height:50px;
+}
+
+.cs_access_hover_icon{
+    cursor: help;
+}
+
+/* 흔들리는 애니메이션 키프레임 정의 */
+@keyframes headShake {
+    0%, 100% {
+        transform: rotate(0deg); /* 초기 위치 (회전하지 않음) */
+    }
+    20%, 60% {
+        transform: rotate(-10deg); /* 왼쪽으로 흔들림 */
+    }
+    40%, 80% {
+        transform: rotate(10deg); /* 오른쪽으로 흔들림 */
+    }
+}
+
+
+
+
 /*============바디 끝===========*/
 
 /*============푸터===========*/

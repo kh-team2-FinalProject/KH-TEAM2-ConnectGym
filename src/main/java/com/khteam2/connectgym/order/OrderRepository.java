@@ -15,6 +15,7 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     @Query("SELECT o FROM Order o WHERE o.no = ?1")
     Optional<Order> findByOrderNo(String OrderNo);
 
+
     List<Order> findByMember(Member member);
 
     Page<Order> findByMemberOrderByDayOfPaymentDesc(Member member, Pageable pageable);

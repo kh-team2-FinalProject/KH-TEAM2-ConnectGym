@@ -1,17 +1,20 @@
 body{
-background:#f0f0f0;
+background:#0e1414;
+/*background:#f0f0f0;*/
 }
 
+
 .trainerList_all_content_detail_banner{
-min-height: 200px;
-margin: 10vh;
+height: 300px;
+margin-top: 10vh;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:100px;
+text-align:center;
+color: #f0f0f0;
+text-shadow: 4px 2px #cacaca;
+font-size:90px;
 font-weight:600;
-min-width: 900px;
-max-width: 1000px;
 }
 
 
@@ -34,6 +37,7 @@ max-width: 1000px;
 .trainerList_search_input {
     width: 90%;
     position: absolute;
+    color: #f0f0f0;
     top: 0px;
     height: 100%;
     border: none;
@@ -56,7 +60,7 @@ max-width: 1000px;
     width: 50px;
     height: 100%;
     position: absolute;
-    left: 90%;
+    left: 94%;
     top: 0px;
     border: none;
     background: #fff;
@@ -64,22 +68,34 @@ max-width: 1000px;
     float: right;
     background-color: rgba(255, 255, 255, 0.0);
 }
+.trainerList_search_icon .search_icon_img{
+filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+
+}
 
 .trainerList_search_icon:hover {
     cursor: pointer;
 }
 
   .trainerList_search_result {
-    max-height: 0;
+   margin : 30px 0px;
+   min-height: 0px;
+      max-height: 0px;
+    color: #f0f0f0;
     overflow: hidden;
-    transition: max-height 1s ease-in-out;
+    transition: all 1s ease-in-out;
   }
 
   .trainerList_search_result.show {
     margin : 30px 0px;
-    min-height: 300px;
-    max-height: 1000px; /* 적절한 크기로 조절하세요. */
+    min-height: 200px;
+    max-height: 1000px;
   }
+
+  .trainerList_search_result div{
+
+  }
+
 
 
 /*카드 슬라이더*/
@@ -101,9 +117,10 @@ max-width: 1000px;
 
 .trainerList_all_content_detail_rolling{
     width: 100%;
-    color: black;
+     color: #f0f0f0;
     margin: 0;
-    	background-color: #f0f0f0;
+    	background-color: #0e1414;
+    	/*background-color: #f0f0f0;*/
 }
 
 .trainerList_all_content_detail_rolling > .trainerList_all_content_detail_wrap{
@@ -125,8 +142,8 @@ max-width: 1000px;
   z-index: 1;
   background: linear-gradient(
     to right,
-    #f0f0f0 0%,
-    #f0f0f0bf 51%,
+    #0e1414 0%,
+    #0e1414bf 51%,
     rgba(170, 0, 0, 0) 100%
   );
 }
@@ -141,8 +158,8 @@ max-width: 1000px;
   z-index: 1;
   background: linear-gradient(
     to left,
-    #f0f0f0 0%,
-    #f0f0f0bf 51%,
+    #0e1414 0%,
+    #0e1414bf 51%,
     rgba(170, 0, 0, 0) 100%
   );
 }
@@ -209,11 +226,15 @@ max-width: 1000px;
 
 .trainerList_all_item_text{
 text-align:center;
-font-weight: 14px;
-font-weight: 300;
+font-size: 14px;
+font-weight: 400;
 color: #0e1414;
 margin-top : 20px;
 letter-spacing: 10px;
+}
+
+.trainerList_all_item_text:hover{
+cursor: help;
 }
 
 

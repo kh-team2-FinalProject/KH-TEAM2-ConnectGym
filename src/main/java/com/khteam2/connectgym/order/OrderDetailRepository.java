@@ -1,10 +1,12 @@
 package com.khteam2.connectgym.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
     List<OrderDetail> findByOrder(Order order);
@@ -38,7 +40,7 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
     //트레이너별 누적 수강생
     @Query("SELECT COUNT(od) FROM OrderDetail od " +
         "WHERE od.lesson.trainer.no = ?1")
-    int findCountByTrainer(Long trainerNo);
+    Optional<Integer> findCountByTrainer(Long trainerNo);
 
     //레슨별 누적 수강생
     @Query("SELECT COUNT(od) from OrderDetail od WHERE od.lesson.no = ?1")
