@@ -20,6 +20,7 @@
     margin: 0px 5px;
     height: 40px;
     box-sizing: border-box;
+    border-radius: 5px;
 }
 
 /*select 태그*/
@@ -72,7 +73,7 @@
     height: 100%;
     margin-bottom: 0;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 .l_card {
