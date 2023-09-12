@@ -83,6 +83,7 @@ li {
 .header-item li a {
     text-decoration: none;
     color: #dde6e8;
+    text-shadow: 4px 1px #0e1414;
 }
 
 .mypage_hover_menu {

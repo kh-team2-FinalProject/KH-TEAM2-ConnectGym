@@ -5,25 +5,25 @@
 
 /* 전체 랩 */
 .join_container {
-    margin-top: 10vh;
-    margin-bottom: 7vh;
+    /* margin-top: 10vh; */
+    /*margin-bottom: 7vh;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: end;
     min-height: 50vh;
-    background-image: url('/images/login_background3.png');
+    background-image: url('/images/login_background5.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 90vh;
+    height: 100vh;
 }
 
 .join_right {
 
     height: 100vh;
 
-    background: #a39e9e91;
+    background: #6d6d6d61;
 
     width: 50vw;
 
@@ -64,12 +64,13 @@
     justify-content: center;
     flex-direction: column;
     margin-bottom: 10px;
+    align-items: center;
 }
 
 .join_logo_img {
     height: 67px;
-    width: 179px;
-    text-align: left;
+    width: 94px;
+    text-align: center;
 }
 
 .login_logo_text {
@@ -125,7 +126,7 @@
 .login_select_class label {
     color: white;
     font-size: 14px;
-    margin: 0px 5px;
+    /*margin: 0px 5px;*/
 }
 
 
@@ -307,7 +308,7 @@
 
 /* Style for the form border */
 .join_border {
-    background-color: #e7e7e754;
+    background-color: #dfdfdf42;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
@@ -418,3 +419,24 @@
 }
 
 
+/**********************/
+.login_select_class input[type="radio"] {
+    display: none;
+}
+
+.login_select_class input[type="radio"] + span {
+    display: inline-block;
+    padding: 5px 12px;
+    /*border: 1px solid #dfdfdf;*/
+    background-color: #ffffffad;
+    text-align: center;
+    cursor: pointer;
+    width: 71px;
+    border-radius: 5px;
+    color: #8f8f8f8c;
+}
+
+.login_select_class input[type="radio"]:checked + span {
+    background-color: #A3DC10ad;
+    color: #ffffff;
+}
