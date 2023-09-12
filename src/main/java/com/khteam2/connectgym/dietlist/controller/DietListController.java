@@ -47,16 +47,14 @@ public class DietListController {
         @Valid Food food,
         Errors errors,
         Model model,
-/*        BindingResult bindingResult,*/
         FoodFindRequestDto requestDto) throws Exception {
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
 
-        /*model.addAttribute("responseDto", responseDto);*/
-/*      model.addAttribute("food", food);*/
+        model.addAttribute("responseDto", responseDto);
 
         /* 에러 메세지 */
         if (errors.hasErrors()) {
-            model.addAttribute("responseDto", responseDto);
+
             model.addAttribute("food", food);
             Map<String, String> validatorResult = foodService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
