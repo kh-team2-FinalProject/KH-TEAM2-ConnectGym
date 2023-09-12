@@ -1,4 +1,4 @@
-package com.khteam2.connectgym.chat_test;
+package com.khteam2.connectgym.common;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
