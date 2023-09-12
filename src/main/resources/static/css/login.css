@@ -292,13 +292,21 @@
     text-align: left; /* Align input text to the left */
 }
 .btn-primary {
-    background-color: #0E181A;
+    background-color: #a3dc10;
     border: none;
     border-radius: 5px;
-    color: #fff;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    opacity: 0.0;
     padding: 12px 24px; /* 조절 가능한 패딩값 */
     cursor: pointer;
     font-size: 16px; /* 조절 가능한 폰트 크기 */
+}
+
+.btn-primary:hover,
+.btn-primary:active{
+    background-color: rgba(163, 220, 16, 0.6);
 }
 
 /* 소셜 로그인 버튼 스타일 */
