@@ -1,20 +1,20 @@
 package com.khteam2.connectgym.trainer.dto;
 
-import java.util.List;
-
 import com.khteam2.connectgym.trainer.License;
 import com.khteam2.connectgym.trainer.Trainer;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class TrainerResponseDTO {
+
     private Long trainerNo;
     private String trainerPw;
     private String trainerId;
@@ -45,4 +45,6 @@ public class TrainerResponseDTO {
         this.infoContent = entity.getInfoContent();
         this.trainerEmail = entity.getTrainerEmail();
     }
+
+
 }

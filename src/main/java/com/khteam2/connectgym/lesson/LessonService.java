@@ -125,6 +125,8 @@ public class LessonService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            lessonRequestDTO.setLesson_img(lessonRepository.findByTrainerNo(trainerNo).orElse(null).getLesson_img());
         }
 
         lessonRequestDTO.setLesson_img(fileUrl);

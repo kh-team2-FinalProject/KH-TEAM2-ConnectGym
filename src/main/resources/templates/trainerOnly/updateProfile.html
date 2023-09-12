@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate="~{trainerOnly/mypages}"
+    xmlns:layout="http://www.w3.org/1999/xhtml"
+>
+<th:block layout:fragment="script"></th:block>
+
+<th:block layout:fragment="title">
+    <title>마이페이지 > 트레이너 계정 전환</title>
+</th:block>
+
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="mypage">
+    <link rel="stylesheet" th:href="@{/css/convertToTrainerAccount.css}"/>
+    <form id="convertToTrainerAccount_wrap" name="profile_update_form"
+          action="/trainerOnly/mypage/updateProfile" method="post"
+          enctype="multipart/form-data">
+
+        <label
+            for="convertToTrainerAccount_photo_container_input"
+            class="convertToTrainerAccount_photo_container"
+        >
+            <input type="file"
+                   id="convertToTrainerAccount_photo_container_input"
+                   name="profileImgFile"
+                   accept="image/*"/>
+            <img
+                class="convertToTrainerAccount_photo"
+                th:src="${trainerDTO.profileImg} ?: '/images/icons/mdi/account-outline.svg'"
+                width="150"
+                height="150"
+            />
+        </label>
+        <div class="convertToTrainerAccount_description_container">
+            <input class="_js_textarea_design_1 convertToTrainerAccount_description_inputtext"
+                   name="infoTitle"
+                   type="text" placeholder="타이틀"
+                   th:value="${trainerDTO.infoTitle}"/>
+            <textarea
+                name="infoContent"
+                rows="5"
+                wrap="hard"
+                placeholder="자기소개 입력..."
+                class="_js_textarea_design_1 convertToTrainerAccount_description_textarea"
+                th:text="${trainerDTO.infoContent}"
+            ></textarea>
+        </div>
+
+        <div class="convertToTrainerAccount_convert_button_container">
+            <button type="submit" class="_js_button_reset _js_button_1 convertToTrainerAccount_convert_button">
+                프로필 수정
+            </button>
+            <button type="button" class="_js_button_reset _js_button_1 convertToTrainerAccount_convert_button"
+                    onclick="history.back()">
+                뒤로 가기
+            </button>
+        </div>
+    </form>
+
+
+    <script th:src="@{/js/trainerOnly/updateProfile.js}"></script>
+</th:block>
+</html>

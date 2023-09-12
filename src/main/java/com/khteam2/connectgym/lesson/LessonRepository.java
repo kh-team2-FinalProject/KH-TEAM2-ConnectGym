@@ -25,7 +25,12 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
     @Query("SELECT l.titleCode FROM Lesson l ORDER BY l.titleCode DESC")
     List<String> findLatestTitleCode();
 
+<<<<<<< HEAD
+    //
+//    @Query("select l from Lesson l where l.trainer.no=?1")
+=======
     // 특정 트레이너의 레슨을 찾아 반환합니다.
     @Query("SELECT l FROM Lesson l WHERE l.trainer.no = ?1")
+>>>>>>> 53cb92ec070ae90605fcb6711f501aae56eb717e
     Optional<Lesson> findByTrainerNo(Long trainerNo);
 }
