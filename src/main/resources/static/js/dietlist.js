@@ -89,10 +89,13 @@ function deleteMeal(event) {
                       showConfirmButton: true,
                       showCancelButton: false,
                       confirmButtonColor: "#A3DC10"
-                    });
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                                location.reload();
+                           }
+                        });
 
                 /*alert("삭제되었습니다.");*/
-                location.reload();
             } else {
              Swal.fire({
                                   position: "center",
@@ -296,9 +299,13 @@ function addFoodToDietList(foodNo) {
                       showConfirmButton: true,
                       showCancelButton: false,
                       confirmButtonColor: "#A3DC10"
-                    });
+                    }).then(result => {
+                                              if (result.isConfirmed) {
+                       location.reload();
+                                                 }
+                                              });
                 /*alert("선택한 음식이 추가되었습니다.");*/
-                location.reload();
+
             } else {
             Swal.fire({
                       position: "center",

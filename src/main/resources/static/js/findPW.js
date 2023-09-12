@@ -73,9 +73,13 @@ function findMemberPW(){
                   showConfirmButton: true,
                   showCancelButton: false,
                   confirmButtonColor: "#A3DC10"
-                });
-            /*alert('비밀번호 변경에 성공하였습니다.');*/
+                }).then(result => {
+                  if (result.isConfirmed) {
+
             window.location.href = "/user/login";
+                  }
+                  });
+            /*alert('비밀번호 변경에 성공하였습니다.');*/
         },
         error: function(error){
 Swal.fire({

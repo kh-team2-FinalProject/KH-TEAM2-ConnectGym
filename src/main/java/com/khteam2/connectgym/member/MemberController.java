@@ -57,6 +57,11 @@ public class MemberController {
         }
 
         String referer = request.getHeader("Referer");
+        if (referer != null && referer.contains("/user/")) {
+            // URI에 "/user/"을 포함하는 경우 referer 객체를 비웁니다.
+            referer = null;
+        }
+
         model.addAttribute("requestUrl", referer);
 
         return "content/login";

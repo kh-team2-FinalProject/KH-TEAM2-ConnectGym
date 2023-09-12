@@ -54,10 +54,12 @@ function findMemberID(){
                   showConfirmButton: true,
                   showCancelButton: false,
                   confirmButtonColor: "#A3DC10"
-                });
-
+                }).then(result => {
+                 if (result.isConfirmed) {
             /*alert('찾으시는 아이디는 ' + data + ' 입니다.');*/
             window.location.href = "/user/login";
+                           }
+                           });
         },
         error: function(error){
         Swal.fire({
