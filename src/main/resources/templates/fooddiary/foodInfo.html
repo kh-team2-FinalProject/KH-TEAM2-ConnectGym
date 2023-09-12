@@ -121,14 +121,14 @@
                         <label class="nutriNm">식품명</label>
                         <input id="foodNm" class="nutriInput" th:field="*{foodNm}"
                             type="text"/>
-                    <p id="valid_foodNm" class="error" th:if="${#fields.hasErrors('foodNm')}"
-                        th:errors="*{foodNm}" style="color: red;"></p>
                     </div>
+                    <p class="error" th:if="${#fields.hasErrors('foodNm')}"
+                       th:errors="*{foodNm}"></p>
+
                     <div class="foodInput">
                         <label class="nutriNm">1회 제공량(g)</label>
                         <input id="foodSize" class="nutriInput" th:field="*{foodSize}"
                             type="number" step="0.001"/>
-                        <!--<p class="error" th:text="${valid_foodSize}"></p>-->
                     </div>
                     <p class="error" th:if="${#fields.hasErrors('foodSize')}"
                         th:errors="*{foodSize}"></p>
@@ -202,7 +202,7 @@
         <script>
             document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("submitBtn").addEventListener("click", function (e){
-                    e.preventDefault(); // <!-- 기본 이벤트 (폼 제출) 방지-->
+                    e.preventDefault();
 
 
                     var foodNm = document.querySelector("#foodNm").value;
@@ -219,15 +219,18 @@
                             title: "필수 입력 항목이 비었습니다.",
                             buttonsStyling: false,
                             confirmButtonClass: "swal2-btn",
+                        }).then((result) => {
+                     if (result.isConfirmed) {
+                        document.getElementById("myWriteForm").submit();
+                            }
                         });
-                        return;
                     } else {
                         Swal.fire({
                             title: "저장하시겠습니까?",
                             showCancelButton: true,
                             showConfirmButton: true,
                             confirmButtonText: "Save",
-                            cancelButtonText: "Don save"
+                            cancelButtonText: "Don't save"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 Swal.fire("저장되었습니다", "", "success");

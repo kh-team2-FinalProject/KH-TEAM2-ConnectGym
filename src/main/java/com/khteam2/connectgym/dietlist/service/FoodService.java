@@ -18,7 +18,6 @@ public interface FoodService {
     /* db 저장 */
     Food saveFood(Food food);
 
-    Map<String, String> validateHandling(Errors errors);
 
 
     List<Food> searchFood(String key);

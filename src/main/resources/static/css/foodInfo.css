@@ -172,7 +172,9 @@ span{
 }
 
 .error {
+    font-weight: bold;
     font-size: 10px;
+    color: #f9b332;
 }
 
 #submitBtn {
@@ -240,3 +242,4 @@ span{
 /*    filter: grayscale(100%);*/
     background-color: #d0dda1;
 }
+
