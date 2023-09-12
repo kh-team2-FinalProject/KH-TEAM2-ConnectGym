@@ -36,20 +36,17 @@ public class CSService {
     }
 
     public List<CS> getDataForPage(int pageNumber, int itemsPerPage) {
+        // pageNumber = 응답받은 페이지 번호
+        // itemsPerPage = 한 페이지당 보여줄 게시글 수
         List<CS> dataForPage = new ArrayList<>();
         List<CS> allData = csRepository.findAllByOrderByFaqDatetimeDesc();
 
         int startIndex = (pageNumber - 1) * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, allData.size());
 
-        for (int i = 0; i < allData.size(); i++) {
-            allData.get(i).setContent(allData.get(i).getContent().replaceAll("\r\n", "<br>"));
-        }
-
         for (int i = startIndex; i < endIndex; i++) {
             dataForPage.add(allData.get(i));
         }
-
         return dataForPage;
     }
 

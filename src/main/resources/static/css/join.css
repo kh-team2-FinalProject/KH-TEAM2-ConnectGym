@@ -188,10 +188,12 @@
 
 .join_btn_wrap{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 20px;
 }
-
+.join_btn_wrap button:first-child{
+    margin-right: 20px;
+}
 .join_btn_wrap button{
     height: 40px;
     border-radius: 5px;
