@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>1:1 Chat</title>
+    <title>
+        1:1 Chat
+        <th:block th:if="${session.session_login_member_class != null}
+            and ${chatroom != null}
+            and ${chatroom.trainer != null}
+            and ${chatroom.member != null}" >
+            <th:block
+                th:if="${session.session_login_member_class.name() == 'MEMBER'}"
+                th:text="| > ${chatroom.trainer.trainerName}|"
+            ></th:block>
+            <th:block
+                th:if="${session.session_login_member_class.name() == 'TRAINER'}"
+                th:text="| > ${chatroom.member.userName}|"></th:block>
+        </th:block>
+    </title>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
     <style>

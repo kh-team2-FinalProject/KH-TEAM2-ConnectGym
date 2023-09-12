@@ -5,10 +5,6 @@
     layout:decorate="~{content/fooddiary}"
     xmlns:layout="http://www.w3.org/1999/xhtml"
 >
-    <th:block layout:fragment="title">
-        <title>Diet input 페이지</title>
-    </th:block>
-
     <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
     <th:block layout:fragment="foodD">
         <link rel="stylesheet" th:href="@{/css/dietlist.css}" />
@@ -449,7 +445,7 @@
                                         <input
                                             th:name="selectedKey"
                                             th:value="${food.foodCd}"
-                                        ></input>
+                                        />
                                         <!--<span
                                             type="button"
                                             th:text="${food.foodNm}"
