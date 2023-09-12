@@ -14,7 +14,7 @@
 <th:block layout:fragment="script">
     <!-- 기존 스크립트 -->
     <script th:inline="javascript">
-        const loginMemberNo = [[${session.session_login_member_no}]];
+
         var trainerEmail = [[${trainerResponseDTO.trainerEmail}]];
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -22,12 +22,12 @@
                 var email = trainerEmail.split("@");
                 var email01 = email[0];
                 var email02 = email[1];
-                var em1 = document.getElementById('email001');
+                var em1 = document.getElementById('email01');
                 em1.value = email01;
-                document.getElementById('email002').value = email02;
+                document.getElementById('email02').value = email02;
 
-                document.getElementById('email001').setAttribute('readonly', true);
-                document.getElementById('email002').setAttribute('readonly', true);
+                document.getElementById('email01').setAttribute('readonly', true);
+                document.getElementById('email02').setAttribute('readonly', true);
             }
 
             email_split(trainerEmail);
@@ -105,9 +105,9 @@
                 </div>
                 <div class="input_email_wrap">
                     <span>이메일</span><br>
-                    <input id="email001" type="text" name="email01">
+                    <input id="email01" type="text" name="email01">
                     <span id="email_middle">@</span>
-                    <input id="email002" name="email02">
+                    <input id="email02" name="email02">
                     <input type="hidden" id="userEmail" name="userEmail">
                 </div>
                 <div class="join_btn_wrap">

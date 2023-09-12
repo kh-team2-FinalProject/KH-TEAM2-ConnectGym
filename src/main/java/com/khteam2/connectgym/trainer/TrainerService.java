@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -79,6 +80,7 @@ public class TrainerService {
             .infoTitle(trainerRequestDTO.getInfoTitle())
             .infoContent(trainerRequestDTO.getInfoContent())
             .build();
+
 
         Trainer trainer = trainerRepository.save(dto.toEntity());
 
@@ -210,15 +212,72 @@ public class TrainerService {
             dto.setFollowCount(followRepository.findAllByToTrainerCount(val.getNo()));
 
         }
-
         return trainerAll;
-
     }
 
-    public void updateTrainer(TrainerRequestDTO trainerRequestDTO, MultipartFile file) {
+    @Transactional
+    public void updateTrainer(Long trainerNo, TrainerRequestDTO trainerRequestDTO,
+                              MultipartFile profileImgFile,
+                              MultipartFile[] licenseImgFiles) {
+        trainerRequestDTO.setNo(trainerNo);
+        trainerRequestDTO.setTrainerPw(trainerRepository.findById(trainerNo).orElse(null).getTrainerPw());
+        String fileUrl = "";
+        if (!profileImgFile.isEmpty()) {
+            try {
+                fileUrl = s3Uploader.uploadProfileFile(profileImgFile, trainerRequestDTO.getTrainerId());
+                trainerRequestDTO.setProfileImg(fileUrl);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            trainerRequestDTO.setProfileImg(trainerRepository.findById(trainerNo).orElse(null).getProfileImg());
+        }
+
+        System.out.println("trainerRequestDTO = " + trainerRequestDTO);
+        //자격증사진
+        Trainer trainer = trainerRepository.save(trainerRequestDTO.toEntity());
+
+        try {
+            for (MultipartFile file : licenseImgFiles) {
+                if (!file.isEmpty()) {
+                    String licenseImgUrl = s3Uploader.uploadProfileFile(file, trainerRequestDTO.getTrainerId());
+                    License license = License.builder()
+                        .licenseImg(licenseImgUrl)
+                        .trainer(trainer)
+                        .build();
+                    licenseRepository.save(license);
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public TrainerResponseDTO findbyId(Long no) {
+        return new TrainerResponseDTO(Objects.requireNonNull(trainerRepository.findById(no).orElse(null)));
+    }
+
+    @Transactional
+    public void updateProfile(Long trainerNo, TrainerRequestDTO trainerRequestDTO, MultipartFile profileImgFile) {
 
 
-        trainerRepository.save(trainerRequestDTO.toEntity());
+        String fileUrl = "";
+        if (!profileImgFile.isEmpty()) {
+            try {
+                fileUrl = s3Uploader.uploadProfileFile(profileImgFile, trainerRequestDTO.getTrainerId());
+                trainerRequestDTO.setProfileImg(fileUrl);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            trainerRequestDTO.setProfileImg(trainerRepository.findById(trainerNo).orElse(null).getProfileImg());
+        }
+
+        System.out.println("fileUrl = " + fileUrl);
+        trainerRepository.updateProfileImg(trainerRequestDTO.getProfileImg(), trainerNo);
+        trainerRepository.updateInfoTitle(trainerRequestDTO.getInfoTitle(), trainerNo);
+        trainerRepository.updateInfoContent(trainerRequestDTO.getInfoContent(), trainerNo);
+        System.out.println("TrainerService.updateProfile");
 
     }
 }

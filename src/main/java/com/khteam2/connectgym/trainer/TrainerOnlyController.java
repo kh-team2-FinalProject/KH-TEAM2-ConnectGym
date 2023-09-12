@@ -225,7 +225,7 @@ public class TrainerOnlyController {
         }
     }
 
-
+    //트레이너 정보페이지
     @GetMapping("/mypage/trainerInfo")
     public String trainerMyInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                                 @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
@@ -237,7 +237,7 @@ public class TrainerOnlyController {
 
         } else if (loginMemberClass == MemberClass.TRAINER) {
             // 트레이너 회원 로그인 된 경우
-
+            model.addAttribute("bannerTitle", "Trainer Info");
             TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
             System.out.println("trainerResponseDTO = " + trainerResponseDTO);
             model.addAttribute(trainerResponseDTO);
@@ -252,6 +252,7 @@ public class TrainerOnlyController {
 
     }
 
+    //트레이너 정보수정 페이지
     @GetMapping("/mypage/updateInfo")
     public String trainerUpdateInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_CLASS, required = false) MemberClass loginMemberClass,
                                     @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
@@ -263,9 +264,8 @@ public class TrainerOnlyController {
 
         } else if (loginMemberClass == MemberClass.TRAINER) {
             // 트레이너 회원 로그인 된 경우
-
+            model.addAttribute("bannerTitle", "Update Info");
             TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
-            System.out.println("trainerResponseDTO = " + trainerResponseDTO);
             model.addAttribute("trainerDTO", trainerResponseDTO);
 
             return "trainerOnly/updateInfo";
@@ -274,18 +274,45 @@ public class TrainerOnlyController {
         } else {
             return "redirect:/mypage";
         }
-
     }
+
+    //트레이너 업데이트
 
     @PostMapping("/mypage/trainerUpdate")
     public String trainerUpdate(TrainerRequestDTO trainerRequestDTO,
                                 @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
-                                @RequestParam("lessonImgFile") MultipartFile file) {
+                                @RequestParam("profileImgFile") MultipartFile profileImgFile,
+                                @RequestParam("licenseImgFiles") MultipartFile[] licenseImgFiles) {
 
 
-        trainerRequestDTO.setNo(loginMemberNo);
-
-        trainerService.updateTrainer(trainerRequestDTO, file);
+        trainerService.updateTrainer(loginMemberNo, trainerRequestDTO, profileImgFile, licenseImgFiles);
         return "detailOrCrud/updateComplete";
     }
+
+
+    @GetMapping("/mypage/updateProfile")
+    private String updateProfileInfo(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long trainerNo,
+                                     Model model) {
+        model.addAttribute("bannerTitle", "Update Profile");
+
+        TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+        model.addAttribute("trainerDTO", trainerResponseDTO);
+
+        return "trainerOnly/updateProfile";
+
+    }
+
+    @PostMapping("/mypage/updateProfile")
+    public String updateProfile(TrainerRequestDTO trainerRequestDTO,
+                                @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo,
+                                @RequestParam("profileImgFile") MultipartFile profileImgFile) {
+
+        System.out.println("1111111111111111trainerRequestDTO = " + trainerRequestDTO);
+        trainerService.updateProfile(loginMemberNo, trainerRequestDTO, profileImgFile);
+
+
+        return "redirect:/trainerOnly/mypage";
+    }
 }
+
+

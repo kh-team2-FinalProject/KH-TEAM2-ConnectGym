@@ -1,6 +1,7 @@
 package com.khteam2.connectgym.trainer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -18,5 +19,15 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long> {
     @Query("SELECT t FROM Trainer t WHERE t.no = :trainerNo")
     Trainer findTrainerByLessonNo(@Param("trainerNo") Long trainerNo);
 
+    @Modifying
+    @Query("UPDATE Trainer t SET t.infoTitle = :infoTitle WHERE t.no = :no ")
+    void updateInfoTitle(@Param("infoTitle") String infoTitle, @Param("no") Long no);
 
+    @Modifying
+    @Query("UPDATE Trainer t SET t.infoContent = :infoContent WHERE t.no = :no ")
+    void updateInfoContent(@Param("infoContent") String infoContent, @Param("no") Long no);
+
+    @Modifying
+    @Query("UPDATE Trainer t SET t.profileImg = :profileImg WHERE t.no = :no ")
+    void updateProfileImg(@Param("profileImg") String profileImg, @Param("no") Long no);
 }

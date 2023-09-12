@@ -32,7 +32,7 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
     List<String> findLatestTitleCode();
 
     //
-    @Query("select l from Lesson l where l.trainer.no=?1")
+//    @Query("select l from Lesson l where l.trainer.no=?1")
     Optional<Lesson> findByTrainerNo(Long trainerNo);
 
 
