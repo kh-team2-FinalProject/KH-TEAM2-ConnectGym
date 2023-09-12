@@ -167,7 +167,7 @@
                     .then((v) => v.json())
                     .then((v) => {
                         if (v.success) {
-                            location.href = ""+requestUrl;
+                            location.href = (typeof requestUrl === "string" && requestUrl.length > 0) ? requestUrl : "/";
                         } else {
                             alert(v.message);
                         }
