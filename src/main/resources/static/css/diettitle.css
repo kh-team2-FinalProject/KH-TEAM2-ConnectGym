@@ -26,9 +26,12 @@ body {
 /* 캘린더 버튼 */
 .calendar-button {
     position: relative;
-    font-size: 30px;
+    font-size: 1.6rem;
     cursor: pointer;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* 캘린더 전체 박스 */
@@ -75,7 +78,7 @@ body {
     text-align: center;
     border-radius: 50%;
     transition: background-color 0.3s;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: white;
 }
 
