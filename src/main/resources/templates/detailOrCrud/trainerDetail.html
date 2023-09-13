@@ -14,12 +14,8 @@
 <th:block layout:fragment="script">
 <script th:src="@{/js/follow.js}"></script>
 <script th:src="@{/js/review/trainerReview.js}"></script>
+<script th:src="@{/js/review/rating.js}"></script>
 
-    <script th:inline="javascript">
-        const memberNo = [[${session.session_login_member_no}]];
-        const trainerNo = [[${trainerInfo.trainerNo}]];
-
-    </script>
     <script th:inline="javascript">
     function isTakingLesson() {
         const lessonNo = /*[[${trainer.lessonNo}]]*/;
@@ -40,7 +36,7 @@
         }
     }
     </script>
-    <script th:src="@{/js/review/rating.js}"></script>
+    <script th:src="@{/js/chatroom.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content">
