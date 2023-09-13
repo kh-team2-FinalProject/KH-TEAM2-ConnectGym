@@ -13,7 +13,10 @@
     <script src="js/review/rating.js"></script>
     <script>
             applyStarRating();
-        </script>
+
+
+
+    </script>
 
 </th:block>
 
@@ -59,15 +62,9 @@
         <div class="section-4">
             <div class="s4_lesson_demo">
                 <div class="s4_lesson_demo_text_top">
-                    <!--<div data-aos="flip-right"
-                         data-delay="500"
-                         data-aos-duration="2000"
-                    >
-                        소개합니다. CONNECT GYM!
-                    </div>-->
                 </div>
                 <div class="s4_lesson_demo_text_titleBox"
-                     data-aos="fade-left"
+                     data-aos="fade-up"
                      data-aos-duration="2200"
                 >
                 </div>
@@ -76,12 +73,6 @@
                          data-aos="fade-up"
                          data-aos-duration="2000"
                     >
-                        <!-- data-aos="flip-left"
-                         data-aos-easing="ease-out-cubic"
-                         data-aos-duration="2000"
-                         data-delay="800"-->
-
-
                         커넥트짐 만의 레슨 룸, 언택트 운동의 끝.
                     </div>
 
@@ -116,12 +107,13 @@
         <!-- 인기 트레이너 -->
         <div class="section-2">
             <div data-aos="fade-down"
-                class="person-title">
+                 class="person-title">
                 Popular Trainer
             </div>
             <div class="person-content">
                 <!--요가-->
-                <div class="person" th:each="trainer : ${trainerList}" th:onclick="|location.href='/trainerDetail/${trainer.trainerNo}'|">
+                <div class="person" th:each="trainer : ${trainerList}"
+                     th:onclick="|location.href='/trainerDetail/${trainer.trainerNo}'|">
                     <div class="p-container">
                         <div class="p-container-inner">
                             <img class="p-circle" th:src="@{/images/background.png}"/>
@@ -135,29 +127,29 @@
                     <div class="p-cat" th:if="${trainer.trainerCategory == 3}">Pilates</div> <!--레슨 카테고리 변수-->
                 </div>
                 <!--헬스-->
-               <!-- <div class="person">
-                    <div class="p-container">
-                        <div class="p-container-inner">
-                            <img class="p-circle" th:src="@{/images/background.png}"/>
-                            <img class="p-img p-img2" th:src="@{/images/심으뜸.png}"/> &lt;!&ndash;트레이너 프로필 변수&ndash;&gt;
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="p-name">심으뜸</div> &lt;!&ndash;트레이너 이름 변수&ndash;&gt;
-                    <div class="p-cat">health</div> &lt;!&ndash;레슨 카테고리 변수&ndash;&gt;
-                </div>
-                &lt;!&ndash;필라테스&ndash;&gt;
-                <div class="person">
-                    <div class="p-container">
-                        <div class="p-container-inner">
-                            <img class="p-circle" th:src="@{/images/background.png}"/>
-                            <img class="p-img p-img3" th:src="@{/images/김계란.png}"/>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="p-name">김계란</div>
-                    <div class="p-cat">pilates</div>
-                </div>-->
+                <!-- <div class="person">
+                     <div class="p-container">
+                         <div class="p-container-inner">
+                             <img class="p-circle" th:src="@{/images/background.png}"/>
+                             <img class="p-img p-img2" th:src="@{/images/심으뜸.png}"/> &lt;!&ndash;트레이너 프로필 변수&ndash;&gt;
+                         </div>
+                     </div>
+                     <div class="divider"></div>
+                     <div class="p-name">심으뜸</div> &lt;!&ndash;트레이너 이름 변수&ndash;&gt;
+                     <div class="p-cat">health</div> &lt;!&ndash;레슨 카테고리 변수&ndash;&gt;
+                 </div>
+                 &lt;!&ndash;필라테스&ndash;&gt;
+                 <div class="person">
+                     <div class="p-container">
+                         <div class="p-container-inner">
+                             <img class="p-circle" th:src="@{/images/background.png}"/>
+                             <img class="p-img p-img3" th:src="@{/images/김계란.png}"/>
+                         </div>
+                     </div>
+                     <div class="divider"></div>
+                     <div class="p-name">김계란</div>
+                     <div class="p-cat">pilates</div>
+                 </div>-->
             </div>
         </div>
         <!-- 인기 트레이너 끝 -->

@@ -444,4 +444,5 @@
 .login_select_class input[type="radio"]:checked + span {
     background-color: #A3DC10ad;
     color: #ffffff;
+    transition: all 400ms ease-in-out;
 }

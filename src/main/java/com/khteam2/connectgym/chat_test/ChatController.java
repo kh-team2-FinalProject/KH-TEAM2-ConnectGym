@@ -1,7 +1,7 @@
 package com.khteam2.connectgym.chat_test;
 
-import com.khteam2.connectgym.chat_test.dto.ChatMessageDTO;
-import com.khteam2.connectgym.chat_test.dto.ChatMessageReaponseDTO;
+import com.khteam2.connectgym.chat_test.dto.ChatMessageDto;
+import com.khteam2.connectgym.chat_test.dto.ChatMessageReaponseDto;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.MemberClass;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class ChatController {
         //chatroomNo로 특정된 채팅룸 입장
         Chatroom chatroom = chatroomService.inChatroom(chatroomNo);
         //지난 대화내용 전송
-        List<ChatMessageReaponseDTO> chatMessages = chatroomService.loadMessage(chatroom);
+        List<ChatMessageReaponseDto> chatMessages = chatroomService.loadMessage(chatroom);
         model.addAttribute("chatMessages", chatMessages);
         model.addAttribute("chatroomNo", chatroomNo);
         model.addAttribute("chatroom", chatroom);
@@ -61,11 +61,11 @@ public class ChatController {
 
     @MessageMapping("/chat/{chatroomNo}") // 클라이언트가 메시지 보낼 때의 엔드포인트 설정
     public void sendMessage(@DestinationVariable Long chatroomNo,
-                            @Payload ChatMessageDTO message) {
+                            @Payload ChatMessageDto message) {
         //채팅 메시지 DB저장
         ChatMessage chatMessage = chatMessageService.saveMessage(chatroomNo, message);
         //리턴된 엔티티의 DTO화
-        ChatMessageReaponseDTO chatMessageReaponseDTO = new ChatMessageReaponseDTO().fromEntity(chatMessage);
+        ChatMessageReaponseDto chatMessageReaponseDTO = new ChatMessageReaponseDto().fromEntity(chatMessage);
         log.error(chatMessageReaponseDTO.getSendAt());
         // 채팅메시지 수신하는 주소
         String claQueue = "/queue/qqq/" + chatroomNo;

@@ -76,7 +76,7 @@ public class MemberController {
     }
 
     @GetMapping(value = "/user/join")
-    public String tempJoin() {
+    public String join() {
         return "content/join";
     }
 
