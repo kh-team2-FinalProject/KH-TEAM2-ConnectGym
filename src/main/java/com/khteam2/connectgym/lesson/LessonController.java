@@ -57,7 +57,7 @@ public class LessonController {
     ) {
         model.addAttribute("lessonCategory", "lessons");
 
-        int itemsPerPage = 10;   // 한 페이지에 보여질 게시글 수
+        int itemsPerPage = 20;   // 한 페이지에 보여질 게시글 수
 
         List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
         lessonList = lessonService.viewCategoryList(lessonList,
@@ -83,7 +83,7 @@ public class LessonController {
                                    @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
                                    @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
     ) {
-        int itemsPerPage = 10;   // 한 페이지에 보여질 게시글 수
+        int itemsPerPage = 20;   // 한 페이지에 보여질 게시글 수
 
         List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
         lessonList = lessonService.viewCategoryList(lessonList,

@@ -45,16 +45,16 @@ function openPop(meal) {
             mealName += "간식";
             break;
         default:
-                Swal.fire({
-                  position: "center",
-                  width: "500px",
-                  height: "30px",
-                  background: "rgba(215, 214, 214, 0.761)",
-                  html: `<div style="font-size:14px;">알 수 없는 이름입니다.(${meal}) </div>`,
-                  showConfirmButton: true,
-                  showCancelButton: false,
-                  confirmButtonColor: "#df1811"
-                });
+            Swal.fire({
+                position: "center",
+                width: "500px",
+                height: "30px",
+                background: "rgba(215, 214, 214, 0.761)",
+                html: `<div style="font-size:14px;">알 수 없는 이름입니다.(${meal}) </div>`,
+                showConfirmButton: true,
+                showCancelButton: false,
+                confirmButtonColor: "#df1811"
+            });
 
             return;
     }
@@ -81,32 +81,32 @@ function deleteMeal(event) {
         .then((r) => r.json())
         .then((v) => {
             if (v.success) {
-            Swal.fire({
-                      position: "center",
-                      width: "500px",
-                      background: "rgba(215, 214, 214, 0.761)",
-                      html: `<div style="font-size:14px;">삭제되었습니다.</div>`,
-                      showConfirmButton: true,
-                      showCancelButton: false,
-                      confirmButtonColor: "#A3DC10"
-                    }).then(result => {
-                        if (result.isConfirmed) {
-                                location.reload();
-                           }
-                        });
+                Swal.fire({
+                    position: "center",
+                    width: "500px",
+                    background: "rgba(215, 214, 214, 0.761)",
+                    html: `<div style="font-size:14px;">삭제되었습니다.</div>`,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonColor: "#A3DC10"
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
 
                 /*alert("삭제되었습니다.");*/
             } else {
-             Swal.fire({
-                                  position: "center",
-                                  width: "500px",
-                                  background: "rgba(215, 214, 214, 0.761)",
-                                  html: `<div style="font-size:14px;">${v.message}</div>`,
-                                  showConfirmButton: true,
-                                  showCancelButton: false,
-                                  confirmButtonColor: "#eb4315"
-                                });
-               /* alert(v.message);*/
+                Swal.fire({
+                    position: "center",
+                    width: "500px",
+                    background: "rgba(215, 214, 214, 0.761)",
+                    html: `<div style="font-size:14px;">${v.message}</div>`,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonColor: "#eb4315"
+                });
+                /* alert(v.message);*/
             }
         });
 }
@@ -137,23 +137,23 @@ function foodSearch(search, page) {
 
     fetch(
         "/api/dietList/findFood?" +
-            new URLSearchParams({
-                search,
-                page,
-            })
+        new URLSearchParams({
+            search,
+            page,
+        })
     )
         .then((r) => r.json())
         .then((v) => {
             if (!v.success) {
-            Swal.fire({
-                      position: "center",
-                      width: "500px",
-                      background: "rgba(215, 214, 214, 0.761)",
-                      html: `<div style="font-size:14px;">${v.message}</div>`,
-                      showConfirmButton: true,
-                      showCancelButton: false,
-                      confirmButtonColor: "#eb4315"
-                    });
+                Swal.fire({
+                    position: "center",
+                    width: "500px",
+                    background: "rgba(215, 214, 214, 0.761)",
+                    html: `<div style="font-size:14px;">${v.message}</div>`,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonColor: "#eb4315"
+                });
                 /*alert(v.message);*/
                 return;
             }
@@ -166,7 +166,7 @@ function foodSearch(search, page) {
                 tr.innerHTML = `
                 <td>
                     <span>${food.foodNm}</span>
-                    <button type="button" onclick="addFoodToDietList(${food.foodCd})"></button>
+                    <button type="button" onclick="addFoodToDietList(${food.foodCd})"><img src="/images/plus_btn.png" /></button>
                 </td>
                 <td>
                     <span>${food.foodSize}g</span>
@@ -226,7 +226,7 @@ function foodSearch(search, page) {
                 `;
 
                 i === v.pagination.currentPage &&
-                    li.classList.add("dietList_search_popup_pagination_li_on");
+                li.classList.add("dietList_search_popup_pagination_li_on");
 
                 foodSearchPaginationUlEl.append(li);
             }
@@ -248,14 +248,14 @@ function foodSearch(search, page) {
                 foodSearchPaginationUlEl.append(liNext);
             }
 
-            dietPopupContent.scrollTo({ top: 0, behavior: "smooth" });
+            dietPopupContent.scrollTo({top: 0, behavior: "smooth"});
         });
 }
 
 document.forms.foodSearchForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const { foodTime, key } = this.elements;
+    const {foodTime, key} = this.elements;
 
     if (!foodTime || !key) {
         console.log("일부 element가 없습니다.");
@@ -267,15 +267,15 @@ document.forms.foodSearchForm.addEventListener("submit", function (e) {
 
 function addFoodToDietList(foodNo) {
     if (!foodNo) {
-    Swal.fire({
-              position: "center",
-              width: "500px",
-              background: "rgba(215, 214, 214, 0.761)",
-              html: `<div style="font-size:14px;">필수 파라미터가 누락되었습니다.</div>`,
-              showConfirmButton: true,
-              showCancelButton: false,
-              confirmButtonColor: "#eb4315"
-            });
+        Swal.fire({
+            position: "center",
+            width: "500px",
+            background: "rgba(215, 214, 214, 0.761)",
+            html: `<div style="font-size:14px;">필수 파라미터가 누락되었습니다.</div>`,
+            showConfirmButton: true,
+            showCancelButton: false,
+            confirmButtonColor: "#eb4315"
+        });
         /*alert("필수 파라미터가 누락되었습니다.");*/
         return;
     }
@@ -291,31 +291,31 @@ function addFoodToDietList(foodNo) {
         .then((r) => r.json())
         .then((v) => {
             if (v.success) {
-            Swal.fire({
-                      position: "center",
-                      width: "500px",
-                      background: "rgba(215, 214, 214, 0.761)",
-                      html: `<div style="font-size:14px;">선택한 음식이 추가되었습니다.</div>`,
-                      showConfirmButton: true,
-                      showCancelButton: false,
-                      confirmButtonColor: "#A3DC10"
-                    }).then(result => {
-                                              if (result.isConfirmed) {
-                       location.reload();
-                                                 }
-                                              });
+                Swal.fire({
+                    position: "center",
+                    width: "500px",
+                    background: "rgba(215, 214, 214, 0.761)",
+                    html: `<div style="font-size:14px;">선택한 음식이 추가되었습니다.</div>`,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonColor: "#A3DC10"
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
                 /*alert("선택한 음식이 추가되었습니다.");*/
 
             } else {
-            Swal.fire({
-                      position: "center",
-                      width: "500px",
-                      background: "rgba(215, 214, 214, 0.761)",
-                      html: `<div style="font-size:14px;">${v.message}</div>`,
-                      showConfirmButton: true,
-                      showCancelButton: false,
-                      confirmButtonColor: "#eb4315"
-                    });
+                Swal.fire({
+                    position: "center",
+                    width: "500px",
+                    background: "rgba(215, 214, 214, 0.761)",
+                    html: `<div style="font-size:14px;">${v.message}</div>`,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonColor: "#eb4315"
+                });
                 /*alert(v.message);*/
             }
         });
