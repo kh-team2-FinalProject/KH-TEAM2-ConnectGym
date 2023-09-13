@@ -117,7 +117,7 @@ ul > li {
 
 .site_banner.Calendar-banner {
     background: url("/images/banner-calendar.jpg") center center / cover no-repeat;
-    background-color: #d0dda1;
+    /*background-color: #d0dda1;*/
 }
 
 /* 이전달  다음달 버튼*/
