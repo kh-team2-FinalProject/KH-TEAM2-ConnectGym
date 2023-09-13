@@ -134,6 +134,12 @@ th.sub {
     margin-top: 30px;
 }
 
+#foodSearchForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .pop_content2 th,
 .pop_content2 td {
     padding: 12px;
@@ -185,10 +191,14 @@ th.sub {
 
 /* input box */
 #popInput {
-    width: 83%;
+    width: 80%;
     height: 30px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-left: 22px;
+    border: 1px solid white;
+    color: white;
 }
 
 .pop-content input,
