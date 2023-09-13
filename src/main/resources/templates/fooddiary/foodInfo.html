@@ -5,243 +5,244 @@
     layout:decorate="~{content/fooddiary}"
     xmlns:layout="http://www.w3.org/1999/xhtml"
 >
-    <!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
-    <th:block layout:fragment="foodD">
-        <link rel="stylesheet" th:href="@{/css/foodInfo.css}" />
+<!-- 해당 페이지를 호출하면 콘텐츠 영역에 해당 페이지가 출력 -->
+<th:block layout:fragment="foodD">
+    <link rel="stylesheet" th:href="@{/css/foodInfo.css}"/>
 
-        <div class="foodD_search">
-            <!-- 헤더 -->
-            <div class="search_header">
-                <h1 id="food_search">FOOD INFO</h1>
-            </div>
-            <div class="info_btn">
-                <form class="form" th:action="@{/fooddiary/foodInfo}" method="GET">
-                    <input
-                        class="searchInput"
-                        name="search"
-                        type="text"
-                        placeholder="식품명을 입력하시오"
-                    />
-                    <button class="search_btn">search</button>
-                </form>
-                <button class="write_btn" onclick="openPop()">write</button>
-            </div>
-            <table class="FoodInfo_table">
-                <thead>
-                    <tr>
-                        <th class="Info_name">식품명</th>
-                        <th class="Info_name">1회제공량</th>
-                        <th class="Info_name">탄수화물</th>
-                        <th class="Info_name">단백질</th>
-                        <th class="Info_name">지방</th>
-                        <th class="Info_name">나트륨</th>
-                        <th class="Info_name">당</th>
-                        <th class="Info_name">칼로리</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="food : ${responseDto.foods}">
-                        <td>
-                            <span th:text="${food.foodNm}"></span>
-                        </td>
-                        <td>
-                            <span th:text="${food.foodSize}">g</span>
-                        </td>
-                        <td>
-                            <span th:text="${food.choc}">g</span>
-                        </td>
-                        <td>
-                            <span th:text="${food.prot}">g</span>
-                        </td>
-                        <td>
-                            <span th:text="${food.fat}">g</span>
-                        </td>
-                        <td>
-                            <span th:text="${food.nat}">mg</span>
-                        </td>
-                        <td>
-                            <span th:text="${food.sugar}">g</span>
-                        </td>
-                        <td>
-                            <span th:text="${food.kcal}">kcal</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="foodInfo_search_pagination">
-                <ul class="foodInfo_search_pagination_ul">
-                    <li
-                        th:if="${responseDto.pagination.prev}"
-                        class="foodInfo_search_pagination_li"
-                    >
-                        <button
-                            type="button"
-                            class="foodInfo_search_pagination_li_button"
-                            th:onclick="|movePage(${responseDto.pagination.firstPage - 1})|"
-                        >
-                            이전
-                        </button>
-                    </li>
-                    <li
-                        th:each="page : ${#numbers.sequence(responseDto.pagination.firstPage, responseDto.pagination.endPage)}"
-                        th:classappend="${page == responseDto.pagination.currentPage} ? 'foodInfo_search_pagination_li_on'"
-                        class="foodInfo_search_pagination_li"
-                    >
-                        <button
-                            type="button"
-                            class="foodInfo_search_pagination_li_button"
-                            th:onclick="|movePage(${page})|"
-                            th:text="${page}"
-                        ></button>
-                    </li>
-                    <li
-                        th:if="${responseDto.pagination.next}"
-                        class="foodInfo_search_pagination_li"
-                    >
-                        <button
-                            type="button"
-                            class="foodInfo_search_pagination_li_button"
-                            th:onclick="|movePage(${responseDto.pagination.endPage + 1})|"
-                        >
-                            다음
-                        </button>
-                    </li>
-                </ul>
-            </div>
+    <div class="foodD_search">
+        <!-- 헤더 -->
+        <div class="search_header">
+            <h1 id="food_search">FOOD INFO</h1>
         </div>
-
-        <!-- 상품 등록 팝업 -->
-        <div id="dietPopup" style="display: none">
-            <div class="dietPop">
-                <form id="myWriteForm" class="pop-content" th:object="${food}" action="/fooddiary/foodInfo" method="POST">
-                    <button id="closeBtn" type="button">X</button>
-                    <h2>영양성분 기입</h2>
-
-                    <div class="foodInput">
-                        <label class="nutriNm">식품명</label>
-                        <input id="foodNm" class="nutriInput" th:field="*{foodNm}"
-                            type="text"/>
-                    </div>
-                    <p class="error" th:if="${#fields.hasErrors('foodNm')}"
-                       th:errors="*{foodNm}"></p>
-
-                    <div class="foodInput">
-                        <label class="nutriNm">1회 제공량(g)</label>
-                        <input id="foodSize" class="nutriInput" th:field="*{foodSize}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <p class="error" th:if="${#fields.hasErrors('foodSize')}"
-                        th:errors="*{foodSize}"></p>
-
-                    <div class="foodInput">
-                        <label class="nutriNm">칼로리(kcal)</label>
-                        <input id="kcal" class="nutriInput" th:field="*{kcal}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <p class="error" th:if="${#fields.hasErrors('kcal')}"
-                        th:errors="*{kcal}"></p>
-
-                    <div class="foodInput">
-                        <label class="nutriNm">탄수화물(g)</label>
-                        <input id="choc" class="nutriInput" th:field="*{choc}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <p class="error" th:if="${#fields.hasErrors('choc')}"
-                        th:errors="*{choc}"></p>
-
-                    <div class="foodInput">
-                        <label class="nutriNm">단백질(g)</label>
-                        <input id="prot" class="nutriInput" th:field="*{prot}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <p class="error" th:if="${#fields.hasErrors('prot')}"
-                        th:errors="*{prot}"></p>
-
-                    <div class="foodInput">
-                        <label class="nutriNm">지방(g)</label>
-                        <input id="fat" class="nutriInput" th:field="*{fat}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <p class="error" th:if="${#fields.hasErrors('fat')}"
-                        th:errors="*{fat}"></p>
-
-                    <div class="foodInput">
-                        <label class="nutriNm">당류(g)</label>
-                        <input  class="nutriInput" th:field="*{sugar}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <div class="foodInput">
-                        <label class="nutriNm">나트륨(mg)</label>
-                        <input  class="nutriInput" th:field="*{nat}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <div class="foodInput">
-                        <label class="nutriNm">포화지방산(g)</label>
-                        <input  class="nutriInput" th:field="*{satFat}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <div class="foodInput">
-                        <label class="nutriNm">불포화지방산(g)</label>
-                        <input  class="nutriInput" th:field="*{transFat}"
-                            type="number" step="0.001"/>
-                    </div>
-                    <div class="foodInput">
-                        <label class="nutriNm">가공업체</label>
-                        <input  class="nutriInput" th:field="*{animalPlant}"
-                            type="text"/>
-                    </div>
-
-                    <!-- 저장 버튼 -->
-                    <input id="submitBtn" type="submit" value="저장"/>
-                </form>
-            </div>
+        <div class="info_btn">
+            <form class="form" th:action="@{/fooddiary/foodInfo}" method="GET">
+                <input
+                    class="searchInput"
+                    name="search"
+                    type="text"
+                    placeholder="식품명을 입력하시오"
+                />
+                <button class="search_btn">SEARCH</button>
+            </form>
+            <button class="write_btn" onclick="openPop()">WRITE</button>
         </div>
-        <script th:src="@{/js/foodInfo.js}"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"/>
-        <script th:src="@{https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js}"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("submitBtn").addEventListener("click", function (e){
-                    e.preventDefault();
+        <table class="FoodInfo_table">
+            <thead>
+            <tr>
+                <th class="Info_name">식품명</th>
+                <th class="Info_name">1회제공량</th>
+                <th class="Info_name">탄수화물</th>
+                <th class="Info_name">단백질</th>
+                <th class="Info_name">지방</th>
+                <th class="Info_name">나트륨</th>
+                <th class="Info_name">당</th>
+                <th class="Info_name">칼로리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="food : ${responseDto.foods}">
+                <td>
+                    <span th:text="${food.foodNm}"></span>
+                </td>
+                <td>
+                    <span th:text="${food.foodSize}">g</span>
+                </td>
+                <td>
+                    <span th:text="${food.choc}">g</span>
+                </td>
+                <td>
+                    <span th:text="${food.prot}">g</span>
+                </td>
+                <td>
+                    <span th:text="${food.fat}">g</span>
+                </td>
+                <td>
+                    <span th:text="${food.nat}">mg</span>
+                </td>
+                <td>
+                    <span th:text="${food.sugar}">g</span>
+                </td>
+                <td>
+                    <span th:text="${food.kcal}">kcal</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="foodInfo_search_pagination">
+            <ul class="foodInfo_search_pagination_ul">
+                <li
+                    th:if="${responseDto.pagination.prev}"
+                    class="foodInfo_search_pagination_li"
+                >
+                    <button
+                        type="button"
+                        class="foodInfo_search_pagination_li_button"
+                        th:onclick="|movePage(${responseDto.pagination.firstPage - 1})|"
+                    >
+                        이전
+                    </button>
+                </li>
+                <li
+                    th:each="page : ${#numbers.sequence(responseDto.pagination.firstPage, responseDto.pagination.endPage)}"
+                    th:classappend="${page == responseDto.pagination.currentPage} ? 'foodInfo_search_pagination_li_on'"
+                    class="foodInfo_search_pagination_li"
+                >
+                    <button
+                        type="button"
+                        class="foodInfo_search_pagination_li_button"
+                        th:onclick="|movePage(${page})|"
+                        th:text="${page}"
+                    ></button>
+                </li>
+                <li
+                    th:if="${responseDto.pagination.next}"
+                    class="foodInfo_search_pagination_li"
+                >
+                    <button
+                        type="button"
+                        class="foodInfo_search_pagination_li_button"
+                        th:onclick="|movePage(${responseDto.pagination.endPage + 1})|"
+                    >
+                        다음
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 상품 등록 팝업 -->
+    <div id="dietPopup" style="display: none">
+        <div class="dietPop">
+            <form id="myWriteForm" class="pop-content" th:object="${food}" action="/fooddiary/foodInfo" method="POST">
+                <button id="closeBtn" type="button">X</button>
+                <h2>영양성분 기입</h2>
+
+                <div class="foodInput">
+                    <label class="nutriNm">식품명</label>
+                    <input id="foodNm" class="nutriInput" th:field="*{foodNm}"
+                           type="text"/>
+                </div>
+                <p class="error" th:if="${#fields.hasErrors('foodNm')}"
+                   th:errors="*{foodNm}"></p>
+
+                <div class="foodInput">
+                    <label class="nutriNm">1회 제공량(g)</label>
+                    <input id="foodSize" class="nutriInput" th:field="*{foodSize}"
+                           type="number" step="0.001"/>
+                </div>
+                <p class="error" th:if="${#fields.hasErrors('foodSize')}"
+                   th:errors="*{foodSize}"></p>
+
+                <div class="foodInput">
+                    <label class="nutriNm">칼로리(kcal)</label>
+                    <input id="kcal" class="nutriInput" th:field="*{kcal}"
+                           type="number" step="0.001"/>
+                </div>
+                <p class="error" th:if="${#fields.hasErrors('kcal')}"
+                   th:errors="*{kcal}"></p>
+
+                <div class="foodInput">
+                    <label class="nutriNm">탄수화물(g)</label>
+                    <input id="choc" class="nutriInput" th:field="*{choc}"
+                           type="number" step="0.001"/>
+                </div>
+                <p class="error" th:if="${#fields.hasErrors('choc')}"
+                   th:errors="*{choc}"></p>
+
+                <div class="foodInput">
+                    <label class="nutriNm">단백질(g)</label>
+                    <input id="prot" class="nutriInput" th:field="*{prot}"
+                           type="number" step="0.001"/>
+                </div>
+                <p class="error" th:if="${#fields.hasErrors('prot')}"
+                   th:errors="*{prot}"></p>
+
+                <div class="foodInput">
+                    <label class="nutriNm">지방(g)</label>
+                    <input id="fat" class="nutriInput" th:field="*{fat}"
+                           type="number" step="0.001"/>
+                </div>
+                <p class="error" th:if="${#fields.hasErrors('fat')}"
+                   th:errors="*{fat}"></p>
+
+                <div class="foodInput">
+                    <label class="nutriNm">당류(g)</label>
+                    <input class="nutriInput" th:field="*{sugar}"
+                           type="number" step="0.001"/>
+                </div>
+                <div class="foodInput">
+                    <label class="nutriNm">나트륨(mg)</label>
+                    <input class="nutriInput" th:field="*{nat}"
+                           type="number" step="0.001"/>
+                </div>
+                <div class="foodInput">
+                    <label class="nutriNm">포화지방산(g)</label>
+                    <input class="nutriInput" th:field="*{satFat}"
+                           type="number" step="0.001"/>
+                </div>
+                <div class="foodInput">
+                    <label class="nutriNm">불포화지방산(g)</label>
+                    <input class="nutriInput" th:field="*{transFat}"
+                           type="number" step="0.001"/>
+                </div>
+                <div class="foodInput">
+                    <label class="nutriNm">가공업체</label>
+                    <input class="nutriInput" th:field="*{animalPlant}"
+                           type="text"/>
+                </div>
+
+                <!-- 저장 버튼 -->
+                <input id="submitBtn" type="submit" value="저장"/>
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/js/foodInfo.js}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"/>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("submitBtn").addEventListener("click", function (e) {
+                e.preventDefault();
 
 
-                    var foodNm = document.querySelector("#foodNm").value;
-                    var foodSize = document.querySelector("#foodSize").value;
-                    var choc = document.querySelector("#choc").value;
-                    var prot = document.querySelector("#prot").value;
-                    var fat = document.querySelector("#fat").value;
-                    var kcal = document.querySelector("#kcal").value;
-                    var myWriteForm = document.getElementById("myWriteForm");
+                var foodNm = document.querySelector("#foodNm").value;
+                var foodSize = document.querySelector("#foodSize").value;
+                var choc = document.querySelector("#choc").value;
+                var prot = document.querySelector("#prot").value;
+                var fat = document.querySelector("#fat").value;
+                var kcal = document.querySelector("#kcal").value;
+                var myWriteForm = document.getElementById("myWriteForm");
 
-                    if (!foodNm || !foodSize || !kcal || !choc || !prot || !fat ) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "필수 입력 항목이 비었습니다.",
-                            buttonsStyling: false,
-                            confirmButtonClass: "swal2-btn",
-                        }).then((result) => {
-                     if (result.isConfirmed) {
-                        document.getElementById("myWriteForm").submit();
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            title: "저장하시겠습니까?",
-                            showCancelButton: true,
-                            showConfirmButton: true,
-                            confirmButtonText: "Save",
-                            cancelButtonText: "Don't save"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire("저장되었습니다", "", "success");
-                                myWriteForm.submit();
-                            }else{
-                            }
-                });
-            }});
-});
-        </script>
-    </th:block>
+                if (!foodNm || !foodSize || !kcal || !choc || !prot || !fat) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "필수 입력 항목이 비었습니다.",
+                        buttonsStyling: false,
+                        confirmButtonClass: "swal2-btn",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("myWriteForm").submit();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: "저장하시겠습니까?",
+                        showCancelButton: true,
+                        showConfirmButton: true,
+                        confirmButtonText: "Save",
+                        cancelButtonText: "Don't save"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire("저장되었습니다", "", "success");
+                            myWriteForm.submit();
+                        } else {
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</th:block>
 
 
 </html>
