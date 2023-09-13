@@ -110,21 +110,6 @@ public class FoodServiceImpl implements FoodService {
         return foodRepository.save(food);
     }
 
-    @Override
-    public Map<String, String> validateHandling(Errors errors) {
-        Map<String, String> validatorResult = new HashMap<>();
-
-        for (FieldError error : errors.getFieldErrors()) {
-            String validKeyName = String.format("valid_%s", error.getField());
-/*
-                String.format("valid_%s", error.getField());
-*/
-            String errorMessage = error.getDefaultMessage();
-            validatorResult.put(validKeyName, errorMessage);
-        }
-
-        return validatorResult;
-    }
 
     @Transactional(readOnly = true)
     @Override

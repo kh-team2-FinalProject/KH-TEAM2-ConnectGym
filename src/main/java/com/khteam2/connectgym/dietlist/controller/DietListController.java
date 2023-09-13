@@ -45,7 +45,7 @@ public class DietListController {
     public String addFood(
         @ModelAttribute("food")
         @Valid Food food,
-        Errors errors,
+        BindingResult result,
         Model model,
         FoodFindRequestDto requestDto) throws Exception {
         FoodFindResponseDto responseDto = this.foodService.findFood(requestDto);
@@ -53,13 +53,9 @@ public class DietListController {
         model.addAttribute("responseDto", responseDto);
 
         /* 에러 메세지 */
-        if (errors.hasErrors()) {
+        if (result.hasErrors()) {
+           model.addAttribute("food", food);
 
-            model.addAttribute("food", food);
-            Map<String, String> validatorResult = foodService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
             return "fooddiary/foodInfo";
         }
         foodService.saveFood(food);

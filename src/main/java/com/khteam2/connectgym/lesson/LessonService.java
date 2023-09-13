@@ -122,14 +122,15 @@ public class LessonService {
         if (!file.isEmpty()) {
             try {
                 fileUrl = s3Uploader.uploadLessonFile(file, lessonRequestDTO.getTitleCode());
+                lessonRequestDTO.setLesson_img(fileUrl);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         } else {
-            lessonRequestDTO.setLesson_img(lessonRepository.findByTrainerNo(trainerNo).orElse(null).getLesson_img());
+            lessonRequestDTO.setLesson_img(Objects.requireNonNull(lessonRepository.findByTrainerNo(trainerNo).orElse(null)).getLesson_img());
+
         }
 
-        lessonRequestDTO.setLesson_img(fileUrl);
 
         lessonRepository.save(lessonRequestDTO.toEntity());
     }
