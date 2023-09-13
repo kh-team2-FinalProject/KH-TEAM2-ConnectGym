@@ -4,7 +4,7 @@ import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.order.dto.OrderDetailDto;
 import com.khteam2.connectgym.trainer.Trainer;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,16 +37,16 @@ public class OrderDetailService {
     }
 
     //누적 수강생 Top3
-    public List<TrainerResponseDTO> findTop3Trainer() {
+    public List<TrainerResponseDto> findTop3Trainer() {
         int limit = 3; // 상위 3개의 트레이너를 얻고자 할 때
-        List<TrainerResponseDTO> dtoList = new ArrayList<>();
+        List<TrainerResponseDto> dtoList = new ArrayList<>();
 
         List<Object[]> trainerList = orderDetailRepository.findCountGroupByTrainer();
 
         for (int i = 0; i < Math.min(limit, trainerList.size()); i++) {
             Object[] result = trainerList.get(i);
             Trainer trainer = (Trainer) result[0];
-            TrainerResponseDTO dto = new TrainerResponseDTO(trainer);
+            TrainerResponseDto dto = new TrainerResponseDto(trainer);
             Lesson lesson = lessonRepository.findByTrainerNo(trainer.getNo()).orElse(null);
 
             dto.setTrainerCategory(lesson.getCategory());

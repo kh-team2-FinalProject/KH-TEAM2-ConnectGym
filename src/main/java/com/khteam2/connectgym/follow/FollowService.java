@@ -3,10 +3,10 @@ package com.khteam2.connectgym.follow;
 import com.khteam2.connectgym.follow.dto.FollowForTrainerDto;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
-import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.member.dto.MemberResponseDto;
 import com.khteam2.connectgym.trainer.Trainer;
 import com.khteam2.connectgym.trainer.TrainerRepository;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,16 +43,16 @@ public class FollowService {
     }
 
     // 트레이너를 팔로우한 회원 목록 > 트레이너에게만 공개
-    public List<MemberResponseDTO> followList(Long trainerNo) {
+    public List<MemberResponseDto> followList(Long trainerNo) {
         FollowForTrainerDto responseDTO = getfollowList(trainerNo);
         return responseDTO.getFollowUserList();
     }
 
     public FollowForTrainerDto getfollowList(Long trainerNo) {
-        List<MemberResponseDTO> followList = new ArrayList<>();
+        List<MemberResponseDto> followList = new ArrayList<>();
 
         for (Follow val : followRepository.findAllByToTrainer(trainerNo)) {
-            MemberResponseDTO memberResponseDTO = new MemberResponseDTO(val.getFromUser());
+            MemberResponseDto memberResponseDTO = new MemberResponseDto(val.getFromUser());
             followList.add(memberResponseDTO);
         }
 
@@ -77,11 +77,11 @@ public class FollowService {
     }
 
     // 유저가 팔로우한 트레이너 목록
-    public List<TrainerResponseDTO> followingList(Long userNo) {
-        List<TrainerResponseDTO> followingList = new ArrayList<>();
+    public List<TrainerResponseDto> followingList(Long userNo) {
+        List<TrainerResponseDto> followingList = new ArrayList<>();
 
         for (Follow val : followRepository.findAllByFromUser(userNo)) {
-            TrainerResponseDTO trainerResponseDTO = new TrainerResponseDTO(val.getToTrainer());
+            TrainerResponseDto trainerResponseDTO = new TrainerResponseDto(val.getToTrainer());
             followingList.add(trainerResponseDTO);
         }
 
@@ -89,15 +89,15 @@ public class FollowService {
     }
 
     // 유저가 팔로우한 트레이너 목록 중 이름으로 검색 결과
-    public List<TrainerResponseDTO> searchFollow(Long fromUserNo, String keyword) {
-        List<TrainerResponseDTO> followingList = new ArrayList<>();
+    public List<TrainerResponseDto> searchFollow(Long fromUserNo, String keyword) {
+        List<TrainerResponseDto> followingList = new ArrayList<>();
 
         if (keyword == "") {
             return followingList(fromUserNo);
         }
 
         for (Follow val : followRepository.searchByTrainerName(fromUserNo, keyword)) {
-            TrainerResponseDTO trainerResponseDTO = new TrainerResponseDTO(val.getToTrainer());
+            TrainerResponseDto trainerResponseDTO = new TrainerResponseDto(val.getToTrainer());
             followingList.add(trainerResponseDTO);
         }
         System.out.println("followingList = " + followingList.toString());

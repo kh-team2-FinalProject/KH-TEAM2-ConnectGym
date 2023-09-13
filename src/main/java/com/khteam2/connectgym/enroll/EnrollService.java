@@ -3,7 +3,7 @@ package com.khteam2.connectgym.enroll;
 import com.khteam2.connectgym.enroll.dto.EnrollResponseDto;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
-import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.member.dto.MemberResponseDto;
 import com.khteam2.connectgym.order.Order;
 import com.khteam2.connectgym.order.OrderDetail;
 import com.khteam2.connectgym.order.OrderDetailRepository;
@@ -22,7 +22,7 @@ public class EnrollService {
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
 
-    public List<EnrollResponseDto> enrollList(MemberResponseDTO mem) {
+    public List<EnrollResponseDto> enrollList(MemberResponseDto mem) {
         List<EnrollResponseDto> enrolls = new ArrayList<>();
 
         Member member = Member.builder()

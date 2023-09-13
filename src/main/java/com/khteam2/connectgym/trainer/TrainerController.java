@@ -7,7 +7,7 @@ import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +27,7 @@ public class TrainerController {
 
     @GetMapping("/trainerList")
     public String trainerList(Model model) {
-        List<TrainerResponseDTO> trainerAll = trainerService.trainerAll();
+        List<TrainerResponseDto> trainerAll = trainerService.trainerAll();
 
         model.addAttribute("trainerList", trainerAll);
 
@@ -36,7 +36,7 @@ public class TrainerController {
 
     @ResponseBody
     @PostMapping("/trainerList/search")
-    public List<TrainerResponseDTO> searchTrainer(@RequestBody(required = false) TrainerRequestDTO trainer) {
+    public List<TrainerResponseDto> searchTrainer(@RequestBody(required = false) TrainerRequestDTO trainer) {
         return trainerService.searchTrainer(trainer.getKeyword());
     }
 
@@ -66,7 +66,7 @@ public class TrainerController {
     @GetMapping(value = "/trainerDetail/{trainerNo}")
     public String trainerDetail(@PathVariable Long trainerNo, HttpSession session, Model model) {
         //트레이너 정보
-        TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+        TrainerResponseDto trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
 
         //리뷰 수
         int reviewCount = reviewService.trainerReviewCount(trainerNo);

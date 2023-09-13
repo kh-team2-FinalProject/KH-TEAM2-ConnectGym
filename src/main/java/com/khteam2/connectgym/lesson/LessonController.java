@@ -7,7 +7,7 @@ import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.like.dto.LikeDto;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.review.dto.ReviewResponseListDto;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,7 +111,7 @@ public class LessonController {
         Lesson lesson = lessonService.getLessonById(lessonNo);
 
         //트레이너 정보
-        TrainerResponseDTO trainerLessonResponseDTO = TrainerResponseDTO.builder()
+        TrainerResponseDto trainerLessonResponseDTO = TrainerResponseDto.builder()
             .trainerNo(lesson.getTrainer().getNo())
             .trainerId(lesson.getTrainer().getTrainerId())
             .trainerName(lesson.getTrainer().getTrainerName())

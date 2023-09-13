@@ -5,7 +5,7 @@ import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.member.Member;
 import com.khteam2.connectgym.member.MemberRepository;
-import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.member.dto.MemberResponseDto;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -72,11 +72,11 @@ public class LikeService {
     }
 
     //레슨넘버로 찜한 사람 목록 가져오기
-    public List<MemberResponseDTO> likedList(Long lessonNo) {
-        List<MemberResponseDTO> likedMembers = new ArrayList<>();
+    public List<MemberResponseDto> likedList(Long lessonNo) {
+        List<MemberResponseDto> likedMembers = new ArrayList<>();
         try {
             for (Like like : likeRepository.findAllByLessonNo(lessonNo)) {
-                MemberResponseDTO memberResponseDTO = new MemberResponseDTO(like.getMember());
+                MemberResponseDto memberResponseDTO = new MemberResponseDto(like.getMember());
                 likedMembers.add(memberResponseDTO);
             }
         } catch (Exception e) {

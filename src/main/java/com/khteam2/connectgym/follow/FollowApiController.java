@@ -2,7 +2,7 @@ package com.khteam2.connectgym.follow;
 
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.dto.FollowForUserDto;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ public class FollowApiController {
     }
 
     @PostMapping("/follow/search")
-    public List<TrainerResponseDTO> searchFollow(HttpSession session, @RequestBody(required = false) FollowForUserDto follow) {
+    public List<TrainerResponseDto> searchFollow(HttpSession session, @RequestBody(required = false) FollowForUserDto follow) {
         Long fromUserNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
 
         return followService.searchFollow(fromUserNo, follow.getKeyword());
