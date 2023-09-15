@@ -35,13 +35,17 @@
 
         function checkpwAndUpdate() {
             Swal.fire({
-                title: '비밀번호를 입력하세요',
+                html: '<div style="font-size:14px;">비밀번호를 입력하세요.</div>',
                 input: 'password', // 입력 필드의 유형을 'password'로 지정
                 inputAttributes: {
                     autocapitalize: 'off'
                 },
+                position: "center",
+                width: "500px",
+                height: "30px",
                 showLoaderOnConfirm: true,
                 showCancelButton: true,
+                confirmButtonColor: "#A3DC10",
                 confirmButtonText: '비밀번호 확인',
                 cancelButtonText: '취소',
                 preConfirm: (password) => {
@@ -64,7 +68,7 @@
 
         function checkpwAndPWUpdate() {
             Swal.fire({
-                title: '비밀번호를 입력하세요',
+                html: '<div style="font-size:14px;">비밀번호를 입력하세요.</div>',
                 input: 'password', // 입력 필드의 유형을 'password'로 지정
                 inputAttributes: {
                     autocapitalize: 'off'
@@ -73,6 +77,8 @@
                 showCancelButton: true,
                 confirmButtonText: '비밀번호 확인',
                 cancelButtonText: '취소',
+                confirmButtonColor: "#A3DC10",
+
                 preConfirm: (password) => {
                     console.log([[${trainerResponseDTO.trainerPw}]]);
                     if (password === [[${trainerResponseDTO.trainerPw}]]) {
@@ -90,6 +96,7 @@
                     }
                 });
         }
+
 
 
     </script>

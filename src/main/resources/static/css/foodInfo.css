@@ -19,15 +19,19 @@
 .info_btn,
 .form {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .searchInput {
-    padding: 3px;
+    padding: 11px;
     margin: 2px;
+    border-radius: 5px;
+    margin-right: 4px;
 }
 
 .write_btn {
-    margin-left: 72%;
+    /* margin-left: 72%; */
 }
 
 .foodD_search button {
@@ -36,53 +40,107 @@
     border: none;
 }
 
-.info_btn button {
-    background-color: #b5b0a9;
+.info_btn .search_btn {
+    background-color: #0E1414;
     position: relative;
-    display: inline-block;
-    /*
-    height:20%;*/
-    font-family: "Black Ops One", cursive;
+    display: flex;
+    height: 38px;
+    font-family: Noto sans-serif;
     padding: 5px 5px;
-    color: white;
-    border: 0px;
-    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #a3dc10;
+    width: 74px;
+    border: 2px solid #a3dc10ad;
+    letter-spacing: 1px;
+    border-radius: 5px;
     text-align: center;
-    transition: top 0.01s linear;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-
-    box-shadow: 0 0 0 1px #aaaeac inset,
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    /* transition: top 0.01s linear; */
+    /* text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15); */
+    /* box-shadow: 0 0 0 1px #aaaeac inset,
                      0 0 0 2px rgba(255, 255, 255, 0.15) inset,
                      0 4px 0 0 #ffedcd, 0 4px 0 1px rgb(239 239 239 / 40%),
-                     0 4px 4px 1px rgba(0, 0, 0, 0.5);
+                     0 4px 4px 1px rgba(0, 0, 0, 0.5); */
+}
+
+.info_btn .write_btn {
+    background-color: #a3dc10ad;
+    position: relative;
+    display: flex;
+    height: 38px;
+    font-family: Noto sans-serif;
+    padding: 5px 5px;
+    font-size: 0.8rem;
+    color: white;
+    width: 80px;
+    /* border: 0px; */
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+    cursor: pointer;
+    /* transition: top 0.01s linear; */
+    /* text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15); */
+    /* box-shadow: 0 0 0 1px #aaaeac inset,
+                     0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+                     0 4px 0 0 #ffedcd, 0 4px 0 1px rgb(239 239 239 / 40%),
+                     0 4px 4px 1px rgba(0, 0, 0, 0.5); */
 }
 
 .search_header button:active {
     top: 6px;
     border: 0px;
-    box-shadow: 0 0 0 1px #a3dc10 inset,
-        0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 0 0 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 1px #a3dc108f inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 0 0 1px rgba(0, 0, 0, 0.4);
 }
 
-.info_btn button:hover {
-    background-color: #fad693;
-    transform: scale(1.3);
+.info_btn .search_btn:hover {
+    background-color: #a3dc10ad;
+    color: white;
+    /* transform: scale(1.3); */
+}
+
+.info_btn .search_btn:active {
+    background-color: #a3dc1080;
+    color: white;
+    /* transform: scale(1.3); */
+
+}
+
+.info_btn .write_btn:hover {
+    background-color: #a3dc1080;
+
+}
+
+.info_btn .write_btn:active {
+    background-color: #a3dc1047;
+
 }
 
 .FoodInfo_table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    margin-top: 10px;
+    margin-top: 20px;
     color: white;
 }
 
 /* 식품 정보 이름 */
-th,
+.FoodInfo_table th {
+    font-size: 1rem;
+    padding: 12px;
+    margin-top: 10px;
+    border-bottom: 1px solid white;
+}
+
 .FoodInfo_table td {
     padding: 12px;
     font-size: 15px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgb(161 161 161 / 24%);
 }
 
 /* 결과
@@ -143,11 +201,22 @@ span{
 #closeBtn {
     font-size: 20px;
     font-weight: bold;
-    background-color: #fad693;
+    /* background-color: #fad693; */
+    background: none;
+    border: none;
     border-radius: 50%;
     margin-left: 90%;
     padding: 5px 10px;
-    color: #3f3535;
+    color: #9e9e9e;
+    cursor: pointer;
+}
+
+#closeBtn:hover {
+    color: #ffffff;
+}
+
+#closeBtn:active {
+    color: #ffffff8c;
 }
 
 /* input 박스 정리 */
@@ -156,6 +225,7 @@ span{
     align-items: center;
     margin-bottom: 15px;
 }
+
 .nutriNm,
 .nutriInput {
     flex: 0 0 130px; /* 고정 너비 */
@@ -172,20 +242,31 @@ span{
 }
 
 .error {
+    font-weight: bold;
     font-size: 10px;
+    color: #f9b332;
 }
 
 #submitBtn {
-    background-color: #878787;
+    background-color: #a3dc10b8;
     color: white;
     padding: 10px;
-    border-radius: 10px;
-    font-weight: bolder;
+    border-radius: 5px;
+    /* font-weight: bold; */
+    width: 90px;
+    font-size: 0.9rem;
+    cursor: pointer;
+
 }
 
 #submitBtn:hover {
-    background-color: ##fad693;
-    color: #0d1416;
+    background-color: #a3dc10a8;
+    color: white;
+}
+
+#submitBtn:active {
+    background-color: #a3dc1085;
+    color: white;
 }
 
 .swal2-btn {
@@ -203,19 +284,19 @@ span{
 }
 
 .foodInfo_search_pagination
-    > .foodInfo_search_pagination_ul
-    > .foodInfo_search_pagination_li {
+> .foodInfo_search_pagination_ul
+> .foodInfo_search_pagination_li {
 }
 
 .foodInfo_search_pagination
-    > .foodInfo_search_pagination_ul
-    > .foodInfo_search_pagination_li_on {
+> .foodInfo_search_pagination_ul
+> .foodInfo_search_pagination_li_on {
 }
 
 .foodInfo_search_pagination
-    > .foodInfo_search_pagination_ul
-    > .foodInfo_search_pagination_li
-    .foodInfo_search_pagination_li_button {
+> .foodInfo_search_pagination_ul
+> .foodInfo_search_pagination_li
+.foodInfo_search_pagination_li_button {
     background-color: initial;
     border: none;
     color: rgb(192, 192, 192);
@@ -226,17 +307,17 @@ span{
 }
 
 .foodInfo_search_pagination
-    > .foodInfo_search_pagination_ul
-    > .foodInfo_search_pagination_li_on
-    .foodInfo_search_pagination_li_button {
+> .foodInfo_search_pagination_ul
+> .foodInfo_search_pagination_li_on
+.foodInfo_search_pagination_li_button {
     color: white;
 }
 
 
-
 /* banner */
-.site_banner.FoodInfo-banner{
+.site_banner.FoodInfo-banner {
     background: url("/images/banner-fooddiary.jpg") center center / cover no-repeat;
-/*    filter: grayscale(100%);*/
+    /*    filter: grayscale(100%);*/
     background-color: #d0dda1;
 }
+

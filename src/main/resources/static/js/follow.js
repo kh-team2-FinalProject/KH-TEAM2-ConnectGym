@@ -45,13 +45,22 @@ function toggleFollow() {
           width: '300px',
           height:'30px',
           background:'rgba(215, 214, 214, 0.761)',
-          html: '<div style="font-size:16px;">팔로우가 취소되었습니다.</div>',
+          html: '<div style="font-size:14px;">팔로우가 취소되었습니다.</div>',
           showConfirmButton: false,
           timer: 800
         })
       })
       .fail((error) => {
-        alert(error.responseText);
+     Swal.fire({
+               position: "center",
+               width: "500px",
+               background: "rgba(215, 214, 214, 0.761)",
+               html: `<div style="font-size:14px;">${error.responseText}</div>`,
+               showConfirmButton: true,
+               showCancelButton: false,
+               confirmButtonColor: "#eb4315"
+             });
+        /*alert(error.responseText);*/
       });
   } else {
     $.ajax({
@@ -70,13 +79,24 @@ function toggleFollow() {
                   width: '300px',
                   height:'30px',
                   background:'rgba(215, 214, 214, 0.761)',
-                  html: '<div style="font-size:16px;">팔로우 되었습니다.</div>',
+                  html: '<div style="font-size:14px;">팔로우 되었습니다.</div>',
                   showConfirmButton: false,
                   timer: 800
                 })
       })
       .fail((error) => {
-        alert(error.responseText);
+      Swal.fire({
+                position: "center",
+                width: "500px",
+                background: "rgba(215, 214, 214, 0.761)",
+                html: `<div style="font-size:14px;">${error.responseText}</div>`,
+                showConfirmButton: true,
+                showCancelButton: false,
+                confirmButtonColor: "#eb4315"
+              });
+
+
+        /*alert(error.responseText);*/
       });
   }
 }

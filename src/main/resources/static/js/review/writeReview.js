@@ -27,7 +27,17 @@ ratingInputs.forEach(function (input, index) {
 // 댓글 글자수 카운팅
 function countingLength(reviewContent) {
 if (reviewContent.value.length > 500) {
-alert('댓글을 300자 이하로 입력해 주세요.');
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">리뷰를 500자 이하로 입력해주세요.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+/*alert('리뷰는 500자 이하로 입력해주세요.');*/
 reviewContent.value = reviewContent.value.substring(0, 500);
 reviewContent.focus();
 }

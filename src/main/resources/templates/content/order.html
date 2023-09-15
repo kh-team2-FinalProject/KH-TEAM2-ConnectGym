@@ -224,7 +224,17 @@
                     </th:block>
                     <th:block th:unless="${orderResponse.success}">
                         <script th:inline="javascript">
-                            alert([[${orderResponse.message}]]);
+                            Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">${orderResponse.message}</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+                            //alert([[${orderResponse.message}]]);
                             history.back();
                         </script>
                     </th:block>

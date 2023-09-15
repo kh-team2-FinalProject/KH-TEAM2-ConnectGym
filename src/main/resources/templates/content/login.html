@@ -141,12 +141,32 @@
                         memberClass = "TRAINER";
                         break;
                     default:
-                        alert("알 수 없는 회원입니다.");
+                    Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">알 수 없는 회원입니다.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+                        //alert("알 수 없는 회원입니다.");
                         return;
                 }
 
                 if (id.value.length <= 0 || password.value.length <= 0) {
-                    alert("ID 또는 비밀번호를 입력해 주세요.");
+
+                    Swal.fire({
+          position: "center",
+          width: "500px",
+          height: "30px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: '<div style="font-size:14px;">ID 또는 비밀번호를 입력해주세요.</div>',
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#df1811",
+        });
+
                     return;
                 }
 
@@ -169,14 +189,32 @@
                         if (v.success) {
                             location.href = (typeof requestUrl === "string" && requestUrl.length > 0) ? requestUrl : "/";
                         } else {
-                            alert(v.message);
+                        Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">${v.message}</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
                         }
                     });
             });
         })(document);
     </script>
     <script th:if="${message != null}" th:inline="javascript">
-        alert([[${message}]]);
+        Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">${message}</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+        //alert([[${message}]]);
     </script>
 </th:block>
 

@@ -20,7 +20,8 @@
                 </a>
             </div>
 
-            <div>
+            <div th:if="${(session.session_login_member_class != null and session.session_login_member_class.name() == 'MEMBER')
+                or session.session_login_member_class == null}">
                 <ul class="nav-links header-item">
                     <li class="h-title"><a aria-current="page" href="/lessonList">Lesson</a></li>
                     <li class="h-title"><a aria-current="page" href="/trainerList">Trainer</a></li>

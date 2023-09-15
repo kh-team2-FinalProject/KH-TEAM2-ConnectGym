@@ -15,6 +15,7 @@
 <script th:src="@{/js/follow.js}"></script>
 <script th:src="@{/js/review/trainerReview.js}"></script>
 <script th:src="@{/js/review/rating.js}"></script>
+
     <script th:inline="javascript">
     function isTakingLesson() {
         const lessonNo = /*[[${trainer.lessonNo}]]*/;
@@ -26,7 +27,7 @@
                   width: '300px',
                   height:'30px',
                   background:'rgba(215, 214, 214, 0.761)',
-                  html: '<div style="font-size:16px;">현재는 모집중인 레슨이 없습니다.🥺</div>',
+                  html: '<div style="font-size:14px;">현재는 모집중인 레슨이 없습니다.🥺</div>',
                   showConfirmButton: false,
                   timer: 800
                 })
@@ -35,7 +36,7 @@
         }
     }
     </script>
-
+    <script th:src="@{/js/chatroom.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content">
@@ -89,7 +90,7 @@
                   width: '300px',
                   height:'30px',
                   background:'rgba(215, 214, 214, 0.761)',
-                  html: '<div style="font-size:16px;">로그인 후 이용해 주세요.</div>',
+                  html: '<div style="font-size:14px;">로그인 후 이용해 주세요.</div>',
                   showConfirmButton: false,
                   timer: 800
                 }).then(result => {

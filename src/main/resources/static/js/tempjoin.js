@@ -90,6 +90,7 @@ $("#email02").blur(function () {
 // 이메일 id 부분과 도메인 부분 합치기
 function email() {
     const email = $("#email01").val();
+    x``
     const middle = $("#email_middle").text();
     const address = $("#email02").val();
 
@@ -151,25 +152,31 @@ $('#InputID').on("propertychange change keyup paste input", function () {
                 $('#id_check_message').empty();
                 $('#id_check_message').css('color', 'red');
                 $('#id_check_message').text("중복된 아이디입니다.");
-                $('#id_check_message').attr('value', false);
             } else {
                 if (!idCheck.test(liveValue)) {
                     $('#InputID').css('border', '2px solid red');
                     $('#id_check_message').empty();
                     $('#id_check_message').css('color', 'red');
                     $('#id_check_message').text("영문 + 숫자 조합으로 6~16자리 입력해주세요.");
-                    $('#id_check_message').attr('value', false);
                 } else {
                     $('#InputID').css('border', '2px solid green');
                     $('#id_check_message').empty();
                     $('#id_check_message').css('color', 'green');
                     $('#id_check_message').text("사용 가능한 아이디입니다.");
-                    $('#id_check_message').attr('value', true);
                 }
             }
         },
         error: function (error) {
-            alert('에러가 발생하였습니다.');
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">에러가 발생하였습니다.</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#eb4315"
+                });
+            /*alert('에러가 발생하였습니다.');*/
             return false;
         }
     });
@@ -191,7 +198,6 @@ $('#join_request_btn').click(function () {
         success: function (data) {
             checkInput.attr('readonly', false);
             code = data;
-
             Swal.fire({
                       position: "center",
                       width: "500px",
@@ -199,8 +205,8 @@ $('#join_request_btn').click(function () {
                       html: `<div style="font-size:14px;">인증번호가 전송되었습니다.</div>`,
                       showConfirmButton: true,
                       showCancelButton: false,
-                      confirmButtonColor: "#eb4315"
-              });
+                      confirmButtonColor: "#A3DC10"
+                    });
 
             /*alert('인증번호가 전송되었습니다.');*/
         }
@@ -254,114 +260,98 @@ function joinform_check() {
                   showConfirmButton: true,
                   showCancelButton: false,
                   confirmButtonColor: "#eb4315"
-          });
+                });
 
         /*alert("아이디를 입력하세요.");*/
         InputID.focus();
         return false;
     }
-
-    if($('#id_check_message').attr('value') != 'true'){
-       Swal.fire({
-                 position: "center",
-                 width: "500px",
-                 background: "rgba(215, 214, 214, 0.761)",
-                 html: `<div style="font-size:14px;">아이디를 확인하세요.</div>`,
-                 showConfirmButton: true,
-                 showCancelButton: false,
-                 confirmButtonColor: "#eb4315"
-         });
-
-       /* alert("아이디를 확인하세요.");*/
-        InputID.focus();
-        return false;
-    }
+    ;
 
     if (InputID.value.length < 6 || InputID.value.length > 16) {
-        Swal.fire({
-                  position: "center",
-                  width: "500px",
-                  background: "rgba(215, 214, 214, 0.761)",
-                  html: `<div style="font-size:14px;">영문 + 숫자 조합으로 6~16자리 입력해주세요.</div>`,
-                  showConfirmButton: true,
-                  showCancelButton: false,
-                  confirmButtonColor: "#eb4315"
-          });
-
+    Swal.fire({
+              position: "center",
+              width: "500px",
+              background: "rgba(215, 214, 214, 0.761)",
+              html: `<div style="font-size:14px;">영문 + 숫자 조합으로 <br>6~16자리 입력해주세요.</div>`,
+              showConfirmButton: true,
+              showCancelButton: false,
+              confirmButtonColor: "#eb4315"
+            });
         /*alert("영문 + 숫자 조합으로 6~16자리 입력해주세요.");*/
         InputID.focus();
         return false;
     }
-
+    ;
 
     if (InputPW.value == "") {
-     Swal.fire({
-                      position: "center",
-                      width: "500px",
-                      background: "rgba(215, 214, 214, 0.761)",
-                      html: `<div style="font-size:14px;">비밀번호를 입력하세요.</div>`,
-                      showConfirmButton: true,
-                      showCancelButton: false,
-                      confirmButtonColor: "#eb4315"
-              });
+    Swal.fire({
+              position: "center",
+              width: "500px",
+              background: "rgba(215, 214, 214, 0.761)",
+              html: `<div style="font-size:14px;">비밀번호를 입력하세요.</div>`,
+              showConfirmButton: true,
+              showCancelButton: false,
+              confirmButtonColor: "#eb4315"
+            });
         /*alert("비밀번호를 입력하세요.");*/
         InputPW.focus();
         return false;
     }
-
+    ;
 
     // 비밀번호 영문자 + 숫자 조합 (6~25자리 입력) 정규식
     var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,25}$/;
 
     if (!pwdCheck.test(CheckPW.value)) {
-     Swal.fire({
-                      position: "center",
-                      width: "500px",
-                      background: "rgba(215, 214, 214, 0.761)",
-                      html: `<div style="font-size:14px;">비밀번호는 영문자 + 숫자 조합으로<br>6~25자리 사용해야합니다.</div>`,
-                      showConfirmButton: true,
-                      showCancelButton: false,
-                      confirmButtonColor: "#eb4315"
-              });
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">비밀번호는 영문자 + 숫자 조합으로 <br>6~25자리 사용해야합니다.</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#eb4315"
+                });
+
         /*alert("비밀번호는 영문자 + 숫자 조합으로 6~25자리 사용해야합니다.");*/
         CheckPW.focus();
         return false;
     }
-
+    ;
 
     if (InputPW.value != CheckPW.value) {
-         Swal.fire({
-                          position: "center",
-                          width: "500px",
-                          background: "rgba(215, 214, 214, 0.761)",
-                          html: `<div style="font-size:14px;">비밀번호가 일치하지 않습니다.</div>`,
-                          showConfirmButton: true,
-                          showCancelButton: false,
-                          confirmButtonColor: "#eb4315"
-                  });
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">비밀번호가 일치하지 않습니다.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
 
-        /*alert("비밀번호가 일치하지 않습니다.");*/
+       /* alert("비밀번호가 일치하지 않습니다.");*/
         CheckPW.focus();
         return false;
     }
-
+    ;
 
     if (InputName.value == "") {
-             Swal.fire({
-                              position: "center",
-                              width: "500px",
-                              background: "rgba(215, 214, 214, 0.761)",
-                              html: `<div style="font-size:14px;">이름을 입력하세요.</div>`,
-                              showConfirmButton: true,
-                              showCancelButton: false,
-                              confirmButtonColor: "#eb4315"
-                      });
-
+    Swal.fire({
+              position: "center",
+              width: "500px",
+              background: "rgba(215, 214, 214, 0.761)",
+              html: `<div style="font-size:14px;">이름을 입력하세요.</div>`,
+              showConfirmButton: true,
+              showCancelButton: false,
+              confirmButtonColor: "#eb4315"
+            });
         /*alert("이름을 입력하세요.");*/
         InputName.focus();
         return false;
     }
-
+    ;
 
     // 숫자만 입력하는 정규식
     var phoneRule = /^(010)[0-9]{4}[0-9]{4}$/;
@@ -375,23 +365,24 @@ function joinform_check() {
               showConfirmButton: true,
               showCancelButton: false,
               confirmButtonColor: "#eb4315"
-      });
+            });
         /*alert("전화번호를 확인해주세요.");*/
         InputTel.focus();
         return false;
     }
-
+    ;
 
     if (InputTel.value == "") {
     Swal.fire({
               position: "center",
               width: "500px",
               background: "rgba(215, 214, 214, 0.761)",
-              html: `<div style="font-size:14px;">"전화번호를 입력해주세요.</div>`,
+              html: `<div style="font-size:14px;">전화번호를 입력해주세요.</div>`,
               showConfirmButton: true,
               showCancelButton: false,
               confirmButtonColor: "#eb4315"
-      });
+            });
+
         /*alert("전화번호를 입력해주세요.");*/
         InputTel.focus();
         return false;
@@ -404,7 +395,7 @@ function joinform_check() {
 //    };
 
     // 이메일 인증 후 안되어있으면 진행하라 메시지로 수정할 것
-    if ($('#join_auth_btn').val() != 'true') {
+    if (!$('#join_auth_btn')) {
     Swal.fire({
               position: "center",
               width: "500px",
@@ -413,29 +404,30 @@ function joinform_check() {
               showConfirmButton: true,
               showCancelButton: false,
               confirmButtonColor: "#eb4315"
-      });
+            });
 
         /*alert("이메일 인증을 완료해주세요.");*/
-        userEmail.focus();
+        returnEmail.focus();
         return false;
     }
-
+    ;
 
     if (!check1.checked) {
-    Swal.fire({
-              position: "center",
-              width: "500px",
-              background: "rgba(215, 214, 214, 0.761)",
-              html: `<div style="font-size:14px;">약관 동의를 체크해주세요.</div>`,
-              showConfirmButton: true,
-              showCancelButton: false,
-              confirmButtonColor: "#eb4315"
-      });
-        /*alert("필수 약관 동의를 체크해주세요.");*/
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">필수 약관 동의를 체크해주세요.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+        /*alert("약관 동의를 체크해주세요.");*/
         check.focus();
         return false;
     }
-
+    ;
 
     if (!check2.checked) {
     Swal.fire({
@@ -446,12 +438,12 @@ function joinform_check() {
               showConfirmButton: true,
               showCancelButton: false,
               confirmButtonColor: "#eb4315"
-      });
-        /*alert("필수 약관 동의를 체크해주세요.");*/
+            });
+        /*alert("약관 동의를 체크해주세요.");*/
         check.focus();
         return false;
     }
-
+    ;
 
     document.join_form.submit();
 };

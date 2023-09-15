@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LicenseDTO {
+public class LicenseDto {
     private String licenseImg;
 
     public License toEntity() {

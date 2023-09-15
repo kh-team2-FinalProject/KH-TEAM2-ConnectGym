@@ -137,7 +137,8 @@ li {
     letter-spacing: 4px;
     padding: 0;
     text-align: center;
-    text-shadow: 4px 1px #0e1414;
+    /*text-shadow: 4px 1px #0e1414; 검정*/
+        text-shadow: 2px 1px #a6a5a5; /*회색*/
 }
 
 .h-title::after {

@@ -129,7 +129,7 @@ window.onbeforeunload = function () {
         removeAllUserData();
 
         Swal.fire({
-          html: '<div style="font-size:16px;">페이지를 벗어났습니다.</div>',
+          html: '<div style="font-size:14px;">페이지를 벗어났습니다.</div>',
           width: "350px",
           height: 50,
           color: "#2f79a6",

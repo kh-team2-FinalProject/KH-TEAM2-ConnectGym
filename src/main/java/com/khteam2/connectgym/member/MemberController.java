@@ -6,30 +6,24 @@ import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.follow.FollowService;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
-import com.khteam2.connectgym.member.dto.MemberDTO;
-import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.member.dto.MemberDto;
+import com.khteam2.connectgym.member.dto.MemberResponseDto;
 import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.order.dto.OrderDetailDto;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.review.dto.MyReviewResponseDto;
 import com.khteam2.connectgym.trainer.TrainerService;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
-import java.util.HashMap;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -46,26 +40,29 @@ public class MemberController {
     private final ReviewService reviewService;
 
     @GetMapping(value = "/user/login")
-    public String tempLogin(
+    public String login(
         Model model,
         HttpServletRequest request,
         @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo
     ) {
         if (loginMemberNo != null) {
-            model.addAttribute("message", "이미 로그인되어 있는 상태입니다."
-                + " 로그아웃 하려면 /temp_logout 으로 이동하면 됩니다.");
+            model.addAttribute("message", "이미 로그인되어 있는 상태입니다.");
+            return "redirect:/";
         }
 
         String referer = request.getHeader("Referer");
-        model.addAttribute("requestUrl", referer);
+        if (referer != null && referer.contains("/user/")) {
+            // URI에 "/user/"을 포함하는 경우 referer 객체를 비웁니다.
+            referer = null;
+        }
 
-        System.out.println("referer = " + referer);
+        model.addAttribute("requestUrl", referer);
 
         return "content/login";
     }
 
     @GetMapping(value = "/user/logout")
-    public String tempLogout(HttpSession session) {
+    public String logout(HttpSession session) {
         session.removeAttribute(SessionConstant.LOGIN_MEMBER_NO);
         session.removeAttribute(SessionConstant.LOGIN_MEMBER_CLASS);
 
@@ -73,13 +70,13 @@ public class MemberController {
     }
 
     @GetMapping(value = "/user/join")
-    public String tempJoin() {
+    public String join() {
         return "content/join";
     }
 
     // 회원가입 버튼 클릭 시 실행
     @PostMapping("/user/joinProcess")
-    public String saveUser(MemberDTO memberDTO) {
+    public String saveUser(MemberDto memberDTO) {
         memberService.createMember(memberDTO);
         return "redirect:/user/login";
     }
@@ -95,7 +92,7 @@ public class MemberController {
     //  로컬호스트일 때의 urlmapping
     @RequestMapping(value = "/connectgym", method = RequestMethod.GET)
     public String kakaoLogin(@RequestParam(value = "code", required = false) String code,
-        HttpSession session) {
+                             HttpSession session) {
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
 
@@ -141,7 +138,7 @@ public class MemberController {
 
     @RequestMapping(value = "/connectgym.store", method = RequestMethod.GET)
     public String kakaoLogindomain(@RequestParam(value = "code", required = false) String code,
-        HttpSession session) {
+                                   HttpSession session) {
         // 인가코드 받는 부분 // 출력 테스트
         System.out.println("###########" + code);
 
@@ -209,7 +206,7 @@ public class MemberController {
         //배너타이틀
         model.addAttribute("bannerTitle", "my dashboard");
 
-        MemberResponseDTO member = memberService.sessionMem(session);
+        MemberResponseDto member = memberService.sessionMem(session);
 
         model.addAttribute("member", member);
         return "mypage/dashboard";
@@ -221,7 +218,7 @@ public class MemberController {
         //배너타이틀
         model.addAttribute("bannerTitle", "MY LESSON");
 
-        MemberResponseDTO member = memberService.sessionMem(session);
+        MemberResponseDto member = memberService.sessionMem(session);
         model.addAttribute("member", member);
 
         return "mypage/myLessonList";
@@ -233,9 +230,9 @@ public class MemberController {
         //배너타이틀
         model.addAttribute("bannerTitle", "following");
 
-        MemberResponseDTO member = memberService.sessionMem(session);
+        MemberResponseDto member = memberService.sessionMem(session);
 
-        List<TrainerResponseDTO> following = followService.followingList(member.getNo());
+        List<TrainerResponseDto> following = followService.followingList(member.getNo());
 
         model.addAttribute("following", following);
 
@@ -248,7 +245,7 @@ public class MemberController {
         //배너타이틀
         model.addAttribute("bannerTitle", "like");
 
-        MemberResponseDTO member = memberService.sessionMem(session);
+        MemberResponseDto member = memberService.sessionMem(session);
 
         List<LessonResponseDTO> likes = likeService.likingList(member.getNo());
 
@@ -262,7 +259,7 @@ public class MemberController {
     public String myChatroomList(Model model, HttpSession session) {
         // 배너 타이틀
         model.addAttribute("bannerTitle", "messages");
-        MemberResponseDTO member = memberService.sessionMem(session);
+        MemberResponseDto member = memberService.sessionMem(session);
         List<ChatroomDTO> chatroomList = chatroomService.searchMyTrainerChatroomList(
             member.getNo());
         model.addAttribute("chatroomList", chatroomList);
@@ -282,7 +279,7 @@ public class MemberController {
     // 7) 내 리뷰 관리
     @GetMapping("/mypage/myReviewList")
     public String showReview(Model model,
-        @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo) {
+                             @SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO, required = false) Long loginMemberNo) {
         model.addAttribute("bannerTitle", "review");
 
         List<MyReviewResponseDto> reviewList = reviewService.myReview(loginMemberNo);
@@ -297,7 +294,7 @@ public class MemberController {
         //배너타이틀
         model.addAttribute("bannerTitle", "my info");
 
-        MemberResponseDTO member = memberService.sessionMem(session);
+        MemberResponseDto member = memberService.sessionMem(session);
 
         model.addAttribute("member", member);
 
@@ -306,7 +303,7 @@ public class MemberController {
 
     // 8-2)회원정보 업데이트
     @PostMapping(value = "/mypage/updateProcess")
-    public String updateProcess(MemberDTO memberDTO) {
+    public String updateProcess(MemberDto memberDTO) {
 
         // 회원정보 수정 버튼 누르면 실행되는 컨트롤러
         // 버튼 클릭 시 회원정보 수정해주는 서비스 함수 실행

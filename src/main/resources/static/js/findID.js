@@ -1,3 +1,16 @@
+$('#select').change(function () {
+    $('#select option:selected').each(function () {
+        if ($(this).val() == '1') { // 직접입력
+            $("#email02").val('');                  // 값 초기화
+            $("#email02").attr("disabled", false);  // 활성화
+        } else { // 직접입력이 아닐 경우
+            $("#email02").val($(this).text());       // 선택값 입력
+            $("#email02").attr("disabled", true);    // 비활성화
+            email();
+        }
+    });
+});
+
 // 이메일 앞부분 가져오기
 $("#email01").blur(function(){
     email();
@@ -24,7 +37,17 @@ function findMemberID(){
     var inputEmail = $('#userEmail').val();
 
     if(!$('#join_auth_btn').val()){
-        alert('이메일 인증을 먼저 진행해주세요.');
+    Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">이메일 인증을 먼저 진행해주세요.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+        /*alert('이메일 인증을 먼저 진행해주세요.');*/
         return false;
     }
 
@@ -36,11 +59,32 @@ function findMemberID(){
             email:inputEmail
         },
         success: function(data){
-            alert('찾으시는 아이디는 ' + data + ' 입니다.');
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">찾으시는 아이디는 '${data}'입니다.</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#A3DC10"
+                }).then(result => {
+                 if (result.isConfirmed) {
+            /*alert('찾으시는 아이디는 ' + data + ' 입니다.');*/
             window.location.href = "/user/login";
+                           }
+                           });
         },
         error: function(error){
-            alert('작성 정보가 잘못되었거나 존재하지 않는 정보입니다.');
+        Swal.fire({
+                  position: "center",
+                  width: "500px",
+                  background: "rgba(215, 214, 214, 0.761)",
+                  html: `<div style="font-size:14px;">작성된 정보가 잘못되었거나 존재하지 않는 정보입니다.</div>`,
+                  showConfirmButton: true,
+                  showCancelButton: false,
+                  confirmButtonColor: "#eb4315"
+                });
+            /*alert('작성 정보가 잘못되었거나 존재하지 않는 정보입니다.');*/
             return false;
         }
     });
@@ -59,7 +103,17 @@ $('#join_request_btn').click(function(){
         success: function(data){
             checkInput.attr('readonly', false);
             code=data;
-            alert('인증번호가 전송되었습니다.');
+            Swal.fire({
+                      position: "center",
+                      width: "500px",
+                      background: "rgba(215, 214, 214, 0.761)",
+                      html: `<div style="font-size:14px;">인증번호가 전송되었습니다.</div>`,
+                      showConfirmButton: true,
+                      showCancelButton: false,
+                      confirmButtonColor: "#A3DC10"
+                    });
+
+            /*alert('인증번호가 전송되었습니다.');*/
         }
     }); // ajax 끝
 

@@ -11,7 +11,7 @@ import com.khteam2.connectgym.member.dto.MemberLoginRequestDto;
 import com.khteam2.connectgym.member.dto.MemberLoginResponseDto;
 import com.khteam2.connectgym.order.OrderDetailRepository;
 import com.khteam2.connectgym.trainer.dto.TrainerRequestDTO;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import com.khteam2.connectgym.upload.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -138,7 +138,7 @@ public class TrainerService {
     }
 
     //트레이너 불러오기(레슨까지)
-    public TrainerResponseDTO findOneTrainer(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO) Long trainerNo) {
+    public TrainerResponseDto findOneTrainer(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER_NO) Long trainerNo) {
 
         Trainer trainer = trainerRepository.findById(trainerNo).orElse(null);
 
@@ -151,7 +151,7 @@ public class TrainerService {
         //라이선스 목록
         List<License> licenses = licenseRepository.findAllTrainerNo(trainerNo);
 
-        TrainerResponseDTO trainerResponseDTO = TrainerResponseDTO.builder()
+        TrainerResponseDto trainerResponseDTO = TrainerResponseDto.builder()
             .trainerNo(trainerNo)
             .trainerPw(trainer.getTrainerPw())
             .trainerId(trainer.getTrainerId())
@@ -193,22 +193,21 @@ public class TrainerService {
         return null;
     }
 
-    public TrainerResponseDTO sessionT(HttpSession session) {
+    public TrainerResponseDto sessionT(HttpSession session) {
         Long sessionTrainerNo = (Long) session.getAttribute(SessionConstant.LOGIN_MEMBER_NO);
-        TrainerResponseDTO trainerResponseDTO = findOneTrainer(sessionTrainerNo);
+        TrainerResponseDto trainerResponseDTO = findOneTrainer(sessionTrainerNo);
 
         return trainerResponseDTO;
     }
 
-    public List<TrainerResponseDTO> trainerAll() {
-        List<TrainerResponseDTO> trainerAll = new ArrayList<>();
+    public List<TrainerResponseDto> trainerAll() {
+        List<TrainerResponseDto> trainerAll = new ArrayList<>();
 
         List<Trainer> trainers = trainerRepository.findAll();
 
         for (Trainer val : trainers) {
-            TrainerResponseDTO dto = new TrainerResponseDTO(val);
+            TrainerResponseDto dto = new TrainerResponseDto(val);
             trainerAll.add(dto);
-
 
 
             dto.setFollowCount(followRepository.findAllByToTrainerCount(val.getNo()).orElse(0));
@@ -218,8 +217,8 @@ public class TrainerService {
     }
 
     //트레이너 리스트에서 트레이너 검색
-    public List<TrainerResponseDTO> searchTrainer(String keyword) {
-        List<TrainerResponseDTO> dtoList = new ArrayList<>();
+    public List<TrainerResponseDto> searchTrainer(String keyword) {
+        List<TrainerResponseDto> dtoList = new ArrayList<>();
 
         if (keyword == "" || keyword.equals("")) {
             return dtoList;
@@ -228,7 +227,7 @@ public class TrainerService {
         List<Trainer> trainerList = trainerRepository.searchByTrainerName(keyword);
 
         for (Trainer val : trainerList) {
-            TrainerResponseDTO dto = new TrainerResponseDTO(val);
+            TrainerResponseDto dto = new TrainerResponseDto(val);
 
             //팔로우 수
             dto.setFollowCount(followRepository.findAllByToTrainerCount(dto.getTrainerNo()).orElse(0));
@@ -281,8 +280,8 @@ public class TrainerService {
         }
     }
 
-    public TrainerResponseDTO findbyId(Long no) {
-        return new TrainerResponseDTO(Objects.requireNonNull(trainerRepository.findById(no).orElse(null)));
+    public TrainerResponseDto findbyId(Long no) {
+        return new TrainerResponseDto(Objects.requireNonNull(trainerRepository.findById(no).orElse(null)));
     }
 
     @Transactional

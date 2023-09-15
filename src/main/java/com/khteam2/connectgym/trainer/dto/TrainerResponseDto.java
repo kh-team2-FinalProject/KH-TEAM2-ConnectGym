@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TrainerResponseDTO {
+public class TrainerResponseDto {
 
     private Long trainerNo;
     private String trainerPw;
@@ -34,7 +34,7 @@ public class TrainerResponseDTO {
     private int followCount;
 
 
-    public TrainerResponseDTO(Trainer entity) {
+    public TrainerResponseDto(Trainer entity) {
         this.trainerNo = entity.getNo();
         this.trainerPw = entity.getTrainerPw();
         this.trainerId = entity.getTrainerId();

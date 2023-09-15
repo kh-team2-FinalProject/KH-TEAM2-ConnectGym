@@ -3,12 +3,12 @@ package com.khteam2.connectgym;
 import com.khteam2.connectgym.common.SessionConstant;
 import com.khteam2.connectgym.member.MemberClass;
 import com.khteam2.connectgym.member.MemberService;
-import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.member.dto.MemberResponseDto;
 import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.review.dto.ReviewResponseDto;
 import com.khteam2.connectgym.trainer.TrainerService;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -41,12 +41,12 @@ public class CommonController {
 
             if (userRole != null) {
                 if (userRole.equals(MemberClass.MEMBER)) {
-                    MemberResponseDTO member = memberService.sessionMem(session);
+                    MemberResponseDto member = memberService.sessionMem(session);
                     String userId = member.getUserId();
                     model.addAttribute("loginMemberId", userId);
                     model.addAttribute("memberClass", "member");
                 } else if (userRole.equals(MemberClass.TRAINER)) {
-                    TrainerResponseDTO trainerResponseDTO = trainerService.sessionT(session);
+                    TrainerResponseDto trainerResponseDTO = trainerService.sessionT(session);
                     String trainerId = trainerResponseDTO.getTrainerId();
                     model.addAttribute("loginMemberId", trainerId);
                     model.addAttribute("memberClass", "trainer");
@@ -56,10 +56,10 @@ public class CommonController {
             }
 
             //메인 메뉴 TOP3 트레이너
-            List<TrainerResponseDTO> trainerList = orderDetailService.findTop3Trainer();
+            List<TrainerResponseDto> trainerList = orderDetailService.findTop3Trainer();
             model.addAttribute("trainerList", trainerList);
 
-            System.out.println("trainerList = " + trainerList);
+            //메인 메뉴 TOP3 리뷰
             List<ReviewResponseDto> top3Reviews = reviewService.top3Review();
             model.addAttribute("reviews", top3Reviews);
 
@@ -70,10 +70,6 @@ public class CommonController {
         return "content/main";
     }
 
-    @GetMapping("/testRoom")
-    public String testRoom() {
-        return "room/bak_enterroom";
-    }
 
     //레슨 페이지 내 메뉴 이동
     @GetMapping("/lesson")
@@ -85,7 +81,7 @@ public class CommonController {
     public String chattingRoomList(Model model) {
         //배너타이틀
         model.addAttribute("bannerTitle", "MY CHATTIING");
-        MemberResponseDTO member = memberService.findOneMember(1L);
+        MemberResponseDto member = memberService.findOneMember(1L);
         model.addAttribute("member", member);
         System.out.println("member = " + member.getUserName());
         System.out.println("마이레슨리스트 컨트롤러 호출");

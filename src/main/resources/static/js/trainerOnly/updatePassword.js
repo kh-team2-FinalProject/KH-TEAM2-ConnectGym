@@ -40,7 +40,17 @@ function password_form_check() {
     var CheckPW = document.getElementById("CheckPW");
 
     if (InputPW.value === "") {
-        alert("비밀번호를 입력하세요.");
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">비밀번호를 입력하세요.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+        /*alert("비밀번호를 입력하세요.");*/
         InputPW.focus();
         return false;
     }
@@ -49,13 +59,32 @@ function password_form_check() {
     var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,25}$/;
 
     if (!pwdCheck.test(CheckPW.value)) {
-        alert("비밀번호는 영문자 + 숫자 조합으로 6~25자리 사용해야합니다.");
+Swal.fire({
+          position: "center",
+          width: "500px",
+          background: "rgba(215, 214, 214, 0.761)",
+          html: `<div style="font-size:14px;">비밀번호는 영문자 + 숫자 조합으로 <br>6~25자리 사용해야합니다.</div>`,
+          showConfirmButton: true,
+          showCancelButton: false,
+          confirmButtonColor: "#eb4315"
+        });
+
+        /*alert("비밀번호는 영문자 + 숫자 조합으로 6~25자리 사용해야합니다.");*/
         CheckPW.focus();
         return false;
     }
 
     if (InputPW.value !== CheckPW.value) {
-        alert("비밀번호가 일치하지 않습니다.");
+    Swal.fire({
+              position: "center",
+              width: "500px",
+              background: "rgba(215, 214, 214, 0.761)",
+              html: `<div style="font-size:14px;">비밀번호가 일치하지 않습니다.</div>`,
+              showConfirmButton: true,
+              showCancelButton: false,
+              confirmButtonColor: "#eb4315"
+            });
+        /*alert("비밀번호가 일치하지 않습니다.");*/
         CheckPW.focus();
         return false;
     }

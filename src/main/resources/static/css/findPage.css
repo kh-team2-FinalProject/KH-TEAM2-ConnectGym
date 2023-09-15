@@ -95,6 +95,7 @@ body {
 }
 
 .input-wrap #email02 {
+  color: black;
   text-align: center;
   padding: 0;
   margin-right: 10px;

@@ -7,7 +7,7 @@ import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.like.dto.LikeDto;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.review.dto.ReviewResponseListDto;
-import com.khteam2.connectgym.trainer.dto.TrainerResponseDTO;
+import com.khteam2.connectgym.trainer.dto.TrainerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +57,7 @@ public class LessonController {
     ) {
         model.addAttribute("lessonCategory", "lessons");
 
-        int itemsPerPage = 10;   // 한 페이지에 보여질 게시글 수
+        int itemsPerPage = 20;   // 한 페이지에 보여질 게시글 수
 
         List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
         lessonList = lessonService.viewCategoryList(lessonList,
@@ -83,7 +83,7 @@ public class LessonController {
                                    @RequestParam(name = "category", required = false, defaultValue = "0") Integer category,
                                    @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber
     ) {
-        int itemsPerPage = 10;   // 한 페이지에 보여질 게시글 수
+        int itemsPerPage = 20;   // 한 페이지에 보여질 게시글 수
 
         List<Lesson> lessonList = lessonService.getAllLessons(); // 모든 lesson
         lessonList = lessonService.viewCategoryList(lessonList,
@@ -111,7 +111,7 @@ public class LessonController {
         Lesson lesson = lessonService.getLessonById(lessonNo);
 
         //트레이너 정보
-        TrainerResponseDTO trainerLessonResponseDTO = TrainerResponseDTO.builder()
+        TrainerResponseDto trainerLessonResponseDTO = TrainerResponseDto.builder()
             .trainerNo(lesson.getTrainer().getNo())
             .trainerId(lesson.getTrainer().getTrainerId())
             .trainerName(lesson.getTrainer().getTrainerName())

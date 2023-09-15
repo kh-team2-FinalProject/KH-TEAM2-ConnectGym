@@ -1,17 +1,17 @@
-body{
+body {
     width: 100%;
     height: 100px;
     border: 1px solid black;
 
 }
 
-.diettitle{
-    margin:20px 0 -90px 0;
+.diettitle {
+    margin: 0 0 0 0;
     width: 100%;
     align-items: center;
     justify-content: center;
-    font-family: Arial, sans-serif;
-    color:#dedada;
+    font-family: Noto sans-serif;
+    color: #dedada;
 }
 
 /*캘린더 버튼 라인*/
@@ -19,28 +19,30 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 50px;
-
+    /* margin: 50px; */
 }
 
 
 /* 캘린더 버튼 */
 .calendar-button {
     position: relative;
-    font-size: 30px;
+    font-size: 1.6rem;
     cursor: pointer;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* 캘린더 전체 박스 */
 #calendarDropdown {
-    border-radius: 5%;
+    border-radius: 5px;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 91%;
     display: none;
-    background-color: #e7f3e7;
-    border: 1px solid #ccc;
+    background: linear-gradient(45deg, #ffcb8a, #ec453be3);
+    /* border: 1px solid #ccc; */
     padding: 10px;
     z-index: 1;
 }
@@ -56,8 +58,8 @@ body{
 /*년도 월 버튼 */
 #yearSelect,
 #monthSelect {
-    padding: 5px;
-    border: 1px solid #ccc;
+    padding: 7px;
+    border: 1px solid #ccc0;
     border-radius: 4px;
 }
 
@@ -72,24 +74,26 @@ body{
 /*일자*/
 .calendar-day {
     cursor: pointer;
-    padding: 5px;
+    padding: 9px;
     text-align: center;
     border-radius: 50%;
     transition: background-color 0.3s;
+    font-size: 1rem;
+    color: white;
 }
 
 .calendar-day:hover {
-    background-color: #7a9d6e;
+    background-color: rgb(255 218 192 / 76%);
 }
 
 
 /* search 버튼 */
-.search{
+.search {
     float: right;
 
 }
 
-.search button{
+.search button {
     font-size: 15px;
     padding: 10px 20px;
     border-radius: 30px;

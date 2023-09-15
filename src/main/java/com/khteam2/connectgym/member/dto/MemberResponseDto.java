@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MemberResponseDTO {
+public class MemberResponseDto {
     private Long no;
     private String userId;
     private String userPw;
@@ -19,7 +19,7 @@ public class MemberResponseDTO {
     private String userEmail;
     private String userAddress;
 
-    public MemberResponseDTO(Member entity) {
+    public MemberResponseDto(Member entity) {
         if (entity != null) {
             this.no = entity.getNo();
             this.userId = entity.getUserId();

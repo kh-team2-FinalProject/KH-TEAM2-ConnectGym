@@ -8,7 +8,7 @@ import com.khteam2.connectgym.lesson.LessonService;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
 import com.khteam2.connectgym.like.LikeService;
 import com.khteam2.connectgym.member.MemberClass;
-import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.member.dto.MemberResponseDto;
 import com.khteam2.connectgym.order.OrderDetailService;
 import com.khteam2.connectgym.review.ReviewService;
 import com.khteam2.connectgym.review.dto.ReviewResponseListDto;
@@ -53,7 +53,7 @@ public class TrainerOnlyController {
 
         } else if (loginMemberClass == MemberClass.TRAINER) {
             // 트레이너 회원 로그인 된 경우
-            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+            TrainerResponseDto trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
 
             //트레이너 번호로 레슨 번호 찾음
             Long lessonNo = trainerOnlyService.findLessonNoByTrainerNo(trainerNo);
@@ -118,7 +118,7 @@ public class TrainerOnlyController {
     public String liked(Model model, HttpSession session) {
         try {
             model.addAttribute("bannerTitle", "liked");
-            TrainerResponseDTO trainerSession = trainerService.sessionT(session);
+            TrainerResponseDto trainerSession = trainerService.sessionT(session);
             //세션에서 트레이너 번호 가져옴
             long trainerNo = trainerSession.getTrainerNo();
 
@@ -127,7 +127,7 @@ public class TrainerOnlyController {
 
             //트레이너가 만든 레슨 있을 때
             if (lessonNo != null) {
-                List<MemberResponseDTO> likedMembers = likeService.likedList(lessonNo);
+                List<MemberResponseDto> likedMembers = likeService.likedList(lessonNo);
                 model.addAttribute("likedMembers", likedMembers);
             } else {
                 //레슨 없을 때
@@ -154,7 +154,7 @@ public class TrainerOnlyController {
             model.addAttribute("lesson", registered);
         }
 
-        TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+        TrainerResponseDto trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
         model.addAttribute("trainer", trainerResponseDTO);
         return "trainerOnly/myLesson";
     }
@@ -189,8 +189,8 @@ public class TrainerOnlyController {
     public String followed(Model model, HttpSession session) {
         model.addAttribute("bannerTitle", "followed");
 
-        TrainerResponseDTO trainer = trainerService.sessionT(session);
-        List<MemberResponseDTO> followed = followService.followList(trainer.getTrainerNo());
+        TrainerResponseDto trainer = trainerService.sessionT(session);
+        List<MemberResponseDto> followed = followService.followList(trainer.getTrainerNo());
         model.addAttribute("followed", followed);
 
         return "trainerOnly/followed";
@@ -208,7 +208,7 @@ public class TrainerOnlyController {
 
         } else if (loginMemberClass == MemberClass.TRAINER) {
             // 트레이너 회원 로그인 된 경우
-            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+            TrainerResponseDto trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
 
             //채팅방 목록 보여주기
             List<ChatroomDTO> chatroomList = chatroomService.searchMyMemberChatroomList(trainerNo);
@@ -235,7 +235,7 @@ public class TrainerOnlyController {
         } else if (loginMemberClass == MemberClass.TRAINER) {
             // 트레이너 회원 로그인 된 경우
             model.addAttribute("bannerTitle", "Trainer Info");
-            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+            TrainerResponseDto trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
             System.out.println("trainerResponseDTO = " + trainerResponseDTO);
             model.addAttribute(trainerResponseDTO);
 
@@ -259,7 +259,7 @@ public class TrainerOnlyController {
         } else if (loginMemberClass == MemberClass.TRAINER) {
             // 트레이너 회원 로그인 된 경우
             model.addAttribute("bannerTitle", "Update Info");
-            TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+            TrainerResponseDto trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
             model.addAttribute("trainerDTO", trainerResponseDTO);
 
             return "trainerOnly/updateInfo";
@@ -290,7 +290,7 @@ public class TrainerOnlyController {
                                      Model model) {
         model.addAttribute("bannerTitle", "Update Profile");
 
-        TrainerResponseDTO trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
+        TrainerResponseDto trainerResponseDTO = trainerService.findOneTrainer(trainerNo);
         model.addAttribute("trainerDTO", trainerResponseDTO);
 
         return "trainerOnly/updateProfile";

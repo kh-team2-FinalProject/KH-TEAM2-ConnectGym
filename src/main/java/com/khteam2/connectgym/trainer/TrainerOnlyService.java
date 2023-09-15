@@ -3,7 +3,7 @@ package com.khteam2.connectgym.trainer;
 import com.khteam2.connectgym.lesson.Lesson;
 import com.khteam2.connectgym.lesson.LessonRepository;
 import com.khteam2.connectgym.lesson.dto.LessonResponseDTO;
-import com.khteam2.connectgym.member.dto.MemberResponseDTO;
+import com.khteam2.connectgym.member.dto.MemberResponseDto;
 import com.khteam2.connectgym.order.Order;
 import com.khteam2.connectgym.order.OrderDetail;
 import com.khteam2.connectgym.order.OrderDetailRepository;
@@ -53,7 +53,7 @@ public class TrainerOnlyService {
         String titleCode = lesson.getTitleCode();
 
         // 룸 키에 따른 멤버
-        Map<Long, MemberResponseDTO> memberMap = new HashMap<>();
+        Map<Long, MemberResponseDto> memberMap = new HashMap<>();
 
         List<OrderDetail> orderDetails = orderDetailRepository.enrollList(lessonNo);
 
@@ -67,7 +67,7 @@ public class TrainerOnlyService {
         for (OrderDetail od : orderDetails) {
             Order order = orderRepository.findByOrderNo(od.getOrder().getNo()).orElse(null);
 
-            MemberResponseDTO memberResponseDTO = new MemberResponseDTO(order.getMember());
+            MemberResponseDto memberResponseDTO = new MemberResponseDto(order.getMember());
 
             memberMap.put(od.getEnrollKey(), memberResponseDTO);
         }
